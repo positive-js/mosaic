@@ -347,25 +347,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -395,25 +377,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -443,25 +407,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -491,25 +437,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -539,25 +467,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -587,25 +497,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -635,25 +527,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -683,25 +557,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -731,25 +587,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -778,25 +616,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -825,25 +645,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -873,25 +675,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -921,25 +705,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -969,25 +735,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1017,25 +765,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1065,25 +795,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1113,25 +825,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1161,25 +855,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1209,25 +885,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1257,25 +915,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1305,25 +945,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1353,25 +975,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1401,25 +1005,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1449,25 +1035,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1497,25 +1065,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1545,25 +1095,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1593,25 +1125,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1641,25 +1155,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1689,25 +1185,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1737,25 +1215,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1785,23 +1245,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [{
-                                "type": "anyComponentStyle",
-                                "maximumWarning": "6kb"
-                            }],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1831,25 +1275,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1879,25 +1305,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1927,25 +1335,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -1975,25 +1365,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -2023,25 +1395,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -2071,25 +1425,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -2119,25 +1455,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -2167,25 +1485,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -2208,32 +1508,13 @@
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/tree/main.ts",
                         "polyfills": "packages/mosaic-dev/polyfills.ts",
-                        "aot": false,
                         "vendorChunk": true,
                         "extractLicenses": false,
                         "buildOptimizer": false,
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -2263,25 +1544,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -2311,25 +1574,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -2359,25 +1604,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -2407,25 +1634,7 @@
                         "sourceMap": true,
                         "optimization": false,
                         "namedChunks": true
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
