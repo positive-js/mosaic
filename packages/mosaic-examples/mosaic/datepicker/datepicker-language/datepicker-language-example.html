@@ -13,9 +13,8 @@
 
 <mc-form-field
     (click)="picker.toggle()"
-    mcTooltip
-    [mcTitle]="'Только цифры'"
-    #tooltip="mcTooltip">
+    mcWarningTooltip="Только цифры"
+    #tooltip="mcWarningTooltip">
 
     <input
         [formControl]="selectedDate"

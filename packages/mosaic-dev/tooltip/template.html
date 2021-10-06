@@ -1,135 +1,247 @@
-<section class="container flex-100 layout-row layout-align-start-center">
-    <div class="flex layout-column layout-align-center-center container-item">
-        <span class="mc-title">Focus</span>
-        <button
-            mc-button
-            mcTooltip
-            mcTitle="Удалить файл"
-            mcTrigger="focus"
-            mcPlacement="top">top</button>
-        <button
-            mc-button
-            mcTooltip="Подсказка может занимать две и более строк"
-            mcTrigger="focus"
-            mcPlacement="right">right</button>
-        <button
-            mc-button
-            mcTooltip="PDQL-запрос фильтра содержит ошибки"
-            mcTrigger="focus"
-            mcPlacement="left">left</button>
-        <button
-            mc-button
-            mcTooltip="PDQL-запрос фильтра содержит ошибки. Uncaught SyntaxError: Unexpected string"
-            mcTrigger="focus"
-            mcPlacement="bottom">bottom</button>
-        <button
-                mc-button
-                mcTooltip="Обновить"
-                mcTrigger="focus"
-                mcPlacement="bottom"
-                [mcTooltipDisabled]="true">disabled</button>
-    </div>
-    <div class="flex layout-column layout-align-center-center container-item">
-        <span class="mc-title">Hover</span>
-        <button
-                mc-button
-                mcTooltip="Показать\Скрыть"
-                mcPlacement="top">top</button>
-        <button
-                mc-button
-                mcTooltip="Активировать записи"
-                mcPlacement="right">right</button>
-        <button
-                mc-button
-                mcTooltip="PDQL-запрос фильтра содержит ошибки,
-                            исправьте запрос"
-                mcPlacement="left">left</button>
-        <button
-                mc-button
-                mcTooltip="Обновить"
-                mcPlacement="bottom"
-                mcVisible="true">bottom Visible</button>
-        <button
-            mc-button
-            mcTooltip="Tooltip Class"
-            mcPlacement="bottom"
-            mcTooltipClass="customTooltipClass"
-            >TooltipClass</button>
-        <button
-                mc-button
-                mcTooltip="Обновить"
-                mcPlacement="bottom"
-                [mcTooltipDisabled]="true">disabled</button>
-    </div>
-    <div class="flex layout-column layout-align-center-center container-item">
-        <span class="mc-title">Arrow placement for left and right</span>
-            <button
-                mc-button
-                mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
-                mcPlacement="left">
-                    left default
-            </button>
-            <button
-                mc-button
-                mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
-                mcPlacement="right">
-                    right default
-            </button>
-            <button
-                mc-button
-                mcArrowPlacement="center"
-                mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
-                mcPlacement="left">
-                    left center
-            </button>
-            <button
-                mc-button
-                mcArrowPlacement="{{arrowPos.Center}}"
-                mcTooltip="PDQL-запрос фильтра содержит ошибки, исправьте запрос"
-                mcPlacement="right">
-                    right center
-            </button>
-    </div>
+<ng-template #tooltipContent>
+    <div>                В западной традиции рыбой выступает фрагмент латинского текста из философского трактата Цицерона «О пределах добра и зла», написанного в 45 году до нашей эры. Впервые этот текст был применен для набора шрифтовых образцов неизвестным печатником еще в XVI веке.</div>
+</ng-template>
 
-    <div class="flex layout-row layout-align-center-center">
-        <div class="flex-45 flex-column">
-            <span class="mc-title">Change placement</span>
+<ng-template #tooltipHeader>
+    <span>Header</span>
+</ng-template>
 
-            <mc-form-field>
-                <input mcInput
-                       #titleSource
-                       class="mc-textarea_monospace"
-                />
-            </mc-form-field>
 
-            <ng-template #titleSourceTest>
-                <mc-form-field >
-                    <input mcInput
-                           class="mc-textarea_monospace"
-                    />
+<div class="container flex-100 layout-column layout-align-start-start">
+    <div class="mc-form-vertical layout-row layou-align-start-start config" [style]="getOrder('config')">
+        <div class="flex-20 mc-form__fieldset">
+            <div class="mc-form__row">
+                <label class="mc-form__label" for="order">Inverse layout order</label>
+
+                <mc-checkbox class="mc-form__control" id="order" [(ngModel)]="selectedOrder">Yes/No</mc-checkbox>
+            </div>
+
+            <div class="mc-form__row">
+                <label for="element" class="mc-form__label">
+                    Choose trigger element
+                </label>
+
+                <mc-form-field id="element" class="mc-form__control">
+                    <mc-select [(value)]="selectedElement" [placeholder]="'Select element'">
+                        <mc-option value="button">Button</mc-option>
+                        <mc-option value="icon">Icon</mc-option>
+                        <mc-option value="input">Input</mc-option>
+                        <mc-option value="warning">warning</mc-option>
+                        <mc-option value="extended">extended</mc-option>
+                    </mc-select>
                 </mc-form-field>
-            </ng-template>
+            </div>
 
-            <mc-form-field *ngIf="show">
-                <input mcInput
-                       class="mc-textarea_monospace"
-                />
-            </mc-form-field>
+            <div class="mc-form__row">
+                <label for="trigger" class="mc-form__label">
+                    Choose popover trigger
+                </label>
 
-            <mc-form-field
-                mcTooltip
-                mcTooltipClass="mc-tooltip_warning"
-                [mcTitle]="titleModel"
-                #tooltipRef="mcTooltip"
-                mcTrigger="manual"
-                mcPlacement="{{tooltipPosition}}">
+                <mc-form-field id="trigger" class="mc-form__control">
+                    <mc-select [(value)]="selectedTrigger" [placeholder]="'Select trigger'">
+                        <mc-option value="click">Click</mc-option>
+                        <mc-option value="hover">Hover</mc-option>
+                        <mc-option value="focus">Focus</mc-option>
+                    </mc-select>
+                </mc-form-field>
+            </div>
 
-                    <input mcInput #positionSource class="mc-textarea_monospace" [value]="'top'"/>
-            </mc-form-field>
+            <div class="mc-form__row">
+                <label for="layout" class="mc-form__label">
+                    Choose layout content placement
+                </label>
 
-            <button mc-button (click)="updatePosition(positionSource.value)">Update</button>
-            <button mc-button (click)="toggleTooltipExternal(tooltipRef.isTooltipOpen)">Trigger</button>
-            <button mc-button (click)="updateTitle()">Title upd</button>
+                <mc-form-field id="layout" class="mc-form__control">
+                    <mc-select [(value)]="layoutClass" [placeholder]="'Select layout'">
+                        <mc-option value="layout-row layout-align-start-start">Start start</mc-option>
+                        <mc-option value="layout-row layout-align-start-center">Start center</mc-option>
+                        <mc-option value="layout-row layout-align-start-end">Start end</mc-option>
+                        <mc-option value="layout-row layout-align-center-start">Center start</mc-option>
+                        <mc-option value="layout-row layout-align-center-center">Center center</mc-option>
+                        <mc-option value="layout-row layout-align-center-end">Center end</mc-option>
+                        <mc-option value="layout-row layout-align-end-start">End start</mc-option>
+                        <mc-option value="layout-row layout-align-end-center">End center</mc-option>
+                        <mc-option value="layout-row layout-align-end-end">End end</mc-option>
+                    </mc-select>
+                </mc-form-field>
+            </div>
+        </div>
+        <div class="flex left-padding layout-align-center-center">
+            <label for="trigger" class="flex mc-form__label">
+                Choose mcPlacement
+            </label>
+            <div class="visual-box">
+                <div (click)="setPlacement('topLeft')"
+                     [ngClass]="{
+                        active: activated('topLeft'),
+                        actual: isActual('topLeft')
+                     }"
+                     class="visual-box_clickable visual-box_placement-top-left"></div>
+                <div (click)="setPlacement('top')"
+                     [ngClass]="{
+                        active: activated('top'),
+                        actual: isActual('top')
+                     }"
+                     class="visual-box_clickable visual-box_placement-top"></div>
+                <div (click)="setPlacement('topRight')"
+                     [ngClass]="{
+                        active: activated('topRight'),
+                        actual: isActual('topRight')
+                     }"
+                     class="visual-box_clickable visual-box_placement-top-right"></div>
+                <div (click)="setPlacement('rightTop')"
+                     [ngClass]="{
+                        active: activated('rightTop'),
+                        actual: isActual('rightTop')
+                     }"
+                     class="visual-box_clickable visual-box_placement-right-top"></div>
+                <div (click)="setPlacement('right')"
+                     [ngClass]="{
+                        active: activated('right'),
+                        actual: isActual('right')
+                     }"
+                     class="visual-box_clickable visual-box_placement-right"></div>
+                <div (click)="setPlacement('rightBottom')"
+                     [ngClass]="{
+                        active: activated('rightBottom'),
+                        actual: isActual('rightBottom')
+                     }"
+                     class="visual-box_clickable visual-box_placement-right-bottom"></div>
+                <div (click)="setPlacement('bottomRight')"
+                     [ngClass]="{
+                        active: activated('bottomRight'),
+                        actual: isActual('bottomRight')
+                     }"
+                     class="visual-box_clickable visual-box_placement-bottom-right"></div>
+                <div (click)="setPlacement('bottom')"
+                     [ngClass]="{
+                        active: activated('bottom'),
+                        actual: isActual('bottom')
+                     }"
+                     class="visual-box_clickable visual-box_placement-bottom"></div>
+                <div (click)="setPlacement('bottomLeft')"
+                     [ngClass]="{
+                        active: activated('bottomLeft'),
+                        actual: isActual('bottomLeft')
+                     }"
+                     class="visual-box_clickable visual-box_placement-bottom-left"></div>
+                <div (click)="setPlacement('leftBottom')"
+                     [ngClass]="{
+                        active: activated('leftBottom'),
+                        actual: isActual('leftBottom')
+                     }"
+                     class="visual-box_clickable visual-box_placement-left-bottom"></div>
+                <div (click)="setPlacement('left')"
+                     [ngClass]="{
+                        active: activated('left'),
+                        actual: isActual('left')
+                     }"
+                     class="visual-box_clickable visual-box_placement-left"></div>
+                <div (click)="setPlacement('leftTop')"
+                     [ngClass]="{
+                        active: activated('leftTop'),
+                        actual: isActual('leftTop')
+                     }"
+                     class="visual-box_clickable visual-box_placement-left-top"></div>
+            </div>
+
+            <div class="mc-form__row flex-50">
+                <label for="size" class="mc-form__label">
+                    Choose mcPlacementPriority
+                </label>
+
+                <mc-form-field class="mc-form__control">
+                    <mc-select multiple [(value)]="multipleSelected">
+                        <mc-option value="top" disabled>Top</mc-option>
+                        <mc-option value="topLeft">TopLeft</mc-option>
+                        <mc-option value="topRight">TopRight</mc-option>
+                        <mc-option value="bottom">Bottom</mc-option>
+                        <mc-option value="bottomLeft">BottomLeft</mc-option>
+                        <mc-option value="bottomRight">BottomRight</mc-option>
+                        <mc-option value="right">Right</mc-option>
+                        <mc-option value="rightTop">RightTop</mc-option>
+                        <mc-option value="rightBottom">RightBottom</mc-option>
+                        <mc-option value="left">Left</mc-option>
+                        <mc-option value="leftTop">LeftTop</mc-option>
+                        <mc-option value="leftBottom">LeftBottom</mc-option>
+                    </mc-select>
+                </mc-form-field>
+            </div>
+        </div>
+        <div class="flex left-padding">
+            <h3>Configuration:</h3>
+            <ul>
+                <li>Tooltip trigger: {{selectedTrigger}}</li>
+                <li>Tooltip anchor placement: {{selectedPlacement}}</li>
+                <li>Tooltip anchored element: {{selectedElement}}</li>
+                <li *ngIf="this.isFallbackActivated" class="actual red">Tooltip activated fallback position: {{activatedPosition}}</li>
+                <li>Layout positioning: {{layoutClass}}</li>
+                <li *ngIf="multipleSelected">Placement priority order: {{multipleSelected}}</li>
+            </ul>
         </div>
     </div>
-</section>
+
+    <div class="{{layoutClass}} result" [style]="getOrder('result')">
+        <div [ngSwitch]="showElement()">
+            <button mc-button
+                    *ngSwitchCase="ELEMENTS.BUTTON"
+                    mcTooltip="Tooltip text"
+                    [mcPlacement]="selectedPlacement"
+                    [mcPlacementPriority]="multipleSelected"
+                    [mcTrigger]="selectedTrigger"
+                    (mcPlacementChange)="onPlacementChange($event)"
+                    (mcVisibleChange)="onTooltipVisibleChange($event)">
+                Button
+            </button>
+
+            <button mc-button
+                    *ngSwitchCase="ELEMENTS.WARNING"
+                    mcWarningTooltip="Warning tooltip text"
+                    [mcPlacement]="selectedPlacement"
+                    [mcPlacementPriority]="multipleSelected"
+                    [mcTrigger]="selectedTrigger"
+                    (mcPlacementChange)="onPlacementChange($event)"
+                    (mcVisibleChange)="onTooltipVisibleChange($event)">
+                Button
+            </button>
+
+            <button mc-button
+                    *ngSwitchCase="ELEMENTS.EXTENDED"
+                    [mcExtendedTooltip]="tooltipContent"
+                    [mcTooltipHeader]="tooltipHeader"
+                    mcTooltipClass="tooltip-485"
+                    [mcPlacement]="selectedPlacement"
+                    [mcPlacementPriority]="multipleSelected"
+                    [mcTrigger]="selectedTrigger"
+                    (mcPlacementChange)="onPlacementChange($event)"
+                    (mcVisibleChange)="onTooltipVisibleChange($event)">
+                Button
+            </button>
+
+            <mc-form-field *ngSwitchCase="ELEMENTS.INPUT">
+                <input mcInput
+                       [(ngModel)]="content"
+                       placeholder="Button content"
+                       mcTooltip="Tooltip text"
+                       [mcPlacement]="selectedPlacement"
+                       [mcPlacementPriority]="multipleSelected"
+                       [mcTrigger]="selectedTrigger"
+                       (mcPlacementChange)="onPlacementChange($event)"
+                       (mcVisibleChange)="onTooltipVisibleChange($event)">
+            </mc-form-field>
+
+            <div *ngSwitchCase="ELEMENTS.ICON">
+                <i mc-icon="mc-calendar_16"
+                   mcTooltip="Tooltip text"
+                   [mcPlacement]="selectedPlacement"
+                   [mcPlacementPriority]="multipleSelected"
+                   [mcTrigger]="selectedTrigger"
+                   (mcPlacementChange)="onPlacementChange($event)"
+                   (mcVisibleChange)="onTooltipVisibleChange($event)">
+                </i>
+            </div>
+        </div>
+    </div>
+</div>
+
+

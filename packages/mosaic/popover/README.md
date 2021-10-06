@@ -4,15 +4,15 @@
 
 | Property               | Description                                                                                                                                                                              | Type                  | Default |
 |------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|---------|
-| mcPopoverPlacement     | Место для показа относительно элемента, к которому он привязан. Возможные значения: top, bottom, left, right                                                                             | string                | bottom  |
-| mcPopoverTrigger       | Триггер для показа Возможные значения: hover, manual, click, focus                                                                                                                       | string                | hover   |
-| mcPopoverVisible       | Ручное управление показом, используется только при mcPopoverTrigger="manual"                                                                                                             | boolean               | false   |
+| mcPlacement            | Место для показа относительно элемента, к которому он привязан. Возможные значения: top, bottom, left, right                                                                             | string                | bottom  |
+| mcTrigger              | Триггер для показа Возможные значения: hover, manual, click, focus                                                                                                                       | string                | hover   |
+| mcVisible              | Ручное управление показом, используется только при mcTrigger="manual"                                                                                                             | boolean               | false   |
 | mcPopoverHeader        | Содержимое шапки Обрати  внимание: если используешь строку, то используй аккуратно, желательно  предварительно сделать escape строки, чтобы избежать потенциальной XSS  уязвимости.      | string | ng-template  | –       |
 | mcPopoverContent       | Содержимое компонента Обрати  внимание: если используешь строку, то используй аккуратно, желательно  предварительно сделать escape строки, чтобы избежать потенциальной XSS  уязвимости. | string | ng-template  | –       |
 | mcPopoverFooter        | Содержимое подвала Обрати  внимание: если используешь строку, то используй аккуратно, желательно  предварительно сделать escape строки, чтобы избежать потенциальной XSS  уязвимости.    | string | ng-template  | –       |
 | mcPopoverDisabled      | Флаг для запрета показа                                                                                                                                                                  | boolean               | false   |
 | mcPopoverClass         | Добавление своих классов                                                                                                                                                                 | string | string[]     | –       |
-| mcPopoverVisibleChange | Callback на изменение видимости компонента                                                                                                                                               | EventEmitter<boolean> | –       |
+| mcVisibleChange        | Callback на изменение видимости компонента                                                                                                                                               | EventEmitter<boolean> | –       |
 
 ## Example
 
@@ -23,8 +23,8 @@
  
 <button
     mcPopover
-    mcPopoverTrigger="hover"
-    mcPopoverPlacement="top"
+    mcTrigger="hover"
+    mcPlacement="top"
     mcPopoverHeader="Это header"
     [mcPopoverContent]="customContent">
     Найти Эйяфьядлайёкюдль

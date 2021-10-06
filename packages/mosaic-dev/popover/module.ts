@@ -1,10 +1,10 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
+import { McFormsModule } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McPopoverModule } from '@ptsecurity/mosaic/popover';
@@ -51,7 +51,7 @@ export class DemoComponent {
     selectedPlacement: string = 'left';
     selectedTrigger: string = 'click';
     selectedSize: string = 'normal';
-    layoutClass: string = 'flex-65 layout-row layout-align-center-center';
+    layoutClass: string = 'layout-row layout-align-center-center';
     content: string = 'button text';
     userDefinedPlacementPriority: string[] = ['bottom', 'right'];
     multipleSelected: string[] = [];
@@ -97,10 +97,10 @@ export class DemoComponent {
 
     getOrder(forElement: string) {
         if (forElement === 'config') {
-            return this.selectedOrder ? {order: 2} : {order: 1};
+            return this.selectedOrder ? { order: 2 } : { order: 1 };
         }
         if (forElement === 'result') {
-            return this.selectedOrder ? {order: 1} : {order: 2};
+            return this.selectedOrder ? { order: 1 } : { order: 2 };
         }
     }
 
@@ -110,14 +110,12 @@ export class DemoComponent {
 }
 
 @NgModule({
-    declarations: [
-        DemoComponent
-    ],
+    declarations: [DemoComponent],
     imports: [
-        BrowserModule,
         BrowserAnimationsModule,
         A11yModule,
         FormsModule,
+        McFormsModule,
         McFormFieldModule,
         McSelectModule,
         McPopoverModule,
@@ -127,8 +125,6 @@ export class DemoComponent {
         McSplitterModule,
         McCheckboxModule
     ],
-    bootstrap: [
-        DemoComponent
-    ]
+    bootstrap: [DemoComponent]
 })
 export class DemoModule {}

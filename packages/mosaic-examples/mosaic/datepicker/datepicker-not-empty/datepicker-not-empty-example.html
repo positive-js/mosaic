@@ -1,8 +1,7 @@
 <mc-form-field
     (click)="myDatepicker.toggle()"
-    mcTooltip
-    [mcTitle]="'Только цифры'"
-    #tooltip="mcTooltip">
+    mcWarningTooltip="Только цифры"
+    #tooltip="mcWarningTooltip">
 
     <input
         [(ngModel)]="date"

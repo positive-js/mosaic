@@ -3,9 +3,8 @@
         <label for="Time"
                class="flex-35 mc-form-label">Выберите время между min и max</label>
         <mc-form-field
-            mcTooltip
-            [mcTitle]="'Только цифры'"
-            #tooltip="mcTooltip">
+            mcWarningTooltip="Только цифры"
+            #tooltip="mcWarningTooltip">
 
             <i mcPrefix mc-icon="mc-clock_16"></i>
             <input mcTimepicker

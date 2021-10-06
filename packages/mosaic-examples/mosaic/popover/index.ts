@@ -4,12 +4,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
+import { McFormsModule } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McPopoverModule } from '@ptsecurity/mosaic/popover';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
-import { McSplitterModule } from '@ptsecurity/mosaic/splitter';
 
 import { PopoverInstanceExample } from './popover-instance/popover-instance-example';
 import { PopoverOverviewExample } from './popover-overview/popover-overview-example';
@@ -30,13 +30,13 @@ const EXAMPLES = [
         CommonModule,
         A11yModule,
         FormsModule,
+        McFormsModule,
         McFormFieldModule,
         McSelectModule,
         McPopoverModule,
         McButtonModule,
         McIconModule,
         McInputModule,
-        McSplitterModule,
         McCheckboxModule
     ],
     declarations: EXAMPLES,

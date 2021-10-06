@@ -1,12 +1,22 @@
 <div class="mc-tooltip"
      [ngClass]="classMap"
-     [@fadeAnimation]="''+($visible | async)">
-    <div class="mc-tooltip-content">
-        <div class="mc-tooltip-arrow"></div>
-        <div class="mc-tooltip-inner">
-            <ng-container *ngIf="isTemplateRef" [ngTemplateOutlet]="mcTitle"></ng-container>
-            <ng-container *ngIf="isNonEmptyString">
-                <div [innerHTML]="mcTitle"></div>
+     [@state]="visibility"
+     (@state.start)="animationStart()"
+     (@state.done)="animationDone($event)">
+
+    <div class="mc-tooltip__inner">
+        <div class="mc-tooltip__arrow"></div>
+
+        <div class="mc-tooltip__header" *ngIf="header">
+            <ng-container *ngIf="isTemplateRef(header)" [ngTemplateOutlet]="header"></ng-container>
+            <ng-container *ngIf="!isTemplateRef(header)">
+                <div>{{ header }}</div>
+            </ng-container>
+        </div>
+        <div class="mc-tooltip__content">
+            <ng-container *ngIf="isTemplateRef(content)" [ngTemplateOutlet]="content"></ng-container>
+            <ng-container *ngIf="!isTemplateRef(content)">
+                <div>{{ content }}</div>
             </ng-container>
         </div>
     </div>

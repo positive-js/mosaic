@@ -4,17 +4,32 @@ import { NgModule } from '@angular/core';
 
 import {
     McTooltipComponent,
-    McTooltip,
-    MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER
+    McTooltipTrigger,
+    McExtendedTooltipTrigger,
+    McWarningTooltipTrigger,
+    MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER,
+    MC_TOOLTIP_OPEN_TIME_PROVIDER
 } from './tooltip.component';
 
 
 @NgModule({
-    declarations: [McTooltipComponent, McTooltip],
-    exports: [McTooltipComponent, McTooltip],
+    declarations: [
+        McTooltipComponent,
+        McTooltipTrigger,
+        McExtendedTooltipTrigger,
+        McWarningTooltipTrigger
+    ],
+    exports: [
+        McTooltipComponent,
+        McTooltipTrigger,
+        McExtendedTooltipTrigger,
+        McWarningTooltipTrigger
+    ],
     imports: [CommonModule, OverlayModule],
-    providers: [MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER],
+    providers: [
+        MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER,
+        MC_TOOLTIP_OPEN_TIME_PROVIDER
+    ],
     entryComponents: [McTooltipComponent]
 })
-export class McToolTipModule {
-}
+export class McToolTipModule {}

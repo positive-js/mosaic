@@ -1,18 +1,17 @@
-import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import {
     McPopoverComponent,
-    McPopover,
+    McPopoverTrigger,
     MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER
 } from './popover.component';
 
 
 @NgModule({
-    declarations: [McPopoverComponent, McPopover],
-    exports: [A11yModule, McPopoverComponent, McPopover],
+    declarations: [McPopoverComponent, McPopoverTrigger],
+    exports: [McPopoverComponent, McPopoverTrigger],
     imports: [CommonModule, OverlayModule],
     providers: [MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER],
     entryComponents: [McPopoverComponent]

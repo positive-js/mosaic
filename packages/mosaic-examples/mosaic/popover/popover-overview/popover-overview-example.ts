@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 
 /**
@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'popover-overview-example',
     templateUrl: 'popover-overview-example.html',
-    styleUrls: ['popover-overview-example.css']
+    styleUrls: ['popover-overview-example.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class PopoverOverviewExample {
     popoverActiveStage: number;
@@ -23,12 +24,6 @@ export class PopoverOverviewExample {
         ICON: 'icon'
     };
 
-    TRIGGERS = {
-        CLICK: 'click',
-        FOCUS: 'focus',
-        HOVER: 'hover'
-    };
-
     SIZE = {
         LARGE: 'large',
         NORMAL: 'normal',
@@ -37,9 +32,8 @@ export class PopoverOverviewExample {
 
     selectedElement: string = 'button';
     selectedPlacement: string = 'left';
-    selectedTrigger: string = 'click';
     selectedSize: string = 'normal';
-    layoutClass: string = 'flex-65 layout-row layout-align-center-center';
+    layoutClass: string = 'layout-row layout-align-center-center';
     content: string = 'button text';
     userDefinedPlacementPriority: string[] = ['bottom', 'right'];
     multipleSelected: string[] = [];
@@ -85,10 +79,10 @@ export class PopoverOverviewExample {
 
     getOrder(forElement: string) {
         if (forElement === 'config') {
-            return this.selectedOrder ? {order: 2} : {order: 1};
+            return this.selectedOrder ? { order: 2 } : { order: 1 };
         }
         if (forElement === 'result') {
-            return this.selectedOrder ? {order: 1} : {order: 2};
+            return this.selectedOrder ? { order: 1 } : { order: 2 };
         }
     }
 

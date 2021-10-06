@@ -23,5 +23,11 @@
         "mocha-no-side-effect-code": [true, { "ignore": "xdescribe|xit" }],
         "no-for-in": false,
         "no-constant-condition": false
+    },
+    "linterOptions": {
+        "exclude": [
+            "./packages/mosaic/design-tokens/tokens.ts",
+            "./packages/docs/src/styles/**/tokens.ts"
+        ]
     }
 }

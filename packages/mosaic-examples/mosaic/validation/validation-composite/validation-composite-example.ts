@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { McTooltip } from '@ptsecurity/mosaic/tooltip';
+import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 
 
 function groupValidator(): ValidatorFn {
@@ -55,14 +55,14 @@ export class ValidationCompositeExample {
         );
     }
 
-    onInput(event, tooltip: McTooltip, controlName: string) {
+    onInput(event, tooltip: McTooltipTrigger, controlName: string) {
         const regex = /^[\d\.]+$/g;
 
         if (!regex.test(event.target.value)) {
             const newValue = event.target.value.replace(/[^\d\.]+/g, '');
             this.compositeFormGroup.controls[controlName].setValue(newValue);
 
-            if (!tooltip.isTooltipOpen) {
+            if (!tooltip.isOpen) {
                 tooltip.show();
 
                 // tslint:disable-next-line:no-magic-numbers
