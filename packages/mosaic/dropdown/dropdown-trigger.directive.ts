@@ -214,6 +214,8 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         overlayRef.attach(this.getPortal());
 
         if (this.dropdown.lazyContent) {
+            this.dropdown.lazyContent.detach();
+
             this.dropdown.lazyContent.attach(this.data);
         }
 
@@ -328,14 +330,7 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             }
 
             dropdownAnimationDoneSubscription
-                .subscribe({
-                    // If lazy content has attached we're need to detach it.
-                    next: this.dropdown.lazyContent ? () => this.dropdown.lazyContent?.detach() : undefined,
-                    error: undefined,
-                    complete: () => {
-                        this.reset();
-                    }
-                });
+                .subscribe(() => this.reset());
         } else {
             this.reset();
 

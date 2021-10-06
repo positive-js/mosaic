@@ -15,6 +15,33 @@ import { McLinkModule } from '@ptsecurity/mosaic/link';
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
+    pools = [
+        {
+            id: 1,
+            name: 'x',
+            domains: [
+                { id: 10, name: 'ax' },
+                { id: 11, name: 'bx' }
+            ]
+        },
+        {
+            id: 2,
+            name: 'y',
+            domains: [
+                { id: 20, name: 'ay' },
+                { id: 21, name: 'by' }
+            ]
+        },
+        {
+            id: 3,
+            name: 'z',
+            domains: [
+                { id: 30, name: 'az' },
+                { id: 31, name: 'bz' }
+            ]
+        }
+    ];
+
     someValue = 'Lazy Value';
 
     isDropdownOpen: boolean = false;
@@ -25,6 +52,10 @@ export class DemoComponent {
 
     dropdownClosed() {
         this.isDropdownOpen = false;
+    }
+
+    selectDomain(id: string): void {
+        console.log('selected domain id', id);
     }
 }
 
