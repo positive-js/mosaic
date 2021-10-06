@@ -32,16 +32,16 @@ export class AnchorsComponent {
     readonly isSmoothScrollSupported;
     noSmoothScrollDebounce = 10;
     debounceTime: number = 15;
+    activeClass = 'anchors-menu__list-element_active';
+    pathName: string;
+    fragment = '';
     private destroyed: Subject<boolean> = new Subject();
-    private fragment = '';
-    private activeClass = 'anchors-menu__list-element_active';
     private scrollContainer: any;
     private currentUrl: any;
-    private pathName: string;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private element: ElementRef,
+                public element: ElementRef,
                 private ref: ChangeDetectorRef,
                 @Inject(DOCUMENT) private document: Document) {
         this.isSmoothScrollSupported  = 'scrollBehavior' in this.document.documentElement.style;
@@ -69,7 +69,7 @@ export class AnchorsComponent {
     ngOnInit() {
         // attached to anchor's change in the address bar manually or by clicking on the anchor
         this.route.fragment.pipe(takeUntil(this.destroyed)).subscribe((fragment) => {
-            this.fragment = fragment;
+            this.fragment = fragment as string;
             const index = this.getAnchorIndex(fragment);
 
             if (index) { this.setFragment(index); }
@@ -140,7 +140,7 @@ export class AnchorsComponent {
     }
 
     private createAnchors(): IAnchor[] {
-        const anchors = [];
+        const anchors: any = [];
         const headers: HTMLElement[] = Array.from(this.document.querySelectorAll(this.headerSelectors));
 
         if (headers.length) {

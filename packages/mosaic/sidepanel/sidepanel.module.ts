@@ -2,6 +2,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
@@ -22,6 +23,7 @@ import { McSidepanelService } from './sidepanel.service';
         OverlayModule,
         PortalModule,
         McCommonModule,
+        McButtonModule,
         McIconModule
     ],
     providers: [McSidepanelService],

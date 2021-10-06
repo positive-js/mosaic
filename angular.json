@@ -47,14 +47,14 @@
                             {
                                 "input": "packages/docs/src/highlightjs/material-light.scss"
                             }
-
                         ],
                         "scripts": [],
                         "vendorChunk": true,
                         "extractLicenses": false,
                         "buildOptimizer": false,
                         "optimization": false,
-                        "namedChunks": true
+                        "namedChunks": true,
+                        "aot": false
                     },
                     "configurations": {
                         "development": {
@@ -103,7 +103,8 @@
                                 }
                             ]
                         }
-                    }
+                    },
+                    "defaultConfiguration": ""
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -338,24 +339,14 @@
                         "tsConfig": "packages/mosaic-dev/alert/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/alert/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -378,24 +369,14 @@
                         "tsConfig": "packages/mosaic-dev/all/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/all/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -418,24 +399,14 @@
                         "tsConfig": "packages/mosaic-dev/autocomplete/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/autocomplete/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -458,24 +429,14 @@
                         "tsConfig": "packages/mosaic-dev/badge/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/badge/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -498,24 +459,14 @@
                         "tsConfig": "packages/mosaic-dev/button/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/button/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -538,24 +489,14 @@
                         "tsConfig": "packages/mosaic-dev/button-toggle/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/button-toggle/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -578,24 +519,14 @@
                         "tsConfig": "packages/mosaic-dev/card/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/card/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -618,24 +549,14 @@
                         "tsConfig": "packages/mosaic-dev/checkbox/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/checkbox/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -658,24 +579,14 @@
                         "tsConfig": "packages/mosaic-dev/date-formatter/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/date-formatter/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -698,25 +609,13 @@
                         "tsConfig": "packages/mosaic-dev/date-formatter-luxon/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/date-formatter-luxon/main.ts",
-                        "aot": true,
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -739,25 +638,13 @@
                         "tsConfig": "packages/mosaic-dev/date-formatter-moment/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/date-formatter-moment/main.ts",
-                        "aot": true,
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -780,24 +667,14 @@
                         "tsConfig": "packages/mosaic-dev/datepicker/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/datepicker/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -820,24 +697,14 @@
                         "tsConfig": "packages/mosaic-dev/divider/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/divider/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -860,24 +727,14 @@
                         "tsConfig": "packages/mosaic-dev/dropdown/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/dropdown/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -900,24 +757,14 @@
                         "tsConfig": "packages/mosaic-dev/forms/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/forms/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -940,24 +787,14 @@
                         "tsConfig": "packages/mosaic-dev/flex-layout/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/flex-layout/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -980,24 +817,14 @@
                         "tsConfig": "packages/mosaic-dev/icon/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/icon/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1020,24 +847,14 @@
                         "tsConfig": "packages/mosaic-dev/input/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/input/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1060,24 +877,14 @@
                         "tsConfig": "packages/mosaic-dev/link/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/link/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1100,24 +907,14 @@
                         "tsConfig": "packages/mosaic-dev/list/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/list/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1140,24 +937,14 @@
                         "tsConfig": "packages/mosaic-dev/modal/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/modal/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1180,24 +967,14 @@
                         "tsConfig": "packages/mosaic-dev/navbar/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/navbar/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1220,24 +997,14 @@
                         "tsConfig": "packages/mosaic-dev/number-formatter/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/number-formatter/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1260,24 +1027,14 @@
                         "tsConfig": "packages/mosaic-dev/panel/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/panel/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1300,24 +1057,14 @@
                         "tsConfig": "packages/mosaic-dev/popover/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/popover/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1340,24 +1087,14 @@
                         "tsConfig": "packages/mosaic-dev/progress-bar/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/progress-bar/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1380,24 +1117,14 @@
                         "tsConfig": "packages/mosaic-dev/progress-spinner/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/progress-spinner/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1420,24 +1147,14 @@
                         "tsConfig": "packages/mosaic-dev/radio/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/radio/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1460,24 +1177,14 @@
                         "tsConfig": "packages/mosaic-dev/select/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/select/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1500,24 +1207,14 @@
                         "tsConfig": "packages/mosaic-dev/sidebar/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/sidebar/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1540,24 +1237,14 @@
                         "tsConfig": "packages/mosaic-dev/sidepanel/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/sidepanel/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1580,24 +1267,14 @@
                         "tsConfig": "packages/mosaic-dev/splitter/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/splitter/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1620,24 +1297,14 @@
                         "tsConfig": "packages/mosaic-dev/table/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/table/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1660,24 +1327,14 @@
                         "tsConfig": "packages/mosaic-dev/tabs/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/tabs/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1700,24 +1357,14 @@
                         "tsConfig": "packages/mosaic-dev/tags/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/tags/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1740,24 +1387,14 @@
                         "tsConfig": "packages/mosaic-dev/textarea/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/textarea/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1780,24 +1417,14 @@
                         "tsConfig": "packages/mosaic-dev/timepicker/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/timepicker/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1820,24 +1447,14 @@
                         "tsConfig": "packages/mosaic-dev/toggle/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/toggle/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1860,24 +1477,14 @@
                         "tsConfig": "packages/mosaic-dev/tooltip/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/tooltip/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1900,24 +1507,13 @@
                         "tsConfig": "packages/mosaic-dev/tree/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/tree/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1940,24 +1536,14 @@
                         "tsConfig": "packages/mosaic-dev/tree-select/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/tree-select/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -1980,24 +1566,14 @@
                         "tsConfig": "packages/mosaic-dev/typography/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/typography/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -2020,24 +1596,14 @@
                         "tsConfig": "packages/mosaic-dev/validation/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/validation/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {
@@ -2060,24 +1626,14 @@
                         "tsConfig": "packages/mosaic-dev/vertical-navbar/tsconfig.app.json",
                         "index": "packages/mosaic-dev/index.html",
                         "main": "packages/mosaic-dev/vertical-navbar/main.ts",
-                        "polyfills": "packages/mosaic-dev/polyfills.ts"
-                    },
-                    "configurations": {
-                        "production": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "statsJson": true
-                        }
+                        "polyfills": "packages/mosaic-dev/polyfills.ts",
+                        "aot": false,
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     }
                 },
                 "serve": {

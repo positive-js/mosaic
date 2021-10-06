@@ -1,6 +1,6 @@
 import { ElementRef } from '@angular/core';
 
-import { Constructor } from './constructor';
+import { AbstractConstructor, Constructor } from './constructor';
 
 
 // tslint:disable-next-line:naming-convention
@@ -9,7 +9,7 @@ export interface CanColor {
 }
 
 /** @docs-private */
-export type CanColorCtor = Constructor<CanColor>;
+export type CanColorCtor = Constructor<CanColor> & AbstractConstructor<CanColor>;
 
 // tslint:disable-next-line:naming-convention
 export interface HasElementRef {
@@ -25,16 +25,11 @@ export enum ThemePalette {
 }
 
 /** Mixin to augment a directive with a `color` property. */
-export function mixinColor<T extends Constructor<HasElementRef>>(
-    base: T,
-    defaultColor: ThemePalette = ThemePalette.Default
-): CanColorCtor & T {
+export function mixinColor<T extends AbstractConstructor<HasElementRef>>(base: T, defaultColor?: ThemePalette): CanColorCtor & T;
+
+export function mixinColor<T extends Constructor<HasElementRef>>(base: T, defaultColor = ThemePalette.Default): CanColorCtor & T {
     return class extends base {
-
-        get color(): ThemePalette {
-            return this._color;
-        }
-
+        get color(): ThemePalette { return this._color; }
         set color(value: ThemePalette) {
             const colorPalette = value || defaultColor;
 
@@ -42,7 +37,6 @@ export function mixinColor<T extends Constructor<HasElementRef>>(
                 if (this._color) {
                     this._elementRef.nativeElement.classList.remove(`mc-${this._color}`);
                 }
-
                 if (colorPalette) {
                     this._elementRef.nativeElement.classList.add(`mc-${colorPalette}`);
                 }

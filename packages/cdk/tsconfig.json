@@ -15,6 +15,6 @@
         "flatModuleId": "@ptsecurity/cdk",
         "skipTemplateCodegen": true,
         "fullTemplateTypeCheck": true,
-        "enableIvy": false
+        "compilationMode": "partial"
     }
 }

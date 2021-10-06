@@ -21,6 +21,6 @@
         "flatModuleId": "@ptsecurity/mosaic-luxon-adapter",
         "strictInjectionParameters": true,
         "enableResourceInlining": true,
-        "enableIvy": false
+        "compilationMode": "partial"
     }
 }

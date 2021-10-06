@@ -18,9 +18,7 @@
                         "polyfills": "polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
                         "assets": [],
-                        "styles": [
-                            "styles.css"
-                        ],
+                        "styles": ["styles.css"],
                         "scripts": []
                     },
                     "configurations": {
@@ -34,13 +32,11 @@
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
-                            "budgets": [
-                                {
-                                    "type": "initial",
-                                    "maximumWarning": "2mb",
-                                    "maximumError": "5mb"
-                                }
-                            ]
+                            "budgets": [{
+                                "type": "initial",
+                                "maximumWarning": "2mb",
+                                "maximumError": "5mb"
+                            }]
                         }
                     }
                 },

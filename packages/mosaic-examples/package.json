@@ -17,7 +17,7 @@
     },
     "homepage": "https://github.com/positive-js/mosaic#readme",
     "peerDependencies": {
-        "@angular/свл": "{{NG_VERSION}}",
+        "@angular/cdk": "{{NG_VERSION}}",
         "@angular/core": "{{NG_VERSION}}",
         "@angular/common": "{{NG_VERSION}}",
         "@ptsecurity/cdk": "{{VERSION}}",

@@ -3,7 +3,7 @@ import {
     BuilderOutput,
     Target
 } from '@angular-devkit/architect';
-import { Schema as AngularJson } from '@angular/cli/lib/config/schema';
+import { Schema } from '@angular/cli/lib/config/workspace-schema';
 import { green } from 'chalk';
 import { promises as fs, writeFileSync } from 'fs';
 import { dirname, join, resolve } from 'path';
@@ -45,7 +45,7 @@ export async function packager(options: IPackagerOptions, context: BuilderContex
 
     try {
         context.logger.info('📖 angular.json file...');
-        const angularJson = await tryJsonParse<AngularJson>(
+        const angularJson = await tryJsonParse<Schema>(
             join(context.workspaceRoot, 'angular.json')
         );
 

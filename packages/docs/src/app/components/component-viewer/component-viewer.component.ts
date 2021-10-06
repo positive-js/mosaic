@@ -20,18 +20,21 @@ export class ComponentViewerComponent implements OnDestroy {
 
     private destroyed: Subject<boolean> = new Subject();
 
-    constructor(routeActivated: ActivatedRoute,
-                public docItems: DocumentationItems
+    constructor(
+        routeActivated: ActivatedRoute,
+        public docItems: DocumentationItems
     ) {
         // Listen to changes on the current route for the doc id (e.g. button/checkbox) and the
         // parent route for the section (mosaic/cdk).
 
-        combineLatest([routeActivated.params, routeActivated.parent.params]).pipe(
-            map((p: [Params, Params]) => ({id: p[0].id, section: p[1].section})),
-            map((p) => ({doc: docItems.getItemById(p.id, p.section), section: p.section}),
+        combineLatest([routeActivated.params, routeActivated!.parent!.params]).pipe(
+            map((p: [Params, Params]) => ({ id: p[0].id, section: p[1].section })),
+            map((p) => ({ doc: docItems.getItemById(p.id, p.section), section: p.section }),
                 takeUntil(this.destroyed))
         ).subscribe((d) => {
-            this.componentDocItem = d.doc;
+            if (d.doc) {
+                this.componentDocItem = d.doc;
+            }
         });
     }
 
@@ -137,11 +140,17 @@ export class ComponentOverviewComponent implements OnDestroy {
 
     copyCode = (event: Event) =>  {
         const codeCopyAnimationTime = 1000;
-        const copyBlock = (<HTMLElement> event.target).parentElement.parentElement;
+        const copyBlock = (<HTMLElement> event.target)!.parentElement!.parentElement;
+
+        if (!copyBlock) { return; }
 
         const range = document.createRange();
         range.selectNodeContents(copyBlock);
+
         const sel = window.getSelection();
+
+        if (!sel) { return; }
+
         sel.removeAllRanges();
         sel.addRange(range);
         document.execCommand('copy');

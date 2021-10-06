@@ -178,8 +178,7 @@ function resolveModuleName(node: ts.Identifier, typeChecker: ts.TypeChecker) {
 
     // If the symbol can't be found, or no declaration could be found within
     // the symbol, add failure to report that the given symbol can't be found.
-    if (!symbol ||
-        !(symbol.valueDeclaration || (symbol.declarations && symbol.declarations.length !== 0))) {
+    if (!symbol || !(symbol.valueDeclaration || (symbol.declarations && symbol.declarations.length !== 0))) {
         // tslint:disable-next-line:no-null-keyword
         return null;
     }
@@ -187,7 +186,10 @@ function resolveModuleName(node: ts.Identifier, typeChecker: ts.TypeChecker) {
     // The filename for the source file of the node that contains the
     // first declaration of the symbol. All symbol declarations must be
     // part of a defining node, so parent can be asserted to be defined.
-    const resolvedNode = symbol.valueDeclaration || symbol.declarations[0];
+    const resolvedNode = symbol.valueDeclaration || symbol.declarations?.[0];
+
+    if (!resolvedNode) { return null; }
+
     const sourceFile = resolvedNode.getSourceFile().fileName;
 
     // File the module the symbol belongs to from a regex match of the

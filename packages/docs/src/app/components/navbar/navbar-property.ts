@@ -28,12 +28,12 @@ export class NavbarProperty {
     setValue(i: number) {
         this.currentValue = this.data[i];
         localStorage.setItem(this.property, `${i}`);
-        if (this.updateTemplate) { this.updateTemplate(i); }
+        if (this.updateTemplate) { this.updateTemplate(); }
         if (this.updateSelected) { this.updateSelected(i); }
     }
 
     init() {
-        const currentValue = +localStorage.getItem(this.property);
+        const currentValue = parseInt(localStorage.getItem(this.property) as string);
 
         if (currentValue) {
             this.setValue(currentValue);
@@ -42,7 +42,7 @@ export class NavbarProperty {
         }
     }
 
-    private updateTemplate(i: number) {
+    private updateTemplate() {
         if (this.currentValue) {
             for (const color of this.data) {
                 document.body.classList.remove(color.className);

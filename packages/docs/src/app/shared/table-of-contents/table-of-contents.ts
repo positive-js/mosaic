@@ -36,14 +36,14 @@ export class TableOfContents {
     constructor(
         @Inject(DOCUMENT) private _document: Document,
         private _router: Router,
-        private _route: ActivatedRoute
+        public route: ActivatedRoute
     ) {
         this.links = this.createLinks();
     }
 
     private createLinks(): ILink[] {
 
-        const links = [];
+        const links: any = [];
         const headers: HTMLElement[] =
             Array.from(this._document.querySelectorAll(this.headerSelectors));
 
