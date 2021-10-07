@@ -5,7 +5,7 @@ import {
     Component,
     ComponentFactoryResolver,
     ElementRef,
-    EventEmitter,
+    EventEmitter, Injectable,
     Injector,
     Input,
     NgZone,
@@ -15,11 +15,29 @@ import {
     ViewContainerRef
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { shareReplay, take, tap } from 'rxjs/operators';
 
 import { ExampleViewer } from '../example-viewer/example-viewer';
 
+
+@Injectable({providedIn: 'root'})
+class DocFetcher {
+    // tslint:disable-next-line:orthodox-getter-and-setter
+    private _cache: Record<string, Observable<string>> = {};
+
+    constructor(private _http: HttpClient) {}
+
+    fetchDocument(url: string): Observable<string> {
+        if (this._cache[url]) {
+            return this._cache[url];
+        }
+
+        const stream = this._http.get(url, {responseType: 'text'}).pipe(shareReplay(1));
+
+        return stream.pipe(tap(() => this._cache[url] = stream));
+    }
+}
 
 @Component({
     selector: 'doc-viewer',
@@ -48,25 +66,20 @@ export class DocViewer implements OnDestroy {
                 private _injector: Injector,
                 private _viewContainerRef: ViewContainerRef,
                 private _ngZone: NgZone,
-                private _domSanitizer: DomSanitizer) {
+                private _domSanitizer: DomSanitizer,
+                private _docFetcher: DocFetcher) {
     }
 
     ngOnDestroy() {
         this.clearLiveExamples();
-
-        if (this.documentFetchSubscription) {
-            this.documentFetchSubscription.unsubscribe();
-        }
+        this.documentFetchSubscription?.unsubscribe();
     }
 
     /** Fetch a document by URL. */
     private fetchDocument(url: string) {
-        // Cancel previous pending request
-        if (this.documentFetchSubscription) {
-            this.documentFetchSubscription.unsubscribe();
-        }
+        this.documentFetchSubscription?.unsubscribe();
 
-        this.documentFetchSubscription = this._http.get(url, {responseType: 'text'}).subscribe(
+        this.documentFetchSubscription = this._docFetcher.fetchDocument(url).subscribe(
             (document) => this.updateDocument(document),
             (error) => this.showError(url, error)
         );
@@ -125,7 +138,6 @@ export class DocViewer implements OnDestroy {
             const examplePortal: ComponentPortal<any> = new ComponentPortal(componentClass, this._viewContainerRef);
             const exampleViewer = portalHost.attach(examplePortal);
             (exampleViewer.instance as ExampleViewer).example = example;
-
             this.portalHosts.push(portalHost);
         });
     }

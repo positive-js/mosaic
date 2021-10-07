@@ -13,7 +13,7 @@
         "node": ">= 12",
         "yarn": ">= 1.0.0"
     },
-    "requiredAngularVersion": ">=11.0.0",
+    "requiredAngularVersion": ">=12.0.0",
     "dependencies": {
         "@angular/animations": "^12.2.5",
         "@angular/cdk": "^11.2.2",

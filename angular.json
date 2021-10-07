@@ -53,8 +53,7 @@
                         "extractLicenses": false,
                         "buildOptimizer": false,
                         "optimization": false,
-                        "namedChunks": true,
-                        "aot": false
+                        "namedChunks": true
                     },
                     "configurations": {
                         "development": {
@@ -84,7 +83,6 @@
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
-                            "extractCss": true,
                             "namedChunks": false,
                             "extractLicenses": true,
                             "vendorChunk": false,
@@ -103,8 +101,7 @@
                                 }
                             ]
                         }
-                    },
-                    "defaultConfiguration": ""
+                    }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
