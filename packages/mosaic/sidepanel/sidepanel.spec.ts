@@ -252,6 +252,12 @@ describe('McSidepanelService', () => {
         expect(overlayContainerElement.querySelector('.custom-overlay')).not.toBeNull();
     });
 
+    it('should be able to set custom backdrop class', () => {
+        sidepanelService.open(SimpleSidepanelExample, { backdropClass: 'custom-backdrop' });
+
+        expect(overlayContainerElement.querySelector('.custom-backdrop')).not.toBeNull();
+    });
+
     it('should add indent when open more than one sidepanel with same position', () => {
         sidepanelService.open(SimpleSidepanelExample);
 
