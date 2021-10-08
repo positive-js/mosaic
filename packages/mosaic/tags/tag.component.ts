@@ -422,6 +422,8 @@ export class McTagRemove {
     /** Calls the parent tag's public `remove()` method if applicable. */
     handleClick(event: Event): void {
         if (this.parentTag.removable) {
+            this.parentTag.hasFocus = true;
+
             this.parentTag.remove();
         }
 
