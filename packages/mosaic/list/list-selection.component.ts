@@ -300,7 +300,12 @@ export const McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeof
 @Component({
     exportAs: 'mcListSelection',
     selector: 'mc-list-selection',
-    template: '<ng-content></ng-content>',
+    template: `
+        <div [attr.tabindex]="tabIndex"
+             (focus)="focus()"
+             (blur)="blur()">
+            <ng-content></ng-content>
+        </div>`,
     styleUrls: ['./list.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
@@ -308,11 +313,9 @@ export const McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeof
     host: {
         class: 'mc-list-selection',
 
-        '[attr.tabindex]': 'tabIndex',
+        '[attr.tabindex]': '-1',
         '[attr.disabled]': 'disabled || null',
 
-        '(focus)': 'focus()',
-        '(blur)': 'blur()',
         '(keydown)': 'onKeyDown($event)',
         '(window:resize)': 'updateScrollSize()'
     },
