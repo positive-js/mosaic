@@ -36,6 +36,8 @@ export const MC_SIDEPANEL_WITH_SHADOW = new InjectionToken<boolean>('mc-sidepane
     animations: [mcSidepanelAnimations.sidepanelState],
     host: {
         class: 'mc-sidepanel-container',
+        '[class.mc-sidepanel_nested]': 'withIndent',
+        '[class.mc-sidepanel-container_shadowed]': 'withShadow',
         role: 'dialog',
         'aria-modal': 'true',
         '[attr.id]': 'id',
@@ -132,10 +134,6 @@ export class McSidepanelContainerComponent extends BasePortalOutlet implements O
         const position: McSidepanelPosition = this.sidepanelConfig.position!;
 
         element.classList.add(`mc-sidepanel-container_${position}`);
-
-        if (this.withShadow) {
-            element.classList.add('mc-sidepanel-container_shadowed');
-        }
     }
 
     private validatePortalAttached() {
