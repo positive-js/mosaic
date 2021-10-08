@@ -47,8 +47,10 @@ export class McSidepanelService implements OnDestroy {
         this.closeSidepanels(this.openedSidepanelsAtThisLevel);
     }
 
-    open<T, D = any>(componentOrTemplateRef: ComponentType<T> | TemplateRef<T>,
-                     config?: McSidepanelConfig<D>): McSidepanelRef<T> {
+    open<T, D = any>(
+        componentOrTemplateRef: ComponentType<T> | TemplateRef<T>,
+        config?: McSidepanelConfig<D>
+    ): McSidepanelRef<T> {
         const fullConfig = {
             ...(this.defaultOptions || new McSidepanelConfig()),
             ...config
@@ -170,6 +172,10 @@ export class McSidepanelService implements OnDestroy {
     }
 
     private getBackdropClass(config: McSidepanelConfig): string {
+        if (config.hasBackdrop && config.backdropClass) {
+            return config.backdropClass;
+        }
+
         const hasOpenedSidepanelWithBackdrop =
             this.openedSidepanels.some((sidepanelRef) => sidepanelRef.config.hasBackdrop!);
 
