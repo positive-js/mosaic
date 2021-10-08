@@ -1,4 +1,39 @@
 <div>
+    <br><br><br>
+
+    <span mc-link
+          pseudo
+          [mcDropdownTriggerFor]="dropdown">
+        Выбрать
+    </span>
+
+    <mc-dropdown #dropdown>
+        <ng-template mcDropdownContent>
+            <button
+                *ngFor="let pool of pools"
+                mc-dropdown-item
+                [mcDropdownTriggerFor]="domainsDropdown"
+                [mcDropdownTriggerData]="{domains: pool.domains}"
+            >
+                {{pool.name}}
+            </button>
+        </ng-template>
+    </mc-dropdown>
+
+    <mc-dropdown #domainsDropdown>
+        <ng-template mcDropdownContent let-domains="domains">
+            <button
+                *ngFor="let domain of domains"
+                mc-dropdown-item
+                (click)="selectDomain(domain.id)"
+            >
+                {{domain.name}}
+            </button>
+        </ng-template>
+    </mc-dropdown>
+
+    <br><br><br>
+
     <span class="mc-group">
         <button mc-button class="mc-group-item mc-active"
                 [ngClass]="{ 'mc-active': isDropdownOpen}"

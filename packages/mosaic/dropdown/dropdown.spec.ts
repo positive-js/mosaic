@@ -597,14 +597,14 @@ describe('McDropdown', () => {
             fixture.detectChanges();
             tick(500);
 
-            expect(fixture.componentInstance.items.length).toBeGreaterThan(0);
+            expect(overlayContainerElement.querySelectorAll('.mc-dropdown__panel').length).toBeGreaterThan(0);
 
             fixture.componentInstance.trigger.close();
             fixture.detectChanges();
             tick(500);
             fixture.detectChanges();
 
-            expect(fixture.componentInstance.items.length).toBe(0);
+            expect(overlayContainerElement.querySelectorAll('.mc-dropdown__panel').length).toBe(0);
         }));
 
         it('should wait for the close animation to finish before considering the panel as closed', fakeAsync(() => {
