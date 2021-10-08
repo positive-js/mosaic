@@ -30,7 +30,12 @@ export class McNavbarContainer {}
 @Component({
     selector: 'mc-navbar',
     template: `<ng-content select="[mc-navbar-container], mc-navbar-container"></ng-content>`,
-    styleUrls: ['./navbar.scss'],
+    styleUrls: [
+        './navbar.scss',
+        './navbar-item.scss',
+        './navbar-brand.scss',
+        './navbar-divider.scss'
+    ],
     host: {
         class: 'mc-navbar',
         '(window:resize)': 'resizeStream.next($event)'
