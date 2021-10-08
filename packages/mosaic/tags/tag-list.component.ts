@@ -798,7 +798,6 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
     private listenToTagsFocus(): void {
         this.tagFocusSubscription = this.tagFocusChanges
             .subscribe((event) => {
-                console.log('this.tagFocusChanges: ');
                 const tagIndex: number = this.tags.toArray().indexOf(event.tag);
 
                 if (this.isValidIndex(tagIndex)) {
@@ -818,7 +817,6 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
     private listenToTagsRemoved(): void {
         this.tagRemoveSubscription = this.tagRemoveChanges
             .subscribe((event) => {
-                console.log('this.tagRemoveChanges: ');
                 const tag = event.tag;
                 const tagIndex = this.tags.toArray().indexOf(event.tag);
 
