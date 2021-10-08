@@ -136,11 +136,6 @@ export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase = mixin
     selector: 'mc-navbar-item, [mc-navbar-item]',
     exportAs: 'mcNavbarItem',
     template: `<ng-content></ng-content>`,
-    styleUrls: [
-        './navbar-item.scss',
-        './navbar-brand.scss',
-        './navbar-divider.scss'
-    ],
     host: {
         class: 'mc-navbar-item',
         '[class.mc-navbar-item_collapsed]': 'collapsed',
