@@ -6,6 +6,22 @@
         }
     },
     'datepicker-body': {
+        'light-color-scheme': {
+            states: {
+                selected: {
+                    color: { value: '{light-color-scheme.primary.default.value}' },
+                    background: { value: '{light-color-scheme.primary.palette.value.100.value}' }
+                }
+            }
+        },
+        'dark-color-scheme': {
+            states: {
+                selected: {
+                    color: { value: '{dark-color-scheme.primary.palette.value.500.value}' },
+                    background: { value: '{dark-color-scheme.primary.palette.value.700.value}' }
+                }
+            }
+        },
         size: {
             label: {
                 'paddings': { value: '8px 28px 12px 12px' }
