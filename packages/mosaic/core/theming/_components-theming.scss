@@ -117,6 +117,11 @@
         state-focused-shadow: $checkbox-light-color-scheme-states-focused-shadow
     );
 
+    $datepicker: (
+        state-selected-color: $datepicker-body-light-color-scheme-states-selected-color,
+        state-selected-background: $datepicker-body-light-color-scheme-states-selected-background
+    );
+
     $form-field: (
         border: $form-field-light-color-scheme-border,
         background: $form-field-light-color-scheme-background,
@@ -256,6 +261,7 @@
         button: $button,
         card: $card,
         checkbox: $checkbox,
+        datepicker: $datepicker,
         form-field: $form-field,
         forms: $forms,
         link: $link,
@@ -387,6 +393,11 @@
 
         state-focused-border: $checkbox-dark-color-scheme-states-focused-border,
         state-focused-shadow: $checkbox-dark-color-scheme-states-focused-shadow
+    );
+
+    $datepicker: (
+        state-selected-color: $datepicker-body-dark-color-scheme-states-selected-color,
+        state-selected-background: $datepicker-body-dark-color-scheme-states-selected-background
     );
 
     $form-field: (
@@ -528,6 +539,7 @@
         button: $button,
         card: $card,
         checkbox: $checkbox,
+        datepicker: $datepicker,
         form-field: $form-field,
         forms: $forms,
         link: $link,
