@@ -69,7 +69,7 @@ export class McDropdownContent implements OnDestroy {
      * @docs-private
      */
     detach() {
-        if (this.portal.isAttached) {
+        if (this.portal?.isAttached) {
             this.portal.detach();
         }
     }
