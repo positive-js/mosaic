@@ -1,3 +1,9 @@
+## 12.0.1 "Respiratory Worldview" (2021-10-11)
+
+### Mosaic
+
+ * bug fix  **build:** declare annotation for tools scripts ([f53a33a](https://github.com/positive-js/mosaic/commit/f53a33a5f7b89ed4b7298df7d85753a634e9e9d6))
+
 # 12.0.0 "Knobbly Unification" (2021-10-11)
 
 ### Mosaic
