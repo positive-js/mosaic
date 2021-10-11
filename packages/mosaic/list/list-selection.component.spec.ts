@@ -58,7 +58,7 @@ describe('McListSelection without forms', () => {
 
             expect(listItem.classList).not.toContain('mc-focused');
 
-            dispatchFakeEvent(listItem, 'focus');
+            dispatchFakeEvent(listItem, 'focusin');
             flush();
             fixture.detectChanges();
             expect(listItem.className).toContain('mc-focused');
@@ -466,7 +466,7 @@ describe('McListSelection without forms', () => {
         }));
 
         it('should be focused when focus on nativeElements', fakeAsync(() => {
-            dispatchFakeEvent(listOption.nativeElement, 'focus');
+            dispatchFakeEvent(listOption.nativeElement, 'focusin');
             flush();
             fixture.detectChanges();
 
