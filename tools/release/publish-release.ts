@@ -40,7 +40,7 @@ class PublishReleaseTask extends BaseReleaseTask {
     releaseOutputPath: string;
 
     /** Instance of a wrapper that can execute Git commands. */
-    git: GitClient;
+    declare git: GitClient;
 
     constructor(
         public projectDir: string,

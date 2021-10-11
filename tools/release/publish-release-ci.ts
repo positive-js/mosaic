@@ -30,7 +30,7 @@ class PublishReleaseCITask extends BaseReleaseTask {
     currentVersion: Version;
 
     /** Instance of a wrapper that can execute Git commands. */
-    git: GitClient;
+    declare git: GitClient;
 
     /** Octokit API instance that can be used to make Github API calls. */
     githubApi: Octokit;
