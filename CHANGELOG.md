@@ -1,3 +1,13 @@
+# 12.0.0 "Knobbly Unification" (2021-10-11)
+
+### Mosaic
+
+ * bug fix  **datepicker:** emit event after clean, correct decrement for year (#UIM-741, #UIM-765) ([#695](https://github.com/positive-js/mosaic/issues/695)) ([8b47c79](https://github.com/positive-js/mosaic/commit/8b47c79f492d3f184c6fdbddc19e663af3e1d48d)), closes [#UIM-741](https://github.com/positive-js/mosaic/issues/UIM-741) [#UIM-765](https://github.com/positive-js/mosaic/issues/UIM-765)
+ * bug fix  **tree:** emit selectionChange event without selection (#UIM-742) ([#696](https://github.com/positive-js/mosaic/issues/696)) ([2b2bc60](https://github.com/positive-js/mosaic/commit/2b2bc60c9a3ed52304b7bfc3964e2fe3be22f9b4)), closes [#UIM-742](https://github.com/positive-js/mosaic/issues/UIM-742)
+ * bug fix  package.json & yarn.lock to reduce vulnerabilities ([#698](https://github.com/positive-js/mosaic/issues/698)) ([3162f7c](https://github.com/positive-js/mosaic/commit/3162f7c5207b37e78c18ef12eb831584edef11d6))
+ * feature  **chore:** Angular 12 (#UIM-757) ([#694](https://github.com/positive-js/mosaic/issues/694)) ([4ba72e2](https://github.com/positive-js/mosaic/commit/4ba72e29d2ecc23b32368a4c5ea8e3f0c3612bd6)), closes [#UIM-757](https://github.com/positive-js/mosaic/issues/UIM-757)
+ * feature  **tooltip, popover:** implementation by guideline (#UIM-698, #UIM-699) ([#680](https://github.com/positive-js/mosaic/issues/680)) ([31cedde](https://github.com/positive-js/mosaic/commit/31cedde40c2a57ec896a661aee0dd17e2402a88a)), closes [#UIM-698](https://github.com/positive-js/mosaic/issues/UIM-698) [#UIM-699](https://github.com/positive-js/mosaic/issues/UIM-699)
+
 ## 11.4.3 "Introspective Divvy" (2021-10-11)
 
 ### Mosaic
