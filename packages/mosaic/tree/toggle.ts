@@ -1,6 +1,7 @@
 import { Component, Directive, Input, ViewEncapsulation } from '@angular/core';
-import { CdkTree, CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { map } from 'rxjs/operators';
+
+import { McTree, McTreeNode } from './tree';
 
 
 @Component({
@@ -36,7 +37,7 @@ export class McTreeNodeToggleComponent<T> {
         return this.disabled || this.tree.treeControl.isExpanded(this.node);
     }
 
-    constructor(private tree: CdkTree<T>, private treeNode: CdkTreeNode<T>) {
+    constructor(private tree: McTree<T>, private treeNode: McTreeNode<T>) {
         this.tree.treeControl.filterValue
             .pipe(map((value) => value?.length > 0))
             .subscribe((state: boolean) => this.disabled = state);
@@ -72,7 +73,7 @@ export class McTreeNodeToggleDirective<T> {
 
     private _recursive = false;
 
-    constructor(private tree: CdkTree<T>, private treeNode: CdkTreeNode<T>) {
+    constructor(private tree: McTree<T>, private treeNode: McTreeNode<T>) {
 
         this.tree.treeControl.filterValue
             .pipe(map((value) => value.length > 0))

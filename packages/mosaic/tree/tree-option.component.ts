@@ -15,10 +15,11 @@ import {
     NgZone
 } from '@angular/core';
 import { hasModifierKey } from '@ptsecurity/cdk/keycodes';
-import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
+
+import { McTreeNode } from './tree';
 
 
 // tslint:disable-next-line:naming-convention
@@ -58,9 +59,9 @@ let uniqueIdCounter: number = 0;
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }]
+    providers: [{ provide: McTreeNode, useExisting: McTreeOption }]
 })
-export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisable, AfterContentInit {
+export class McTreeOption extends McTreeNode<McTreeOption> implements CanDisable, AfterContentInit {
     readonly onFocus = new Subject<McTreeOptionEvent>();
 
     readonly onBlur = new Subject<McTreeOptionEvent>();

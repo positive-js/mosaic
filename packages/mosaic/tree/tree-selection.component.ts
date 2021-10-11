@@ -34,7 +34,6 @@ import {
     DOWN_ARROW,
     UP_ARROW
 } from '@ptsecurity/cdk/keycodes';
-import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import {
     CanDisable,
     getMcSelectNonArrayValueError,
@@ -44,6 +43,9 @@ import {
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { delay, takeUntil } from 'rxjs/operators';
 
+import { FlatTreeControl } from './control/flat-tree-control';
+import { McTreeNodeOutlet } from './outlet';
+import { McTree } from './tree';
 import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption, McTreeOptionEvent } from './tree-option.component';
 
 
@@ -71,7 +73,7 @@ interface SelectionModelOption {
 @Component({
     selector: 'mc-tree-selection',
     exportAs: 'mcTreeSelection',
-    template: '<ng-container cdkTreeNodeOutlet></ng-container>',
+    template: '<ng-container mcTreeNodeOutlet></ng-container>',
     styleUrls: ['./tree.scss'],
     host: {
         class: 'mc-tree-selection',
@@ -90,13 +92,13 @@ interface SelectionModelOption {
     providers: [
         MC_SELECTION_TREE_VALUE_ACCESSOR,
         { provide: MC_TREE_OPTION_PARENT_COMPONENT, useExisting: McTreeSelection },
-        { provide: CdkTree, useExisting: McTreeSelection }
+        { provide: McTree, useExisting: McTreeSelection }
     ]
 })
-export class McTreeSelection extends CdkTree<McTreeOption>
+export class McTreeSelection extends McTree<McTreeOption>
     implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
 
-    @ViewChild(CdkTreeNodeOutlet, { static: true }) nodeOutlet: CdkTreeNodeOutlet;
+    @ViewChild(McTreeNodeOutlet, { static: true }) nodeOutlet: McTreeNodeOutlet;
 
     @ContentChildren(McTreeOption) unorderedOptions: QueryList<McTreeOption>;
 

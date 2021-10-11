@@ -58,7 +58,6 @@ import {
     PAGE_DOWN,
     hasModifierKey
 } from '@ptsecurity/cdk/keycodes';
-import { CdkTree } from '@ptsecurity/cdk/tree';
 import {
     getOptionScrollPosition,
     CanDisable,
@@ -89,7 +88,7 @@ import {
 } from '@ptsecurity/mosaic/core';
 import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tags';
-import { McTreeSelection, McTreeOption } from '@ptsecurity/mosaic/tree';
+import { McTree, McTreeSelection, McTreeOption } from '@ptsecurity/mosaic/tree';
 import { defer, merge, Observable, Subject, Subscription } from 'rxjs';
 import {
     filter,
@@ -158,7 +157,7 @@ const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorSt
     ],
     providers: [
         { provide: McFormFieldControl, useExisting: McTreeSelect },
-        { provide: CdkTree, useExisting: McTreeSelect }
+        { provide: McTree, useExisting: McTreeSelect }
     ]
 })
 export class McTreeSelect extends McTreeSelectMixinBase implements

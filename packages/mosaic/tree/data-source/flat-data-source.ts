@@ -1,7 +1,9 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import { FlatTreeControl, TreeControl } from '@ptsecurity/cdk/tree';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
+
+import { FlatTreeControl } from '../control/flat-tree-control';
+import { TreeControl } from '../control/tree-control';
 
 
 /**
