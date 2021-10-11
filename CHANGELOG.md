@@ -1,3 +1,16 @@
+## 11.4.3 "Introspective Divvy" (2021-10-11)
+
+### Mosaic
+
+ * bug fix  **datepicker:** no color for today in dark theme (#UIM-769) ([#702](https://github.com/positive-js/mosaic/issues/702)) ([f2a55e3](https://github.com/positive-js/mosaic/commit/f2a55e3c8573f8c5b2bb6ece9a81280b1cd8a985)), closes [#UIM-769](https://github.com/positive-js/mosaic/issues/UIM-769)
+ * bug fix  **dropdown:** doesn't render nested dropdowns (#UIM-773) ([#700](https://github.com/positive-js/mosaic/issues/700)) ([eb63fee](https://github.com/positive-js/mosaic/commit/eb63feee8c15d2a28b6261305349440ebcbd9b64)), closes [#UIM-773](https://github.com/positive-js/mosaic/issues/UIM-773) [#UIM-773](https://github.com/positive-js/mosaic/issues/UIM-773)
+ * bug fix  **list:** unnecessary focus on scroll by click (#UIM-771) ([#705](https://github.com/positive-js/mosaic/issues/705)) ([9941006](https://github.com/positive-js/mosaic/commit/994100613689ffa18f0bb928fa4e3fd683ce8128)), closes [#UIM-771](https://github.com/positive-js/mosaic/issues/UIM-771)
+ * bug fix  **navbar:** no styles for brand item (#UIM-762) ([#703](https://github.com/positive-js/mosaic/issues/703)) ([54bb75b](https://github.com/positive-js/mosaic/commit/54bb75b7af81e76463f09c56bc723b68e9c51013)), closes [#UIM-762](https://github.com/positive-js/mosaic/issues/UIM-762)
+ * bug fix  **sidepanel:** can' t change backdropClass (#UIM-732) ([#704](https://github.com/positive-js/mosaic/issues/704)) ([885790e](https://github.com/positive-js/mosaic/commit/885790e8e7267d4c696e7363d58774be2cfa5de3)), closes [#UIM-732](https://github.com/positive-js/mosaic/issues/UIM-732)
+ * bug fix  **sidepanel:** fixed styles for nested sidepanels (#UIM-735) ([#701](https://github.com/positive-js/mosaic/issues/701)) ([7d43e55](https://github.com/positive-js/mosaic/commit/7d43e55af5bd871b6a7b114be53505b38912729e)), closes [#UIM-735](https://github.com/positive-js/mosaic/issues/UIM-735)
+ * bug fix  **tags:** tag-input affects another focused input (#UIM-723) ([#707](https://github.com/positive-js/mosaic/issues/707)) ([2e5548c](https://github.com/positive-js/mosaic/commit/2e5548ca62b908e73bd66eb47c39da035730e494)), closes [#UIM-723](https://github.com/positive-js/mosaic/issues/UIM-723) [#UIM-723](https://github.com/positive-js/mosaic/issues/UIM-723)
+ * bug fix  **list,tree:** option doesn't receive focus if has focused elements in (#UIM-772) ([#706](https://github.com/positive-js/mosaic/issues/706)) ([f73ebe0](https://github.com/positive-js/mosaic/commit/f73ebe02585a8463ec46db744c6e2484689a560d)), closes [#UIM-772](https://github.com/positive-js/mosaic/issues/UIM-772)
+
 ## 11.4.2 "Awesome Wingspan" (2021-09-03)
 
 ### Mosaic
