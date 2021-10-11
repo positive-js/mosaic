@@ -74,7 +74,7 @@ export interface McOptionEvent {
         '[attr.tabindex]': 'tabIndex',
         '[attr.disabled]': 'disabled || null',
 
-        '(focus)': 'focus()',
+        '(focusin)': 'focus()',
         '(blur)': 'blur()',
         '(click)': 'handleClick($event)'
     },

@@ -51,7 +51,7 @@ let uniqueIdCounter: number = 0;
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
 
-        '(focus)': 'focus()',
+        '(focusin)': 'focus()',
         '(blur)': 'blur()',
 
         '(click)': 'selectViaInteraction($event)'
