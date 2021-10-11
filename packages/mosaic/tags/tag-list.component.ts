@@ -796,36 +796,37 @@ export class McTagList extends McTagListMixinBase implements McFormFieldControl<
 
     /** Listens to user-generated selection events on each tag. */
     private listenToTagsFocus(): void {
-        this.tagFocusSubscription = this.tagFocusChanges.subscribe((event) => {
-            const tagIndex: number = this.tags.toArray().indexOf(event.tag);
+        this.tagFocusSubscription = this.tagFocusChanges
+            .subscribe((event) => {
+                const tagIndex: number = this.tags.toArray().indexOf(event.tag);
 
-            if (this.isValidIndex(tagIndex)) {
-                this.keyManager.updateActiveItem(tagIndex);
-            }
+                if (this.isValidIndex(tagIndex)) {
+                    this.keyManager.updateActiveItem(tagIndex);
+                }
 
-            this.stateChanges.next();
-        });
+                this.stateChanges.next();
+            });
 
-        this.tagBlurSubscription = this.tagBlurChanges.subscribe(() => {
-            this.blur();
-            this.stateChanges.next();
-        });
+        this.tagBlurSubscription = this.tagBlurChanges
+            .subscribe(() => {
+                this.blur();
+                this.stateChanges.next();
+            });
     }
 
     private listenToTagsRemoved(): void {
-        this.tagRemoveSubscription = this.tagRemoveChanges.subscribe((event) => {
-            const tag = event.tag;
-            const tagIndex = this.tags.toArray().indexOf(event.tag);
+        this.tagRemoveSubscription = this.tagRemoveChanges
+            .subscribe((event) => {
+                const tag = event.tag;
+                const tagIndex = this.tags.toArray().indexOf(event.tag);
 
-            // In case the tag that will be removed is currently focused, we temporarily store
-            // the index in order to be able to determine an appropriate sibling tag that will
-            // receive focus.
-            if (this.isValidIndex(tagIndex) && tag.hasFocus) {
-                this.lastDestroyedTagIndex = tagIndex;
-            } else if (this.isValidIndex(tagIndex) && !tag.hasFocus) {
-                this.focusInput();
-            }
-        });
+                // In case the tag that will be removed is currently focused, we temporarily store
+                // the index in order to be able to determine an appropriate sibling tag that will
+                // receive focus.
+                if (this.isValidIndex(tagIndex) && tag.hasFocus) {
+                    this.lastDestroyedTagIndex = tagIndex;
+                }
+            });
     }
 
     /** Checks whether an event comes from inside a tag element. */
