@@ -1,4 +1,6 @@
 export * from './tree.module';
+export * from './tree-base';
+export * from './outlet';
 export * from './tree';
 export * from './node';
 export * from './padding.directive';

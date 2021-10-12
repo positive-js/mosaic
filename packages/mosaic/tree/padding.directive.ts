@@ -12,7 +12,7 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { McTree, McTreeNode } from './tree';
+import { McTreeBase, McTreeNode } from './tree-base';
 
 
 /** Regex used to split a string on its CSS units. */
@@ -20,7 +20,8 @@ const cssUnitPattern = /([A-Za-z%]+)$/;
 
 
 @Directive({
-    selector: '[mcTreeNodePadding]'
+    selector: '[mcTreeNodePadding]',
+    exportAs: 'mcTreeNodePadding'
 })
 export class McTreeNodePadding<T> implements OnInit, OnDestroy {
     @Input('mcTreeNodePadding')
@@ -61,7 +62,7 @@ export class McTreeNodePadding<T> implements OnInit, OnDestroy {
 
     constructor(
         protected treeNode: McTreeNode<T>,
-        protected tree: McTree<T>,
+        protected tree: McTreeBase<T>,
         private renderer: Renderer2,
         private element: ElementRef<HTMLElement>,
         @Optional() private dir: Directionality
@@ -100,7 +101,7 @@ export class McTreeNodePadding<T> implements OnInit, OnDestroy {
      */
     private setLevelInput(value: number) {
         // Set to null as the fallback value so that _setPadding can fall back to the node level if the
-        // consumer set the directive as `cdkTreeNodePadding=""`. We still want to take this value if
+        // consumer set the directive as `mcTreeNodePadding=""`. We still want to take this value if
         // they set 0 explicitly.
         this._level = coerceNumberProperty(value, null)!;
         this.setPadding();

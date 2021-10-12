@@ -1,0 +1,33 @@
+@import '../design-tokens/tokens';
+
+
+.mc-tree-option {
+    display: flex;
+    align-items: center;
+
+    padding-right: var(--mc-tree-size-padding-right, $tree-size-padding-right);
+
+    height: var(--mc-tree-size-node-height, $tree-size-node-height);
+
+    word-wrap: break-word;
+
+    border: var(--mc-tree-size-border-width, $tree-size-border-width) solid transparent;
+
+    & > .mc-icon {
+        margin-right: 4px;
+
+        cursor: pointer;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &:not([disabled]) {
+        cursor: pointer;
+    }
+
+    & .mc-pseudo-checkbox {
+        margin-right: 8px;
+    }
+}

@@ -1,0 +1,22 @@
+@import '../design-tokens/tokens';
+
+
+.mc-tree-node-toggle {
+    margin-right: 4px;
+
+    cursor: pointer;
+
+    & .mc-icon {
+        transform: rotate(-90deg);
+    }
+
+    &.mc-opened {
+        & .mc-icon {
+            transform: rotate(0);
+        }
+    }
+
+    &[disabled] {
+        cursor: default;
+    }
+}

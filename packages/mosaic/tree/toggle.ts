@@ -1,7 +1,7 @@
 import { Component, Directive, Input, ViewEncapsulation } from '@angular/core';
 import { map } from 'rxjs/operators';
 
-import { McTree, McTreeNode } from './tree';
+import { McTreeBase, McTreeNode } from './tree-base';
 
 
 @Component({
@@ -9,10 +9,13 @@ import { McTree, McTreeNode } from './tree';
     template: `
         <i class="mc mc-icon mc-angle-down-S_16"></i>
     `,
+    styleUrls: ['./toggle.scss'],
     host: {
         class: 'mc-tree-node-toggle',
         '[class.mc-opened]': 'iconState',
+
         '[attr.disabled]': 'disabled || null',
+
         '(click)': 'toggle($event)'
     },
     encapsulation: ViewEncapsulation.None
@@ -22,7 +25,7 @@ export class McTreeNodeToggleComponent<T> {
 
     @Input() node: T;
 
-    @Input('cdkTreeNodeToggleRecursive')
+    @Input('mcTreeNodeToggleRecursive')
     get recursive(): boolean {
         return this._recursive;
     }
@@ -37,7 +40,7 @@ export class McTreeNodeToggleComponent<T> {
         return this.disabled || this.tree.treeControl.isExpanded(this.node);
     }
 
-    constructor(private tree: McTree<T>, private treeNode: McTreeNode<T>) {
+    constructor(private tree: McTreeBase<T>, private treeNode: McTreeNode<T>) {
         this.tree.treeControl.filterValue
             .pipe(map((value) => value?.length > 0))
             .subscribe((state: boolean) => this.disabled = state);
@@ -62,7 +65,7 @@ export class McTreeNodeToggleComponent<T> {
 export class McTreeNodeToggleDirective<T> {
     disabled: boolean = false;
 
-    @Input('cdkTreeNodeToggleRecursive')
+    @Input('mcTreeNodeToggleRecursive')
     get recursive(): boolean {
         return this._recursive;
     }
@@ -73,8 +76,7 @@ export class McTreeNodeToggleDirective<T> {
 
     private _recursive = false;
 
-    constructor(private tree: McTree<T>, private treeNode: McTreeNode<T>) {
-
+    constructor(private tree: McTreeBase<T>, private treeNode: McTreeNode<T>) {
         this.tree.treeControl.filterValue
             .pipe(map((value) => value.length > 0))
             .subscribe((state: boolean) => this.disabled = state);

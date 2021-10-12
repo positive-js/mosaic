@@ -4,8 +4,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 /**
  * Tree control interface. User can implement TreeControl to expand/collapse dataNodes in the tree.
- * The CDKTree will use this TreeControl to expand/collapse a node.
- * User can also use it outside the `<cdk-tree>` to control the expansion status of the tree.
+ * The Tree will use this TreeControl to expand/collapse a node.
+ * User can also use it outside the `<mc-tree>` to control the expansion status of the tree.
  */
 // tslint:disable-next-line:naming-convention
 export interface TreeControl<T> {

@@ -7,6 +7,7 @@ import { McTreeNodeOutlet } from './outlet';
 import { McTreeNodePadding } from './padding.directive';
 import { McTreeNodeToggleDirective, McTreeNodeToggleComponent } from './toggle';
 import { McTree } from './tree';
+import { McTreeNode } from './tree-base';
 import { McTreeOption } from './tree-option.component';
 import { McTreeSelection } from './tree-selection.component';
 
@@ -14,6 +15,7 @@ import { McTreeSelection } from './tree-selection.component';
 const MC_TREE_DIRECTIVES = [
     McTreeNodeOutlet,
     McTreeNodeDef,
+    McTreeNode,
     McTreeNodePadding,
     McTree,
     McTreeSelection,

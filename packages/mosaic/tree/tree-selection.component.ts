@@ -43,9 +43,9 @@ import {
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { delay, takeUntil } from 'rxjs/operators';
 
+import { McTreeBase } from './tree-base';
 import { FlatTreeControl } from './control/flat-tree-control';
 import { McTreeNodeOutlet } from './outlet';
-import { McTree } from './tree';
 import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption, McTreeOptionEvent } from './tree-option.component';
 
 
@@ -74,7 +74,7 @@ interface SelectionModelOption {
     selector: 'mc-tree-selection',
     exportAs: 'mcTreeSelection',
     template: '<ng-container mcTreeNodeOutlet></ng-container>',
-    styleUrls: ['./tree.scss'],
+    styleUrls: ['./tree-selection.scss'],
     host: {
         class: 'mc-tree-selection',
 
@@ -92,15 +92,11 @@ interface SelectionModelOption {
     providers: [
         MC_SELECTION_TREE_VALUE_ACCESSOR,
         { provide: MC_TREE_OPTION_PARENT_COMPONENT, useExisting: McTreeSelection },
-        { provide: McTree, useExisting: McTreeSelection }
+        { provide: McTreeBase, useExisting: McTreeSelection }
     ]
 })
-export class McTreeSelection extends McTree<McTreeOption>
+export class McTreeSelection extends McTreeBase<McTreeOption>
     implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
-
-    @ViewChild(McTreeNodeOutlet, { static: true }) nodeOutlet: McTreeNodeOutlet;
-
-    @ContentChildren(McTreeOption) unorderedOptions: QueryList<McTreeOption>;
 
     renderedOptions = new QueryList<McTreeOption>();
 
@@ -110,15 +106,19 @@ export class McTreeSelection extends McTree<McTreeOption>
 
     resetFocusedItemOnBlur: boolean = true;
 
+    multipleMode: MultipleMode | null = null;
+
+    userTabIndex: number | null = null;
+
+    @ViewChild(McTreeNodeOutlet, { static: true }) nodeOutlet: McTreeNodeOutlet;
+
+    @ContentChildren(McTreeOption) unorderedOptions: QueryList<McTreeOption>;
+
     @Input() treeControl: FlatTreeControl<McTreeOption>;
 
     @Output() readonly navigationChange = new EventEmitter<McTreeNavigationChange<McTreeOption>>();
 
     @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange<McTreeOption>>();
-
-    multipleMode: MultipleMode | null = null;
-
-    userTabIndex: number | null = null;
 
     private sortedNodes: McTreeOption[] = [];
 
@@ -301,10 +301,12 @@ export class McTreeSelection extends McTree<McTreeOption>
         switch (keyCode) {
             case DOWN_ARROW:
                 this.keyManager.setNextItemActive();
+                event.preventDefault();
 
                 break;
             case UP_ARROW:
                 this.keyManager.setPreviousItemActive();
+                event.preventDefault();
 
                 break;
             case LEFT_ARROW:
@@ -455,20 +457,6 @@ export class McTreeSelection extends McTree<McTreeOption>
         this.nodeOutlet.changeDetectorRef.detectChanges();
     }
 
-    getHeight(): number {
-        const clientRects = this.elementRef.nativeElement.getClientRects();
-
-        if (clientRects.length) {
-            return clientRects[0].height;
-        }
-
-        return 0;
-    }
-
-    getItemHeight(): number {
-        return this.renderedOptions.first ? this.renderedOptions.first.getHeight() : 0;
-    }
-
     emitNavigationEvent(option: McTreeOption): void {
         this.navigationChange.emit(new McTreeNavigationChange(this, option));
     }
@@ -528,7 +516,21 @@ export class McTreeSelection extends McTree<McTreeOption>
         return this.selectionModel.selected.map((selected) => this.treeControl.getValue(selected));
     }
 
-    protected updateTabIndex(): void {
+    getItemHeight(): number {
+        return this.renderedOptions.first ? this.renderedOptions.first.getHeight() : 0;
+    }
+
+    private getHeight(): number {
+        const clientRects = this.elementRef.nativeElement.getClientRects();
+
+        if (clientRects.length) {
+            return clientRects[0].height;
+        }
+
+        return 0;
+    }
+
+    private updateTabIndex(): void {
         this._tabIndex = this.renderedOptions.length === 0 ? -1 : 0;
     }
 

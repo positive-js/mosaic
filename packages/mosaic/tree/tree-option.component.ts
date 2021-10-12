@@ -15,11 +15,10 @@ import {
     NgZone
 } from '@angular/core';
 import { hasModifierKey } from '@ptsecurity/cdk/keycodes';
-import { CanDisable } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { McTreeNode } from './tree';
+import { McTreeNode } from './tree-base';
 
 
 // tslint:disable-next-line:naming-convention
@@ -42,15 +41,15 @@ let uniqueIdCounter: number = 0;
     selector: 'mc-tree-option',
     exportAs: 'mcTreeOption',
     templateUrl: './tree-option.html',
+    styleUrls: ['./tree-option.scss'],
     host: {
-        '[attr.id]': 'id',
-        '[attr.tabindex]': '-1',
-
-        '[attr.disabled]': 'disabled || null',
-
         class: 'mc-tree-option',
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
+
+        '[attr.id]': 'id',
+        '[attr.tabindex]': '-1',
+        '[attr.disabled]': 'disabled || null',
 
         '(focusin)': 'focus()',
         '(blur)': 'blur()',
@@ -61,7 +60,7 @@ let uniqueIdCounter: number = 0;
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: McTreeNode, useExisting: McTreeOption }]
 })
-export class McTreeOption extends McTreeNode<McTreeOption> implements CanDisable, AfterContentInit {
+export class McTreeOption extends McTreeNode<McTreeOption> implements AfterContentInit {
     readonly onFocus = new Subject<McTreeOptionEvent>();
 
     readonly onBlur = new Subject<McTreeOptionEvent>();
@@ -210,32 +209,32 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements CanDisable
     }
 
     select(): void {
-        if (!this._selected) {
-            this._selected = true;
+        if (this._selected) { return; }
 
-            this.changeDetectorRef.markForCheck();
-            this.emitSelectionChangeEvent();
-        }
+        this._selected = true;
+
+        this.changeDetectorRef.markForCheck();
+        this.emitSelectionChangeEvent();
     }
 
     deselect(): void {
-        if (this._selected) {
-            this._selected = false;
+        if (!this._selected) { return; }
 
-            this.changeDetectorRef.markForCheck();
-        }
+        this._selected = false;
+
+        this.changeDetectorRef.markForCheck();
     }
 
     selectViaInteraction($event?: KeyboardEvent): void {
-        if (!this.disabled) {
-            this.changeDetectorRef.markForCheck();
-            this.emitSelectionChangeEvent(true);
+        if (this.disabled) { return; }
 
-            const shiftKey = $event ? hasModifierKey($event, 'shiftKey') : false;
-            const ctrlKey = $event ? hasModifierKey($event, 'ctrlKey') : false;
+        this.changeDetectorRef.markForCheck();
+        this.emitSelectionChangeEvent(true);
 
-            this.tree.setSelectedOptionsByClick(this, shiftKey, ctrlKey);
-        }
+        const shiftKey = $event ? hasModifierKey($event, 'shiftKey') : false;
+        const ctrlKey = $event ? hasModifierKey($event, 'ctrlKey') : false;
+
+        this.tree.setSelectedOptionsByClick(this, shiftKey, ctrlKey);
     }
 
     emitSelectionChangeEvent(isUserInput = false): void {

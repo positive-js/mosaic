@@ -21,7 +21,7 @@ export class McTreeNodeOutletContext<T> {
 }
 
 /**
- * Data node definition for the CdkTree.
+ * Data node definition for the McTree.
  * Captures the node's template and a when predicate that describes when this node should be used.
  */
 @Directive({

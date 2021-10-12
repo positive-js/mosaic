@@ -199,9 +199,7 @@ export class DemoComponent {
 
 
 @NgModule({
-    declarations: [
-        DemoComponent
-    ],
+    declarations: [DemoComponent],
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
@@ -215,8 +213,6 @@ export class DemoComponent {
         McIconModule,
         ReactiveFormsModule
     ],
-    bootstrap: [
-        DemoComponent
-    ]
+    bootstrap: [DemoComponent]
 })
 export class DemoModule {}

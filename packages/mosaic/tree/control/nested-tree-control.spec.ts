@@ -114,8 +114,7 @@ export class TestData {
     }
 }
 
-function generateData(dataLength: number, childLength: number, grandChildLength: number = 0)
-    : TestData[] {
+function generateData(dataLength: number, childLength: number, grandChildLength: number = 0): TestData[] {
     const data = <any> [];
     let nextIndex = 0;
 
