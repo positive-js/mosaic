@@ -1,3 +1,7 @@
+## 11.4.4 "False Publish" (2021-10-11)
+
+* bug fix  publish NPM
+
 ## 11.4.3 "Introspective Divvy" (2021-10-11)
 
 ### Mosaic
