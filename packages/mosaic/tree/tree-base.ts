@@ -286,7 +286,7 @@ export class McTreeNode<T> implements IFocusableOption, OnDestroy {
     private _data: T;
 
     get isExpanded(): boolean {
-        return this.tree.treeControl.isExpanded(this._data);
+        return this.tree.treeControl.isExpanded(this.data);
     }
 
     get level(): number {

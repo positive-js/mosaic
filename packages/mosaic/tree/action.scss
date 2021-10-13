@@ -1,25 +1,24 @@
+@import '../button/button-theme';
 @import '../design-tokens/tokens';
 
 
-.mc-tree-node-toggle {
+.mc-tree-node-action {
+    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 
-    width: 24px;
-    height: 100%;
+    width: 32px;
+    height: 32px;
 
     cursor: pointer;
 
     & .mc-icon {
-        transform: rotate(-90deg);
     }
 
     &.mc-opened {
-        & .mc-icon {
-            transform: rotate(0);
-        }
     }
 
     &[disabled] {

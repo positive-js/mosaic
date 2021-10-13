@@ -310,7 +310,8 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
 
                 break;
             case LEFT_ARROW:
-                if (this.keyManager.activeItem) {
+                if (this.keyManager.activeItem?.isExpandable) {
+                    console.log('RIGHT_ARROW');
                     this.treeControl.collapse(this.keyManager.activeItem.data as McTreeOption);
                 }
 
@@ -318,7 +319,8 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
 
                 return;
             case RIGHT_ARROW:
-                if (this.keyManager.activeItem) {
+                if (this.keyManager.activeItem?.isExpandable) {
+                    console.log('RIGHT_ARROW');
                     this.treeControl.expand(this.keyManager.activeItem.data as McTreeOption);
                 }
 

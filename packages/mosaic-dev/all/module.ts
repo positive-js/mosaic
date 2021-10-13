@@ -4,7 +4,6 @@ import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CdkTreeModule, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { McLuxonDateModule } from '@ptsecurity/mosaic-luxon-adapter/adapter';
 import { McMomentDateModule } from '@ptsecurity/mosaic-moment-adapter/adapter';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
@@ -29,7 +28,7 @@ import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
 import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
 import { McToggleModule } from '@ptsecurity/mosaic/toggle';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
-import { McTreeFlatDataSource, McTreeFlattener, McTreeModule } from '@ptsecurity/mosaic/tree';
+import { FlatTreeControl, McTreeFlatDataSource, McTreeFlattener, McTreeModule } from '@ptsecurity/mosaic/tree';
 import { Observable, of as observableOf } from 'rxjs';
 
 import { buildFileTree, FileFlatNode, FileNode, DATA_OBJECT } from '../tree/module';
@@ -245,8 +244,7 @@ export class DemoComponent {
         McTimepickerModule,
         McToggleModule,
         McToolTipModule,
-        McTreeModule,
-        CdkTreeModule
+        McTreeModule
     ],
     bootstrap: [
         DemoComponent

@@ -9,6 +9,7 @@ import {
     Optional,
     Renderer2
 } from '@angular/core';
+import { TreeSizePaddingLeft } from '@ptsecurity/mosaic/design-tokens';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -53,10 +54,10 @@ export class McTreeNodePadding<T> implements OnInit, OnDestroy {
     /** CSS units used for the indentation value. */
     indentUnits = 'px';
 
-    baseLeftPadding: number = 12;
+    baseLeftPadding: number = parseInt(TreeSizePaddingLeft);
 
     withIcon: boolean;
-    iconWidth: number = 20;
+    iconWidth: number = 24;
 
     private destroyed = new Subject<void>();
 

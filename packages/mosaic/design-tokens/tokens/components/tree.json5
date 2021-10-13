@@ -1,9 +1,9 @@
 {
     tree: {
         size: {
-            'padding-right': { value: '{padding.option-horizontal}' },
-            'border-width': { value: '2px' },
-            'node-height': { value: '{size.option-height}' }
+            'node-height': { value: '32px' },
+            'padding-left': { value: '8px' },
+            'padding-right': { value: '16px' },
         },
         font: {
             node: { value: 'body' }

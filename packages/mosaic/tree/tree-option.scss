@@ -2,16 +2,28 @@
 
 
 .mc-tree-option {
+    box-sizing: border-box;
+
     display: flex;
     align-items: center;
-
-    padding-right: var(--mc-tree-size-padding-right, $tree-size-padding-right);
 
     height: var(--mc-tree-size-node-height, $tree-size-node-height);
 
     word-wrap: break-word;
 
-    border: var(--mc-tree-size-border-width, $tree-size-border-width) solid transparent;
+    border: 2px solid transparent;
+
+    & .mc-option-text {
+        display: inline-block;
+        flex-grow: 1;
+
+        overflow: hidden;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        margin-right: var(--mc-tree-size-padding-right, $tree-size-padding-right);
+    }
 
     & > .mc-icon {
         margin-right: 4px;
@@ -29,5 +41,16 @@
 
     & .mc-pseudo-checkbox {
         margin-right: 8px;
+    }
+
+    & .mc-tree-node-action {
+        display: none;
+    }
+
+    &:not([disabled]):hover,
+    &:not([disabled]).mc-focused {
+        & .mc-tree-node-action {
+            display: flex;
+        }
     }
 }

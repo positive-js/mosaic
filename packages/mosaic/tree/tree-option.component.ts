@@ -12,12 +12,14 @@ import {
     ChangeDetectionStrategy,
     ViewEncapsulation,
     AfterContentInit,
-    NgZone
+    NgZone,
+    ContentChild
 } from '@angular/core';
 import { hasModifierKey } from '@ptsecurity/cdk/keycodes';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 
+import { McTreeNodeToggleBase } from './toggle';
 import { McTreeNode } from './tree-base';
 
 
@@ -64,6 +66,8 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
     readonly onFocus = new Subject<McTreeOptionEvent>();
 
     readonly onBlur = new Subject<McTreeOptionEvent>();
+
+    @ContentChild('mcTreeNodeToggle') toggleElement: McTreeNodeToggleBase<McTreeOption>;
 
     get value(): any {
         return this._value;
@@ -133,6 +137,10 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
     }
 
     hasFocus: boolean = false;
+
+    get isExpandable(): boolean {
+        return this.tree.treeControl.isExpandable(this.data) && !this.toggleElement?.disabled;
+    }
 
     constructor(
         elementRef: ElementRef,

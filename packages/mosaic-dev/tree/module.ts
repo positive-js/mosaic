@@ -64,7 +64,6 @@ export const DATA_OBJECT = {
         }
     },
     Documents: {
-        Pictures_3: 'Pictures',
         angular: {
             src: {
                 core: 'ts',
@@ -77,7 +76,8 @@ export const DATA_OBJECT = {
                 checkbox: 'ts',
                 input: 'ts'
             }
-        }
+        },
+        Pictures_3: 'Pictures'
     },
     Downloads: {
         Tutorial: 'html',
