@@ -11,7 +11,7 @@ import { mosaicVersion } from '../version/version';
 const STACKBLITZ_URL = 'https://run.stackblitz.com/api/angular/v1';
 
 const COPYRIGHT =
-    `Copyright 2020 Positive Technologies. All Rights Reserved.
+    `Copyright 2021 Positive Technologies. All Rights Reserved.
     Use of this source code is governed by an MIT-style license.`;
 
 /**
