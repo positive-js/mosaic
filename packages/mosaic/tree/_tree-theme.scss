@@ -1,11 +1,12 @@
 @import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
-@import '../button/button-theme';
 
 
 @mixin mc-tree-theme($theme) {
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
+
+    $second: map-get($theme, second);
 
     .mc-tree-selection:focus {
         outline: none;
@@ -34,8 +35,6 @@
     }
 
     .mc-tree-node-toggle {
-        $second: map-get($theme, second);
-
         & .mc-icon {
             color: mc-color($second, 400);
         }
@@ -52,12 +51,29 @@
     .mc-tree-node-action {
         $button: map-get(map-get($theme, components), button);
 
-        @include mc-button-color(map-get($button, second));
-
-        @include mc-button_transparent($theme);
-
         &.mc-focused {
             border-color: map-get(map-get($theme, states), focused-color);
+        }
+
+        &:active,
+        &.mc-pressed {
+            & .mc-icon {
+                color: mc-color($second, 700);
+            }
+
+            background-color: mc-color($second, A100);
+        }
+
+        &:hover .mc-icon {
+            color: mc-color($second, 700);
+        }
+
+        &[disabled] {
+            & .mc-icon {
+                color: mc-color($second, 300);
+            }
+
+            background-color: transparent;
         }
     }
 }

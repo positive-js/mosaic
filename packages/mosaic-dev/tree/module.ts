@@ -2,12 +2,14 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
 import { McHighlightModule } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 import { FlatTreeControl, McTreeFlatDataSource, McTreeFlattener, McTreeModule } from '@ptsecurity/mosaic/tree';
 
 
@@ -178,6 +180,7 @@ export class DemoComponent {
     declarations: [DemoComponent],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         McFormFieldModule,
         McCheckboxModule,
@@ -185,6 +188,7 @@ export class DemoComponent {
         McButtonModule,
         McTreeModule,
         McIconModule,
+        McToolTipModule,
         McHighlightModule
     ],
     bootstrap: [DemoComponent]

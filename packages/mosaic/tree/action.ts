@@ -1,21 +1,24 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { McButton } from '@ptsecurity/mosaic/button';
+import { ChangeDetectionStrategy, Component, ContentChild, ViewEncapsulation } from '@angular/core';
+import {
+    mixinDisabled,
+    mixinTabIndex
+} from '@ptsecurity/mosaic/core';
+import { McIcon } from '@ptsecurity/mosaic/icon';
 
 
 @Component({
-    selector: '[mc-tree-node-action]',
+    selector: 'mc-tree-node-action',
     exportAs: 'mcTreeNodeAction',
     template: `
-        <div class="mc-button-wrapper">
-            <ng-content></ng-content>
-
-            <i class="mc mc-icon mc-ellipsis_16"></i>
-        </div>
-        <div class="mc-button-overlay"></div>`,
+        <ng-container [ngSwitch]="!!customIcon">
+            <i class="mc mc-icon mc-ellipsis_16" *ngSwitchCase="false"></i>
+            <ng-content select="[mc-icon]" *ngSwitchCase="true"></ng-content>
+        </ng-container>
+        `,
     styleUrls: ['./action.scss'],
     host: {
-        class: 'mc-tree-node-action mc-button_transparent',
-        // '[class.mc-opened]': 'iconState',
+        class: 'mc-tree-node-action',
+        '[class.mc-opened]': 'false',
 
         '[attr.disabled]': 'disabled || null',
         '[attr.tabIndex]': '0',
@@ -26,6 +29,6 @@ import { McButton } from '@ptsecurity/mosaic/button';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McTreeNodeActionComponent extends McButton {
-
+export class McTreeNodeActionComponent extends mixinTabIndex(mixinDisabled(class {})) {
+    @ContentChild(McIcon) customIcon: McIcon;
 }

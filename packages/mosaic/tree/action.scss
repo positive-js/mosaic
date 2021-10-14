@@ -11,15 +11,11 @@
     flex-shrink: 0;
 
     width: 32px;
-    height: 32px;
+    height: 100%;
 
     cursor: pointer;
 
-    & .mc-icon {
-    }
-
-    &.mc-opened {
-    }
+    border: 2px solid transparent;
 
     &[disabled] {
         cursor: default;

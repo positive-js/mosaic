@@ -39,6 +39,7 @@
         <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
     </mc-tree-option>
 
+<!--        class="mc-focused"-->
     <mc-tree-option
         *mcTreeNodeDef="let node; when: hasChild"
         mcTreeNodePadding
@@ -47,6 +48,10 @@
         <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
 
         <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
-        <button mc-tree-node-action></button>
+        <mc-tree-node-action
+            class="mc-focused"
+            mcTooltip="Tooltip text"
+            [mcPlacement]="'right'">
+        </mc-tree-node-action>
     </mc-tree-option>
 </mc-tree-selection>
