@@ -26,6 +26,24 @@
     }
 }
 
+.mc-navbar-item.mc-horizontal {
+    & .mc-badge {
+        position: absolute;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        top: 8px;
+        right: 8px;
+
+        height: 16px;
+
+        padding-right: 4px;
+        padding-left: 4px;
+    }
+}
+
 .mc-navbar-item.mc-vertical {
     & .mc-navbar-title {
         padding-left: 26px;
