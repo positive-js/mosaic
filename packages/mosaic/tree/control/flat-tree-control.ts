@@ -85,10 +85,19 @@ export class FlatTreeControl<T> extends BaseTreeControl<T> {
         );
 
         const filteredNodesWithTheirParents = new Set();
+
         filteredNodes.forEach((filteredNode) => {
-            this.getParents(filteredNode, []).forEach((node) => filteredNodesWithTheirParents.add(node));
+            const childNodeLevel = this.getLevel(filteredNode) + 1;
+
+            this.getParents(filteredNode, [])
+                .forEach((node) => filteredNodesWithTheirParents.add(node));
 
             filteredNodesWithTheirParents.add(filteredNode);
+
+            this.getDescendants(filteredNode)
+                .filter(this.isExpandable)
+                .filter((childNode) => this.getLevel(childNode) === childNodeLevel)
+                .forEach((node) => filteredNodesWithTheirParents.add(node));
         });
 
         this.filterModel.select(...Array.from(filteredNodesWithTheirParents) as []);
