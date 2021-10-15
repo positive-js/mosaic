@@ -30,6 +30,8 @@
     [(ngModel)]="modelValue"
     [dataSource]="dataSource"
     [treeControl]="treeControl"
+    (onSelectAll)="onSelectAll($event)"
+    (onCopy)="onCopy($event)"
     (navigationChange)="onNavigationChange($event)"
     (selectionChange)="onSelectionChange($event)">
 

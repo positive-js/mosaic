@@ -81,7 +81,7 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
 
     @Input()
     get disabled() {
-        return this._disabled || (this.tree && this.tree.disabled);
+        return this._disabled || this.tree!.disabled;
     }
 
     set disabled(value: any) {
@@ -127,10 +127,6 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
 
     private _id = `mc-tree-option-${uniqueIdCounter++}`;
 
-    get multiple(): boolean {
-        return this.tree.multiple;
-    }
-
     get viewValue(): string {
         // TODO: Add input property alternative for node envs.
         return (this.getHostElement().textContent || '').trim();
@@ -139,7 +135,7 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
     hasFocus: boolean = false;
 
     get isExpandable(): boolean {
-        return this.tree.treeControl.isExpandable(this.data) && !this.toggleElement?.disabled;
+        return !this.toggleElement?.disabled && this.tree.treeControl.isExpandable(this.data);
     }
 
     constructor(

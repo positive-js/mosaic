@@ -32,7 +32,9 @@ import {
     RIGHT_ARROW,
     SPACE,
     DOWN_ARROW,
-    UP_ARROW
+    UP_ARROW,
+    isSelectAll,
+    isCopy
 } from '@ptsecurity/cdk/keycodes';
 import {
     CanDisable,
@@ -43,9 +45,9 @@ import {
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { delay, takeUntil } from 'rxjs/operators';
 
-import { McTreeBase } from './tree-base';
 import { FlatTreeControl } from './control/flat-tree-control';
 import { McTreeNodeOutlet } from './outlet';
+import { McTreeBase } from './tree-base';
 import { MC_TREE_OPTION_PARENT_COMPONENT, McTreeOption, McTreeOptionEvent } from './tree-option.component';
 
 
@@ -54,6 +56,14 @@ export const MC_SELECTION_TREE_VALUE_ACCESSOR: any = {
     useExisting: forwardRef(() => McTreeSelection),
     multi: true
 };
+
+export class McTreeSelectAllEvent<T> {
+    constructor(public source: McTreeSelection, public options: T[]) {}
+}
+
+export class McTreeCopyEvent<T> {
+    constructor(public source: McTreeSelection, public option: T) {}
+}
 
 export class McTreeNavigationChange<T> {
     constructor(public source: McTreeSelection, public option: T) {}
@@ -119,6 +129,10 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
     @Output() readonly navigationChange = new EventEmitter<McTreeNavigationChange<McTreeOption>>();
 
     @Output() readonly selectionChange = new EventEmitter<McTreeSelectionChange<McTreeOption>>();
+
+    @Output() readonly onSelectAll = new EventEmitter<McTreeSelectAllEvent<McTreeOption>>();
+
+    @Output() readonly onCopy = new EventEmitter<McTreeCopyEvent<McTreeOption>>();
 
     private sortedNodes: McTreeOption[] = [];
 
@@ -294,19 +308,27 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
     }
 
     onKeyDown(event: KeyboardEvent): void {
+        event.preventDefault();
+
         this.keyManager.setFocusOrigin('keyboard');
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
+        if (isSelectAll(event) && this.multiple) {
+            return this.selectAllOptions();
+        }
+
+        if (isCopy(event)) {
+            return this.copyActiveOption();
+        }
+
         switch (keyCode) {
             case DOWN_ARROW:
                 this.keyManager.setNextItemActive();
-                event.preventDefault();
 
                 break;
             case UP_ARROW:
                 this.keyManager.setPreviousItemActive();
-                event.preventDefault();
 
                 break;
             case LEFT_ARROW:
@@ -315,8 +337,6 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
                     this.treeControl.collapse(this.keyManager.activeItem.data as McTreeOption);
                 }
 
-                event.preventDefault();
-
                 return;
             case RIGHT_ARROW:
                 if (this.keyManager.activeItem?.isExpandable) {
@@ -324,33 +344,26 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
                     this.treeControl.expand(this.keyManager.activeItem.data as McTreeOption);
                 }
 
-                event.preventDefault();
-
                 return;
             case SPACE:
             case ENTER:
                 this.toggleFocusedOption();
-                event.preventDefault();
 
                 break;
             case HOME:
                 this.keyManager.setFirstItemActive();
-                event.preventDefault();
 
                 break;
             case END:
                 this.keyManager.setLastItemActive();
-                event.preventDefault();
 
                 break;
             case PAGE_UP:
                 this.keyManager.setPreviousPageItemActive();
-                event.preventDefault();
 
                 break;
             case PAGE_DOWN:
                 this.keyManager.setNextPageItemActive();
-                event.preventDefault();
 
                 break;
             default:
@@ -465,6 +478,20 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
 
     emitChangeEvent(option: McTreeOption): void {
         this.selectionChange.emit(new McTreeNavigationChange(this, option));
+    }
+
+    selectAllOptions(): void {
+        const optionsToSelect = this.renderedOptions
+            .filter((option) => !option.disabled);
+
+        optionsToSelect
+            .forEach((option) => option.setSelected(true));
+
+        this.onSelectAll.emit(new McTreeSelectAllEvent(this, optionsToSelect));
+    }
+
+    copyActiveOption(): void {
+        this.onCopy.emit(new McTreeNavigationChange(this, this.keyManager.activeItem as McTreeOption));
     }
 
     writeValue(value: any): void {
