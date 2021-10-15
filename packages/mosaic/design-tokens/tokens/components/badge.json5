@@ -6,7 +6,7 @@
                 padding: { value: '0 8px' },
                 'border-width': { value: '1px' },
                 'border-radius': { value: '4px' },
-                height: { value: '22px' },
+                height: { value: '24px' },
                 font: {
                     default: { value: 'caption' },
                     caps: { value: 'caption-caps' },
@@ -14,7 +14,7 @@
                 }
             },
             mini: {
-                height: { value: '14px' },
+                height: { value: '16px' },
                 'min-width': { value: '10px' },
                 'border-width': { value: '1px' },
                 'border-radius': { value: '2px' },
@@ -66,8 +66,9 @@
                     color: { value: 'white' }
                 },
                 transparent: {
-                    border: { value: '1px solid {light-color-scheme.second.palette.value.200.value}' },
-                    color: { value: '{light-color-scheme.primary.palette.value.contrast.300.value}' }
+                    border: { value: '{light-color-scheme.second.palette.value.200.value}' },
+                    color: { value: '{light-color-scheme.primary.palette.value.contrast.300.value}' },
+                    background: { value: 'transparent' }
                 },
                 light: {
                     border: { value: '{light-color-scheme.second.palette.value.100.value}' },
@@ -99,7 +100,7 @@
                 warning: {
                     background: { value: '{light-color-scheme.warning.palette.value.40.value}' },
                     border: { value: '{light-color-scheme.warning.palette.value.200.value}' },
-                    color: { value: '{light-color-scheme.warning.palette.value.500.value}' }
+                    color: { value: '{light-color-scheme.warning.palette.value.560.value}' }
                 },
                 error: {
                     background: { value: '{light-color-scheme.error.palette.value.40.value}' },
@@ -163,8 +164,9 @@
                     color: { value: 'white' }
                 },
                 transparent: {
-                    border: { value: '1px solid {light-color-scheme.second.palette.value.500.value}' },
-                    color: { value: '{light-color-scheme.primary.palette.value.contrast.300.value}' }
+                    border: { value: '{light-color-scheme.second.palette.value.500.value}' },
+                    color: { value: '{light-color-scheme.second.palette.value.40.value}' },
+                    background: { value: 'transparent' }
                 },
                 light: {
                     border: { value: '{light-color-scheme.second.palette.value.400.value}' },

@@ -62,7 +62,7 @@
         }
 
         &.mc-badge_transparent {
-            @include mc-badge-color(map-get($badge, light_solid));
+            @include mc-badge-color(map-get($badge, transparent_solid));
         }
 
         &.mc-badge_success {
@@ -75,6 +75,10 @@
 
         &.mc-badge_error {
             @include mc-badge-color(map-get($badge, error_solid));
+        }
+
+        &.mc-badge_light {
+            @include mc-badge-color(map-get($badge, light_solid));
         }
     }
 

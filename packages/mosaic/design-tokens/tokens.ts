@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 14 Oct 2021 16:36:39 GMT
+ * Generated on Fri, 15 Oct 2021 12:50:45 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -340,11 +340,11 @@ export const BadgeSizeDefaultMinWidth = "10px";
 export const BadgeSizeDefaultPadding = "0 8px";
 export const BadgeSizeDefaultBorderWidth = "1px";
 export const BadgeSizeDefaultBorderRadius = "4px";
-export const BadgeSizeDefaultHeight = "22px";
+export const BadgeSizeDefaultHeight = "24px";
 export const BadgeSizeDefaultFontDefault = "caption";
 export const BadgeSizeDefaultFontCaps = "caption-caps";
 export const BadgeSizeDefaultFontMono = "caption-mono";
-export const BadgeSizeMiniHeight = "14px";
+export const BadgeSizeMiniHeight = "16px";
 export const BadgeSizeMiniMinWidth = "10px";
 export const BadgeSizeMiniBorderWidth = "1px";
 export const BadgeSizeMiniBorderRadius = "2px";
@@ -373,8 +373,9 @@ export const BadgeLightColorSchemeSolidWarningColor = "white";
 export const BadgeLightColorSchemeSolidErrorBorder = "#E04D36";
 export const BadgeLightColorSchemeSolidErrorBackground = "#E04D36";
 export const BadgeLightColorSchemeSolidErrorColor = "white";
-export const BadgeLightColorSchemeSolidTransparentBorder = "1px solid #CCCCCC";
+export const BadgeLightColorSchemeSolidTransparentBorder = "#CCCCCC";
 export const BadgeLightColorSchemeSolidTransparentColor = "#4D4D4D";
+export const BadgeLightColorSchemeSolidTransparentBackground = "transparent";
 export const BadgeLightColorSchemeSolidLightBorder = "#E6E6E6";
 export const BadgeLightColorSchemeSolidLightBackground = "#E6E6E6";
 export const BadgeLightColorSchemeSolidLightColor = "#4D4D4D";
@@ -392,7 +393,7 @@ export const BadgeLightColorSchemePastelSuccessBorder = "#B4DEA4";
 export const BadgeLightColorSchemePastelSuccessColor = "#449327";
 export const BadgeLightColorSchemePastelWarningBackground = "#FDFAF3";
 export const BadgeLightColorSchemePastelWarningBorder = "#F0D49B";
-export const BadgeLightColorSchemePastelWarningColor = "#D6930D";
+export const BadgeLightColorSchemePastelWarningColor = "#BB800A";
 export const BadgeLightColorSchemePastelErrorBackground = "#FEF7F6";
 export const BadgeLightColorSchemePastelErrorBorder = "#F4B7AE";
 export const BadgeLightColorSchemePastelErrorColor = "#E04D36";
@@ -426,8 +427,9 @@ export const BadgeDarkColorSchemeSolidWarningColor = "white";
 export const BadgeDarkColorSchemeSolidErrorBorder = "#832112";
 export const BadgeDarkColorSchemeSolidErrorBackground = "#832112";
 export const BadgeDarkColorSchemeSolidErrorColor = "white";
-export const BadgeDarkColorSchemeSolidTransparentBorder = "1px solid #808080";
-export const BadgeDarkColorSchemeSolidTransparentColor = "#4D4D4D";
+export const BadgeDarkColorSchemeSolidTransparentBorder = "#808080";
+export const BadgeDarkColorSchemeSolidTransparentColor = "#F5F5F5";
+export const BadgeDarkColorSchemeSolidTransparentBackground = "transparent";
 export const BadgeDarkColorSchemeSolidLightBorder = "#999999";
 export const BadgeDarkColorSchemeSolidLightBackground = "#999999";
 export const BadgeDarkColorSchemeSolidLightColor = "white";

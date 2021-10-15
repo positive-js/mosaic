@@ -76,8 +76,9 @@
             border: $badge-light-color-scheme-solid-error-border
         ),
         transparent_solid: (
-                color: $badge-light-color-scheme-solid-transparent-color,
-                border: $badge-light-color-scheme-solid-transparent-border
+            color: $badge-light-color-scheme-solid-transparent-color,
+            border: $badge-light-color-scheme-solid-transparent-border,
+            background: $badge-light-color-scheme-solid-transparent-background
         ),
         primary_pastel: (
             color: $badge-light-color-scheme-pastel-primary-color,
@@ -446,7 +447,8 @@
         ),
         transparent_solid: (
             color: $badge-dark-color-scheme-solid-transparent-color,
-            border: $badge-dark-color-scheme-solid-transparent-border
+            border: $badge-dark-color-scheme-solid-transparent-border,
+            background: $badge-dark-color-scheme-solid-transparent-background
         ),
         primary_pastel: (
             color: $badge-dark-color-scheme-pastel-primary-color,

@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Thu, 14 Oct 2021 16:36:39 GMT
+// Generated on Fri, 15 Oct 2021 12:50:45 GMT
 
 $light-color-scheme-primary-default: #338FCC;
 $light-color-scheme-second-default: #B3B3B3;
@@ -220,11 +220,11 @@ $badge-size-default-min-width: 10px;
 $badge-size-default-padding: 0 8px;
 $badge-size-default-border-width: 1px;
 $badge-size-default-border-radius: 4px;
-$badge-size-default-height: 22px;
+$badge-size-default-height: 24px;
 $badge-size-default-font-default: caption;
 $badge-size-default-font-caps: caption-caps;
 $badge-size-default-font-mono: caption-mono;
-$badge-size-mini-height: 14px;
+$badge-size-mini-height: 16px;
 $badge-size-mini-min-width: 10px;
 $badge-size-mini-border-width: 1px;
 $badge-size-mini-border-radius: 2px;
@@ -253,8 +253,9 @@ $badge-light-color-scheme-solid-warning-color: white;
 $badge-light-color-scheme-solid-error-border: #E04D36;
 $badge-light-color-scheme-solid-error-background: #E04D36;
 $badge-light-color-scheme-solid-error-color: white;
-$badge-light-color-scheme-solid-transparent-border: 1px solid #CCCCCC;
+$badge-light-color-scheme-solid-transparent-border: #CCCCCC;
 $badge-light-color-scheme-solid-transparent-color: #4D4D4D;
+$badge-light-color-scheme-solid-transparent-background: transparent;
 $badge-light-color-scheme-solid-light-border: #E6E6E6;
 $badge-light-color-scheme-solid-light-background: #E6E6E6;
 $badge-light-color-scheme-solid-light-color: #4D4D4D;
@@ -272,7 +273,7 @@ $badge-light-color-scheme-pastel-success-border: #B4DEA4;
 $badge-light-color-scheme-pastel-success-color: #449327;
 $badge-light-color-scheme-pastel-warning-background: #FDFAF3;
 $badge-light-color-scheme-pastel-warning-border: #F0D49B;
-$badge-light-color-scheme-pastel-warning-color: #D6930D;
+$badge-light-color-scheme-pastel-warning-color: #BB800A;
 $badge-light-color-scheme-pastel-error-background: #FEF7F6;
 $badge-light-color-scheme-pastel-error-border: #F4B7AE;
 $badge-light-color-scheme-pastel-error-color: #E04D36;
@@ -306,8 +307,9 @@ $badge-dark-color-scheme-solid-warning-color: white;
 $badge-dark-color-scheme-solid-error-border: #832112;
 $badge-dark-color-scheme-solid-error-background: #832112;
 $badge-dark-color-scheme-solid-error-color: white;
-$badge-dark-color-scheme-solid-transparent-border: 1px solid #808080;
-$badge-dark-color-scheme-solid-transparent-color: #4D4D4D;
+$badge-dark-color-scheme-solid-transparent-border: #808080;
+$badge-dark-color-scheme-solid-transparent-color: #F5F5F5;
+$badge-dark-color-scheme-solid-transparent-background: transparent;
 $badge-dark-color-scheme-solid-light-border: #999999;
 $badge-dark-color-scheme-solid-light-background: #999999;
 $badge-dark-color-scheme-solid-light-color: white;
