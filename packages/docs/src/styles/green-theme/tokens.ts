@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 15 Oct 2021 13:14:30 GMT
+ * Generated on Mon, 18 Oct 2021 12:39:15 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#52A832";
@@ -288,7 +288,7 @@ export const TypographyExtraSmallTextCapsFontFamily = "Roboto, -apple-system, Bl
 export const TypographyExtraSmallTextCapsTextTransform = "uppercase";
 export const TypographyExtraSmallTextMonoFontSize = "11px";
 export const TypographyExtraSmallTextMonoLineHeight = "16px";
-export const TypographyExtraSmallTextMonoLetterSpacing = "1px";
+export const TypographyExtraSmallTextMonoLetterSpacing = "0px";
 export const TypographyExtraSmallTextMonoFontWeight = "normal";
 export const TypographyExtraSmallTextMonoFontFamily = "'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace";
 export const TypographyExtraSmallTextMonoTextTransform = "null";
