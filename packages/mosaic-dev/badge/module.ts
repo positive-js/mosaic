@@ -1,6 +1,7 @@
 // tslint:disable:no-console
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class DemoComponent {}
         DemoComponent
     ],
     imports: [
-        BrowserModule
+        BrowserModule,
+        McIconModule
     ],
     bootstrap: [
         DemoComponent
