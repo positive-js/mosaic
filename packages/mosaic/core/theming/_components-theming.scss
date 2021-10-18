@@ -39,6 +39,74 @@
         footer-background: $popup-light-color-scheme-footer-background
     );
 
+    $badge: (
+        primary_solid: (
+            color: $badge-light-color-scheme-solid-primary-color,
+            background: $badge-light-color-scheme-solid-primary-background,
+            border: $badge-light-color-scheme-solid-primary-border
+        ),
+        second_solid: (
+            color: $badge-light-color-scheme-solid-second-color,
+            background: $badge-light-color-scheme-solid-second-background,
+            border: $badge-light-color-scheme-solid-second-border
+        ),
+        light_solid: (
+            color: $badge-light-color-scheme-solid-light-color,
+            background: $badge-light-color-scheme-solid-light-background,
+            border: $badge-light-color-scheme-solid-light-background
+        ),
+        info_solid: (
+            color: $badge-light-color-scheme-solid-info-color,
+            background: $badge-light-color-scheme-solid-info-background,
+            border: $badge-light-color-scheme-solid-info-border
+        ),
+        success_solid: (
+            color: $badge-light-color-scheme-solid-success-color,
+            background: $badge-light-color-scheme-solid-success-background,
+            border: $badge-light-color-scheme-solid-success-border
+        ),
+        warning_solid: (
+            color: $badge-light-color-scheme-solid-warning-color,
+            background: $badge-light-color-scheme-solid-warning-background,
+            border: $badge-light-color-scheme-solid-warning-border
+        ),
+        error_solid: (
+            color: $badge-light-color-scheme-solid-error-color,
+            background: $badge-light-color-scheme-solid-error-background,
+            border: $badge-light-color-scheme-solid-error-border
+        ),
+        transparent_solid: (
+            color: $badge-light-color-scheme-solid-transparent-color,
+            border: $badge-light-color-scheme-solid-transparent-border,
+            background: $badge-light-color-scheme-solid-transparent-background
+        ),
+        primary_pastel: (
+            color: $badge-light-color-scheme-pastel-primary-color,
+            background: $badge-light-color-scheme-pastel-primary-background,
+            border: $badge-light-color-scheme-pastel-primary-border
+        ),
+        info_pastel: (
+            color: $badge-light-color-scheme-pastel-info-color,
+            background: $badge-light-color-scheme-pastel-info-background,
+            border: $badge-light-color-scheme-pastel-info-border
+        ),
+        success_pastel: (
+            color: $badge-light-color-scheme-pastel-success-color,
+            background: $badge-light-color-scheme-pastel-success-background,
+            border: $badge-light-color-scheme-pastel-success-border
+        ),
+        warning_pastel: (
+            color: $badge-light-color-scheme-pastel-warning-color,
+            background: $badge-light-color-scheme-pastel-warning-background,
+            border: $badge-light-color-scheme-pastel-warning-border
+        ),
+        error_pastel: (
+            color: $badge-light-color-scheme-pastel-error-color,
+            background: $badge-light-color-scheme-pastel-error-background,
+            border: $badge-light-color-scheme-pastel-error-border
+        ),
+    );
+
     $button: (
         state-active_shadow: $button-light-color-scheme-active-shadow,
 
@@ -281,6 +349,7 @@
     @return (
         alert: $alert,
         popup: $popup,
+        badge: $badge,
         button: $button,
         card: $card,
         checkbox: $checkbox,
@@ -338,6 +407,74 @@
 
         background: $popup-dark-color-scheme-background,
         footer-background: $popup-dark-color-scheme-footer-background
+    );
+
+    $badge: (
+        primary_solid: (
+            color: $badge-dark-color-scheme-solid-primary-color,
+            background: $badge-dark-color-scheme-solid-primary-background,
+            border: $badge-dark-color-scheme-solid-primary-border
+        ),
+        second_solid: (
+            color: $badge-dark-color-scheme-solid-second-color,
+            background: $badge-dark-color-scheme-solid-second-background,
+            border: $badge-dark-color-scheme-solid-second-border
+        ),
+        light_solid: (
+            color: $badge-dark-color-scheme-solid-light-color,
+            background: $badge-dark-color-scheme-solid-light-background,
+            border: $badge-dark-color-scheme-solid-light-background
+        ),
+        info_solid: (
+            color: $badge-dark-color-scheme-solid-info-color,
+            background: $badge-dark-color-scheme-solid-info-background,
+            border: $badge-dark-color-scheme-solid-info-border
+        ),
+        success_solid: (
+            color: $badge-dark-color-scheme-solid-success-color,
+            background: $badge-dark-color-scheme-solid-success-background,
+            border: $badge-dark-color-scheme-solid-success-border
+        ),
+        warning_solid: (
+            color: $badge-dark-color-scheme-solid-warning-color,
+            background: $badge-dark-color-scheme-solid-warning-background,
+            border: $badge-dark-color-scheme-solid-warning-border
+        ),
+        error_solid: (
+            color: $badge-dark-color-scheme-solid-error-color,
+            background: $badge-dark-color-scheme-solid-error-background,
+            border: $badge-dark-color-scheme-solid-error-border
+        ),
+        transparent_solid: (
+            color: $badge-dark-color-scheme-solid-transparent-color,
+            border: $badge-dark-color-scheme-solid-transparent-border,
+            background: $badge-dark-color-scheme-solid-transparent-background
+        ),
+        primary_pastel: (
+            color: $badge-dark-color-scheme-pastel-primary-color,
+            background: $badge-dark-color-scheme-pastel-primary-background,
+            border: $badge-dark-color-scheme-pastel-primary-border
+        ),
+        info_pastel: (
+            color: $badge-dark-color-scheme-pastel-info-color,
+            background: $badge-dark-color-scheme-pastel-info-background,
+            border: $badge-dark-color-scheme-pastel-info-border
+        ),
+        success_pastel: (
+            color: $badge-dark-color-scheme-pastel-success-color,
+            background: $badge-dark-color-scheme-pastel-success-background,
+            border: $badge-dark-color-scheme-pastel-success-border
+        ),
+        warning_pastel: (
+            color: $badge-dark-color-scheme-pastel-warning-color,
+            background: $badge-dark-color-scheme-pastel-warning-background,
+            border: $badge-dark-color-scheme-pastel-warning-border
+        ),
+        error_pastel: (
+            color: $badge-dark-color-scheme-pastel-error-color,
+            background: $badge-dark-color-scheme-pastel-error-background,
+            border: $badge-dark-color-scheme-pastel-error-border
+        ),
     );
 
     $button: (
@@ -582,6 +719,7 @@
     @return (
         alert: $alert,
         popup: $popup,
+        badge: $badge,
         button: $button,
         card: $card,
         checkbox: $checkbox,
