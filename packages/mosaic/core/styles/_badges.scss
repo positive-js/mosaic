@@ -12,6 +12,8 @@
     text-align: center;
     white-space: nowrap;
 
+    box-sizing: border-box;
+
     &.mc-badge_default {
         height: var(--mc-badge-size-default-height, $badge-size-default-height);
         min-width: var(--mc-badge-size-default-min-width, $badge-size-default-min-width);
