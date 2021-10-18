@@ -7,9 +7,6 @@ import * as ts from 'typescript';
 /** RegExp that matches Angular component inline styles that contain a sourcemap reference. */
 const inlineStylesSourcemapRegex = /styles: ?\[["'].*sourceMappingURL=.*["']/;
 
-/** RegExp that matches Angular component metadata properties that refer to external resources. */
-const externalReferencesRegex = /(templateUrl|styleUrls): *["'[]/;
-
 /**
  * Checks the specified release bundle and ensures that it does not contain
  * any external resource URLs.
@@ -20,10 +17,6 @@ export function checkReleaseBundle(bundlePath: string): string[] {
 
     if (inlineStylesSourcemapRegex.exec(bundleContent) !== null) {
         failures.push('Found sourcemap references in component styles.');
-    }
-
-    if (externalReferencesRegex.exec(bundleContent) !== null) {
-        failures.push('Found external component resource references');
     }
 
     return failures;
