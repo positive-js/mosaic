@@ -12,6 +12,8 @@
     text-align: center;
     white-space: nowrap;
 
+    border-style: solid;
+
     box-sizing: border-box;
 
     &.mc-badge_default {
@@ -20,7 +22,6 @@
         padding: var(--mc-badge-size-default-padding, $badge-size-default-padding);
         border: {
             width: var(--mc-badge-size-default-border-width, $badge-size-default-border-width);
-            style: solid;
             radius: var(--mc-badge-size-default-border-radius, $badge-size-default-border-radius);
         }
     }
@@ -31,7 +32,6 @@
         padding: var(--mc-badge-size-mini-padding, $badge-size-mini-padding);
         border: {
             width: var(--mc-badge-size-mini-border-width, $badge-size-mini-border-width);
-            style: solid;
             radius: var(--mc-badge-size-mini-border-radius, $badge-size-mini-border-radius);
         }
 
