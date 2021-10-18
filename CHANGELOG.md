@@ -1,3 +1,15 @@
+## 12.0.2 "Handheld Seatbelt" (2021-10-18)
+
+### Mosaic
+
+ * bug fix  **build:** update the dependency check in the bundle ([34c21eb](https://github.com/positive-js/mosaic/commit/34c21eb4f5adc949fc8619699009d66b75006930))
+
+## 12.0.1 "Respiratory Worldview" (2021-10-11)
+
+### Mosaic
+
+ * bug fix  **build:** declare annotation for tools scripts ([f53a33a](https://github.com/positive-js/mosaic/commit/f53a33a5f7b89ed4b7298df7d85753a634e9e9d6))
+
 # 12.0.0 "Knobbly Unification" (2021-10-11)
 
 ### Mosaic
