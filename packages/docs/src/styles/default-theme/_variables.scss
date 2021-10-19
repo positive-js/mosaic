@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Tue, 24 Aug 2021 08:36:39 GMT
+// Generated on Tue, 19 Oct 2021 09:17:59 GMT
 
 $light-color-scheme-primary-default: #338FCC;
 $light-color-scheme-second-default: #B3B3B3;
@@ -326,6 +326,10 @@ $checkbox-size-toggle-box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.2);
 $checkbox-font-default: body;
 $datepicker-toggle-size-width: 30px;
 $datepicker-toggle-size-height: 30px;
+$datepicker-body-light-color-scheme-states-selected-color: #338FCC;
+$datepicker-body-light-color-scheme-states-selected-background: #D8EAF7;
+$datepicker-body-dark-color-scheme-states-selected-color: #338FCC;
+$datepicker-body-dark-color-scheme-states-selected-background: #114E77;
 $datepicker-body-size-label-paddings: 8px 28px 12px 12px;
 $datepicker-body-size-cell-min-size: 32px;
 $datepicker-body-size-cell-margin: 5%;
@@ -664,7 +668,7 @@ $tooltip-size-border-radius: 3px;
 $tooltip-size-arrow-size: 12px;
 $tooltip-size-arrow-width: 5px;
 $tooltip-size-padding: 8px 16px;
-$tooltip-size-distance: 5px + 4px;
+$tooltip-size-distance: calc(5px + 4px);
 $tooltip-font-default: caption;
 $tree-size-padding-right: 16px;
 $tree-size-border-width: 2px;
