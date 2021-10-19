@@ -15,7 +15,11 @@
 
     cursor: pointer;
 
+    outline: none;
+
     border: 2px solid transparent;
+
+    background: transparent;
 
     &[disabled] {
         cursor: default;

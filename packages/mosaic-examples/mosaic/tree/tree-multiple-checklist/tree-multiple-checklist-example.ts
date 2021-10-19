@@ -1,8 +1,7 @@
 /* tslint:disable:no-reserved-keywords object-literal-key-quotes */
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component } from '@angular/core';
-import { FlatTreeControl } from '@ptsecurity/cdk/tree';
-import { McTreeFlatDataSource, McTreeFlattener } from '@ptsecurity/mosaic/tree';
+import { FlatTreeControl, McTreeFlatDataSource, McTreeFlattener } from '@ptsecurity/mosaic/tree';
 
 
 export class FileNode {

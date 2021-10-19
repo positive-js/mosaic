@@ -14,7 +14,6 @@ import {
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { COMMA, ENTER } from '@ptsecurity/cdk/keycodes';
-import { CdkTreeModule, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { McAutocompleteModule } from '@ptsecurity/mosaic/autocomplete';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
@@ -24,7 +23,7 @@ import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McTagInputEvent, McTagsModule } from '@ptsecurity/mosaic/tags';
 import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
-import { McTreeFlatDataSource, McTreeFlattener, McTreeModule } from '@ptsecurity/mosaic/tree';
+import { FlatTreeControl, McTreeFlatDataSource, McTreeFlattener, McTreeModule } from '@ptsecurity/mosaic/tree';
 import { McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
 
 
@@ -297,7 +296,6 @@ export class DemoComponent {
         McTextareaModule,
         McSelectModule,
         McTreeModule,
-        CdkTreeModule,
         McTreeSelectModule,
         McFormFieldModule,
         McIconModule

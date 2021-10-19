@@ -3,7 +3,6 @@
         "lib": {
             "entryFile": "index.ts",
             "umdModuleIds": {
-                "@ptsecurity/cdk/tree": "mc.cdk.tree",
                 "@ptsecurity/cdk/keycodes": "mc.cdk.keycodes"
             }
         }

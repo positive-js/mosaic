@@ -30,7 +30,6 @@
             "@ptsecurity/cdk/datetime": ["packages/cdk/datetime/index.ts"],
             "@ptsecurity/cdk/keycodes": ["packages/cdk/keycodes/index.ts"],
             "@ptsecurity/cdk/testing": ["packages/cdk/testing/index.ts"],
-            "@ptsecurity/cdk/tree": ["packages/cdk/tree/index.ts"],
             "@ptsecurity/mosaic/autocomplete": ["packages/mosaic/autocomplete/index.ts"],
             "@ptsecurity/mosaic/button": ["packages/mosaic/button/index.ts"],
             "@ptsecurity/mosaic/button-toggle": ["packages/mosaic/button-toggle/index.ts"],

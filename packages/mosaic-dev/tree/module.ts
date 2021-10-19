@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
 import { McHighlightModule } from '@ptsecurity/mosaic/core';
+import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
@@ -194,6 +195,7 @@ export class DemoComponent {
         FormsModule,
         McFormFieldModule,
         McCheckboxModule,
+        McDropdownModule,
         McInputModule,
         McButtonModule,
         McTreeModule,

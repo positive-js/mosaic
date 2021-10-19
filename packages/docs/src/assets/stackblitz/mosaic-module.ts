@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { McLuxonDateModule } from '@ptsecurity/mosaic-luxon-adapter/adapter';
 import { McAutocompleteModule } from '@ptsecurity/mosaic/autocomplete';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
@@ -83,14 +82,10 @@ const NG_MODULES = [
     ReactiveFormsModule
 ];
 
-const MATERIAL_MODULES = [
-    CdkTreeModule
-];
 
 @NgModule({
     exports: [
         ...NG_MODULES,
-        ...MATERIAL_MODULES,
         ...MC_COMPONENTS,
         ...MC_CORE
     ]

@@ -3,13 +3,12 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { createMouseEvent, dispatchEvent } from '@ptsecurity/cdk/testing';
-import { FlatTreeControl } from '@ptsecurity/cdk/tree';
 
 import {
     McTreeSelection,
     McTreeFlatDataSource,
     McTreeFlattener,
-    McTreeModule
+    McTreeModule, FlatTreeControl
 } from './index';
 
 
