@@ -494,8 +494,8 @@ function expectFlatTreeToMatch(treeElement: Element, expectedPaddingIndent: numb
         const actualLevel = (node as HTMLElement).style.paddingLeft;
 
         if (expectedNode.length === 1) {
-            // root node can contain icon (padding = 12) and also can be without icon (padding = 32)
-            if (actualLevel !== `12px` && actualLevel !== `32px`) {
+            // root node can contain icon (padding = 8) and also can be without icon (padding = 32)
+            if (actualLevel !== `8px` && actualLevel !== `32px`) {
                 missedExpectations.push(`Expected node level to be 0 but was ${actualLevel}`);
             }
         } else {

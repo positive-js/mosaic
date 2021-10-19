@@ -68,8 +68,7 @@ export class McTreeNodePadding<T> implements OnInit, OnDestroy {
         private element: ElementRef<HTMLElement>,
         @Optional() private dir: Directionality
     ) {
-        this.dir!.change
-            .pipe(takeUntil(this.destroyed))
+        this.dir?.change?.pipe(takeUntil(this.destroyed))
             .subscribe(() => this.setPadding());
     }
 
@@ -131,7 +130,7 @@ export class McTreeNodePadding<T> implements OnInit, OnDestroy {
 
     private setPadding() {
         const padding = this.paddingIndent();
-        const paddingProp = this.dir && this.dir.value === 'rtl' ? 'paddingRight' : 'paddingLeft';
+        const paddingProp = this.dir?.value === 'rtl' ? 'paddingRight' : 'paddingLeft';
 
         this.renderer.setStyle(this.element.nativeElement, paddingProp, padding);
     }
