@@ -15,9 +15,10 @@ import {
     NgZone,
     ContentChild
 } from '@angular/core';
-import { hasModifierKey } from '@ptsecurity/cdk/keycodes';
+import { hasModifierKey, TAB } from '@ptsecurity/cdk/keycodes';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { McTreeNodeActionComponent } from './action';
 
 import { McTreeNodeToggleBase } from './toggle';
 import { McTreeNode } from './tree-base';
@@ -48,6 +49,7 @@ let uniqueIdCounter: number = 0;
         class: 'mc-tree-option',
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
+        '[class.mc-action-button-focused]': 'actionButton?.active',
 
         '[attr.id]': 'id',
         '[attr.tabindex]': '-1',
@@ -56,7 +58,8 @@ let uniqueIdCounter: number = 0;
         '(focusin)': 'focus()',
         '(blur)': 'blur()',
 
-        '(click)': 'selectViaInteraction($event)'
+        '(click)': 'selectViaInteraction($event)',
+        '(keydown)': 'onKeydown($event)'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
@@ -68,6 +71,7 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
     readonly onBlur = new Subject<McTreeOptionEvent>();
 
     @ContentChild('mcTreeNodeToggle') toggleElement: McTreeNodeToggleBase<McTreeOption>;
+    @ContentChild(McTreeNodeActionComponent) actionButton: McTreeNodeActionComponent;
 
     get value(): any {
         return this._value;
@@ -172,7 +176,7 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
     focus(focusOrigin?: FocusOrigin) {
         if (focusOrigin === 'program') { return; }
 
-        if (this.disabled || this.hasFocus) { return; }
+        if (this.disabled || this.hasFocus || this.actionButton?.hasFocus) { return; }
 
         this.elementRef.nativeElement.focus();
 
@@ -196,6 +200,8 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
             .subscribe(() => {
                 this.ngZone.run(() => {
                     this.hasFocus = false;
+
+                    if (this.actionButton?.hasFocus) { return; }
 
                     this.onBlur.next({ option: this });
                 });
@@ -227,6 +233,16 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
         this._selected = false;
 
         this.changeDetectorRef.markForCheck();
+    }
+
+    onKeydown($event) {
+        if (!this.actionButton) { return; }
+
+        if ($event.keyCode === TAB && !$event.shiftKey && !this.actionButton.hasFocus) {
+            this.actionButton.focus();
+
+            $event.preventDefault();
+        }
     }
 
     selectViaInteraction($event?: KeyboardEvent): void {

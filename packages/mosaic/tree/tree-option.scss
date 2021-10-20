@@ -48,7 +48,8 @@
     }
 
     &:not([disabled]):hover,
-    &:not([disabled]).mc-focused {
+    &:not([disabled]).mc-focused,
+    &:not([disabled]).mc-action-button-focused {
         & .mc-tree-node-action {
             display: flex;
         }

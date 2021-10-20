@@ -31,9 +31,7 @@
     [dataSource]="dataSource"
     [treeControl]="treeControl"
     (onSelectAll)="onSelectAll($event)"
-    (onCopy)="onCopy($event)"
-    (navigationChange)="onNavigationChange($event)"
-    (selectionChange)="onSelectionChange($event)">
+    (onCopy)="onCopy($event)">
 
     <mc-tree-option
         *mcTreeNodeDef="let node"
@@ -50,10 +48,18 @@
         <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
 
         <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
+
         <mc-tree-node-action
-            class="mc-focused"
             mcTooltip="Tooltip text"
-            [mcPlacement]="'right'">
+            [mcPlacement]="'right'"
+            [mcDropdownTriggerFor]="dropdown">
         </mc-tree-node-action>
     </mc-tree-option>
 </mc-tree-selection>
+
+
+<mc-dropdown #dropdown>
+    <button mc-dropdown-item>item 1</button>
+    <button mc-dropdown-item>item 2</button>
+    <button mc-dropdown-item>item 3</button>
+</mc-dropdown>

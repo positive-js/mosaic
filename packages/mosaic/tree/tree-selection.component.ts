@@ -33,8 +33,9 @@ import {
     SPACE,
     DOWN_ARROW,
     UP_ARROW,
-    isSelectAll,
-    isCopy
+    TAB,
+    isCopy,
+    isSelectAll, isVerticalMovement
 } from '@ptsecurity/cdk/keycodes';
 import {
     CanDisable,
@@ -295,7 +296,9 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
     focus($event): void {
         if (this.renderedOptions.length === 0 || this.isFocusReceivedFromNestedOption($event)) { return; }
 
+        this.keyManager.setFocusOrigin('keyboard');
         this.keyManager.setFirstItemActive();
+        this.keyManager.setFocusOrigin('program');
     }
 
     blur() {
@@ -308,66 +311,38 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
     }
 
     onKeyDown(event: KeyboardEvent): void {
-        event.preventDefault();
-
         this.keyManager.setFocusOrigin('keyboard');
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
-        if (isSelectAll(event) && this.multiple) {
+        if ([LEFT_ARROW, RIGHT_ARROW].includes(keyCode) || isVerticalMovement(event)) {
+            event.preventDefault();
+        }
+
+        if (this.multiple && isSelectAll(event)) {
             return this.selectAllOptions();
-        }
-
-        if (isCopy(event)) {
+        } else if (isCopy(event)) {
             return this.copyActiveOption();
-        }
-
-        switch (keyCode) {
-            case DOWN_ARROW:
-                this.keyManager.setNextItemActive();
-
-                break;
-            case UP_ARROW:
-                this.keyManager.setPreviousItemActive();
-
-                break;
-            case LEFT_ARROW:
-                if (this.keyManager.activeItem?.isExpandable) {
-                    console.log('RIGHT_ARROW');
-                    this.treeControl.collapse(this.keyManager.activeItem.data as McTreeOption);
-                }
-
-                return;
-            case RIGHT_ARROW:
-                if (this.keyManager.activeItem?.isExpandable) {
-                    console.log('RIGHT_ARROW');
-                    this.treeControl.expand(this.keyManager.activeItem.data as McTreeOption);
-                }
-
-                return;
-            case SPACE:
-            case ENTER:
-                this.toggleFocusedOption();
-
-                break;
-            case HOME:
-                this.keyManager.setFirstItemActive();
-
-                break;
-            case END:
-                this.keyManager.setLastItemActive();
-
-                break;
-            case PAGE_UP:
-                this.keyManager.setPreviousPageItemActive();
-
-                break;
-            case PAGE_DOWN:
-                this.keyManager.setNextPageItemActive();
-
-                break;
-            default:
-                return;
+        } else if (keyCode === TAB) {
+            return this.keyManager.tabOut.next();
+        } else if (keyCode === LEFT_ARROW && this.keyManager.activeItem?.isExpandable) {
+            return this.treeControl.collapse(this.keyManager.activeItem.data as McTreeOption);
+        } else if (keyCode === RIGHT_ARROW && this.keyManager.activeItem?.isExpandable) {
+            return this.treeControl.expand(this.keyManager.activeItem.data as McTreeOption);
+        } else if (keyCode === DOWN_ARROW) {
+            this.keyManager.setNextItemActive();
+        } else if (keyCode === UP_ARROW) {
+            this.keyManager.setPreviousItemActive();
+        } else if ([SPACE, ENTER].includes(keyCode)) {
+            return this.toggleFocusedOption();
+        } else if (keyCode === HOME) {
+            this.keyManager.setFirstItemActive();
+        } else if (keyCode === END) {
+            this.keyManager.setLastItemActive();
+        } else if (keyCode === PAGE_UP) {
+            this.keyManager.setPreviousPageItemActive();
+        } else if (keyCode === PAGE_DOWN) {
+            this.keyManager.setNextPageItemActive();
         }
 
         if (this.keyManager.activeItem) {
@@ -466,8 +441,6 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
         super.renderNodeChanges(data, dataDiffer, viewContainer, parentData);
 
         this.sortedNodes = this.getSortedNodes(viewContainer);
-
-        this.updateScrollSize();
 
         this.nodeOutlet.changeDetectorRef.detectChanges();
     }
@@ -576,6 +549,8 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
 
         this.renderedOptions.reset(orderedOptions);
         this.renderedOptions.notifyOnChanges();
+
+        this.updateScrollSize();
     }
 
     private getSortedNodes(viewContainer: ViewContainerRef) {

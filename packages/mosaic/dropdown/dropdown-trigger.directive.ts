@@ -75,6 +75,7 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({passive: tr
     }
 })
 export class McDropdownTrigger implements AfterContentInit, OnDestroy {
+    lastDestroyReason: DropdownCloseReason;
 
     /** Data to be passed along to any lazily-rendered content. */
     @Input('mcDropdownTriggerData') data: any;
@@ -303,6 +304,8 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     /** Closes the dropdown and does the necessary cleanup. */
     private destroy(reason: DropdownCloseReason) {
         if (!this.overlayRef || !this.opened) { return; }
+
+        this.lastDestroyReason = reason;
 
         this.dropdown.resetActiveItem();
 

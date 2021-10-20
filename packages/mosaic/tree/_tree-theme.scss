@@ -51,7 +51,7 @@
     .mc-tree-node-action {
         $button: map-get(map-get($theme, components), button);
 
-        &.mc-focused {
+        &.cdk-keyboard-focused {
             border-color: map-get(map-get($theme, states), focused-color);
         }
 
