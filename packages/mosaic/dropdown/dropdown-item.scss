@@ -68,7 +68,6 @@
 }
 
 .mc-dropdown__divider {
-    height: var(--mc-dropdown-item-size-padding, $dropdown-divider-size-height);
-
-    margin: var(--mc-dropdown-item-size-padding, $dropdown-divider-size-margin);
+    height: var(--mc-dropdown-divider-size-height, $dropdown-divider-size-height);
+    margin: var(--mc-dropdown-divider-size-margin, $dropdown-divider-size-margin);
 }
