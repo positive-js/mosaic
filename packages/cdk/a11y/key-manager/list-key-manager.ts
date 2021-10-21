@@ -240,6 +240,7 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
      * Sets the active item depending on the key event passed in.
      * @param event Keyboard event to be used for determining which element should be active.
      */
+    // tslint:disable-next-line:cyclomatic-complexity
     onKeydown(event: KeyboardEvent): void {
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
