@@ -21,7 +21,7 @@ import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { McTreeNodeActionComponent } from './action';
-import { McTreeNodeToggleBase } from './toggle';
+import { McTreeNodeToggleBaseDirective } from './toggle';
 import { McTreeNode } from './tree-base';
 
 
@@ -71,7 +71,7 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
 
     readonly onBlur = new Subject<McTreeOptionEvent>();
 
-    @ContentChild('mcTreeNodeToggle') toggleElement: McTreeNodeToggleBase<McTreeOption>;
+    @ContentChild('mcTreeNodeToggle') toggleElement: McTreeNodeToggleBaseDirective<McTreeOption>;
     @ContentChild(forwardRef(() => McTreeNodeActionComponent)) actionButton: McTreeNodeActionComponent;
 
     get value(): any {

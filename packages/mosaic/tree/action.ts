@@ -12,6 +12,8 @@ import {
 } from '@angular/core';
 import { ENTER, SPACE, TAB } from '@ptsecurity/cdk/keycodes';
 import {
+    CanDisableCtor,
+    HasTabIndexCtor,
     mixinDisabled,
     mixinTabIndex
 } from '@ptsecurity/mosaic/core';
@@ -22,6 +24,13 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { McTreeOption } from './tree-option.component';
+
+
+export class McTreeNodeActionBase {}
+
+// tslint:disable-next-line:naming-convention
+export const McTreeNodeActionMixinBase:
+    HasTabIndexCtor & CanDisableCtor & typeof McTreeNodeActionBase = mixinTabIndex(mixinDisabled(McTreeNodeActionBase));
 
 
 @Component({
@@ -50,7 +59,7 @@ import { McTreeOption } from './tree-option.component';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McTreeNodeActionComponent extends mixinTabIndex(mixinDisabled(class {})) implements OnInit, OnDestroy {
+export class McTreeNodeActionComponent extends McTreeNodeActionMixinBase implements OnInit, OnDestroy {
     @ContentChild(McIcon) customIcon: McIcon;
 
     hasFocus: boolean = false;

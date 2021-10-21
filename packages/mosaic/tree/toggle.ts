@@ -1,14 +1,21 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ChangeDetectionStrategy, Component, Directive, Input, ViewEncapsulation } from '@angular/core';
-import { CanDisable, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { map } from 'rxjs/operators';
 
 import { McTreeBase, McTreeNode } from './tree-base';
 
 
+export class McTreeNodeToggleBase {}
+
+
+// tslint:disable-next-line:naming-convention
+export const McTreeNodeToggleMixinBase:
+    CanDisableCtor & typeof McTreeNodeToggleBase = mixinDisabled(McTreeNodeToggleBase);
+
 /** @docs-private */
 @Directive()
-export class McTreeNodeToggleBase<T> extends mixinDisabled(class {}) implements CanDisable {
+export class McTreeNodeToggleBaseDirective<T> extends McTreeNodeToggleMixinBase implements CanDisable {
     @Input() node: T;
 
     @Input('mcTreeNodeToggleRecursive')
@@ -63,7 +70,7 @@ export class McTreeNodeToggleBase<T> extends mixinDisabled(class {}) implements 
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McTreeNodeToggleComponent<T> extends McTreeNodeToggleBase<T> {}
+export class McTreeNodeToggleComponent<T> extends McTreeNodeToggleBaseDirective<T> {}
 
 
 @Directive({
@@ -74,4 +81,4 @@ export class McTreeNodeToggleComponent<T> extends McTreeNodeToggleBase<T> {}
         '(click)': 'toggle($event)'
     }
 })
-export class McTreeNodeToggleDirective<T> extends McTreeNodeToggleBase<T> {}
+export class McTreeNodeToggleDirective<T> extends McTreeNodeToggleBaseDirective<T> {}
