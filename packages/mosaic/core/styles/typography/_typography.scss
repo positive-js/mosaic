@@ -27,7 +27,9 @@
         caption-mono:       map-get($typography, caption-mono),
 
         small-text:         map-get($typography, small-text),
-        extra-small-text:   map-get($typography, extra-small-text)
+        extra-small-text:   map-get($typography, extra-small-text),
+        extra-small-text-caps:   map-get($typography, extra-small-text-caps),
+        extra-small-text-mono:   map-get($typography, extra-small-text-mono)
     );
 
     @each $key, $level in $config {

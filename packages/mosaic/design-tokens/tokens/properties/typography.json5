@@ -119,6 +119,22 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' }
+        },
+        "extra-small-text-caps": {
+            "font-size": { value: '11px' },
+            "line-height": { value: '16px' },
+            "letter-spacing": { value: '1px' },
+            "font-weight": { value: 'normal' },
+            "font-family": { value: '{font.family.base.value}' },
+            "text-transform": { value: 'uppercase' }
+        },
+        "extra-small-text-mono": {
+            "font-size": { value: '11px' },
+            "line-height": { value: '16px' },
+            "letter-spacing": { value: '0px' },
+            "font-weight": { value: 'normal' },
+            "font-family": { value: '{font.family.monospace.value}' },
+            "text-transform": { value: 'null' }
         }
     }
 }
