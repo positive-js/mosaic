@@ -13,7 +13,8 @@ import {
     ViewEncapsulation,
     AfterContentInit,
     NgZone,
-    ContentChild
+    ContentChild,
+    forwardRef
 } from '@angular/core';
 import { hasModifierKey, TAB } from '@ptsecurity/cdk/keycodes';
 import { Subject } from 'rxjs';
@@ -71,7 +72,7 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
     readonly onBlur = new Subject<McTreeOptionEvent>();
 
     @ContentChild('mcTreeNodeToggle') toggleElement: McTreeNodeToggleBase<McTreeOption>;
-    @ContentChild('mcTreeNodeAction') actionButton: McTreeNodeActionComponent;
+    @ContentChild(forwardRef(() => McTreeNodeActionComponent)) actionButton: McTreeNodeActionComponent;
 
     get value(): any {
         return this._value;
