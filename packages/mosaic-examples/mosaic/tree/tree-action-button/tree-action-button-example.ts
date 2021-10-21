@@ -133,6 +133,7 @@ export class TreeActionButtonExample {
     }
 
     onSelectAll($event) {
+        // tslint:disable-next-line:no-console
         console.log('All items selected', $event);
     }
 
