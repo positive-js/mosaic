@@ -321,12 +321,16 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
         if (this.dropdown instanceof McDropdown) {
             this.dropdown.resetAnimation();
 
+            const animationSubscription = this.dropdown.animationDone
+                .pipe(
+                    filter((event) => event.toState === 'void'),
+                    take(1)
+                );
+
             if (this.dropdown.lazyContent) {
                 // Wait for the exit animation to finish before detaching the content.
-                this.dropdown.animationDone
+                animationSubscription
                     .pipe(
-                        filter((event) => event.toState === 'void'),
-                        take(1),
                         // Interrupt if the content got re-attached.
                         takeUntil(this.dropdown.lazyContent.attached)
                     )
@@ -336,7 +340,8 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
                         complete: () => this.setIsOpened(false)
                     });
             } else {
-                this.setIsOpened(false);
+                animationSubscription
+                    .subscribe(() => this.setIsOpened(false));
             }
         } else {
             this.setIsOpened(false);
