@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 19 Oct 2021 13:31:09 GMT
+ * Generated on Thu, 21 Oct 2021 09:01:01 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -776,7 +776,7 @@ export const TooltipSizeBorderRadius = "3px";
 export const TooltipSizeArrowSize = "12px";
 export const TooltipSizeArrowWidth = "5px";
 export const TooltipSizePadding = "8px 16px";
-export const TooltipSizeDistance = "calc(5px + 4px)";
+export const TooltipSizeDistance = "9px";
 export const TooltipFontDefault = "caption";
 export const TreeSizePaddingRight = "16px";
 export const TreeSizeBorderWidth = "2px";
