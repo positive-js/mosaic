@@ -18,8 +18,8 @@ import {
 import { hasModifierKey, TAB } from '@ptsecurity/cdk/keycodes';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { McTreeNodeActionComponent } from './action';
 
+import { McTreeNodeActionComponent } from './action';
 import { McTreeNodeToggleBase } from './toggle';
 import { McTreeNode } from './tree-base';
 
@@ -71,7 +71,7 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
     readonly onBlur = new Subject<McTreeOptionEvent>();
 
     @ContentChild('mcTreeNodeToggle') toggleElement: McTreeNodeToggleBase<McTreeOption>;
-    @ContentChild(McTreeNodeActionComponent) actionButton: McTreeNodeActionComponent;
+    @ContentChild('mcTreeNodeAction') actionButton: McTreeNodeActionComponent;
 
     get value(): any {
         return this._value;
