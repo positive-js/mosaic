@@ -8,7 +8,9 @@ import {
     A,
     Z,
     ZERO,
-    NINE
+    NINE,
+    HOME,
+    END
 } from '@ptsecurity/cdk/keycodes';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, map, tap } from 'rxjs/operators';
@@ -23,6 +25,9 @@ export interface ListKeyManagerOption {
     // Gets the label for this option.
     getLabel?(): string;
 }
+
+/** Modifier keys handled by the ListKeyManager. */
+export type ListKeyManagerModifierKey = 'altKey' | 'ctrlKey' | 'metaKey' | 'shiftKey';
 
 /* tslint:disable:member-ordering */
 /**
@@ -66,6 +71,10 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
     // Buffer for the letters that the user has pressed when the typeahead option is turned on.
     private pressedLetters: string[] = [];
 
+    private homeAndEnd = false;
+
+    private allowedModifierKeys: ListKeyManagerModifierKey[] = [];
+
     constructor(private _items: QueryList<T>) {
         if (_items instanceof QueryList) {
 
@@ -83,8 +92,23 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
         }
     }
 
+    /** Gets whether the user is currently typing into the manager using the typeahead feature. */
+    isTyping(): boolean {
+        return this.pressedLetters.length > 0;
+    }
+
     withScrollSize(scrollSize: number): this {
         this.scrollSize = scrollSize;
+
+        return this;
+    }
+
+    /**
+     * Modifier keys which are allowed to be held down and whose default actions will be prevented
+     * as the user is pressing the arrow keys. Defaults to not allowing any modifier keys.
+     */
+    withAllowedModifierKeys(keys: ListKeyManagerModifierKey[]): this {
+        this.allowedModifierKeys = keys;
 
         return this;
     }
@@ -94,8 +118,19 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
      * the other end of list when there are no more items in the given direction.
      */
 
-    withWrap(): this {
-        this.wrap = true;
+    withWrap(shouldWrap = true): this {
+        this.wrap = shouldWrap;
+
+        return this;
+    }
+
+    /**
+     * Sets the predicate function that determines which items should be skipped by the
+     * list key manager.
+     * @param predicate Function that determines whether the given item should be skipped.
+     */
+    skipPredicate(predicate: (item: T) => boolean): this {
+        this.skipPredicateFn = predicate;
 
         return this;
     }
@@ -171,6 +206,17 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
     }
 
     /**
+     * Configures the key manager to activate the first and last items
+     * respectively when the Home or End key is pressed.
+     * @param enabled Whether pressing the Home or End key activates the first/last item.
+     */
+    withHomeAndEnd(enabled: boolean = true): this {
+        this.homeAndEnd = enabled;
+
+        return this;
+    }
+
+    /**
      * Sets the active item to the item at the index specified.
      * @param index The index of the item to be set as active or item The item to be set as active.
      */
@@ -197,6 +243,11 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
     onKeydown(event: KeyboardEvent): void {
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
+
+        const modifiers: ListKeyManagerModifierKey[] = ['altKey', 'ctrlKey', 'metaKey', 'shiftKey'];
+        const isModifierAllowed = modifiers.every((modifier) => {
+            return !event[modifier] || this.allowedModifierKeys.indexOf(modifier) > -1;
+        });
 
         switch (keyCode) {
             case TAB:
@@ -237,6 +288,22 @@ export class ListKeyManager<T extends ListKeyManagerOption> {
                     break;
                 } else if (this.horizontal === 'rtl') {
                     this.setNextItemActive();
+                    break;
+                } else {
+                    return;
+                }
+
+            case HOME:
+                if (this.homeAndEnd && isModifierAllowed) {
+                    this.setFirstItemActive();
+                    break;
+                } else {
+                    return;
+                }
+
+            case END:
+                if (this.homeAndEnd && isModifierAllowed) {
+                    this.setLastItemActive();
                     break;
                 } else {
                     return;
