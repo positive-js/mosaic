@@ -1,4 +1,5 @@
-/* tslint:disable:no-reserved-keywords */
+/* tslint:disable:no-reserved-keywords object-literal-key-quotes */
+import { Clipboard } from '@angular/cdk/clipboard';
 import { Component } from '@angular/core';
 import { FlatTreeControl, McTreeFlatDataSource, McTreeFlattener } from '@ptsecurity/mosaic/tree';
 
@@ -97,22 +98,22 @@ export const DATA_OBJECT = {
 };
 
 /**
- * @title Basic Select
+ * @title Basic tree
  */
 @Component({
-    selector: 'tree-select-multiple-overview-example',
-    templateUrl: 'tree-select-multiple-overview-example.html',
-    styleUrls: ['tree-select-multiple-overview-example.css']
+    selector: 'tree-action-button-example',
+    templateUrl: 'tree-action-button-example.html',
+    styleUrls: ['tree-action-button-example.css']
 })
-export class TreeSelectMultipleOverviewExample {
-    selected = '';
-
+export class TreeActionButtonExample {
     treeControl: FlatTreeControl<FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    constructor() {
+    modelValue: any = '';
+
+    constructor(private clipboard: Clipboard) {
         this.treeFlattener = new McTreeFlattener(
             this.transformer, this.getLevel, this.isExpandable, this.getChildren
         );
@@ -125,8 +126,14 @@ export class TreeSelectMultipleOverviewExample {
         this.dataSource.data = buildFileTree(DATA_OBJECT, 0);
     }
 
-    hasChild(_: number, nodeData: FileFlatNode) {
-        return nodeData.expandable;
+    hasChild(_: number, nodeData: FileFlatNode) { return nodeData.expandable; }
+
+    onCopy($event) {
+        this.clipboard.copy($event.option.viewValue);
+    }
+
+    onSelectAll($event) {
+        console.log('All items selected', $event);
     }
 
     private transformer = (node: FileNode, level: number, parent: any) => {
@@ -158,6 +165,8 @@ export class TreeSelectMultipleOverviewExample {
     }
 
     private getViewValue = (node: FileNode): string => {
-        return `${node.name} view`;
+        const nodeType = node.type ? `.${node.type}` : '';
+
+        return `${node.name}${nodeType}`;
     }
 }

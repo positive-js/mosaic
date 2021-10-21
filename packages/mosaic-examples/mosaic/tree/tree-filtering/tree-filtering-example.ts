@@ -50,13 +50,13 @@ export const DATA_OBJECT = {
     src: {
         cdk: {
             a11ly: {
-                'aria-describer': {
+                'aria describer': {
                     'aria-describer': 'ts',
                     'aria-describer.spec': 'ts',
                     'aria-reference': 'ts',
                     'aria-reference.spec': 'ts'
                 },
-                'focus-monitor': {
+                'focus monitor': {
                     'focus-monitor': 'ts',
                     'focus-monitor.spec': 'ts'
                 }
