@@ -320,21 +320,33 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
         }
 
         if (this.multiple && isSelectAll(event)) {
-            return this.selectAllOptions();
+            this.selectAllOptions();
+
+            return;
         } else if (isCopy(event)) {
-            return this.copyActiveOption();
+            this.copyActiveOption();
+
+            return;
         } else if (keyCode === TAB) {
-            return this.keyManager.tabOut.next();
+            this.keyManager.tabOut.next();
+
+            return;
         } else if (keyCode === LEFT_ARROW && this.keyManager.activeItem?.isExpandable) {
-            return this.treeControl.collapse(this.keyManager.activeItem.data as McTreeOption);
+            this.treeControl.collapse(this.keyManager.activeItem.data as McTreeOption);
+
+            return;
         } else if (keyCode === RIGHT_ARROW && this.keyManager.activeItem?.isExpandable) {
-            return this.treeControl.expand(this.keyManager.activeItem.data as McTreeOption);
+            this.treeControl.expand(this.keyManager.activeItem.data as McTreeOption);
+
+            return;
         } else if (keyCode === DOWN_ARROW) {
             this.keyManager.setNextItemActive();
         } else if (keyCode === UP_ARROW) {
             this.keyManager.setPreviousItemActive();
         } else if ([SPACE, ENTER].includes(keyCode)) {
-            return this.toggleFocusedOption();
+            this.toggleFocusedOption();
+
+            return;
         } else if (keyCode === HOME) {
             this.keyManager.setFirstItemActive();
         } else if (keyCode === END) {
