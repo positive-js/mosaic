@@ -1,3 +1,11 @@
+# 11.5.0 "Blaring Marx" (2021-10-22)
+
+### Mosaic
+
+ * bug fix  divider is not displayed (#UIM-787) ([#710](https://github.com/positive-js/mosaic/issues/710)) ([fd498c9](https://github.com/positive-js/mosaic/commit/fd498c9a3be4bde614c1ea4557689b6bc4bf3c61)), closes [#UIM-787](https://github.com/positive-js/mosaic/issues/UIM-787)
+ * bug fix  **tooltip:** calculation of tooltip distance fixed (#UIM-730) ([#709](https://github.com/positive-js/mosaic/issues/709)) ([f6b5960](https://github.com/positive-js/mosaic/commit/f6b5960046c74e020c9bc83c41aa13966b74237a)), closes [#UIM-730](https://github.com/positive-js/mosaic/issues/UIM-730) [#UIM-730](https://github.com/positive-js/mosaic/issues/UIM-730) [#UIM-730](https://github.com/positive-js/mosaic/issues/UIM-730)
+ * feature  **badge:** badge element rework (#UIM-770) ([#708](https://github.com/positive-js/mosaic/issues/708)) ([46060f8](https://github.com/positive-js/mosaic/commit/46060f8d4dfc0ce56fa7024ca045e1e1077f4513)), closes [#UIM-770](https://github.com/positive-js/mosaic/issues/UIM-770)
+
 ## 11.4.5 "Wired Looms" (2021-10-13)
 
 ## 11.4.4 "False Publish" (2021-10-11)
