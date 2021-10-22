@@ -28,6 +28,7 @@
     multiple="keyboard"
     [disabled]="disableState"
     [(ngModel)]="modelValue"
+    [autoSelect]="false"
     [dataSource]="dataSource"
     [treeControl]="treeControl"
     (onSelectAll)="onSelectAll($event)"
@@ -36,14 +37,16 @@
     <mc-tree-option
         *mcTreeNodeDef="let node"
         mcTreeNodePadding>
+        <i mc-icon="mc-info-o_16"></i>
         <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
     </mc-tree-option>
 
-<!--        class="mc-focused"-->
     <mc-tree-option
         *mcTreeNodeDef="let node; when: hasChild"
         mcTreeNodePadding
         [disabled]="node.name === 'Downloads'">
+
+        <i mc-icon="mc-info-o_16"></i>
 
         <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
 

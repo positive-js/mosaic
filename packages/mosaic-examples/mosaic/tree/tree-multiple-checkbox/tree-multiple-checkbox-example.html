@@ -5,10 +5,14 @@
     [treeControl]="treeControl">
 
     <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding [disabled]="node.name === 'tests'">
+        <i mc-icon="mc-info-o_16"></i>
+
         <span [innerHTML]="treeControl.getViewValue(node)"></span>
     </mc-tree-option>
 
     <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+        <i mc-icon="mc-info-o_16"></i>
+
         <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
 
         <span [innerHTML]="treeControl.getViewValue(node)"></span>
