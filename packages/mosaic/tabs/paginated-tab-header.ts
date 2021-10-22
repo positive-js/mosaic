@@ -468,7 +468,7 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
      * should be called sparingly.
      */
     checkPaginationEnabled() {
-        if (this.disablePagination) {
+        if (this.disablePagination || this.vertical) {
             this.showPaginationControls = false;
         } else {
             const isEnabled = this.tabList.nativeElement.scrollWidth > this.elementRef.nativeElement.offsetWidth;

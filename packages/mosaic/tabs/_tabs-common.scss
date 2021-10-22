@@ -96,9 +96,9 @@
     }
 
     & .mc-tab-label__template {
-        display: flex;
-        flex-direction: row;
-        align-items: baseline;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
 
         & > .mc-icon {
             &.mc-icon_left {
