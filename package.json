@@ -99,7 +99,7 @@
         "snyk": "^1.667.0",
         "spdx-satisfies": "^5.0.0",
         "style-dictionary": "^3.0.1",
-        "stylelint": "^13.6.1",
+        "stylelint": "^14.0.0",
         "stylelint-config-standard": "^19.0.0",
         "stylelint-scss": "^3.13.0",
         "ts-node": "^9.0.0",
