@@ -16,7 +16,8 @@ import {
 import {
     CanDisable,
     CanDisableCtor,
-    mixinDisabled
+    mixinDisabled,
+    PopUpPlacements
 } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 
@@ -47,9 +48,13 @@ export class McTab extends McTabMixinBase implements OnInit, CanDisable, OnChang
     }
 
     @ContentChild(MC_TAB_LABEL)
-    get templateLabel(): McTabLabel { return this._templateLabel; }
+    get templateLabel(): McTabLabel {
+        return this._templateLabel;
+    }
 
-    set templateLabel(value: McTabLabel) { this.setTemplateLabelInput(value); }
+    set templateLabel(value: McTabLabel) {
+        this.setTemplateLabelInput(value);
+    }
 
     private _templateLabel: McTabLabel;
 
@@ -61,12 +66,23 @@ export class McTab extends McTabMixinBase implements OnInit, CanDisable, OnChang
     /** Template inside the McTab view that contains an `<ng-content>`. */
     @ViewChild(TemplateRef, { static: true }) implicitContent: TemplateRef<any>;
 
+    @Input()
+    get tooltipTitle(): string {
+        return this.overflowTooltipTitle + this._tooltipTitle;
+    }
+
+    set tooltipTitle(value: string) {
+        this._tooltipTitle = value;
+    }
+
+    private _tooltipTitle = '';
+
+    @Input() tooltipPlacement: PopUpPlacements;
+
     /** Plain text label for the tab, used when there is no template label. */
     @Input('label') textLabel = '';
 
     @Input() empty = false;
-    @Input() tooltipTitle = '';
-    @Input() tooltipPlacement = '';
 
     @Input('tabId') tabId: string;
 
@@ -89,6 +105,24 @@ export class McTab extends McTabMixinBase implements OnInit, CanDisable, OnChang
      * Whether the tab is currently active.
      */
     isActive = false;
+
+    get isOverflown(): boolean {
+        return !!this._overflowTooltipTitle;
+    }
+
+    get overflowTooltipTitle(): string {
+        if (this.isOverflown) {
+            return `${this._overflowTooltipTitle}\n`;
+        }
+
+        return '';
+    }
+
+    set overflowTooltipTitle(value: string) {
+        this._overflowTooltipTitle = value;
+    }
+
+    private _overflowTooltipTitle = '';
 
     /** Portal that will be the hosted content of the tab */
     private contentPortal: TemplatePortal | null = null;

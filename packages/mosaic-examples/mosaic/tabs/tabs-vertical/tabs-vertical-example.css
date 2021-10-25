@@ -2,6 +2,6 @@
     height: 240px;
 }
 
-.mc-tab-header_vertical {
-    width: 110px;
+.docs-vertical-tabs .mc-tab-header {
+    max-width: 30%;
 }

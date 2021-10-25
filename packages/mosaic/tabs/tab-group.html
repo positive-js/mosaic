@@ -15,16 +15,17 @@
          [class.mc-tab-label_empty]="tab.empty"
          [class.mc-active]="selectedIndex == i"
          *ngFor="let tab of tabs; let i = index"
+         [tab]="tab"
          [id]="getTabLabelId(i)"
          [disabled]="tab.disabled"
          (click)="handleClick(tab, tabHeader, i)"
 
          [mcTooltip]="tab.tooltipTitle"
-         [mcTooltipDisabled]="!tab.empty"
+         [mcTooltipDisabled]="!tab.empty && !tab.isOverflown"
          [mcTrigger]="'hover, focus'"
          [mcPlacement]="tab.tooltipPlacement">
 
-        <div class="mc-tab-label__content"
+        <div #labelContent class="mc-tab-label__content"
             [class.mc-tab-label__template]="tab.templateLabel">
             <!-- If there is a label template, use it. -->
             <ng-template [ngIf]="tab.templateLabel">

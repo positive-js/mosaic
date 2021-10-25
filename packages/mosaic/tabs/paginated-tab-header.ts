@@ -136,8 +136,7 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
      * Whether pagination should be disabled. This can be used to avoid unnecessary
      * layout recalculations if it's known that pagination won't be required.
      */
-    @Input()
-    disablePagination: boolean = false;
+    @Input() disablePagination: boolean = false;
 
     /** Emits when the component is destroyed. */
     protected readonly destroyed = new Subject<void>();
@@ -174,7 +173,6 @@ export abstract class McPaginatedTabHeader implements AfterContentChecked, After
         @Optional() private dir: Directionality,
         @Optional() @Inject(ANIMATION_MODULE_TYPE) public animationMode?: string
     ) {
-
         // Bind the `mouseleave` event on the outside since it doesn't change anything in the view.
         ngZone.runOutsideAngular(() => {
             fromEvent(elementRef.nativeElement, 'mouseleave')
