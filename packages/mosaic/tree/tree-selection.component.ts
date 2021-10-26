@@ -315,7 +315,7 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
-        if ([LEFT_ARROW, RIGHT_ARROW].includes(keyCode) || isVerticalMovement(event)) {
+        if ([SPACE, LEFT_ARROW, RIGHT_ARROW].includes(keyCode) || isVerticalMovement(event)) {
             event.preventDefault();
         }
 

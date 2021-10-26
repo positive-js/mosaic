@@ -364,12 +364,12 @@ describe('McTreeSelection', () => {
 
                 component.treeControl.filterNodes('Pictures');
                 nodes = getNodes(treeElement);
-                expect(nodes.length).toBe(3);
+                expect(nodes.length).toBe(6);
 
                 component.treeControl.filterNodes('Documents');
                 fixture.detectChanges();
                 nodes = getNodes(treeElement);
-                expect(nodes.length).toBe(1);
+                expect(nodes.length).toBe(4);
 
                 component.treeControl.filterNodes('condition for filter all nodes');
                 nodes = getNodes(treeElement);
@@ -398,7 +398,7 @@ describe('McTreeSelection', () => {
 
                 component.treeControl.filterNodes('Pictures');
                 nodes = getNodes(treeElement);
-                expect(nodes.length).toBe(3);
+                expect(nodes.length).toBe(6);
 
                 component.treeControl.filterNodes('');
                 nodes = getNodes(treeElement);
