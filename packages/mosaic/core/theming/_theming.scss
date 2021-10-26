@@ -108,7 +108,7 @@ $dark-warning: mc-palette($dark-color-scheme-warning-palette, $dark-color-scheme
 ) {
     $states: (
         focused-color: $dark-color-scheme-states-focused-color,
-        selected-color: $dark-color-scheme-states-focused-color,
+        selected-color: $dark-color-scheme-states-selected-color,
         pressed-shadow: $dark-color-scheme-states-pressed-shadow,
         disabled-opacity: $dark-color-scheme-states-disabled-opacity
     );

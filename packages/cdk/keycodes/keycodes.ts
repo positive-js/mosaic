@@ -168,7 +168,7 @@ export function isSelectAll(event: KeyboardEvent): boolean {
 }
 
 export function isCopy(event: KeyboardEvent): boolean {
-    return event.ctrlKey && event.keyCode === C;
+    return (event.ctrlKey || event.metaKey) && event.keyCode === C;
 }
 
 export function isInput(event): boolean {

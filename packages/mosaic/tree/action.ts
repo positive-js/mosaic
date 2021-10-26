@@ -131,8 +131,9 @@ export class McTreeNodeActionComponent extends McTreeNodeActionMixinBase impleme
     }
 
     onKeyDown($event) {
-        if ([SPACE, ENTER].includes($event.keyCode)) {
-            this.dropdownTrigger?.toggle();
+        if ([SPACE, ENTER].includes($event.keyCode) && this.dropdownTrigger) {
+            this.dropdownTrigger.openedBy = 'keyboard';
+            this.dropdownTrigger.toggle();
         } else if ($event.shiftKey && $event.keyCode === TAB) {
             this.hasFocus = false;
 
