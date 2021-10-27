@@ -89,9 +89,9 @@ export class McTreeNodeActionComponent extends McTreeNodeActionMixinBase impleme
                 .subscribe(() => {
                     this.preventShowingTooltip();
 
-                    const destroyReason: FocusOrigin = this.dropdownTrigger.lastDestroyReason === 'click' ?
-                        'program' :
-                        'keyboard';
+                    const destroyReason: FocusOrigin = this.dropdownTrigger.lastDestroyReason === 'keydown' ?
+                        'keyboard' :
+                        'program';
 
                     this.focus(destroyReason);
                 });
