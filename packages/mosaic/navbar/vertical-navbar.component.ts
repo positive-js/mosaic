@@ -25,7 +25,12 @@ import { toggleVerticalNavbarAnimation } from './vertical-navbar.animation';
         <ng-content select="[mc-navbar-container], mc-navbar-container"></ng-content>
         <ng-content select="[mc-navbar-toggle], mc-navbar-toggle"></ng-content>
     `,
-    styleUrls: ['./vertical-navbar.scss'],
+    styleUrls: [
+        './vertical-navbar.scss',
+        './navbar-item.scss',
+        './navbar-brand.scss',
+        './navbar-divider.scss'
+    ],
     host: {
         class: 'mc-vertical-navbar',
         '[class.mc-closed]': '!expanded',
