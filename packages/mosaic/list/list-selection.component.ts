@@ -20,7 +20,8 @@ import {
     OnInit,
     ViewChild,
     NgZone,
-    Optional
+    Optional,
+    ContentChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
@@ -37,7 +38,6 @@ import {
     UP_ARROW
 } from '@ptsecurity/cdk/keycodes';
 import {
-    McLine,
     CanDisable,
     mixinDisabled,
     toBoolean,
@@ -47,8 +47,11 @@ import {
     HasTabIndex,
     MultipleMode,
     McOptgroup,
-    MC_OPTION_ACTION_PARENT
+    MC_OPTION_ACTION_PARENT,
+    McOptionActionComponent
 } from '@ptsecurity/mosaic/core';
+import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
+import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, take, takeUntil } from 'rxjs/operators';
 
@@ -68,17 +71,21 @@ export interface McOptionEvent {
     selector: 'mc-list-option',
     templateUrl: './list-option.html',
     host: {
-        class: 'mc-list-option mc-no-select',
+        class: 'mc-list-option',
+
         '[class.mc-selected]': 'selected',
-        '[class.mc-focused]': 'hasFocus',
         '[class.mc-disabled]': 'disabled',
+        '[class.mc-focused]': 'hasFocus',
+
+        '[class.mc-action-button-focused]': 'actionButton?.active',
 
         '[attr.tabindex]': 'tabIndex',
         '[attr.disabled]': 'disabled || null',
 
         '(focusin)': 'focus()',
         '(blur)': 'blur()',
-        '(click)': 'handleClick($event)'
+        '(click)': 'handleClick($event)',
+        '(keydown)': 'onKeydown($event)'
     },
     encapsulation: ViewEncapsulation.None,
     preserveWhitespaces: false,
@@ -94,7 +101,9 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
 
     readonly onBlur = new Subject<McOptionEvent>();
 
-    @ContentChildren(McLine) lines: QueryList<McLine>;
+    @ContentChild(McOptionActionComponent) actionButton: McOptionActionComponent;
+    @ContentChild(McTooltipTrigger) tooltipTrigger: McTooltipTrigger;
+    @ContentChild(McDropdownTrigger) dropdownTrigger: McDropdownTrigger;
 
     @ViewChild('text', { static: false }) text: ElementRef;
 
@@ -245,18 +254,28 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
         );
     }
 
-    focus() {
-        if (!this.hasFocus) {
-            this.elementRef.nativeElement.focus();
+    onKeydown($event) {
+        if (!this.actionButton) { return; }
 
-            this.onFocus.next({ option: this });
+        if ($event.keyCode === TAB && !$event.shiftKey && !this.actionButton.hasFocus) {
+            this.actionButton.focus();
 
-            Promise.resolve().then(() => {
-                this.hasFocus = true;
-
-                this.changeDetector.markForCheck();
-            });
+            $event.preventDefault();
         }
+    }
+
+    focus() {
+        if (this.disabled || this.hasFocus || this.actionButton?.hasFocus) { return; }
+
+        this.elementRef.nativeElement.focus();
+
+        this.onFocus.next({ option: this });
+
+        Promise.resolve().then(() => {
+            this.hasFocus = true;
+
+            this.changeDetector.markForCheck();
+        });
     }
 
     blur(): void {
@@ -270,6 +289,8 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
             .subscribe(() => {
                 this.ngZone.run(() => {
                     this.hasFocus = false;
+
+                    if (this.actionButton?.hasFocus) { return; }
 
                     this.onBlur.next({ option: this });
                 });

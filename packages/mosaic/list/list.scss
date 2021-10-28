@@ -1,6 +1,7 @@
 @import '../design-tokens/tokens';
 
 @import 'list-base';
+@import '../core/styles/common/list';
 
 
 .mc-list,
@@ -12,6 +13,8 @@
 
 .mc-list-item,
 .mc-list-option {
+    @include mc-no-select;
+
     @include mc-list-item-base(
         var(--mc-list-size-item-height, $list-size-item-height),
         var(--mc-list-size-icon-width, $list-size-icon-width)
@@ -19,6 +22,18 @@
 
     & .mc-pseudo-checkbox {
         margin-right: 8px;
+    }
+
+    & .mc-option-action {
+        display: none;
+    }
+
+    &:not([disabled]):hover,
+    &:not([disabled]).mc-focused,
+    &:not([disabled]).mc-action-button-focused {
+        & .mc-option-action {
+            display: flex;
+        }
     }
 }
 
