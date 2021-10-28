@@ -77,7 +77,7 @@ export class McTab extends McTabMixinBase implements OnInit, CanDisable, OnChang
 
     private _tooltipTitle = '';
 
-    @Input() tooltipPlacement: PopUpPlacements;
+    @Input() tooltipPlacement: PopUpPlacements = PopUpPlacements.Right;
 
     /** Plain text label for the tab, used when there is no template label. */
     @Input('label') textLabel = '';
