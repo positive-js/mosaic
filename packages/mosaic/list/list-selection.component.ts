@@ -46,7 +46,8 @@ import {
     mixinTabIndex,
     HasTabIndex,
     MultipleMode,
-    McOptgroup
+    McOptgroup,
+    MC_OPTION_ACTION_PARENT
 } from '@ptsecurity/mosaic/core';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, take, takeUntil } from 'rxjs/operators';
@@ -65,6 +66,7 @@ export interface McOptionEvent {
 @Component({
     exportAs: 'mcListOption',
     selector: 'mc-list-option',
+    templateUrl: './list-option.html',
     host: {
         class: 'mc-list-option mc-no-select',
         '[class.mc-selected]': 'selected',
@@ -78,10 +80,12 @@ export interface McOptionEvent {
         '(blur)': 'blur()',
         '(click)': 'handleClick($event)'
     },
-    templateUrl: 'list-option.html',
     encapsulation: ViewEncapsulation.None,
     preserveWhitespaces: false,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        { provide: MC_OPTION_ACTION_PARENT, useExisting: McListOption }
+    ]
 })
 export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     hasFocus: boolean = false;

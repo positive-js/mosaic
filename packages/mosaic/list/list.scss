@@ -14,9 +14,6 @@
 .mc-list-option {
     @include mc-list-item-base(
         var(--mc-list-size-item-height, $list-size-item-height),
-        var(--mc-list-size-two-line-height, $list-size-two-line-height),
-        var(--mc-list-size-three-line-height, $list-size-three-line-height),
-        var(--mc-list-size-multi-line-padding, $list-size-multi-line-padding),
         var(--mc-list-size-icon-width, $list-size-icon-width)
     );
 
