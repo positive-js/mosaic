@@ -11,11 +11,11 @@
 
         <span [innerHTML]="treeControl.getViewValue(node)"></span>
 
-        <mc-tree-node-action
+        <mc-option-action
             mcTooltip="Tooltip text"
             [mcPlacement]="'right'"
             [mcDropdownTriggerFor]="dropdown">
-        </mc-tree-node-action>
+        </mc-option-action>
     </mc-tree-option>
 
     <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
@@ -25,11 +25,11 @@
 
         <span [innerHTML]="treeControl.getViewValue(node)"></span>
 
-        <mc-tree-node-action
+        <mc-option-action
             mcTooltip="Tooltip text"
             [mcPlacement]="'right'"
             [mcDropdownTriggerFor]="dropdown">
-        </mc-tree-node-action>
+        </mc-option-action>
     </mc-tree-option>
 </mc-tree-selection>
 

@@ -10,7 +10,7 @@
 
     $is-dark: map-get($theme, is-dark);
 
-    .mc-tree-node-action {
+    .mc-option-action {
         &.cdk-keyboard-focused {
             border-color: map-get(map-get($theme, states), focused-color);
         }

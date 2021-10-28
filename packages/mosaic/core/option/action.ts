@@ -44,8 +44,8 @@ export const McOptionActionMixinBase:
 
 
 @Component({
-    selector: 'mc-tree-node-action',
-    exportAs: 'mcTreeNodeAction',
+    selector: 'mc-option-action',
+    exportAs: 'mcOptionAction',
     template: `
         <ng-container [ngSwitch]="!!customIcon">
             <i class="mc mc-icon mc-ellipsis_16" *ngSwitchCase="false"></i>
@@ -54,7 +54,7 @@ export const McOptionActionMixinBase:
     `,
     styleUrls: ['./action.scss'],
     host: {
-        class: 'mc-tree-node-action',
+        class: 'mc-option-action',
         '[class.mc-opened]': 'false',
 
         '[attr.disabled]': 'disabled || null',
