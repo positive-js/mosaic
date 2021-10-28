@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 
-import { McTreeNodeActionComponent } from './action';
 import { McTreeNodeDef } from './node';
 import { McTreeNodeOutlet } from './outlet';
 import { McTreeNodePadding } from './padding.directive';
@@ -22,7 +21,6 @@ const MC_TREE_DIRECTIVES = [
     McTreeSelection,
     McTreeOption,
     McTreeNodePadding,
-    McTreeNodeActionComponent,
     McTreeNodeToggleComponent,
     McTreeNodeToggleDirective
 ];

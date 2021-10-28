@@ -13,14 +13,18 @@ import {
     ViewEncapsulation,
     AfterContentInit,
     NgZone,
-    ContentChild,
-    forwardRef
+    ContentChild
 } from '@angular/core';
 import { hasModifierKey, TAB } from '@ptsecurity/cdk/keycodes';
+import {
+    MC_OPTION_ACTION_PARENT,
+    McOptionActionComponent
+} from '@ptsecurity/mosaic/core';
+import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
+import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { McTreeNodeActionComponent } from './action';
 import { McTreeNodeToggleBaseDirective } from './toggle';
 import { McTreeNode } from './tree-base';
 
@@ -64,7 +68,10 @@ let uniqueIdCounter: number = 0;
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: McTreeNode, useExisting: McTreeOption }]
+    providers: [
+        { provide: McTreeNode, useExisting: McTreeOption },
+        { provide: MC_OPTION_ACTION_PARENT, useExisting: McTreeOption }
+    ]
 })
 export class McTreeOption extends McTreeNode<McTreeOption> implements AfterContentInit {
     readonly onFocus = new Subject<McTreeOptionEvent>();
@@ -72,7 +79,10 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
     readonly onBlur = new Subject<McTreeOptionEvent>();
 
     @ContentChild('mcTreeNodeToggle') toggleElement: McTreeNodeToggleBaseDirective<McTreeOption>;
-    @ContentChild(forwardRef(() => McTreeNodeActionComponent)) actionButton: McTreeNodeActionComponent;
+
+    @ContentChild(McOptionActionComponent) actionButton: McOptionActionComponent;
+    @ContentChild(McTooltipTrigger) tooltipTrigger: McTooltipTrigger;
+    @ContentChild(McDropdownTrigger) dropdownTrigger: McDropdownTrigger;
 
     get value(): any {
         return this._value;

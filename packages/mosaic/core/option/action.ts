@@ -1,36 +1,46 @@
 import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     ContentChild,
     ElementRef,
+    EventEmitter,
+    Inject,
+    InjectionToken,
     OnDestroy,
-    OnInit,
-    Optional,
-    Self,
     ViewEncapsulation
 } from '@angular/core';
 import { ENTER, SPACE, TAB } from '@ptsecurity/cdk/keycodes';
-import {
-    CanDisableCtor,
-    HasTabIndexCtor,
-    mixinDisabled,
-    mixinTabIndex
-} from '@ptsecurity/mosaic/core';
-import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
-import { McIcon } from '@ptsecurity/mosaic/icon';
-import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { McTreeOption } from './tree-option.component';
+import { CanDisableCtor, HasTabIndexCtor, mixinDisabled, mixinTabIndex } from '../common-behaviors/index';
 
-
-export class McTreeNodeActionBase {}
 
 // tslint:disable-next-line:naming-convention
-export const McTreeNodeActionMixinBase:
-    HasTabIndexCtor & CanDisableCtor & typeof McTreeNodeActionBase = mixinTabIndex(mixinDisabled(McTreeNodeActionBase));
+export interface McOptionActionParent {
+    dropdownTrigger: {
+        opened: boolean;
+        restoreFocus: boolean;
+        dropdownClosed: EventEmitter<void>;
+        lastDestroyReason: void | 'click' | 'keydown' | 'tab';
+        openedBy: Exclude<FocusOrigin, 'program' | null> | undefined;
+        toggle(): void;
+    };
+    tooltipTrigger: {
+        disabled: boolean;
+    };
+    focus(): void;
+}
+
+export const MC_OPTION_ACTION_PARENT = new InjectionToken<McOptionActionParent>('MC_OPTION_ACTION_PARENT');
+
+export class McOptionActionBase {}
+
+// tslint:disable-next-line:naming-convention
+export const McOptionActionMixinBase:
+    HasTabIndexCtor & CanDisableCtor & typeof McOptionActionBase = mixinTabIndex(mixinDisabled(McOptionActionBase));
 
 
 @Component({
@@ -41,7 +51,7 @@ export const McTreeNodeActionMixinBase:
             <i class="mc mc-icon mc-ellipsis_16" *ngSwitchCase="false"></i>
             <ng-content select="[mc-icon]" *ngSwitchCase="true"></ng-content>
         </ng-container>
-        `,
+    `,
     styleUrls: ['./action.scss'],
     host: {
         class: 'mc-tree-node-action',
@@ -59,13 +69,13 @@ export const McTreeNodeActionMixinBase:
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class McTreeNodeActionComponent extends McTreeNodeActionMixinBase implements OnInit, OnDestroy {
-    @ContentChild(McIcon) customIcon: McIcon;
+export class McOptionActionComponent extends McOptionActionMixinBase implements AfterViewInit, OnDestroy {
+    @ContentChild('customIcon') customIcon: ElementRef;
 
     hasFocus: boolean = false;
 
     get active(): boolean {
-        return this.dropdownTrigger?.opened || this.hasFocus;
+        return this.hasFocus || !!this.option.dropdownTrigger?.opened;
     }
 
     private readonly destroy = new Subject<void>();
@@ -73,31 +83,29 @@ export class McTreeNodeActionComponent extends McTreeNodeActionMixinBase impleme
     constructor(
         private elementRef: ElementRef,
         private focusMonitor: FocusMonitor,
-        private option: McTreeOption,
-        @Optional() @Self() private dropdownTrigger: McDropdownTrigger,
-        @Optional() @Self() private tooltip: McTooltipTrigger
+        @Inject(MC_OPTION_ACTION_PARENT) private option: McOptionActionParent
     ) {
         super();
-    }
-
-    ngOnInit(): void {
-        if (this.dropdownTrigger) {
-            this.dropdownTrigger.restoreFocus = false;
-
-            this.dropdownTrigger.dropdownClosed
-                .pipe(takeUntil(this.destroy))
-                .subscribe(() => {
-                    this.preventShowingTooltip();
-
-                    const destroyReason: FocusOrigin = this.dropdownTrigger.lastDestroyReason === 'keydown' ?
-                        'keyboard' :
-                        'program';
-
-                    this.focus(destroyReason);
-                });
-        }
 
         this.focusMonitor.monitor(this.elementRef.nativeElement);
+    }
+
+    ngAfterViewInit(): void {
+        if (!this.option.dropdownTrigger) { return; }
+
+        this.option.dropdownTrigger.restoreFocus = false;
+
+        this.option.dropdownTrigger.dropdownClosed
+            .pipe(takeUntil(this.destroy))
+            .subscribe(() => {
+                this.preventShowingTooltip();
+
+                const destroyReason: FocusOrigin = this.option.dropdownTrigger.lastDestroyReason === 'keydown' ?
+                    'keyboard' :
+                    'program';
+
+                this.focus(destroyReason);
+            });
     }
 
     ngOnDestroy(): void {
@@ -131,9 +139,9 @@ export class McTreeNodeActionComponent extends McTreeNodeActionMixinBase impleme
     }
 
     onKeyDown($event) {
-        if ([SPACE, ENTER].includes($event.keyCode) && this.dropdownTrigger) {
-            this.dropdownTrigger.openedBy = 'keyboard';
-            this.dropdownTrigger.toggle();
+        if ([SPACE, ENTER].includes($event.keyCode) && this.option.dropdownTrigger) {
+            this.option.dropdownTrigger.openedBy = 'keyboard';
+            this.option.dropdownTrigger.toggle();
         } else if ($event.shiftKey && $event.keyCode === TAB) {
             this.hasFocus = false;
 
@@ -147,10 +155,10 @@ export class McTreeNodeActionComponent extends McTreeNodeActionMixinBase impleme
     }
 
     private preventShowingTooltip() {
-        if (!this.tooltip) { return; }
+        if (!this.option.tooltipTrigger) { return; }
 
-        this.tooltip.disabled = true;
+        this.option.tooltipTrigger.disabled = true;
 
-        setTimeout(() => this.tooltip.disabled = false);
+        setTimeout(() => this.option.tooltipTrigger.disabled = false);
     }
 }

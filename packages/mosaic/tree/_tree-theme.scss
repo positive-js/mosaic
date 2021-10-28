@@ -54,33 +54,6 @@
             color: mc-color($second, if($is-dark, 700, 300));
         }
     }
-
-    .mc-tree-node-action {
-        &.cdk-keyboard-focused {
-            border-color: map-get(map-get($theme, states), focused-color);
-        }
-
-        &:active,
-        &.mc-pressed {
-            & .mc-icon {
-                color: mc-color($second, if($is-dark, 300, 700));
-            }
-
-            background-color: mc-color($second, A100);
-        }
-
-        &:hover .mc-icon {
-            color: mc-color($second, if($is-dark, 300, 700));
-        }
-
-        &[disabled] {
-            & .mc-icon {
-                color: mc-color($second, if($is-dark, 700, 300));
-            }
-
-            background-color: transparent;
-        }
-    }
     /* stylelint-enable no-descending-specificity */
 }
 
