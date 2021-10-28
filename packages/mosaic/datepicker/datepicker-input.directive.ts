@@ -517,7 +517,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         } else if (this.isKeyForOpen(event)) {
             event.preventDefault();
 
-            this.datepicker.open();
+            this.datepicker?.open();
         } else if (this.isKeyForClose(event)) {
             event.preventDefault();
 
