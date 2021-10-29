@@ -476,7 +476,7 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
     }
 
     copyActiveOption(): void {
-        this.onCopy.emit(new McTreeNavigationChange(this, this.keyManager.activeItem as McTreeOption));
+        this.onCopy.emit(new McTreeCopyEvent(this, this.keyManager.activeItem as McTreeOption));
     }
 
     writeValue(value: any): void {

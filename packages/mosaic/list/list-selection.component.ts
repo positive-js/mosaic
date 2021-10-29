@@ -26,13 +26,18 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
 import {
+    hasModifierKey,
+    isCopy,
+    isSelectAll,
+    isVerticalMovement,
     DOWN_ARROW,
     END,
     ENTER,
-    hasModifierKey,
     HOME,
+    LEFT_ARROW,
     PAGE_DOWN,
     PAGE_UP,
+    RIGHT_ARROW,
     SPACE,
     TAB,
     UP_ARROW
@@ -313,6 +318,13 @@ export class McListSelectionChange {
     constructor(public source: McListSelection, public option: McListOption) {}
 }
 
+export class McListSelectAllEvent<T> {
+    constructor(public source: McListSelection, public options: T[]) {}
+}
+
+export class McListCopyEvent<T> {
+    constructor(public source: McListSelection, public option: T) {}
+}
 
 export class McListSelectionBase {
     constructor(public elementRef: ElementRef) {}
@@ -353,6 +365,10 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     keyManager: FocusKeyManager<McListOption>;
 
     @ContentChildren(McListOption, { descendants: true }) options: QueryList<McListOption>;
+
+    @Output() readonly onSelectAll = new EventEmitter<McListSelectAllEvent<McListOption>>();
+
+    @Output() readonly onCopy = new EventEmitter<McListCopyEvent<McListOption>>();
 
     @Input()
     get autoSelect(): boolean {
@@ -668,53 +684,49 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
-        switch (keyCode) {
-            case SPACE:
-            case ENTER:
-                this.toggleFocusedOption();
-
-                break;
-
-            case TAB:
-                this.keyManager.tabOut.next();
-
-                return;
-
-            case DOWN_ARROW:
-                this.keyManager.setNextItemActive();
-
-                break;
-            case UP_ARROW:
-                this.keyManager.setPreviousItemActive();
-
-                break;
-            case HOME:
-                this.keyManager.setFirstItemActive();
-
-                break;
-            case END:
-                this.keyManager.setLastItemActive();
-
-                break;
-            case PAGE_UP:
-                this.keyManager.setPreviousPageItemActive();
-
-                break;
-            case PAGE_DOWN:
-                this.keyManager.setNextPageItemActive();
-
-                break;
-            default:
-                return;
+        if ([SPACE, LEFT_ARROW, RIGHT_ARROW].includes(keyCode) || isVerticalMovement(event)) {
+            event.preventDefault();
         }
 
-        event.preventDefault();
+        if (this.multiple && isSelectAll(event)) {
+            this.selectAllOptions();
+            event.preventDefault();
 
-        this.setSelectedOptionsByKey(
-            this.keyManager.activeItem as McListOption,
-            hasModifierKey(event, 'shiftKey'),
-            hasModifierKey(event, 'ctrlKey')
-        );
+            return;
+        } else if (isCopy(event)) {
+            this.copyActiveOption();
+            event.preventDefault();
+
+            return;
+        } else if ([SPACE, ENTER].includes(keyCode)) {
+            this.toggleFocusedOption();
+
+            return;
+        } else if (keyCode === TAB) {
+            this.keyManager.tabOut.next();
+
+            return;
+        } else if (keyCode === DOWN_ARROW) {
+            this.keyManager.setNextItemActive();
+        } else if (keyCode === UP_ARROW) {
+            this.keyManager.setPreviousItemActive();
+        } else if (keyCode === HOME) {
+            this.keyManager.setFirstItemActive();
+        } else if (keyCode === END) {
+            this.keyManager.setLastItemActive();
+        } else if (keyCode === PAGE_UP) {
+            this.keyManager.setPreviousPageItemActive();
+        } else if (keyCode === PAGE_DOWN) {
+            this.keyManager.setNextPageItemActive();
+        }
+
+        if (this.keyManager.activeItem) {
+            this.setSelectedOptionsByKey(
+                this.keyManager.activeItem as McListOption,
+                hasModifierKey(event, 'shiftKey'),
+                hasModifierKey(event, 'ctrlKey')
+            );
+        }
     }
 
     // Reports a value change to the ControlValueAccessor
@@ -802,4 +814,18 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
 
     // View to model callback that should be called whenever the selected options change.
     private onChange: (value: any) => void = (_: any) => {};
+
+    private selectAllOptions() {
+        const optionsToSelect = this.options
+            .filter((option) => !option.disabled);
+
+        optionsToSelect
+        .forEach((option) => option.setSelected(true));
+
+        this.onSelectAll.emit(new McListSelectAllEvent(this, optionsToSelect));
+    }
+
+    private copyActiveOption() {
+        this.onCopy.emit(new McListCopyEvent(this, this.keyManager.activeItem as McListOption));
+    }
 }

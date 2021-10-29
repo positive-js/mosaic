@@ -1,4 +1,5 @@
 // tslint:disable:no-console
+import { Clipboard, ClipboardModule } from '@angular/cdk/clipboard';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -35,8 +36,19 @@ export class DemoComponent {
         })
     );
 
+    constructor(private clipboard: Clipboard) {}
+
     onSelectionChange($event: McListSelectionChange) {
         console.log(`onSelectionChange: ${$event.option.value}`);
+    }
+
+    onSelectAll($event) {
+        console.log('onSelectAll', $event);
+    }
+
+    onCopy($event) {
+        console.log('onCopy', $event);
+        this.clipboard.copy($event.option.value);
     }
 }
 
@@ -53,7 +65,8 @@ export class DemoComponent {
         McListModule,
         McToolTipModule,
         McDropdownModule,
-        McIconModule
+        McIconModule,
+        ClipboardModule
     ],
     bootstrap: [
         DemoComponent
