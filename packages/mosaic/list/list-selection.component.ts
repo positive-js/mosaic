@@ -558,15 +558,13 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
             this.setSelectedOptions(option);
         } else if (ctrlKey) {
             if (!this.canDeselectLast(option)) { return; }
-        } else {
-            if (this.multipleMode === MultipleMode.KEYBOARD || !this.multiple) {
-                this.options.forEach((item) => item.setSelected(false));
-                option.setSelected(true);
-            }
-        }
+        } else if (this.autoSelect) {
+            this.options.forEach((item) => item.setSelected(false));
+            option.setSelected(true);
 
-        this.emitChangeEvent(option);
-        this.reportValueChange();
+            this.emitChangeEvent(option);
+            this.reportValueChange();
+        }
     }
 
     setSelectedOptions(option: McListOption): void {
