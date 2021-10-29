@@ -1,0 +1,22 @@
+<mc-list-selection
+    [autoSelect]="false"
+    [(ngModel)]="selected">
+    <mc-list-option *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9]"
+                    value="Item {{ item }}">
+        Item {{ item }}
+
+        <mc-option-action
+            mcTooltip="Tooltip text"
+            [mcPlacement]="'right'"
+            [mcDropdownTriggerFor]="dropdown">
+        </mc-option-action>
+    </mc-list-option>
+</mc-list-selection>
+<br>
+<div>Selected: {{ selected }}</div>
+
+<mc-dropdown #dropdown>
+    <button mc-dropdown-item>item 1</button>
+    <button mc-dropdown-item>item 2</button>
+    <button mc-dropdown-item>item 3</button>
+</mc-dropdown>

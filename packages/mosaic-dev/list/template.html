@@ -1,16 +1,16 @@
-<!--<h5>single selection</h5>-->
-<!--<mc-list-selection [(ngModel)]="selected">-->
-    <!--<mc-list-option value="Disabled" disabled>Disabled</mc-list-option>-->
-    <!--<mc-list-option value="Normal">Normal</mc-list-option>-->
-    <!--<mc-list-option value="Hovered" class="mc-hovered">Hovered</mc-list-option>-->
-    <!--<mc-list-option value="Focused" class="mc-focused">Focused</mc-list-option>-->
-    <!--<mc-list-option value="Selected" class="mc-selected">Selected</mc-list-option>-->
-    <!--<mc-list-option value="Progress" class="mc-progress">Progress</mc-list-option>-->
-<!--</mc-list-selection>-->
-<!--<br>-->
-<!--<div>selected: {{ selected }}</div>-->
+<h5>single selection</h5>
+<mc-list-selection [(ngModel)]="selected">
+    <mc-list-option value="Disabled" disabled>Disabled</mc-list-option>
+    <mc-list-option value="Normal">Normal</mc-list-option>
+    <mc-list-option value="Hovered" class="mc-hovered">Hovered</mc-list-option>
+    <mc-list-option value="Focused" class="mc-focused">Focused</mc-list-option>
+    <mc-list-option value="Selected" class="mc-selected">Selected</mc-list-option>
+    <mc-list-option value="Progress" class="mc-progress">Progress</mc-list-option>
+</mc-list-selection>
+<br>
+<div>selected: {{ selected }}</div>
 
-<!--<br><br><br>-->
+<br><br><br>
 
 <h2>Multiple selection: Keyboard</h2>
 <mc-list-selection
@@ -36,19 +36,62 @@
 <br>
 <div>multipleSelected: {{ multipleSelected }}</div>
 
-<br><br><br>
-
 <h2>Multiple selection: Checkbox</h2>
 <mc-list-selection
     multiple="checkbox"
     [(ngModel)]="multipleSelectedCheckbox"
     (selectionChange)="onSelectionChange($event)">
-    <mc-list-option value="Normal">Normal</mc-list-option>
-    <mc-list-option value="Hovered">Hovered</mc-list-option>
-    <mc-list-option value="Focused">Focused</mc-list-option>
-    <mc-list-option value="Disabled">Disabled</mc-list-option>
-    <mc-list-option value="Selected">Selected</mc-list-option>
+    <mc-list-option value="Normal">
+        Normal
+        <mc-option-action
+            mcTooltip="Tooltip text"
+            [mcPlacement]="'right'"
+            [mcDropdownTriggerFor]="dropdown">
+        </mc-option-action>
+    </mc-list-option>
+    <mc-list-option value="Hovered">
+        Hovered
+
+        <mc-option-action
+            mcTooltip="Tooltip text"
+            [mcPlacement]="'right'"
+            [mcDropdownTriggerFor]="dropdown">
+        </mc-option-action>
+    </mc-list-option>
+    <mc-list-option value="Focused">
+        Focused
+
+        <mc-option-action
+            mcTooltip="Tooltip text"
+            [mcPlacement]="'right'"
+            [mcDropdownTriggerFor]="dropdown">
+        </mc-option-action>
+    </mc-list-option>
+    <mc-list-option value="Disabled">
+        Disabled
+
+        <mc-option-action
+            mcTooltip="Tooltip text"
+            [mcPlacement]="'right'"
+            [mcDropdownTriggerFor]="dropdown">
+        </mc-option-action>
+    </mc-list-option>
+    <mc-list-option value="Selected">
+        Selected
+
+        <mc-option-action
+            mcTooltip="Tooltip text"
+            [mcPlacement]="'right'"
+            [mcDropdownTriggerFor]="dropdown">
+        </mc-option-action>
+    </mc-list-option>
 </mc-list-selection>
+
+<mc-dropdown #dropdown>
+    <button mc-dropdown-item>item 1</button>
+    <button mc-dropdown-item>item 2</button>
+    <button mc-dropdown-item>item 3</button>
+</mc-dropdown>
 <br>
 <div>multipleSelectedCheckbox: {{ multipleSelectedCheckbox|json }}</div>
 
@@ -68,9 +111,11 @@
 
 <h2>Single selection</h2>
 <mc-list-selection
-    autoSelect
+    multiple
     [(ngModel)]="singleSelected"
-    (selectionChange)="onSelectionChange($event)">
+    (selectionChange)="onSelectionChange($event)"
+    (onSelectAll)="onSelectAll($event)"
+    (onCopy)="onCopy($event)">
     <mc-list-option value="Normal">Normal</mc-list-option>
     <mc-list-option value="Hovered">Hovered</mc-list-option>
     <mc-list-option value="Focused">Focused</mc-list-option>
