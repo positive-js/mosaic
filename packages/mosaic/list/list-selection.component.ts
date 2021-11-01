@@ -1,4 +1,5 @@
 /* tslint:disable:no-empty */
+import { Clipboard } from '@angular/cdk/clipboard';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
@@ -444,7 +445,8 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     constructor(
         elementRef: ElementRef,
         private changeDetectorRef: ChangeDetectorRef,
-        @Attribute('multiple') multiple: MultipleMode
+        @Attribute('multiple') multiple: MultipleMode,
+        @Optional() private clipboard: Clipboard
     ) {
         super(elementRef);
 
@@ -747,6 +749,10 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
         this._tabIndex = this.userTabIndex || (this.options.length === 0 ? -1 : 0);
     }
 
+    private onCopyDefaultHandler(): void {
+        this.clipboard?.copy(this.keyManager.activeItem!.value);
+    }
+
     private resetOptions() {
         this.dropSubscriptions();
         this.listenToOptionsFocus();
@@ -826,6 +832,10 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     }
 
     private copyActiveOption() {
-        this.onCopy.emit(new McListCopyEvent(this, this.keyManager.activeItem as McListOption));
+        if (this.onCopy.observers.length) {
+            this.onCopy.emit(new McListCopyEvent(this, this.keyManager.activeItem as McListOption));
+        } else {
+            this.onCopyDefaultHandler();
+        }
     }
 }

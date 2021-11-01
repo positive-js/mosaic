@@ -1,5 +1,5 @@
 // tslint:disable:no-console
-import { Clipboard, ClipboardModule } from '@angular/cdk/clipboard';
+import { Clipboard } from '@angular/cdk/clipboard';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -66,8 +66,7 @@ export class DemoComponent {
         McListModule,
         McToolTipModule,
         McDropdownModule,
-        McIconModule,
-        ClipboardModule
+        McIconModule
     ],
     bootstrap: [
         DemoComponent

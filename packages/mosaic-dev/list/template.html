@@ -1,6 +1,7 @@
 <h5>single selection</h5>
 <mc-list-selection
-    [(ngModel)]="selected">
+    [(ngModel)]="selected"
+    (onCopy)="onCopy($event)">
     <mc-list-option value="Disabled" disabled>Disabled</mc-list-option>
     <mc-list-option value="Normal">Normal</mc-list-option>
     <mc-list-option value="Hovered" class="mc-hovered">Hovered</mc-list-option>

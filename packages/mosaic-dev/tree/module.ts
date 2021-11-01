@@ -1,5 +1,4 @@
 /* tslint:disable:no-console no-reserved-keywords */
-import { ClipboardModule, Clipboard } from '@angular/cdk/clipboard';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -115,7 +114,7 @@ export class DemoComponent {
 
     disableState: boolean = false;
 
-    constructor(private clipboard: Clipboard) {
+    constructor() {
         this.treeFlattener = new McTreeFlattener(
             this.transformer, this.getLevel, this.isExpandable, this.getChildren
         );
@@ -136,11 +135,6 @@ export class DemoComponent {
 
     onSelectAll($event) {
         console.log('onSelectAll', $event);
-    }
-
-    onCopy($event) {
-        console.log('onCopy', $event);
-        this.clipboard.copy($event.option.viewValue);
     }
 
     onNavigationChange($event) {
@@ -202,8 +196,7 @@ export class DemoComponent {
         McIconModule,
         McToolTipModule,
         McHighlightModule,
-        McOptionModule,
-        ClipboardModule
+        McOptionModule
     ],
     bootstrap: [DemoComponent]
 })

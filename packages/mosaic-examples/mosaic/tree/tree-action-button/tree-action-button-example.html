@@ -3,8 +3,7 @@
     [autoSelect]="false"
     [dataSource]="dataSource"
     [treeControl]="treeControl"
-    (onSelectAll)="onSelectAll($event)"
-    (onCopy)="onCopy($event)">
+    (onSelectAll)="onSelectAll($event)">
 
     <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding [disabled]="node.name === 'tests'">
         <i mc-icon="mc-info-o_16"></i>
