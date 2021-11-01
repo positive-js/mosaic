@@ -20,6 +20,13 @@
         var(--mc-list-size-icon-width, $list-size-icon-width)
     );
 
+    &.mc-progress:after {
+        top: -2px;
+        right: -2px;
+        bottom: -2px;
+        left: -2px;
+    }
+
     & .mc-pseudo-checkbox {
         margin-right: 8px;
     }

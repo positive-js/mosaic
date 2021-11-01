@@ -43,7 +43,6 @@ describe('McListSelection without forms', () => {
             TestBed.compileComponents();
         }));
 
-
         beforeEach(waitForAsync(() => {
             fixture = TestBed.createComponent(SelectionListWithListOptions);
             fixture.detectChanges();
@@ -846,8 +845,8 @@ class SelectionListWithCustomComparator {
     template: `
         <mc-list-selection
                 id="selection-list-1"
-                auto-select="false"
-                no-unselect="false"
+                [autoSelect]="false"
+                [noUnselectLast]="false"
                 multiple="keyboard"
                 (selectionChange)="onValueChange($event)">
             <mc-list-option checkboxPosition="before" disabled="true" value="inbox">
@@ -954,7 +953,7 @@ class SelectionListWithTabindexInDisabledState {
 
 @Component({
     template: `
-        <mc-list-selection [(ngModel)]="selectedOptions" auto-select="false">
+        <mc-list-selection [(ngModel)]="selectedOptions" [autoSelect]="false">
             <mc-list-option value="opt1">Option 1</mc-list-option>
             <mc-list-option value="opt2">Option 2</mc-list-option>
             <mc-list-option value="opt3" *ngIf="renderLastOption">Option 3</mc-list-option>

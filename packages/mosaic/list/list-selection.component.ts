@@ -684,7 +684,7 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
-        if ([SPACE, LEFT_ARROW, RIGHT_ARROW].includes(keyCode) || isVerticalMovement(event)) {
+        if ([SPACE, ENTER, LEFT_ARROW, RIGHT_ARROW].includes(keyCode) || isVerticalMovement(event)) {
             event.preventDefault();
         }
 

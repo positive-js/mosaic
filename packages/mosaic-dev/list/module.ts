@@ -23,6 +23,7 @@ export class DemoComponent {
     typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
     multipleSelected = ['Boots', 'Clogs'];
     multipleSelectedCheckbox: string[] = [];
+    selected = [];
     singleSelected = [];
 
     asyncUpdate = new FormControl();
