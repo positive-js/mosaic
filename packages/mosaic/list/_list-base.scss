@@ -3,64 +3,24 @@
 @import '../divider/divider';
 
 
-// This mixin provides all list-item styles, changing font size and height
-// based on whether the list is in dense mode.
-@mixin mc-list-item-base($base-height, $two-line-height, $three-line-height, $multi-line-padding, $icon-size) {
-    // Prevents the wrapper `mc-list-item-content` from collapsing due to it being `inline` by default.
-    display: block;
+// This mixin provides all list-item styles, changing font size and height based on whether the list is in dense mode.
+@mixin mc-list-item-base($base-height, $icon-size) {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
     height: $base-height;
 
     border: 2px solid transparent;
 
-    .mc-list-item-content {
-        position: relative;
-
-        box-sizing: border-box;
-
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-
-        height: 100%;
-
-        padding: 0 var(--mc-list-size-horizontal-padding, $list-size-horizontal-padding);
-    }
-
-    &.mc-2-line {
-        height: $two-line-height;
-    }
-
-    &.mc-3-line {
-        height: $three-line-height;
-    }
-
-    // list items with more than 3 lines should expand to match the height of its contained text
-    &.mc-multi-line {
-        height: auto;
-
-        .mc-list-item-content {
-            padding-top: $multi-line-padding;
-            padding-bottom: $multi-line-padding;
-        }
-    }
+    padding-left: var(--mc-list-size-horizontal-padding, $list-size-horizontal-padding);
 
     .mc-list-text {
         @include mc-line-wrapper-base();
 
-        // By default, there will be no padding for the list item text because the padding is already
-        // set on the `mc-list-item-content` element. Later, if the list-item detects that there are
-        // secondary items (avatar, checkbox), a padding on the proper side will be added.
-        padding: 0;
-    }
-
-    // There can be a secondary item (e.g. avatar-icon, checkbox) at the start of the
-    // list-item. This means that there should be a padding for the mc-list-text on the start-side.
-    .mc-list-item-content .mc-list-text:not(:nth-child(2)) {
-        padding-right: 0;
-
-        [dir='rtl'] & {
-            padding-left: 0;
-        }
+        padding-right: var(--mc-list-size-horizontal-padding, $list-size-horizontal-padding);
     }
 
     .mc-list-icon {

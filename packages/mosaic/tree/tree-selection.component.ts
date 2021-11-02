@@ -1,4 +1,5 @@
 /* tslint:disable:no-empty */
+import { Clipboard } from '@angular/cdk/clipboard';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
@@ -14,6 +15,7 @@ import {
     Input,
     IterableDiffer,
     IterableDiffers,
+    Optional,
     Output,
     QueryList,
     ViewChild, ViewContainerRef,
@@ -214,7 +216,8 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
         private elementRef: ElementRef,
         differs: IterableDiffers,
         changeDetectorRef: ChangeDetectorRef,
-        @Attribute('multiple') multiple: MultipleMode
+        @Attribute('multiple') multiple: MultipleMode,
+        @Optional() private clipboard: Clipboard
     ) {
         super(differs, changeDetectorRef);
 
@@ -476,7 +479,11 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
     }
 
     copyActiveOption(): void {
-        this.onCopy.emit(new McTreeNavigationChange(this, this.keyManager.activeItem as McTreeOption));
+        if (this.onCopy.observers.length) {
+            this.onCopy.emit(new McTreeCopyEvent(this, this.keyManager.activeItem as McTreeOption));
+        } else {
+            this.onCopyDefaultHandler();
+        }
     }
 
     writeValue(value: any): void {
@@ -532,6 +539,10 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
 
     getItemHeight(): number {
         return this.renderedOptions.first ? this.renderedOptions.first.getHeight() : 0;
+    }
+
+    private onCopyDefaultHandler(): void {
+        this.clipboard?.copy(this.keyManager.activeItem!.value);
     }
 
     private getHeight(): number {

@@ -50,33 +50,6 @@ describe('McList', () => {
         expect(listItem.nativeElement.className).toBe('mc-list-item');
     });
 
-    // it('should apply mc-2-line class to lists with two lines', () => {
-    //     const fixture = TestBed.createComponent(ListWithTwoLineItem);
-    //     fixture.detectChanges();
-    //
-    //     const listItems = fixture.debugElement.children[0].queryAll(By.css('mc-list-item'));
-    //     expect(listItems[0].nativeElement.className).toContain('mc-2-line');
-    //     expect(listItems[1].nativeElement.className).toContain('mc-2-line');
-    // });
-
-    // it('should apply mc-3-line class to lists with three lines', () => {
-    //     const fixture = TestBed.createComponent(ListWithThreeLineItem);
-    //     fixture.detectChanges();
-    //
-    //     const listItems = fixture.debugElement.children[0].queryAll(By.css('mc-list-item'));
-    //     expect(listItems[0].nativeElement.className).toContain('mc-3-line');
-    //     expect(listItems[1].nativeElement.className).toContain('mc-3-line');
-    // });
-
-    // it('should apply mc-multi-line class to lists with more than 3 lines', () => {
-    //     const fixture = TestBed.createComponent(ListWithManyLines);
-    //     fixture.detectChanges();
-    //
-    //     const listItems = fixture.debugElement.children[0].queryAll(By.css('mc-list-item'));
-    //     expect(listItems[0].nativeElement.className).toContain('mc-multi-line');
-    //     expect(listItems[1].nativeElement.className).toContain('mc-multi-line');
-    // });
-
     it('should not clear custom classes provided by user', () => {
         const fixture = TestBed.createComponent(ListWithItemWithCssClass);
         fixture.detectChanges();
@@ -84,21 +57,6 @@ describe('McList', () => {
         const listItems = fixture.debugElement.children[0].queryAll(By.css('mc-list-item'));
         expect(listItems[0].nativeElement.classList.contains('test-class')).toBe(true);
     });
-
-    // it('should update classes if number of lines change', () => {
-    //     const fixture = TestBed.createComponent(ListWithDynamicNumberOfLines);
-    //     fixture.debugElement.componentInstance.showThirdLine = false;
-    //     fixture.detectChanges();
-    //
-    //     const listItem = fixture.debugElement.children[0].query(By.css('mc-list-item'));
-    //     expect(listItem.nativeElement.classList.length).toBe(2);
-    //     expect(listItem.nativeElement.classList).toContain('mc-2-line');
-    //     expect(listItem.nativeElement.classList).toContain('mc-list-item');
-    //
-    //     fixture.debugElement.componentInstance.showThirdLine = true;
-    //     fixture.detectChanges();
-    //     expect(listItem.nativeElement.className).toContain('mc-3-line');
-    // });
 
     it('should add aria roles properly', () => {
         const fixture = TestBed.createComponent(ListWithMultipleItems);

@@ -1,5 +1,4 @@
 /* tslint:disable:no-reserved-keywords object-literal-key-quotes */
-import { Clipboard } from '@angular/cdk/clipboard';
 import { Component } from '@angular/core';
 import { FlatTreeControl, McTreeFlatDataSource, McTreeFlattener } from '@ptsecurity/mosaic/tree';
 
@@ -113,7 +112,7 @@ export class TreeActionButtonExample {
 
     modelValue: any = '';
 
-    constructor(private clipboard: Clipboard) {
+    constructor() {
         this.treeFlattener = new McTreeFlattener(
             this.transformer, this.getLevel, this.isExpandable, this.getChildren
         );
@@ -127,10 +126,6 @@ export class TreeActionButtonExample {
     }
 
     hasChild(_: number, nodeData: FileFlatNode) { return nodeData.expandable; }
-
-    onCopy($event) {
-        this.clipboard.copy($event.option.viewValue);
-    }
 
     onSelectAll($event) {
         // tslint:disable-next-line:no-console

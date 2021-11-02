@@ -1,11 +1,11 @@
-<div class="mc-list-item-content">
-    <mc-pseudo-checkbox
-        *ngIf="showCheckbox"
-        [state]="selected ? 'checked' : 'unchecked'"
-        [disabled]="disabled">
-    </mc-pseudo-checkbox>
+<mc-pseudo-checkbox
+    *ngIf="showCheckbox"
+    [state]="selected ? 'checked' : 'unchecked'"
+    [disabled]="disabled">
+</mc-pseudo-checkbox>
 
-    <div class="mc-list-text" #text>
-        <ng-content></ng-content>
-    </div>
+<div class="mc-list-text" #text>
+    <ng-content></ng-content>
 </div>
+
+<ng-content select="mc-option-action"></ng-content>

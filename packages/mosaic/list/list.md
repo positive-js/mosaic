@@ -9,3 +9,6 @@
 
 ### Multiple mode without checkboxes
 <!-- example(list-multiple-keyboard) -->
+
+### Action button
+<!-- example(list-action-button) -->

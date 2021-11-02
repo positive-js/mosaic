@@ -1,0 +1,39 @@
+@import '../theming/theming';
+@import '../styles/typography/typography-utils';
+
+
+@mixin mc-option-action-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $second: map-get($theme, second);
+
+    $is-dark: map-get($theme, is-dark);
+
+    .mc-option-action {
+        &.cdk-keyboard-focused {
+            border-color: map-get(map-get($theme, states), focused-color);
+        }
+
+        &:active,
+        &.mc-pressed {
+            & .mc-icon {
+                color: mc-color($second, if($is-dark, 300, 700));
+            }
+
+            background-color: mc-color($second, A100);
+        }
+
+        &:hover .mc-icon {
+            color: mc-color($second, if($is-dark, 300, 700));
+        }
+
+        &[disabled] {
+            & .mc-icon {
+                color: mc-color($second, if($is-dark, 700, 300));
+            }
+
+            background-color: transparent;
+        }
+    }
+}

@@ -36,6 +36,7 @@
 @import '../forms/forms-theme';
 @import '../option/option-theme';
 @import '../option/optgroup-theme';
+@import '../option/option-action-theme';
 @import '../highlight/highlight-theme';
 @import '../visual/panel-theme';
 
@@ -62,6 +63,7 @@
     @include mc-navbar-theme($theme);
     @include mc-option-theme($theme);
     @include mc-optgroup-theme($theme);
+    @include mc-option-action-theme($theme);
     @include mc-panel-theme($theme);
     @include mc-popover-theme($theme);
     @include mc-progress-bar-theme($theme);

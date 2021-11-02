@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 18 Oct 2021 12:39:15 GMT
+ * Generated on Thu, 28 Oct 2021 12:33:13 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -642,10 +642,7 @@ export const LinkAnimationStateHoverTransition = "color 0ms";
 export const LinkFontDefault = "body";
 export const ListSizeHorizontalPadding = "16px";
 export const ListSizeIconPadding = "4px";
-export const ListSizeItemHeight = "28px";
-export const ListSizeTwoLineHeight = "72px";
-export const ListSizeThreeLineHeight = "88px";
-export const ListSizeMultiLinePadding = "16px";
+export const ListSizeItemHeight = "32px";
 export const ListSizeIconWidth = "24px";
 export const ListFontItem = "body";
 export const ModalLightColorSchemeShadow = "(0 0 0 1px #B3B3B3, 0 6px 12px 0 rgba(0, 0, 0, 0.5))";
@@ -928,7 +925,7 @@ export const ExtendedTooltipHeaderDarkColorSchemeBackground = "#4D4D4D";
 export const ExtendedTooltipHeaderSizeHeight = "40px";
 export const ExtendedTooltipHeaderSizePadding = "10px 16px";
 export const ExtendedTooltipHeaderFontDefault = "subheading";
+export const TreeSizeNodeHeight = "32px";
+export const TreeSizePaddingLeft = "8px";
 export const TreeSizePaddingRight = "16px";
-export const TreeSizeBorderWidth = "2px";
-export const TreeSizeNodeHeight = "28px";
 export const TreeFontNode = "body";

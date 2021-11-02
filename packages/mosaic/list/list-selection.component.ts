@@ -1,4 +1,5 @@
 /* tslint:disable:no-empty */
+import { Clipboard } from '@angular/cdk/clipboard';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
@@ -20,24 +21,29 @@ import {
     OnInit,
     ViewChild,
     NgZone,
-    Optional
+    Optional,
+    ContentChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
 import {
+    hasModifierKey,
+    isCopy,
+    isSelectAll,
+    isVerticalMovement,
     DOWN_ARROW,
     END,
     ENTER,
-    hasModifierKey,
     HOME,
+    LEFT_ARROW,
     PAGE_DOWN,
     PAGE_UP,
+    RIGHT_ARROW,
     SPACE,
     TAB,
     UP_ARROW
 } from '@ptsecurity/cdk/keycodes';
 import {
-    McLine,
     CanDisable,
     mixinDisabled,
     toBoolean,
@@ -46,8 +52,12 @@ import {
     mixinTabIndex,
     HasTabIndex,
     MultipleMode,
-    McOptgroup
+    McOptgroup,
+    MC_OPTION_ACTION_PARENT,
+    McOptionActionComponent
 } from '@ptsecurity/mosaic/core';
+import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
+import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, take, takeUntil } from 'rxjs/operators';
 
@@ -65,23 +75,30 @@ export interface McOptionEvent {
 @Component({
     exportAs: 'mcListOption',
     selector: 'mc-list-option',
+    templateUrl: './list-option.html',
     host: {
-        class: 'mc-list-option mc-no-select',
+        class: 'mc-list-option',
+
         '[class.mc-selected]': 'selected',
-        '[class.mc-focused]': 'hasFocus',
         '[class.mc-disabled]': 'disabled',
+        '[class.mc-focused]': 'hasFocus',
+
+        '[class.mc-action-button-focused]': 'actionButton?.active',
 
         '[attr.tabindex]': 'tabIndex',
         '[attr.disabled]': 'disabled || null',
 
         '(focusin)': 'focus()',
         '(blur)': 'blur()',
-        '(click)': 'handleClick($event)'
+        '(click)': 'handleClick($event)',
+        '(keydown)': 'onKeydown($event)'
     },
-    templateUrl: 'list-option.html',
     encapsulation: ViewEncapsulation.None,
     preserveWhitespaces: false,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        { provide: MC_OPTION_ACTION_PARENT, useExisting: McListOption }
+    ]
 })
 export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     hasFocus: boolean = false;
@@ -90,7 +107,9 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
 
     readonly onBlur = new Subject<McOptionEvent>();
 
-    @ContentChildren(McLine) lines: QueryList<McLine>;
+    @ContentChild(McOptionActionComponent) actionButton: McOptionActionComponent;
+    @ContentChild(McTooltipTrigger) tooltipTrigger: McTooltipTrigger;
+    @ContentChild(McDropdownTrigger) dropdownTrigger: McDropdownTrigger;
 
     @ViewChild('text', { static: false }) text: ElementRef;
 
@@ -241,18 +260,28 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
         );
     }
 
-    focus() {
-        if (!this.hasFocus) {
-            this.elementRef.nativeElement.focus();
+    onKeydown($event) {
+        if (!this.actionButton) { return; }
 
-            this.onFocus.next({ option: this });
+        if ($event.keyCode === TAB && !$event.shiftKey && !this.actionButton.hasFocus) {
+            this.actionButton.focus();
 
-            Promise.resolve().then(() => {
-                this.hasFocus = true;
-
-                this.changeDetector.markForCheck();
-            });
+            $event.preventDefault();
         }
+    }
+
+    focus() {
+        if (this.disabled || this.hasFocus || this.actionButton?.hasFocus) { return; }
+
+        this.elementRef.nativeElement.focus();
+
+        this.onFocus.next({ option: this });
+
+        Promise.resolve().then(() => {
+            this.hasFocus = true;
+
+            this.changeDetector.markForCheck();
+        });
     }
 
     blur(): void {
@@ -266,6 +295,8 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
             .subscribe(() => {
                 this.ngZone.run(() => {
                     this.hasFocus = false;
+
+                    if (this.actionButton?.hasFocus) { return; }
 
                     this.onBlur.next({ option: this });
                 });
@@ -288,6 +319,13 @@ export class McListSelectionChange {
     constructor(public source: McListSelection, public option: McListOption) {}
 }
 
+export class McListSelectAllEvent<T> {
+    constructor(public source: McListSelection, public options: T[]) {}
+}
+
+export class McListCopyEvent<T> {
+    constructor(public source: McListSelection, public option: T) {}
+}
 
 export class McListSelectionBase {
     constructor(public elementRef: ElementRef) {}
@@ -328,6 +366,10 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     keyManager: FocusKeyManager<McListOption>;
 
     @ContentChildren(McListOption, { descendants: true }) options: QueryList<McListOption>;
+
+    @Output() readonly onSelectAll = new EventEmitter<McListSelectAllEvent<McListOption>>();
+
+    @Output() readonly onCopy = new EventEmitter<McListCopyEvent<McListOption>>();
 
     @Input()
     get autoSelect(): boolean {
@@ -403,7 +445,8 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     constructor(
         elementRef: ElementRef,
         private changeDetectorRef: ChangeDetectorRef,
-        @Attribute('multiple') multiple: MultipleMode
+        @Attribute('multiple') multiple: MultipleMode,
+        @Optional() private clipboard: Clipboard
     ) {
         super(elementRef);
 
@@ -533,15 +576,13 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
             this.setSelectedOptions(option);
         } else if (ctrlKey) {
             if (!this.canDeselectLast(option)) { return; }
-        } else {
-            if (this.multipleMode === MultipleMode.KEYBOARD || !this.multiple) {
-                this.options.forEach((item) => item.setSelected(false));
-                option.setSelected(true);
-            }
-        }
+        } else if (this.autoSelect) {
+            this.options.forEach((item) => item.setSelected(false));
+            option.setSelected(true);
 
-        this.emitChangeEvent(option);
-        this.reportValueChange();
+            this.emitChangeEvent(option);
+            this.reportValueChange();
+        }
     }
 
     setSelectedOptions(option: McListOption): void {
@@ -645,53 +686,49 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
-        switch (keyCode) {
-            case SPACE:
-            case ENTER:
-                this.toggleFocusedOption();
-
-                break;
-
-            case TAB:
-                this.keyManager.tabOut.next();
-
-                return;
-
-            case DOWN_ARROW:
-                this.keyManager.setNextItemActive();
-
-                break;
-            case UP_ARROW:
-                this.keyManager.setPreviousItemActive();
-
-                break;
-            case HOME:
-                this.keyManager.setFirstItemActive();
-
-                break;
-            case END:
-                this.keyManager.setLastItemActive();
-
-                break;
-            case PAGE_UP:
-                this.keyManager.setPreviousPageItemActive();
-
-                break;
-            case PAGE_DOWN:
-                this.keyManager.setNextPageItemActive();
-
-                break;
-            default:
-                return;
+        if ([SPACE, ENTER, LEFT_ARROW, RIGHT_ARROW].includes(keyCode) || isVerticalMovement(event)) {
+            event.preventDefault();
         }
 
-        event.preventDefault();
+        if (this.multiple && isSelectAll(event)) {
+            this.selectAllOptions();
+            event.preventDefault();
 
-        this.setSelectedOptionsByKey(
-            this.keyManager.activeItem as McListOption,
-            hasModifierKey(event, 'shiftKey'),
-            hasModifierKey(event, 'ctrlKey')
-        );
+            return;
+        } else if (isCopy(event)) {
+            this.copyActiveOption();
+            event.preventDefault();
+
+            return;
+        } else if ([SPACE, ENTER].includes(keyCode)) {
+            this.toggleFocusedOption();
+
+            return;
+        } else if (keyCode === TAB) {
+            this.keyManager.tabOut.next();
+
+            return;
+        } else if (keyCode === DOWN_ARROW) {
+            this.keyManager.setNextItemActive();
+        } else if (keyCode === UP_ARROW) {
+            this.keyManager.setPreviousItemActive();
+        } else if (keyCode === HOME) {
+            this.keyManager.setFirstItemActive();
+        } else if (keyCode === END) {
+            this.keyManager.setLastItemActive();
+        } else if (keyCode === PAGE_UP) {
+            this.keyManager.setPreviousPageItemActive();
+        } else if (keyCode === PAGE_DOWN) {
+            this.keyManager.setNextPageItemActive();
+        }
+
+        if (this.keyManager.activeItem) {
+            this.setSelectedOptionsByKey(
+                this.keyManager.activeItem as McListOption,
+                hasModifierKey(event, 'shiftKey'),
+                hasModifierKey(event, 'ctrlKey')
+            );
+        }
     }
 
     // Reports a value change to the ControlValueAccessor
@@ -710,6 +747,10 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
 
     protected updateTabIndex(): void {
         this._tabIndex = this.userTabIndex || (this.options.length === 0 ? -1 : 0);
+    }
+
+    private onCopyDefaultHandler(): void {
+        this.clipboard?.copy(this.keyManager.activeItem!.value);
     }
 
     private resetOptions() {
@@ -779,4 +820,22 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
 
     // View to model callback that should be called whenever the selected options change.
     private onChange: (value: any) => void = (_: any) => {};
+
+    private selectAllOptions() {
+        const optionsToSelect = this.options
+            .filter((option) => !option.disabled);
+
+        optionsToSelect
+        .forEach((option) => option.setSelected(true));
+
+        this.onSelectAll.emit(new McListSelectAllEvent(this, optionsToSelect));
+    }
+
+    private copyActiveOption() {
+        if (this.onCopy.observers.length) {
+            this.onCopy.emit(new McListCopyEvent(this, this.keyManager.activeItem as McListOption));
+        } else {
+            this.onCopyDefaultHandler();
+        }
+    }
 }

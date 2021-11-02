@@ -6,21 +6,6 @@
     text-overflow: ellipsis;
 }
 
-// Mixin to provide all mc-line styles, changing secondary font size based on whether the list is in dense mode.
-@mixin mc-line-base($secondary-font-size) {
-    .mc-line {
-        @include mc-truncate-line();
-
-        display: block;
-        box-sizing: border-box;
-
-        // all lines but the top line should have smaller text
-        &:nth-child(n + 2) {
-            font-size: $secondary-font-size;
-        }
-    }
-}
-
 // This mixin normalizes default element styles, e.g. font weight for heading text.
 @mixin mc-normalize-text() {
     & > * {
@@ -48,10 +33,14 @@
     }
 }
 
-.mc-no-select {
+@mixin mc-no-select() {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.mc-no-select {
+    @include mc-no-select;
 }

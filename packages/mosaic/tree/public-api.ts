@@ -3,7 +3,6 @@ export * from './tree-base';
 export * from './outlet';
 export * from './tree';
 export * from './node';
-export * from './action';
 export * from './padding.directive';
 export * from './toggle';
 export * from './tree-selection.component';

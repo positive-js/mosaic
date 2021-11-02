@@ -1,6 +1,6 @@
 {
     size: {
-        'option-height': '28px',
+        'option-height': '32px',
         'panel-height': '48px',
         // у radio и checkbox в макетах 20px, у тоггла есть две модификации на 16px и 14px
         'control_S-height': '16px',
