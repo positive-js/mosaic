@@ -30,8 +30,7 @@
     [autoSelect]="false"
     [dataSource]="dataSource"
     [treeControl]="treeControl"
-    (onSelectAll)="onSelectAll($event)"
-    (onCopy)="onCopy($event)">
+    (onSelectAll)="onSelectAll($event)">
 
     <mc-tree-option
         *mcTreeNodeDef="let node"
@@ -53,7 +52,7 @@
 
         <mc-option-action
             mcTooltip="Tooltip text"
-            [mcPlacement]="'right'"
+            [mcPlacement]="PopUpPlacements.Right"
             [mcDropdownTriggerFor]="dropdown">
         </mc-option-action>
     </mc-tree-option>

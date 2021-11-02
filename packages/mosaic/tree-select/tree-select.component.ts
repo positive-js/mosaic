@@ -5,6 +5,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
     CdkConnectedOverlay,
+    ConnectedPosition,
     ViewportRuler
 } from '@angular/cdk/overlay';
 import {
@@ -200,7 +201,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
      * the trigger completely). If the panel cannot fit below the trigger, it
      * will fall back to a position above the trigger.
      */
-    positions = [
+    positions: ConnectedPosition[] = [
         {
             originX: 'start',
             originY: 'bottom',

@@ -108,7 +108,7 @@ interface SelectionModelOption {
         { provide: McTreeBase, useExisting: McTreeSelection }
     ]
 })
-export class McTreeSelection extends McTreeBase<McTreeOption>
+export class McTreeSelection extends McTreeBase<any>
     implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
 
     renderedOptions = new QueryList<McTreeOption>();
@@ -127,7 +127,7 @@ export class McTreeSelection extends McTreeBase<McTreeOption>
 
     @ContentChildren(McTreeOption) unorderedOptions: QueryList<McTreeOption>;
 
-    @Input() treeControl: FlatTreeControl<McTreeOption>;
+    @Input() treeControl: FlatTreeControl<any>;
 
     @Output() readonly navigationChange = new EventEmitter<McTreeNavigationChange<McTreeOption>>();
 

@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
-import { McHighlightModule, McOptionModule } from '@ptsecurity/mosaic/core';
+import { McHighlightModule, McOptionModule, PopUpPlacements } from '@ptsecurity/mosaic/core';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
@@ -102,6 +102,9 @@ export const DATA_OBJECT = {
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
+    // tslint:disable-next-line:naming-convention
+    PopUpPlacements = PopUpPlacements;
+
     treeControl: FlatTreeControl<FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 
