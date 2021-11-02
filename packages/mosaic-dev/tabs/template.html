@@ -45,15 +45,21 @@
     </mc-tab-group>
 
     <h4>Default Vertical tabs</h4>
-    <mc-tab-group vertical (selectedTabChange)="selectedTabChange($event)" style="height: 100px">
-        <mc-tab [tabId]="'firstTab'" disabled>
+    <mc-tab-group class="docs-vertical-tabs" vertical (selectedTabChange)="selectedTabChange($event)" style="height: 100px">
+        <mc-tab [tabId]="'firstTab'">
             <ng-template mc-tab-label>
-                <i mc-icon="mc-play_16"></i>First<i mc-icon="mc-play_16"></i>
+                <i mc-icon="mc-play_16"></i>First long long long long long long long long tab name<i mc-icon="mc-play_16"></i>
             </ng-template>
             Content 1
         </mc-tab>
+        <mc-tab [tabId]="'Empty'" [empty]="true" [tooltipTitle]="'Text for empty tab'">
+            <ng-template mc-tab-label>
+                Empty Empty Empty Empty Empty Empty Empty Empty Empty Empty Empty Empty Empty Empty<i mc-icon="mc-play_16"></i>
+            </ng-template>
+            Empty Content
+        </mc-tab>
         <mc-tab [tabId]="'secondTab'" label="Second">Content 2</mc-tab>
-        <mc-tab label="Third">Content 3</mc-tab>
+        <mc-tab label="long long long long long long long long tab name">Content 4</mc-tab>
         <mc-tab label="4">Content 4</mc-tab>
         <mc-tab label="5">Content 5</mc-tab>
     </mc-tab-group>

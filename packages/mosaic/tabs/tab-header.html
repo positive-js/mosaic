@@ -1,4 +1,4 @@
-<div class="mc-tab-header__pagination mc-tab-header__pagination_before mc-elevation-z4"
+<div class="mc-tab-header__pagination mc-tab-header__pagination_before"
      #previousPaginator
      [class.mc-disabled]="disableScrollBefore"
      (click)="handlePaginatorClick('before')"
@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<div class="mc-tab-header__pagination mc-tab-header__pagination_after mc-elevation-z4"
+<div class="mc-tab-header__pagination mc-tab-header__pagination_after"
      #nextPaginator
      [class.mc-disabled]="disableScrollAfter"
      (mousedown)="handlePaginatorPress('after', $event)"

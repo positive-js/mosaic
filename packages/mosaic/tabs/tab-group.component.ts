@@ -17,10 +17,13 @@ import {
     InjectionToken,
     Inject,
     Optional,
-    Directive, Attribute
+    Directive,
+    Attribute,
+    AfterViewInit
 } from '@angular/core';
 import { CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
-import { merge, Subscription } from 'rxjs';
+import { merge, Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 import { McTabHeader } from './tab-header.component';
 import { McTab } from './tab.component';
@@ -103,10 +106,12 @@ export const McTabGroupMixinBase: CanDisableCtor & typeof McTabGroupBase = mixin
     host: {
         class: 'mc-tab-group',
         '[class.mc-tab-group_dynamic-height]': 'dynamicHeight',
-        '[class.mc-tab-group_inverted-header]': 'headerPosition === "below"'
+        '[class.mc-tab-group_inverted-header]': 'headerPosition === "below"',
+        '(window:resize)': 'resizeStream.next()'
     }
 })
-export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit, AfterContentChecked, OnDestroy {
+export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit, AfterViewInit, AfterContentChecked, OnDestroy {
+    readonly resizeStream = new Subject<Event>();
 
     oldTab: boolean;
     vertical: boolean;
@@ -119,18 +124,27 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
 
     /** Whether the tab group should grow to the size of the active tab. */
     @Input()
-    get dynamicHeight(): boolean { return this._dynamicHeight; }
+    get dynamicHeight(): boolean {
+        return this._dynamicHeight;
+    }
+
     set dynamicHeight(value: boolean) {
         this._dynamicHeight = coerceBooleanProperty(value);
     }
 
+    private _dynamicHeight = false;
+
     /** The index of the active tab. */
     @Input()
-    get selectedIndex(): number | null { return this._selectedIndex; }
+    get selectedIndex(): number | null {
+        return this._selectedIndex;
+    }
+
     set selectedIndex(value: number | null) {
         this.indexToSelect = coerceNumberProperty(value, null);
     }
 
+    private _selectedIndex: number | null = null;
 
     /** Position of the tab header. */
     @Input() headerPosition: McTabHeaderPosition = 'above';
@@ -161,10 +175,10 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
 
     /** Subscription to changes in the tab labels. */
     private tabLabelSubscription = Subscription.EMPTY;
-    private _dynamicHeight = false;
-    private _selectedIndex: number | null = null;
+    private resizeSubscription = Subscription.EMPTY;
 
     private readonly groupId: number;
+    private readonly resizeDebounceInterval: number = 100;
 
     constructor(
         elementRef: ElementRef,
@@ -180,6 +194,8 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
 
         this.groupId = nextId++;
         this.animationDuration = defaultConfig?.animationDuration || '0ms';
+
+        this.subscribeToResize();
     }
 
     /**
@@ -235,33 +251,39 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
 
         // Subscribe to changes in the amount of tabs, in order to be
         // able to re-render the content as new tabs are added or removed.
-        this.tabsSubscription = this.tabs.changes.subscribe(() => {
-            const indexToSelect = this.clampTabIndex(this.indexToSelect);
+        this.tabsSubscription = this.tabs.changes
+            .subscribe(() => {
+                const indexToSelect = this.clampTabIndex(this.indexToSelect);
 
-            // Maintain the previously-selected tab if a new tab is added or removed and there is no
-            // explicit change that selects a different tab.
-            if (indexToSelect === this._selectedIndex) {
-                const tabs = this.tabs.toArray();
+                // Maintain the previously-selected tab if a new tab is added or removed and there is no
+                // explicit change that selects a different tab.
+                if (indexToSelect === this._selectedIndex) {
+                    const tabs = this.tabs.toArray();
 
-                for (let i = 0; i < tabs.length; i++) {
-                    if (tabs[i].isActive) {
-                        // Assign both to the `_indexToSelect` and `_selectedIndex` so we don't fire a changed
-                        // event, otherwise the consumer may end up in an infinite loop in some edge cases like
-                        // adding a tab within the `selectedIndexChange` event.
-                        this.indexToSelect = this._selectedIndex = i;
-                        break;
+                    for (let i = 0; i < tabs.length; i++) {
+                        if (tabs[i].isActive) {
+                            // Assign both to the `_indexToSelect` and `_selectedIndex` so we don't fire a changed
+                            // event, otherwise the consumer may end up in an infinite loop in some edge cases like
+                            // adding a tab within the `selectedIndexChange` event.
+                            this.indexToSelect = this._selectedIndex = i;
+                            break;
+                        }
                     }
                 }
-            }
 
-            this.subscribeToTabLabels();
-            this.changeDetectorRef.markForCheck();
-        });
+                this.subscribeToTabLabels();
+                this.changeDetectorRef.markForCheck();
+            });
+    }
+
+    ngAfterViewInit(): void {
+        this.checkOverflow();
     }
 
     ngOnDestroy() {
         this.tabsSubscription.unsubscribe();
         this.tabLabelSubscription.unsubscribe();
+        this.resizeSubscription.unsubscribe();
     }
 
     focusChanged(index: number) {
@@ -317,6 +339,11 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
         return this.selectedIndex === index ? 0 : -1;
     }
 
+    private checkOverflow = () => {
+        this.tabHeader.items
+            .forEach((headerTab) => headerTab.checkOverflow());
+    }
+
     private createChangeEvent(index: number): McTabChangeEvent {
         const event = new McTabChangeEvent();
         event.index = index;
@@ -341,6 +368,18 @@ export class McTabGroup extends McTabGroupMixinBase implements AfterContentInit,
 
         this.tabLabelSubscription = merge(...this.tabs.map((tab) => tab.stateChanges))
             .subscribe(() => this.changeDetectorRef.markForCheck());
+    }
+
+    private subscribeToResize() {
+        if (!this.vertical) { return; }
+
+        if (this.resizeSubscription) {
+            this.resizeSubscription.unsubscribe();
+        }
+
+        this.resizeSubscription = this.resizeStream
+            .pipe(debounceTime(this.resizeDebounceInterval))
+            .subscribe(this.checkOverflow);
     }
 
     /** Clamps the given index to the bounds of 0 and the tabs length. */

@@ -1,9 +1,18 @@
-import { AfterViewInit, Directive, ElementRef, Renderer2 } from '@angular/core';
+import {
+    AfterViewInit,
+    ContentChild,
+    Directive,
+    ElementRef,
+    Input,
+    Renderer2
+} from '@angular/core';
 import {
     CanDisable,
     CanDisableCtor,
     mixinDisabled
 } from '@ptsecurity/mosaic/core';
+
+import { McTab } from './tab.component';
 
 
 // Boilerplate for applying mixins to McTabLabelWrapper.
@@ -25,6 +34,10 @@ export const McTabLabelWrapperMixinBase: CanDisableCtor &
     }
 })
 export class McTabLabelWrapper extends McTabLabelWrapperMixinBase implements CanDisable, AfterViewInit {
+    @ContentChild('labelContent') labelContent: ElementRef;
+
+    @Input() tab: McTab;
+
     constructor(
         public elementRef: ElementRef,
         private renderer: Renderer2
@@ -47,6 +60,18 @@ export class McTabLabelWrapper extends McTabLabelWrapperMixinBase implements Can
 
     getOffsetWidth(): number {
         return this.elementRef.nativeElement.offsetWidth;
+    }
+
+    checkOverflow() {
+        this.tab.overflowTooltipTitle = this.isOverflown() ? this.getInnerText() : '';
+    }
+
+    isOverflown() {
+        return this.labelContent.nativeElement.scrollWidth > this.labelContent.nativeElement.clientWidth;
+    }
+
+    getInnerText() {
+        return this.labelContent.nativeElement.innerText;
     }
 
     private addClassModifierForIcons(icons: HTMLElement[]) {
