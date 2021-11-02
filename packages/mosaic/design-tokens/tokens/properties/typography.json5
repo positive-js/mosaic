@@ -5,7 +5,7 @@
             "line-height": { value: '76px' },
             "letter-spacing": { value: '-0.4px' },
             "font-weight": { value: 'normal' },
-            "font-family": { value: '{font.family.base.value}' },
+            "font-family": { value: '{font.family.accidental.value}' },
             "text-transform": { value: 'null' }
         },
         "display-2": {
@@ -13,7 +13,7 @@
             "line-height": { value: '56px' },
             "letter-spacing": { value: 'normal' },
             "font-weight": { value: 'normal' },
-            "font-family": { value: '{font.family.base.value}' },
+            "font-family": { value: '{font.family.accidental.value}' },
             "text-transform": { value: 'null' }
         },
         "display-3": {
@@ -21,7 +21,7 @@
             "line-height": { value: '44px' },
             "letter-spacing": { value: '0.25px' },
             "font-weight": { value: 'normal' },
-            "font-family": { value: '{font.family.base.value}' },
+            "font-family": { value: '{font.family.accidental.value}' },
             "text-transform": { value: 'null' }
         },
         "headline": {
@@ -29,7 +29,7 @@
             "line-height": { value: '32px' },
             "letter-spacing": { value: 'normal' },
             "font-weight": { value: 'normal' },
-            "font-family": { value: '{font.family.base.value}' },
+            "font-family": { value: '{font.family.accidental.value}' },
             "text-transform": { value: 'null' }
         },
         "title": {
@@ -37,13 +37,13 @@
             "line-height": { value: '28px' },
             "letter-spacing": { value: '0.15px' },
             "font-weight": { value: '500' },
-            "font-family": { value: '{font.family.base.value}' },
+            "font-family": { value: '{font.family.accidental.value}' },
             "text-transform": { value: 'null' }
         },
         "subheading": {
             "font-size": { value: '15px' },
             "line-height": { value: '20px' },
-            "letter-spacing": { value: '0.15px' },
+            "letter-spacing": { value: '-0.009em' },
             "font-weight": { value: '700' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' }
@@ -51,7 +51,7 @@
         "body": {
             "font-size": { value: '15px' },
             "line-height": { value: '20px' },
-            "letter-spacing": { value: '0.15px' },
+            "letter-spacing": { value: '-0.009em' },
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' }
@@ -59,7 +59,7 @@
         "body-strong": {
             "font-size": { value: '15px' },
             "line-height": { value: '20px' },
-            "letter-spacing": { value: '0.15px' },
+            "letter-spacing": { value: '-0.009em' },
             "font-weight": { value: '500' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' }
@@ -83,7 +83,7 @@
         "caption": {
             "font-size": { value: '13px' },
             "line-height": { value: '16px' },
-            "letter-spacing": { value: '0.25px' },
+            "letter-spacing": { value: '-0.0025em' },
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' }
@@ -107,7 +107,7 @@
         "small-text": {
             "font-size": { value: '13px' },
             "line-height": { value: '16px' },
-            "letter-spacing": { value: '0.25px' },
+            "letter-spacing": { value: '-0.0025em' },
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' }
@@ -115,7 +115,7 @@
         "extra-small-text": {
             "font-size": { value: '11px' },
             "line-height": { value: '16px' },
-            "letter-spacing": { value: '0.22px' },
+            "letter-spacing": { value: '0.005em' },
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' }
