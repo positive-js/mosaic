@@ -11,6 +11,8 @@ export function defaultCompareViewValues(firstViewValue, secondViewValue): boole
 
 /** Flat tree control. Able to expand/collapse a subtree recursively for flattened tree. */
 export class FlatTreeControl<T> extends BaseTreeControl<T> {
+    expandedItemsBeforeFiltration: T[];
+
     /** Construct with flat tree data node functions getLevel, isExpandable, getValue and getViewValue. */
     constructor(
         public getLevel: (dataNode: T) => number,
@@ -78,21 +80,74 @@ export class FlatTreeControl<T> extends BaseTreeControl<T> {
     }
 
     filterNodes(value: string): void {
-        this.filterModel.clear();
+        this.saveExpansionState();
 
-        const filteredNodes = this.dataNodes.filter(
-            (node: any) => this.compareViewValues(this.getViewValue(node), value)
-        );
+        this.filterModel.clear();
+        this.expansionModel.clear();
+
+        const filteredNodes = this.dataNodes
+            .filter((node: any) => this.compareViewValues(this.getViewValue(node), value));
 
         const filteredNodesWithTheirParents = new Set();
+
         filteredNodes.forEach((filteredNode) => {
-            this.getParents(filteredNode, []).forEach((node) => filteredNodesWithTheirParents.add(node));
+
+            this.getParents(filteredNode, [])
+                .forEach((node) => {
+                    filteredNodesWithTheirParents.add(node);
+
+                    this.expandDataNode(node);
+                });
 
             filteredNodesWithTheirParents.add(filteredNode);
+            this.expandDataNode(filteredNode);
+
+            if (this.isExpandable(filteredNode)) {
+                const childNodeLevel = this.getLevel(filteredNode) + 1;
+
+                this.getDescendants(filteredNode)
+                    .filter((childNode) => this.getLevel(childNode) === childNodeLevel)
+                    .filter((childNode) => !this.isExpandable(childNode) || !this.hasFilteredDescendant(childNode, filteredNodes))
+                    .forEach((childNode) => {
+                        filteredNodesWithTheirParents.add(childNode);
+
+                        this.expandDataNode(childNode);
+                    });
+            }
         });
 
         this.filterModel.select(...Array.from(filteredNodesWithTheirParents) as []);
 
         this.filterValue.next(value);
+
+        this.restoreExpansionState();
+    }
+
+    private expandDataNode(dataNode: T) {
+        if (this.isExpandable(dataNode)) {
+            this.expansionModel.select(dataNode);
+        }
+    }
+
+    private saveExpansionState() {
+        if (this.filterValue.value === '') {
+            this.expandedItemsBeforeFiltration = this.expansionModel.selected;
+        }
+    }
+
+    private restoreExpansionState() {
+        if (this.filterValue.value === '') {
+            this.expansionModel.clear();
+            this.expansionModel.select(...this.expandedItemsBeforeFiltration);
+        }
+    }
+
+    private hasFilteredDescendant(dataNode: T, filteredNodes: T[]) {
+        const filteredViewValues = filteredNodes
+            .map((node: any) => this.getViewValue(node));
+
+        return this.getDescendants(dataNode)
+            .filter((node) => filteredViewValues.includes(this.getViewValue(node)))
+            .length > 0;
     }
 }

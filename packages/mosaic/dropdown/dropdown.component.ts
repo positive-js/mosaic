@@ -353,6 +353,12 @@ export class McDropdown implements AfterContentInit, McDropdownPanel, OnInit, On
         }
     }
 
+    close() {
+        const focusOrigin = this.keyManager.getFocusOrigin() === 'keyboard' ? 'keydown' : 'click';
+
+        this.closed.emit(focusOrigin);
+    }
+
     /**
      * Sets up a stream that will keep track of any newly-added menu items and will update the list
      * of direct descendants. We collect the descendants this way, because `_allItems` can include

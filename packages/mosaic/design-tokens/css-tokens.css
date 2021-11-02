@@ -199,7 +199,7 @@
   --mc-extended-tooltip-size-max-height: 480px;
   --mc-extended-tooltip-header-size-height: 40px;
   --mc-extended-tooltip-header-size-padding: 10px 16px;
+  --mc-tree-size-node-height: 32px;
+  --mc-tree-size-padding-left: 8px;
   --mc-tree-size-padding-right: 16px;
-  --mc-tree-size-border-width: 2px;
-  --mc-tree-size-node-height: 28px;
 }

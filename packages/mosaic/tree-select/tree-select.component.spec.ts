@@ -57,7 +57,6 @@ import {
     dispatchKeyboardEvent,
     wrappedErrorMessage
 } from '@ptsecurity/cdk/testing';
-import { FlatTreeControl } from '@ptsecurity/cdk/tree';
 import {
     ErrorStateMatcher, getMcSelectDynamicMultipleError,
     getMcSelectNonArrayValueError,
@@ -65,6 +64,7 @@ import {
 } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import {
+    FlatTreeControl,
     McTreeFlatDataSource,
     McTreeFlattener,
     McTreeModule,
@@ -4587,7 +4587,7 @@ describe('McTreeSelect', () => {
             // testInstance.dataSource.data.push({ name: 'cake-8', type: 'app' });
             fixture.detectChanges();
 
-            expect(testInstance.options.toArray().every((option) => !!option.multiple))
+            expect(testInstance.options.toArray().every((option) => !!option.tree.multiple))
                 .toBe(
                     true,
                     'Expected `multiple` to have been set on dynamically-added option.'

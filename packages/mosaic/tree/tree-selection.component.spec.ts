@@ -3,13 +3,12 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { createMouseEvent, dispatchEvent } from '@ptsecurity/cdk/testing';
-import { FlatTreeControl } from '@ptsecurity/cdk/tree';
 
 import {
     McTreeSelection,
     McTreeFlatDataSource,
     McTreeFlattener,
-    McTreeModule
+    McTreeModule, FlatTreeControl
 } from './index';
 
 
@@ -365,12 +364,12 @@ describe('McTreeSelection', () => {
 
                 component.treeControl.filterNodes('Pictures');
                 nodes = getNodes(treeElement);
-                expect(nodes.length).toBe(3);
+                expect(nodes.length).toBe(6);
 
                 component.treeControl.filterNodes('Documents');
                 fixture.detectChanges();
                 nodes = getNodes(treeElement);
-                expect(nodes.length).toBe(1);
+                expect(nodes.length).toBe(4);
 
                 component.treeControl.filterNodes('condition for filter all nodes');
                 nodes = getNodes(treeElement);
@@ -399,7 +398,7 @@ describe('McTreeSelection', () => {
 
                 component.treeControl.filterNodes('Pictures');
                 nodes = getNodes(treeElement);
-                expect(nodes.length).toBe(3);
+                expect(nodes.length).toBe(6);
 
                 component.treeControl.filterNodes('');
                 nodes = getNodes(treeElement);
@@ -495,8 +494,8 @@ function expectFlatTreeToMatch(treeElement: Element, expectedPaddingIndent: numb
         const actualLevel = (node as HTMLElement).style.paddingLeft;
 
         if (expectedNode.length === 1) {
-            // root node can contain icon (padding = 12) and also can be without icon (padding = 32)
-            if (actualLevel !== `12px` && actualLevel !== `32px`) {
+            // root node can contain icon (padding = 8) and also can be without icon (padding = 32)
+            if (actualLevel !== `8px` && actualLevel !== `32px`) {
                 missedExpectations.push(`Expected node level to be 0 but was ${actualLevel}`);
             }
         } else {

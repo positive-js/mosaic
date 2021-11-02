@@ -26,7 +26,7 @@ import {
     ViewContainerRef
 } from '@angular/core';
 import { LEFT_ARROW, RIGHT_ARROW, SPACE, ENTER, DOWN_ARROW } from '@ptsecurity/cdk/keycodes';
-import { asapScheduler, merge, of as observableOf, Subscription } from 'rxjs';
+import { asapScheduler, merge, Observable, of as observableOf, Subscription } from 'rxjs';
 import { delay, filter, take, takeUntil } from 'rxjs/operators';
 
 import { throwMcDropdownMissingError } from './dropdown-errors';
@@ -75,6 +75,7 @@ const passiveEventListenerOptions = normalizePassiveListenerOptions({passive: tr
     }
 })
 export class McDropdownTrigger implements AfterContentInit, OnDestroy {
+    lastDestroyReason: DropdownCloseReason;
 
     /** Data to be passed along to any lazily-rendered content. */
     @Input('mcDropdownTriggerData') data: any;
@@ -236,11 +237,10 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
 
     /**
      * Focuses the dropdown trigger.
-     * @param origin Source of the dropdown trigger's focus.
      */
-    focus(origin: FocusOrigin = 'program') {
-        if (this.focusMonitor) {
-            this.focusMonitor.focusVia(this.elementRef.nativeElement, origin);
+    focus(origin?: FocusOrigin, options?: FocusOptions) {
+        if (this.focusMonitor && origin) {
+            this.focusMonitor.focusVia(this.elementRef.nativeElement, origin, options);
         } else {
             this.elementRef.nativeElement.focus();
         }
@@ -305,36 +305,50 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
     private destroy(reason: DropdownCloseReason) {
         if (!this.overlayRef || !this.opened) { return; }
 
+        this.lastDestroyReason = reason;
+
         this.dropdown.resetActiveItem();
 
         this.closeSubscription.unsubscribe();
         this.overlayRef.detach();
 
-        if (this.restoreFocus && reason === 'keydown' && this.isNested()) {
+        if (this.restoreFocus && (reason === 'keydown' || !this.openedBy || !this.isNested())) {
             this.focus(this.openedBy);
         }
+
+        this.openedBy = undefined;
 
         if (this.dropdown instanceof McDropdown) {
             this.dropdown.resetAnimation();
 
-            // Wait for the exit animation to finish before reseting dropdown toState.
-            const dropdownAnimationDoneSubscription = this.dropdown.animationDone
+            const animationSubscription = this.dropdown.animationDone
                 .pipe(
                     filter((event) => event.toState === 'void'),
                     take(1)
                 );
 
             if (this.dropdown.lazyContent) {
-                 dropdownAnimationDoneSubscription
-                    .pipe(takeUntil(this.dropdown.lazyContent.attached));
+                // Wait for the exit animation to finish before detaching the content.
+                animationSubscription
+                    .pipe(
+                        // Interrupt if the content got re-attached.
+                        takeUntil(this.dropdown.lazyContent.attached)
+                    )
+                    .subscribe({
+                        next: () => this.dropdown.lazyContent!.detach(),
+                        // No matter whether the content got re-attached, reset the this.dropdown.
+                        complete: () => this.setIsOpened(false)
+                    });
+            } else {
+                animationSubscription
+                    .subscribe(() => this.setIsOpened(false));
             }
-
-            dropdownAnimationDoneSubscription
-                .subscribe(() => this.reset());
         } else {
-            this.reset();
+            this.setIsOpened(false);
 
-            this.dropdown.lazyContent?.detach();
+            if (this.dropdown.lazyContent) {
+                this.dropdown.lazyContent.detach();
+            }
         }
     }
 
@@ -350,29 +364,9 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
             this.dropdown.triggerWidth = this.getWidth();
         }
 
+        this.dropdown.focusFirstItem(this.openedBy || 'program');
+
         this.setIsOpened(true);
-        this.dropdown.focusFirstItem(this.openedBy);
-    }
-
-    /**
-     * This method resets the dropdown when it's closed, most importantly restoring
-     * focus to the dropdown trigger if the dropdown was opened via the keyboard.
-     */
-    private reset(): void {
-        this.setIsOpened(false);
-
-        // We should reset focus if the user is navigating using a keyboard or
-        // if we have a top-level trigger which might cause focus to be lost
-        // when clicking on the backdrop.
-        if (!this.openedBy) {
-            // Note that the focus style will show up both for `program` and
-            // `keyboard` so we don't have to specify which one it is.
-            this.focus();
-        } else if (!this.isNested()) {
-            this.focus(this.openedBy);
-        }
-
-        this.openedBy = undefined;
     }
 
     // set state rather than toggle to support triggers sharing a dropdown
@@ -528,7 +522,13 @@ export class McDropdownTrigger implements AfterContentInit, OnDestroy {
                 filter(() => this._opened)
             ) : observableOf();
 
-        return merge(backdrop, outsidePointerEvents, parentClose, hover, detachments);
+        return merge(
+            backdrop,
+            outsidePointerEvents,
+            parentClose as Observable<DropdownCloseReason>,
+            hover,
+            detachments
+        );
     }
 
     /** Handles the cases where the user hovers over the trigger. */

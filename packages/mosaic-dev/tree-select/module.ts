@@ -3,12 +3,11 @@ import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CdkTreeModule, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
-import { McTreeFlatDataSource, McTreeFlattener, McTreeModule } from '@ptsecurity/mosaic/tree';
+import { McTreeFlatDataSource, McTreeFlattener, FlatTreeControl, McTreeModule } from '@ptsecurity/mosaic/tree';
 import { McTreeSelectChange, McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
 
 
@@ -200,15 +199,12 @@ export class DemoComponent {
 
 
 @NgModule({
-    declarations: [
-        DemoComponent
-    ],
+    declarations: [DemoComponent],
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
         McTreeModule,
-        CdkTreeModule,
         McTreeSelectModule,
 
         McButtonModule,
@@ -217,8 +213,6 @@ export class DemoComponent {
         McIconModule,
         ReactiveFormsModule
     ],
-    bootstrap: [
-        DemoComponent
-    ]
+    bootstrap: [DemoComponent]
 })
 export class DemoModule {}

@@ -1,8 +1,7 @@
 /* tslint:disable:no-reserved-keywords object-literal-key-quotes */
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component } from '@angular/core';
-import { FlatTreeControl } from '@ptsecurity/cdk/tree';
-import { McTreeFlatDataSource, McTreeFlattener } from '@ptsecurity/mosaic/tree';
+import { FlatTreeControl, McTreeFlatDataSource, McTreeFlattener } from '@ptsecurity/mosaic/tree';
 
 
 export class FileNode {
@@ -51,13 +50,13 @@ export const DATA_OBJECT = {
     src: {
         cdk: {
             a11ly: {
-                'aria-describer': {
+                'aria describer': {
                     'aria-describer': 'ts',
                     'aria-describer.spec': 'ts',
                     'aria-reference': 'ts',
                     'aria-reference.spec': 'ts'
                 },
-                'focus-monitor': {
+                'focus monitor': {
                     'focus-monitor': 'ts',
                     'focus-monitor.spec': 'ts'
                 }

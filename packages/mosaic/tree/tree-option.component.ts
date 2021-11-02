@@ -12,13 +12,17 @@ import {
     ChangeDetectionStrategy,
     ViewEncapsulation,
     AfterContentInit,
-    NgZone
+    NgZone,
+    ContentChild,
+    forwardRef
 } from '@angular/core';
-import { hasModifierKey } from '@ptsecurity/cdk/keycodes';
-import { CdkTreeNode } from '@ptsecurity/cdk/tree';
-import { CanDisable } from '@ptsecurity/mosaic/core';
+import { hasModifierKey, TAB } from '@ptsecurity/cdk/keycodes';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
+
+import { McTreeNodeActionComponent } from './action';
+import { McTreeNodeToggleBaseDirective } from './toggle';
+import { McTreeNode } from './tree-base';
 
 
 // tslint:disable-next-line:naming-convention
@@ -41,29 +45,34 @@ let uniqueIdCounter: number = 0;
     selector: 'mc-tree-option',
     exportAs: 'mcTreeOption',
     templateUrl: './tree-option.html',
+    styleUrls: ['./tree-option.scss'],
     host: {
-        '[attr.id]': 'id',
-        '[attr.tabindex]': '-1',
-
-        '[attr.disabled]': 'disabled || null',
-
         class: 'mc-tree-option',
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
+        '[class.mc-action-button-focused]': 'actionButton?.active',
+
+        '[attr.id]': 'id',
+        '[attr.tabindex]': '-1',
+        '[attr.disabled]': 'disabled || null',
 
         '(focusin)': 'focus()',
         '(blur)': 'blur()',
 
-        '(click)': 'selectViaInteraction($event)'
+        '(click)': 'selectViaInteraction($event)',
+        '(keydown)': 'onKeydown($event)'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }]
+    providers: [{ provide: McTreeNode, useExisting: McTreeOption }]
 })
-export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisable, AfterContentInit {
+export class McTreeOption extends McTreeNode<McTreeOption> implements AfterContentInit {
     readonly onFocus = new Subject<McTreeOptionEvent>();
 
     readonly onBlur = new Subject<McTreeOptionEvent>();
+
+    @ContentChild('mcTreeNodeToggle') toggleElement: McTreeNodeToggleBaseDirective<McTreeOption>;
+    @ContentChild(forwardRef(() => McTreeNodeActionComponent)) actionButton: McTreeNodeActionComponent;
 
     get value(): any {
         return this._value;
@@ -77,7 +86,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
 
     @Input()
     get disabled() {
-        return this._disabled || (this.tree && this.tree.disabled);
+        return this._disabled || this.tree!.disabled;
     }
 
     set disabled(value: any) {
@@ -123,16 +132,16 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
 
     private _id = `mc-tree-option-${uniqueIdCounter++}`;
 
-    get multiple(): boolean {
-        return this.tree.multiple;
-    }
-
     get viewValue(): string {
         // TODO: Add input property alternative for node envs.
         return (this.getHostElement().textContent || '').trim();
     }
 
     hasFocus: boolean = false;
+
+    get isExpandable(): boolean {
+        return !this.toggleElement?.disabled && this.tree.treeControl.isExpandable(this.data);
+    }
 
     constructor(
         elementRef: ElementRef,
@@ -168,7 +177,7 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
     focus(focusOrigin?: FocusOrigin) {
         if (focusOrigin === 'program') { return; }
 
-        if (this.disabled || this.hasFocus) { return; }
+        if (this.disabled || this.hasFocus || this.actionButton?.hasFocus) { return; }
 
         this.elementRef.nativeElement.focus();
 
@@ -193,6 +202,8 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
                 this.ngZone.run(() => {
                     this.hasFocus = false;
 
+                    if (this.actionButton?.hasFocus) { return; }
+
                     this.onBlur.next({ option: this });
                 });
             });
@@ -209,32 +220,42 @@ export class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisabl
     }
 
     select(): void {
-        if (!this._selected) {
-            this._selected = true;
+        if (this._selected) { return; }
 
-            this.changeDetectorRef.markForCheck();
-            this.emitSelectionChangeEvent();
-        }
+        this._selected = true;
+
+        this.changeDetectorRef.markForCheck();
+        this.emitSelectionChangeEvent();
     }
 
     deselect(): void {
-        if (this._selected) {
-            this._selected = false;
+        if (!this._selected) { return; }
 
-            this.changeDetectorRef.markForCheck();
+        this._selected = false;
+
+        this.changeDetectorRef.markForCheck();
+    }
+
+    onKeydown($event) {
+        if (!this.actionButton) { return; }
+
+        if ($event.keyCode === TAB && !$event.shiftKey && !this.actionButton.hasFocus) {
+            this.actionButton.focus();
+
+            $event.preventDefault();
         }
     }
 
     selectViaInteraction($event?: KeyboardEvent): void {
-        if (!this.disabled) {
-            this.changeDetectorRef.markForCheck();
-            this.emitSelectionChangeEvent(true);
+        if (this.disabled) { return; }
 
-            const shiftKey = $event ? hasModifierKey($event, 'shiftKey') : false;
-            const ctrlKey = $event ? hasModifierKey($event, 'ctrlKey') : false;
+        this.changeDetectorRef.markForCheck();
+        this.emitSelectionChangeEvent(true);
 
-            this.tree.setSelectedOptionsByClick(this, shiftKey, ctrlKey);
-        }
+        const shiftKey = $event ? hasModifierKey($event, 'shiftKey') : false;
+        const ctrlKey = $event ? hasModifierKey($event, 'ctrlKey') : false;
+
+        this.tree.setSelectedOptionsByClick(this, shiftKey, ctrlKey);
     }
 
     emitSelectionChangeEvent(isUserInput = false): void {

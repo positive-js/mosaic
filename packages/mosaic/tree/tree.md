@@ -12,3 +12,6 @@
 
 ### Filtration
 <!-- example(tree-filtering) -->
+
+### Action button
+<!-- example(tree-action-button) -->

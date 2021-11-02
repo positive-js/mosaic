@@ -1,11 +1,8 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import {
     AfterContentChecked,
-    ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component,
     ContentChildren,
-    Directive,
     ElementRef,
     Input,
     IterableChangeRecord,
@@ -16,16 +13,17 @@ import {
     QueryList,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation,
-    TrackByFunction, Inject, forwardRef
+    TrackByFunction,
+    Inject,
+    forwardRef, Directive
 } from '@angular/core';
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { BehaviorSubject, Observable, of as observableOf, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { TreeControl } from './control/tree-control';
-import { CdkTreeNodeDef, CdkTreeNodeOutletContext } from './node';
-import { CdkTreeNodeOutlet } from './outlet';
+import { McTreeNodeDef, McTreeNodeOutletContext } from './node';
+import { McTreeNodeOutlet } from './outlet';
 import {
     getTreeControlMissingError,
     getTreeMissingMatchingNodeDefError,
@@ -34,24 +32,8 @@ import {
 } from './tree-errors';
 
 
-/**
- * CDK tree component that connects with a data source to retrieve data of type `T` and renders
- * dataNodes with hierarchy. Updates the dataNodes when new data is provided by the data source.
- */
-@Component({
-    selector: 'cdk-tree',
-    exportAs: 'cdkTree',
-    template: `<ng-container cdkTreeNodeOutlet></ng-container>`,
-    host: {
-        class: 'cdk-tree',
-        role: 'tree'
-    },
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
-})
-export class CdkTree<T> implements AfterContentChecked, CollectionViewer, OnDestroy, OnInit {
-
-    /** The tree controller */
+@Directive()
+export class McTreeBase<T> implements AfterContentChecked, CollectionViewer, OnDestroy, OnInit {
     @Input() treeControl: TreeControl<T>;
 
     /**
@@ -63,10 +45,10 @@ export class CdkTree<T> implements AfterContentChecked, CollectionViewer, OnDest
     @Input() trackBy: TrackByFunction<T>;
 
     // Outlets within the tree's template where the dataNodes will be inserted.
-    @ViewChild(CdkTreeNodeOutlet, {static: true}) nodeOutlet: CdkTreeNodeOutlet;
+    @ViewChild(McTreeNodeOutlet, { static: true }) nodeOutlet: McTreeNodeOutlet;
 
     /** The tree node template for the tree */
-    @ContentChildren(CdkTreeNodeDef) nodeDefs: QueryList<CdkTreeNodeDef<T>>;
+    @ContentChildren(McTreeNodeDef) nodeDefs: QueryList<McTreeNodeDef<T>>;
 
     // TODO(tinayuangao): Setup a listener for scrolling, emit the calculated view to viewChange.
     //     Remove the MAX_VALUE in viewChange
@@ -83,7 +65,7 @@ export class CdkTree<T> implements AfterContentChecked, CollectionViewer, OnDest
     private onDestroy = new Subject<void>();
 
     /** Stores the node definition that does not have a when predicate. */
-    private defaultNodeDef: CdkTreeNodeDef<T> | null;
+    private defaultNodeDef: McTreeNodeDef<T> | null;
 
     /** Data subscription */
     private dataSubscription: Subscription | null;
@@ -160,9 +142,11 @@ export class CdkTree<T> implements AfterContentChecked, CollectionViewer, OnDest
 
         if (!changes) { return; }
 
-        changes.forEachOperation((item: IterableChangeRecord<T>,
-                                  adjustedPreviousIndex: number | null,
-                                  currentIndex: number | null) => {
+        changes.forEachOperation((
+            item: IterableChangeRecord<T>,
+            adjustedPreviousIndex: number | null,
+            currentIndex: number | null
+        ) => {
             if (item.previousIndex == null) {
                 this.insertNode(data[currentIndex!], currentIndex!, viewContainer, parentData);
             } else if (currentIndex == null) {
@@ -183,7 +167,7 @@ export class CdkTree<T> implements AfterContentChecked, CollectionViewer, OnDest
      * predicate that returns true with the data. If none return true, return the default node
      * definition.
      */
-    getNodeDef(data: T, i: number): CdkTreeNodeDef<T> {
+    getNodeDef(data: T, i: number): McTreeNodeDef<T> {
         if (this.nodeDefs.length === 1) { return this.nodeDefs.first; }
 
         const nodeDef = this.nodeDefs.find((def) => def.when && def.when(i, data)) || this.defaultNodeDef;
@@ -201,7 +185,7 @@ export class CdkTree<T> implements AfterContentChecked, CollectionViewer, OnDest
         const node = this.getNodeDef(nodeData, index);
 
         // Node context that will be provided to created embedded view
-        const context = new CdkTreeNodeOutletContext<T>(nodeData);
+        const context = new McTreeNodeOutletContext<T>(nodeData);
 
         // If the tree is flat tree, then use the `getLevel` function in flat tree control
         // Otherwise, use the level of parent node.
@@ -220,11 +204,11 @@ export class CdkTree<T> implements AfterContentChecked, CollectionViewer, OnDest
         const container = viewContainer ? viewContainer : this.nodeOutlet.viewContainer;
         container.createEmbeddedView(node.template, context, index);
 
-        // Set the data to just created `CdkTreeNode`.
-        // The `CdkTreeNode` created from `createEmbeddedView` will be saved in static variable
+        // Set the data to just created `McTreeNode`.
+        // The `McTreeNode` created from `createEmbeddedView` will be saved in static variable
         //     `mostRecentTreeNode`. We get it from static variable and pass the node data to it.
-        if (CdkTreeNode.mostRecentTreeNode) {
-            CdkTreeNode.mostRecentTreeNode.data = nodeData;
+        if (McTreeNode.mostRecentTreeNode) {
+            McTreeNode.mostRecentTreeNode.data = nodeData;
         }
     }
 
@@ -277,28 +261,17 @@ export class CdkTree<T> implements AfterContentChecked, CollectionViewer, OnDest
     }
 }
 
-/**
- * Tree node for CdkTree. It contains the data in the tree node.
- */
+
 @Directive({
-    selector: 'cdk-tree-node',
-    exportAs: 'cdkTreeNode',
-    host: {
-        class: 'cdk-tree-node',
-
-        '[attr.aria-expanded]': 'isExpanded',
-        '[attr.aria-level]': 'role === "treeitem" ? level : null',
-        '[attr.role]': 'role'
-    }
+    selector: 'mc-tree-node',
+    exportAs: 'mcTreeNode'
 })
-export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
+export class McTreeNode<T> implements IFocusableOption, OnDestroy {
     /**
-     * The most recently created `CdkTreeNode`. We save it in static variable so we can retrieve it
-     * in `CdkTree` and set the data to it.
+     * The most recently created `McTreeNode`. We save it in static variable so we can retrieve it
+     * in `McTree` and set the data to it.
      */
-    static mostRecentTreeNode: CdkTreeNode<any> | null = null;
-
-    @Input() role: 'treeitem' | 'group' = 'treeitem';
+    static mostRecentTreeNode: McTreeNode<any> | null = null;
 
     protected destroyed = new Subject<void>();
 
@@ -313,7 +286,7 @@ export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
     private _data: T;
 
     get isExpanded(): boolean {
-        return this.tree.treeControl.isExpanded(this._data);
+        return this.tree.treeControl.isExpanded(this.data);
     }
 
     get level(): number {
@@ -322,9 +295,9 @@ export class CdkTreeNode<T> implements IFocusableOption, OnDestroy {
 
     constructor(
         protected elementRef: ElementRef,
-        @Inject(forwardRef(() => CdkTree)) public tree: CdkTree<T>
+        @Inject(forwardRef(() => McTreeBase)) public tree: McTreeBase<T>
     ) {
-        CdkTreeNode.mostRecentTreeNode = this;
+        McTreeNode.mostRecentTreeNode = this;
     }
 
     ngOnDestroy() {

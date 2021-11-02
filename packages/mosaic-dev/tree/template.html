@@ -25,17 +25,18 @@
 <br><br><br>
 <!--    [noUnselectLast]="false"-->
 <mc-tree-selection
-    multiple="keyboard"
     [disabled]="disableState"
     [(ngModel)]="modelValue"
+    [autoSelect]="false"
     [dataSource]="dataSource"
     [treeControl]="treeControl"
-    (navigationChange)="onNavigationChange($event)"
-    (selectionChange)="onSelectionChange($event)">
+    (onSelectAll)="onSelectAll($event)"
+    (onCopy)="onCopy($event)">
 
     <mc-tree-option
         *mcTreeNodeDef="let node"
         mcTreeNodePadding>
+        <i mc-icon="mc-info-o_16"></i>
         <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
     </mc-tree-option>
 
@@ -44,11 +45,23 @@
         mcTreeNodePadding
         [disabled]="node.name === 'Downloads'">
 
+        <i mc-icon="mc-info-o_16"></i>
+
         <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
 
-        <div>
-            <i mc-icon="mc-close-M_16"></i>
-            <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
-        </div>
+        <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
+
+        <mc-tree-node-action
+            mcTooltip="Tooltip text"
+            [mcPlacement]="'right'"
+            [mcDropdownTriggerFor]="dropdown">
+        </mc-tree-node-action>
     </mc-tree-option>
 </mc-tree-selection>
+
+
+<mc-dropdown #dropdown>
+    <button mc-dropdown-item>item 1</button>
+    <button mc-dropdown-item>item 2</button>
+    <button mc-dropdown-item>item 3</button>
+</mc-dropdown>

@@ -1,5 +1,3 @@
-<ng-content select="[mc-icon]"></ng-content>
-
 <ng-content select="mc-tree-node-toggle"></ng-content>
 
 <mc-pseudo-checkbox
@@ -8,6 +6,10 @@
     [disabled]="disabled">
 </mc-pseudo-checkbox>
 
+<ng-content select="[mc-icon]"></ng-content>
+
 <span class="mc-option-text mc-no-select"><ng-content></ng-content></span>
+
+<ng-content select="mc-tree-node-action"></ng-content>
 
 <div class="mc-option-overlay"></div>

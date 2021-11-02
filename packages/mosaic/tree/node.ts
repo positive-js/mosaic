@@ -1,8 +1,8 @@
-import { Directive, TemplateRef } from '@angular/core';
+import { Directive, Input, TemplateRef } from '@angular/core';
 
 
 /** Context provided to the tree node component. */
-export class CdkTreeNodeOutletContext<T> {
+export class McTreeNodeOutletContext<T> {
     /** Data for the node. */
     $implicit: T;
 
@@ -21,16 +21,16 @@ export class CdkTreeNodeOutletContext<T> {
 }
 
 /**
- * Data node definition for the CdkTree.
+ * Data node definition for the McTree.
  * Captures the node's template and a when predicate that describes when this node should be used.
  */
 @Directive({
-    selector: '[cdkTreeNodeDef]',
-    inputs: [
-        'when: cdkTreeNodeDefWhen'
-    ]
+    selector: '[mcTreeNodeDef]',
+    inputs: ['when: mcTreeNodeDefWhen']
 })
-export class CdkTreeNodeDef<T> {
+export class McTreeNodeDef<T> {
+    @Input('mcTreeNode') data: T;
+
     /**
      * Function that should return true if this node template should be used for the provided node
      * data and index. If left undefined, this node will be considered the default node template to

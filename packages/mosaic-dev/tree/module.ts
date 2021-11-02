@@ -1,15 +1,18 @@
 /* tslint:disable:no-console no-reserved-keywords */
+import { ClipboardModule, Clipboard } from '@angular/cdk/clipboard';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { FlatTreeControl } from '@ptsecurity/cdk/tree';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
 import { McHighlightModule } from '@ptsecurity/mosaic/core';
+import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
-import { McTreeFlatDataSource, McTreeFlattener, McTreeModule } from '@ptsecurity/mosaic/tree';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
+import { FlatTreeControl, McTreeFlatDataSource, McTreeFlattener, McTreeModule } from '@ptsecurity/mosaic/tree';
 
 
 export class FileNode {
@@ -65,7 +68,6 @@ export const DATA_OBJECT = {
         }
     },
     Documents: {
-        Pictures_3: 'Pictures',
         angular: {
             src: {
                 core: 'ts',
@@ -78,7 +80,8 @@ export const DATA_OBJECT = {
                 checkbox: 'ts',
                 input: 'ts'
             }
-        }
+        },
+        Pictures_3: 'Pictures'
     },
     Downloads: {
         Tutorial: 'html',
@@ -112,7 +115,7 @@ export class DemoComponent {
 
     disableState: boolean = false;
 
-    constructor() {
+    constructor(private clipboard: Clipboard) {
         this.treeFlattener = new McTreeFlattener(
             this.transformer, this.getLevel, this.isExpandable, this.getChildren
         );
@@ -130,6 +133,15 @@ export class DemoComponent {
     }
 
     hasChild(_: number, nodeData: FileFlatNode) { return nodeData.expandable; }
+
+    onSelectAll($event) {
+        console.log('onSelectAll', $event);
+    }
+
+    onCopy($event) {
+        console.log('onCopy', $event);
+        this.clipboard.copy($event.option.viewValue);
+    }
 
     onNavigationChange($event) {
         console.log('onNavigationChange', $event);
@@ -179,14 +191,18 @@ export class DemoComponent {
     declarations: [DemoComponent],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         McFormFieldModule,
         McCheckboxModule,
+        McDropdownModule,
         McInputModule,
         McButtonModule,
         McTreeModule,
         McIconModule,
-        McHighlightModule
+        McToolTipModule,
+        McHighlightModule,
+        ClipboardModule
     ],
     bootstrap: [DemoComponent]
 })

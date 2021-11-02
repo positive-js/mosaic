@@ -130,64 +130,59 @@ export function hasModifierKey(event: KeyboardEvent | MouseEvent, ...modifiers: 
     return event.altKey || event.shiftKey || event.ctrlKey || event.metaKey;
 }
 
-export function isControl(event): boolean {
-    const keyCode = event.which;
+export function isControl(event: KeyboardEvent): boolean {
+    const keyCode = event.keyCode;
+
     switch (keyCode) {
         case SHIFT:
         case CONTROL:
         case ALT:
             return true;
         default:
-            return !!event.metaKey;
+            return event.metaKey;
     }
 }
 
-export function isNumberKey(event): boolean {
-    const keyCode = event.which ? event.which : event;
-
-    return keyCode >= 49 && keyCode <= 57;
+export function isNumberKey({ keyCode }: KeyboardEvent): boolean {
+    return keyCode >= ZERO && keyCode <= NINE;
 }
 
-export function isLetterKey(event): boolean {
-    const keyCode = event.which ? event.which : event;
-
-    return keyCode >= 65 && keyCode <= 90;
+export function isLetterKey({ keyCode }: KeyboardEvent): boolean {
+    return keyCode >= A && keyCode <= Z;
 }
 
-export function isFunctionKey(event): boolean {
-    const keyCode = event.which ? event.which : event;
-
-    return keyCode >= 112 && keyCode <= 123;
+export function isFunctionKey({ keyCode }: KeyboardEvent): boolean {
+    return keyCode >= F1 && keyCode <= F12;
 }
 
-export function isVerticalMovement(event): boolean {
-    return [UP_ARROW, DOWN_ARROW, PAGE_DOWN, PAGE_UP, HOME, END].indexOf(event) !== -1;
+export function isVerticalMovement({ keyCode }: KeyboardEvent): boolean {
+    return [UP_ARROW, DOWN_ARROW, PAGE_DOWN, PAGE_UP, HOME, END].includes(keyCode);
 }
 
-export function isHorizontalMovement(event): boolean {
-    return [LEFT_ARROW, RIGHT_ARROW, BACKSPACE, DELETE].indexOf(event) !== -1;
+export function isHorizontalMovement({ keyCode }: KeyboardEvent): boolean {
+    return [LEFT_ARROW, RIGHT_ARROW, BACKSPACE, DELETE].includes(keyCode);
 }
 
-export function isSelectAll(event): boolean {
-    return event.ctrlKey && event.keyCode === 65;
+export function isSelectAll(event: KeyboardEvent): boolean {
+    return event.ctrlKey && event.keyCode === A;
 }
 
-export function isCopy(event): boolean {
-    return event.ctrlKey && event.keyCode === 67;
+export function isCopy(event: KeyboardEvent): boolean {
+    return (event.ctrlKey || event.metaKey) && event.keyCode === C;
 }
 
 export function isInput(event): boolean {
     return event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA';
 }
 
-export function isLeftBracket(event): boolean {
+export function isLeftBracket(event: KeyboardEvent): boolean {
     return event.code === 'BracketLeft';
 }
 
-export function isRightBracket(event): boolean {
+export function isRightBracket(event: KeyboardEvent): boolean {
     return event.code === 'BracketRight';
 }
 
-export function isDigit(event): boolean {
-    return [48, 49, 50, 51, 52, 53, 54, 55, 56, 57].indexOf(event.which) !== -1;
+export function isDigit({ keyCode }: KeyboardEvent): boolean {
+    return [ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE].includes(keyCode);
 }

@@ -1,0 +1,40 @@
+<mc-tree-selection
+    [(ngModel)]="modelValue"
+    [autoSelect]="false"
+    [dataSource]="dataSource"
+    [treeControl]="treeControl"
+    (onSelectAll)="onSelectAll($event)"
+    (onCopy)="onCopy($event)">
+
+    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding [disabled]="node.name === 'tests'">
+        <i mc-icon="mc-info-o_16"></i>
+
+        <span [innerHTML]="treeControl.getViewValue(node)"></span>
+
+        <mc-tree-node-action
+            mcTooltip="Tooltip text"
+            [mcPlacement]="'right'"
+            [mcDropdownTriggerFor]="dropdown">
+        </mc-tree-node-action>
+    </mc-tree-option>
+
+    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+        <i mc-icon="mc-info-o_16"></i>
+
+        <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
+
+        <span [innerHTML]="treeControl.getViewValue(node)"></span>
+
+        <mc-tree-node-action
+            mcTooltip="Tooltip text"
+            [mcPlacement]="'right'"
+            [mcDropdownTriggerFor]="dropdown">
+        </mc-tree-node-action>
+    </mc-tree-option>
+</mc-tree-selection>
+
+<mc-dropdown #dropdown>
+    <button mc-dropdown-item>action 1</button>
+    <button mc-dropdown-item>action 2</button>
+    <button mc-dropdown-item>action 3</button>
+</mc-dropdown>

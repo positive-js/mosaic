@@ -1,0 +1,32 @@
+@import '../button/button-theme';
+@import '../design-tokens/tokens';
+
+
+.mc-tree-node-action {
+    box-sizing: unset;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    margin-right: -2px;
+
+    //width 28px for total width 32px (left border + right border);
+    width: 28px;
+    height: 100%;
+
+    cursor: pointer;
+
+    outline: none;
+
+    border: 2px solid transparent;
+
+    background: transparent;
+
+    &[disabled] {
+        cursor: default;
+    }
+}
