@@ -1,3 +1,15 @@
+# 12.1.0 "Dissipated Marshes" (2021-11-03)
+
+### Mosaic
+
+ * bug fix  **datepicker:** fixed test error (#UIM-672) ([#715](https://github.com/positive-js/mosaic/issues/715)) ([57d1d26](https://github.com/positive-js/mosaic/commit/57d1d263e77eafaeb09e07bf850df9e1e76d4d10)), closes [#UIM-672](https://github.com/positive-js/mosaic/issues/UIM-672)
+ * bug fix  **navbar:** no styles for vertical navbar (#UIM-792) ([#714](https://github.com/positive-js/mosaic/issues/714)) ([cfc82ec](https://github.com/positive-js/mosaic/commit/cfc82ec9f382d45e745c1c2f0a5242bb0dc447d3)), closes [#UIM-792](https://github.com/positive-js/mosaic/issues/UIM-792)
+ * bug fix  divider is not displayed (#UIM-787) ([#710](https://github.com/positive-js/mosaic/issues/710)) ([52e7783](https://github.com/positive-js/mosaic/commit/52e77836a30537c543dff3ba95764258c0d4427e)), closes [#UIM-787](https://github.com/positive-js/mosaic/issues/UIM-787)
+ * feature  **badge:** badge element rework (#UIM-770) ([#708](https://github.com/positive-js/mosaic/issues/708)) ([84c4b4a](https://github.com/positive-js/mosaic/commit/84c4b4acb6bc13a98824536c3f282d2c57679701)), closes [#UIM-770](https://github.com/positive-js/mosaic/issues/UIM-770)
+ * feature  **list:** implementation by guideline (#UIM-793) ([#716](https://github.com/positive-js/mosaic/issues/716)) ([7c8f9df](https://github.com/positive-js/mosaic/commit/7c8f9df3c466dc182eccd3d1fd0f14652a3563e3)), closes [#UIM-793](https://github.com/positive-js/mosaic/issues/UIM-793)
+ * feature  **tabs:** tooltip for overflown and empty labels (#UIM-717) ([#713](https://github.com/positive-js/mosaic/issues/713)) ([09ca235](https://github.com/positive-js/mosaic/commit/09ca2355838d23704bdfbdf3403b7b2549d8c34a)), closes [#UIM-717](https://github.com/positive-js/mosaic/issues/UIM-717)
+ * feature  **tree:** implementation by guideline (#UIM-778) ([#711](https://github.com/positive-js/mosaic/issues/711)) ([9585ba2](https://github.com/positive-js/mosaic/commit/9585ba2af4b1ad557bf6a9bc8e6b6d22d16833a7)), closes [#UIM-778](https://github.com/positive-js/mosaic/issues/UIM-778)
+
 ## 12.0.2 "Handheld Seatbelt" (2021-10-18)
 
 ### Mosaic
