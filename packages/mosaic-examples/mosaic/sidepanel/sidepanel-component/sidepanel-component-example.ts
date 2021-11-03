@@ -12,11 +12,16 @@ import { MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelService } from '@pts
     encapsulation: ViewEncapsulation.None
 })
 export class SidepanelComponentExample {
+    position: McSidepanelPosition = McSidepanelPosition.Right;
+
+    modalState: boolean = false;
+
     constructor(private sidepanelService: McSidepanelService) {}
 
     openComponentSidepanel() {
         this.sidepanelService.open(SidepanelExampleCustomComponent, {
-            position: McSidepanelPosition.Right,
+            position: this.position,
+            hasBackdrop: this.modalState,
             data: {
                 openComponentSidepanel: () => { this.openComponentSidepanel(); }
             }

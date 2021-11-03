@@ -6,11 +6,15 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelService, McSidepanelModule } from '@ptsecurity/mosaic/sidepanel';
+import { McToggleModule } from '@ptsecurity/mosaic/toggle';
 
 
 // tslint:disable:no-console
@@ -21,6 +25,10 @@ import { MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelService, McSidepanel
     encapsulation: ViewEncapsulation.None
 })
 export class SidepanelDemoComponent {
+    position: McSidepanelPosition = McSidepanelPosition.Right;
+
+    modalState: boolean = false;
+
     @ViewChild(TemplateRef, {static: false}) template: TemplateRef<any>;
 
     array = new Array(40); // tslint:disable-line
@@ -29,7 +37,8 @@ export class SidepanelDemoComponent {
 
     openComponentSidepanel() {
         this.sidepanelService.open(ExampleSidepanelComponent, {
-            position: McSidepanelPosition.Right,
+            hasBackdrop: this.modalState,
+            position: this.position,
             data: {
                 openComponentSidepanel: () => { this.openComponentSidepanel(); }
             }
@@ -38,7 +47,8 @@ export class SidepanelDemoComponent {
 
     openTemplateSidepanel() {
         this.sidepanelService.open(this.template, {
-            position: McSidepanelPosition.Bottom
+            position: this.position,
+            hasBackdrop: this.modalState
         });
     }
 }
@@ -49,6 +59,7 @@ export class SidepanelDemoComponent {
     <mc-sidepanel-header [closeable]="true">
         Sidepanel Component Content
     </mc-sidepanel-header>
+
     <mc-sidepanel-body class="layout-padding">
         <div class="mc-subheading">Sidepanel Component Body</div>
 
@@ -56,9 +67,10 @@ export class SidepanelDemoComponent {
             {{ i + 1 }}
         </div>
     </mc-sidepanel-body>
+
     <mc-sidepanel-footer>
         <mc-sidepanel-actions align="right">
-            <button mc-button [color]="'primary'" (click)="openComponentSidepanel()">
+            <button #mcAutoFocus mc-button [color]="'primary'" (click)="openComponentSidepanel()">
                 <span>Open another sidepanel</span>
             </button>
 
@@ -93,9 +105,13 @@ export class ExampleSidepanelComponent {
         BrowserModule,
         BrowserAnimationsModule,
         CommonModule,
+        FormsModule,
         McSidepanelModule,
         McButtonModule,
-        McIconModule
+        McIconModule,
+        McFormFieldModule,
+        McSelectModule,
+        McToggleModule
     ],
     bootstrap: [
         SidepanelDemoComponent

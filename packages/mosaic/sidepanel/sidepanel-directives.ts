@@ -1,4 +1,15 @@
-import { Component, Directive, ElementRef, Input, OnChanges, OnInit, Optional, SimpleChanges } from '@angular/core';
+import {
+    AfterContentInit,
+    Component,
+    ContentChild,
+    Directive,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit,
+    Optional,
+    SimpleChanges
+} from '@angular/core';
 
 import { McSidepanelRef } from './sidepanel-ref';
 import { McSidepanelService } from './sidepanel.service';
@@ -69,6 +80,12 @@ export class McSidepanelClose implements OnInit, OnChanges {
 })
 export class McSidepanelHeader {
     @Input() closeable: boolean;
+
+    @ContentChild('mcAutoFocus', { read: ElementRef }) autoFocusedElement: ElementRef;
+
+    ngAfterContentInit(): void {
+        this.autoFocusedElement?.nativeElement.focus();
+    }
 }
 
 /**
@@ -80,7 +97,13 @@ export class McSidepanelHeader {
         class: 'mc-sidepanel-body'
     }
 })
-export class McSidepanelBody {}
+export class McSidepanelBody {
+    @ContentChild('mcAutoFocus', { read: ElementRef }) autoFocusedElement: ElementRef;
+
+    ngAfterContentInit(): void {
+        this.autoFocusedElement?.nativeElement.focus();
+    }
+}
 
 /**
  * Footer of a sidepanel.
@@ -91,7 +114,13 @@ export class McSidepanelBody {}
         class: 'mc-sidepanel-footer'
     }
 })
-export class McSidepanelFooter {}
+export class McSidepanelFooter implements AfterContentInit {
+    @ContentChild('mcAutoFocus', { read: ElementRef }) autoFocusedElement: ElementRef;
+
+    ngAfterContentInit(): void {
+        this.autoFocusedElement?.nativeElement.focus();
+    }
+}
 
 /**
  * Actions block of a sidepanel footer.
