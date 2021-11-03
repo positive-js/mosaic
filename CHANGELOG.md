@@ -1,3 +1,9 @@
+## 11.5.1 "Mansard Ong" (2021-11-03)
+
+### Mosaic
+
+ * bug fix  **navbar:** no styles for vertical navbar (#UIM-792) ([#714](https://github.com/positive-js/mosaic/issues/714)) ([2c397c9](https://github.com/positive-js/mosaic/commit/2c397c9c0cbbea1761c9dedf45fb48cdcf27d36d)), closes [#UIM-792](https://github.com/positive-js/mosaic/issues/UIM-792)
+
 # 11.5.0 "Blaring Marx" (2021-10-22)
 
 ### Mosaic
