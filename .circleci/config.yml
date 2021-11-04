@@ -57,11 +57,17 @@ var_10: &filter_by_release_tag
     tags:
         only: /^\d+\.\d+\.\d+$/
 
-var_11: &docs_stable_version
+#var_11: &docs_stable_version
+#    branches:
+#        ignore: /.*/
+#    tags:
+#        only: /11\.\d+\.\d+$/
+
+var_12: &docs_stable_version
     branches:
         ignore: /.*/
     tags:
-        only: /11\.\d+\.\d+$/
+        only: /12\.\d+\.\d+$/
 
 # Configures CircleCI orbs for this pipeline. Orbs allow consumption of publicly shared
 # CircleCI commands, jobs, configuration elements or executors.
