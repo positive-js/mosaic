@@ -1,6 +1,7 @@
 import { Component, Input, NgModule, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { McButton, McButtonModule } from '@ptsecurity/mosaic/button';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McModalModule, McModalRef, McModalService, ModalSize } from '@ptsecurity/mosaic/modal';
 
@@ -15,6 +16,7 @@ import { McModalModule, McModalRef, McModalService, ModalSize } from '@ptsecurit
     encapsulation: ViewEncapsulation.None
 })
 export class ModalDemoComponent {
+    themePalette = ThemePalette;
 
     @ViewChild('confirmButton') confirmButton: McButton;
     @ViewChild('deleteButton') deleteButton: McButton;

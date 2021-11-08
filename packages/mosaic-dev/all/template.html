@@ -7,35 +7,35 @@
             Alert text
             // todo сделать отдельную кнопку
             <button class="mc-alert__close">
-                <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="ThemePalette.Second"></i>
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="themePalette.Second"></i>
             </button>
         </div>
         <div class="mc-alert mc-alert_warning mc-alert_dismissible">
             <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
             Alert text
             <button class="mc-alert__close">
-                <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="ThemePalette.Second"></i>
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="themePalette.Second"></i>
             </button>
         </div>
         <div class="mc-alert mc-alert_success mc-alert_dismissible">
             <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
             Alert text
             <button class="mc-alert__close">
-                <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="ThemePalette.Second"></i>
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="themePalette.Second"></i>
             </button>
         </div>
         <div class="mc-alert mc-alert_info mc-alert_dismissible">
             <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
             Alert text
             <button class="mc-alert__close">
-                <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="ThemePalette.Second"></i>
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="themePalette.Second"></i>
             </button>
         </div>
         <div class="mc-alert mc-alert_dismissible">
             <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
             Alert text
             <button class="mc-alert__close">
-                <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="ThemePalette.Second"></i>
+                <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="themePalette.Second"></i>
             </button>
         </div>
     </div>
@@ -82,23 +82,23 @@
     <div class="dev-box">
         <h1>Button</h1>
 
-        <button mc-button [color]="ThemePalette.Primary" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
-        <button mc-button [color]="ThemePalette.Primary"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
-        <button class="cdk-keyboard-focused" mc-button [color]="ThemePalette.Primary"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
+        <button mc-button [color]="themePalette.Primary" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
+        <button mc-button [color]="themePalette.Primary"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
+        <button class="cdk-keyboard-focused" mc-button [color]="themePalette.Primary"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
 
         <br>
         <br>
 
-        <button mc-button [color]="ThemePalette.Second" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
-        <button mc-button [color]="ThemePalette.Second"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
-        <button class="cdk-keyboard-focused" mc-button [color]="ThemePalette.Second"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
+        <button mc-button [color]="themePalette.Second" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
+        <button mc-button [color]="themePalette.Second"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
+        <button class="cdk-keyboard-focused" mc-button [color]="themePalette.Second"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
 
         <br>
         <br>
 
-        <button mc-button [color]="ThemePalette.Error" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
-        <button mc-button [color]="ThemePalette.Error"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
-        <button class="cdk-keyboard-focused" mc-button [color]="ThemePalette.Error"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
+        <button mc-button [color]="themePalette.Error" disabled><i mc-icon="mc-play_16"></i>disabled</button>&nbsp;
+        <button mc-button [color]="themePalette.Error"><i mc-icon="mc-play_16"></i>normal</button>&nbsp;
+        <button class="cdk-keyboard-focused" mc-button [color]="themePalette.Error"><i mc-icon="mc-play_16"></i>focus</button>&nbsp;
     </div>
 
     <div class="dev-box">
@@ -356,7 +356,7 @@
         <mc-dropdown #appDropdown="mcDropdown">
             <button mc-dropdown-item>
                 Point 1
-                <div class="mc-dropdown-item__caption">Some info</div>
+                <span class="mc-dropdown-item__caption">Some info</span>
             </button>
             <button mc-dropdown-item>
                 <i mc-icon="mc-search_16"></i>
@@ -388,27 +388,27 @@
             </thead>
             <tr>
                 <td><i mc-icon="mc-angle-down-L_16"></i></td>
-                <td><i mc-icon="mc-angle-down-L_16" [color]="ThemePalette.Primary"></i></td>
-                <td><i mc-icon="mc-angle-down-L_16" [color]="ThemePalette.Second"></i></td>
-                <td><i mc-icon="mc-angle-down-L_16" [color]="ThemePalette.Error"></i></td>
+                <td><i mc-icon="mc-angle-down-L_16" [color]="themePalette.Primary"></i></td>
+                <td><i mc-icon="mc-angle-down-L_16" [color]="themePalette.Second"></i></td>
+                <td><i mc-icon="mc-angle-down-L_16" [color]="themePalette.Error"></i></td>
             </tr>
             <tr>
                 <td><i mc-icon="mc-calendar_16"></i></td>
-                <td><i mc-icon="mc-calendar_16" [color]="ThemePalette.Primary"></i></td>
-                <td><i mc-icon="mc-calendar_16" [color]="ThemePalette.Second"></i></td>
-                <td><i mc-icon="mc-calendar_16" [color]="ThemePalette.Error"></i></td>
+                <td><i mc-icon="mc-calendar_16" [color]="themePalette.Primary"></i></td>
+                <td><i mc-icon="mc-calendar_16" [color]="themePalette.Second"></i></td>
+                <td><i mc-icon="mc-calendar_16" [color]="themePalette.Error"></i></td>
             </tr>
             <tr>
                 <td><i mc-icon="mc-clock_16"></i></td>
-                <td><i mc-icon="mc-clock_16" [color]="ThemePalette.Primary"></i></td>
-                <td><i mc-icon="mc-clock_16" [color]="ThemePalette.Second"></i></td>
-                <td><i mc-icon="mc-clock_16" [color]="ThemePalette.Error"></i></td>
+                <td><i mc-icon="mc-clock_16" [color]="themePalette.Primary"></i></td>
+                <td><i mc-icon="mc-clock_16" [color]="themePalette.Second"></i></td>
+                <td><i mc-icon="mc-clock_16" [color]="themePalette.Error"></i></td>
             </tr>
             <tr>
                 <td><i mc-icon="mc-folder-opened_16"></i></td>
-                <td><i mc-icon="mc-folder-opened_16" [color]="ThemePalette.Primary"></i></td>
-                <td><i mc-icon="mc-folder-opened_16" [color]="ThemePalette.Second"></i></td>
-                <td><i mc-icon="mc-folder-opened_16" [color]="ThemePalette.Error"></i></td>
+                <td><i mc-icon="mc-folder-opened_16" [color]="themePalette.Primary"></i></td>
+                <td><i mc-icon="mc-folder-opened_16" [color]="themePalette.Second"></i></td>
+                <td><i mc-icon="mc-folder-opened_16" [color]="themePalette.Error"></i></td>
             </tr>
         </table>
 
@@ -426,27 +426,27 @@
             </thead>
             <tr>
                 <td><i class="mc-disabled" mc-icon="mc-angle-down-L_16"></i></td>
-                <td><i class="mc-disabled" mc-icon="mc-angle-down-L_16" [color]="ThemePalette.Primary"></i></td>
-                <td><i class="mc-disabled" mc-icon="mc-angle-down-L_16" [color]="ThemePalette.Second"></i></td>
-                <td><i class="mc-disabled" mc-icon="mc-angle-down-L_16" [color]="ThemePalette.Error"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-angle-down-L_16" [color]="themePalette.Primary"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-angle-down-L_16" [color]="themePalette.Second"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-angle-down-L_16" [color]="themePalette.Error"></i></td>
             </tr>
             <tr>
                 <td><i class="mc-disabled" mc-icon="mc-calendar_16"></i></td>
-                <td><i class="mc-disabled" mc-icon="mc-calendar_16" [color]="ThemePalette.Primary"></i></td>
-                <td><i class="mc-disabled" mc-icon="mc-calendar_16" [color]="ThemePalette.Second"></i></td>
-                <td><i class="mc-disabled" mc-icon="mc-calendar_16" [color]="ThemePalette.Error"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-calendar_16" [color]="themePalette.Primary"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-calendar_16" [color]="themePalette.Second"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-calendar_16" [color]="themePalette.Error"></i></td>
             </tr>
             <tr>
                 <td><i class="mc-disabled" mc-icon="mc-clock_16"></i></td>
-                <td><i class="mc-disabled" mc-icon="mc-clock_16" [color]="ThemePalette.Primary"></i></td>
-                <td><i class="mc-disabled" mc-icon="mc-clock_16" [color]="ThemePalette.Second"></i></td>
-                <td><i class="mc-disabled" mc-icon="mc-clock_16" [color]="ThemePalette.Error"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-clock_16" [color]="themePalette.Primary"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-clock_16" [color]="themePalette.Second"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-clock_16" [color]="themePalette.Error"></i></td>
             </tr>
             <tr>
                 <td><i class="mc-disabled" mc-icon="mc-folder-opened_16"></i></td>
-                <td><i class="mc-disabled" mc-icon="mc-folder-opened_16" [color]="ThemePalette.Primary"></i></td>
-                <td><i class="mc-disabled" mc-icon="mc-folder-opened_16" [color]="ThemePalette.Second"></i></td>
-                <td><i class="mc-disabled" mc-icon="mc-folder-opened_16" [color]="ThemePalette.Error"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-folder-opened_16" [color]="themePalette.Primary"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-folder-opened_16" [color]="themePalette.Second"></i></td>
+                <td><i class="mc-disabled" mc-icon="mc-folder-opened_16" [color]="themePalette.Error"></i></td>
             </tr>
         </table>
 
@@ -464,27 +464,27 @@
             </thead>
             <tr>
                 <td><i class="mc-icon_light" mc-icon="mc-angle-down-L_16"></i></td>
-                <td><i class="mc-icon_light" mc-icon="mc-angle-down-L_16" [color]="ThemePalette.Primary"></i></td>
-                <td><i class="mc-icon_light" mc-icon="mc-angle-down-L_16" [color]="ThemePalette.Second"></i></td>
-                <td><i class="mc-icon_light" mc-icon="mc-angle-down-L_16" [color]="ThemePalette.Error"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-angle-down-L_16" [color]="themePalette.Primary"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-angle-down-L_16" [color]="themePalette.Second"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-angle-down-L_16" [color]="themePalette.Error"></i></td>
             </tr>
             <tr>
                 <td><i class="mc-icon_light" mc-icon="mc-calendar_16"></i></td>
-                <td><i class="mc-icon_light" mc-icon="mc-calendar_16" [color]="ThemePalette.Primary"></i></td>
-                <td><i class="mc-icon_light" mc-icon="mc-calendar_16" [color]="ThemePalette.Second"></i></td>
-                <td><i class="mc-icon_light" mc-icon="mc-calendar_16" [color]="ThemePalette.Error"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-calendar_16" [color]="themePalette.Primary"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-calendar_16" [color]="themePalette.Second"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-calendar_16" [color]="themePalette.Error"></i></td>
             </tr>
             <tr>
                 <td><i class="mc-icon_light" mc-icon="mc-clock_16"></i></td>
-                <td><i class="mc-icon_light" mc-icon="mc-clock_16" [color]="ThemePalette.Primary"></i></td>
-                <td><i class="mc-icon_light" mc-icon="mc-clock_16" [color]="ThemePalette.Second"></i></td>
-                <td><i class="mc-icon_light" mc-icon="mc-clock_16" [color]="ThemePalette.Error"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-clock_16" [color]="themePalette.Primary"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-clock_16" [color]="themePalette.Second"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-clock_16" [color]="themePalette.Error"></i></td>
             </tr>
             <tr>
                 <td><i class="mc-icon_light" mc-icon="mc-folder-opened_16"></i></td>
-                <td><i class="mc-icon_light" mc-icon="mc-folder-opened_16" [color]="ThemePalette.Primary"></i></td>
-                <td><i class="mc-icon_light" mc-icon="mc-folder-opened_16" [color]="ThemePalette.Second"></i></td>
-                <td><i class="mc-icon_light" mc-icon="mc-folder-opened_16" [color]="ThemePalette.Error"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-folder-opened_16" [color]="themePalette.Primary"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-folder-opened_16" [color]="themePalette.Second"></i></td>
+                <td><i class="mc-icon_light" mc-icon="mc-folder-opened_16" [color]="themePalette.Error"></i></td>
             </tr>
         </table>
     </div>
@@ -504,7 +504,7 @@
         <mc-form-field class="mc-focused">
             <input mcInput [(ngModel)]="value" placeholder="Placeholder">
 
-            <i mcSuffix mc-icon="mc-calendar_16" [color]="ThemePalette.Second"></i>
+            <i mcSuffix mc-icon="mc-calendar_16" [color]="themePalette.Second"></i>
         </mc-form-field>
 
         <br><br>
@@ -550,7 +550,7 @@
         <header>With prefix:</header>
 
         <mc-form-field>
-            <i mcPrefix mc-icon="mc-search_16" [color]="ThemePalette.Second"></i>
+            <i mcPrefix mc-icon="mc-search_16" [color]="themePalette.Second"></i>
 
             <input mcInput [(ngModel)]="value" placeholder="Placeholder">
         </mc-form-field>
@@ -562,7 +562,7 @@
         <mc-form-field>
             <input mcInput [(ngModel)]="value" placeholder="Placeholder">
 
-            <i mcSuffix mc-icon="mc-calendar_16" [color]="ThemePalette.Second"></i>
+            <i mcSuffix mc-icon="mc-calendar_16" [color]="themePalette.Second"></i>
         </mc-form-field>
 
         <br><br>
@@ -592,7 +592,7 @@
         <header>Without borders:</header>
 
         <mc-form-field mcFormFieldWithoutBorders>
-            <i mcPrefix mc-icon="mc-search_16" [color]="ThemePalette.Second"></i>
+            <i mcPrefix mc-icon="mc-search_16" [color]="themePalette.Second"></i>
 
             <input mcInput [(ngModel)]="value" placeholder="Placeholder">
 
@@ -684,7 +684,7 @@
                     <h1 class="mc-display-3 title">Some title</h1>
                 </div>
                 <div class="mc-panel__actions">
-                    <button mc-button [color]="ThemePalette.Primary">
+                    <button mc-button [color]="themePalette.Primary">
                         <i mc-icon="mc-angle-down-L_16"></i>
                     </button>
                 </div>
@@ -700,7 +700,7 @@
             </div>
             <div class="mc-panel__footer">
                 <div class="buttons-container">
-                    <button mc-button [color]="ThemePalette.Primary">Save</button>
+                    <button mc-button [color]="themePalette.Primary">Save</button>
                     <button mc-button class="footer-button">Cancel</button>
                 </div>
             </div>
@@ -712,13 +712,13 @@
 
         <div class="lines">
             <div class="line-container">
-                <mc-progress-bar [value]="percent" [mode]="mode" [color]="ThemePalette.Primary"></mc-progress-bar>
+                <mc-progress-bar [value]="percent" [mode]="mode" [color]="themePalette.Primary"></mc-progress-bar>
             </div>
             <div class="line-container">
-                <mc-progress-bar [value]="percent" [mode]="mode" [color]="ThemePalette.Second"></mc-progress-bar>
+                <mc-progress-bar [value]="percent" [mode]="mode" [color]="themePalette.Second"></mc-progress-bar>
             </div>
             <div class="line-container">
-                <mc-progress-bar [value]="percent" [mode]="mode" [color]="ThemePalette.Error"></mc-progress-bar>
+                <mc-progress-bar [value]="percent" [mode]="mode" [color]="themePalette.Error"></mc-progress-bar>
             </div>
         </div>
     </div>
@@ -729,35 +729,35 @@
         <div class="spinners-container">
             <ul class="spinners">
                 <li class="spinner-container">
-                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="ThemePalette.Primary"></mc-progress-spinner>
+                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="themePalette.Primary"></mc-progress-spinner>
                 </li>
                 <li class="spinner-container">
-                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="ThemePalette.Second"></mc-progress-spinner>
+                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="themePalette.Second"></mc-progress-spinner>
                 </li>
                 <li class="spinner-container">
-                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="ThemePalette.Error"></mc-progress-spinner>
-                </li>
-            </ul>
-            <ul class="spinners">
-                <li class="spinner-container">
-                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="ThemePalette.Primary" class="big-spinner"></mc-progress-spinner>
-                </li>
-                <li class="spinner-container">
-                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="ThemePalette.Second" class="big-spinner"></mc-progress-spinner>
-                </li>
-                <li class="spinner-container">
-                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="ThemePalette.Error" class="big-spinner"></mc-progress-spinner>
+                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="themePalette.Error"></mc-progress-spinner>
                 </li>
             </ul>
             <ul class="spinners">
                 <li class="spinner-container">
-                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="ThemePalette.Primary" class="huge-spinner"></mc-progress-spinner>
+                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="themePalette.Primary" class="big-spinner"></mc-progress-spinner>
                 </li>
                 <li class="spinner-container">
-                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="ThemePalette.Second" class="huge-spinner"></mc-progress-spinner>
+                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="themePalette.Second" class="big-spinner"></mc-progress-spinner>
                 </li>
                 <li class="spinner-container">
-                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="ThemePalette.Error" class="huge-spinner"></mc-progress-spinner>
+                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="themePalette.Error" class="big-spinner"></mc-progress-spinner>
+                </li>
+            </ul>
+            <ul class="spinners">
+                <li class="spinner-container">
+                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="themePalette.Primary" class="huge-spinner"></mc-progress-spinner>
+                </li>
+                <li class="spinner-container">
+                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="themePalette.Second" class="huge-spinner"></mc-progress-spinner>
+                </li>
+                <li class="spinner-container">
+                    <mc-progress-spinner [value]="percent" [mode]="mode" [color]="themePalette.Error" class="huge-spinner"></mc-progress-spinner>
                 </li>
             </ul>
         </div>
@@ -887,17 +887,17 @@
 
         <br><br>
 
-        <mc-tag [color]="ThemePalette.Primary">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Primary" class="mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Primary" class="mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Primary" [disabled]="true">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Primary">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Primary" class="mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Primary" class="mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Primary" [disabled]="true">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
 
         <br><br>
 
-        <mc-tag [color]="ThemePalette.Error">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Error" class="mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Error" class="mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Error" [disabled]="true">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Error">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Error" class="mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Error" class="mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Error" [disabled]="true">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
 
         <br><br>
 
@@ -909,17 +909,17 @@
 
         <br><br>
 
-        <mc-tag [color]="ThemePalette.Primary" class="mc-tag_mono">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Primary" class="mc-tag_mono mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Primary" class="mc-tag_mono mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Primary" [disabled]="true" class="mc-tag_mono">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Primary" class="mc-tag_mono">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Primary" class="mc-tag_mono mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Primary" class="mc-tag_mono mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Primary" [disabled]="true" class="mc-tag_mono">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
 
         <br><br>
 
-        <mc-tag [color]="ThemePalette.Error" class="mc-tag_mono">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Error" class="mc-tag_mono mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Error" class="mc-tag_mono mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Error" [disabled]="true" class="mc-tag_mono">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Error" class="mc-tag_mono">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Error" class="mc-tag_mono mc-hovered">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Error" class="mc-tag_mono mc-focused">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Error" [disabled]="true" class="mc-tag_mono">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
 
         <br><br>
 
@@ -931,17 +931,17 @@
 
         <br><br>
 
-        <mc-tag [color]="ThemePalette.Primary" class="mc-tag_caps">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Primary" class="mc-hovered mc-tag_caps">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Primary" class="mc-focused mc-tag_caps">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Primary" [disabled]="true" class="mc-tag_caps">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Primary" class="mc-tag_caps">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Primary" class="mc-hovered mc-tag_caps">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Primary" class="mc-focused mc-tag_caps">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Primary" [disabled]="true" class="mc-tag_caps">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
 
         <br><br>
 
-        <mc-tag [color]="ThemePalette.Error" class="mc-tag_caps">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Error" class="mc-hovered mc-tag_caps">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Error" class="mc-focused mc-tag_caps">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
-        <mc-tag [color]="ThemePalette.Error" [disabled]="true" class="mc-tag_caps">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Error" class="mc-tag_caps">Normal <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Error" class="mc-hovered mc-tag_caps">Hovered <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Error" class="mc-focused mc-tag_caps">Focused <i mc-icon="mc-close-S_16"></i></mc-tag>
+        <mc-tag [color]="themePalette.Error" [disabled]="true" class="mc-tag_caps">Disabled <i mc-icon="mc-close-S_16"></i></mc-tag>
     </div>
 
     <div class="dev-box">
@@ -996,12 +996,12 @@
 
             <section class="demo-timepicker_full">
                 <mc-form-field >
-                    <i mcPrefix mc-icon="mc-clock_16" [color]="ThemePalette.Second"></i>
+                    <i mcPrefix mc-icon="mc-clock_16" [color]="themePalette.Second"></i>
                     <input mcTimepicker
                            [(ngModel)]="timeValue1"
-                           time-format="HH:mm:ss"
-                           min-time="10:00:00"
-                           max-time="13:30:00"
+                           [format]="$any('HH:mm:ss')"
+                           [min]="$any('10:00:00')"
+                           [max]="$any('13:30:00')"
                            [disabled]="isDisabled">
                 </mc-form-field>
             </section>
@@ -1024,7 +1024,7 @@
                         </mc-toggle>
                     </div>
                     <div class="flex-33">
-                        <mc-toggle class="mc-toggle_small" [color]="ThemePalette.Error" [(ngModel)]="valueSmallOn">
+                        <mc-toggle class="mc-toggle_small" [color]="themePalette.Error" [(ngModel)]="valueSmallOn">
                         </mc-toggle>
                     </div>
                 </div>
@@ -1051,7 +1051,7 @@
                         </mc-toggle>
                     </div>
                     <div class="flex-33">
-                        <mc-toggle [color]="ThemePalette.Error" [(ngModel)]="valueBigOn">
+                        <mc-toggle [color]="themePalette.Error" [(ngModel)]="valueBigOn">
                         </mc-toggle>
                     </div>
                 </div>
@@ -1081,7 +1081,7 @@
                         </mc-toggle>
                     </div>
                     <div class="flex-33">
-                        <mc-toggle class="mc-toggle_small" [color]="ThemePalette.Error" [(ngModel)]="valueSmallOn" [disabled]="true">
+                        <mc-toggle class="mc-toggle_small" [color]="themePalette.Error" [(ngModel)]="valueSmallOn" [disabled]="true">
                         </mc-toggle>
                     </div>
                 </div>
@@ -1108,7 +1108,7 @@
                         </mc-toggle>
                     </div>
                     <div class="flex-33">
-                        <mc-toggle [color]="ThemePalette.Error" [(ngModel)]="valueBigOn" [disabled]="true">
+                        <mc-toggle [color]="themePalette.Error" [(ngModel)]="valueBigOn" [disabled]="true">
                         </mc-toggle>
                     </div>
                 </div>
@@ -1132,27 +1132,26 @@
         <div class="flex-60 layout-row layout-align-center-center">
             <div class="flex layout-column layout-align-center-center container-item">
                 <button mc-button
-                        mc-tooltip="Показать\Скрыть"
-                        mcPlacement="top">
+                        [mcTooltip]="'Показать\Скрыть'"
+                        [mcPlacement]="popUpPlacements.Top">
                     top
                 </button>
                 <br>
                 <button mc-button
-                        mc-tooltip="Активировать записи"
-                        mcPlacement="right">
+                        [mcTooltip]="'Активировать записи'"
+                        [mcPlacement]="popUpPlacements.Right">
                     right
                 </button>
                 <br>
                 <button mc-button
-                        mc-tooltip="PDQL-запрос фильтра содержит ошибки
-                            испральве запрос"
-                        mcPlacement="left">
+                        [mcTooltip]="'PDQL-запрос фильтра содержит ошибки испральве запрос'"
+                        [mcPlacement]="popUpPlacements.Left">
                     left
                 </button>
                 <br>
                 <button mc-button
-                        mc-tooltip="Обновить"
-                        mcPlacement="bottom">
+                        [mcTooltip]="'Обновить'"
+                        [mcPlacement]="popUpPlacements.Bottom">
                     bottom
                 </button>
             </div>
@@ -1164,7 +1163,7 @@
 
         <mc-tree-selection
             multiple
-            no-unselect="false"
+            [noUnselectLast]="false"
             [dataSource]="dataSource"
             [treeControl]="treeControl">
 

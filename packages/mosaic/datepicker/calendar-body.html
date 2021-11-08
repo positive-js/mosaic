@@ -23,7 +23,7 @@
     </td>
     <td *ngFor="let item of row; let colIndex = index"
         class="mc-calendar__body-cell"
-        [ngClass]="item.cssClasses"
+        [ngClass]="item.cssClasses!"
         [tabindex]="isActiveCell(rowIndex, colIndex) ? 0 : -1"
         [class.mc-calendar__body_disabled]="!item.enabled"
         [class.mc-calendar__body_active]="isActiveCell(rowIndex, colIndex)"

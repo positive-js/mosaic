@@ -6,21 +6,21 @@
 
     <div class="mc-popover__container">
         <div class="mc-popover__header" *ngIf="header">
-            <ng-container *ngIf="isTemplateRef(header)" [ngTemplateOutlet]="header"></ng-container>
+            <ng-container *ngIf="isTemplateRef(header)" [ngTemplateOutlet]="$any(header)"></ng-container>
             <ng-container *ngIf="!isTemplateRef(header)">
                 <div>{{ header }}</div>
             </ng-container>
         </div>
 
         <div class="mc-popover__content" *ngIf="content">
-            <ng-container *ngIf="isTemplateRef(content)" [ngTemplateOutlet]="content"></ng-container>
+            <ng-container *ngIf="isTemplateRef(content)" [ngTemplateOutlet]="$any(content)"></ng-container>
             <ng-container *ngIf="!isTemplateRef(content)">
                 <div>{{ content }}</div>
             </ng-container>
         </div>
 
         <div class="mc-popover__footer" *ngIf="footer">
-            <ng-container *ngIf="isTemplateRef(footer)" [ngTemplateOutlet]="footer"></ng-container>
+            <ng-container *ngIf="isTemplateRef(footer)" [ngTemplateOutlet]="$any(footer)"></ng-container>
             <ng-container *ngIf="!isTemplateRef(footer)">
                 <div>{{ footer }}</div>
             </ng-container>

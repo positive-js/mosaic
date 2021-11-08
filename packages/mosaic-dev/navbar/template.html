@@ -76,7 +76,7 @@
         </mc-navbar-item>
 
         <mc-navbar-item (click)="onItemClick($event)">
-            <button mc-button [color]="'primary'">
+            <button mc-button [color]="themePalette.Primary">
                 <i mc-icon="mc-info_16"></i>
                 <span *ngIf="verticalNavbar.expanded">Новый инцидент</span>
             </button>
@@ -112,7 +112,7 @@
 
         <mc-navbar-divider></mc-navbar-divider>
 
-        <mc-navbar-toggle (click)="verticalNavbar.toggle()"(keydown.space)="verticalNavbar.toggle()">
+        <mc-navbar-toggle (click)="verticalNavbar.toggle()" (keydown.space)="verticalNavbar.toggle()">
             <mc-navbar-title>Свернуть</mc-navbar-title>
         </mc-navbar-toggle>
     </mc-navbar-container>

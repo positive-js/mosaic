@@ -19,7 +19,7 @@
 <div class="container">
     <label>Default datepicker toggle</label>
     <mc-form-field (click)="myDatepicker1.toggle()"
-                   mcWarningTooltip="Только цифры"
+                   [mcWarningTooltip]="'Только цифры'"
                    #tooltip="mcWarningTooltip">
 
         <input [formControl]="formControlValue"
@@ -32,9 +32,7 @@
         <mc-datepicker #myDatepicker1></mc-datepicker>
     </mc-form-field>
 
-    <br/><br/>
-
-    <button mc-button>button</button>
+<!--    <br/><br/>-->
 
 <!--    <label>Datepicker toggle with custom icon</label>-->
 <!--    <mc-form-field>-->
@@ -53,7 +51,7 @@
 <!--        <mc-datepicker-toggle mcSuffix [for]="myDatepicker3">-->
 <!--            <i mc-icon="mc-angle-down-M_16" mcDatepickerToggleIcon></i>-->
 <!--        </mc-datepicker-toggle>-->
-<!--        <mc-datepicker #myDatepicker3 startView="multi-year"></mc-datepicker>-->
+<!--        <mc-datepicker #myDatepicker3 [startView]="mcCalendarView.MultiYear"></mc-datepicker>-->
 <!--    </mc-form-field>-->
 
 <!--    <br/><br/>-->
@@ -64,14 +62,14 @@
 <!--        <mc-datepicker-toggle mcSuffix [for]="myDatepicker4">-->
 <!--            <i mc-icon="mc-angle-down-M_16" mcDatepickerToggleIcon></i>-->
 <!--        </mc-datepicker-toggle>-->
-<!--        <mc-datepicker disabled #myDatepicker4 startView="multi-year"></mc-datepicker>-->
+<!--        <mc-datepicker [disabled]="true" #myDatepicker4 [startView]="mcCalendarView.MultiYear"></mc-datepicker>-->
 <!--    </mc-form-field>-->
 
 <!--    <br/><br/>-->
 
 <!--    <label>Datepicker with disabled input</label>-->
 <!--    <mc-form-field>-->
-<!--        <input mcInput [mcDatepicker]="myDatepicker5" disabled/>-->
+<!--        <input mcInput [mcDatepicker]="myDatepicker5" [disabled]="true"/>-->
 <!--        <mc-datepicker-toggle mcSuffix [for]="myDatepicker5">-->
 <!--            <i mc-icon="mc-angle-down-M_16" mcDatepickerToggleIcon></i>-->
 <!--        </mc-datepicker-toggle>-->
@@ -95,7 +93,7 @@
 <!--    <mc-form-field>-->
 <!--        <input mcInput-->
 <!--               [mcDatepicker]="myDatepicker7"-->
-<!--               [mcDatepickerFilter]="myFilter"-->
+<!--               [mcDatepickerFilter]="$any(myFilter)"-->
 <!--               [min]="minDate"-->
 <!--               [max]="maxDate"/>-->
 <!--        <mc-datepicker-toggle mcSuffix [for]="myDatepicker7">-->

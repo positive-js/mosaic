@@ -5,7 +5,7 @@
 
 
 <p class="mc-headline">Modal from service</p>
-<button mc-button [color]="'primary'" (click)="createTplModal(tplTitle, tplContent, tplFooter)">
+<button mc-button [color]="themePalette.Primary" (click)="createTplModal(tplTitle, tplContent, tplFooter)">
     <span>Template</span>
 </button>
 <ng-template #tplTitle>
@@ -19,29 +19,29 @@
     <p>some contents...</p>
 </ng-template>
 <ng-template #tplFooter>
-    <button mc-button mc-modal-main-action [color]="'primary'" (click)="destroyTplModal()">Close after submit</button>
+    <button mc-button mc-modal-main-action [color]="themePalette.Primary" (click)="destroyTplModal()">Close after submit</button>
 </ng-template>
 
 <p class="mc-headline">Modal with custom component</p>
-<button mc-button [color]="'primary'" (click)="createComponentModal()">
+<button mc-button [color]="themePalette.Primary" (click)="createComponentModal()">
    Open
 </button>
 
 
 <p class="mc-headline">Modal with looong component</p>
-<button mc-button [color]="'primary'" (click)="createLongModal()">
+<button mc-button [color]="themePalette.Primary" (click)="createLongModal()">
     Open
 </button>
 
 
 <p class="mc-headline">Many many modals</p>
-<button mc-button [color]="'primary'" (click)="openAndCloseAll()">Open more modals then close all after 10s</button>
+<button mc-button [color]="themePalette.Primary" (click)="openAndCloseAll()">Open more modals then close all after 10s</button>
 <mc-modal [(mcVisible)]="htmlModalVisible"
           [mcMask]="true"
-          mcOkText="Accept"
-          mcCancelText="Cancel"
+          [mcOkText]="'Accept'"
+          [mcCancelText]="'Cancel'"
           [mcZIndex]="1001"
-          mcTitle="Non-service html modal">This is a non-service html modal</mc-modal>
+          [mcTitle]="'Non-service html modal'">This is a non-service html modal</mc-modal>
 
 <p class="mc-headline">Modal with looong component</p>
-<button mc-button [color]="'primary'" (click)="createModalComponent()">Open Component</button>
+<button mc-button [color]="themePalette.Primary" (click)="createModalComponent()">Open Component</button>

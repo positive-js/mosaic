@@ -45,9 +45,9 @@
         *ngFor="let tab of tabs; let i = index"
         [id]="getTabContentId(i)"
         [class.mc-tab-body__active]="selectedIndex == i"
-        [content]="tab.content"
-        [position]="tab.position"
-        [origin]="tab.origin"
+        [content]="tab.content!"
+        [position]="tab.position!"
+        [origin]="tab.origin!"
         [animationDuration]="animationDuration"
         (onCentered)="removeTabBodyWrapperHeight()"
         (onCentering)="setTabBodyWrapperHeight($event)">

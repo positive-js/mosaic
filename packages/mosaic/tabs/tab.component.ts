@@ -83,6 +83,7 @@ export class McTab extends McTabMixinBase implements OnInit, CanDisable, OnChang
     @Input('label') textLabel = '';
 
     @Input() empty = false;
+    @Input() tooltipPlacement: PopUpPlacements;
 
     @Input('tabId') tabId: string;
 

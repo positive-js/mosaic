@@ -24,7 +24,8 @@ import { McModalService } from './modal.service';
         McModalComponent,
         McModalTitle,
         McModalBody,
-        McModalFooter
+        McModalFooter,
+        McModalMainAction
     ],
     declarations: [
         McModalComponent,

@@ -2,8 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation, NgModule, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
-import { McProgressBarModule } from '../../mosaic/progress-bar/';
+import { McProgressBarModule, ProgressBarMode } from '../../mosaic/progress-bar/';
 
 
 const INTERVAL: number = 300;
@@ -17,7 +18,8 @@ const MAX_PERCENT: number = 100;
     styleUrls: ['../main.scss', './styles.scss']
 })
 export class ProgressBarDemoComponent implements OnDestroy {
-    mode: string = 'determinate';
+    themePalette = ThemePalette;
+    mode: ProgressBarMode = 'determinate';
     percent: number = 0;
     intervalId: number;
 

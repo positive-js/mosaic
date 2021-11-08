@@ -10,7 +10,7 @@
         <mc-button-toggle value="3">
             default 3
         </mc-button-toggle>
-        <mc-button-toggle value="4" disabled>
+        <mc-button-toggle value="4" [disabled]="true">
             default 4
         </mc-button-toggle>
         <mc-button-toggle value="5">
@@ -40,7 +40,7 @@
         <mc-button-toggle value="1">
             default 1
         </mc-button-toggle>
-        <mc-button-toggle value="2" disabled>
+        <mc-button-toggle value="2" [disabled]="true">
             default 2
         </mc-button-toggle>
         <mc-button-toggle value="3">
@@ -55,11 +55,11 @@
     <br>
 
     <label>Multiple Group</label>
-    <mc-button-toggle-group multiple #multipleGroup="mcButtonToggleGroup">
+    <mc-button-toggle-group [multiple]="true" #multipleGroup="mcButtonToggleGroup">
         <mc-button-toggle value="1">
             default 1
         </mc-button-toggle>
-        <mc-button-toggle value="2" disabled>
+        <mc-button-toggle value="2" [disabled]="true">
             default 2
         </mc-button-toggle>
         <mc-button-toggle value="3">
@@ -90,7 +90,7 @@
         <mc-button-toggle value="1">
             default 1
         </mc-button-toggle>
-        <mc-button-toggle value="2" disabled>
+        <mc-button-toggle value="2" [disabled]="true">
             default 2
         </mc-button-toggle>
         <mc-button-toggle value="3">
@@ -110,7 +110,7 @@
         <mc-button-toggle value="1">
             default 1
         </mc-button-toggle>
-        <mc-button-toggle value="2" disabled>
+        <mc-button-toggle value="2" [disabled]="true">
             default 2
         </mc-button-toggle>
         <mc-button-toggle value="3">

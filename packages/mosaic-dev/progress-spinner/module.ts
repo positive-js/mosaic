@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation, NgModule, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { McProgressSpinnerModule } from '@ptsecurity/mosaic/progress-spinner';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
+import { McProgressSpinnerModule, ProgressSpinnerMode } from '@ptsecurity/mosaic/progress-spinner';
 
 
 const INTERVAL: number = 300;
@@ -16,7 +17,9 @@ const MAX_PERCENT: number = 100;
     styleUrls: ['../main.scss', './styles.scss']
 })
 export class ProgressSpinnerDemoComponent implements OnDestroy {
-    mode: string = 'determinate';
+    themePalette = ThemePalette;
+
+    mode: ProgressSpinnerMode = 'determinate';
     percent: number = 0;
     intervalId: number;
 

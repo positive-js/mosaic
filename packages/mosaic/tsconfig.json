@@ -9,6 +9,7 @@
     "angularCompilerOptions": {
         "annotateForClosureCompiler": true,
         "strictMetadataEmit": true,
+        "strictTemplates": true,
         "flatModuleId": "@ptsecurity/mosaic",
         "skipTemplateCodegen": true,
         "fullTemplateTypeCheck": true,

@@ -10,7 +10,7 @@ import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McButtonToggleModule } from '@ptsecurity/mosaic/button-toggle';
 import { McCardModule } from '@ptsecurity/mosaic/card';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
-import { ThemePalette } from '@ptsecurity/mosaic/core';
+import { PopUpPlacements, ThemePalette } from '@ptsecurity/mosaic/core';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
@@ -60,8 +60,8 @@ const MAX_PERCENT: number = 100;
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
-    // tslint:disable-next-line:naming-convention
-    ThemePalette = ThemePalette;
+    themePalette = ThemePalette;
+    popUpPlacements = PopUpPlacements;
 
     checked: boolean[] = [true, true, false];
     indeterminate: boolean = true;

@@ -19,62 +19,176 @@ import { DateTime } from 'luxon';
     ]
 })
 export class DemoComponent {
-    ru: any = {
+    ru = {
         absolute: {
             long: {
-                date: {},
-                dateTime: {}
+                date: {
+                    currentYear: '',
+                    notCurrentYear: ''
+                },
+                dateTime: {
+                    currentYear: '',
+                    notCurrentYear: '',
+                    milliseconds: ''
+                }
             },
             short: {
-                date: {},
-                dateTime: {}
+                date: {
+                    currentYear: '',
+                    notCurrentYear: ''
+                },
+                dateTime: {
+                    currentYear: '',
+                    notCurrentYear: '',
+                    milliseconds: ''
+                }
             }
         },
         relative: {
-            long: {},
-            short: {}
+            long: {
+                secondsAgo: '',
+                minutesAgo: '',
+                today: '',
+                yesterday: '',
+                beforeYesterdayCurrentYear: '',
+                beforeYesterdayNotCurrentYear: ''
+            },
+            short: {
+                secondsAgo: '',
+                minutesAgo: '',
+                today: '',
+                yesterday: '',
+                beforeYesterdayCurrentYear: '',
+                beforeYesterdayNotCurrentYear: ''
+            }
         },
         range: {
             long: {
-                date: {},
-                dateTime: {}
+                date: {
+                    currentMonth: '',
+                    notCurrentYear: '',
+                    startsNotCurrentYear: '',
+                    endsNotCurrentYear: ''
+                },
+                dateTime: {
+                    startsNotCurrentYear: '',
+                    endsNotCurrentYear: '',
+                    sameDateCurrentYear: '',
+                    sameDateNotCurrentYear: '',
+                    notCurrentMonth: ''
+                }
             },
             middle: {
-                dateTime: {}
+                dateTime: {
+                    currentYear: '',
+                    sameDateCurrentYear: '',
+                    sameDateNotCurrentYear: '',
+                    notCurrentMonth: '',
+                    startsNotCurrentYear: '',
+                    endsNotCurrentYear: ''
+                }
             },
             short: {
-                date: {},
-                dateTime: {}
+                date: {
+                    currentMonth: '',
+                    notCurrentYear: '',
+                    startsNotCurrentYear: '',
+                    endsNotCurrentYear: ''
+                },
+                dateTime: {
+                    sameDateCurrentYear: '',
+                    sameDateNotCurrentYear: '',
+                    notCurrentMonth: '',
+                    startsNotCurrentYear: '',
+                    endsNotCurrentYear: ''
+                }
             }
         }
     };
 
-    en: any = {
+    en = {
         absolute: {
             long: {
-                date: {},
-                dateTime: {}
+                date: {
+                    currentYear: '',
+                    notCurrentYear: ''
+                },
+                dateTime: {
+                    currentYear: '',
+                    notCurrentYear: '',
+                    milliseconds: ''
+                }
             },
             short: {
-                date: {},
-                dateTime: {}
+                date: {
+                    currentYear: '',
+                    notCurrentYear: ''
+                },
+                dateTime: {
+                    currentYear: '',
+                    notCurrentYear: '',
+                    milliseconds: ''
+                }
             }
         },
         relative: {
-            long: {},
-            short: {}
+            long: {
+                secondsAgo: '',
+                minutesAgo: '',
+                today: '',
+                yesterday: '',
+                beforeYesterdayCurrentYear: '',
+                beforeYesterdayNotCurrentYear: ''
+            },
+            short: {
+                secondsAgo: '',
+                minutesAgo: '',
+                today: '',
+                yesterday: '',
+                beforeYesterdayCurrentYear: '',
+                beforeYesterdayNotCurrentYear: ''
+            }
         },
         range: {
             long: {
-                date: {},
-                dateTime: {}
+                date: {
+                    currentMonth: '',
+                    notCurrentYear: '',
+                    startsNotCurrentYear: '',
+                    endsNotCurrentYear: ''
+                },
+                dateTime: {
+                    startsNotCurrentYear: '',
+                    endsNotCurrentYear: '',
+                    sameDateCurrentYear: '',
+                    sameDateNotCurrentYear: '',
+                    notCurrentMonth: ''
+                }
             },
             middle: {
-                dateTime: {}
+                dateTime: {
+                    currentYear: '',
+                    sameDateCurrentYear: '',
+                    sameDateNotCurrentYear: '',
+                    notCurrentMonth: '',
+                    startsNotCurrentYear: '',
+                    endsNotCurrentYear: ''
+                }
             },
             short: {
-                date: {},
-                dateTime: {}
+                date: {
+                    currentMonth: '',
+                    notCurrentYear: '',
+                    startsNotCurrentYear: '',
+                    endsNotCurrentYear: ''
+                },
+                dateTime: {
+                    sameDateCurrentYear: '',
+                    sameDateNotCurrentYear: '',
+                    notCurrentMonth: '',
+                    startsNotCurrentYear: '',
+                    endsNotCurrentYear: ''
+                }
             }
         }
     };

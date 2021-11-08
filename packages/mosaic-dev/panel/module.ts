@@ -3,6 +3,7 @@ import { Component, ViewEncapsulation, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McListModule } from '@ptsecurity/mosaic/list';
 
@@ -14,6 +15,7 @@ import { McListModule } from '@ptsecurity/mosaic/list';
     styleUrls: ['../main.scss', './styles.scss']
 })
 export class PanelDemoComponent {
+    themePalette = ThemePalette;
     page: string = 'first';
     test: boolean = true;
     selectedItems = [];

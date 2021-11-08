@@ -18,6 +18,7 @@
         "allowSyntheticDefaultImports": true,
         "skipTemplateCodegen": true,
         "strictMetadataEmit": true,
+        "strictTemplates": true,
         "flatModuleId": "@ptsecurity/mosaic-luxon-adapter",
         "strictInjectionParameters": true,
         "enableResourceInlining": true,
