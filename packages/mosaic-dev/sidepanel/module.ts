@@ -70,7 +70,7 @@ export class SidepanelDemoComponent {
 
     <mc-sidepanel-footer>
         <mc-sidepanel-actions align="right">
-            <button #mcAutoFocus mc-button [color]="'primary'" (click)="openComponentSidepanel()">
+            <button cdkFocusInitial mc-button [color]="'primary'" (click)="openComponentSidepanel()">
                 <span>Open another sidepanel</span>
             </button>
 

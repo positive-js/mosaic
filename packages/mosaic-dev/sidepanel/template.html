@@ -52,15 +52,11 @@
 
         <mc-sidepanel-footer>
             <mc-sidepanel-actions align="left">
-                <button #mcAutoFocus mc-button [color]="'primary'" (click)="openTemplateSidepanel()">
+                <button cdkFocusInitial mc-button [color]="'primary'" (click)="openTemplateSidepanel()">
                     <span>Open another sidepanel</span>
                 </button>
             </mc-sidepanel-actions>
             <mc-sidepanel-actions align="right">
-                <button mc-button [color]="'primary'" (click)="openTemplateSidepanel()">
-                    <span>Open another sidepanel</span>
-                </button>
-
                 <button mc-button [color]="'second'" mc-sidepanel-close>
                     <span>Close</span>
                 </button>

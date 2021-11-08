@@ -2,7 +2,7 @@
 
     <div *ngIf="withIndent" class="mc-sidepanel-indent" (click)="exit()"></div>
 
-    <div class="mc-sidepanel-content" cdkTrapFocus>
+    <div class="mc-sidepanel-content" cdkTrapFocus cdkTrapFocusAutoCapture>
         <ng-template cdkPortalOutlet></ng-template>
     </div>
 </div>

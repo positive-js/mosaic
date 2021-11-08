@@ -44,7 +44,7 @@ export class SidepanelComponentExample {
     </mc-sidepanel-body>
     <mc-sidepanel-footer>
         <mc-sidepanel-actions align="right">
-            <button mc-button [color]="'primary'" (click)="openComponentSidepanel()">
+            <button cdkFocusInitial mc-button [color]="'primary'" (click)="openComponentSidepanel()">
                 <span>Open another sidepanel</span>
             </button>
 
