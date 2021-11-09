@@ -13,6 +13,8 @@ import { McSidepanelPosition, McSidepanelService } from '@ptsecurity/mosaic/side
     encapsulation: ViewEncapsulation.None
 })
 export class SidepanelOverviewExample {
+    themePalette = ThemePalette;
+
     position: McSidepanelPosition = McSidepanelPosition.Right;
 
     modalState: boolean = false;

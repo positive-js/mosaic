@@ -13,6 +13,8 @@ import { MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelService } from '@pts
     encapsulation: ViewEncapsulation.None
 })
 export class SidepanelComponentExample {
+    themePalette = ThemePalette;
+
     position: McSidepanelPosition = McSidepanelPosition.Right;
 
     modalState: boolean = false;
@@ -45,7 +47,7 @@ export class SidepanelComponentExample {
     </mc-sidepanel-body>
     <mc-sidepanel-footer>
         <mc-sidepanel-actions align="right">
-            <button cdkFocusInitial mc-button [color]="'primary'" (click)="openComponentSidepanel()">
+            <button cdkFocusInitial mc-button [color]="themePalette.Primary" (click)="openComponentSidepanel()">
                 <span>Open another sidepanel</span>
             </button>
 

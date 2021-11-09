@@ -10,8 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
-import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { ThemePalette } from '@ptsecurity/mosaic/core';
+import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelService, McSidepanelModule } from '@ptsecurity/mosaic/sidepanel';
@@ -72,11 +72,11 @@ export class SidepanelDemoComponent {
 
     <mc-sidepanel-footer>
         <mc-sidepanel-actions align="right">
-            <button cdkFocusInitial mc-button [color]="'primary'" (click)="openComponentSidepanel()">
+            <button cdkFocusInitial mc-button [color]="themePalette.Primary" (click)="openComponentSidepanel()">
                 <span>Open another sidepanel</span>
             </button>
 
-            <button mc-button [color]="'second'" mc-sidepanel-close>
+            <button mc-button [color]="themePalette.Second" mc-sidepanel-close>
                 <span>Close</span>
             </button>
         </mc-sidepanel-actions>
@@ -86,6 +86,8 @@ export class SidepanelDemoComponent {
     }
 })
 export class ExampleSidepanelComponent {
+    themePalette = ThemePalette;
+
     openComponentSidepanel: () => void;
 
     array = new Array(60); // tslint:disable-line

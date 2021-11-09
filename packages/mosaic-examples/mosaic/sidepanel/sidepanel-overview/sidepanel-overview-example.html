@@ -3,10 +3,10 @@
         <label class="mc-form__label">Position</label>
         <mc-form-field class="mc-form__control flex-10">
             <mc-select [(value)]="position">
-                <mc-option value="right">Right</mc-option>
-                <mc-option value="left">Left</mc-option>
-                <mc-option value="top">Top</mc-option>
-                <mc-option value="bottom">Bottom</mc-option>
+                <mc-option [value]="'right'">Right</mc-option>
+                <mc-option [value]="'left'">Left</mc-option>
+                <mc-option [value]="'top'">Top</mc-option>
+                <mc-option [value]="'bottom'">Bottom</mc-option>
             </mc-select>
         </mc-form-field>
 
@@ -18,6 +18,7 @@
 
 <br><br>
 
+<button class="template-button" mc-button [color]="themePalette.Primary" (click)="openTemplateSidepanel()">
     <span>Open template sidepanel</span>
 </button>
 
@@ -34,14 +35,13 @@
     </mc-sidepanel-body>
     <mc-sidepanel-footer>
         <mc-sidepanel-actions align="left">
-            <button cdkFocusInitial mc-button [color]="'primary'" (click)="openTemplateSidepanel()">
+            <button cdkFocusInitial mc-button [color]="themePalette.Primary" (click)="openTemplateSidepanel()">
                 <span>Open another sidepanel</span>
             </button>
         </mc-sidepanel-actions>
 
         <mc-sidepanel-actions align="right">
                 <span>Close</span>
-            </button>
         </mc-sidepanel-actions>
     </mc-sidepanel-footer>
 </ng-template>
