@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { PopUpPlacements } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -11,6 +12,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
     encapsulation: ViewEncapsulation.None
 })
 export class PopoverOverviewExample {
+    popUpPlacements = PopUpPlacements;
     popoverActiveStage: number;
     selectedOrder: boolean;
 
@@ -61,7 +63,7 @@ export class PopoverOverviewExample {
         this.activatedPosition = event;
     }
 
-    setPlacement(placement: string) {
+    setPlacement(placement: PopUpPlacements) {
         this.selectedPlacement = placement;
     }
 

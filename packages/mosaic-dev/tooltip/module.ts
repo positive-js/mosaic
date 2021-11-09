@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
-import { McFormsModule } from '@ptsecurity/mosaic/core';
+import { McFormsModule, PopUpPlacements, ThemePalette } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
@@ -20,6 +20,9 @@ import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
     templateUrl: './template.html'
 })
 export class DemoComponent {
+    themePalette = ThemePalette;
+    popUpPlacements = PopUpPlacements;
+
     tooltipActiveStage: number;
     selectedOrder: boolean;
 
@@ -42,7 +45,7 @@ export class DemoComponent {
     };
 
     selectedElement: string = 'button';
-    selectedPlacement: string = 'left';
+    selectedPlacement: PopUpPlacements = PopUpPlacements.Left;
     selectedTrigger: string = 'click';
     layoutClass: string = 'layout-row layout-align-center-center';
     content: string = 'button text';
@@ -72,7 +75,7 @@ export class DemoComponent {
         this.activatedPosition = event;
     }
 
-    setPlacement(placement: string) {
+    setPlacement(placement: PopUpPlacements) {
         this.selectedPlacement = placement;
     }
 

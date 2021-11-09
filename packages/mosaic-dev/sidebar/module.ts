@@ -2,8 +2,8 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { McSidebarModule } from '@ptsecurity/mosaic/sidebar';
-import { McSplitterModule } from '@ptsecurity/mosaic/splitter';
+import { McSidebarModule, SidebarPositions } from '@ptsecurity/mosaic/sidebar';
+import { Direction, McSplitterModule } from '@ptsecurity/mosaic/splitter';
 
 import { McButtonModule } from '../../mosaic/button';
 
@@ -15,6 +15,9 @@ import { McButtonModule } from '../../mosaic/button';
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
+    direction = Direction;
+    sidebarPositions = SidebarPositions;
+
     leftSidebarSidebarState: boolean = false;
     leftSplitterState: boolean = false;
 

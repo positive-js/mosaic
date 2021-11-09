@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelService, McSidepanelModule } from '@ptsecurity/mosaic/sidepanel';
@@ -25,11 +26,12 @@ import { McToggleModule } from '@ptsecurity/mosaic/toggle';
     encapsulation: ViewEncapsulation.None
 })
 export class SidepanelDemoComponent {
+    themePalette = ThemePalette;
     position: McSidepanelPosition = McSidepanelPosition.Right;
 
     modalState: boolean = false;
 
-    @ViewChild(TemplateRef, {static: false}) template: TemplateRef<any>;
+    @ViewChild(TemplateRef, { static: false }) template: TemplateRef<any>;
 
     array = new Array(40); // tslint:disable-line
 

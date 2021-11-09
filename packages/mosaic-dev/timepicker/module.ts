@@ -18,7 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { McLuxonDateModule } from '@ptsecurity/mosaic-luxon-adapter/adapter';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
-import { McTimepickerModule } from '@ptsecurity/mosaic/timepicker';
+import { McTimepickerModule, TimeFormats } from '@ptsecurity/mosaic/timepicker';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 import { DateTime } from 'luxon';
 
@@ -37,6 +37,7 @@ export function customValidator(): ValidatorFn {
     encapsulation: ViewEncapsulation.None
 })
 export class TimepickerDemoComponent {
+    timeFormats = TimeFormats;
     placeholder: string = 'placeholder';
     minDate: DateTime;
     maxDate: DateTime;

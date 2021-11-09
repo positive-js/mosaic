@@ -1,13 +1,10 @@
-
-<!--<theme-picker></theme-picker>-->
-
 <div class="dev-container">
     <mc-radio-group
         class="example-radio-group"
         [(ngModel)]="favoriteFruit"
         (change)="onChange($event)">
         <mc-radio-button class="example-radio-button" *ngFor="let season of fruits" [value]="season">
-            {{season}}
+            {{ season }}
         </mc-radio-button>
     </mc-radio-group>
 
@@ -17,11 +14,11 @@
 
     <mc-radio-group
         class="example-radio-group"
-        name="my_options"
+        [name]="'my_options'"
         [disabled]="isDisabled">
-        <mc-radio-button class="example-radio-button" value="option_1">Option 1</mc-radio-button>
-        <mc-radio-button class="example-radio-button" value="option_2">Option 2</mc-radio-button>
-        <mc-radio-button class="example-radio-button" value="option_3">Option 3</mc-radio-button>
+        <mc-radio-button class="example-radio-button" [value]="'option_1'">Option 1</mc-radio-button>
+        <mc-radio-button class="example-radio-button" [value]="'option_2'">Option 2</mc-radio-button>
+        <mc-radio-button class="example-radio-button" [value]="'option_3'">Option 3</mc-radio-button>
     </mc-radio-group>
 
     <p class="mc-headline">Disabled selected buttons</p>
@@ -29,11 +26,11 @@
         <mc-radio-button
             class="example-radio-button"
             *ngFor="let data of selectionList"
-            name="data.value"
+            [name]="data.value"
             [disabled]="true"
             [checked]="data.selected"
             [value]="data.value">
-            {{data.name}}
+            {{ data.name }}
         </mc-radio-button>
     </mc-radio-group>
 </div>

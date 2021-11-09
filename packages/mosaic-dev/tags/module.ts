@@ -12,6 +12,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { COMMA, ENTER, SPACE, TAB } from '@ptsecurity/cdk/keycodes';
 import { McAutocomplete, McAutocompleteModule, McAutocompleteSelectedEvent } from '@ptsecurity/mosaic/autocomplete';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McTagList, McTagsModule, McTagInputEvent } from '@ptsecurity/mosaic/tags';
@@ -26,6 +27,8 @@ import { map } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent implements AfterViewInit {
+    themePalette = ThemePalette;
+
     addOnBlur = false;
     visible = true;
     tagCtrl = new FormControl();

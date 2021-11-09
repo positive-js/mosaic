@@ -2,6 +2,7 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 import { Direction, McSplitterModule } from '../../mosaic/splitter';
 
@@ -30,7 +31,8 @@ export class DemoComponent {
     imports: [
         BrowserModule,
         McButtonModule,
-        McSplitterModule
+        McSplitterModule,
+        McIconModule
     ],
     bootstrap: [
         DemoComponent

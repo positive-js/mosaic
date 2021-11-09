@@ -51,7 +51,7 @@
         <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
 
         <mc-option-action
-            mcTooltip="Tooltip text"
+            [mcTooltip]="'Tooltip text'"
             [mcPlacement]="PopUpPlacements.Right"
             [mcDropdownTriggerFor]="dropdown">
         </mc-option-action>

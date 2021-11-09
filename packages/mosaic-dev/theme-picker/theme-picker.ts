@@ -13,10 +13,9 @@ import { IDocsSiteTheme, ThemeStorage } from './theme-storage/theme-storage';
     host: {'aria-hidden': 'true'}
 })
 export class ThemePicker {
-
     currentTheme;
 
-    themes = [
+    themes: IDocsSiteTheme[] = [
         {
             primary: '#673AB7',
             href: 'default-theme.scss',

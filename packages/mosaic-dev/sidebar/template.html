@@ -15,7 +15,7 @@
 <div class="container layout-row layout-align-space-between">
     <mc-sidebar
         #leftSidebar="mcSidebar"
-        [position]="'left'"
+        [position]="sidebarPositions.Left"
         (stateChanged)="onStateChanged($event)">
         <div mc-sidebar-opened class="mc-sidebar-opened">mc-sidebar-opened</div>
         <div mc-sidebar-closed class="mc-sidebar-closed">mc-sidebar-closed</div>
@@ -25,7 +25,7 @@
 
     <mc-sidebar
         #rightSidebar="mcSidebar"
-        [position]="'right'"
+        [position]="sidebarPositions.Right"
         (stateChanged)="onStateChanged($event)">
         <div mc-sidebar-opened class="mc-sidebar-opened">mc-sidebar-opened</div>
         <div mc-sidebar-closed class="mc-sidebar-closed">mc-sidebar-closed</div>
@@ -49,11 +49,11 @@
 
 <mc-splitter
     class="container layout-row layout-align-space-between"
-    direction="horizontal"
+    [direction]="direction.Horizontal"
     [disabled]="leftSplitterState">
     <mc-sidebar
         mc-splitter-area
-        [position]="'left'"
+        [position]="sidebarPositions.Left"
         [opened]="leftSidebarSidebarState"
         (stateChanged)="onStateChanged($event)">
         <div class="mc-sidebar-opened"
@@ -63,9 +63,7 @@
             mc-sidebar-opened
         </div>
 
-        <div class="mc-sidebar-closed"
-             mc-sidebar-closed
-             [width]="'32px'">
+        <div class="mc-sidebar-closed" mc-sidebar-closed [width]="'32px'">
             mc-sidebar-closed
         </div>
     </mc-sidebar>
@@ -74,7 +72,7 @@
 
     <mc-sidebar
         mc-splitter-area
-        [position]="'right'"
+        [position]="sidebarPositions.Right"
         [opened]="rightSidebarSidebarState"
         (stateChanged)="onStateChanged($event)">
         <div mc-sidebar-opened class="mc-sidebar-opened">mc-sidebar-opened</div>
