@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { PopUpPlacements } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -27,7 +28,7 @@ export class TooltipOverviewExample {
     };
 
     selectedElement: string = 'button';
-    selectedPlacement: string = 'left';
+    selectedPlacement: PopUpPlacements = PopUpPlacements.Left;
     layoutClass: string = 'layout-row layout-align-center-center';
     content: string = 'button text';
     userDefinedPlacementPriority: string[] = ['bottom', 'right'];

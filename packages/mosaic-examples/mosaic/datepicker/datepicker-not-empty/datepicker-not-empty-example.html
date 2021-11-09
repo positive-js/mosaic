@@ -1,6 +1,6 @@
 <mc-form-field
     (click)="myDatepicker.toggle()"
-    mcWarningTooltip="Только цифры"
+    [mcWarningTooltip]="'Только цифры'"
     #tooltip="mcWarningTooltip">
 
     <input

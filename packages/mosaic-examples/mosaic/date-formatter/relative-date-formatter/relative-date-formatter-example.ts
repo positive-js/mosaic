@@ -19,17 +19,45 @@ import { DateTime } from 'luxon';
     ]
 })
 export class RelativeDateFormatterExample {
-    formats: any = {
+    formats = {
         ru: {
             relative: {
-                long: {},
-                short: {}
+                long: {
+                    secondsAgo: '',
+                    minutesAgo: '',
+                    today: '',
+                    yesterday: '',
+                    beforeYesterdayCurrentYear: '',
+                    beforeYesterdayNotCurrentYear: ''
+                },
+                short: {
+                    secondsAgo: '',
+                    minutesAgo: '',
+                    today: '',
+                    yesterday: '',
+                    beforeYesterdayCurrentYear: '',
+                    beforeYesterdayNotCurrentYear: ''
+                }
             }
         },
         en: {
             relative: {
-                long: {},
-                short: {}
+                long: {
+                    secondsAgo: '',
+                    minutesAgo: '',
+                    today: '',
+                    yesterday: '',
+                    beforeYesterdayCurrentYear: '',
+                    beforeYesterdayNotCurrentYear: ''
+                },
+                short: {
+                    secondsAgo: '',
+                    minutesAgo: '',
+                    today: '',
+                    yesterday: '',
+                    beforeYesterdayCurrentYear: '',
+                    beforeYesterdayNotCurrentYear: ''
+                }
             }
         }
     };

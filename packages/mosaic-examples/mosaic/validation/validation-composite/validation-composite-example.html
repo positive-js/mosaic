@@ -11,7 +11,7 @@
                 <label class="mc-form__label flex-20">Начало диапазона</label>
                 <mc-form-field
                     class="mc-form__control"
-                    mcWarningTooltip="Только цифры и точки"
+                    [mcWarningTooltip]="'Только цифры'"
                     [mcEnterDelay]="10"
                     #startTooltip="mcWarningTooltip"
                     mcTrigger="manual"
@@ -30,7 +30,7 @@
                 <label class="mc-form__label flex-20">Окончание</label>
                 <mc-form-field
                     class="mc-form__control"
-                    mcWarningTooltip="Только цифры и точки"
+                    [mcWarningTooltip]="'Только цифры и точки'"
                     [mcEnterDelay]="10"
                     #endTooltip="mcWarningTooltip"
                     mcTrigger="manual"

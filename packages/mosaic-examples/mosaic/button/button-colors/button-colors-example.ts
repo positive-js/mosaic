@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -9,4 +10,6 @@ import { Component } from '@angular/core';
     templateUrl: 'button-colors-example.html',
     styleUrls: ['button-colors-example.css']
 })
-export class ButtonColorsExample {}
+export class ButtonColorsExample {
+    themePalette = ThemePalette;
+}

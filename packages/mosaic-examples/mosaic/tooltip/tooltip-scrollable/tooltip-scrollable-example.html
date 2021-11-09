@@ -3,7 +3,7 @@
         <button
             mc-button
             (click)="toggleTooltip(tooltip.isOpen)"
-            mcTooltip="tooltip text"
+            [mcTooltip]="'Tooltip text'"
             mcTrigger="manual"
             #tooltip="mcTooltip"
             mcPlacement="right">
