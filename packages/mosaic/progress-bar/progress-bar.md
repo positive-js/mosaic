@@ -17,7 +17,7 @@
 
 ```html
 Такое значение заполнит 30% линии
-<mc-progress-bar value="30"></mc-progress-bar>
+<mc-progress-bar [value]="30"></mc-progress-bar>
 ```
 <!-- example(progress-bar-overview) -->
 
@@ -27,9 +27,9 @@
 
 ```html
 Для отображения неопределенного по завершенности прогресса:
-<mc-progress-bar mode="indeterminate"></mc-progress-bar>
+<mc-progress-bar [mode]="'indeterminate'"></mc-progress-bar>
 Для отображения определенного по завершенности прогресса:
-<mc-progress-bar mode="determinate" value="30"></mc-progress-bar>
+<mc-progress-bar [mode]="determinate" [value]="30"></mc-progress-bar>
 ```
 <!-- example(progress-bar-indeterminate) -->
 

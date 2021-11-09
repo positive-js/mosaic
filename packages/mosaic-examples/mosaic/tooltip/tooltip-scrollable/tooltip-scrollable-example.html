@@ -4,9 +4,9 @@
             mc-button
             (click)="toggleTooltip(tooltip.isOpen)"
             [mcTooltip]="'Tooltip text'"
-            mcTrigger="manual"
+            [mcTrigger]="'manual'"
             #tooltip="mcTooltip"
-            mcPlacement="right">
+            [mcPlacement]="popUpPlacements.Right">
             toggle tooltip
         </button>
     </div>

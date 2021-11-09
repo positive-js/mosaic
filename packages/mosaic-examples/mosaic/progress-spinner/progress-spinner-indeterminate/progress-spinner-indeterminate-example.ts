@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -9,4 +10,6 @@ import { Component } from '@angular/core';
     templateUrl: 'progress-spinner-indeterminate-example.html',
     styleUrls: ['progress-spinner-indeterminate-example.css']
 })
-export class ProgressSpinnerIndeterminateExample {}
+export class ProgressSpinnerIndeterminateExample {
+    themePalette = ThemePalette;
+}

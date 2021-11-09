@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Direction } from '@ptsecurity/mosaic/splitter';
 
 
 /**
@@ -9,4 +10,6 @@ import { Component } from '@angular/core';
     templateUrl: 'splitter-nested-example.html',
     styleUrls: ['splitter-nested-example.css']
 })
-export class SplitterNestedExample {}
+export class SplitterNestedExample {
+    direction = Direction;
+}

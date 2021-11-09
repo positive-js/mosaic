@@ -2,6 +2,7 @@ import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 import { McRadioButton, McRadioGroup, McRadioModule } from './index';
 
@@ -333,13 +334,13 @@ describe('MсRadio', () => {
                   [required]="isGroupRequired"
                   [value]="groupValue"
                   name="test-name">
-    <mc-radio-button value="fire" [disabled]="isFirstDisabled" [color]="color">
+    <mc-radio-button [value]="'fire'" [disabled]="isFirstDisabled" [color]="color">
       Charmander
     </mc-radio-button>
-    <mc-radio-button value="water" [color]="color">
+    <mc-radio-button [value]="'water'" [color]="color">
       Squirtle
     </mc-radio-button>
-    <mc-radio-button value="leaf" [color]="color">
+    <mc-radio-button [value]="'leaf'" [color]="color">
       Bulbasaur
     </mc-radio-button>
   </mc-radio-group>
@@ -351,7 +352,7 @@ class RadiosInsideRadioGroup {
     isGroupDisabled: boolean = false;
     isGroupRequired: boolean = false;
     groupValue: string | null = null;
-    color: string | null;
+    color: ThemePalette;
 }
 
 @Component({

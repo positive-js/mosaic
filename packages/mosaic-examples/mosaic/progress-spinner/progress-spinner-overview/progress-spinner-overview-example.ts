@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 const INTERVAL: number = 300;
@@ -14,6 +15,8 @@ const MAX_PERCENT: number = 100;
     styleUrls: ['progress-spinner-overview-example.css']
 })
 export class ProgressSpinnerOverviewExample {
+    themePalette = ThemePalette;
+
     percent: number = 0;
     intervalId: number;
 

@@ -12,6 +12,8 @@ import { PopUpPlacements } from '@ptsecurity/mosaic/core';
     encapsulation: ViewEncapsulation.None
 })
 export class TooltipOverviewExample {
+    popUpPlacements = PopUpPlacements;
+
     tooltipActiveStage: number;
     selectedOrder: boolean;
 
@@ -57,7 +59,7 @@ export class TooltipOverviewExample {
         this.activatedPosition = event;
     }
 
-    setPlacement(placement: string) {
+    setPlacement(placement: PopUpPlacements) {
         this.selectedPlacement = placement;
     }
 

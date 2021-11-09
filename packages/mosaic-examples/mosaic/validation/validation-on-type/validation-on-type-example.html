@@ -11,8 +11,8 @@
                     [mcWarningTooltip]="'Буквы и цифры'"
                     [mcEnterDelay]="10"
                     #tooltip="mcWarningTooltip"
-                    mcTrigger="manual"
-                    mcPlacement="bottom">
+                    [mcTrigger]="'manual'"
+                    [mcPlacement]="popUpPlacements.Bottom">
                     <input mcInput formControlName="folderName" (input)="onInput($event)">
 
                     <mc-cleaner></mc-cleaner>

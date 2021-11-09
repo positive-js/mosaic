@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -11,6 +12,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
     styleUrls: ['validation-overview-example.css']
 })
 export class ValidationOverviewExample {
+    themePalette = ThemePalette;
+
     feedbackForm: FormGroup;
     feedbackFormWithHints: FormGroup;
 

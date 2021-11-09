@@ -1,5 +1,6 @@
 /* tslint:disable:no-reserved-keywords object-literal-key-quotes */
 import { Component } from '@angular/core';
+import { PopUpPlacements } from '@ptsecurity/mosaic/core';
 import { FlatTreeControl, McTreeFlatDataSource, McTreeFlattener } from '@ptsecurity/mosaic/tree';
 
 
@@ -105,6 +106,8 @@ export const DATA_OBJECT = {
     styleUrls: ['tree-action-button-example.css']
 })
 export class TreeActionButtonExample {
+    popUpPlacements = PopUpPlacements;
+
     treeControl: FlatTreeControl<FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 

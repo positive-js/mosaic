@@ -849,16 +849,16 @@ class SelectionListWithCustomComparator {
                 [noUnselectLast]="false"
                 multiple="keyboard"
                 (selectionChange)="onValueChange($event)">
-            <mc-list-option checkboxPosition="before" disabled="true" value="inbox">
+            <mc-list-option checkboxPosition="before" disabled="true" [value]="'inbox'">
                 Inbox (disabled selection-option)
             </mc-list-option>
-            <mc-list-option id="testSelect" checkboxPosition="before" value="starred">
+            <mc-list-option id="testSelect" checkboxPosition="before" [value]="'starred'">
                 Starred
             </mc-list-option>
-            <mc-list-option checkboxPosition="before" value="sent-mail">
+            <mc-list-option checkboxPosition="before" [value]="'sent-mail'">
                 Sent Mail
             </mc-list-option>
-            <mc-list-option checkboxPosition="before" value="drafts" *ngIf="showLastOption">
+            <mc-list-option checkboxPosition="before" [value]="'drafts'" *ngIf="showLastOption">
                 Drafts
             </mc-list-option>
         </mc-list-selection>`
@@ -954,9 +954,9 @@ class SelectionListWithTabindexInDisabledState {
 @Component({
     template: `
         <mc-list-selection [(ngModel)]="selectedOptions" [autoSelect]="false">
-            <mc-list-option value="opt1">Option 1</mc-list-option>
-            <mc-list-option value="opt2">Option 2</mc-list-option>
-            <mc-list-option value="opt3" *ngIf="renderLastOption">Option 3</mc-list-option>
+            <mc-list-option [value]="'opt1'">Option 1</mc-list-option>
+            <mc-list-option [value]="'opt2'">Option 2</mc-list-option>
+            <mc-list-option [value]="'opt3'" *ngIf="renderLastOption">Option 3</mc-list-option>
         </mc-list-selection>`
 })
 class SelectionListWithModel {
@@ -967,9 +967,9 @@ class SelectionListWithModel {
 @Component({
     template: `
         <mc-list-selection [formControl]="formControl">
-            <mc-list-option value="opt1">Option 1</mc-list-option>
-            <mc-list-option value="opt2">Option 2</mc-list-option>
-            <mc-list-option value="opt3">Option 3</mc-list-option>
+            <mc-list-option [value]="'opt1'">Option 1</mc-list-option>
+            <mc-list-option [value]="'opt2'">Option 2</mc-list-option>
+            <mc-list-option [value]="'opt3'">Option 3</mc-list-option>
         </mc-list-selection>
     `
 })
@@ -981,8 +981,8 @@ class SelectionListWithFormControl {
 @Component({
     template: `
         <mc-list-selection [(ngModel)]="selectedOptions">
-            <mc-list-option value="opt1">Option 1</mc-list-option>
-            <mc-list-option value="opt2" selected>Option 2</mc-list-option>
+            <mc-list-option [value]="'opt1'">Option 1</mc-list-option>
+            <mc-list-option [value]="'opt2'" selected>Option 2</mc-list-option>
         </mc-list-selection>`
 })
 class SelectionListWithPreselectedOption {
@@ -993,8 +993,8 @@ class SelectionListWithPreselectedOption {
 @Component({
     template: `
         <mc-list-selection [(ngModel)]="selectedOptions">
-            <mc-list-option value="opt1">Option 1</mc-list-option>
-            <mc-list-option value="opt2" selected>Option 2</mc-list-option>
+            <mc-list-option [value]="'opt1'">Option 1</mc-list-option>
+            <mc-list-option [value]="'opt2'" selected>Option 2</mc-list-option>
         </mc-list-selection>`
 })
 class SelectionListWithPreselectedOptionAndModel {

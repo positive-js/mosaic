@@ -202,14 +202,14 @@ class NgModelSelect {
     template: `
         <mc-form-field>
             <mc-select placeholder="First">
-                <mc-option value="one">one</mc-option>
-                <mc-option value="two">two</mc-option>
+                <mc-option [value]="'one'">one</mc-option>
+                <mc-option [value]="'two'">two</mc-option>
             </mc-select>
         </mc-form-field>
         <mc-form-field>
             <mc-select placeholder="Second">
-                <mc-option value="three">three</mc-option>
-                <mc-option value="four">four</mc-option>
+                <mc-option [value]="'three'">three</mc-option>
+                <mc-option [value]="'four'">four</mc-option>
             </mc-select>
         </mc-form-field>
     `
@@ -472,7 +472,7 @@ class SelectEarlyAccessSibling {
     template: `
         <mc-form-field>
             <mc-select [style.display]="isVisible ? 'block' : 'none'">
-                <mc-option value="value">There are no other options</mc-option>
+                <mc-option [value]="'value'">There are no other options</mc-option>
             </mc-select>
         </mc-form-field>
     `
@@ -486,7 +486,7 @@ class BasicSelectInitiallyHidden {
     template: `
         <mc-form-field>
             <mc-select>
-                <mc-option value="value">There are no other options</mc-option>
+                <mc-option [value]="'value'">There are no other options</mc-option>
             </mc-select>
         </mc-form-field>
     `
@@ -499,8 +499,8 @@ class BasicSelectNoPlaceholder {
     template: `
         <mc-form-field [color]="theme">
             <mc-select placeholder="Food">
-                <mc-option value="steak-0">Steak</mc-option>
-                <mc-option value="pizza-1">Pizza</mc-option>
+                <mc-option [value]="'steak'-0">Steak</mc-option>
+                <mc-option [value]="'pizza'-1">Pizza</mc-option>
             </mc-select>
         </mc-form-field>
     `
@@ -567,7 +567,7 @@ class FalsyValueSelect {
                         {{ pokemon.viewValue }}
                     </mc-option>
                 </mc-optgroup>
-                <mc-option value="mime-11">Mr. Mime</mc-option>
+                <mc-option [value]="'mime'-11">Mr. Mime</mc-option>
             </mc-select>
         </mc-form-field>
     `
@@ -653,8 +653,8 @@ class InvalidSelectInForm {
         <form [formGroup]="formGroup">
             <mc-form-field>
                 <mc-select placeholder="Food" formControlName="food">
-                    <mc-option value="steak-0">Steak</mc-option>
-                    <mc-option value="pizza-1">Pizza</mc-option>
+                    <mc-option [value]="'steak'-0">Steak</mc-option>
+                    <mc-option [value]="'pizza'-1">Pizza</mc-option>
                 </mc-select>
 
                 <!--<mc-error>This field is required</mc-error>-->
@@ -885,7 +885,7 @@ class SelectWithoutOptionCentering {
             <!--<mc-label>Select a thing</mc-label>-->
 
             <mc-select [placeholder]="placeholder">
-                <mc-option value="thing">A thing</mc-option>
+                <mc-option [value]="'thing'">A thing</mc-option>
             </mc-select>
         </mc-form-field>
     `

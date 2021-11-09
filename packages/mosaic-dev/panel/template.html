@@ -41,11 +41,11 @@
                 class="mc-no-select"
                 [(ngModel)]="selectedItems">
 
-                <mc-list-option value="disabled" disabled>Disabled</mc-list-option>
-                <mc-list-option value="Item 1">Item 1</mc-list-option>
-                <mc-list-option value="Item 2">Item 2</mc-list-option>
-                <mc-list-option value="Item 3">Item 3</mc-list-option>
-                <mc-list-option value="Item 4">Item 4</mc-list-option>
+                <mc-list-option [value]="'disabled'" disabled>Disabled</mc-list-option>
+                <mc-list-option [value]="'Item 1'">Item 1</mc-list-option>
+                <mc-list-option [value]="'Item 2'">Item 2</mc-list-option>
+                <mc-list-option [value]="'Item 3'">Item 3</mc-list-option>
+                <mc-list-option [value]="'Item 4'">Item 4</mc-list-option>
             </mc-list-selection>
         </div>
         <div class="mc-panel list list__short">
@@ -53,11 +53,11 @@
                 class="mc-no-select"
                 [(ngModel)]="selectedItems">
 
-                <mc-list-option value="disabled" disabled>Disabled</mc-list-option>
-                <mc-list-option value="Item 1">Item 1</mc-list-option>
-                <mc-list-option value="Item 2">Item 2</mc-list-option>
-                <mc-list-option value="Item 3">Item 3</mc-list-option>
-                <mc-list-option value="Item 4">Item 4</mc-list-option>
+                <mc-list-option [value]="'disabled'" disabled>Disabled</mc-list-option>
+                <mc-list-option [value]="'Item 1'">Item 1</mc-list-option>
+                <mc-list-option [value]="'Item 2'">Item 2</mc-list-option>
+                <mc-list-option [value]="'Item 3'">Item 3</mc-list-option>
+                <mc-list-option [value]="'Item 4'">Item 4</mc-list-option>
             </mc-list-selection>
         </div>
         <div class="mc-panel list list__short">
@@ -66,11 +66,11 @@
                     class="mc-no-select"
                     [(ngModel)]="selectedItems">
 
-                    <mc-list-option value="disabled" disabled>Disabled</mc-list-option>
-                    <mc-list-option value="Item 1">Item 1</mc-list-option>
-                    <mc-list-option value="Item 2">Item 2</mc-list-option>
-                    <mc-list-option value="Item 3">Item 3</mc-list-option>
-                    <mc-list-option value="Item 4">Item 4</mc-list-option>
+                    <mc-list-option [value]="'disabled'" disabled>Disabled</mc-list-option>
+                    <mc-list-option [value]="'Item 1'">Item 1</mc-list-option>
+                    <mc-list-option [value]="'Item 2'">Item 2</mc-list-option>
+                    <mc-list-option [value]="'Item 3'">Item 3</mc-list-option>
+                    <mc-list-option [value]="'Item 4'">Item 4</mc-list-option>
                 </mc-list-selection>
             </div>
         </div>
@@ -99,10 +99,10 @@
                     [(ngModel)]="narwhalCategories"
                     multiple="false">
 
-                    <mc-list-option value="all" disabled>All narwhals</mc-list-option>
-                    <mc-list-option value="grey">Grey narwhals</mc-list-option>
-                    <mc-list-option value="pink">Pink narwhals</mc-list-option>
-                    <mc-list-option value="cute">Cute narwhals</mc-list-option>
+                    <mc-list-option [value]="'all'" disabled>All narwhals</mc-list-option>
+                    <mc-list-option [value]="'grey'">Grey narwhals</mc-list-option>
+                    <mc-list-option [value]="'pink'">Pink narwhals</mc-list-option>
+                    <mc-list-option [value]="'cute'">Cute narwhals</mc-list-option>
                 </mc-list-selection>
             </div>
             <div class="narwhals__main">

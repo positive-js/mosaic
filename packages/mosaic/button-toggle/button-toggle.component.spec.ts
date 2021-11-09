@@ -638,15 +638,10 @@ describe('McButtonToggle without forms', () => {
         <mc-button-toggle-group [disabled]="isGroupDisabled"
                                 [vertical]="isVertical"
                                 [(value)]="groupValue">
-            <mc-button-toggle value="test1" *ngIf="renderFirstToggle">
-                Test1
-            </mc-button-toggle>
-            <mc-button-toggle value="test2">
-                Test2
-            </mc-button-toggle>
-            <mc-button-toggle value="test3">
-                Test3
-            </mc-button-toggle>
+
+            <mc-button-toggle [value]="'test1'" *ngIf="renderFirstToggle">Test1</mc-button-toggle>
+            <mc-button-toggle [value]="'test2'">Test2</mc-button-toggle>
+            <mc-button-toggle [value]="'test3'">Test3</mc-button-toggle>
         </mc-button-toggle-group>
     `
 })
@@ -683,15 +678,9 @@ class ButtonToggleGroupWithNgModel {
 @Component({
     template: `
         <mc-button-toggle-group [disabled]="isGroupDisabled" [vertical]="isVertical" multiple>
-            <mc-button-toggle value="eggs">
-                Eggs
-            </mc-button-toggle>
-            <mc-button-toggle value="flour">
-                Flour
-            </mc-button-toggle>
-            <mc-button-toggle value="sugar">
-                Sugar
-            </mc-button-toggle>
+            <mc-button-toggle [value]="'eggs'">Eggs</mc-button-toggle>
+            <mc-button-toggle [value]="'flour'">Flour</mc-button-toggle>
+            <mc-button-toggle [value]="'sugar'">Sugar</mc-button-toggle>
         </mc-button-toggle-group>
     `
 })
@@ -703,15 +692,9 @@ class ButtonTogglesInsideButtonToggleGroupMultiple {
 @Component({
     template: `
         <mc-button-toggle-group multiple [value]="value">
-            <mc-button-toggle [value]="0">
-                Eggs
-            </mc-button-toggle>
-            <mc-button-toggle [value]="null">
-                Flour
-            </mc-button-toggle>
-            <mc-button-toggle [value]="false">
-                Sugar
-            </mc-button-toggle>
+            <mc-button-toggle [value]="0">Eggs</mc-button-toggle>
+            <mc-button-toggle [value]="null">Flour</mc-button-toggle>
+            <mc-button-toggle [value]="false">Sugar</mc-button-toggle>
             <mc-button-toggle>Sugar</mc-button-toggle>
         </mc-button-toggle-group>
     `
@@ -733,13 +716,9 @@ class StandaloneButtonToggle {
 
 @Component({
     template: `
-        <mc-button-toggle-group (change)="lastEvent = $event" value="red">
-            <mc-button-toggle value="red">
-                Value Red
-            </mc-button-toggle>
-            <mc-button-toggle value="green">
-                Value Green
-            </mc-button-toggle>
+        <mc-button-toggle-group (change)="lastEvent = $event" [value]="'red'">
+            <mc-button-toggle [value]="'red'">Value Red</mc-button-toggle>
+            <mc-button-toggle [value]="'green'">Value Green</mc-button-toggle>
         </mc-button-toggle-group>
     `
 })
@@ -750,15 +729,9 @@ class ButtonToggleGroupWithInitialValue {
 @Component({
     template: `
         <mc-button-toggle-group [formControl]="control">
-            <mc-button-toggle value="red">
-                Value Red
-            </mc-button-toggle>
-            <mc-button-toggle value="green">
-                Value Green
-            </mc-button-toggle>
-            <mc-button-toggle value="blue">
-                Value Blue
-            </mc-button-toggle>
+            <mc-button-toggle [value]="'red'">Value Red</mc-button-toggle>
+            <mc-button-toggle [value]="'green'">Value Green</mc-button-toggle>
+            <mc-button-toggle [value]="'blue'">Value Blue</mc-button-toggle>
         </mc-button-toggle-group>
     `
 })

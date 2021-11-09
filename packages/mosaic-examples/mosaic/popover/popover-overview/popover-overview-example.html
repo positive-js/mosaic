@@ -45,9 +45,9 @@
 
                 <mc-form-field id="element" class="mc-form__control">
                     <mc-select [(value)]="selectedElement" [placeholder]="'Select element'">
-                        <mc-option value="button">Button</mc-option>
-                        <mc-option value="icon">Icon</mc-option>
-                        <mc-option value="input">Input</mc-option>
+                        <mc-option [value]="'button'">Button</mc-option>
+                        <mc-option [value]="'icon'">Icon</mc-option>
+                        <mc-option [value]="'input'">Input</mc-option>
                     </mc-select>
                 </mc-form-field>
             </div>
@@ -59,9 +59,9 @@
 
                 <mc-form-field id="size" class="mc-form__control">
                     <mc-select [(value)]="selectedSize" [placeholder]="'Select size'">
-                        <mc-option value="small">Small</mc-option>
-                        <mc-option value="normal">Normal</mc-option>
-                        <mc-option value="large">Large</mc-option>
+                        <mc-option [value]="'small'">Small</mc-option>
+                        <mc-option [value]="'normal'">Normal</mc-option>
+                        <mc-option [value]="'large'">Large</mc-option>
                     </mc-select>
                 </mc-form-field>
             </div>
@@ -73,15 +73,15 @@
 
                 <mc-form-field id="layout" class="mc-form__control">
                     <mc-select [(value)]="layoutClass" [placeholder]="'Select layout'">
-                        <mc-option value="layout-row layout-align-start-start">Start start</mc-option>
-                        <mc-option value="layout-row layout-align-start-center">Start center</mc-option>
-                        <mc-option value="layout-row layout-align-start-end">Start end</mc-option>
-                        <mc-option value="layout-row layout-align-center-start">Center start</mc-option>
-                        <mc-option value="layout-row layout-align-center-center">Center center</mc-option>
-                        <mc-option value="layout-row layout-align-center-end">Center end</mc-option>
-                        <mc-option value="layout-row layout-align-end-start">End start</mc-option>
-                        <mc-option value="layout-row layout-align-end-center">End center</mc-option>
-                        <mc-option value="layout-row layout-align-end-end">End end</mc-option>
+                        <mc-option [value]="'layout-row layout-align-start-start'">Start start</mc-option>
+                        <mc-option [value]="'layout-row layout-align-start-center'">Start center</mc-option>
+                        <mc-option [value]="'layout-row layout-align-start-end'">Start end</mc-option>
+                        <mc-option [value]="'layout-row layout-align-center-start'">Center start</mc-option>
+                        <mc-option [value]="'layout-row layout-align-center-center'">Center center</mc-option>
+                        <mc-option [value]="'layout-row layout-align-center-end'">Center end</mc-option>
+                        <mc-option [value]="'layout-row layout-align-end-start'">End start</mc-option>
+                        <mc-option [value]="'layout-row layout-align-end-center'">End center</mc-option>
+                        <mc-option [value]="'layout-row layout-align-end-end'">End end</mc-option>
                     </mc-select>
                 </mc-form-field>
             </div>
@@ -172,18 +172,18 @@
 
                 <mc-form-field class="mc-form__control">
                     <mc-select multiple [(value)]="multipleSelected">
-                        <mc-option value="top" disabled>Top</mc-option>
-                        <mc-option value="topLeft">TopLeft</mc-option>
-                        <mc-option value="topRight">TopRight</mc-option>
-                        <mc-option value="bottom">Bottom</mc-option>
-                        <mc-option value="bottomLeft">BottomLeft</mc-option>
-                        <mc-option value="bottomRight">BottomRight</mc-option>
-                        <mc-option value="right">Right</mc-option>
-                        <mc-option value="rightTop">RightTop</mc-option>
-                        <mc-option value="rightBottom">RightBottom</mc-option>
-                        <mc-option value="left">Left</mc-option>
-                        <mc-option value="leftTop">LeftTop</mc-option>
-                        <mc-option value="leftBottom">LeftBottom</mc-option>
+                        <mc-option [value]="popUpPlacements.Top" disabled>Top</mc-option>
+                        <mc-option [value]="popUpPlacements.TopLeft">TopLeft</mc-option>
+                        <mc-option [value]="popUpPlacements.TopRight">TopRight</mc-option>
+                        <mc-option [value]="popUpPlacements.Bottom">Bottom</mc-option>
+                        <mc-option [value]="popUpPlacements.BottomLeft">BottomLeft</mc-option>
+                        <mc-option [value]="popUpPlacements.BottomRight">BottomRight</mc-option>
+                        <mc-option [value]="popUpPlacements.Right">Right</mc-option>
+                        <mc-option [value]="popUpPlacements.RightTop">RightTop</mc-option>
+                        <mc-option [value]="popUpPlacements.RightBottom">RightBottom</mc-option>
+                        <mc-option [value]="popUpPlacements.Left">Left</mc-option>
+                        <mc-option [value]="popUpPlacements.LeftTop">LeftTop</mc-option>
+                        <mc-option [value]="popUpPlacements.LeftBottom">LeftBottom</mc-option>
                     </mc-select>
                 </mc-form-field>
             </div>
@@ -206,8 +206,8 @@
             <button mc-button
                     *ngSwitchCase="ELEMENTS.BUTTON"
                     mcPopover
-                    mcPopoverClass="popover-485"
-                    mcPopoverHeader="Header text"
+                    [mcPopoverClass]="'popover-485'"
+                    [mcPopoverHeader]="'Header text'"
                     [mcPlacement]="selectedPlacement"
                     [mcPlacementPriority]="multipleSelected"
                     [mcPopoverSize]="selectedSize"
@@ -222,8 +222,8 @@
                        [(ngModel)]="content"
                        placeholder="Button content"
                        mcPopover
-                       mcPopoverClass="popover-485"
-                       mcPopoverHeader="Lorem ipsum"
+                       [mcPopoverClass]="'popover-485'"
+                       [mcPopoverHeader]="'Lorem ipsum'"
                        [mcPlacement]="selectedPlacement"
                        [mcPlacementPriority]="multipleSelected"
                        [mcPopoverSize]="selectedSize"
@@ -235,8 +235,8 @@
             <div *ngSwitchCase="ELEMENTS.ICON">
                 <i mc-icon="mc-calendar_16"
                    mcPopover
-                   mcPopoverClass="popover-485"
-                   mcPopoverHeader="Header text"
+                   [mcPopoverClass]="'popover-485'"
+                   [mcPopoverHeader]="'Header text'"
                    [mcPlacement]="selectedPlacement"
                    [mcPlacementPriority]="multipleSelected"
                    [mcPopoverSize]="selectedSize"

@@ -106,25 +106,25 @@
 
         <label>Horizontal Group</label>
         <mc-button-toggle-group #group1="mcButtonToggleGroup">
-            <mc-button-toggle value="1">
+            <mc-button-toggle [value]="'1'">
                 default 1
             </mc-button-toggle>
-            <mc-button-toggle value="2">
+            <mc-button-toggle [value]="'2'">
                 default 2
             </mc-button-toggle>
-            <mc-button-toggle value="3">
+            <mc-button-toggle [value]="'3'">
                 default 3
             </mc-button-toggle>
-            <mc-button-toggle value="4" [disabled]="true">
+            <mc-button-toggle [value]="'4'" [disabled]="true">
                 default 4
             </mc-button-toggle>
-            <mc-button-toggle value="5">
+            <mc-button-toggle [value]="'5'">
                 <i mc-icon="mc-angle-down-L_16"></i>
             </mc-button-toggle>
-            <mc-button-toggle value="6">
+            <mc-button-toggle [value]="'6'">
                 default 6
             </mc-button-toggle>
-            <mc-button-toggle value="7">
+            <mc-button-toggle [value]="'7'">
                 <i mc-icon="mc-angle-down-L_16"></i>
             </mc-button-toggle>
         </mc-button-toggle-group>
@@ -142,16 +142,16 @@
         <br>
 
         <mc-button-toggle-group [disabled]="disabled" #disabledGroup="mcButtonToggleGroup">
-            <mc-button-toggle value="1">
+            <mc-button-toggle [value]="'1'">
                 default 1
             </mc-button-toggle>
-            <mc-button-toggle value="2" [disabled]="true">
+            <mc-button-toggle [value]="'2'" [disabled]="true">
                 default 2
             </mc-button-toggle>
-            <mc-button-toggle value="3">
+            <mc-button-toggle [value]="'3'">
                 default 3
             </mc-button-toggle>
-            <mc-button-toggle value="4">
+            <mc-button-toggle [value]="'4'">
                 <i mc-icon="mc-angle-down-L_16"></i>
             </mc-button-toggle>
         </mc-button-toggle-group>
@@ -161,16 +161,16 @@
 
         <label>Multiple Group</label>
         <mc-button-toggle-group [multiple]="true" #multipleGroup="mcButtonToggleGroup">
-            <mc-button-toggle value="1">
+            <mc-button-toggle [value]="'1'">
                 default 1
             </mc-button-toggle>
-            <mc-button-toggle value="2" [disabled]="true">
+            <mc-button-toggle [value]="'2'" [disabled]="true">
                 default 2
             </mc-button-toggle>
-            <mc-button-toggle value="3">
+            <mc-button-toggle [value]="'3'">
                 default
             </mc-button-toggle>
-            <mc-button-toggle value="4">
+            <mc-button-toggle [value]="'4'">
                 <i mc-icon="mc-angle-down-L_16"></i>
             </mc-button-toggle>
         </mc-button-toggle-group>
@@ -182,7 +182,7 @@
 
         <br>
 
-        <mc-button-toggle value="123" #standAloneToggle="mcButtonToggle">
+        <mc-button-toggle [value]="'123'" #standAloneToggle="mcButtonToggle">
             default
         </mc-button-toggle>
         <div class="example-selected-value">Selected value: {{standAloneToggle.checked}}</div>
@@ -192,16 +192,16 @@
         <label>Vertical Group</label>
 
         <mc-button-toggle-group #group3="mcButtonToggleGroup" [vertical]="true">
-            <mc-button-toggle value="1">
+            <mc-button-toggle [value]="'1'">
                 default 1
             </mc-button-toggle>
-            <mc-button-toggle value="2" [disabled]="true">
+            <mc-button-toggle [value]="'2'" [disabled]="true">
                 default 2
             </mc-button-toggle>
-            <mc-button-toggle value="3">
+            <mc-button-toggle [value]="'3'">
                 default 3
             </mc-button-toggle>
-            <mc-button-toggle value="4">
+            <mc-button-toggle [value]="'4'">
                 <i mc-icon="mc-angle-down-L_16"></i>
             </mc-button-toggle>
         </mc-button-toggle-group>
@@ -212,16 +212,16 @@
         <label>Group With Model</label>
 
         <mc-button-toggle-group [(ngModel)]="buttonToggleModelResult">
-            <mc-button-toggle value="1">
+            <mc-button-toggle [value]="'1'">
                 default 1
             </mc-button-toggle>
-            <mc-button-toggle value="2" [disabled]="true">
+            <mc-button-toggle [value]="'2'" [disabled]="true">
                 default 2
             </mc-button-toggle>
-            <mc-button-toggle value="3">
+            <mc-button-toggle [value]="'3'">
                 default 3
             </mc-button-toggle>
-            <mc-button-toggle value="4">
+            <mc-button-toggle [value]="'4'">
                 <i mc-icon="mc-angle-down-L_16"></i>
             </mc-button-toggle>
         </mc-button-toggle-group>
@@ -661,11 +661,11 @@
         <mc-list-selection
             class="mc-no-select"
             [(ngModel)]="multipleSelected">
-            <mc-list-option value="Disabled" disabled>Disabled</mc-list-option>
-            <mc-list-option value="Normal">Normal</mc-list-option>
-            <mc-list-option value="Hovered" class="mc-hovered">Hovered</mc-list-option>
-            <mc-list-option value="Focused" class="mc-focused">Focused</mc-list-option>
-            <mc-list-option value="Selected" class="mc-selected">Selected</mc-list-option>
+            <mc-list-option [value]="'Disabled'" disabled>Disabled</mc-list-option>
+            <mc-list-option [value]="'Normal'">Normal</mc-list-option>
+            <mc-list-option [value]="'Hovered'" class="mc-hovered">Hovered</mc-list-option>
+            <mc-list-option [value]="'Focused'" class="mc-focused">Focused</mc-list-option>
+            <mc-list-option [value]="'Selected'" class="mc-selected">Selected</mc-list-option>
         </mc-list-selection>
     </div>
 
@@ -793,21 +793,21 @@
         <div class="dev-container">
             <mc-form-field>
                 <mc-select [(value)]="singleSelected">
-                    <mc-option value="Disabled" disabled>Disabled</mc-option>
-                    <mc-option value="Normal">Normal</mc-option>
-                    <mc-option value="Hovered">Hovered</mc-option>
-                    <mc-option value="Focused">Focused</mc-option>
-                    <mc-option value="Selected">Selected</mc-option>
-                    <mc-option value="Selected1">Selected1</mc-option>
-                    <mc-option value="Selected2">Selected2</mc-option>
-                    <mc-option value="Selected3">Selected3</mc-option>
-                    <mc-option value="Selected4">Selected4</mc-option>
-                    <mc-option value="Selected5">Selected5</mc-option>
-                    <mc-option value="Selected6">Selected6</mc-option>
-                    <mc-option value="Selected7">Selected7</mc-option>
-                    <mc-option value="Selected8">Selected8</mc-option>
-                    <mc-option value="Selected9">Selected9</mc-option>
-                    <mc-option value="Selected10">Selected10</mc-option>
+                    <mc-option [value]="'Disabled'" disabled>Disabled</mc-option>
+                    <mc-option [value]="'Normal'">Normal</mc-option>
+                    <mc-option [value]="'Hovered'">Hovered</mc-option>
+                    <mc-option [value]="'Focused'">Focused</mc-option>
+                    <mc-option [value]="'Selected'">Selected</mc-option>
+                    <mc-option [value]="'Selected1'">Selected1</mc-option>
+                    <mc-option [value]="'Selected2'">Selected2</mc-option>
+                    <mc-option [value]="'Selected3'">Selected3</mc-option>
+                    <mc-option [value]="'Selected4'">Selected4</mc-option>
+                    <mc-option [value]="'Selected5'">Selected5</mc-option>
+                    <mc-option [value]="'Selected6'">Selected6</mc-option>
+                    <mc-option [value]="'Selected7'">Selected7</mc-option>
+                    <mc-option [value]="'Selected8'">Selected8</mc-option>
+                    <mc-option [value]="'Selected9'">Selected9</mc-option>
+                    <mc-option [value]="'Selected10'">Selected10</mc-option>
                 </mc-select>
             </mc-form-field>
 
@@ -815,7 +815,7 @@
 
             <mc-form-field>
                 <mc-select [formControl]="singleSelectFormControl">
-                    <mc-option value="Normal">Normal</mc-option>
+                    <mc-option [value]="'Normal'">Normal</mc-option>
                 </mc-select>
             </mc-form-field>
 
@@ -823,7 +823,7 @@
 
             <mc-form-field>
                 <mc-select [(value)]="singleSelected" [disabled]="true">
-                    <mc-option value="Normal">Normal</mc-option>
+                    <mc-option [value]="'Normal'">Normal</mc-option>
                 </mc-select>
             </mc-form-field>
         </div>
@@ -833,23 +833,23 @@
         <div class="dev-container">
             <mc-form-field>
                 <mc-select [multiple]="true" [(value)]="multipleSelected">
-                    <mc-option value="Disabled" disabled>Disabled</mc-option>
-                    <mc-option value="Normal">Normal</mc-option>
-                    <mc-option value="Hovered">Hovered</mc-option>
-                    <mc-option value="FocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocused">
+                    <mc-option [value]="'Disabled'" disabled>Disabled</mc-option>
+                    <mc-option [value]="'Normal'">Normal</mc-option>
+                    <mc-option [value]="'Hovered'">Hovered</mc-option>
+                    <mc-option [value]="'FocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocused'">
                         FocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocusedFocused
                     </mc-option>
-                    <mc-option value="Selected">Selected</mc-option>
-                    <mc-option value="Selected1">Selected1</mc-option>
-                    <mc-option value="Selected2">Selected2</mc-option>
-                    <mc-option value="Selected3">Selected3</mc-option>
-                    <mc-option value="Selected4">Selected4</mc-option>
-                    <mc-option value="Selected5">Selected5</mc-option>
-                    <mc-option value="Selected6">Selected6</mc-option>
-                    <mc-option value="Selected7">Selected7</mc-option>
-                    <mc-option value="Selected8">Selected8</mc-option>
-                    <mc-option value="Selected9">Selected9</mc-option>
-                    <mc-option value="Selected10">Selected10</mc-option>
+                    <mc-option [value]="'Selected'">Selected</mc-option>
+                    <mc-option [value]="'Selected1'">Selected1</mc-option>
+                    <mc-option [value]="'Selected2'">Selected2</mc-option>
+                    <mc-option [value]="'Selected3'">Selected3</mc-option>
+                    <mc-option [value]="'Selected4'">Selected4</mc-option>
+                    <mc-option [value]="'Selected5'">Selected5</mc-option>
+                    <mc-option [value]="'Selected6'">Selected6</mc-option>
+                    <mc-option [value]="'Selected7'">Selected7</mc-option>
+                    <mc-option [value]="'Selected8'">Selected8</mc-option>
+                    <mc-option [value]="'Selected9'">Selected9</mc-option>
+                    <mc-option [value]="'Selected10'">Selected10</mc-option>
                 </mc-select>
             </mc-form-field>
 
@@ -857,10 +857,10 @@
 
             <mc-form-field>
                 <mc-select [multiple]="true" [formControl]="multiSelectSelectFormControl">
-                    <mc-option value="Normal">Normal</mc-option>
-                    <mc-option value="Hovered">Hovered</mc-option>
-                    <mc-option value="Selected">Selected</mc-option>
-                    <mc-option value="Selected1">Selected1</mc-option>
+                    <mc-option [value]="'Normal'">Normal</mc-option>
+                    <mc-option [value]="'Hovered'">Hovered</mc-option>
+                    <mc-option [value]="'Selected'">Selected</mc-option>
+                    <mc-option [value]="'Selected1'">Selected1</mc-option>
                 </mc-select>
             </mc-form-field>
 
@@ -868,10 +868,10 @@
 
             <mc-form-field>
                 <mc-select [multiple]="true" [(value)]="multipleSelected" [disabled]="true">
-                    <mc-option value="Normal">Normal</mc-option>
-                    <mc-option value="Hovered">Hovered</mc-option>
-                    <mc-option value="Selected">Selected</mc-option>
-                    <mc-option value="Selected1">Selected1</mc-option>
+                    <mc-option [value]="'Normal'">Normal</mc-option>
+                    <mc-option [value]="'Hovered'">Hovered</mc-option>
+                    <mc-option [value]="'Selected'">Selected</mc-option>
+                    <mc-option [value]="'Selected1'">Selected1</mc-option>
                 </mc-select>
             </mc-form-field>
         </div>
@@ -1267,10 +1267,10 @@
         <div class="mc-group">
             <mc-form-field class="mc-group-item">
                 <mc-select [multiple]="true" [formControl]="multiSelectSelectFormControl">
-                    <mc-option value="Normal">Normal</mc-option>
-                    <mc-option value="Hovered">Hovered</mc-option>
-                    <mc-option value="Selected">Selected</mc-option>
-                    <mc-option value="Selected1">Selected1</mc-option>
+                    <mc-option [value]="'Normal'">Normal</mc-option>
+                    <mc-option [value]="'Hovered'">Hovered</mc-option>
+                    <mc-option [value]="'Selected'">Selected</mc-option>
+                    <mc-option [value]="'Selected1'">Selected1</mc-option>
                 </mc-select>
             </mc-form-field>
 
@@ -1288,10 +1288,10 @@
 
             <mc-form-field class="mc-group-item">
                 <mc-select [multiple]="true" [formControl]="multiSelectSelectFormControl">
-                    <mc-option value="Normal">Normal</mc-option>
-                    <mc-option value="Hovered">Hovered</mc-option>
-                    <mc-option value="Selected">Selected</mc-option>
-                    <mc-option value="Selected1">Selected1</mc-option>
+                    <mc-option [value]="'Normal'">Normal</mc-option>
+                    <mc-option [value]="'Hovered'">Hovered</mc-option>
+                    <mc-option [value]="'Selected'">Selected</mc-option>
+                    <mc-option [value]="'Selected1'">Selected1</mc-option>
                 </mc-select>
             </mc-form-field>
         </div>

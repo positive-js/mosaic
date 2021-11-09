@@ -23,11 +23,11 @@
 
                 <mc-form-field id="element" class="mc-form__control">
                     <mc-select [(value)]="selectedElement" [placeholder]="'Select element'">
-                        <mc-option value="button">Button</mc-option>
-                        <mc-option value="icon">Icon</mc-option>
-                        <mc-option value="input">Input</mc-option>
-                        <mc-option value="warning">warning</mc-option>
-                        <mc-option value="extended">extended</mc-option>
+                        <mc-option [value]="'button'">Button</mc-option>
+                        <mc-option [value]="'icon'">Icon</mc-option>
+                        <mc-option [value]="'input'">Input</mc-option>
+                        <mc-option [value]="'warning'">warning</mc-option>
+                        <mc-option [value]="'extended'">extended</mc-option>
                     </mc-select>
                 </mc-form-field>
             </div>
@@ -39,15 +39,15 @@
 
                 <mc-form-field id="layout" class="mc-form__control">
                     <mc-select [(value)]="layoutClass" [placeholder]="'Select layout'">
-                        <mc-option value="layout-row layout-align-start-start">Start start</mc-option>
-                        <mc-option value="layout-row layout-align-start-center">Start center</mc-option>
-                        <mc-option value="layout-row layout-align-start-end">Start end</mc-option>
-                        <mc-option value="layout-row layout-align-center-start">Center start</mc-option>
-                        <mc-option value="layout-row layout-align-center-center">Center center</mc-option>
-                        <mc-option value="layout-row layout-align-center-end">Center end</mc-option>
-                        <mc-option value="layout-row layout-align-end-start">End start</mc-option>
-                        <mc-option value="layout-row layout-align-end-center">End center</mc-option>
-                        <mc-option value="layout-row layout-align-end-end">End end</mc-option>
+                        <mc-option [value]="'layout-row layout-align-start-start'">Start start</mc-option>
+                        <mc-option [value]="'layout-row layout-align-start-center'">Start center</mc-option>
+                        <mc-option [value]="'layout-row layout-align-start-end'">Start end</mc-option>
+                        <mc-option [value]="'layout-row layout-align-center-start'">Center start</mc-option>
+                        <mc-option [value]="'layout-row layout-align-center-center'">Center center</mc-option>
+                        <mc-option [value]="'layout-row layout-align-center-end'">Center end</mc-option>
+                        <mc-option [value]="'layout-row layout-align-end-start'">End start</mc-option>
+                        <mc-option [value]="'layout-row layout-align-end-center'">End center</mc-option>
+                        <mc-option [value]="'layout-row layout-align-end-end'">End end</mc-option>
                     </mc-select>
                 </mc-form-field>
             </div>
@@ -57,73 +57,73 @@
                 Choose mcPlacement
             </label>
             <div class="visual-box">
-                <div (click)="setPlacement('topLeft')"
+                <div (click)="setPlacement(popUpPlacements.TopLeft)"
                      [ngClass]="{
                         active: activated('topLeft'),
                         actual: isActual('topLeft')
                      }"
                      class="visual-box_clickable visual-box_placement-top-left"></div>
-                <div (click)="setPlacement('top')"
+                <div (click)="setPlacement(popUpPlacements.Top)"
                      [ngClass]="{
                         active: activated('top'),
                         actual: isActual('top')
                      }"
                      class="visual-box_clickable visual-box_placement-top"></div>
-                <div (click)="setPlacement('topRight')"
+                <div (click)="setPlacement(popUpPlacements.TopRight)"
                      [ngClass]="{
                         active: activated('topRight'),
                         actual: isActual('topRight')
                      }"
                      class="visual-box_clickable visual-box_placement-top-right"></div>
-                <div (click)="setPlacement('rightTop')"
+                <div (click)="setPlacement(popUpPlacements.RightTop)"
                      [ngClass]="{
                         active: activated('rightTop'),
                         actual: isActual('rightTop')
                      }"
                      class="visual-box_clickable visual-box_placement-right-top"></div>
-                <div (click)="setPlacement('right')"
+                <div (click)="setPlacement(popUpPlacements.Right)"
                      [ngClass]="{
                         active: activated('right'),
                         actual: isActual('right')
                      }"
                      class="visual-box_clickable visual-box_placement-right"></div>
-                <div (click)="setPlacement('rightBottom')"
+                <div (click)="setPlacement(popUpPlacements.RightBottom)"
                      [ngClass]="{
                         active: activated('rightBottom'),
                         actual: isActual('rightBottom')
                      }"
                      class="visual-box_clickable visual-box_placement-right-bottom"></div>
-                <div (click)="setPlacement('bottomRight')"
+                <div (click)="setPlacement(popUpPlacements.BottomRight)"
                      [ngClass]="{
                         active: activated('bottomRight'),
                         actual: isActual('bottomRight')
                      }"
                      class="visual-box_clickable visual-box_placement-bottom-right"></div>
-                <div (click)="setPlacement('bottom')"
+                <div (click)="setPlacement(popUpPlacements.Bottom)"
                      [ngClass]="{
                         active: activated('bottom'),
                         actual: isActual('bottom')
                      }"
                      class="visual-box_clickable visual-box_placement-bottom"></div>
-                <div (click)="setPlacement('bottomLeft')"
+                <div (click)="setPlacement(popUpPlacements.BottomLeft)"
                      [ngClass]="{
                         active: activated('bottomLeft'),
                         actual: isActual('bottomLeft')
                      }"
                      class="visual-box_clickable visual-box_placement-bottom-left"></div>
-                <div (click)="setPlacement('leftBottom')"
+                <div (click)="setPlacement(popUpPlacements.LeftBottom)"
                      [ngClass]="{
                         active: activated('leftBottom'),
                         actual: isActual('leftBottom')
                      }"
                      class="visual-box_clickable visual-box_placement-left-bottom"></div>
-                <div (click)="setPlacement('left')"
+                <div (click)="setPlacement(popUpPlacements.Left)"
                      [ngClass]="{
                         active: activated('left'),
                         actual: isActual('left')
                      }"
                      class="visual-box_clickable visual-box_placement-left"></div>
-                <div (click)="setPlacement('leftTop')"
+                <div (click)="setPlacement(popUpPlacements.LeftTop)"
                      [ngClass]="{
                         active: activated('leftTop'),
                         actual: isActual('leftTop')
@@ -138,18 +138,18 @@
 
                 <mc-form-field class="mc-form__control">
                     <mc-select multiple [(value)]="multipleSelected">
-                        <mc-option value="top" disabled>Top</mc-option>
-                        <mc-option value="topLeft">TopLeft</mc-option>
-                        <mc-option value="topRight">TopRight</mc-option>
-                        <mc-option value="bottom">Bottom</mc-option>
-                        <mc-option value="bottomLeft">BottomLeft</mc-option>
-                        <mc-option value="bottomRight">BottomRight</mc-option>
-                        <mc-option value="right">Right</mc-option>
-                        <mc-option value="rightTop">RightTop</mc-option>
-                        <mc-option value="rightBottom">RightBottom</mc-option>
-                        <mc-option value="left">Left</mc-option>
-                        <mc-option value="leftTop">LeftTop</mc-option>
-                        <mc-option value="leftBottom">LeftBottom</mc-option>
+                        <mc-option [value]="popUpPlacements.Top" disabled>Top</mc-option>
+                        <mc-option [value]="popUpPlacements.TopLeft">TopLeft</mc-option>
+                        <mc-option [value]="popUpPlacements.TopRight">TopRight</mc-option>
+                        <mc-option [value]="popUpPlacements.Bottom">Bottom</mc-option>
+                        <mc-option [value]="popUpPlacements.BottomLeft">BottomLeft</mc-option>
+                        <mc-option [value]="popUpPlacements.BottomRight">BottomRight</mc-option>
+                        <mc-option [value]="popUpPlacements.Right">Right</mc-option>
+                        <mc-option [value]="popUpPlacements.RightTop">RightTop</mc-option>
+                        <mc-option [value]="popUpPlacements.RightBottom">RightBottom</mc-option>
+                        <mc-option [value]="popUpPlacements.Left">Left</mc-option>
+                        <mc-option [value]="popUpPlacements.LeftTop">LeftTop</mc-option>
+                        <mc-option [value]="popUpPlacements.LeftBottom">LeftBottom</mc-option>
                     </mc-select>
                 </mc-form-field>
             </div>

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { PopUpPlacements } from '@ptsecurity/mosaic/core';
+import { PopUpPlacements, PopUpSizes } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -33,8 +33,8 @@ export class PopoverOverviewExample {
     };
 
     selectedElement: string = 'button';
-    selectedPlacement: string = 'left';
-    selectedSize: string = 'normal';
+    selectedPlacement: PopUpPlacements = PopUpPlacements.Left;
+    selectedSize: PopUpSizes = PopUpSizes.Normal;
     layoutClass: string = 'layout-row layout-align-center-center';
     content: string = 'button text';
     userDefinedPlacementPriority: string[] = ['bottom', 'right'];

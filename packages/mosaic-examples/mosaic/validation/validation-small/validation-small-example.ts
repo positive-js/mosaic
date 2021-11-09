@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 function emptyFormValidator(): ValidatorFn {
@@ -18,6 +19,8 @@ function emptyFormValidator(): ValidatorFn {
     styleUrls: ['validation-small-example.css']
 })
 export class ValidationSmallExample {
+    themePalette = ThemePalette;
+
     smallForm: FormGroup;
 
     constructor() {

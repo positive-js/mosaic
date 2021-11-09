@@ -2,7 +2,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
-import { McHighlightModule } from '@ptsecurity/mosaic/core';
+import { McHighlightModule, McOptionModule } from '@ptsecurity/mosaic/core';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
@@ -49,6 +49,7 @@ const EXAMPLES = [
         McCheckboxModule,
         McDropdownModule,
         McToolTipModule,
+        McOptionModule,
         ClipboardModule
     ],
     declarations: EXAMPLES,

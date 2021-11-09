@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -11,6 +12,8 @@ import { FormControl, FormGroup } from '@angular/forms';
     styleUrls: ['validation-global-example.css']
 })
 export class ValidationGlobalExample {
+    themePalette = ThemePalette;
+
     globalErrorForm: FormGroup;
     showServerErrors: boolean = false;
     inProgress: boolean = false;

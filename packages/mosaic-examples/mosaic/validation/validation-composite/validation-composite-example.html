@@ -14,8 +14,8 @@
                     [mcWarningTooltip]="'Только цифры'"
                     [mcEnterDelay]="10"
                     #startTooltip="mcWarningTooltip"
-                    mcTrigger="manual"
-                    mcPlacement="bottom">
+                    [mcTrigger]="'manual'"
+                    [mcPlacement]="popUpPlacements.Bottom">
                     <input mcInput formControlName="start" (input)="onInput($event, startTooltip, 'start')">
 
                     <mc-hint *ngIf="compositeFormGroup.controls.start.invalid">
@@ -33,8 +33,8 @@
                     [mcWarningTooltip]="'Только цифры и точки'"
                     [mcEnterDelay]="10"
                     #endTooltip="mcWarningTooltip"
-                    mcTrigger="manual"
-                    mcPlacement="bottom">
+                    [mcTrigger]="'manual'"
+                    [mcPlacement]="popUpPlacements.Bottom">
                     <input mcInput formControlName="end" (input)="onInput($event, endTooltip, 'end')">
 
                     <mc-hint *ngIf="compositeFormGroup.controls.end.invalid">
