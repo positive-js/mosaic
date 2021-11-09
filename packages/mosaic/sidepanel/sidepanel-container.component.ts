@@ -38,8 +38,6 @@ export const MC_SIDEPANEL_WITH_SHADOW = new InjectionToken<boolean>('mc-sidepane
         class: 'mc-sidepanel-container',
         '[class.mc-sidepanel_nested]': 'withIndent',
         '[class.mc-sidepanel-container_shadowed]': 'withShadow',
-        role: 'dialog',
-        'aria-modal': 'true',
         '[attr.id]': 'id',
         '[attr.tabindex]': '-1',
         '[@state]': `{
@@ -55,7 +53,7 @@ export class McSidepanelContainerComponent extends BasePortalOutlet implements O
     id: string;
 
     /** The portal outlet inside of this container into which the content will be loaded. */
-    @ViewChild(CdkPortalOutlet, {static: true}) portalOutlet: CdkPortalOutlet;
+    @ViewChild(CdkPortalOutlet, { static: true }) portalOutlet: CdkPortalOutlet;
 
     /** The state of the sidepanel animations. */
     animationState: McSidepanelAnimationState = McSidepanelAnimationState.Void;
@@ -102,18 +100,18 @@ export class McSidepanelContainerComponent extends BasePortalOutlet implements O
 
     /** Begin animation of the sidepanel entrance into view. */
     enter(): void {
-        if (!this.destroyed) {
-            this.animationState = McSidepanelAnimationState.Visible;
-            this.changeDetectorRef.detectChanges();
-        }
+        if (this.destroyed) { return; }
+
+        this.animationState = McSidepanelAnimationState.Visible;
+        this.changeDetectorRef.detectChanges();
     }
 
     /** Begin animation of the sidepanel exiting from view. */
     exit(): void {
-        if (!this.destroyed) {
-            this.animationState = McSidepanelAnimationState.Hidden;
-            this.changeDetectorRef.markForCheck();
-        }
+        if (this.destroyed) { return; }
+
+        this.animationState = McSidepanelAnimationState.Hidden;
+        this.changeDetectorRef.markForCheck();
     }
 
     onAnimation(event: AnimationEvent) {

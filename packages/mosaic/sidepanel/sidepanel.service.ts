@@ -48,8 +48,7 @@ export class McSidepanelService implements OnDestroy {
     }
 
     open<T, D = any>(
-        componentOrTemplateRef: ComponentType<T> | TemplateRef<T>,
-        config?: McSidepanelConfig<D>
+        componentOrTemplateRef: ComponentType<T> | TemplateRef<T>, config?: McSidepanelConfig<D>
     ): McSidepanelRef<T> {
         const fullConfig = {
             ...(this.defaultOptions || new McSidepanelConfig()),
@@ -78,7 +77,9 @@ export class McSidepanelService implements OnDestroy {
         }
 
         this.openedSidepanels.push(ref);
-        ref.afterClosed().subscribe(() => this.removeOpenSidepanel(ref));
+        ref.afterClosed()
+            .subscribe(() => this.removeOpenSidepanel(ref));
+
         container.enter();
 
         return ref;

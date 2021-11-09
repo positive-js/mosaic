@@ -1,4 +1,13 @@
-import { Component, Directive, ElementRef, Input, OnChanges, OnInit, Optional, SimpleChanges } from '@angular/core';
+import {
+    Component,
+    Directive,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit,
+    Optional,
+    SimpleChanges
+} from '@angular/core';
 
 import { McSidepanelRef } from './sidepanel-ref';
 import { McSidepanelService } from './sidepanel.service';

@@ -1,3 +1,8 @@
+sidepanel-component-example .mc-form__control.flex-10 {
+    min-width: 120px;
+}
+
+
 .sidepanel-container {
     display: flex;
     flex-direction: column;

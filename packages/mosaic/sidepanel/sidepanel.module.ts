@@ -1,3 +1,4 @@
+import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
@@ -24,7 +25,8 @@ import { McSidepanelService } from './sidepanel.service';
         PortalModule,
         McCommonModule,
         McButtonModule,
-        McIconModule
+        McIconModule,
+        A11yModule
     ],
     providers: [McSidepanelService],
     declarations: [

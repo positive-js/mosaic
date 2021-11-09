@@ -1,3 +1,7 @@
+sidepanel-overview-example .mc-form__control.flex-10 {
+    min-width: 120px;
+}
+
 .layout-padding {
     padding: 8px;
 }

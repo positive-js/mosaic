@@ -1,20 +1,47 @@
 <div class="sidepanel-demo layout-column layout-padding">
     <p class="mc-headline">Sidepanel demo</p>
 
+    <div class="mc-form-horizontal margin">
+        <div class="mc-form__row">
+            <label class="mc-form__label">Position</label>
+            <mc-form-field class="mc-form__control flex-10">
+                <mc-select [(value)]="position">
+                    <mc-option value="right">Right</mc-option>
+                    <mc-option value="left">Left</mc-option>
+                    <mc-option value="top">Top</mc-option>
+                    <mc-option value="bottom">Bottom</mc-option>
+                </mc-select>
+            </mc-form-field>
+
+            <div class="layout-row mc-form__control layout-align-center-center flex-10">
+                <mc-toggle [(ngModel)]="modalState">Modal: {{ modalState.toString() }}</mc-toggle>
+            </div>
+        </div>
+    </div>
+
     <div class="layout-row">
-        <button mc-button [color]="'primary'" (click)="openComponentSidepanel()">
+
+    </div>
+
+    <br><br>
+
+    <div class="layout-row">
+        <button mc-button (click)="openComponentSidepanel()">
             <span>Open component sidepanel</span>
         </button>
 
-        <button class="template-button" mc-button [color]="'primary'" (click)="openTemplateSidepanel()">
+        <button mc-button class="template-button" (click)="openTemplateSidepanel()">
             <span>Open template sidepanel</span>
         </button>
     </div>
+
+    <br><br>
 
     <ng-template>
         <mc-sidepanel-header [closeable]="true">
             Sidepanel Template Content
         </mc-sidepanel-header>
+
         <mc-sidepanel-body class="layout-padding">
             <div class="mc-subheading">Sidepanel Template Body</div>
 
@@ -22,17 +49,14 @@
                 {{ i + 1 }}
             </div>
         </mc-sidepanel-body>
+
         <mc-sidepanel-footer>
             <mc-sidepanel-actions align="left">
-                <button mc-button [color]="'primary'" (click)="openTemplateSidepanel()">
+                <button cdkFocusInitial mc-button [color]="'primary'" (click)="openTemplateSidepanel()">
                     <span>Open another sidepanel</span>
                 </button>
             </mc-sidepanel-actions>
             <mc-sidepanel-actions align="right">
-                <button mc-button [color]="'primary'" (click)="openTemplateSidepanel()">
-                    <span>Open another sidepanel</span>
-                </button>
-
                 <button mc-button [color]="'second'" mc-sidepanel-close>
                     <span>Close</span>
                 </button>

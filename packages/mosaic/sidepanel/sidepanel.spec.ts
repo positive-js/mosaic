@@ -92,14 +92,6 @@ describe('McSidepanelService', () => {
         expect(overlayContainerElement.querySelector('mc-sidepanel-container')).toBeNull();
     }));
 
-    it('should have role dialog', () => {
-        sidepanelService.open(SimpleSidepanelExample);
-
-        const sidepanelContainerElement = overlayContainerElement.querySelector('mc-sidepanel-container')!;
-
-        expect(sidepanelContainerElement.getAttribute('role')).toBe('dialog');
-    });
-
     it('should close a sidepanel via the escape key', fakeAsync(() => {
         sidepanelService.open(SimpleSidepanelExample);
 

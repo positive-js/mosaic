@@ -12,6 +12,10 @@ import { McSidepanelPosition, McSidepanelService } from '@ptsecurity/mosaic/side
     encapsulation: ViewEncapsulation.None
 })
 export class SidepanelOverviewExample {
+    position: McSidepanelPosition = McSidepanelPosition.Right;
+
+    modalState: boolean = false;
+
     @ViewChild(TemplateRef, {static: false}) template: TemplateRef<any>;
 
     arrayLength = 40;
@@ -21,7 +25,8 @@ export class SidepanelOverviewExample {
 
     openTemplateSidepanel() {
         this.sidepanelService.open(this.template, {
-            position: McSidepanelPosition.Bottom
+            position: this.position,
+            hasBackdrop: this.modalState
         });
     }
 }
