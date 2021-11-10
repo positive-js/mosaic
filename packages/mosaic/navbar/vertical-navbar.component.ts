@@ -3,6 +3,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
@@ -11,11 +12,32 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
+import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
+import {
+    DOWN_ARROW,
+    ENTER,
+    isVerticalMovement,
+    LEFT_ARROW,
+    RIGHT_ARROW,
+    SPACE,
+    TAB,
+    UP_ARROW
+} from '@ptsecurity/cdk/keycodes';
 import { CanDisableCtor, HasTabIndexCtor, mixinDisabled, mixinTabIndex } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
+import { merge, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { McNavbarItemBase } from './navbar-item.component';
+import { McNavbarFocusableItem, McNavbarFocusableItemEvent, McNavbarRectangleElement } from './navbar-item.component';
 import { toggleVerticalNavbarAnimation } from './vertical-navbar.animation';
+
+
+export class McNavbarBase {
+    constructor(public elementRef: ElementRef) {}
+}
+
+// tslint:disable-next-line:naming-convention
+export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarBase = mixinDisabled(McNavbarBase);
 
 
 @Component({
@@ -31,17 +53,30 @@ import { toggleVerticalNavbarAnimation } from './vertical-navbar.animation';
         './navbar-brand.scss',
         './navbar-divider.scss'
     ],
+    inputs: ['disabled'],
     host: {
         class: 'mc-vertical-navbar',
         '[class.mc-closed]': '!expanded',
         '[class.mc-opened]': 'expanded',
-        '[@toggle]': 'expanded'
+        '[@toggle]': 'expanded',
+        '[attr.tabindex]': 'tabIndex',
+
+        '(focus)': 'focus()',
+        '(blur)': 'blur()',
+        '(keydown)': 'onKeyDown($event)',
     },
     animations: [toggleVerticalNavbarAnimation()],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class McVerticalNavbar implements AfterContentInit {
+export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentInit {
+    @ContentChildren(McNavbarRectangleElement, { descendants: true })
+    rectangleElements: QueryList<McNavbarRectangleElement>;
+
+    @ContentChildren(McNavbarFocusableItem, { descendants: true }) items: QueryList<McNavbarFocusableItem>;
+
+    keyManager: FocusKeyManager<McNavbarFocusableItem>;
+
     get expanded() {
         return this._expanded;
     }
@@ -55,29 +90,118 @@ export class McVerticalNavbar implements AfterContentInit {
 
     private _expanded: boolean = false;
 
-    @ContentChildren(McNavbarItemBase, { descendants: true }) navbarBaseItems: QueryList<McNavbarItemBase>;
+    @Input()
+    get tabIndex(): any {
+        return this.disabled ? -1 : this._tabIndex;
+    }
 
-    toggle(): void {
-        this.expanded = !this.expanded;
+    set tabIndex(value: any) {
+        this.userTabIndex = value;
+        this._tabIndex = value;
+    }
+
+    private _tabIndex = 0;
+
+    get optionFocusChanges(): Observable<McNavbarFocusableItemEvent> {
+        return merge(...this.items.map((item) => item.onFocus));
+    }
+
+    get optionBlurChanges(): Observable<McNavbarFocusableItemEvent> {
+        return merge(...this.items.map((option) => option.onBlur));
+    }
+
+    userTabIndex: number | null = null;
+
+    /** Emits whenever the component is destroyed. */
+    private readonly destroyed = new Subject<void>();
+
+    constructor(
+        elementRef: ElementRef,
+        private changeDetectorRef: ChangeDetectorRef
+    ) {
+        super(elementRef);
     }
 
     ngAfterContentInit(): void {
         this.setItemsState();
         this.setClosedStateForItems(this.expanded);
 
-        this.navbarBaseItems.changes
+        this.rectangleElements.changes
             .subscribe(this.setItemsState);
+
+        this.keyManager = new FocusKeyManager<McNavbarFocusableItem>(this.items)
+            .withVerticalOrientation(true);
+
+        this.keyManager.tabOut
+            .pipe(takeUntil(this.destroyed))
+            .subscribe(() => {
+                this._tabIndex = -1;
+
+                setTimeout(() => {
+                    this._tabIndex = this.userTabIndex || 0;
+                    this.changeDetectorRef.markForCheck();
+                });
+            });
+    }
+
+    ngOnDestroy() {
+        this.destroyed.next();
+
+        this.destroyed.complete();
+    }
+
+    toggle(): void {
+        this.expanded = !this.expanded;
+    }
+
+    focus(): void {
+        console.log('focus: ');
+        if (this.items.length === 0) { return; }
+
+        this.keyManager.setFirstItemActive();
+    }
+
+    blur() {
+        if (!this.hasFocusedItem()) {
+            this.keyManager.setActiveItem(-1);
+        }
+
+        this.changeDetectorRef.markForCheck();
+    }
+
+    onKeyDown(event: KeyboardEvent) {
+        console.log('onKeyDown: ');
+        // tslint:disable-next-line: deprecation
+        const keyCode = event.keyCode;
+
+        if ([SPACE, ENTER, LEFT_ARROW, RIGHT_ARROW].includes(keyCode) || isVerticalMovement(event)) {
+            event.preventDefault();
+        }
+
+        if (keyCode === TAB) {
+            this.keyManager.tabOut.next();
+
+            return;
+        } else if (keyCode === DOWN_ARROW) {
+            this.keyManager.setNextItemActive();
+        } else if (keyCode === UP_ARROW) {
+            this.keyManager.setPreviousItemActive();
+        }
+    }
+
+    private hasFocusedItem() {
+        return this.items.some((item) => item.hasFocus);
     }
 
     private setClosedStateForItems(value: boolean) {
-        this.navbarBaseItems?.forEach((item) => {
+        this.rectangleElements?.forEach((item) => {
             item.closed = !value;
             setTimeout(() => item.button?.updateClassModifierForIcons());
         });
     }
 
     private setItemsState = () => {
-        Promise.resolve().then(() => this.navbarBaseItems?.forEach((item) => item.vertical = true));
+        Promise.resolve().then(() => this.rectangleElements?.forEach((item) => item.vertical = true));
     }
 }
 

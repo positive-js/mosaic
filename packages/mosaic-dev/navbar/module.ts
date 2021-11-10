@@ -8,7 +8,7 @@ import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McLinkModule } from '@ptsecurity/mosaic/link';
 
 import { McIconModule } from '../../mosaic/icon';
-import { McNavbarModule, McNavbar, McNavbarItem } from '../../mosaic/navbar';
+import { McNavbarModule, McNavbar } from '../../mosaic/navbar';
 
 
 @Component({
@@ -19,8 +19,7 @@ import { McNavbarModule, McNavbar, McNavbarItem } from '../../mosaic/navbar';
 })
 export class NavbarDemoComponent {
     themePalette = ThemePalette;
-
-    @ViewChild('verticalNavbar', {static: false}) navbar: McNavbar;
+    @ViewChild('verticalNavbar', { static: false }) navbar: McNavbar;
 
     readonly minNavbarWidth: number = 940;
 
@@ -40,9 +39,7 @@ export class NavbarDemoComponent {
         this.navbar.updateCollapsed();
     }
 
-    onItemClick(event: MouseEvent, disabledItem?: McNavbarItem) {
-        if (disabledItem?.disabled) { return; }
-
+    onItemClick(event: MouseEvent) {
         alert(`innerText: ${(<HTMLElement> event.target).innerText}`);
     }
 }

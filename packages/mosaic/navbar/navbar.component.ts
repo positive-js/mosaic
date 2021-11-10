@@ -13,7 +13,7 @@ import {
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { McNavbarItem, McNavbarItemBase } from './navbar-item.component';
+import { McNavbarItem, McNavbarRectangleElement } from './navbar-item.component';
 
 
 export type McNavbarContainerPositionType = 'left' | 'right';
@@ -44,7 +44,8 @@ export class McNavbarContainer {}
     encapsulation: ViewEncapsulation.None
 })
 export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
-    @ContentChildren(McNavbarItemBase, { descendants: true }) navbarBaseItems: QueryList<McNavbarItemBase>;
+    @ContentChildren(McNavbarRectangleElement, { descendants: true })
+    rectangleElements: QueryList<McNavbarRectangleElement>;
 
     @ContentChildren(McNavbarItem, { descendants: true }) navbarItems: QueryList<McNavbarItem>;
 
@@ -57,7 +58,7 @@ export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
     }
 
     private get totalItemsWidth(): number {
-        return this.navbarBaseItems
+        return this.rectangleElements
             .reduce((acc, item) => acc + item.getOuterElementWidth(), 0);
     }
 
@@ -79,7 +80,7 @@ export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
     ngAfterContentInit(): void {
         this.setItemsState();
 
-        this.navbarBaseItems.changes
+        this.rectangleElements.changes
             .subscribe(this.setItemsState);
     }
 
@@ -133,6 +134,6 @@ export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
     }
 
     private setItemsState = () => {
-        Promise.resolve().then(() => this.navbarBaseItems?.forEach((item) => item.horizontal = true));
+        Promise.resolve().then(() => this.rectangleElements?.forEach((item) => item.horizontal = true));
     }
 }

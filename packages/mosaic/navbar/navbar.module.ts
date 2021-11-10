@@ -5,12 +5,12 @@ import { NgModule } from '@angular/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 import {
-    McNavbarItemBase,
+    McNavbarFocusableItem,
     McNavbarBrand,
     McNavbarDivider,
     McNavbarItem,
     McNavbarLogo,
-    McNavbarTitle
+    McNavbarTitle, McNavbarRectangleElement
 } from './navbar-item.component';
 import { McNavbar, McNavbarContainer } from './navbar.component';
 import { McNavbarToggle, McVerticalNavbar } from './vertical-navbar.component';
@@ -33,7 +33,8 @@ import { McNavbarToggle, McVerticalNavbar } from './vertical-navbar.component';
         McNavbarToggle,
         McVerticalNavbar,
         McNavbarDivider,
-        McNavbarItemBase
+        McNavbarFocusableItem,
+        McNavbarRectangleElement
     ],
     declarations: [
         McNavbar,
@@ -45,7 +46,8 @@ import { McNavbarToggle, McVerticalNavbar } from './vertical-navbar.component';
         McNavbarToggle,
         McVerticalNavbar,
         McNavbarDivider,
-        McNavbarItemBase
+        McNavbarFocusableItem,
+        McNavbarRectangleElement
     ]
 })
 export class McNavbarModule {}
