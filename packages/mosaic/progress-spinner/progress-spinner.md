@@ -18,7 +18,7 @@
 
 ```html
 Такое значение заполнит 30% сектора
-<mc-progress-spinner [value]="30"></mc-progress-spinner>
+<mc-progress-spinner value="30"></mc-progress-spinner>
 ```
 
 #### `mode`
@@ -27,9 +27,9 @@
 
 ```html
 Для отображения неопределенного по завершенности прогресса:
-<mc-progress-spinner [mode]="'indeterminate'"></mc-progress-spinner>
+<mc-progress-spinner mode="indeterminate"></mc-progress-spinner>
 Для отображения определенного по завершенности прогресса:
-<mc-progress-spinner [mode]="'determinate'" [value]="30"></mc-progress-spinner>
+<mc-progress-spinner mode="determinate" value="30"></mc-progress-spinner>
 ```
 <!-- example(progress-spinner-indeterminate) -->
 
