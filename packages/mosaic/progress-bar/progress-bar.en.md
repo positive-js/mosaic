@@ -17,7 +17,7 @@ Default: 0
 
 ```html
 This will fill 30% of the hole progress bar
-<mc-progress-bar value="30"></mc-progress-bar>
+<mc-progress-bar [value]="30"></mc-progress-bar>
 ```
 <!-- example(progress-bar-overview) -->
 
@@ -27,9 +27,9 @@ Default: 'determinate'
 
 ```html
 To show indeterminate progress
-<mc-progress-bar mode="indeterminate"></mc-progress-bar>
+<mc-progress-bar [mode]="'indeterminate'"></mc-progress-bar>
 Or for determinate progress
-<mc-progress-bar mode="determinate" value="30"></mc-progress-bar>
+<mc-progress-bar [mode]="'determinate'" [value]="30"></mc-progress-bar>
 ```
 <!-- example(progress-bar-indeterminate) -->
 
@@ -40,9 +40,9 @@ Default: 'primary'
 Set theming of element
 
 ```html
-<mc-progress-bar [color]="'primary'"></mc-progress-bar>
-<mc-progress-bar [color]="'second'"></mc-progress-bar>
-<mc-progress-bar [color]="'error'"></mc-progress-bar>
+<mc-progress-bar [color]="themePalette.Primary"></mc-progress-bar>
+<mc-progress-bar [color]="themePalette.Second"></mc-progress-bar>
+<mc-progress-bar [color]="themePalette.Error"></mc-progress-bar>
 ```
 
 ### Theming

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { PopUpPlacements, PopUpSizes } from '@ptsecurity/mosaic/core';
+import { PopUpPlacements, PopUpSizes, ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -12,6 +12,7 @@ import { PopUpPlacements, PopUpSizes } from '@ptsecurity/mosaic/core';
     encapsulation: ViewEncapsulation.None
 })
 export class PopoverOverviewExample {
+    themePalette = ThemePalette;
     popUpPlacements = PopUpPlacements;
     popoverActiveStage: number;
     selectedOrder: boolean;

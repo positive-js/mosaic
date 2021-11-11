@@ -27,6 +27,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ESCAPE, ENTER } from '@ptsecurity/cdk/keycodes';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { Observable } from 'rxjs';
 
 import { McModalControlService } from './modal-control.service';
@@ -53,6 +54,8 @@ type AnimationState = 'enter' | 'leave' | null;
 })
 export class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     implements OnInit, OnChanges, AfterViewInit, OnDestroy, IModalOptions {
+
+    themePalette = ThemePalette;
 
     @Input() mcModalType: ModalType = 'default';
 

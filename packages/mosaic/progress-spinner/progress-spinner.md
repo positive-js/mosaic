@@ -27,9 +27,9 @@
 
 ```html
 Для отображения неопределенного по завершенности прогресса:
-<mc-progress-spinner mode="indeterminate"></mc-progress-spinner>
+<mc-progress-spinner [mode]="'indeterminate'"></mc-progress-spinner>
 Для отображения определенного по завершенности прогресса:
-<mc-progress-spinner mode="determinate" value="30"></mc-progress-spinner>
+<mc-progress-spinner [mode]="'determinate'" value="30"></mc-progress-spinner>
 ```
 <!-- example(progress-spinner-indeterminate) -->
 
@@ -39,9 +39,9 @@
 Это свойство задает тему элемента.
 
 ```html
-<mc-progress-spinner [color]="'primary'"></mc-progress-spinner>
-<mc-progress-spinner [color]="'second'"></mc-progress-spinner>
-<mc-progress-spinner [color]="'error'"></mc-progress-spinner>
+<mc-progress-spinner [color]="themePalette.Primary"></mc-progress-spinner>
+<mc-progress-spinner [color]="themePalette.Second"></mc-progress-spinner>
+<mc-progress-spinner [color]="themePalette.Error"></mc-progress-spinner>
 ```
 
 ### Theming

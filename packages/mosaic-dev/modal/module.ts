@@ -193,12 +193,14 @@ export class McModalLongCustomComponent {
       <h4>{{ subtitle }}</h4>
       <p>
         <span>Get Modal instance in component</span>
-        <button mc-button [color]="'primary'" (click)="destroyModal()">destroy modal in the component</button>
+        <button mc-button [color]="themePalette.Primary" (click)="destroyModal()">destroy modal in the component</button>
       </p>
     </div>
   `
 })
 export class McModalCustomComponent {
+    themePalette = ThemePalette;
+
     @Input() title: string;
     @Input() subtitle: string;
 
@@ -221,17 +223,19 @@ export class McModalCustomComponent {
             <h4>{{ subtitle }}</h4>
             <p>
                 <span>Get Modal instance in component</span>
-                <button mc-button [color]="'primary'" (click)="destroyModal()">destroy modal in the component</button>
+                <button mc-button [color]="themePalette.Primary" (click)="destroyModal()">destroy modal in the component</button>
             </p>
         </mc-modal-body>
 
         <div mc-modal-footer>
-            <button mc-button [color]="'primary'" >Save</button>
+            <button mc-button [color]="themePalette.Primary" >Save</button>
             <button mc-button autofocus>Close</button>
         </div>
   `
 })
 export class McModalFullCustomComponent {
+    themePalette = ThemePalette;
+
     @Input() title: string;
     @Input() subtitle: string;
 
