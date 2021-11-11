@@ -3,6 +3,7 @@ import { Component, EventEmitter, NgModule } from '@angular/core';
 import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { ENTER } from '@ptsecurity/cdk/keycodes';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
@@ -226,7 +227,7 @@ describe('McModal', () => {
                 mcFooter: [
                     {
                         label: 'button 1',
-                        type: 'primary',
+                        type: ThemePalette.Primary,
                         show: () => isShown
                     }
                 ]
@@ -244,7 +245,7 @@ describe('McModal', () => {
                 mcFooter: [
                     {
                         label: 'button 1',
-                        type: 'primary',
+                        type: ThemePalette.Primary,
                         disabled: () => isDisabled
                     }
                 ]
