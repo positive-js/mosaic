@@ -1,5 +1,5 @@
-import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
-import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { FocusMonitor } from '@angular/cdk/a11y';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -15,12 +15,15 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { McButtonCssStyler } from '@ptsecurity/mosaic/button';
+import { ENTER, SPACE } from '@ptsecurity/cdk/keycodes';
+import { McButton, McButtonCssStyler } from '@ptsecurity/mosaic/button';
 import { toBoolean } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 import { merge, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
+
+import { McVerticalNavbar } from './vertical-navbar.component';
 
 
 // tslint:disable-next-line:naming-convention
@@ -140,20 +143,21 @@ export class McNavbarRectangleElement {
 }
 
 @Directive({
-    selector: 'mc-navbar-item, [mc-navbar-item], mc-navbar-brand, [mc-navbar-brand]',
+    selector: 'mc-navbar-item, [mc-navbar-item], mc-navbar-brand, [mc-navbar-brand], mc-navbar-toggle',
     host: {
         '[attr.tabindex]': 'tabIndex',
         '[attr.disabled]': 'disabled || null',
 
+        class: 'mc-navbar-focusable-item',
         '[class.mc-navbar-item_button]': 'button',
         '[class.mc-focused]': 'hasFocus',
 
-        '(focusin)': 'focus()',
+        '(focus)': 'focus()',
         '(blur)': 'blur()'
     }
 })
 export class McNavbarFocusableItem implements IFocusableOption {
-    @ContentChild(McButtonCssStyler) button: McButtonCssStyler;
+    @ContentChild(McButton) button: McButton;
 
     readonly onFocus = new Subject<McNavbarFocusableItemEvent>();
 
@@ -178,14 +182,8 @@ export class McNavbarFocusableItem implements IFocusableOption {
     private _disabled = false;
 
     get tabIndex(): number {
-        return this.disabled || this.button ? -1 : this._tabIndex;
+        return -1;
     }
-
-    set tabIndex(value: number) {
-        this._tabIndex = value != null ? coerceNumberProperty(value) : 0;
-    }
-
-    private _tabIndex: number = 0;
 
     constructor(
         private elementRef: ElementRef<HTMLElement>,
@@ -199,19 +197,32 @@ export class McNavbarFocusableItem implements IFocusableOption {
     }
 
     ngAfterContentInit(): void {
-        if (this.button) { return; }
+        console.log('ngAfterContentInit: ');
 
-        this.focusMonitor.monitor(this.elementRef, true);
+        if (this.button) {
+            this.button.tabIndex = -1;
+        }
+
+        this.focusMonitor
+            .monitor(this.elementRef, true);
+            // .subscribe(this.focus);
     }
 
-    focus(origin?: FocusOrigin, options?: FocusOptions) {
-        if (this.disabled || this.hasFocus) { return; }
+    focus = () => {
+        if (this.disabled || this.hasFocus || this.button?.hasFocus) { return; }
+        console.log('focus: ', origin);
 
-        if (this.focusMonitor && origin) {
-            this.focusMonitor.focusVia(this.elementRef.nativeElement, origin, options);
-        } else {
-            this.elementRef.nativeElement.focus();
+        if (this.button) {
+            this.hasFocus = true;
+
+            this.button.focusViaKeyboard();
+
+            this.changeDetector.markForCheck();
+
+            return;
         }
+
+        this.elementRef.nativeElement.focus();
 
         this.onFocus.next({ item: this });
 
@@ -223,6 +234,7 @@ export class McNavbarFocusableItem implements IFocusableOption {
     }
 
     blur(): void {
+        console.log('blur(): ');
         // When animations are enabled, Angular may end up removing the option from the DOM a little
         // earlier than usual, causing it to be blurred and throwing off the logic in the list
         // that moves focus not the next item. To work around the issue, we defer marking the option
@@ -233,6 +245,8 @@ export class McNavbarFocusableItem implements IFocusableOption {
             .subscribe(() => {
                 this.ngZone.run(() => {
                     this.hasFocus = false;
+
+                    if (this.button?.hasFocus) { return; }
 
                     this.onBlur.next({ item: this });
                 });
@@ -249,7 +263,8 @@ export class McNavbarFocusableItem implements IFocusableOption {
         '[class.mc-navbar-item_collapsed]': 'collapsed',
 
         '[attr.title]': 'collapsedTitle',
-        '(keydown)': 'onKeydown($event)'
+
+        '(keydown)': 'onKeyDown($event)'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
@@ -282,19 +297,47 @@ export class McNavbarItem {
 
     private _collapsedTitle: string | null = null;
 
-    constructor(@Optional() private dropdownTrigger: McDropdownTrigger) {}
+    constructor(@Optional() private dropdownTrigger: McDropdownTrigger) {
+        if (this.dropdownTrigger) {
+            this.dropdownTrigger.openByArrowDown = false;
+        }
+    }
 
     getTitleWidth(): number {
         return this.title.outerElementWidth;
     }
 
-    onKeydown($event: KeyboardEvent) {
-        if (!this.dropdownTrigger) { return; }
+    onKeyDown($event: KeyboardEvent) {
+        if (this.dropdownTrigger && [ENTER, SPACE].includes($event.keyCode)) {
+            this.dropdownTrigger.open();
 
-        console.log('onKeydown: ', $event);
-
-        if (this.dropdownTrigger) {
-            console.log('this.dropdownTrigger: ', this.dropdownTrigger);
+            $event.preventDefault();
         }
     }
+}
+
+
+@Component({
+    selector: 'mc-navbar-toggle',
+    template: `
+        <i mc-icon
+           [class.mc-angle-left-M_16]="mcNavbar.expanded"
+           [class.mc-angle-right-M_16]="!mcNavbar.expanded"
+           *ngIf="!customIcon">
+        </i>
+
+        <ng-content select="[mc-icon]"></ng-content>
+        <ng-content select="mc-navbar-title" *ngIf="mcNavbar.expanded"></ng-content>
+    `,
+    styleUrls: ['./navbar.scss'],
+    host: {
+        class: 'mc-navbar-item mc-navbar-toggle mc-vertical'
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
+})
+export class McNavbarToggle {
+    @ContentChild(McIcon) customIcon: McIcon;
+
+    constructor(public mcNavbar: McVerticalNavbar) {}
 }

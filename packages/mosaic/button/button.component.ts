@@ -34,7 +34,7 @@ import { McIcon } from '@ptsecurity/mosaic/icon';
 export class McButtonCssStyler implements AfterContentInit {
     @ContentChildren(McIcon, { descendants: true }) icons: QueryList<McIcon>;
 
-    nativeElement: Element;
+    nativeElement: HTMLElement;
 
     get isIconButton(): boolean {
         return this.icons.length > 0;
@@ -92,33 +92,54 @@ export const McButtonMixinBase: HasTabIndexCtor & CanDisableCtor & CanColorCtor 
     styleUrls: ['./button.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    inputs: ['disabled', 'color'],
+    inputs: ['tabIndex', 'disabled', 'color'],
     host: {
-        '[attr.disabled]': 'disabled || null'
+        '[attr.disabled]': 'disabled || null',
+        '[attr.tabIndex]': 'tabIndex',
+
+        '(focus)': 'onFocus($event)',
+        '(blur)': 'onBlur()'
     }
 })
 export class McButton extends McButtonMixinBase implements OnDestroy, CanDisable, CanColor {
-    constructor(elementRef: ElementRef, private _focusMonitor: FocusMonitor) {
+    hasFocus: boolean = false;
+
+    constructor(elementRef: ElementRef, private focusMonitor: FocusMonitor) {
         super(elementRef);
 
-        this._focusMonitor.monitor(this._elementRef.nativeElement, true);
+        this.focusMonitor.monitor(this._elementRef.nativeElement, true);
     }
 
     ngOnDestroy() {
-        this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
+        this.focusMonitor.stopMonitoring(this._elementRef.nativeElement);
     }
 
-    focus(): void {
-        this.getHostElement().focus();
+    onFocus($event) {
+        $event.stopPropagation();
+
+        this.hasFocus = true;
     }
 
-    focusViaKeyboard(): void {
-        this._focusMonitor.focusVia(this.getHostElement(), 'keyboard');
+    onBlur() {
+        this.hasFocus = false;
     }
 
     getHostElement() {
         return this._elementRef.nativeElement;
     }
+
+    focus(): void {
+        this.hasFocus = true;
+
+        this.getHostElement().focus();
+    }
+
+    focusViaKeyboard(): void {
+        this.hasFocus = true;
+
+        this.focusMonitor.focusVia(this.getHostElement(), 'keyboard');
+    }
+
 }
 
 

@@ -26,17 +26,10 @@
     }
 
     .mc-navbar-item {
-        outline: 0;
-
         color: map-get($navbar-item, color);
 
         & .mc-icon {
             color: map-get($navbar-item, color);
-        }
-
-        &.cdk-keyboard-focused {
-            outline: 0;
-            box-shadow: inset 0 0 0 2px map-get(map-get($theme, states), focused-color);
         }
 
         &.mc-active {
@@ -60,6 +53,14 @@
             .mc-icon {
                 opacity: map-get($navbar-item, state-disabled-opacity);
             }
+        }
+    }
+
+    .mc-navbar-focusable-item {
+        outline: none;
+
+        &.cdk-keyboard-focused {
+            box-shadow: inset 0 0 0 2px map-get(map-get($theme, states), focused-color);
         }
     }
 

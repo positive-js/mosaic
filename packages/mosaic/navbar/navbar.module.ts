@@ -10,10 +10,12 @@ import {
     McNavbarDivider,
     McNavbarItem,
     McNavbarLogo,
-    McNavbarTitle, McNavbarRectangleElement
+    McNavbarTitle,
+    McNavbarRectangleElement,
+    McNavbarToggle
 } from './navbar-item.component';
 import { McNavbar, McNavbarContainer } from './navbar.component';
-import { McNavbarToggle, McVerticalNavbar } from './vertical-navbar.component';
+import { McVerticalNavbar } from './vertical-navbar.component';
 
 
 @NgModule({
