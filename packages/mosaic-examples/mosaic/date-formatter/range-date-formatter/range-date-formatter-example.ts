@@ -19,34 +19,92 @@ import { DateTime } from 'luxon';
     ]
 })
 export class RangeDateFormatterExample {
-    formats: any = {
+    formats = {
         ru: {
             range: {
                 long: {
-                    date: {},
-                    dateTime: {}
+                    date: {
+                        currentMonth: '',
+                        notCurrentYear: '',
+                        startsNotCurrentYear: '',
+                        endsNotCurrentYear: ''
+                    },
+                    dateTime: {
+                        startsNotCurrentYear: '',
+                        endsNotCurrentYear: '',
+                        sameDateCurrentYear: '',
+                        sameDateNotCurrentYear: '',
+                        notCurrentMonth: ''
+                    }
                 },
                 middle: {
-                    dateTime: {}
+                    dateTime: {
+                        currentYear: '',
+                        sameDateCurrentYear: '',
+                        sameDateNotCurrentYear: '',
+                        notCurrentMonth: '',
+                        startsNotCurrentYear: '',
+                        endsNotCurrentYear: ''
+                    }
                 },
                 short: {
-                    date: {},
-                    dateTime: {}
+                    date: {
+                        currentMonth: '',
+                        notCurrentYear: '',
+                        startsNotCurrentYear: '',
+                        endsNotCurrentYear: ''
+                    },
+                    dateTime: {
+                        sameDateCurrentYear: '',
+                        sameDateNotCurrentYear: '',
+                        notCurrentMonth: '',
+                        startsNotCurrentYear: '',
+                        endsNotCurrentYear: ''
+                    }
                 }
             }
         },
         en: {
             range: {
                 long: {
-                    date: {},
-                    dateTime: {}
+                    date: {
+                        currentMonth: '',
+                        notCurrentYear: '',
+                        startsNotCurrentYear: '',
+                        endsNotCurrentYear: ''
+                    },
+                    dateTime: {
+                        startsNotCurrentYear: '',
+                        endsNotCurrentYear: '',
+                        sameDateCurrentYear: '',
+                        sameDateNotCurrentYear: '',
+                        notCurrentMonth: ''
+                    }
                 },
                 middle: {
-                    dateTime: {}
+                    dateTime: {
+                        currentYear: '',
+                        sameDateCurrentYear: '',
+                        sameDateNotCurrentYear: '',
+                        notCurrentMonth: '',
+                        startsNotCurrentYear: '',
+                        endsNotCurrentYear: ''
+                    }
                 },
                 short: {
-                    date: {},
-                    dateTime: {}
+                    date: {
+                        currentMonth: '',
+                        notCurrentYear: '',
+                        startsNotCurrentYear: '',
+                        endsNotCurrentYear: ''
+                    },
+                    dateTime: {
+                        sameDateCurrentYear: '',
+                        sameDateNotCurrentYear: '',
+                        notCurrentMonth: '',
+                        startsNotCurrentYear: '',
+                        endsNotCurrentYear: ''
+                    }
                 }
             }
         }

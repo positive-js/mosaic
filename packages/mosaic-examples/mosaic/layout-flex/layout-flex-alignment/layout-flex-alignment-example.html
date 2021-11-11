@@ -3,20 +3,20 @@
 <div class="example-controls">
     <mc-radio-group [(ngModel)]="layoutHorizontalAlignment">
         <header>Horizontal</header>
-        <mc-radio-button value="-start">start</mc-radio-button>
-        <mc-radio-button value="-center">center</mc-radio-button>
-        <mc-radio-button value="-end">end</mc-radio-button>
-        <mc-radio-button value="-space-around">space-around</mc-radio-button>
-        <mc-radio-button value="-space-between">space-between</mc-radio-button>
+        <mc-radio-button [value]="'-start'">start</mc-radio-button>
+        <mc-radio-button [value]="'-center'">center</mc-radio-button>
+        <mc-radio-button [value]="'-end'">end</mc-radio-button>
+        <mc-radio-button [value]="'-space-around'">space-around</mc-radio-button>
+        <mc-radio-button [value]="'-space-between'">space-between</mc-radio-button>
     </mc-radio-group>
 
     <mc-radio-group [(ngModel)]="layoutVerticalAlignment">
         <header>Vertical</header>
-        <mc-radio-button value="">(none)</mc-radio-button>
-        <mc-radio-button value="-start">start</mc-radio-button>
-        <mc-radio-button value="-center">center</mc-radio-button>
-        <mc-radio-button value="-end">end</mc-radio-button>
-        <mc-radio-button value="-stretch">stretch</mc-radio-button>
+        <mc-radio-button [value]="">(none)</mc-radio-button>
+        <mc-radio-button [value]="'-start'">start</mc-radio-button>
+        <mc-radio-button [value]="'-center'">center</mc-radio-button>
+        <mc-radio-button [value]="'-end'">end</mc-radio-button>
+        <mc-radio-button [value]="'-stretch'">stretch</mc-radio-button>
     </mc-radio-group>
 </div>
 

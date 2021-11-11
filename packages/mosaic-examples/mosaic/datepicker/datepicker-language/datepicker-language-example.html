@@ -13,7 +13,7 @@
 
 <mc-form-field
     (click)="picker.toggle()"
-    mcWarningTooltip="Только цифры"
+    [mcWarningTooltip]="'Только цифры'"
     #tooltip="mcWarningTooltip">
 
     <input

@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { PopUpPlacements, PopUpSizes, ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -11,6 +12,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
     encapsulation: ViewEncapsulation.None
 })
 export class PopoverOverviewExample {
+    themePalette = ThemePalette;
+    popUpPlacements = PopUpPlacements;
     popoverActiveStage: number;
     selectedOrder: boolean;
 
@@ -31,8 +34,8 @@ export class PopoverOverviewExample {
     };
 
     selectedElement: string = 'button';
-    selectedPlacement: string = 'left';
-    selectedSize: string = 'normal';
+    selectedPlacement: PopUpPlacements = PopUpPlacements.Left;
+    selectedSize: PopUpSizes = PopUpSizes.Normal;
     layoutClass: string = 'layout-row layout-align-center-center';
     content: string = 'button text';
     userDefinedPlacementPriority: string[] = ['bottom', 'right'];
@@ -61,7 +64,7 @@ export class PopoverOverviewExample {
         this.activatedPosition = event;
     }
 
-    setPlacement(placement: string) {
+    setPlacement(placement: PopUpPlacements) {
         this.selectedPlacement = placement;
     }
 

@@ -16,18 +16,15 @@
         <mc-checkbox [disabled]="true"> Default disabled</mc-checkbox>
     </p>
 
-
     <p>
-        <mc-checkbox [(ngModel)]="checked" disabled="disabled">Checked disabled</mc-checkbox>
+        <mc-checkbox [(ngModel)]="checked" [disabled]="true">Checked disabled</mc-checkbox>
     </p>
 
     <p>
         <mc-checkbox [(ngModel)]="checked[2]"
                      [indeterminate]="true"
-                     disabled="disabled">
+                     [disabled]="true">
             Indeterminate disabled
         </mc-checkbox>
     </p>
-
-
 </div>

@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { PopUpPlacements } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -11,6 +12,8 @@ import { FormControl, FormGroup } from '@angular/forms';
     styleUrls: ['validation-on-type-example.css']
 })
 export class ValidationOnTypeExample {
+    popUpPlacements = PopUpPlacements;
+
     checkOnFlyForm: FormGroup;
 
     @ViewChild('tooltip', { static: false }) tooltip: any;

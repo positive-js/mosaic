@@ -8,11 +8,11 @@
                 <div class="mc-form__label">Название папки</div>
                 <mc-form-field
                     class="mc-form__control"
-                    mcWarningTooltip="Буквы и цифры"
+                    [mcWarningTooltip]="'Буквы и цифры'"
                     [mcEnterDelay]="10"
                     #tooltip="mcWarningTooltip"
-                    mcTrigger="manual"
-                    mcPlacement="bottom">
+                    [mcTrigger]="'manual'"
+                    [mcPlacement]="popUpPlacements.Bottom">
                     <input mcInput formControlName="folderName" (input)="onInput($event)">
 
                     <mc-cleaner></mc-cleaner>

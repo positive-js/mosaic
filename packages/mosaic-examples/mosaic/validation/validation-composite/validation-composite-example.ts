@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { PopUpPlacements } from '@ptsecurity/mosaic/core';
 import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 
 
@@ -40,6 +41,8 @@ const IP_PATTERN = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-
     styleUrls: ['validation-composite-example.css']
 })
 export class ValidationCompositeExample {
+    popUpPlacements = PopUpPlacements;
+
     compositeFormGroup: FormGroup;
 
     @ViewChild('startTooltip', { static: false }) startTooltip: any;

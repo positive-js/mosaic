@@ -1,6 +1,7 @@
 // tslint:disable:no-console
 import { Component, Input, ViewChild } from '@angular/core';
 import { McButton } from '@ptsecurity/mosaic/button';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { McModalRef, McModalService } from '@ptsecurity/mosaic/modal';
 
 
@@ -52,17 +53,19 @@ export class ModalComponentExample {
             <h4>{{ subtitle }}</h4>
             <p>
                 <span>Get Modal instance in component</span>
-                <button mc-button [color]="'primary'" (click)="destroyModal('close')">destroy modal in the component</button>
+                <button mc-button [color]="themePalette.Primary" (click)="destroyModal('close')">destroy modal in the component</button>
             </p>
         </mc-modal-body>
 
         <div mc-modal-footer>
-            <button mc-button [color]="'primary'" (click)="destroyModal('save')">Save</button>
+            <button mc-button [color]="themePalette.Primary" (click)="destroyModal('save')">Save</button>
             <button mc-button autofocus (click)="destroyModal('close')">Close</button>
         </div>
   `
 })
 export class McModalCustomComponent {
+    themePalette = ThemePalette;
+
     @Input() title: string;
     @Input() subtitle: string;
 

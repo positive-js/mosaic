@@ -8,6 +8,7 @@ import {
     Optional,
     SimpleChanges
 } from '@angular/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 import { McSidepanelRef } from './sidepanel-ref';
 import { McSidepanelService } from './sidepanel.service';
@@ -68,7 +69,7 @@ export class McSidepanelClose implements OnInit, OnChanges {
         </div>
         <button *ngIf="closeable" mc-sidepanel-close>
             <span class="mc-sidepanel-close-x">
-                <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" [color]="'second'"></i>
+                <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" [color]="themePalette.Primary"></i>
             </span>
         </button>
     `,
@@ -77,6 +78,8 @@ export class McSidepanelClose implements OnInit, OnChanges {
     }
 })
 export class McSidepanelHeader {
+    themePalette = ThemePalette;
+
     @Input() closeable: boolean;
 }
 

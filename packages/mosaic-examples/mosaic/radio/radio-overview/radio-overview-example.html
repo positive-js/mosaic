@@ -1,9 +1,23 @@
 <mc-radio-group
     class="example-radio-group"
     name="my_options">
-    <mc-radio-button class="example-radio-button" value="option_1" [disabled]="isDisabled">Option 1</mc-radio-button>
-    <mc-radio-button class="example-radio-button" value="option_2" [disabled]="isDisabled">Option 2</mc-radio-button>
-    <mc-radio-button class="example-radio-button" value="option_3" [disabled]="isDisabled">Option 3</mc-radio-button>
+    <mc-radio-button class="example-radio-button"
+                     [value]="'option_1'"
+                     [disabled]="isDisabled">
+        Option 1
+    </mc-radio-button>
+
+    <mc-radio-button class="example-radio-button"
+                     [value]="'option_2'"
+                     [disabled]="isDisabled">
+        Option 2
+    </mc-radio-button>
+
+    <mc-radio-button class="example-radio-button"
+                     [value]="'option_3'"
+                     [disabled]="isDisabled">
+        Option 3
+    </mc-radio-button>
 </mc-radio-group>
 
 <mc-checkbox class="example-radio-control" [(ngModel)]="isDisabled">Disabled</mc-checkbox>

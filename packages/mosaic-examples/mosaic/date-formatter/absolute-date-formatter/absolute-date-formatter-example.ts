@@ -19,28 +19,56 @@ import { DateTime } from 'luxon';
     ]
 })
 export class AbsoluteDateFormatterExample {
-    formats: any = {
+    formats = {
         ru: {
             absolute: {
                 long: {
-                    date: {},
-                    dateTime: {}
+                    date: {
+                        currentYear: '',
+                        notCurrentYear: ''
+                    },
+                    dateTime: {
+                        currentYear: '',
+                        notCurrentYear: '',
+                        milliseconds: ''
+                    }
                 },
                 short: {
-                    date: {},
-                    dateTime: {}
+                    date: {
+                        currentYear: '',
+                        notCurrentYear: ''
+                    },
+                    dateTime: {
+                        currentYear: '',
+                        notCurrentYear: '',
+                        milliseconds: ''
+                    }
                 }
             }
         },
         en: {
             absolute: {
                 long: {
-                    date: {},
-                    dateTime: {}
+                    date: {
+                        currentYear: '',
+                        notCurrentYear: ''
+                    },
+                    dateTime: {
+                        currentYear: '',
+                        notCurrentYear: '',
+                        milliseconds: ''
+                    }
                 },
                 short: {
-                    date: {},
-                    dateTime: {}
+                    date: {
+                        currentYear: '',
+                        notCurrentYear: ''
+                    },
+                    dateTime: {
+                        currentYear: '',
+                        notCurrentYear: '',
+                        milliseconds: ''
+                    }
                 }
             }
         }

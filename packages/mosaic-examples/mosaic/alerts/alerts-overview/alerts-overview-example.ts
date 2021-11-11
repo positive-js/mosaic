@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -19,6 +20,8 @@ import { Component } from '@angular/core';
     ]
 })
 export class AlertsOverviewExample {
+    themePalette = ThemePalette;
+
     alertsAmount = 16;
     readonly shownAlerts: number[]  = Array.from(Array(this.alertsAmount).keys());
 

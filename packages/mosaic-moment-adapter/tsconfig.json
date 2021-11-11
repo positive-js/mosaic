@@ -20,6 +20,7 @@
         "allowSyntheticDefaultImports": true,
         "skipTemplateCodegen": true,
         "strictMetadataEmit": true,
+        "strictTemplates": true,
         "flatModuleId": "@ptsecurity/mosaic-moment-adapter",
         "strictInjectionParameters": true,
         "enableResourceInlining": true,

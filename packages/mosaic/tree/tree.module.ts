@@ -20,7 +20,6 @@ const MC_TREE_DIRECTIVES = [
     McTree,
     McTreeSelection,
     McTreeOption,
-    McTreeNodePadding,
     McTreeNodeToggleComponent,
     McTreeNodeToggleDirective
 ];

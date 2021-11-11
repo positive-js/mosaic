@@ -45,9 +45,9 @@
 
                 <mc-form-field class="mc-form__control">
                     <mc-select formControlName="reason">
-                        <mc-option value="1">1</mc-option>
-                        <mc-option value="2">2</mc-option>
-                        <mc-option value="3">3</mc-option>
+                        <mc-option [value]="1">1</mc-option>
+                        <mc-option [value]="2">2</mc-option>
+                        <mc-option [value]="3">3</mc-option>
                     </mc-select>
                     <mc-hint *ngIf="feedbackFormWithHints.controls.reason.invalid">Укажите причину обращения</mc-hint>
                 </mc-form-field>
@@ -58,9 +58,9 @@
 
                 <mc-form-field class="mc-form__control">
                     <mc-select formControlName="rating">
-                        <mc-option value="1">1</mc-option>
-                        <mc-option value="2">2</mc-option>
-                        <mc-option value="3">3</mc-option>
+                        <mc-option [value]="1">1</mc-option>
+                        <mc-option [value]="2">2</mc-option>
+                        <mc-option [value]="3">3</mc-option>
                     </mc-select>
 
                     <mc-hint *ngIf="feedbackFormWithHints.controls.rating.invalid">Дайте оценку работы наших специалистов</mc-hint>
@@ -77,7 +77,7 @@
         </div>
 
         <div class="mc-form__row">
-            <button class="flex-40" mc-button [color]="'primary'" type="submit">Отправить</button>
+            <button class="flex-40" mc-button [color]="themePalette.Primary" type="submit">Отправить</button>
         </div>
     </form>
 </div>
@@ -122,9 +122,9 @@
                     <label class="mc-form__label">Причина обращения</label>
                     <mc-form-field class="mc-form__control">
                         <mc-select formControlName="reason">
-                            <mc-option value="1">1</mc-option>
-                            <mc-option value="2">2</mc-option>
-                            <mc-option value="3">3</mc-option>
+                            <mc-option [value]="1">1</mc-option>
+                            <mc-option [value]="2">2</mc-option>
+                            <mc-option [value]="3">3</mc-option>
                         </mc-select>
                     </mc-form-field>
                 </div>
@@ -133,9 +133,9 @@
                     <label class="mc-form__label">Ваша оценка</label>
                     <mc-form-field class="mc-form__control">
                         <mc-select formControlName="rating">
-                            <mc-option value="1">1</mc-option>
-                            <mc-option value="2">2</mc-option>
-                            <mc-option value="3">3</mc-option>
+                            <mc-option [value]="1">1</mc-option>
+                            <mc-option [value]="2">2</mc-option>
+                            <mc-option [value]="3">3</mc-option>
                         </mc-select>
                     </mc-form-field>
                 </div>
@@ -148,7 +148,7 @@
                 </div>
 
                 <div class="mc-form__row">
-                    <button class="flex-40" mc-button [color]="'primary'" type="submit">Отправить</button>
+                    <button class="flex-40" mc-button [color]="themePalette.Primary" type="submit">Отправить</button>
                 </div>
             </div>
         </form>

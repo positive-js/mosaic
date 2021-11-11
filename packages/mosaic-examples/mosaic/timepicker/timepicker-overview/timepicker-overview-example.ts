@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
+import { TimeFormats } from '@ptsecurity/mosaic/timepicker';
 import { DateTime } from 'luxon';
 
 
@@ -17,7 +18,7 @@ export class TimepickerOverviewExample {
 
     value: DateTime;
 
-    timeFormat = 'HH:mm';
+    timeFormat = TimeFormats.HHmm;
 
     constructor(private adapter: DateAdapter<DateTime>) {
         this.value = this.adapter.today();

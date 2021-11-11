@@ -4,8 +4,8 @@ import { Injectable, EventEmitter } from '@angular/core';
 
 export interface IDocsSiteTheme {
     href: string;
-    accent: string;
     primary: string;
+    accent?: string;
     isDark?: boolean;
     isDefault?: boolean;
 }

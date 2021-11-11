@@ -1,5 +1,5 @@
 <mc-form-field class="mc-group-item">
     <input mcInput [(ngModel)]="value" type="number" placeholder="Allowed number from -7 to 7"
-           [min]="-7" max="7" step="0.5" big-step="1.5">
+           [min]="-7" [max]="7" [step]="0.5" [bigStep]="1.5">
     <mc-stepper></mc-stepper>
 </mc-form-field>

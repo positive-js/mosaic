@@ -8,13 +8,13 @@
         <div class="mc-tooltip__arrow"></div>
 
         <div class="mc-tooltip__header" *ngIf="header">
-            <ng-container *ngIf="isTemplateRef(header)" [ngTemplateOutlet]="header"></ng-container>
+            <ng-container *ngIf="isTemplateRef(header)" [ngTemplateOutlet]="$any(header)"></ng-container>
             <ng-container *ngIf="!isTemplateRef(header)">
                 <div>{{ header }}</div>
             </ng-container>
         </div>
         <div class="mc-tooltip__content">
-            <ng-container *ngIf="isTemplateRef(content)" [ngTemplateOutlet]="content"></ng-container>
+            <ng-container *ngIf="isTemplateRef(content)" [ngTemplateOutlet]="$any(content)"></ng-container>
             <ng-container *ngIf="!isTemplateRef(content)">
                 <div>{{ content }}</div>
             </ng-container>

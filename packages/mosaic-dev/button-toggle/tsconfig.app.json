@@ -1,13 +1,8 @@
 {
-    "extends": "../../../tsconfig.json",
-    "compilerOptions": {
-        "outDir": "../../dist/out-tsc"
-    },
+    "extends": "../tsconfig.dev.json",
     "files": [
         "main.ts",
         "../polyfills.ts"
     ],
-    "include": [
-        "**/*.ts"
-    ]
+    "include": ["**/*.ts"]
 }

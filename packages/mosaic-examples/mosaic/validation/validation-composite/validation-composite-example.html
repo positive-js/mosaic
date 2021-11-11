@@ -11,11 +11,11 @@
                 <label class="mc-form__label flex-20">Начало диапазона</label>
                 <mc-form-field
                     class="mc-form__control"
-                    mcWarningTooltip="Только цифры и точки"
+                    [mcWarningTooltip]="'Только цифры'"
                     [mcEnterDelay]="10"
                     #startTooltip="mcWarningTooltip"
-                    mcTrigger="manual"
-                    mcPlacement="bottom">
+                    [mcTrigger]="'manual'"
+                    [mcPlacement]="popUpPlacements.Bottom">
                     <input mcInput formControlName="start" (input)="onInput($event, startTooltip, 'start')">
 
                     <mc-hint *ngIf="compositeFormGroup.controls.start.invalid">
@@ -30,11 +30,11 @@
                 <label class="mc-form__label flex-20">Окончание</label>
                 <mc-form-field
                     class="mc-form__control"
-                    mcWarningTooltip="Только цифры и точки"
+                    [mcWarningTooltip]="'Только цифры и точки'"
                     [mcEnterDelay]="10"
                     #endTooltip="mcWarningTooltip"
-                    mcTrigger="manual"
-                    mcPlacement="bottom">
+                    [mcTrigger]="'manual'"
+                    [mcPlacement]="popUpPlacements.Bottom">
                     <input mcInput formControlName="end" (input)="onInput($event, endTooltip, 'end')">
 
                     <mc-hint *ngIf="compositeFormGroup.controls.end.invalid">

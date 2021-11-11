@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { PopUpPlacements } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -11,6 +12,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
     encapsulation: ViewEncapsulation.None
 })
 export class TooltipOverviewExample {
+    popUpPlacements = PopUpPlacements;
+
     tooltipActiveStage: number;
     selectedOrder: boolean;
 
@@ -27,7 +30,7 @@ export class TooltipOverviewExample {
     };
 
     selectedElement: string = 'button';
-    selectedPlacement: string = 'left';
+    selectedPlacement: PopUpPlacements = PopUpPlacements.Left;
     layoutClass: string = 'layout-row layout-align-center-center';
     content: string = 'button text';
     userDefinedPlacementPriority: string[] = ['bottom', 'right'];
@@ -56,7 +59,7 @@ export class TooltipOverviewExample {
         this.activatedPosition = event;
     }
 
-    setPlacement(placement: string) {
+    setPlacement(placement: PopUpPlacements) {
         this.selectedPlacement = placement;
     }
 

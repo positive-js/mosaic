@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -10,5 +11,6 @@ import { Component } from '@angular/core';
     styleUrls: ['input-overview-example.css']
 })
 export class InputOverviewExample {
+    themePalette = ThemePalette;
     value = '';
 }

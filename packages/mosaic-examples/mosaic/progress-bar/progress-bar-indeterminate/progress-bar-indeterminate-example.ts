@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -9,4 +10,6 @@ import { Component } from '@angular/core';
     templateUrl: 'progress-bar-indeterminate-example.html',
     styleUrls: ['progress-bar-indeterminate-example.css']
 })
-export class ProgressBarIndeterminateExample {}
+export class ProgressBarIndeterminateExample {
+    themePalette = ThemePalette;
+}

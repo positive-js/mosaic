@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
-import { McFormsModule } from '@ptsecurity/mosaic/core';
+import { McFormsModule, PopUpPlacements, PopUpSizes, ThemePalette } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McPopoverModule } from '@ptsecurity/mosaic/popover';
@@ -22,6 +22,9 @@ import { McIconModule } from '../../mosaic/icon/';
     templateUrl: './template.html'
 })
 export class DemoComponent {
+    themePalette = ThemePalette;
+    popUpPlacements = PopUpPlacements;
+
     popoverActiveStage: number;
     selectedOrder: boolean;
 
@@ -48,9 +51,9 @@ export class DemoComponent {
     };
 
     selectedElement: string = 'button';
-    selectedPlacement: string = 'left';
+    selectedPlacement: PopUpPlacements = PopUpPlacements.Left;
     selectedTrigger: string = 'click';
-    selectedSize: string = 'normal';
+    selectedSize: PopUpSizes = PopUpSizes.Normal;
     layoutClass: string = 'layout-row layout-align-center-center';
     content: string = 'button text';
     userDefinedPlacementPriority: string[] = ['bottom', 'right'];
@@ -79,7 +82,7 @@ export class DemoComponent {
         this.activatedPosition = event;
     }
 
-    setPlacement(placement: string) {
+    setPlacement(placement: PopUpPlacements) {
         this.selectedPlacement = placement;
     }
 

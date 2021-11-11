@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -9,4 +10,6 @@ import { Component } from '@angular/core';
     templateUrl: 'tags-overview-example.html',
     styleUrls: ['tags-overview-example.css']
 })
-export class TagsOverviewExample {}
+export class TagsOverviewExample {
+    themePalette = ThemePalette;
+}

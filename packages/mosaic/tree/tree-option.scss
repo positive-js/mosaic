@@ -39,7 +39,8 @@
         cursor: pointer;
     }
 
-    & .mc-pseudo-checkbox {
+    & > .mc-pseudo-checkbox,
+    & > .mc-checkbox {
         margin-right: 8px;
     }
 

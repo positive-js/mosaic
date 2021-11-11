@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -10,5 +11,7 @@ import { Component } from '@angular/core';
     styleUrls: ['progress-bar-overview-example.css']
 })
 export class ProgressBarOverviewExample {
+    themePalette = ThemePalette;
+
     percent: number = 30;
 }

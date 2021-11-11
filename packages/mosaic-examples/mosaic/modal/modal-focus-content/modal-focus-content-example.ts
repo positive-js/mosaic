@@ -1,6 +1,7 @@
 // tslint:disable:no-console
 import { Component, ViewChild } from '@angular/core';
 import { McButton } from '@ptsecurity/mosaic/button';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { McInput } from '@ptsecurity/mosaic/input';
 import { McModalRef, McModalService } from '@ptsecurity/mosaic/modal';
 
@@ -64,12 +65,14 @@ export class ModalFocusContentExample {
         </mc-modal-body>
 
         <div mc-modal-footer>
-            <button mc-button [color]="'primary'" (click)="destroyModal('save')">Save</button>
+            <button mc-button [color]="themePalette.Primary" (click)="destroyModal('save')">Save</button>
             <button mc-button autofocus (click)="destroyModal('close')">Close</button>
         </div>
   `
 })
 export class McModalFocusContentComponent {
+    themePalette = ThemePalette;
+
     @ViewChild('focusedField', { read: McInput }) focusedField: McInput;
 
     constructor(private modal: McModalRef) { }

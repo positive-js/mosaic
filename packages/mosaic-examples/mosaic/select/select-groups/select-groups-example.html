@@ -3,6 +3,6 @@
         <mc-optgroup *ngFor="let group of pokemonTypes" [label]="group.name" [disabled]="group.disabled">
             <mc-option *ngFor="let pokemon of group.pokemon" [value]="pokemon.value">{{ pokemon.viewValue }}</mc-option>
         </mc-optgroup>
-        <mc-option value="mime-11">Mr. Mime</mc-option>
+        <mc-option [value]="'mime-11'">Mr. Mime</mc-option>
     </mc-select>
 </mc-form-field>

@@ -5,6 +5,7 @@ import { FormControl, FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
+import { PopUpPlacements } from '@ptsecurity/mosaic/core';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McListModule, McListSelectionChange } from '@ptsecurity/mosaic/list';
@@ -20,6 +21,8 @@ import { debounceTime, startWith, switchMap } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
+    popUpPlacements = PopUpPlacements;
+
     typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
     multipleSelected = ['Boots', 'Clogs'];
     multipleSelectedCheckbox: string[] = [];

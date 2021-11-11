@@ -1,12 +1,12 @@
 <div class="example-timepicker-group">
     <mc-radio-group [(ngModel)]="timeFormat">
-        <mc-radio-button class="example-radio-button" value="HH:mm">HH:mm</mc-radio-button>
-        <mc-radio-button class="example-radio-button" value="HH:mm:ss">HH:mm:ss</mc-radio-button>
+        <mc-radio-button class="example-radio-button" [value]="'HH:mm'">HH:mm</mc-radio-button>
+        <mc-radio-button class="example-radio-button" [value]="'HH:mm:ss'">HH:mm:ss</mc-radio-button>
     </mc-radio-group>
 
     <mc-form-field
         class="example-timepicker-element"
-        mcWarningTooltip="Только цифры"
+        [mcWarningTooltip]="'Только цифры'"
         #tooltip="mcWarningTooltip">
 
         <i mcPrefix mc-icon="mc-clock_16"></i>

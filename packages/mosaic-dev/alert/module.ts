@@ -3,6 +3,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 import { McButtonModule } from '../../mosaic/button';
 import { McIconModule } from '../../mosaic/icon';
@@ -24,6 +25,8 @@ import { McLinkModule } from '../../mosaic/link';
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
+    themePalette = ThemePalette;
+
     // tslint:disable-next-line:no-magic-numbers
     readonly shownAlerts: number[]  = Array.from(Array(16).keys());
 

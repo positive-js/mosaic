@@ -1,6 +1,7 @@
 import { Component, Input, NgModule, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { McButton, McButtonModule } from '@ptsecurity/mosaic/button';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McModalModule, McModalRef, McModalService, ModalSize } from '@ptsecurity/mosaic/modal';
 
@@ -15,6 +16,7 @@ import { McModalModule, McModalRef, McModalService, ModalSize } from '@ptsecurit
     encapsulation: ViewEncapsulation.None
 })
 export class ModalDemoComponent {
+    themePalette = ThemePalette;
 
     @ViewChild('confirmButton') confirmButton: McButton;
     @ViewChild('deleteButton') deleteButton: McButton;
@@ -191,12 +193,14 @@ export class McModalLongCustomComponent {
       <h4>{{ subtitle }}</h4>
       <p>
         <span>Get Modal instance in component</span>
-        <button mc-button [color]="'primary'" (click)="destroyModal()">destroy modal in the component</button>
+        <button mc-button [color]="themePalette.Primary" (click)="destroyModal()">destroy modal in the component</button>
       </p>
     </div>
   `
 })
 export class McModalCustomComponent {
+    themePalette = ThemePalette;
+
     @Input() title: string;
     @Input() subtitle: string;
 
@@ -219,17 +223,19 @@ export class McModalCustomComponent {
             <h4>{{ subtitle }}</h4>
             <p>
                 <span>Get Modal instance in component</span>
-                <button mc-button [color]="'primary'" (click)="destroyModal()">destroy modal in the component</button>
+                <button mc-button [color]="themePalette.Primary" (click)="destroyModal()">destroy modal in the component</button>
             </p>
         </mc-modal-body>
 
         <div mc-modal-footer>
-            <button mc-button [color]="'primary'" >Save</button>
+            <button mc-button [color]="themePalette.Primary" >Save</button>
             <button mc-button autofocus>Close</button>
         </div>
   `
 })
 export class McModalFullCustomComponent {
+    themePalette = ThemePalette;
+
     @Input() title: string;
     @Input() subtitle: string;
 

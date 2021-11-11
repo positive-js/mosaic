@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -9,4 +10,6 @@ import { Component } from '@angular/core';
     templateUrl: 'button-progress-example.html',
     styleUrls: ['button-progress-example.css']
 })
-export class ButtonProgressExample {}
+export class ButtonProgressExample {
+    themePalette = ThemePalette;
+}

@@ -18,12 +18,12 @@
     <button mc-dropdown-item><i mc-icon="mc-info-o_16"></i>Общие сведения</button>
 
     <button mc-dropdown-item>
-        Общие сведения<div class="mc-dropdown-item__caption">Общие сведения</div>
+        Общие сведения<span class="mc-dropdown-item__caption">Общие сведения</span>
     </button>
 
     <button mc-dropdown-item>
         <i mc-icon="mc-info-o_16"></i>Общие сведения
-        <div class="mc-dropdown-item__caption">Общие сведения</div>
+        <span class="mc-dropdown-item__caption">Общие сведения</span>
     </button>
 
     <button mc-dropdown-item>
@@ -73,7 +73,7 @@
     <ng-template mcDropdownContent let-someValue="someValue">
         <button mc-dropdown-item [disabled]="disabled">dropdown</button>
         <button mc-dropdown-item>
-            Point 1 <div class="mc-dropdown-item__caption">Some info</div>
+            Point 1 <span class="mc-dropdown-item__caption">Some info</span>
         </button>
         <button mc-dropdown-item>Value: {{someValue}}</button>
     </ng-template>

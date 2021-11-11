@@ -18,7 +18,7 @@ Default: 0
 
 ```html
 This will fill 30% of the sector
-<mc-progress-spinner value="30"></mc-progress-spinner>
+<mc-progress-spinner [value]="30"></mc-progress-spinner>
 ```
 
 #### `mode`
@@ -27,9 +27,9 @@ Default: 'determinate'
 
 ```html
 To show indeterminate progress
-<mc-progress-spinner mode="indeterminate"></mc-progress-spinner>
+<mc-progress-spinner [mode]="'indeterminate'"></mc-progress-spinner>
 Or for determinate progress
-<mc-progress-spinner mode="determinate" value="30"></mc-progress-spinner>
+<mc-progress-spinner [mode]="'determinate'" [value]="30"></mc-progress-spinner>
 ```
 <!-- example(progress-spinner-indeterminate) -->
 
@@ -39,9 +39,9 @@ Default: 'primary'
 Set theming of element
 
 ```html
-<mc-progress-spinner [color]="'primary'"></mc-progress-spinner>
-<mc-progress-spinner [color]="'second'"></mc-progress-spinner>
-<mc-progress-spinner [color]="'error'"></mc-progress-spinner>
+<mc-progress-spinner [color]="themePalette.Primary"></mc-progress-spinner>
+<mc-progress-spinner [color]="themePalette.Second"></mc-progress-spinner>
+<mc-progress-spinner [color]="themePalette.Error"></mc-progress-spinner>
 ```
 
 ### Theming

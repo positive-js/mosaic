@@ -23,9 +23,9 @@
  
 <button
     mcPopover
-    mcTrigger="hover"
-    mcPlacement="top"
-    mcPopoverHeader="Это header"
+    [mcTrigger]="'hover'"
+    [mcPlacement]="'top'"
+    [mcPopoverHeader]="'Это header'"
     [mcPopoverContent]="customContent">
     Найти Эйяфьядлайёкюдль
 </button>

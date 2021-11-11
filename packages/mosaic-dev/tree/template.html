@@ -30,8 +30,7 @@
     [autoSelect]="false"
     [dataSource]="dataSource"
     [treeControl]="treeControl"
-    (onSelectAll)="onSelectAll($event)"
-    (onCopy)="onCopy($event)">
+    (onSelectAll)="onSelectAll($event)">
 
     <mc-tree-option
         *mcTreeNodeDef="let node"
@@ -52,8 +51,8 @@
         <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
 
         <mc-option-action
-            mcTooltip="Tooltip text"
-            [mcPlacement]="'right'"
+            [mcTooltip]="'Tooltip text'"
+            [mcPlacement]="PopUpPlacements.Right"
             [mcDropdownTriggerFor]="dropdown">
         </mc-option-action>
     </mc-tree-option>

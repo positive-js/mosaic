@@ -3,7 +3,7 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
-import { CdkConnectedOverlay } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, ConnectedPosition } from '@angular/cdk/overlay';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -274,7 +274,7 @@ export class McSelect extends McSelectMixinBase implements
      * the trigger completely). If the panel cannot fit below the trigger, it
      * will fall back to a position above the trigger.
      */
-    positions = [
+    positions: ConnectedPosition[] = [
         {
             originX: 'start',
             originY: 'bottom',

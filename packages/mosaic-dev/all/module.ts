@@ -10,6 +10,7 @@ import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McButtonToggleModule } from '@ptsecurity/mosaic/button-toggle';
 import { McCardModule } from '@ptsecurity/mosaic/card';
 import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
+import { PopUpPlacements, ThemePalette } from '@ptsecurity/mosaic/core';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
@@ -19,7 +20,7 @@ import { McListModule } from '@ptsecurity/mosaic/list';
 import { McModalModule, McModalService } from '@ptsecurity/mosaic/modal';
 import { McNavbarModule } from '@ptsecurity/mosaic/navbar';
 import { McProgressBarModule } from '@ptsecurity/mosaic/progress-bar';
-import { McProgressSpinnerModule } from '@ptsecurity/mosaic/progress-spinner';
+import { McProgressSpinnerModule, ProgressSpinnerMode } from '@ptsecurity/mosaic/progress-spinner';
 import { McRadioModule } from '@ptsecurity/mosaic/radio';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McSplitterModule } from '@ptsecurity/mosaic/splitter';
@@ -59,6 +60,9 @@ const MAX_PERCENT: number = 100;
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
+    themePalette = ThemePalette;
+    popUpPlacements = PopUpPlacements;
+
     checked: boolean[] = [true, true, false];
     indeterminate: boolean = true;
     disabled: boolean = false;
@@ -107,7 +111,7 @@ export class DemoComponent {
         }
     ];
 
-    mode: string = 'determinate';
+    mode: ProgressSpinnerMode = 'determinate';
     percent: number = 0;
     intervalId: number;
 

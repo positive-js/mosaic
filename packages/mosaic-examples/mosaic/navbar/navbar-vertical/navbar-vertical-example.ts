@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -10,6 +11,8 @@ import { Component } from '@angular/core';
     styleUrls: ['navbar-vertical-example.css']
 })
 export class NavbarVerticalExample {
+    themePalette = ThemePalette;
+
     onItemClick(event: MouseEvent) {
         alert(`innerText: ${(<HTMLElement> event.target).innerText}`);
     }

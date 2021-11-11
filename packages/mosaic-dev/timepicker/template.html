@@ -2,16 +2,6 @@
 <div class="mc-body">
     <h3 class="mc-title">Example 1</h3>
 
-<!--    <mc-form-field>-->
-<!--        <i mcPrefix mc-icon="mc-clock_16"></i>-->
-<!--        <input mcTimepicker-->
-<!--               [(ngModel)]="timeValue"-->
-<!--               time-format="HH:mm:ss"-->
-<!--               min-time="10:00:00"-->
-<!--               max-time="13:30:00"-->
-<!--               [disabled]="isDisabled">-->
-<!--    </mc-form-field>-->
-
     <div>{{ reactiveFormControlValue.value ? reactiveFormControlValue.value.toString() : null }}</div>
 
     <br><br>
@@ -23,13 +13,13 @@
             mcTimepicker
             [formControl]="reactiveFormControlValue"
             [max]="maxDate"
-            [format]="'HH:mm'"
+            [format]="timeFormats.HHmm"
             [placeholder]="placeholder">
         <mc-hint class="mc-caption" *ngIf="reactiveFormControlValue.errors?.mcTimepickerParse">Только цифры</mc-hint>
     </mc-form-field>
 
     <mc-form-field
-        mcWarningTooltip="'Только цифры'"
+        [mcWarningTooltip]="'Только цифры'"
         #tooltip="mcWarningTooltip">
         <i mcPrefix mc-icon="mc-clock_16"></i>
         <input
@@ -38,7 +28,7 @@
             (ngModelChange)="ngModelChange($event)"
             [mcValidationTooltip]="tooltip"
             [max]="maxDate"
-            [format]="'HH:mm:ss'">
+            [format]="timeFormats.HHmmss">
     </mc-form-field>
 
     <br><br><br>
@@ -49,7 +39,7 @@
             placeholder="чч:мм"
             [formControl]="reactiveFormControlValue"
             [max]="maxDate"
-            [format]="'HH:mm'"
+            [format]="timeFormats.HHmm"
             size="3">
     </mc-form-field>
 
@@ -59,22 +49,22 @@
             placeholder="чч:мм"
             [formControl]="reactiveFormControlValue"
             [max]="maxDate"
-            [format]="'HH:mm:ss'"
+            [format]="timeFormats.HHmmss"
             size="6">
     </mc-form-field>
 
-<!--    <br><br><br>-->
+    <br><br><br>
 
-<!--    <div>Validation state: {{ formControlValue.errors | json }}</div>-->
-<!--    <mc-form-field>-->
-<!--        <i mcPrefix mc-icon="mc-clock_16"></i>-->
-<!--        <input mcTimepicker [formControl]="formControlValue" [max]="maxDate" [min]="minDate">-->
-<!--    </mc-form-field>-->
+    <div>Validation state: {{ formControlValue.errors | json }}</div>
+    <mc-form-field>
+        <i mcPrefix mc-icon="mc-clock_16"></i>
+        <input mcTimepicker [formControl]="formControlValue" [max]="maxDate" [min]="minDate">
+    </mc-form-field>
 
-<!--    <br><br><br>-->
+    <br><br><br>
 
-<!--    <mc-form-field>-->
-<!--        <i mcPrefix mc-icon="mc-clock_16"></i>-->
-<!--        <input mcTimepicker [(ngModel)]="ngModelValue" [format]="'HH:mm:ss'" [max]="maxDate" [min]="minDate">-->
-<!--    </mc-form-field>-->
+    <mc-form-field>
+        <i mcPrefix mc-icon="mc-clock_16"></i>
+        <input mcTimepicker [(ngModel)]="ngModelValue" [format]="timeFormats.HHmmss" [max]="maxDate" [min]="minDate">
+    </mc-form-field>
 </div>

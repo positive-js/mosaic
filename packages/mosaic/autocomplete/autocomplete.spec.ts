@@ -2572,7 +2572,7 @@ class AutocompleteWithoutPanel {
         </mc-form-field>
 
         <mc-autocomplete #auto="mcAutocomplete">
-            <mc-option value="California">California</mc-option>
+            <mc-option [value]="'California'">California</mc-option>
         </mc-autocomplete>
     `
 })

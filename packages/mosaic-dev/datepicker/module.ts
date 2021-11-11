@@ -19,7 +19,7 @@ import {
     McLuxonDateModule,
     LuxonDateAdapter
 } from '@ptsecurity/mosaic-luxon-adapter/adapter';
-import { McDatepicker, McDatepickerModule } from '@ptsecurity/mosaic/datepicker';
+import { McCalendarView, McDatepicker, McDatepickerModule } from '@ptsecurity/mosaic/datepicker';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
@@ -50,6 +50,8 @@ registerLocaleData(de);
     ]
 })
 export class DemoComponent implements AfterViewInit {
+    mcCalendarView = McCalendarView;
+
     date = null;
     formControlValue: FormControl;
     minDate;

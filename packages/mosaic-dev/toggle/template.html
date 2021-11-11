@@ -23,7 +23,7 @@
                     </mc-toggle>
                 </div>
                 <div class="flex-33">
-                    <mc-toggle class="mc-toggle_small" [color]="'error'" [(ngModel)]="valueSmallOn" [disabled]="disabled">
+                    <mc-toggle class="mc-toggle_small" [color]="themePalette.Error" [(ngModel)]="valueSmallOn" [disabled]="disabled">
                     </mc-toggle>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                 </mc-toggle>
             </div>
             <div class="toggle-demo-container">
-                <mc-toggle class="mc-toggle_small cdk-keyboard-focused" labelPosition="left" [(ngModel)]="valueSmallOff" [disabled]="disabled">
+                <mc-toggle class="mc-toggle_small cdk-keyboard-focused" [labelPosition]="'left'" [(ngModel)]="valueSmallOff" [disabled]="disabled">
                     Quack like a duck
                 </mc-toggle>
             </div>
@@ -50,7 +50,7 @@
                     </mc-toggle>
                 </div>
                 <div class="flex-33">
-                    <mc-toggle [color]="'error'" [(ngModel)]="valueBigOn" [disabled]="disabled">
+                    <mc-toggle [color]="themePalette.Error" [(ngModel)]="valueBigOn" [disabled]="disabled">
                     </mc-toggle>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                 </mc-toggle>
             </div>
             <div class="toggle-demo-container">
-                <mc-toggle labelPosition="left" [(ngModel)]="valueBigOff" [disabled]="disabled">
+                <mc-toggle [labelPosition]="'left'" [(ngModel)]="valueBigOff" [disabled]="disabled">
                     Quack like a duck
                 </mc-toggle>
             </div>
@@ -80,7 +80,7 @@
                     </mc-toggle>
                 </div>
                 <div class="flex-33">
-                    <mc-toggle class="mc-toggle_small" [color]="'error'" [(ngModel)]="valueSmallOn" [disabled]="true">
+                    <mc-toggle class="mc-toggle_small" [color]="themePalette.Error" [(ngModel)]="valueSmallOn" [disabled]="true">
                     </mc-toggle>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                 </mc-toggle>
             </div>
             <div class="toggle-demo-container">
-                <mc-toggle class="mc-toggle_small cdk-keyboard-focused" labelPosition="left" [(ngModel)]="valueSmallOff" [disabled]="true">
+                <mc-toggle class="mc-toggle_small cdk-keyboard-focused" [labelPosition]="'left'" [(ngModel)]="valueSmallOff" [disabled]="true">
                     Quack like a duck
                 </mc-toggle>
             </div>
@@ -107,7 +107,7 @@
                     </mc-toggle>
                 </div>
                 <div class="flex-33">
-                    <mc-toggle [color]="'error'" [(ngModel)]="valueBigOn" [disabled]="true">
+                    <mc-toggle [color]="themePalette.Error" [(ngModel)]="valueBigOn" [disabled]="true">
                     </mc-toggle>
                 </div>
             </div>
@@ -117,7 +117,7 @@
                 </mc-toggle>
             </div>
             <div class="toggle-demo-container">
-                <mc-toggle labelPosition="left" [(ngModel)]="valueBigOff" [disabled]="true">
+                <mc-toggle [labelPosition]="'left'" [(ngModel)]="valueBigOff" [disabled]="true">
                     Quack like a duck
                 </mc-toggle>
             </div>

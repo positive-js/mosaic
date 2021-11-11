@@ -3,10 +3,10 @@
         <button
             mc-button
             (click)="toggleTooltip(tooltip.isOpen)"
-            mcTooltip="tooltip text"
-            mcTrigger="manual"
+            [mcTooltip]="'Tooltip text'"
+            [mcTrigger]="'manual'"
             #tooltip="mcTooltip"
-            mcPlacement="right">
+            [mcPlacement]="popUpPlacements.Right">
             toggle tooltip
         </button>
     </div>

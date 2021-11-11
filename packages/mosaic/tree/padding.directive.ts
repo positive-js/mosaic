@@ -25,7 +25,6 @@ const cssUnitPattern = /([A-Za-z%]+)$/;
     exportAs: 'mcTreeNodePadding'
 })
 export class McTreeNodePadding<T> implements OnInit, OnDestroy {
-    @Input('mcTreeNodePadding')
     get level(): number {
         return this._level;
     }

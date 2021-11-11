@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McLinkModule } from '@ptsecurity/mosaic/link';
 
@@ -17,6 +18,7 @@ import { McNavbarModule, McNavbar, McNavbarItem } from '../../mosaic/navbar';
     encapsulation: ViewEncapsulation.None
 })
 export class NavbarDemoComponent {
+    themePalette = ThemePalette;
 
     @ViewChild('verticalNavbar', {static: false}) navbar: McNavbar;
 

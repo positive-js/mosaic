@@ -1,4 +1,5 @@
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelService } from '@ptsecurity/mosaic/sidepanel';
 
 
@@ -12,6 +13,8 @@ import { MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelService } from '@pts
     encapsulation: ViewEncapsulation.None
 })
 export class SidepanelComponentExample {
+    themePalette = ThemePalette;
+
     position: McSidepanelPosition = McSidepanelPosition.Right;
 
     modalState: boolean = false;
@@ -44,11 +47,11 @@ export class SidepanelComponentExample {
     </mc-sidepanel-body>
     <mc-sidepanel-footer>
         <mc-sidepanel-actions align="right">
-            <button cdkFocusInitial mc-button [color]="'primary'" (click)="openComponentSidepanel()">
+            <button cdkFocusInitial mc-button [color]="themePalette.Primary" (click)="openComponentSidepanel()">
                 <span>Open another sidepanel</span>
             </button>
 
-            <button mc-button [color]="'second'" mc-sidepanel-close>
+            <button mc-button [color]="themePalette.Second" mc-sidepanel-close>
                 <span>Close</span>
             </button>
         </mc-sidepanel-actions>
@@ -58,6 +61,8 @@ export class SidepanelComponentExample {
     }
 })
 export class SidepanelExampleCustomComponent {
+    themePalette = ThemePalette;
+
     openComponentSidepanel: () => void;
 
     array = new Array(60); // tslint:disable-line

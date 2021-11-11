@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { McRadioChange, McRadioModule } from '@ptsecurity/mosaic/radio';
 
-import { ThemePickerModule } from '../theme-picker';
-
 
 @Component({
     selector: 'app',
@@ -26,8 +24,8 @@ export class DemoComponent {
     ];
 
     selectionList = [
-        {name: 'Yes', value: 'true', selected: false},
-        {name: 'No', value: 'false', selected: true}
+        { name: 'Yes', value: 'true', selected: false },
+        { name: 'No', value: 'false', selected: true }
     ];
 
     onChange($event: McRadioChange) {
@@ -42,8 +40,7 @@ export class DemoComponent {
     imports: [
         BrowserModule,
         FormsModule,
-        McRadioModule,
-        ThemePickerModule
+        McRadioModule
     ],
     bootstrap: [
         DemoComponent

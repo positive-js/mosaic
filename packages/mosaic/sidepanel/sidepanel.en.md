@@ -109,16 +109,16 @@ to close sidepanel. For example, cancel button in footer.
 </mc-sidepanel-body>
 <mc-sidepanel-footer>
     <mc-sidepanel-actions align="left">
-        <button mc-button [color]="'primary'" (click)="doAnotherAction()">
+        <button mc-button [color]="themePalette.Primary" (click)="doAnotherAction()">
             <span>Another Action</span>
         </button>
     </mc-sidepanel-actions>
     <mc-sidepanel-actions align="right">
-        <button mc-button [color]="'primary'" (click)="doAction()">
+        <button mc-button [color]="themePalette.Primary" (click)="doAction()">
             <span>Action</span>
         </button>
 
-        <button mc-button [color]="'second'" mc-sidepanel-close>
+        <button mc-button [color]="themePalette.Second" mc-sidepanel-close>
             <span>Close</span>
         </button>
     </mc-sidepanel-actions>
