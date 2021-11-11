@@ -10,6 +10,8 @@
 }
 
 .mc-navbar-item {
+    box-sizing: border-box;
+
     position: relative;
 
     display: flex;
@@ -19,6 +21,13 @@
 
     padding-left: var(--mc-navbar-item-size-padding, $navbar-item-size-padding);
     padding-right: var(--mc-navbar-item-size-padding, $navbar-item-size-padding);
+
+    &.mc-opened.mc-navbar-item_bento {
+        position: absolute;
+
+        top: 0;
+        right: 0;
+    }
 
     & .mc-icon {
         min-width: 16px;

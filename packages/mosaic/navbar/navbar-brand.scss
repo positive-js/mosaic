@@ -6,8 +6,6 @@
 }
 
 .mc-navbar-brand {
-    position: relative;
-
     display: flex;
     align-items: center;
 
@@ -51,12 +49,6 @@ a.mc-navbar-brand {
 
     &.mc-opened {
         align-items: unset;
-
-        & .mc-navbar-item {
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
 
         & .mc-navbar-logo {
             padding-left: 16px;

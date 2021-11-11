@@ -29,6 +29,7 @@
 <mc-vertical-navbar class="layout-align-space-between" #verticalNavbar>
     <mc-navbar-container>
         <mc-navbar-item
+            [bento]="true"
             #appDropdownTrigger="mcDropdownTrigger"
             [mcDropdownTriggerFor]="appDropdown"
             [class.mc-active]="appDropdownTrigger.opened">

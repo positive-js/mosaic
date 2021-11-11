@@ -3,6 +3,8 @@
 
 
 @mixin mc-navbar-theme($theme) {
+    $background: map-get($theme, background);
+
     $navbar: map-get(map-get($theme, components), navbar);
     $navbar-item: map-get(map-get($theme, components), navbar-item);
 
@@ -60,7 +62,9 @@
         outline: none;
 
         &.cdk-keyboard-focused {
-            box-shadow: inset 0 0 0 2px map-get(map-get($theme, states), focused-color);
+            box-shadow:
+                inset 0 0 0 2px map-get(map-get($theme, states), focused-color),
+                inset 0 0 0 3px map-get($background, background);
         }
     }
 

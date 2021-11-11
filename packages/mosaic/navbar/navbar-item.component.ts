@@ -260,6 +260,7 @@ export class McNavbarFocusableItem implements IFocusableOption {
     template: `<ng-content></ng-content>`,
     host: {
         class: 'mc-navbar-item',
+        '[class.mc-navbar-item_bento]': 'bento',
         '[class.mc-navbar-item_collapsed]': 'collapsed',
 
         '[attr.title]': 'collapsedTitle',
@@ -272,6 +273,8 @@ export class McNavbarFocusableItem implements IFocusableOption {
 export class McNavbarItem {
     @ContentChild(McNavbarTitle) title: McNavbarTitle;
     @ContentChild(McIcon) icon: McIcon;
+
+    @Input() bento: boolean = false;
 
     @Input()
     get collapsable(): boolean {
