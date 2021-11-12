@@ -21,7 +21,7 @@
         size: {
             states: {
                 'opened-width': { value: '240px' },
-                'closed-width': { value: '48px' }
+                'closed-width': { value: '56px' }
             },
             'icon-margin': { value: '10px' }
         }
@@ -49,7 +49,7 @@
         },
         size: {
             padding: { value: '{padding.control-horizontal}' },
-            height: { value: '{size.panel-height}' }
+            height: { value: '56px' }
         }
     },
     'navbar-brand': {

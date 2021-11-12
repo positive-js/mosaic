@@ -78,8 +78,13 @@ export class McNavbarTitle implements AfterContentInit {
 }
 
 
-@Directive({
+@Component({
     selector: 'mc-navbar-brand, [mc-navbar-brand]',
+    exportAs: 'mcNavbarBrand',
+    template: `
+        <ng-content></ng-content>
+        <div class="mc-navbar-item__overlay"></div>
+    `,
     host: {
         class: 'mc-navbar-brand',
         '[class.mc-hovered]': 'hovered'
@@ -259,7 +264,10 @@ export class McNavbarFocusableItem implements IFocusableOption {
 @Component({
     selector: 'mc-navbar-item, [mc-navbar-item]',
     exportAs: 'mcNavbarItem',
-    template: `<ng-content></ng-content>`,
+    template: `
+        <ng-content></ng-content>
+        <div class="mc-navbar-item__overlay"></div>
+    `,
     host: {
         class: 'mc-navbar-item',
         '[class.mc-navbar-item_bento]': 'bento',
@@ -333,6 +341,8 @@ export class McNavbarItem {
 
         <ng-content select="[mc-icon]"></ng-content>
         <ng-content select="mc-navbar-title" *ngIf="navbar.expanded"></ng-content>
+
+        <div class="mc-navbar-item__overlay"></div>
     `,
     styleUrls: ['./navbar.scss'],
     host: {

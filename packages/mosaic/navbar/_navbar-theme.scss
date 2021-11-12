@@ -4,6 +4,7 @@
 
 @mixin mc-navbar-theme($theme) {
     $background: map-get($theme, background);
+    $primary: map-get($theme, primary);
 
     $navbar: map-get(map-get($theme, components), navbar);
     $navbar-item: map-get(map-get($theme, components), navbar-item);
@@ -27,7 +28,9 @@
         color: map-get($navbar-item, color);
     }
 
-    .mc-navbar-item {
+    .mc-navbar-item,
+    .mc-navbar-brand,
+    .mc-navbar-toggle {
         color: map-get($navbar-item, color);
 
         & .mc-icon {
@@ -35,16 +38,21 @@
         }
 
         &.mc-active {
-            background-color: map-get($navbar-item, state-active);
+            background-color: mc-color($primary, 600);
         }
 
         &:hover:not(.mc-navbar-item_button) {
             cursor: pointer;
-            background-color: map-get($navbar-item, state-hover);
+
+            & .mc-navbar-item__overlay {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
         }
 
-        &.mc-progress:hover {
-            background-color: map-get($navbar-item, state-progress);
+        &:active:not(.mc-navbar-item_button) {
+            & .mc-navbar-item__overlay {
+                background: rgba(0, 0, 0, 0.1);
+            }
         }
 
         &[disabled] {
@@ -70,6 +78,15 @@
 
     .mc-navbar-divider {
         background-color: map-get($navbar, divider-background);
+    }
+}
+
+button {
+    &.mc-navbar-item,
+    &.mc-navbar-brand,
+    &.mc-navbar-toggle {
+        background: transparent;
+        border: none;
     }
 }
 

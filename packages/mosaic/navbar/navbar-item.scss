@@ -27,6 +27,8 @@
 
         top: 0;
         right: 0;
+
+        z-index: 1;
     }
 
     & .mc-icon {
@@ -108,4 +110,17 @@
 a.mc-navbar-item,
 a.mc-navbar-title {
     text-decoration: none;
+}
+
+.mc-navbar-item,
+.mc-navbar-brand,
+.mc-navbar-toggle {
+    & .mc-navbar-item__overlay {
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+    }
+
+    & [mc-button] {
+        z-index: 1;
+    }
 }
