@@ -324,17 +324,19 @@ export class McNavbarItem {
     selector: 'mc-navbar-toggle',
     template: `
         <i mc-icon
-           [class.mc-angle-left-M_16]="mcNavbar.expanded"
-           [class.mc-angle-right-M_16]="!mcNavbar.expanded"
+           [class.mc-angle-left-M_16]="navbar.expanded"
+           [class.mc-angle-right-M_16]="!navbar.expanded"
            *ngIf="!customIcon">
         </i>
 
         <ng-content select="[mc-icon]"></ng-content>
-        <ng-content select="mc-navbar-title" *ngIf="mcNavbar.expanded"></ng-content>
+        <ng-content select="mc-navbar-title" *ngIf="navbar.expanded"></ng-content>
     `,
     styleUrls: ['./navbar.scss'],
     host: {
-        class: 'mc-navbar-item mc-navbar-toggle mc-vertical'
+        class: 'mc-navbar-item mc-navbar-toggle mc-vertical',
+        '(keydown)': 'onKeydown($event)',
+        '(click)': 'navbar.toggle()'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
@@ -342,5 +344,14 @@ export class McNavbarItem {
 export class McNavbarToggle {
     @ContentChild(McIcon) customIcon: McIcon;
 
-    constructor(public mcNavbar: McVerticalNavbar) {}
+    constructor(public navbar: McVerticalNavbar) {}
+
+    onKeydown($event: KeyboardEvent) {
+        if ([SPACE, ENTER].includes($event.keyCode)) {
+            this.navbar.toggle();
+
+            $event.stopPropagation();
+            $event.preventDefault();
+        }
+    }
 }
