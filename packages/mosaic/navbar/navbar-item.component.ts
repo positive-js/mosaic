@@ -1,5 +1,6 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { DOCUMENT } from '@angular/common';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -8,6 +9,7 @@ import {
     ContentChild,
     Directive,
     ElementRef,
+    Inject,
     Input,
     NgZone,
     OnDestroy,
@@ -15,7 +17,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { ENTER, SPACE } from '@ptsecurity/cdk/keycodes';
+import { ENTER, NUMPAD_DIVIDE, SPACE } from '@ptsecurity/cdk/keycodes';
 import { McButton, McButtonCssStyler } from '@ptsecurity/mosaic/button';
 import { toBoolean } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
@@ -341,10 +343,22 @@ export class McNavbarItem {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class McNavbarToggle {
+export class McNavbarToggle implements OnDestroy{
     @ContentChild(McIcon) customIcon: McIcon;
 
-    constructor(public navbar: McVerticalNavbar) {}
+    constructor(
+        public navbar: McVerticalNavbar,
+        private ngZone: NgZone,
+        @Optional() @Inject(DOCUMENT) private document: any
+    ) {
+        const window = this.getWindow();
+
+        if (window) {
+            this.ngZone.runOutsideAngular(() => {
+                window.addEventListener('keydown', this.windowToggleHandler);
+            });
+        }
+    }
 
     onKeydown($event: KeyboardEvent) {
         if ([SPACE, ENTER].includes($event.keyCode)) {
@@ -352,6 +366,24 @@ export class McNavbarToggle {
 
             $event.stopPropagation();
             $event.preventDefault();
+        }
+    }
+
+    ngOnDestroy(): void {
+        const window = this.getWindow();
+
+        if (window) {
+            window.removeEventListener('keydown', this.windowToggleHandler);
+        }
+    }
+
+    private getWindow(): Window {
+        return this.document?.defaultView || window;
+    }
+
+    private windowToggleHandler = (event: KeyboardEvent) => {
+        if (event.ctrlKey && event.keyCode === NUMPAD_DIVIDE) {
+            this.ngZone.run(() => this.navbar.toggle());
         }
     }
 }
