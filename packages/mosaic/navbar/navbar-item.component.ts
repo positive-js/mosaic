@@ -1,5 +1,7 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Overlay, ScrollDispatcher } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
 import {
     AfterContentInit,
@@ -14,6 +16,8 @@ import {
     NgZone,
     OnDestroy,
     Optional,
+    TemplateRef,
+    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
@@ -22,6 +26,7 @@ import { McButton, McButtonCssStyler } from '@ptsecurity/mosaic/button';
 import { PopUpPlacements, toBoolean } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 import { McIcon } from '@ptsecurity/mosaic/icon';
+import { MC_TOOLTIP_SCROLL_STRATEGY, McTooltipTrigger, TooltipModifier } from '@ptsecurity/mosaic/tooltip';
 import { merge, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
@@ -342,11 +347,7 @@ export class McNavbarItem {
         <ng-content select="[mc-icon]"></ng-content>
         <ng-content select="mc-navbar-title" *ngIf="navbar.expanded"></ng-content>
 
-        <div class="mc-navbar-item__overlay"
-             [mcTooltip]="'Развернуть меню'"
-             [mcPlacement]="popUpPlacements.Right"
-             [mcTooltipDisabled]="navbar.expanded">
-        </div>
+        <div class="mc-navbar-item__overlay"></div>
     `,
     styleUrls: ['./navbar.scss'],
     host: {
@@ -358,8 +359,6 @@ export class McNavbarItem {
     encapsulation: ViewEncapsulation.None
 })
 export class McNavbarToggle implements OnDestroy {
-    popUpPlacements = PopUpPlacements;
-
     @ContentChild(McIcon) customIcon: McIcon;
 
     constructor(
@@ -401,5 +400,49 @@ export class McNavbarToggle implements OnDestroy {
         if (event.ctrlKey && event.keyCode === NUMPAD_DIVIDE) {
             this.ngZone.run(() => this.navbar.toggle());
         }
+    }
+}
+
+@Directive({
+    selector: 'mc-navbar-toggle[mcCollapsedTooltip]',
+    exportAs: 'mcCollapsedTooltip',
+    host: {
+        '[class.mc-tooltip_open]': 'isOpen',
+
+        '(keydown)': 'handleKeydown($event)',
+        '(touchend)': 'handleTouchend()'
+    }
+})
+export class McNavbarToggleTooltipTrigger extends McTooltipTrigger {
+    @Input('mcCollapsedTooltip')
+    get content(): string | TemplateRef<any> {
+        return this._content;
+    }
+
+    set content(content: string | TemplateRef<any>) {
+        this._content = content;
+
+        this.updateData();
+    }
+
+    get disabled(): boolean {
+        return this.navbar.expanded;
+    }
+
+    protected modifier: TooltipModifier = TooltipModifier.Default;
+
+    constructor(
+        public navbar: McVerticalNavbar,
+        overlay: Overlay,
+        elementRef: ElementRef,
+        ngZone: NgZone,
+        scrollDispatcher: ScrollDispatcher,
+        hostView: ViewContainerRef,
+        @Inject(MC_TOOLTIP_SCROLL_STRATEGY) scrollStrategy,
+        @Optional() direction: Directionality
+    ) {
+        super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
+
+        this.placement = PopUpPlacements.Right;
     }
 }
