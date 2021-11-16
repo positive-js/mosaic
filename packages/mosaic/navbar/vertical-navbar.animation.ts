@@ -1,7 +1,7 @@
 import { animate, AnimationTriggerMetadata, style, transition, trigger, state } from '@angular/animations';
 import {
-    VerticalNavbarSizeStatesClosedWidth as closedWidth,
-    VerticalNavbarSizeStatesOpenedWidth as openedWidth
+    VerticalNavbarSizeStatesCollapsedWidth as closedWidth,
+    VerticalNavbarSizeStatesExpandedWidth as openedWidth
 } from '@ptsecurity/mosaic/design-tokens';
 
 

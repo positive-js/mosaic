@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 12 Nov 2021 13:29:16 GMT
+ * Generated on Tue, 16 Nov 2021 10:16:49 GMT
  */
 
 :root {
@@ -114,11 +114,12 @@
   --mc-modal-footer-size-padding: 16px 16px;
   --mc-modal-confirm-size-padding: 24px;
   --mc-navbar-size-icon-margin: 4px;
-  --mc-vertical-navbar-size-states-opened-width: 240px;
-  --mc-vertical-navbar-size-states-closed-width: 56px;
-  --mc-vertical-navbar-size-icon-margin: 10px;
+  --mc-vertical-navbar-size-states-expanded-width: 240px;
+  --mc-vertical-navbar-size-states-collapsed-width: 56px;
+  --mc-vertical-navbar-size-icon-margin: 16px;
   --mc-navbar-item-size-padding: 16px;
-  --mc-navbar-item-size-height: 56px;
+  --mc-navbar-item-size-height: 48px;
+  --mc-navbar-item-size-height-vertical: 56px;
   --mc-navbar-brand-size-padding: 12px;
   --mc-navbar-brand-size-margin-right: 24px;
   --mc-optgroup-size-padding-left: 17px;

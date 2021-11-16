@@ -3,6 +3,7 @@ import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import {
     McNavbarFocusableItem,
@@ -23,7 +24,8 @@ import { McVerticalNavbar } from './vertical-navbar.component';
         CommonModule,
         A11yModule,
         PlatformModule,
-        McIconModule
+        McIconModule,
+        McToolTipModule
     ],
     exports: [
         McNavbar,

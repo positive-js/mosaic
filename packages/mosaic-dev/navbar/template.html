@@ -105,7 +105,7 @@
             #appDropdownTrigger="mcDropdownTrigger"
             [mcDropdownTriggerFor]="appDropdown"
             [class.mc-active]="appDropdownTrigger.opened">
-            <i mc-icon="mc-bento_32"></i>
+            <i mc-icon="mc-bento_16"></i>
         </mc-navbar-item>
 
         <a href="https://www.ptsecurity.com/" mc-navbar-brand>
@@ -132,7 +132,7 @@
             #firstDropdownTrigger="mcDropdownTrigger"
             [mcDropdownTriggerFor]="firstDropdown"
             [class.mc-active]="firstDropdownTrigger.opened">
-            <i mc-icon="mc-ellipsis_16" *ngIf="!verticalNavbar.expanded"></i>
+            <i mc-icon="mc-ellipsis_16"></i>
             <div class="layout-row flex layout-align-space-between layout-align-center-center">
                 <mc-navbar-title>Участники информационного</mc-navbar-title>
                 <i mc-icon="mc-angle-right-L_16" *ngIf="verticalNavbar.expanded"></i>
@@ -148,7 +148,7 @@
             #secondDropdownTrigger="mcDropdownTrigger"
             [mcDropdownTriggerFor]="secondDropdown"
             [class.mc-active]="secondDropdownTrigger.opened">
-            <i mc-icon="mc-ellipsis_16" *ngIf="!verticalNavbar.expanded"></i>
+            <i mc-icon="mc-ellipsis_16"></i>
             <div class="layout flex layout-align-space-between layout-align-center-center">
                 <mc-navbar-title>Еще</mc-navbar-title>
                 <i mc-icon="mc-angle-right-L_16" *ngIf="verticalNavbar.expanded"></i>
@@ -186,7 +186,7 @@
         <mc-navbar-divider></mc-navbar-divider>
 
         <mc-navbar-toggle>
-            <mc-navbar-title>Свернуть</mc-navbar-title>
+            <mc-navbar-title>Свернуть меню</mc-navbar-title>
         </mc-navbar-toggle>
     </mc-navbar-container>
 </mc-vertical-navbar>

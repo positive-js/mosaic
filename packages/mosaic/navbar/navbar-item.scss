@@ -17,8 +17,6 @@
     display: flex;
     align-items: center;
 
-    height: var(--mc-navbar-item-size-height, $navbar-item-size-height);
-
     padding-left: var(--mc-navbar-item-size-padding, $navbar-item-size-padding);
     padding-right: var(--mc-navbar-item-size-padding, $navbar-item-size-padding);
 
@@ -31,17 +29,19 @@
         z-index: 1;
     }
 
-    & .mc-icon {
-        min-width: 16px;
-        min-height: 16px;
-    }
-
     .mc-badge {
         position: absolute;
     }
 }
 
 .mc-navbar-item.mc-horizontal {
+    height: var(--mc-navbar-item-size-height, $navbar-item-size-height);
+
+    & .mc-icon {
+        min-width: 16px;
+        min-height: 16px;
+    }
+
     & .mc-icon + .mc-navbar-title,
     & .mc-navbar-title + .mc-icon {
         padding-left: var(--mc-navbar-size-icon-margin, $navbar-size-icon-margin)
@@ -58,14 +58,29 @@
 }
 
 .mc-navbar-item.mc-vertical {
+    height: var(--mc-navbar-item-size-height_vertical, $navbar-item-size-height_vertical);
+
     /* stylelint-disable no-descending-specificity */
-    & .mc-navbar-title {
-        padding-left: 26px;
+    & > .mc-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        min-width: 24px;
+        min-height: 24px;
+
+        font-size: 24px;
     }
 
+    & .mc-navbar-title,
     & .mc-icon + .mc-navbar-title,
     & .mc-navbar-title + .mc-icon {
         padding-left: var(--mc-vertical-navbar-size-icon-margin, $vertical-navbar-size-icon-margin);
+    }
+
+    &.mc-navbar-item_button {
+        padding-left: 12px;
+        padding-right: 12px;
     }
 
     &.mc-opened {
@@ -82,11 +97,6 @@
 
         & .mc-navbar-title {
             display: none;
-        }
-
-        &.mc-navbar-item_button {
-            padding-left: 8px;
-            padding-right: 8px;
         }
     }
 }

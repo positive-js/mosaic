@@ -7,6 +7,7 @@ import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McLinkModule } from '@ptsecurity/mosaic/link';
 import { McPopoverModule } from '@ptsecurity/mosaic/popover';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import { McIconModule } from '../../mosaic/icon';
 import { McNavbarModule, McNavbar } from '../../mosaic/navbar';
@@ -57,7 +58,8 @@ export class NavbarDemoComponent {
         FormsModule,
         McDropdownModule,
         McLinkModule,
-        McPopoverModule
+        McPopoverModule,
+        McToolTipModule
     ],
     bootstrap: [NavbarDemoComponent]
 })

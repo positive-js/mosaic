@@ -19,7 +19,7 @@ import {
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { ENTER, NUMPAD_DIVIDE, SPACE } from '@ptsecurity/cdk/keycodes';
 import { McButton, McButtonCssStyler } from '@ptsecurity/mosaic/button';
-import { toBoolean } from '@ptsecurity/mosaic/core';
+import { PopUpPlacements, toBoolean } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 import { merge, Subject } from 'rxjs';
@@ -342,7 +342,11 @@ export class McNavbarItem {
         <ng-content select="[mc-icon]"></ng-content>
         <ng-content select="mc-navbar-title" *ngIf="navbar.expanded"></ng-content>
 
-        <div class="mc-navbar-item__overlay"></div>
+        <div class="mc-navbar-item__overlay"
+             [mcTooltip]="'Развернуть меню'"
+             [mcPlacement]="popUpPlacements.Right"
+             [mcTooltipDisabled]="navbar.expanded">
+        </div>
     `,
     styleUrls: ['./navbar.scss'],
     host: {
@@ -353,7 +357,9 @@ export class McNavbarItem {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class McNavbarToggle implements OnDestroy{
+export class McNavbarToggle implements OnDestroy {
+    popUpPlacements = PopUpPlacements;
+
     @ContentChild(McIcon) customIcon: McIcon;
 
     constructor(
