@@ -4,6 +4,7 @@ import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McNavbarModule } from '@ptsecurity/mosaic/navbar';
+import { McPopoverModule } from '@ptsecurity/mosaic/popover';
 
 import { NavbarOverviewExample } from './navbar-overview/navbar-overview-example';
 import { NavbarVerticalExample } from './navbar-vertical/navbar-vertical-example';
@@ -25,7 +26,8 @@ const EXAMPLES = [
         McNavbarModule,
         McIconModule,
         McButtonModule,
-        McDropdownModule
+        McDropdownModule,
+        McPopoverModule
     ],
     declarations: EXAMPLES,
     exports: EXAMPLES
