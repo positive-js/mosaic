@@ -82,6 +82,36 @@ export class McNavbarTitle implements AfterContentInit {
     }
 }
 
+@Directive({
+    selector: 'mc-navbar-subtitle, [mc-navbar-subtitle]',
+    host: {
+        class: 'mc-navbar-subtitle',
+        '(mouseenter)': 'hovered.next(true)',
+        '(mouseleave)': 'hovered.next(false)'
+    }
+})
+export class McNavbarSubTitle implements AfterContentInit {
+    readonly hovered = new Subject<boolean>();
+
+    outerElementWidth: number;
+
+    get text(): string {
+        return this.elementRef.nativeElement.innerText;
+    }
+
+    constructor(private elementRef: ElementRef) {}
+
+    getOuterElementWidth(): number {
+        const { width, marginLeft, marginRight } = window.getComputedStyle(this.elementRef.nativeElement);
+
+        return [width, marginLeft, marginRight].reduce((acc, item) => acc + parseInt(item) || 0, 0);
+    }
+
+    ngAfterContentInit(): void {
+        this.outerElementWidth = this.getOuterElementWidth();
+    }
+}
+
 
 @Component({
     selector: 'mc-navbar-brand, [mc-navbar-brand]',
@@ -127,32 +157,6 @@ export class McNavbarBrand implements AfterContentInit, OnDestroy {
 })
 export class McNavbarDivider {}
 
-@Directive({
-    selector: 'mc-navbar-item, [mc-navbar-item], mc-navbar-divider, mc-navbar-brand, [mc-navbar-brand]',
-    host: {
-        '[class.mc-vertical]': 'vertical',
-        '[class.mc-horizontal]': 'horizontal',
-
-        '[class.mc-opened]': 'vertical && !closed',
-        '[class.mc-closed]': 'vertical && closed'
-    }
-})
-export class McNavbarRectangleElement {
-    vertical: boolean;
-    horizontal: boolean;
-
-    closed: boolean;
-
-    @ContentChild(McButtonCssStyler) button: McButtonCssStyler;
-
-    constructor(public elementRef: ElementRef) {}
-
-    getOuterElementWidth(): number {
-        const { width, marginLeft, marginRight } = window.getComputedStyle(this.elementRef.nativeElement);
-
-        return [width, marginLeft, marginRight].reduce((acc, item) => acc + parseInt(item), 0);
-    }
-}
 
 @Directive({
     selector: 'mc-navbar-item, [mc-navbar-item], mc-navbar-brand, [mc-navbar-brand], mc-navbar-toggle',
@@ -209,8 +213,6 @@ export class McNavbarFocusableItem implements IFocusableOption {
     }
 
     ngAfterContentInit(): void {
-        console.log('ngAfterContentInit: ');
-
         if (this.button) {
             this.button.tabIndex = -1;
         }
@@ -266,30 +268,63 @@ export class McNavbarFocusableItem implements IFocusableOption {
     }
 }
 
+
 @Component({
     selector: 'mc-navbar-item, [mc-navbar-item]',
     exportAs: 'mcNavbarItem',
     template: `
+        <ng-content select="[mc-icon]"></ng-content>
+
+        <div class="mc-navbar-item__title" *ngIf="title">
+            <ng-content select="mc-navbar-title, [mc-navbar-title]"></ng-content>
+            <ng-content select="mc-navbar-subtitle, [mc-navbar-subtitle]"></ng-content>
+        </div>
+
         <ng-content></ng-content>
+
         <div class="mc-navbar-item__overlay"></div>
     `,
     host: {
         class: 'mc-navbar-item',
         '[class.mc-navbar-item_bento]': 'bento',
         '[class.mc-navbar-item_collapsed]': 'collapsed',
-
-        '[attr.title]': 'collapsedTitle',
+        '[class.mc-navbar-item_cropped-text]': 'croppedText',
 
         '(keydown)': 'onKeyDown($event)'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class McNavbarItem {
+export class McNavbarItem extends McTooltipTrigger {
     @ContentChild(McNavbarTitle) title: McNavbarTitle;
+    @ContentChild(McNavbarSubTitle) subTitle: McNavbarSubTitle;
+
     @ContentChild(McIcon) icon: McIcon;
 
     @Input() bento: boolean = false;
+
+    get collapsed(): boolean {
+        return this._collapsed;
+    }
+
+    set collapsed(value: boolean) {
+        this._collapsed = value;
+
+        this.updateTooltip();
+    }
+
+    private _collapsed = false;
+
+    @Input()
+    get croppedText(): boolean {
+        return this._croppedText;
+    }
+
+    set croppedText(value: boolean) {
+        this._croppedText = value;
+    }
+
+    private _croppedText = false;
 
     @Input()
     get collapsable(): boolean {
@@ -302,22 +337,63 @@ export class McNavbarItem {
 
     private _collapsable: boolean = true;
 
-    @Input() collapsed = false;
-
+    @Input()
     get collapsedTitle(): string | null {
-        return this.collapsed ? (this._collapsedTitle || this.title.text) : null;
+        return this.collapsed ? (this._collapsedTitle || this.title?.text || null) : null;
     }
 
-    @Input()
     set collapsedTitle(value: string | null) {
         this._collapsedTitle = value;
     }
 
     private _collapsedTitle: string | null = null;
 
-    constructor(@Optional() private dropdownTrigger: McDropdownTrigger) {
+    @Input()
+    get collapsedSubTitle(): string | null {
+        return this.collapsed ? (this._collapsedSubTitle || this.subTitle?.text || null) : null;
+    }
+
+    set collapsedSubTitle(value: string | null) {
+        this._collapsedSubTitle = value;
+    }
+
+    private _collapsedSubTitle: string | null = null;
+
+    get disabled(): boolean {
+        return (!this.collapsed && !this.croppedText) || !this.title;
+    }
+
+    constructor(
+        private rectangleElement: McNavbarRectangleElement,
+        overlay: Overlay,
+        elementRef: ElementRef,
+        ngZone: NgZone,
+        scrollDispatcher: ScrollDispatcher,
+        hostView: ViewContainerRef,
+        @Inject(MC_TOOLTIP_SCROLL_STRATEGY) scrollStrategy,
+        @Optional() direction: Directionality,
+        @Optional() private dropdownTrigger: McDropdownTrigger
+    ) {
+        super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
+
         if (this.dropdownTrigger) {
             this.dropdownTrigger.openByArrowDown = false;
+        }
+
+        this.placement = PopUpPlacements.Right;
+
+        this.rectangleElement.navbarItem = this;
+    }
+
+    ngAfterContentInit(): void {
+        this.updateTooltip();
+    }
+
+    updateTooltip(): void {
+        if (this.collapsed) {
+            this.content = `${this.collapsedTitle}\n ${this.collapsedSubTitle || ''}`;
+        } else if (!this.collapsed && this.croppedText) {
+
         }
     }
 
@@ -335,6 +411,50 @@ export class McNavbarItem {
 }
 
 
+@Directive({
+    selector: 'mc-navbar-item, [mc-navbar-item], mc-navbar-divider, mc-navbar-brand, [mc-navbar-brand]',
+    host: {
+        '[class.mc-vertical]': 'vertical',
+        '[class.mc-horizontal]': 'horizontal',
+
+        '[class.mc-expanded]': 'vertical && !collapsed',
+        '[class.mc-collapsed]': 'vertical && collapsed'
+    }
+})
+export class McNavbarRectangleElement {
+    navbarItem: McNavbarItem;
+
+    vertical: boolean;
+    horizontal: boolean;
+
+    get collapsed(): boolean {
+        return this._collapsed;
+    }
+
+    set collapsed(value: boolean) {
+        this._collapsed = value;
+
+        if (this.navbarItem) {
+            this.navbarItem.collapsed = value;
+        }
+    }
+
+    private _collapsed: boolean;
+
+    @ContentChild(McButtonCssStyler) button: McButtonCssStyler;
+
+    constructor(
+        public elementRef: ElementRef
+    ) {}
+
+    getOuterElementWidth(): number {
+        const { width, marginLeft, marginRight } = window.getComputedStyle(this.elementRef.nativeElement);
+
+        return [width, marginLeft, marginRight].reduce((acc, item) => acc + parseInt(item), 0);
+    }
+}
+
+
 @Component({
     selector: 'mc-navbar-toggle',
     template: `
@@ -345,7 +465,10 @@ export class McNavbarItem {
         </i>
 
         <ng-content select="[mc-icon]"></ng-content>
-        <ng-content select="mc-navbar-title" *ngIf="navbar.expanded"></ng-content>
+
+        <div class="mc-navbar-item__title" *ngIf="navbar.expanded">
+            <ng-content select="mc-navbar-title"></ng-content>
+        </div>
 
         <div class="mc-navbar-item__overlay"></div>
     `,
@@ -402,6 +525,7 @@ export class McNavbarToggle implements OnDestroy {
         }
     }
 }
+
 
 @Directive({
     selector: 'mc-navbar-toggle[mcCollapsedTooltip]',

@@ -14,7 +14,8 @@ import {
     McNavbarTitle,
     McNavbarRectangleElement,
     McNavbarToggle,
-    McNavbarToggleTooltipTrigger
+    McNavbarToggleTooltipTrigger,
+    McNavbarSubTitle
 } from './navbar-item.component';
 import { McNavbar, McNavbarContainer } from './navbar.component';
 import { McVerticalNavbar } from './vertical-navbar.component';
@@ -40,7 +41,8 @@ import { McVerticalNavbar } from './vertical-navbar.component';
         McNavbarDivider,
         McNavbarFocusableItem,
         McNavbarRectangleElement,
-        McNavbarToggleTooltipTrigger
+        McNavbarToggleTooltipTrigger,
+        McNavbarSubTitle
     ],
     declarations: [
         McNavbar,
@@ -54,7 +56,8 @@ import { McVerticalNavbar } from './vertical-navbar.component';
         McNavbarDivider,
         McNavbarFocusableItem,
         McNavbarRectangleElement,
-        McNavbarToggleTooltipTrigger
+        McNavbarToggleTooltipTrigger,
+        McNavbarSubTitle
     ]
 })
 export class McNavbarModule {}

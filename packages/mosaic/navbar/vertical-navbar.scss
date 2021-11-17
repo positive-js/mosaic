@@ -10,11 +10,11 @@
         align-items: unset;
     }
 
-    &.mc-opened {
+    &.mc-expanded {
         width: var(--mc-vertical-navbar-size-states-opened-width, $vertical-navbar-size-states-expanded-width);
     }
 
-    &.mc-closed {
+    &.mc-collapsed {
         width: var(--mc-vertical-navbar-size-states-closed-width, $vertical-navbar-size-states-collapsed-width);
     }
 }

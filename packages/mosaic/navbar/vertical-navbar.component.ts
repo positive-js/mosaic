@@ -58,8 +58,8 @@ export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarBase = mixinDisa
     inputs: ['disabled'],
     host: {
         class: 'mc-vertical-navbar',
-        '[class.mc-closed]': '!expanded',
-        '[class.mc-opened]': 'expanded',
+        '[class.mc-collapsed]': '!expanded',
+        '[class.mc-expanded]': 'expanded',
         '[@toggle]': 'expanded',
         '[attr.tabindex]': 'tabIndex',
 
@@ -80,15 +80,15 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
 
     keyManager: FocusKeyManager<McNavbarFocusableItem>;
 
+    @Input()
     get expanded() {
         return this._expanded;
     }
 
-    @Input()
     set expanded(value: boolean) {
         this._expanded = coerceBooleanProperty(value);
 
-        this.setClosedStateForItems(value);
+        this.setExpandedStateForItems(value);
     }
 
     private _expanded: boolean = false;
@@ -131,7 +131,7 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
 
     ngAfterContentInit(): void {
         this.setItemsState();
-        this.setClosedStateForItems(this.expanded);
+        this.setExpandedStateForItems(this.expanded);
 
         this.rectangleElements.changes
             .subscribe(this.setItemsState);
@@ -252,14 +252,15 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
         return this.items.some((item) => item.hasFocus);
     }
 
-    private setClosedStateForItems(value: boolean) {
+    private setExpandedStateForItems(value: boolean) {
         this.rectangleElements?.forEach((item) => {
-            item.closed = !value;
+            item.collapsed = !value;
             setTimeout(() => item.button?.updateClassModifierForIcons());
         });
     }
 
     private setItemsState = () => {
-        Promise.resolve().then(() => this.rectangleElements?.forEach((item) => item.vertical = true));
+        Promise.resolve()
+            .then(() => this.rectangleElements?.forEach((item) => item.vertical = true));
     }
 }

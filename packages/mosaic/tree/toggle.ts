@@ -60,7 +60,7 @@ export class McTreeNodeToggleBaseDirective<T> extends McTreeNodeToggleMixinBase 
     styleUrls: ['./toggle.scss'],
     host: {
         class: 'mc-tree-node-toggle',
-        '[class.mc-opened]': 'iconState',
+        '[class.mc-expanded]': 'iconState',
 
         '[attr.disabled]': 'disabled || null',
 

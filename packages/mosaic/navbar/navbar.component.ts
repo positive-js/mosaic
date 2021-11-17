@@ -6,6 +6,7 @@ import {
     ContentChildren,
     Directive,
     ElementRef,
+    forwardRef,
     OnDestroy,
     QueryList,
     ViewEncapsulation
@@ -44,10 +45,10 @@ export class McNavbarContainer {}
     encapsulation: ViewEncapsulation.None
 })
 export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
-    @ContentChildren(McNavbarRectangleElement, { descendants: true })
+    @ContentChildren(forwardRef(() => McNavbarRectangleElement), { descendants: true })
     rectangleElements: QueryList<McNavbarRectangleElement>;
 
-    @ContentChildren(McNavbarItem, { descendants: true }) navbarItems: QueryList<McNavbarItem>;
+    @ContentChildren(forwardRef(() => McNavbarItem), { descendants: true }) navbarItems: QueryList<McNavbarItem>;
 
     readonly resizeStream = new Subject<Event>();
 
@@ -134,6 +135,7 @@ export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
     }
 
     private setItemsState = () => {
-        Promise.resolve().then(() => this.rectangleElements?.forEach((item) => item.horizontal = true));
+        Promise.resolve()
+            .then(() => this.rectangleElements?.forEach((item) => item.horizontal = true));
     }
 }

@@ -49,7 +49,7 @@ a.mc-navbar-brand {
         padding-left: 0;
     }
 
-    &.mc-opened {
+    &.mc-expanded {
         align-items: unset;
 
         & .mc-navbar-logo {
@@ -63,7 +63,7 @@ a.mc-navbar-brand {
         }
     }
 
-    &.mc-closed {
+    &.mc-collapsed {
         padding: 0;
 
         & .mc-navbar-logo {
