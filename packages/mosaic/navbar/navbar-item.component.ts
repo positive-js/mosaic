@@ -69,6 +69,10 @@ export class McNavbarTitle implements AfterContentInit {
         return this.elementRef.nativeElement.innerText;
     }
 
+    get isOverflown() {
+        return this.elementRef.nativeElement.scrollWidth > this.elementRef.nativeElement.clientWidth;
+    }
+
     constructor(private elementRef: ElementRef) {}
 
     getOuterElementWidth(): number {
@@ -97,6 +101,10 @@ export class McNavbarSubTitle implements AfterContentInit {
 
     get text(): string {
         return this.elementRef.nativeElement.innerText;
+    }
+
+    get isOverflown() {
+        return this.elementRef.nativeElement.scrollWidth > this.elementRef.nativeElement.clientWidth;
     }
 
     constructor(private elementRef: ElementRef) {}
@@ -272,23 +280,11 @@ export class McNavbarFocusableItem implements IFocusableOption {
 @Component({
     selector: 'mc-navbar-item, [mc-navbar-item]',
     exportAs: 'mcNavbarItem',
-    template: `
-        <ng-content select="[mc-icon]"></ng-content>
-
-        <div class="mc-navbar-item__title" *ngIf="title">
-            <ng-content select="mc-navbar-title, [mc-navbar-title]"></ng-content>
-            <ng-content select="mc-navbar-subtitle, [mc-navbar-subtitle]"></ng-content>
-        </div>
-
-        <ng-content></ng-content>
-
-        <div class="mc-navbar-item__overlay"></div>
-    `,
+    templateUrl: './navbar-item.component.html',
     host: {
         class: 'mc-navbar-item',
         '[class.mc-navbar-item_bento]': 'bento',
         '[class.mc-navbar-item_collapsed]': 'collapsed',
-        '[class.mc-navbar-item_cropped-text]': 'croppedText',
 
         '(keydown)': 'onKeyDown($event)'
     },
@@ -309,22 +305,16 @@ export class McNavbarItem extends McTooltipTrigger {
 
     set collapsed(value: boolean) {
         this._collapsed = value;
-
-        this.updateTooltip();
     }
 
     private _collapsed = false;
 
-    @Input()
-    get croppedText(): boolean {
-        return this._croppedText;
-    }
+    get croppedText(): string {
+        const croppedTitleText = this.title?.isOverflown ? this.titleText : '';
+        const croppedSubTitleText = this.subTitle?.isOverflown ? this.subTitleText : '';
 
-    set croppedText(value: boolean) {
-        this._croppedText = value;
+        return `${croppedTitleText}\n ${croppedSubTitleText}`;
     }
-
-    private _croppedText = false;
 
     @Input()
     get collapsable(): boolean {
@@ -337,34 +327,37 @@ export class McNavbarItem extends McTooltipTrigger {
 
     private _collapsable: boolean = true;
 
-    @Input()
-    get collapsedTitle(): string | null {
-        return this.collapsed ? (this._collapsedTitle || this.title?.text || null) : null;
+    get titleText(): string | null {
+        return this.title?.text || null;
     }
 
-    set collapsedTitle(value: string | null) {
-        this._collapsedTitle = value;
+    get subTitleText(): string | null {
+        return this.subTitle?.text || null;
     }
-
-    private _collapsedTitle: string | null = null;
-
-    @Input()
-    get collapsedSubTitle(): string | null {
-        return this.collapsed ? (this._collapsedSubTitle || this.subTitle?.text || null) : null;
-    }
-
-    set collapsedSubTitle(value: string | null) {
-        this._collapsedSubTitle = value;
-    }
-
-    private _collapsedSubTitle: string | null = null;
 
     get disabled(): boolean {
-        return (!this.collapsed && !this.croppedText) || !this.title;
+        return (!this.collapsed && !this.hasCroppedText) || !this.title;
+    }
+
+    get hasDropDownTrigger(): boolean {
+        return !!this.dropdownTrigger;
+    }
+
+    get showVerticalDropDownAngle(): boolean {
+        return !this.bento && this.hasDropDownTrigger && this.rectangleElement.vertical && !this.collapsed;
+    }
+
+    get showHorizontalDropDownAngle(): boolean {
+        return this.hasDropDownTrigger && this.rectangleElement.horizontal && !this.collapsed ;
+    }
+
+    get hasCroppedText(): boolean {
+        return !!(this.title?.isOverflown || this.subTitle?.isOverflown);
     }
 
     constructor(
-        private rectangleElement: McNavbarRectangleElement,
+        public rectangleElement: McNavbarRectangleElement,
+        private changeDetectorRef: ChangeDetectorRef,
         overlay: Overlay,
         elementRef: ElementRef,
         ngZone: NgZone,
@@ -376,7 +369,7 @@ export class McNavbarItem extends McTooltipTrigger {
     ) {
         super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
 
-        if (this.dropdownTrigger) {
+        if (this.hasDropDownTrigger) {
             this.dropdownTrigger.openByArrowDown = false;
         }
 
@@ -391,10 +384,13 @@ export class McNavbarItem extends McTooltipTrigger {
 
     updateTooltip(): void {
         if (this.collapsed) {
-            this.content = `${this.collapsedTitle}\n ${this.collapsedSubTitle || ''}`;
-        } else if (!this.collapsed && this.croppedText) {
-
+            this.content = `${this.titleText}\n ${this.subTitleText || ''}`;
+        } else if (!this.collapsed && this.hasCroppedText) {
+            this.content = this.croppedText;
         }
+
+        console.log('this.changeDetectorRef.markForCheck(): ');
+        this.changeDetectorRef.markForCheck();
     }
 
     getTitleWidth(): number {
@@ -402,7 +398,7 @@ export class McNavbarItem extends McTooltipTrigger {
     }
 
     onKeyDown($event: KeyboardEvent) {
-        if (this.dropdownTrigger && [ENTER, SPACE].includes($event.keyCode)) {
+        if (this.hasDropDownTrigger && [ENTER, SPACE].includes($event.keyCode)) {
             this.dropdownTrigger.open();
 
             $event.preventDefault();
@@ -459,8 +455,8 @@ export class McNavbarRectangleElement {
     selector: 'mc-navbar-toggle',
     template: `
         <i mc-icon
-           [class.mc-angle-left-M_16]="navbar.expanded"
-           [class.mc-angle-right-M_16]="!navbar.expanded"
+           [class.mc-angle-left-M_24]="navbar.expanded"
+           [class.mc-angle-right-M_24]="!navbar.expanded"
            *ngIf="!customIcon">
         </i>
 

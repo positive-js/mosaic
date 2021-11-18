@@ -98,14 +98,14 @@
 
 <br><br>
 
-<mc-vertical-navbar class="layout-align-space-between" #verticalNavbar>
+<mc-vertical-navbar style="height: 120%" class="layout-align-space-between" #verticalNavbar>
     <mc-navbar-container>
         <mc-navbar-item
             [bento]="true"
             #appDropdownTrigger="mcDropdownTrigger"
             [mcDropdownTriggerFor]="appDropdown"
             [class.mc-active]="appDropdownTrigger.opened">
-            <i mc-icon="mc-bento_16"></i>
+            <i mc-icon="mc-bento_24"></i>
         </mc-navbar-item>
 
         <a href="https://www.ptsecurity.com/" mc-navbar-brand>
@@ -116,55 +116,49 @@
             <div mc-navbar-title>Application Name</div>
         </a>
 
-        <mc-navbar-item (click)="onItemClick($event)">
-            <button mc-button [color]="'primary'">
-                <i mc-icon="mc-info_16"></i>
-                <span *ngIf="verticalNavbar.expanded">Новый инцидент</span>
-            </button>
-        </mc-navbar-item>
-
         <a href="https://www.ptsecurity.com/" mc-navbar-item>
-            <i mc-icon="mc-calendar_16"></i>
+            <i mc-icon="mc-chart-bar_24"></i>
             <mc-navbar-title>Контрольная панель</mc-navbar-title>
-            <div mc-navbar-subtitle>sub Контрольная панель</div>
         </a>
 
         <mc-navbar-item
             #firstDropdownTrigger="mcDropdownTrigger"
             [mcDropdownTriggerFor]="firstDropdown"
             [class.mc-active]="firstDropdownTrigger.opened">
-            <i mc-icon="mc-ellipsis_16"></i>
-            <div class="layout-row flex layout-align-space-between layout-align-center-center">
-                <mc-navbar-title>Участники информационного</mc-navbar-title>
-                <i mc-icon="mc-angle-right-L_16" *ngIf="verticalNavbar.expanded"></i>
-            </div>
+            <i mc-icon="mc-list_24"></i>
+            <mc-navbar-title>Участники информационного обмена</mc-navbar-title>
+            <div mc-navbar-subtitle>Длинная подпись во второй строке</div>
         </mc-navbar-item>
 
         <button mc-navbar-item>
-            <i mc-icon="mc-folder-opened_16"></i>
-            <mc-navbar-title>Инциденты</mc-navbar-title>
+            <i mc-icon="mc-folder-open-o_24"></i>
+            <span mc-navbar-title>Инциденты</span>
         </button>
 
         <mc-navbar-item
             #secondDropdownTrigger="mcDropdownTrigger"
             [mcDropdownTriggerFor]="secondDropdown"
             [class.mc-active]="secondDropdownTrigger.opened">
-            <i mc-icon="mc-ellipsis_16"></i>
-            <div class="layout flex layout-align-space-between layout-align-center-center">
-                <mc-navbar-title>Еще</mc-navbar-title>
-                <i mc-icon="mc-angle-right-L_16" *ngIf="verticalNavbar.expanded"></i>
-            </div>
+            <i mc-icon="mc-ellipsis_24"></i>
+            <mc-navbar-title>Еще</mc-navbar-title>
+        </mc-navbar-item>
+
+        <mc-navbar-item (click)="onItemClick($event)">
+            <button mc-button [color]="'primary'">
+                <i mc-icon="mc-info-o_16"></i>
+                <span *ngIf="verticalNavbar.expanded">Новый инцидент</span>
+            </button>
         </mc-navbar-item>
     </mc-navbar-container>
 
     <mc-navbar-container>
         <mc-navbar-item>
-            <i mc-icon="mc-search_16"></i>
+            <i mc-icon="mc-search_24"></i>
             <mc-navbar-title>Поиск</mc-navbar-title>
         </mc-navbar-item>
 
         <mc-navbar-item>
-            <i mc-icon="mc-bell-o_16"></i>
+            <i mc-icon="mc-bell-o_24"></i>
             <mc-navbar-title>Уведомления</mc-navbar-title>
             <span
                 [class.mc-badge_default]="verticalNavbar.expanded"
@@ -175,12 +169,12 @@
         <mc-navbar-divider></mc-navbar-divider>
 
         <mc-navbar-item>
-            <i mc-icon="mc-search_16"></i>
+            <i mc-icon="mc-question-circle_24"></i>
             <mc-navbar-title>Справка</mc-navbar-title>
         </mc-navbar-item>
 
         <mc-navbar-item [disabled]="true">
-            <i mc-icon="mc-search_16"></i>
+            <i mc-icon="mc-user-o_24"></i>
             <mc-navbar-title>Профиль</mc-navbar-title>
         </mc-navbar-item>
 

@@ -1,0 +1,16 @@
+<ng-content select="[mc-icon]"></ng-content>
+
+<div class="mc-navbar-item__container">
+    <div class="mc-navbar-item__title" *ngIf="title">
+        <ng-content select="mc-navbar-title, [mc-navbar-title]"></ng-content>
+        <ng-content select="mc-navbar-subtitle, [mc-navbar-subtitle]"></ng-content>
+    </div>
+
+    <i mc-icon="mc-angle-right-L_24" *ngIf="showVerticalDropDownAngle"></i>
+    <i mc-icon="mc-angle-down-L_24" *ngIf="showHorizontalDropDownAngle"></i>
+
+    <ng-content></ng-content>
+</div>
+
+
+<div class="mc-navbar-item__overlay"></div>

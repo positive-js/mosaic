@@ -29,6 +29,7 @@ import { startWith, takeUntil } from 'rxjs/operators';
 import {
     McNavbarFocusableItem,
     McNavbarFocusableItemEvent,
+    McNavbarItem,
     McNavbarRectangleElement
 } from './navbar-item.component';
 import { toggleVerticalNavbarAnimation } from './vertical-navbar.animation';
@@ -63,6 +64,7 @@ export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarBase = mixinDisa
         '[@toggle]': 'expanded',
         '[attr.tabindex]': 'tabIndex',
 
+        '(@toggle.done)': 'animationDone.next()',
         '(focus)': 'focus()',
         '(blur)': 'blur()',
         '(keydown)': 'onKeyDown($event)'
@@ -76,9 +78,13 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
     rectangleElements: QueryList<McNavbarRectangleElement>;
 
     @ContentChildren(forwardRef(() => McNavbarFocusableItem), { descendants: true })
-    items: QueryList<McNavbarFocusableItem>;
+    focusableItems: QueryList<McNavbarFocusableItem>;
+
+    @ContentChildren(forwardRef(() => McNavbarItem), { descendants: true }) items: QueryList<McNavbarItem>;
 
     keyManager: FocusKeyManager<McNavbarFocusableItem>;
+
+    readonly animationDone = new Subject<void>();
 
     @Input()
     get expanded() {
@@ -88,7 +94,7 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
     set expanded(value: boolean) {
         this._expanded = coerceBooleanProperty(value);
 
-        this.setExpandedStateForItems(value);
+        this.updateExpandedStateForItems();
     }
 
     private _expanded: boolean = false;
@@ -106,11 +112,11 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
     private _tabIndex = 0;
 
     get optionFocusChanges(): Observable<McNavbarFocusableItemEvent> {
-        return merge(...this.items.map((item) => item.onFocus));
+        return merge(...this.focusableItems.map((item) => item.onFocus));
     }
 
     get optionBlurChanges(): Observable<McNavbarFocusableItemEvent> {
-        return merge(...this.items.map((option) => option.onBlur));
+        return merge(...this.focusableItems.map((option) => option.onBlur));
     }
 
     userTabIndex: number | null = null;
@@ -127,16 +133,20 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
         private changeDetectorRef: ChangeDetectorRef
     ) {
         super(elementRef);
+
+        this.animationDone
+            .subscribe(this.updateTooltipForItems);
     }
 
     ngAfterContentInit(): void {
         this.setItemsState();
-        this.setExpandedStateForItems(this.expanded);
+        this.updateExpandedStateForItems();
+        this.updateTooltipForItems();
 
         this.rectangleElements.changes
             .subscribe(this.setItemsState);
 
-        this.keyManager = new FocusKeyManager<McNavbarFocusableItem>(this.items)
+        this.keyManager = new FocusKeyManager<McNavbarFocusableItem>(this.focusableItems)
             .withVerticalOrientation(true);
 
         this.keyManager.setFocusOrigin('keyboard');
@@ -152,7 +162,7 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
                 });
             });
 
-        this.items.changes
+        this.focusableItems.changes
             .pipe(startWith(null), takeUntil(this.destroyed))
             .subscribe(() => {
                 this.resetOptions();
@@ -174,7 +184,7 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
 
     focus(): void {
         console.log('focus: ');
-        if (this.items.length === 0) { return; }
+        if (this.focusableItems.length === 0) { return; }
 
         this.keyManager.setFirstItemActive();
     }
@@ -209,7 +219,7 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
     }
 
     protected updateTabIndex(): void {
-        this._tabIndex = this.userTabIndex || (this.items.length === 0 ? -1 : 0);
+        this._tabIndex = this.userTabIndex || (this.focusableItems.length === 0 ? -1 : 0);
     }
 
     private resetOptions() {
@@ -233,7 +243,7 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
         this.optionFocusSubscription = this.optionFocusChanges
             .subscribe((event) => {
                 console.log('this.optionFocusChanges: ');
-                const index: number = this.items.toArray().indexOf(event.item);
+                const index: number = this.focusableItems.toArray().indexOf(event.item);
 
                 if (this.isValidIndex(index)) {
                     this.keyManager.updateActiveItem(index);
@@ -245,18 +255,22 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
     }
 
     private isValidIndex(index: number): boolean {
-        return index >= 0 && index < this.items.length;
+        return index >= 0 && index < this.focusableItems.length;
     }
 
     private hasFocusedItem() {
-        return this.items.some((item) => item.hasFocus);
+        return this.focusableItems.some((item) => item.hasFocus);
     }
 
-    private setExpandedStateForItems(value: boolean) {
+    private updateExpandedStateForItems = () => {
         this.rectangleElements?.forEach((item) => {
-            item.collapsed = !value;
+            item.collapsed = !this.expanded;
             setTimeout(() => item.button?.updateClassModifierForIcons());
         });
+    }
+
+    private updateTooltipForItems = () => {
+        this.items.forEach((item) => item.updateTooltip());
     }
 
     private setItemsState = () => {
