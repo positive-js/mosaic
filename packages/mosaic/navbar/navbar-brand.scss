@@ -32,19 +32,17 @@ a.mc-navbar-brand {
 }
 
 .mc-navbar-brand.mc-vertical {
-    flex-direction: column;
-
     & .mc-navbar-logo {
         flex-direction: column;
 
-        height: var(--mc-navbar-item-size-height, $navbar-item-size-height);
+        height: var(--mc-navbar-item-size-height-vertical, $navbar-item-size-height-vertical);
     }
 
     & .mc-navbar-title {
         display: flex;
         align-items: center;
 
-        height: var(--mc-navbar-item-size-height, $navbar-item-size-height);
+        height: var(--mc-navbar-item-size-height-vertical, $navbar-item-size-height-vertical);
 
         padding-left: 0;
     }
@@ -55,7 +53,7 @@ a.mc-navbar-brand {
         & .mc-navbar-logo {
             padding-left: 12px;
 
-            justify-content: flex-end;
+            justify-content: center;
         }
 
         & .mc-navbar-title {
@@ -70,7 +68,7 @@ a.mc-navbar-brand {
             align-items: center;
             justify-content: center;
 
-            width: 48px;
+            width: 100%;
         }
 
         & .mc-navbar-title {

@@ -53,9 +53,20 @@ export class McNavbarLogo {
 
 
 @Directive({
+    selector: 'mc-navbar-item[bento], [mc-navbar-item][bento]',
+    host: {
+        class: 'mc-navbar-bento'
+    }
+})
+export class McNavbarBento {}
+
+
+@Directive({
     selector: 'mc-navbar-title, [mc-navbar-title]',
     host: {
         class: 'mc-navbar-title',
+        '[class.mc-navbar-title_small]': 'isTextOverflown',
+
         '(mouseenter)': 'hovered.next(true)',
         '(mouseleave)': 'hovered.next(false)'
     }
@@ -64,13 +75,14 @@ export class McNavbarTitle implements AfterContentInit {
     readonly hovered = new Subject<boolean>();
 
     outerElementWidth: number;
+    isTextOverflown: boolean = false;
 
     get text(): string {
         return this.elementRef.nativeElement.innerText;
     }
 
     get isOverflown() {
-        return this.elementRef.nativeElement.scrollWidth > this.elementRef.nativeElement.clientWidth;
+        return this.elementRef.nativeElement.scrollWidth >= this.elementRef.nativeElement.clientWidth;
     }
 
     constructor(private elementRef: ElementRef) {}
@@ -79,6 +91,11 @@ export class McNavbarTitle implements AfterContentInit {
         const { width, marginLeft, marginRight } = window.getComputedStyle(this.elementRef.nativeElement);
 
         return [width, marginLeft, marginRight].reduce((acc, item) => acc + parseInt(item) || 0, 0);
+    }
+
+    checkTextOverflown() {
+        // tslint:disable-next-line:no-magic-numbers
+        this.isTextOverflown = this.text.length > 18;
     }
 
     ngAfterContentInit(): void {
@@ -130,7 +147,9 @@ export class McNavbarSubTitle implements AfterContentInit {
     `,
     host: {
         class: 'mc-navbar-brand',
-        '[class.mc-hovered]': 'hovered'
+        '[class.mc-hovered]': 'hovered',
+        '[class.layout-column]': 'hasBento',
+        '[class.layout-row]': '!hasBento'
     }
 })
 export class McNavbarBrand implements AfterContentInit, OnDestroy {
@@ -139,7 +158,14 @@ export class McNavbarBrand implements AfterContentInit, OnDestroy {
 
     hovered = false;
 
+    get hasBento(): boolean {
+        return !!this.navbar?.bento;
+    }
+
     private destroyed = new Subject<void>();
+
+    constructor(@Optional() private navbar: McVerticalNavbar) {
+    }
 
     ngAfterContentInit(): void {
         merge(
@@ -148,6 +174,9 @@ export class McNavbarBrand implements AfterContentInit, OnDestroy {
         )
         .pipe(takeUntil(this.destroyed))
         .subscribe((value: boolean) => this.hovered = value);
+
+        this.navbar.animationDone
+            .subscribe(() => this.title?.checkTextOverflown());
     }
 
     ngOnDestroy(): void {
@@ -283,7 +312,6 @@ export class McNavbarFocusableItem implements IFocusableOption {
     templateUrl: './navbar-item.component.html',
     host: {
         class: 'mc-navbar-item',
-        '[class.mc-navbar-item_bento]': 'bento',
         '[class.mc-navbar-item_collapsed]': 'collapsed',
 
         '(keydown)': 'onKeyDown($event)'
@@ -296,8 +324,6 @@ export class McNavbarItem extends McTooltipTrigger {
     @ContentChild(McNavbarSubTitle) subTitle: McNavbarSubTitle;
 
     @ContentChild(McIcon) icon: McIcon;
-
-    @Input() bento: boolean = false;
 
     get collapsed(): boolean {
         return this._collapsed;
@@ -365,7 +391,8 @@ export class McNavbarItem extends McTooltipTrigger {
         hostView: ViewContainerRef,
         @Inject(MC_TOOLTIP_SCROLL_STRATEGY) scrollStrategy,
         @Optional() direction: Directionality,
-        @Optional() private dropdownTrigger: McDropdownTrigger
+        @Optional() private dropdownTrigger: McDropdownTrigger,
+        @Optional() private bento: McNavbarBento
     ) {
         super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
 
@@ -389,7 +416,6 @@ export class McNavbarItem extends McTooltipTrigger {
             this.content = this.croppedText;
         }
 
-        console.log('this.changeDetectorRef.markForCheck(): ');
         this.changeDetectorRef.markForCheck();
     }
 
@@ -439,9 +465,7 @@ export class McNavbarRectangleElement {
 
     @ContentChild(McButtonCssStyler) button: McButtonCssStyler;
 
-    constructor(
-        public elementRef: ElementRef
-    ) {}
+    constructor(public elementRef: ElementRef) {}
 
     getOuterElementWidth(): number {
         const { width, marginLeft, marginRight } = window.getComputedStyle(this.elementRef.nativeElement);

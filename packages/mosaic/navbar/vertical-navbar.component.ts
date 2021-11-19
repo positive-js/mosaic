@@ -4,6 +4,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
     ContentChildren,
     ElementRef,
     forwardRef,
@@ -27,6 +28,7 @@ import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
 import {
+    McNavbarBento,
     McNavbarFocusableItem,
     McNavbarFocusableItemEvent,
     McNavbarItem,
@@ -81,6 +83,8 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
     focusableItems: QueryList<McNavbarFocusableItem>;
 
     @ContentChildren(forwardRef(() => McNavbarItem), { descendants: true }) items: QueryList<McNavbarItem>;
+
+    @ContentChild(forwardRef(() => McNavbarBento)) bento: McNavbarBento;
 
     keyManager: FocusKeyManager<McNavbarFocusableItem>;
 
