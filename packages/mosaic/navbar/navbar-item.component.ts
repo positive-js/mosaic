@@ -496,7 +496,7 @@ export class McNavbarRectangleElement {
     host: {
         class: 'mc-navbar-item mc-navbar-toggle mc-vertical',
         '(keydown)': 'onKeydown($event)',
-        '(click)': 'navbar.toggle()'
+        '(click)': 'toggle()'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
@@ -507,6 +507,7 @@ export class McNavbarToggle implements OnDestroy {
     constructor(
         public navbar: McVerticalNavbar,
         private ngZone: NgZone,
+        private changeDetectorRef: ChangeDetectorRef,
         @Optional() @Inject(DOCUMENT) private document: any
     ) {
         const window = this.getWindow();
@@ -520,7 +521,7 @@ export class McNavbarToggle implements OnDestroy {
 
     onKeydown($event: KeyboardEvent) {
         if ([SPACE, ENTER].includes($event.keyCode)) {
-            this.navbar.toggle();
+            this.toggle();
 
             $event.stopPropagation();
             $event.preventDefault();
@@ -535,13 +536,19 @@ export class McNavbarToggle implements OnDestroy {
         }
     }
 
+    toggle = () => {
+        this.navbar.toggle();
+
+        this.changeDetectorRef.markForCheck();
+    }
+
     private getWindow(): Window {
         return this.document?.defaultView || window;
     }
 
     private windowToggleHandler = (event: KeyboardEvent) => {
         if (event.ctrlKey && event.keyCode === NUMPAD_DIVIDE) {
-            this.ngZone.run(() => this.navbar.toggle());
+            this.ngZone.run(this.toggle);
         }
     }
 }
