@@ -108,14 +108,15 @@
 
     &.mc-expanded {
         & .mc-badge {
+            top: 16px;
             right: 16px;
         }
     }
 
     &.mc-collapsed {
         & .mc-badge {
-            top: 8px;
-            right: 8px;
+            top: 4px;
+            right: 4px;
         }
 
         & .mc-navbar-item__title {

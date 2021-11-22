@@ -49,8 +49,15 @@ export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarBase = mixinDisa
     selector: 'mc-vertical-navbar',
     exportAs: 'McVerticalNavbar',
     template: `
-        <ng-content select="[mc-navbar-container], mc-navbar-container"></ng-content>
-        <ng-content select="[mc-navbar-toggle], mc-navbar-toggle"></ng-content>
+        <div class="mc-vertical-navbar__container"
+             [@toggle]="expanded"
+             (@toggle.done)="animationDone.next()"
+             [class.mc-collapsed]="!expanded"
+             [class.mc-expanded]="expanded">
+
+            <ng-content select="[mc-navbar-container], mc-navbar-container"></ng-content>
+            <ng-content select="[mc-navbar-toggle], mc-navbar-toggle"></ng-content>
+        </div>
     `,
     styleUrls: [
         './vertical-navbar.scss',
@@ -61,12 +68,8 @@ export const McNavbarMixinBase: CanDisableCtor & typeof McNavbarBase = mixinDisa
     inputs: ['disabled'],
     host: {
         class: 'mc-vertical-navbar',
-        '[class.mc-collapsed]': '!expanded',
-        '[class.mc-expanded]': 'expanded',
-        '[@toggle]': 'expanded',
         '[attr.tabindex]': 'tabIndex',
 
-        '(@toggle.done)': 'animationDone.next()',
         '(focus)': 'focus()',
         '(blur)': 'blur()',
         '(keydown)': 'onKeyDown($event)'
@@ -184,6 +187,8 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
 
     toggle(): void {
         this.expanded = !this.expanded;
+
+        this.changeDetectorRef.markForCheck();
     }
 
     focus(): void {
