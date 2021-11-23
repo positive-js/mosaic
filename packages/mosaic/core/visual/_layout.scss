@@ -1,6 +1,9 @@
+@use 'sass:math';
+
 @import '../styles/common/rtl';
 
 @import './variables';
+
 
 /*
 *  Responsive attributes
@@ -389,7 +392,7 @@
     .layout-padding-sm > *,
     .layout-padding    > .flex-sm
     {
-        padding: div($layout-gutter-width, 4);
+        padding: math.div($layout-gutter-width, 4);
     }
 
     .layout-padding,
@@ -405,7 +408,7 @@
     .layout-padding        > .flex-gt-sm,
     .layout-padding        > .flex-md
     {
-        padding: div($layout-gutter-width, 2);
+        padding: math.div($layout-gutter-width, 2);
     }
 
     // NOTE: these`> *` selectors should only be applied for layout="row" or layout="column" children !!
@@ -417,14 +420,14 @@
     .layout-padding        > .flex-lg,
     .layout-padding        > .flex-gt-lg
     {
-        padding: div($layout-gutter-width, 1);
+        padding: math.div($layout-gutter-width, 1);
     }
 
     // Margin enhancements
 
     .layout-margin-sm      > *,
     .layout-margin         > .flex-sm {
-        margin: div($layout-gutter-width, 4);
+        margin: math.div($layout-gutter-width, 4);
     }
 
     .layout-margin,
@@ -440,7 +443,7 @@
     .layout-margin         > .flex-gt-sm,
     .layout-margin         > .flex-md
     {
-        margin: div($layout-gutter-width, 2);
+        margin: math.div($layout-gutter-width, 2);
     }
 
     // NOTE: these`> *` selectors should only be applied for layout="row" or layout="column" children !!
@@ -452,7 +455,7 @@
     .layout-margin        > .flex-lg,
     .layout-margin        > .flex-gt-lg
     {
-        margin: div($layout-gutter-width, 1);
+        margin: math.div($layout-gutter-width, 1);
     }
 
     .layout-wrap {
