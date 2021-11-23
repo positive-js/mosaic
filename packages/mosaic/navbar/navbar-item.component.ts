@@ -175,7 +175,7 @@ export class McNavbarBrand implements AfterContentInit, OnDestroy {
         .pipe(takeUntil(this.destroyed))
         .subscribe((value: boolean) => this.hovered = value);
 
-        this.navbar.animationDone
+        this.navbar?.animationDone
             .subscribe(() => this.title?.checkTextOverflown());
     }
 
@@ -325,6 +325,7 @@ export class McNavbarItem extends McTooltipTrigger {
 
     @ContentChild(McIcon) icon: McIcon;
 
+    @Input()
     get collapsed(): boolean {
         return this._collapsed;
     }
@@ -400,9 +401,12 @@ export class McNavbarItem extends McTooltipTrigger {
             this.dropdownTrigger.openByArrowDown = false;
         }
 
-        this.placement = PopUpPlacements.Right;
+        this.rectangleElement.state
+            .subscribe(() => {
+                this.collapsed = this.rectangleElement.collapsed;
 
-        this.rectangleElement.navbarItem = this;
+                this.changeDetectorRef.detectChanges();
+            });
     }
 
     ngAfterContentInit(): void {
@@ -414,6 +418,10 @@ export class McNavbarItem extends McTooltipTrigger {
             this.content = `${this.titleText}\n ${this.subTitleText || ''}`;
         } else if (!this.collapsed && this.hasCroppedText) {
             this.content = this.croppedText;
+        }
+
+        if (this.rectangleElement.vertical) {
+            this.placement = PopUpPlacements.Right;
         }
 
         this.changeDetectorRef.markForCheck();
@@ -444,10 +452,31 @@ export class McNavbarItem extends McTooltipTrigger {
     }
 })
 export class McNavbarRectangleElement {
-    navbarItem: McNavbarItem;
+    readonly state = new Subject<void>();
 
-    vertical: boolean;
-    horizontal: boolean;
+    get horizontal(): boolean {
+        return this._horizontal;
+    }
+
+    set horizontal(value: boolean) {
+        this._horizontal = value;
+
+        this.state.next();
+    }
+
+    private _horizontal: boolean;
+
+    get vertical(): boolean {
+        return this._vertical;
+    }
+
+    set vertical(value: boolean) {
+        this._vertical = value;
+
+        this.state.next();
+    }
+
+    private _vertical: boolean;
 
     get collapsed(): boolean {
         return this._collapsed;
@@ -456,9 +485,7 @@ export class McNavbarRectangleElement {
     set collapsed(value: boolean) {
         this._collapsed = value;
 
-        if (this.navbarItem) {
-            this.navbarItem.collapsed = value;
-        }
+        this.state.next();
     }
 
     private _collapsed: boolean;

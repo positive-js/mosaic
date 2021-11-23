@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 16 Nov 2021 10:16:46 GMT
+ * Generated on Tue, 23 Nov 2021 14:04:36 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
@@ -673,21 +673,21 @@ export const NavbarLightColorSchemeBackground = "#114E77";
 export const NavbarLightColorSchemeDividerBackground = "rgba(255, 255, 255, 0.3)";
 export const NavbarDarkColorSchemeBackground = "#114E77";
 export const NavbarDarkColorSchemeDividerBackground = "rgba(255, 255, 255, 0.3)";
-export const NavbarSizeIconMargin = "4px";
+export const NavbarSizeIconMargin = "6px";
 export const NavbarFontTitle = "body";
 export const VerticalNavbarSizeStatesExpandedWidth = "240px";
 export const VerticalNavbarSizeStatesCollapsedWidth = "56px";
 export const VerticalNavbarSizeIconMargin = "16px";
 export const NavbarItemLightColorSchemeText = "#D8EAF7";
 export const NavbarItemLightColorSchemeIcon = "#D8EAF7";
-export const NavbarItemLightColorSchemeStatesActive = "#206EA2";
-export const NavbarItemLightColorSchemeStatesHover = "#206EA2";
+export const NavbarItemLightColorSchemeStatesActive = "rgba(0, 0, 0, 0.1)";
+export const NavbarItemLightColorSchemeStatesHover = "rgba(255, 255, 255, 0.1)";
 export const NavbarItemLightColorSchemeStatesProgress = "#07314D";
 export const NavbarItemLightColorSchemeStatesDisabledOpacity = 0.3;
 export const NavbarItemDarkColorSchemeText = "#D8EAF7";
 export const NavbarItemDarkColorSchemeIcon = "#D8EAF7";
-export const NavbarItemDarkColorSchemeStatesActive = "#114E77";
-export const NavbarItemDarkColorSchemeStatesHover = "#114E77";
+export const NavbarItemDarkColorSchemeStatesActive = "rgba(0, 0, 0, 0.1)";
+export const NavbarItemDarkColorSchemeStatesHover = "rgba(255, 255, 255, 0.1)";
 export const NavbarItemDarkColorSchemeStatesProgress = "#07314D";
 export const NavbarItemDarkColorSchemeStatesDisabledOpacity = 0.3;
 export const NavbarItemSizePadding = "16px";

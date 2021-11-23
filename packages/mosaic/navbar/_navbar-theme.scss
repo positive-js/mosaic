@@ -45,13 +45,13 @@
             cursor: pointer;
 
             & .mc-navbar-item__overlay {
-                background-color: rgba(255, 255, 255, 0.1);
+                background-color: map-get($navbar-item, state-hover);
             }
         }
 
         &:active:not(.mc-navbar-item_button) {
             & .mc-navbar-item__overlay {
-                background: rgba(0, 0, 0, 0.1);
+                background: map-get($navbar-item, state-active);
             }
         }
 

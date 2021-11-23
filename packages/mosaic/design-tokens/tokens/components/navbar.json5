@@ -11,7 +11,7 @@
             'divider-background': { value: 'rgba(255, 255, 255, 0.3)' }
         },
         size: {
-            'icon-margin': { value: '4px' }
+            'icon-margin': { value: '6px' }
         },
         font: {
             title: { value: 'body' }
@@ -32,8 +32,8 @@
             icon: { value: '{light-color-scheme.primary.palette.value.100.value}' },
 
             states: {
-                active: { value: '{light-color-scheme.primary.palette.value.600.value}' },
-                hover: { value: '{light-color-scheme.primary.palette.value.600.value}' },
+                active: { value: 'rgba(0, 0, 0, 0.1)' },
+                hover: { value: 'rgba(255, 255, 255, 0.1)' },
                 progress: { value: '{light-color-scheme.primary.palette.value.800.value}' },
                 'disabled-opacity': { value: 0.3 }
             }
@@ -43,8 +43,8 @@
             icon: { value: '{dark-color-scheme.primary.palette.value.100.value}' },
 
             states: {
-                active: { value: '{dark-color-scheme.primary.palette.value.700.value}' },
-                hover: { value: '{dark-color-scheme.primary.palette.value.700.value}' },
+                active: { value: 'rgba(0, 0, 0, 0.1)' },
+                hover: { value: 'rgba(255, 255, 255, 0.1)' },
                 progress: { value: '{dark-color-scheme.primary.palette.value.800.value}' },
                 'disabled-opacity': { value: 0.3 }
             }
