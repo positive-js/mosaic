@@ -2,22 +2,162 @@ import {
     AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChildren,
     Directive,
     ElementRef,
     forwardRef,
+    Input,
     OnDestroy,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
+import {
+    ENTER,
+    isVerticalMovement,
+    LEFT_ARROW,
+    RIGHT_ARROW,
+    SPACE,
+    TAB
+} from '@ptsecurity/cdk/keycodes';
+import { merge, Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 
-import { McNavbarItem, McNavbarRectangleElement } from './navbar-item.component';
+import {
+    McNavbarFocusableItem,
+    McNavbarFocusableItemEvent,
+    McNavbarItem,
+    McNavbarRectangleElement
+} from './navbar-item.component';
 
 
 export type McNavbarContainerPositionType = 'left' | 'right';
+
+
+@Directive()
+export class McFocusableComponent implements AfterContentInit, OnDestroy {
+    @ContentChildren(forwardRef(() => McNavbarFocusableItem), { descendants: true })
+    focusableItems: QueryList<McNavbarFocusableItem>;
+
+    keyManager: FocusKeyManager<McNavbarFocusableItem>;
+
+    @Input()
+    get tabIndex(): any {
+        return this._tabIndex;
+    }
+
+    set tabIndex(value: any) {
+        this._tabIndex = value;
+    }
+
+    private _tabIndex = 0;
+
+    get optionFocusChanges(): Observable<McNavbarFocusableItemEvent> {
+        return merge(...this.focusableItems.map((item) => item.onFocus));
+    }
+
+    get optionBlurChanges(): Observable<McNavbarFocusableItemEvent> {
+        return merge(...this.focusableItems.map((option) => option.onBlur));
+    }
+
+    protected readonly destroyed = new Subject<void>();
+
+    private optionFocusSubscription: Subscription | null;
+    private optionBlurSubscription: Subscription | null;
+
+    constructor(protected changeDetectorRef: ChangeDetectorRef) {}
+
+    ngAfterContentInit(): void {
+        this.keyManager = new FocusKeyManager<McNavbarFocusableItem>(this.focusableItems);
+
+        this.keyManager.setFocusOrigin('keyboard');
+
+        this.keyManager.tabOut
+            .pipe(takeUntil(this.destroyed))
+            .subscribe(() => {
+                this.tabIndex = -1;
+
+                setTimeout(() => {
+                    this.tabIndex = 0;
+                    this.changeDetectorRef.markForCheck();
+                });
+            });
+
+        this.focusableItems.changes
+            .pipe(startWith(null), takeUntil(this.destroyed))
+            .subscribe(() => {
+                this.resetOptions();
+
+                // Check to see if we need to update our tab index
+                this.updateTabIndex();
+            });
+    }
+
+    ngOnDestroy() {
+        this.destroyed.next();
+
+        this.destroyed.complete();
+    }
+
+    focus(): void {
+        if (this.focusableItems.length === 0) { return; }
+
+        this.keyManager.setFirstItemActive();
+    }
+
+    blur() {
+        if (!this.hasFocusedItem()) {
+            this.keyManager.setActiveItem(-1);
+        }
+
+        this.changeDetectorRef.markForCheck();
+    }
+
+    protected resetOptions() {
+        this.dropSubscriptions();
+        this.listenToOptionsFocus();
+    }
+
+    protected dropSubscriptions() {
+        if (this.optionFocusSubscription) {
+            this.optionFocusSubscription.unsubscribe();
+            this.optionFocusSubscription = null;
+        }
+
+        if (this.optionBlurSubscription) {
+            this.optionBlurSubscription.unsubscribe();
+            this.optionBlurSubscription = null;
+        }
+    }
+
+    private listenToOptionsFocus(): void {
+        this.optionFocusSubscription = this.optionFocusChanges
+            .subscribe((event) => {
+                const index: number = this.focusableItems.toArray().indexOf(event.item);
+
+                if (this.isValidIndex(index)) {
+                    this.keyManager.updateActiveItem(index);
+                }
+            });
+
+        this.optionBlurSubscription = this.optionBlurChanges
+            .subscribe(() => this.blur());
+    }
+
+    private updateTabIndex(): void {
+        this.tabIndex = this.focusableItems.length === 0 ? -1 : 0;
+    }
+
+    private isValidIndex(index: number): boolean {
+        return index >= 0 && index < this.focusableItems.length;
+    }
+
+    private hasFocusedItem() {
+        return this.focusableItems.some((item) => item.hasFocus);
+    }
+}
 
 
 @Directive({
@@ -39,12 +179,20 @@ export class McNavbarContainer {}
     ],
     host: {
         class: 'mc-navbar',
+
+        '[attr.tabindex]': 'tabIndex',
+
+        '(focus)': 'focus()',
+        '(blur)': 'blur()',
+
+        '(keydown)': 'onKeyDown($event)',
+
         '(window:resize)': 'resizeStream.next($event)'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
+export class McNavbar extends McFocusableComponent implements AfterViewInit, AfterContentInit, OnDestroy {
     @ContentChildren(forwardRef(() => McNavbarRectangleElement), { descendants: true })
     rectangleElements: QueryList<McNavbarRectangleElement>;
 
@@ -72,7 +220,12 @@ export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
 
     private resizeSubscription: Subscription;
 
-    constructor(private elementRef: ElementRef) {
+    constructor(
+        private elementRef: ElementRef,
+        changeDetectorRef: ChangeDetectorRef
+    ) {
+        super(changeDetectorRef);
+
         this.resizeSubscription = this.resizeStream
             .pipe(debounceTime(this.resizeDebounceInterval))
             .subscribe(this.updateCollapsed);
@@ -83,6 +236,10 @@ export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
 
         this.rectangleElements.changes
             .subscribe(this.setItemsState);
+
+        super.ngAfterContentInit();
+
+        this.keyManager.withHorizontalOrientation('ltr');
     }
 
     ngAfterViewInit(): void {
@@ -93,6 +250,27 @@ export class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
 
     ngOnDestroy() {
         this.resizeSubscription.unsubscribe();
+
+        super.ngOnDestroy();
+    }
+
+    onKeyDown(event: KeyboardEvent) {
+        // tslint:disable-next-line: deprecation
+        const keyCode = event.keyCode;
+
+        if ([SPACE, ENTER, LEFT_ARROW, RIGHT_ARROW].includes(keyCode) || isVerticalMovement(event)) {
+            event.preventDefault();
+        }
+
+        if (keyCode === TAB) {
+            this.keyManager.tabOut.next();
+
+            return;
+        } else if (keyCode === RIGHT_ARROW) {
+            this.keyManager.setNextItemActive();
+        } else if (keyCode === LEFT_ARROW) {
+            this.keyManager.setPreviousItemActive();
+        }
     }
 
     updateCollapsed = () => {

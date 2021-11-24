@@ -291,7 +291,6 @@ export class McNavbarFocusableItem implements IFocusableOption {
     }
 
     blur(): void {
-        console.log('McNavbarFocusableItem blur: ');
         // When animations are enabled, Angular may end up removing the option from the DOM a little
         // earlier than usual, causing it to be blurred and throwing off the logic in the list
         // that moves focus not the next item. To work around the issue, we defer marking the option
@@ -438,7 +437,6 @@ export class McNavbarItem extends McTooltipTrigger {
     }
 
     onKeyDown($event: KeyboardEvent) {
-        console.log('onKeyDown item: ', );
         if (this.hasDropDownTrigger && [ENTER, SPACE].includes($event.keyCode)) {
             this.dropdownTrigger.openedBy = 'keyboard';
             this.dropdownTrigger.open();
