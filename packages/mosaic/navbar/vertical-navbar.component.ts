@@ -192,14 +192,12 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
     }
 
     focus(): void {
-        console.log('focus: ');
         if (this.focusableItems.length === 0) { return; }
 
         this.keyManager.setFirstItemActive();
     }
 
     blur() {
-        console.log('blur(): ');
         if (!this.hasFocusedItem()) {
             this.keyManager.setActiveItem(-1);
         }
@@ -208,7 +206,6 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
     }
 
     onKeyDown(event: KeyboardEvent) {
-        console.log('onKeyDown: ');
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
 
@@ -251,7 +248,6 @@ export class McVerticalNavbar extends McNavbarMixinBase implements AfterContentI
     private listenToOptionsFocus(): void {
         this.optionFocusSubscription = this.optionFocusChanges
             .subscribe((event) => {
-                console.log('this.optionFocusChanges: ');
                 const index: number = this.focusableItems.toArray().indexOf(event.item);
 
                 if (this.isValidIndex(index)) {

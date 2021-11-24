@@ -203,9 +203,8 @@ export class McNavbarDivider {}
 
         class: 'mc-navbar-focusable-item',
         '[class.mc-navbar-item_button]': 'button',
-        '[class.mc-focused]': 'hasFocus',
 
-        '(focus)': 'focus()',
+        '(focus)': 'onFocusHandler($event)',
         '(blur)': 'blur()'
     }
 })
@@ -216,7 +215,15 @@ export class McNavbarFocusableItem implements IFocusableOption {
 
     readonly onBlur = new Subject<McNavbarFocusableItemEvent>();
 
-    hasFocus: boolean = false;
+    get hasFocus(): boolean {
+        return !!this.button?.hasFocus || this._hasFocus;
+    }
+
+    set hasFocus(value: boolean) {
+        this._hasFocus = value;
+    }
+
+    private _hasFocus: boolean = false;
 
     @Input()
     get disabled() {
@@ -254,18 +261,25 @@ export class McNavbarFocusableItem implements IFocusableOption {
             this.button.tabIndex = -1;
         }
 
-        this.focusMonitor
-            .monitor(this.elementRef, true);
-            // .subscribe(this.focus);
+        this.focusMonitor.monitor(this.elementRef);
     }
 
-    focus = () => {
-        if (this.disabled || this.hasFocus || this.button?.hasFocus) { return; }
-        console.log('focus: ', origin);
+    onFocusHandler() {
+        if (this.disabled || this.hasFocus) { return; }
+
+        this.onFocus.next({ item: this });
+
+        this.hasFocus = true;
+
+        this.changeDetector.markForCheck();
+
+        this.elementRef.nativeElement.focus();
+    }
+
+    focus() {
+        if (this.disabled || this.hasFocus) { return; }
 
         if (this.button) {
-            this.hasFocus = true;
-
             this.button.focusViaKeyboard();
 
             this.changeDetector.markForCheck();
@@ -273,19 +287,11 @@ export class McNavbarFocusableItem implements IFocusableOption {
             return;
         }
 
-        this.elementRef.nativeElement.focus();
-
-        this.onFocus.next({ item: this });
-
-        Promise.resolve().then(() => {
-            this.hasFocus = true;
-
-            this.changeDetector.markForCheck();
-        });
+        this.onFocusHandler();
     }
 
     blur(): void {
-        console.log('blur(): ');
+        console.log('McNavbarFocusableItem blur: ');
         // When animations are enabled, Angular may end up removing the option from the DOM a little
         // earlier than usual, causing it to be blurred and throwing off the logic in the list
         // that moves focus not the next item. To work around the issue, we defer marking the option
@@ -295,7 +301,7 @@ export class McNavbarFocusableItem implements IFocusableOption {
             .pipe(take(1))
             .subscribe(() => {
                 this.ngZone.run(() => {
-                    this.hasFocus = false;
+                    this._hasFocus = false;
 
                     if (this.button?.hasFocus) { return; }
 
@@ -432,7 +438,9 @@ export class McNavbarItem extends McTooltipTrigger {
     }
 
     onKeyDown($event: KeyboardEvent) {
+        console.log('onKeyDown item: ', );
         if (this.hasDropDownTrigger && [ENTER, SPACE].includes($event.keyCode)) {
+            this.dropdownTrigger.openedBy = 'keyboard';
             this.dropdownTrigger.open();
 
             $event.preventDefault();
