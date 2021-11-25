@@ -4,7 +4,6 @@ import {
     FlexibleConnectedPositionStrategy,
     Overlay,
     ScrollDispatcher,
-    ScrollStrategy
 } from '@angular/cdk/overlay';
 import { OverlayConfig } from '@angular/cdk/overlay/overlay-config';
 import {
@@ -15,7 +14,6 @@ import {
     ElementRef,
     EventEmitter,
     Inject,
-    InjectionToken,
     Input,
     NgZone,
     Optional,
@@ -26,61 +24,35 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import {
-    McPopUp,
     McPopUpTrigger,
     PopUpTriggers,
     POSITION_TO_CSS_MAP
 } from '@ptsecurity/mosaic/core';
 import { merge, NEVER, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { McPopoverComponent, MC_POPOVER_SCROLL_STRATEGY } from './popover.component';
 
-import { mcPopoverConfirmAnimations } from './popover-confirm-animations';
-
+import { mcPopoverAnimations } from './popover-animations';
 
 @Component({
     selector: 'mc-popover-confirm-component',
     templateUrl: './popover-confirm.component.html',
     preserveWhitespaces: false,
-    styleUrls: ['./popover-confirm.scss'],
-    host: {
-        '(keydown.esc)': 'hide(0)'
-    },
+    styleUrls: ['./popover.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [mcPopoverConfirmAnimations.popoverState]
+    animations: [mcPopoverAnimations.popoverState]
 })
-export class McPopoverConfirmComponent extends McPopUp {
+export class McPopoverConfirmComponent extends McPopoverComponent {
     onConfirm$ = new Subject<void>();
     onReject$ = new Subject<void>();
+
+    DEFAULT_CONFIRM_MESSAGE = 'Вы уверены что хотите продолжить?';
 
     constructor(changeDetectorRef: ChangeDetectorRef) {
         super(changeDetectorRef);
     }
-
-    updateClassMap(placement: string, customClass: string) {
-        super.updateClassMap(
-            placement,
-            customClass,
-        );
-    }
 }
-
-export const MC_POPOVER_SCROLL_STRATEGY =
-    new InjectionToken<() => ScrollStrategy>('mc-popover-scroll-strategy');
-
-/** @docs-private */
-export function mcPopoverScrollStrategyFactory(overlay: Overlay): () => ScrollStrategy {
-    return () => overlay.scrollStrategies.reposition({ scrollThrottle: 20 });
-}
-
-/** @docs-private */
-export const MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
-    provide: MC_POPOVER_SCROLL_STRATEGY,
-    deps: [Overlay],
-    useFactory: mcPopoverScrollStrategyFactory
-};
-
-const DEFAULT_CONFIRM_MESSAGE = 'Вы уверены что хотите продолжить?';
 
 @Directive({
     selector: '[mcPopoverConfirm]',
@@ -105,7 +77,7 @@ export class McPopoverConfirmTrigger extends McPopUpTrigger<McPopoverConfirmComp
 
     @Input('mcPopoverMessage')
     get content(): string | TemplateRef<any> {
-        return this._content || DEFAULT_CONFIRM_MESSAGE;
+        return this._content;
     }
 
     set content(value: string | TemplateRef<any>) {

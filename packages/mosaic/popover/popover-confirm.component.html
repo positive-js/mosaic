@@ -4,7 +4,7 @@
      (@state.start)="animationStart()"
      (@state.done)="animationDone($event)">
     <div class="mc-popover-confirm__message">
-        {{ content }}
+        {{ content || DEFAULT_CONFIRM_MESSAGE }}
     </div>
 
     <button mc-button (click)="onReject$.next()">Нет</button>
