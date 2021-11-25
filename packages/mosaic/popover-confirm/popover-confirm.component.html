@@ -1,0 +1,12 @@
+<div class="mc-popover-confirm"
+     [ngClass]="classMap"
+     [@state]="visibility"
+     (@state.start)="animationStart()"
+     (@state.done)="animationDone($event)">
+    <div class="mc-popover-confirm__message">
+        {{ content }}
+    </div>
+
+    <button mc-button (click)="onReject$.next()">Нет</button>
+    <button mc-button (click)="onConfirm$.next()">Да</button>
+</div>

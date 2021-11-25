@@ -48,6 +48,7 @@
             "@ptsecurity/mosaic/modal": ["packages/mosaic/modal/index.ts"],
             "@ptsecurity/mosaic/navbar": ["packages/mosaic/navbar/index.ts"],
             "@ptsecurity/mosaic/popover": ["packages/mosaic/popover/index.ts"],
+            "@ptsecurity/mosaic/popover-confirm": ["packages/mosaic/popover-confirm/index.ts"],
             "@ptsecurity/mosaic/progress-bar": ["packages/mosaic/progress-bar/index.ts"],
             "@ptsecurity/mosaic/progress-spinner": ["packages/mosaic/progress-spinner/index.ts"],
             "@ptsecurity/mosaic/radio": ["packages/mosaic/radio/index.ts"],
