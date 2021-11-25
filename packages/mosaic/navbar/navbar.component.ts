@@ -228,7 +228,7 @@ export class McNavbar extends McFocusableComponent implements AfterViewInit, Aft
 
         this.resizeSubscription = this.resizeStream
             .pipe(debounceTime(this.resizeDebounceInterval))
-            .subscribe(this.updateCollapsed);
+            .subscribe(this.updateExpandedStateForItems);
     }
 
     ngAfterContentInit(): void {
@@ -245,7 +245,7 @@ export class McNavbar extends McFocusableComponent implements AfterViewInit, Aft
     ngAfterViewInit(): void {
         // Note: this wait is required for loading and rendering fonts for icons;
         // unfortunately we cannot control font rendering
-        setTimeout(this.updateCollapsed);
+        setTimeout(this.updateExpandedStateForItems);
     }
 
     ngOnDestroy() {
@@ -273,7 +273,7 @@ export class McNavbar extends McFocusableComponent implements AfterViewInit, Aft
         }
     }
 
-    updateCollapsed = () => {
+    updateExpandedStateForItems = () => {
         const collapseDelta = this.totalItemsWidth - this.width;
 
         const needCollapse = collapseDelta > 0;
@@ -281,7 +281,7 @@ export class McNavbar extends McFocusableComponent implements AfterViewInit, Aft
         if (needCollapse) {
             this.collapseItems(collapseDelta);
         } else {
-            this.unCollapseItems(collapseDelta);
+            this.expandItems(collapseDelta);
         }
     }
 
@@ -299,7 +299,7 @@ export class McNavbar extends McFocusableComponent implements AfterViewInit, Aft
         }
     }
 
-    private unCollapseItems(collapseDelta: number) {
+    private expandItems(collapseDelta: number) {
         let delta = collapseDelta;
 
         this.collapsableItems

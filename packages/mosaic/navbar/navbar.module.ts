@@ -14,7 +14,6 @@ import {
     McNavbarTitle,
     McNavbarRectangleElement,
     McNavbarToggle,
-    McNavbarToggleTooltipTrigger,
     McNavbarSubTitle,
     McNavbarBento
 } from './navbar-item.component';
@@ -42,7 +41,6 @@ import { McVerticalNavbar } from './vertical-navbar.component';
         McNavbarDivider,
         McNavbarFocusableItem,
         McNavbarRectangleElement,
-        McNavbarToggleTooltipTrigger,
         McNavbarSubTitle,
         McNavbarBento
     ],
@@ -58,7 +56,6 @@ import { McVerticalNavbar } from './vertical-navbar.component';
         McNavbarDivider,
         McNavbarFocusableItem,
         McNavbarRectangleElement,
-        McNavbarToggleTooltipTrigger,
         McNavbarSubTitle,
         McNavbarBento
     ]

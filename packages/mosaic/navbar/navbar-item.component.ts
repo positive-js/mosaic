@@ -82,7 +82,7 @@ export class McNavbarTitle implements AfterContentInit {
     }
 
     get isOverflown() {
-        return this.elementRef.nativeElement.scrollWidth >= this.elementRef.nativeElement.clientWidth;
+        return this.elementRef.nativeElement.scrollWidth > this.elementRef.nativeElement.clientWidth;
     }
 
     constructor(private elementRef: ElementRef) {}
@@ -208,7 +208,7 @@ export class McNavbarDivider {}
         '(blur)': 'blur()'
     }
 })
-export class McNavbarFocusableItem implements IFocusableOption {
+export class McNavbarFocusableItem implements IFocusableOption, AfterContentInit, OnDestroy {
     @ContentChild(McButton) button: McButton;
 
     readonly onFocus = new Subject<McNavbarFocusableItemEvent>();
@@ -252,16 +252,16 @@ export class McNavbarFocusableItem implements IFocusableOption {
         private ngZone: NgZone
     ) {}
 
-    ngOnDestroy() {
-        this.focusMonitor.stopMonitoring(this.elementRef);
-    }
-
     ngAfterContentInit(): void {
         if (this.button) {
             this.button.tabIndex = -1;
         }
 
         this.focusMonitor.monitor(this.elementRef);
+    }
+
+    ngOnDestroy() {
+        this.focusMonitor.stopMonitoring(this.elementRef);
     }
 
     onFocusHandler() {
@@ -330,13 +330,19 @@ export class McNavbarItem extends McTooltipTrigger {
 
     @ContentChild(McIcon) icon: McIcon;
 
+    @Input() collapsedText: string;
+
     @Input()
     get collapsed(): boolean {
         return this._collapsed;
     }
 
     set collapsed(value: boolean) {
-        this._collapsed = value;
+        if (this._collapsed !== value) {
+            this._collapsed = value;
+
+            this.updateTooltip();
+        }
     }
 
     private _collapsed = false;
@@ -360,7 +366,7 @@ export class McNavbarItem extends McTooltipTrigger {
     private _collapsable: boolean = true;
 
     get titleText(): string | null {
-        return this.title?.text || null;
+        return this.collapsedText || this.title?.text || null;
     }
 
     get subTitleText(): string | null {
@@ -528,76 +534,18 @@ export class McNavbarRectangleElement {
     styleUrls: ['./navbar.scss'],
     host: {
         class: 'mc-navbar-item mc-navbar-toggle mc-vertical',
+        '[class.mc-tooltip_open]': 'isOpen',
+
         '(keydown)': 'onKeydown($event)',
-        '(click)': 'toggle()'
+        '(click)': 'toggle()',
+        '(touchend)': 'handleTouchend()'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class McNavbarToggle implements OnDestroy {
+export class McNavbarToggle extends McTooltipTrigger implements OnDestroy {
     @ContentChild(McIcon) customIcon: McIcon;
 
-    constructor(
-        public navbar: McVerticalNavbar,
-        private ngZone: NgZone,
-        private changeDetectorRef: ChangeDetectorRef,
-        @Optional() @Inject(DOCUMENT) private document: any
-    ) {
-        const window = this.getWindow();
-
-        if (window) {
-            this.ngZone.runOutsideAngular(() => {
-                window.addEventListener('keydown', this.windowToggleHandler);
-            });
-        }
-    }
-
-    onKeydown($event: KeyboardEvent) {
-        if ([SPACE, ENTER].includes($event.keyCode)) {
-            this.toggle();
-
-            $event.stopPropagation();
-            $event.preventDefault();
-        }
-    }
-
-    ngOnDestroy(): void {
-        const window = this.getWindow();
-
-        if (window) {
-            window.removeEventListener('keydown', this.windowToggleHandler);
-        }
-    }
-
-    toggle = () => {
-        this.navbar.toggle();
-
-        this.changeDetectorRef.markForCheck();
-    }
-
-    private getWindow(): Window {
-        return this.document?.defaultView || window;
-    }
-
-    private windowToggleHandler = (event: KeyboardEvent) => {
-        if (event.ctrlKey && event.keyCode === NUMPAD_DIVIDE) {
-            this.ngZone.run(this.toggle);
-        }
-    }
-}
-
-
-@Directive({
-    selector: 'mc-navbar-toggle[mcCollapsedTooltip]',
-    exportAs: 'mcCollapsedTooltip',
-    host: {
-        '[class.mc-tooltip_open]': 'isOpen',
-
-        '(keydown)': 'handleKeydown($event)',
-        '(touchend)': 'handleTouchend()'
-    }
-})
-export class McNavbarToggleTooltipTrigger extends McTooltipTrigger {
     @Input('mcCollapsedTooltip')
     get content(): string | TemplateRef<any> {
         return this._content;
@@ -617,16 +565,63 @@ export class McNavbarToggleTooltipTrigger extends McTooltipTrigger {
 
     constructor(
         public navbar: McVerticalNavbar,
+        private changeDetectorRef: ChangeDetectorRef,
         overlay: Overlay,
         elementRef: ElementRef,
         ngZone: NgZone,
         scrollDispatcher: ScrollDispatcher,
         hostView: ViewContainerRef,
         @Inject(MC_TOOLTIP_SCROLL_STRATEGY) scrollStrategy,
-        @Optional() direction: Directionality
+        @Optional() direction: Directionality,
+        @Optional() @Inject(DOCUMENT) private document: any
     ) {
         super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
 
         this.placement = PopUpPlacements.Right;
+
+        const window = this.getWindow();
+
+        if (window) {
+            this.ngZone.runOutsideAngular(() => {
+                window.addEventListener('keydown', this.windowToggleHandler);
+            });
+        }
+    }
+
+    onKeydown($event: KeyboardEvent) {
+        if ([SPACE, ENTER].includes($event.keyCode)) {
+            this.toggle();
+
+            $event.stopPropagation();
+            $event.preventDefault();
+        }
+
+        super.handleKeydown($event);
+    }
+
+    ngOnDestroy(): void {
+        const window = this.getWindow();
+
+        if (window) {
+            window.removeEventListener('keydown', this.windowToggleHandler);
+        }
+    }
+
+    toggle = () => {
+        this.navbar.toggle();
+
+        this.changeDetectorRef.markForCheck();
+
+        this.hide();
+    }
+
+    private getWindow(): Window {
+        return this.document?.defaultView || window;
+    }
+
+    private windowToggleHandler = (event: KeyboardEvent) => {
+        if (event.ctrlKey && event.keyCode === NUMPAD_DIVIDE) {
+            this.ngZone.run(this.toggle);
+        }
     }
 }
