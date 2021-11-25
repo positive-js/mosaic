@@ -1,84 +1,87 @@
+<mc-dropdown
+    #verticalNavbarDropdown_1="mcDropdown"
+    [overlapTriggerY]="true"
+    [overlapTriggerX]="false">
+
+    <button mc-dropdown-item>Point 1</button>
+    <button mc-dropdown-item>Point 2</button>
+    <button mc-dropdown-item>Point 3</button>
+</mc-dropdown>
+
+<mc-dropdown
+    #verticalNavbarDropdown_2="mcDropdown"
+    [overlapTriggerY]="true"
+    [overlapTriggerX]="false">
+
+    <button mc-dropdown-item>Point 1</button>
+    <button mc-dropdown-item>Point 2</button>
+</mc-dropdown>
+
+<mc-dropdown
+    #verticalNavbarDropdown_3="mcDropdown"
+    [overlapTriggerY]="true"
+    [overlapTriggerX]="false">
+
+    <button mc-dropdown-item>Point 1</button>
+    <button mc-dropdown-item>Point 2</button>
+</mc-dropdown>
+
 <div class="demo-container">
-    <mc-dropdown
-        #appDropdown="mcDropdown"
-        [overlapTriggerY]="true"
-        [overlapTriggerX]="false">
-
-        <button mc-dropdown-item>Point 1</button>
-        <button mc-dropdown-item>Point 2</button>
-        <button mc-dropdown-item>Point 3</button>
-    </mc-dropdown>
-
-    <mc-dropdown
-        #firstDropdown="mcDropdown"
-        [overlapTriggerY]="true"
-        [overlapTriggerX]="false">
-
-        <button mc-dropdown-item>Point 1</button>
-        <button mc-dropdown-item>Point 2</button>
-    </mc-dropdown>
-
-    <mc-dropdown
-        #secondDropdown="mcDropdown"
-        [overlapTriggerY]="true"
-        [overlapTriggerX]="false">
-
-        <button mc-dropdown-item>Point 1</button>
-        <button mc-dropdown-item>Point 2</button>
-    </mc-dropdown>
-
-    <mc-vertical-navbar class="layout-align-space-between" #verticalNavbar>
+    <mc-vertical-navbar #verticalNavbar>
         <mc-navbar-container>
-            <mc-navbar-brand>
-                <mc-navbar-item
-                    #appDropdownTrigger="mcDropdownTrigger"
-                    [mcDropdownTriggerFor]="appDropdown"
-                    [class.mc-active]="appDropdownTrigger.opened">
-                    <i mc-icon="mc-bento_16"></i>
-                </mc-navbar-item>
+            <a mc-navbar-item
+               bento
+               #verticalNavbarDropdownTrigger_1="mcDropdownTrigger"
+               [mcDropdownTriggerFor]="verticalNavbarDropdown_1"
+               [class.mc-active]="verticalNavbarDropdownTrigger_1.opened">
 
-                <a href="https://www.ptsecurity.com/" mc-navbar-logo>
+                <i mc-icon="mc-bento_24"></i>
+            </a>
+
+            <a href="#" mc-navbar-brand>
+                <div mc-navbar-logo>
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 25c0 2.63 0 4.09.955 5.045C2.909 31 4.37 31 7 31h18c2.63 0 4.09 0 5.045-.955C31 29.091 31 27.63 31 25V7c0-2.63 0-4.09-.955-5.045C29.091 1 27.63 1 25 1H7c-2.63 0-4.09 0-5.045.955C1 2.909 1 4.37 1 7v18Z" fill="red"/><path fill-rule="evenodd" clip-rule="evenodd" d="M21.376 13.314v3.057c0 1.456.625 2.02 2.017 2.02h2.071v2.462h-2.572c-2.82 0-4.165-1.466-4.165-4.168V7h2.65v3.851h4.087v2.463h-4.088Zm-9.247 5.272c-1.444 0-2.48-1.15-2.48-2.734s1.036-2.734 2.48-2.734c1.454 0 2.509 1.15 2.509 2.734s-1.055 2.734-2.51 2.734Zm.576-7.93c-1.13 0-2.163.414-2.826 1.157h-.23v-.962H7v13.853h2.65V19.89h.229c.614.67 1.61 1.158 2.826 1.158 2.724 0 4.583-2.191 4.583-5.197 0-3.006-1.859-5.197-4.583-5.197Z" fill="#fff"/></svg>
-                </a>
+                </div>
 
-                <a href="https://www.ptsecurity.com/" mc-navbar-title>Application Name</a>
-            </mc-navbar-brand>
+                <div mc-navbar-title>Application Name Application Name</div>
+            </a>
 
-            <mc-navbar-item>
-                <i mc-icon="mc-calendar_16"></i>
+            <a href="#" mc-navbar-item>
+                <i mc-icon="mc-chart-bar_24"></i>
                 <mc-navbar-title>Контрольная панель</mc-navbar-title>
-            </mc-navbar-item>
+            </a>
 
             <mc-navbar-item
-                #firstDropdownTrigger="mcDropdownTrigger"
-                [mcDropdownTriggerFor]="firstDropdown"
-                [class.mc-active]="firstDropdownTrigger.opened">
-                <i mc-icon="mc-ellipsis_16" *ngIf="!verticalNavbar.expanded"></i>
-                <div class="layout-row flex layout-align-space-between layout-align-center-center">
-                    <mc-navbar-title>Участники информационного</mc-navbar-title>
-                    <i mc-icon="mc-angle-right-L_16" *ngIf="verticalNavbar.expanded"></i>
-                </div>
+                #verticalNavbarDropdownTrigger_2="mcDropdownTrigger"
+                [mcDropdownTriggerFor]="verticalNavbarDropdown_2"
+                [class.mc-active]="verticalNavbarDropdownTrigger_2.opened">
+
+                <i mc-icon="mc-list_24"></i>
+                <mc-navbar-title>Участники информационного обмена</mc-navbar-title>
+                <div mc-navbar-subtitle>Длинная подпись во второй строке</div>
+            </mc-navbar-item>
+
+            <button mc-navbar-item>
+                <i mc-icon="mc-folder-open-o_24"></i>
+                <span mc-navbar-title>Инциденты</span>
+            </button>
+
+            <mc-navbar-item
+                #verticalNavbarDropdownTrigger_3="mcDropdownTrigger"
+                [mcDropdownTriggerFor]="verticalNavbarDropdown_3"
+                [class.mc-active]="verticalNavbarDropdownTrigger_3.opened">
+
+                <i mc-icon="mc-ellipsis_24"></i>
+                <mc-navbar-title>Еще</mc-navbar-title>
             </mc-navbar-item>
 
             <mc-navbar-item>
-                <i mc-icon="mc-folder-opened_16"></i>
-                <mc-navbar-title>Инциденты</mc-navbar-title>
-            </mc-navbar-item>
-
-            <mc-navbar-item
-                #secondDropdownTrigger="mcDropdownTrigger"
-                [mcDropdownTriggerFor]="secondDropdown"
-                [class.mc-active]="secondDropdownTrigger.opened">
-                <i mc-icon="mc-ellipsis_16" *ngIf="!verticalNavbar.expanded"></i>
-                <div class="layout flex layout-align-space-between layout-align-center-center">
-                    <mc-navbar-title>Еще</mc-navbar-title>
-                    <i mc-icon="mc-angle-right-L_16" *ngIf="verticalNavbar.expanded"></i>
-                </div>
-            </mc-navbar-item>
-
-            <mc-navbar-item (click)="onItemClick($event)">
-                <button mc-button [color]="themePalette.Primary">
-                    <i mc-icon="mc-info_16"></i>
+                <button mc-button
+                        [color]="themePalette.Primary"
+                        [mcTooltip]="'Новый инцидент'"
+                        [mcPlacement]="popUpPlacements.Right"
+                        [mcTooltipDisabled]="verticalNavbar.expanded">
+                    <i mc-icon="mc-info-o_16"></i>
                     <span *ngIf="verticalNavbar.expanded">Новый инцидент</span>
                 </button>
             </mc-navbar-item>
@@ -86,31 +89,31 @@
 
         <mc-navbar-container>
             <mc-navbar-item>
-                <i mc-icon="mc-search_16"></i>
+                <i mc-icon="mc-search_24"></i>
                 <mc-navbar-title>Поиск</mc-navbar-title>
             </mc-navbar-item>
 
             <mc-navbar-item>
-                <i mc-icon="mc-bell-o_16"></i>
+                <i mc-icon="mc-bell-o_24"></i>
                 <mc-navbar-title>Уведомления</mc-navbar-title>
-                <span class="mc-badge mc-badge_error">5</span>
+                <span class="mc-badge mc-badge_default mc-badge_solid mc-badge_error">5</span>
             </mc-navbar-item>
 
             <mc-navbar-divider></mc-navbar-divider>
 
             <mc-navbar-item>
-                <i mc-icon="mc-search_16"></i>
+                <i mc-icon="mc-question-circle_24"></i>
                 <mc-navbar-title>Справка</mc-navbar-title>
             </mc-navbar-item>
 
-            <mc-navbar-item>
-                <i mc-icon="mc-search_16"></i>
+            <mc-navbar-item [disabled]="true">
+                <i mc-icon="mc-user-o_24"></i>
                 <mc-navbar-title>Профиль</mc-navbar-title>
             </mc-navbar-item>
 
             <mc-navbar-divider></mc-navbar-divider>
 
-            <mc-navbar-toggle (click)="verticalNavbar.toggle()" (keydown.space)="verticalNavbar.toggle()">
+            <mc-navbar-toggle [mcCollapsedTooltip]="'Развернуть меню'">
                 <mc-navbar-title>Свернуть меню</mc-navbar-title>
             </mc-navbar-toggle>
         </mc-navbar-container>
