@@ -21,6 +21,8 @@ import { McNavbarModule, McNavbar } from '../../mosaic/navbar';
 })
 export class NavbarDemoComponent {
     themePalette = ThemePalette;
+    popUpPlacements = PopUpPlacements;
+
     @ViewChild('verticalNavbar', { static: false }) navbar: McNavbar;
 
     readonly minNavbarWidth: number = 940;

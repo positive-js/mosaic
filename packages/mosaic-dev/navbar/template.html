@@ -197,9 +197,9 @@
 
             <mc-navbar-item>
                 <button mc-button
-                        [color]="'primary'"
+                        [color]="themePalette.Primary"
                         [mcTooltip]="'Новый инцидент'"
-                        [mcPlacement]="'right'"
+                        [mcPlacement]="popUpPlacements.Right"
                         [mcTooltipDisabled]="verticalNavbar.expanded">
                     <i mc-icon="mc-info-o_16"></i>
                     <span *ngIf="verticalNavbar.expanded">Новый инцидент</span>
