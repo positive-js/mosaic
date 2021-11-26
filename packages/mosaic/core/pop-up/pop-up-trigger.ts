@@ -14,9 +14,7 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
-    Input,
     NgZone,
-    Output,
     TemplateRef,
     Type,
     ViewContainerRef
@@ -43,79 +41,24 @@ const VIEWPORT_MARGIN: number = 8;
 export abstract class McPopUpTrigger<T> {
     isOpen: boolean = false;
 
-    @Input('mcEnterDelay') enterDelay: number = 0;
-    @Input('mcLeaveDelay') leaveDelay: number = 0;
-
-    @Output('mcPlacementChange') placementChange: EventEmitter<string> = new EventEmitter();
-
-    @Output('mcVisibleChange') visibleChange = new EventEmitter<boolean>();
-
-    @Input('mcPlacementPriority')
-    get placementPriority() {
-        return this._placementPriority;
-    }
-
-    set placementPriority(value) {
-        if (value && value.length > 0) {
-            this._placementPriority = value;
-        } else {
-            this._placementPriority = null;
-        }
-    }
-
-    private _placementPriority: string | string[] | null = null;
-
-    @Input('mcPlacement')
-    get placement(): PopUpPlacements {
-        return this._placement;
-    }
-
-    set placement(value: PopUpPlacements) {
-        if (POSITION_TO_CSS_MAP[value]) {
-            this._placement = value;
-
-            this.updateClassMap();
-        } else {
-            this._placement = PopUpPlacements.Top;
-
-            console.warn(`Unknown position: ${value}. Will used default position: ${this._placement}`);
-        }
-
-        if (this.visible) {
-            this.updatePosition();
-        }
-    }
-
-    private _placement = PopUpPlacements.Top;
-
-    @Input('mcVisible')
-    get visible(): boolean {
-        return this._visible;
-    }
-
-    set visible(externalValue: boolean) {
-        const value = coerceBooleanProperty(externalValue);
-
-        if (this._visible !== value) {
-            this._visible = value;
-
-            if (value) {
-                this.show();
-            } else {
-                this.hide();
-            }
-        }
-    }
-
-    private _visible = false;
+    enterDelay: number = 0;
+    leaveDelay: number = 0;
 
     abstract disabled: boolean;
     abstract trigger: string;
     abstract customClass: string;
     abstract content: string | TemplateRef<any>;
 
+    abstract placementChange: EventEmitter<string>;
+    abstract visibleChange: EventEmitter<boolean>;
+
     protected abstract originSelector: string;
     protected abstract overlayConfig: OverlayConfig;
+
+    protected placement = PopUpPlacements.Top;
+    protected placementPriority: string | string[] | null = null;
+
+    protected visible = false;
 
     // tslint:disable-next-line:naming-convention orthodox-getter-and-setter
     protected _content: string | TemplateRef<any>;
@@ -168,6 +111,44 @@ export abstract class McPopUpTrigger<T> {
 
         this.destroyed.next();
         this.destroyed.complete();
+    }
+
+    updatePlacement(value: PopUpPlacements) {
+        if (POSITION_TO_CSS_MAP[value]) {
+            this.placement = value;
+
+            this.updateClassMap();
+        } else {
+            this.placement = PopUpPlacements.Top;
+
+            console.warn(`Unknown position: ${value}. Will used default position: ${this.placement}`);
+        }
+
+        if (this.visible) {
+            this.updatePosition();
+        }
+    }
+
+    updatePlacementPriority(value) {
+        if (value && value.length > 0) {
+            this.placementPriority = value;
+        } else {
+            this.placementPriority = null;
+        }
+    }
+
+    updateVisible(externalValue: boolean) {
+        const value = coerceBooleanProperty(externalValue);
+
+        if (this.visible !== value) {
+            this.visible = value;
+
+            if (value) {
+                this.show();
+            } else {
+                this.hide();
+            }
+        }
     }
 
     handleKeydown(event: KeyboardEvent) {
