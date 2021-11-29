@@ -70,7 +70,8 @@ export class McFocusableComponent implements AfterContentInit, OnDestroy {
     constructor(protected changeDetectorRef: ChangeDetectorRef) {}
 
     ngAfterContentInit(): void {
-        this.keyManager = new FocusKeyManager<McNavbarFocusableItem>(this.focusableItems);
+        this.keyManager = new FocusKeyManager<McNavbarFocusableItem>(this.focusableItems)
+        .withTypeAhead();
 
         this.keyManager.setFocusOrigin('keyboard');
 
@@ -270,6 +271,8 @@ export class McNavbar extends McFocusableComponent implements AfterViewInit, Aft
             this.keyManager.setNextItemActive();
         } else if (keyCode === LEFT_ARROW) {
             this.keyManager.setPreviousItemActive();
+        } else {
+            this.keyManager.onKeydown(event);
         }
     }
 

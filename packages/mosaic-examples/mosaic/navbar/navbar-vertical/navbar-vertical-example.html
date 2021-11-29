@@ -93,7 +93,13 @@
                 <mc-navbar-title>Поиск</mc-navbar-title>
             </mc-navbar-item>
 
-            <mc-navbar-item>
+            <mc-navbar-item
+                #verticalPopover="mcPopover"
+                mcPopover
+                [mcPopoverPlacement]="popUpPlacements.RightBottom"
+                [class.mc-active]="verticalPopover.isOpen"
+                [mcPopoverHeader]="'Центр уведомлений'"
+                [mcPopoverContent]="'Body of popover Body of popover Body of popover Body of popover Body of popover Body of popover Body of popover Body of popover Body of popover Body of popover Body of popover Body of popover Body of popover Body of popover Body of popover Body of popover '">
                 <i mc-icon="mc-bell-o_24"></i>
                 <mc-navbar-title>Уведомления</mc-navbar-title>
                 <span class="mc-badge mc-badge_default mc-badge_solid mc-badge_error">5</span>

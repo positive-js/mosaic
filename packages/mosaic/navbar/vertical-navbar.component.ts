@@ -130,6 +130,8 @@ export class McVerticalNavbar extends McFocusableComponent implements AfterConte
             this.keyManager.setNextItemActive();
         } else if (keyCode === UP_ARROW) {
             this.keyManager.setPreviousItemActive();
+        } else {
+            this.keyManager.onKeydown(event);
         }
     }
 

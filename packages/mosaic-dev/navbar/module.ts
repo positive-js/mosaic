@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
-import { ThemePalette } from '@ptsecurity/mosaic/core';
+import { PopUpPlacements, ThemePalette } from '@ptsecurity/mosaic/core';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McLinkModule } from '@ptsecurity/mosaic/link';
 import { McPopoverModule } from '@ptsecurity/mosaic/popover';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ThemePalette } from '@ptsecurity/mosaic/core';
+import { PopUpPlacements, ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -12,4 +12,5 @@ import { ThemePalette } from '@ptsecurity/mosaic/core';
 })
 export class NavbarOverviewExample {
     themePalette = ThemePalette;
+    popUpPlacements = PopUpPlacements;
 }

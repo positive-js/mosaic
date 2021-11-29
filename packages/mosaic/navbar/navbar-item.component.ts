@@ -1,4 +1,4 @@
-import { FocusMonitor } from '@angular/cdk/a11y';
+import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Overlay, ScrollDispatcher } from '@angular/cdk/overlay';
@@ -21,7 +21,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { ENTER, NUMPAD_DIVIDE, SPACE } from '@ptsecurity/cdk/keycodes';
+import { DOWN_ARROW, ENTER, NUMPAD_DIVIDE, SPACE } from '@ptsecurity/cdk/keycodes';
 import { McButton, McButtonCssStyler } from '@ptsecurity/mosaic/button';
 import { PopUpPlacements, toBoolean } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
@@ -204,11 +204,13 @@ export class McNavbarDivider {}
         class: 'mc-navbar-focusable-item',
         '[class.mc-navbar-item_button]': 'button',
 
-        '(focus)': 'onFocusHandler($event)',
+        '(focus)': 'onFocusHandler()',
         '(blur)': 'blur()'
     }
 })
 export class McNavbarFocusableItem implements IFocusableOption, AfterContentInit, OnDestroy {
+    @ContentChild(McNavbarTitle) title: McNavbarTitle;
+
     @ContentChild(McButton) button: McButton;
 
     readonly onFocus = new Subject<McNavbarFocusableItemEvent>();
@@ -276,8 +278,12 @@ export class McNavbarFocusableItem implements IFocusableOption, AfterContentInit
         this.elementRef.nativeElement.focus();
     }
 
-    focus() {
-        if (this.disabled || this.hasFocus) { return; }
+    focus(origin?: FocusOrigin) {
+        if (this.disabled || this.hasFocus) { return origin; }
+
+        if (origin === 'keyboard') {
+            this.focusMonitor.focusVia(this.elementRef, origin);
+        }
 
         if (this.button) {
             this.button.focusViaKeyboard();
@@ -307,6 +313,10 @@ export class McNavbarFocusableItem implements IFocusableOption, AfterContentInit
                     this.onBlur.next({ item: this });
                 });
             });
+    }
+
+    getLabel(): string {
+        return this.title?.text || '';
     }
 }
 
@@ -443,7 +453,12 @@ export class McNavbarItem extends McTooltipTrigger {
     }
 
     onKeyDown($event: KeyboardEvent) {
-        if (this.hasDropDownTrigger && [ENTER, SPACE].includes($event.keyCode)) {
+        if (!this.hasDropDownTrigger) { return; }
+
+        if (
+            [ENTER, SPACE].includes($event.keyCode) ||
+            (this.rectangleElement.horizontal && $event.keyCode === DOWN_ARROW)
+        ) {
             this.dropdownTrigger.openedBy = 'keyboard';
             this.dropdownTrigger.open();
 
