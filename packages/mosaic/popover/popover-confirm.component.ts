@@ -1,11 +1,5 @@
 import { Directionality } from '@angular/cdk/bidi';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import {
-    FlexibleConnectedPositionStrategy,
-    Overlay,
-    ScrollDispatcher,
-} from '@angular/cdk/overlay';
-import { OverlayConfig } from '@angular/cdk/overlay/overlay-config';
+import { Overlay, ScrollDispatcher } from '@angular/cdk/overlay';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -18,21 +12,16 @@ import {
     NgZone,
     Optional,
     Output,
-    TemplateRef,
-    Type,
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import {
-    McPopUpTrigger,
-    PopUpTriggers,
-    POSITION_TO_CSS_MAP
-} from '@ptsecurity/mosaic/core';
-import { merge, NEVER, Subject } from 'rxjs';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { McPopoverComponent, MC_POPOVER_SCROLL_STRATEGY } from './popover.component';
 
 import { mcPopoverAnimations } from './popover-animations';
+import { MC_POPOVER_SCROLL_STRATEGY, McPopoverComponent, McPopoverTrigger } from './popover.component';
+
 
 @Component({
     selector: 'mc-popover-confirm-component',
@@ -44,8 +33,10 @@ import { mcPopoverAnimations } from './popover-animations';
     animations: [mcPopoverAnimations.popoverState]
 })
 export class McPopoverConfirmComponent extends McPopoverComponent {
-    onConfirm$ = new Subject<void>();
-    onReject$ = new Subject<void>();
+    themePalette = ThemePalette;
+
+    onConfirm = new Subject<void>();
+    confirmButtonText: string;
 
     DEFAULT_CONFIRM_MESSAGE = 'Вы уверены что хотите продолжить?';
 
@@ -53,6 +44,7 @@ export class McPopoverConfirmComponent extends McPopoverComponent {
         super(changeDetectorRef);
     }
 }
+
 
 @Directive({
     selector: '[mcPopoverConfirm]',
@@ -63,75 +55,21 @@ export class McPopoverConfirmComponent extends McPopoverComponent {
         '(touchend)': 'handleTouchend()'
     }
 })
-export class McPopoverConfirmTrigger extends McPopUpTrigger<McPopoverConfirmComponent> {
-    @Input()
-    get hasBackdrop(): boolean {
-        return this._hasBackdrop;
+export class McPopoverConfirmTrigger extends McPopoverTrigger {
+    @Output() confirm: EventEmitter<void> = new EventEmitter<void>();
+
+    @Input('mcPopoverConfirmButtonText')
+    get confirmButtonText(): string {
+        return this._confirmButtonText;
     }
 
-    set hasBackdrop(value: boolean) {
-        this._hasBackdrop = coerceBooleanProperty(value);
-    }
-
-    private _hasBackdrop: boolean = false;
-
-    @Input('mcPopoverMessage')
-    get content(): string | TemplateRef<any> {
-        return this._content;
-    }
-
-    set content(value: string | TemplateRef<any>) {
-        this._content = value;
+    set confirmButtonText(value: string) {
+        this._confirmButtonText = value;
 
         this.updateData();
     }
 
-    @Input('mcPopoverDisabled')
-    get disabled(): boolean {
-        return this._disabled;
-    }
-
-    set disabled(value) {
-        this._disabled = coerceBooleanProperty(value);
-    }
-
-    trigger: string = PopUpTriggers.Click;
-
-    @Input('mcPopoverClass')
-    get customClass() {
-        return this._customClass;
-    }
-
-    set customClass(value: string) {
-        this._customClass = value;
-
-        this.updateClassMap();
-    }
-
-    @Input()
-    get closeOnScroll(): boolean {
-        return this._closeOnScroll;
-    }
-
-    set closeOnScroll(value: boolean) {
-        this._closeOnScroll = coerceBooleanProperty(value);
-    }
-
-    private _closeOnScroll: boolean = false;
-
-    @Input() backdropClass: string = 'cdk-overlay-transparent-backdrop';
-
-    protected originSelector = '.mc-popover';
-
-    protected overlayConfig: OverlayConfig = {
-        panelClass: 'mc-popover__panel',
-        hasBackdrop: this.hasBackdrop,
-        backdropClass: this.backdropClass
-    };
-
-    @Output() confirm: EventEmitter<void> = new EventEmitter<void>();
-
-    @Output() reject: EventEmitter<void> = new EventEmitter<void>();
+    private _confirmButtonText: string = 'Да';
 
     constructor(
         overlay: Overlay,
@@ -147,55 +85,19 @@ export class McPopoverConfirmTrigger extends McPopUpTrigger<McPopoverConfirmComp
 
     updateData() {
         if (!this.instance) { return; }
-
-        this.instance.content = this.content;
-
+        super.updateData();
         this.setupButtonEvents();
-
-        if (this.isOpen) {
-            this.updatePosition(true);
-        }
+        this.instance.confirmButtonText = this.confirmButtonText;
     }
 
     setupButtonEvents() {
-        this.instance.onConfirm$.pipe(takeUntil(this.destroyed)).subscribe(() => {
+        this.instance.onConfirm.pipe(takeUntil(this.destroyed)).subscribe(() => {
             this.confirm.emit();
-        })
-        this.instance.onReject$.pipe(takeUntil(this.destroyed)).subscribe(() => {
-            this.reject.emit();
-        })
+            this.hide();
+        });
     }
 
-    /** Updates the position of the current popover. */
-    updatePosition(reapplyPosition: boolean = false) {
-        this.overlayRef = this.createOverlay();
-
-        const position = (this.overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy)
-            .withPositions(this.getPrioritizedPositions())
-            .withPush(true);
-
-        if (reapplyPosition) {
-            setTimeout(() => position.reapplyLastPosition());
-        }
-    }
-
-    getOverlayHandleComponentType(): Type<McPopoverConfirmComponent> {
+    getOverlayHandleComponentType() {
         return McPopoverConfirmComponent;
-    }
-
-    updateClassMap(newPlacement: string = this.placement) {
-        if (!this.instance) { return; }
-
-        this.instance.updateClassMap(POSITION_TO_CSS_MAP[newPlacement], this.customClass);
-        this.instance.markForCheck();
-    }
-
-    closingActions() {
-        return merge(
-            this.overlayRef!.backdropClick(),
-            this.hasBackdrop ? NEVER : this.overlayRef!.outsidePointerEvents(),
-            this.closeOnScroll ? this.scrollDispatcher.scrolled() : NEVER,
-            this.overlayRef!.detachments()
-        );
     }
 }

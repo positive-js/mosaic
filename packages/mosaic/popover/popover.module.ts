@@ -3,16 +3,9 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 
-import {
-    McPopoverComponent,
-    McPopoverTrigger,
-    MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER
-} from './popover.component';
+import { McPopoverConfirmComponent, McPopoverConfirmTrigger } from './popover-confirm.component';
+import { MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER, McPopoverComponent, McPopoverTrigger } from './popover.component';
 
-import { 
-    McPopoverConfirmComponent,
-    McPopoverConfirmTrigger
-} from './popover-confirm.component';
 
 @NgModule({
     declarations: [McPopoverComponent, McPopoverTrigger, McPopoverConfirmComponent, McPopoverConfirmTrigger],

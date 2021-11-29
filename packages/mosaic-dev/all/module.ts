@@ -43,7 +43,6 @@ import * as _moment from 'moment';
 // @ts-ignore
 // tslint:disable-next-line:no-duplicate-imports
 import { default as _rollupMoment, Moment } from 'moment';
-import { McPopoverModule } from '@ptsecurity/mosaic/popover';
 
 
 const moment = _rollupMoment || _moment;
@@ -241,7 +240,6 @@ export class DemoComponent {
         McLuxonDateModule,
         McProgressBarModule,
         McProgressSpinnerModule,
-        McPopoverModule,
         McRadioModule,
         McSelectModule,
         McSplitterModule,

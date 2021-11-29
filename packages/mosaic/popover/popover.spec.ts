@@ -156,6 +156,29 @@ describe('McPopover', () => {
             flush();
         }));
     });
+
+
+    describe('Check popover confirm', () => {
+        beforeEach(() => {
+            componentFixture = TestBed.createComponent(McPopoverTestComponent);
+            component = componentFixture.componentInstance;
+            componentFixture.detectChanges();
+        });
+
+        it('Can set button text', fakeAsync(() => {
+            const expectedValue = '_TEST8';
+            const triggerElement = component.test8.nativeElement;
+
+            dispatchMouseEvent(triggerElement, 'click');
+            tick();
+            componentFixture.detectChanges();
+
+            const button = componentFixture.debugElement.query(By.css('.mc-popover-confirm button'));
+            expect(button.nativeElement.textContent).toEqual(expectedValue);
+
+            flush();
+        }));
+    });
 });
 
 @Component({
@@ -170,6 +193,8 @@ describe('McPopover', () => {
         <button #test6 mcPopover mcTrigger="hover" [mcPopoverFooter]="'_TEST6'">_TEST6</button>
 
         <button #test7 mcPopover [mcPopoverClass]="'_TEST7'" [mcPopoverContent]="'_TEST7'">_TEST7</button>
+
+        <button #test8 mcPopoverConfirm mcPopoverConfirmButtonText="_TEST8">_TEST8asdasd</button>
     `
 })
 class McPopoverTestComponent {
@@ -182,5 +207,5 @@ class McPopoverTestComponent {
     @ViewChild('test5', {static: false}) test5: ElementRef;
     @ViewChild('test6', {static: false}) test6: ElementRef;
     @ViewChild('test7', {static: false}) test7: ElementRef;
+    @ViewChild('test8', {static: false}) test8: ElementRef;
 }
-

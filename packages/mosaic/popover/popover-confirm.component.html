@@ -1,12 +1,13 @@
-<div class="mc-popover-confirm"
+<div class="mc-popover-confirm mc-popover"
      [ngClass]="classMap"
      [@state]="visibility"
      (@state.start)="animationStart()"
      (@state.done)="animationDone($event)">
-    <div class="mc-popover-confirm__message">
+    <div class="mc-popover-confirm__container">
         {{ content || DEFAULT_CONFIRM_MESSAGE }}
+    
+        <button mc-button [color]="themePalette.Primary" (click)="onConfirm.next()">{{confirmButtonText}}</button>    
     </div>
 
-    <button mc-button (click)="onReject$.next()">Нет</button>
-    <button mc-button (click)="onConfirm$.next()">Да</button>
+    <div class="mc-popover__arrow"></div>
 </div>
