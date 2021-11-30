@@ -1,0 +1,9 @@
+.example-button-group {
+    display: flex;
+    flex-flow: column wrap;
+
+    button {
+        width: 100px;
+        margin-bottom: 5px;
+    }
+}

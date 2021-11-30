@@ -60,6 +60,7 @@
             "@ptsecurity/mosaic/tags": ["packages/mosaic/tags/index.ts"],
             "@ptsecurity/mosaic/textarea": ["packages/mosaic/textarea/index.ts"],
             "@ptsecurity/mosaic/timepicker": ["packages/mosaic/timepicker/index.ts"],
+            "@ptsecurity/mosaic/toast": ["packages/mosaic/toast/index.ts"],
             "@ptsecurity/mosaic/toggle": ["packages/mosaic/toggle/index.ts"],
             "@ptsecurity/mosaic/tooltip": ["packages/mosaic/tooltip/index.ts"],
             "@ptsecurity/mosaic/tree": ["packages/mosaic/tree/index.ts"],
