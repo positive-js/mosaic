@@ -44,6 +44,7 @@ const scope_types = [
     'tags',
     'textarea',
     'timepicker',
+    'toast',
     'toggle',
     'tooltip',
     'tree',
