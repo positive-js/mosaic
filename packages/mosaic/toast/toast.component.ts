@@ -1,12 +1,10 @@
 import { AnimationEvent } from '@angular/animations';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 
 import { ToastAnimationState, toastAnimations } from './toast.animation';
 import { ToastRef } from './toast.ref';
-import { ToastData } from './toast.type';
+import { ToastData, IToastConfig, TOAST_CONFIG_TOKEN } from './toast.type';
 
-
-const TOAST_DEFAULT_TIMEOUT = 5000;
 
 @Component({
   selector: 'mc-toast',
@@ -23,12 +21,13 @@ export class ToastComponent implements OnInit, OnDestroy {
 
   constructor(
       readonly data: ToastData,
-      readonly ref: ToastRef
+      readonly ref: ToastRef,
+      @Inject(TOAST_CONFIG_TOKEN) readonly toast: IToastConfig
   ) {
   }
 
   ngOnInit(): void {
-    this.intervalId = setTimeout(() => this.animationState = 'closing', TOAST_DEFAULT_TIMEOUT);
+    this.intervalId = setTimeout(() => this.animationState = 'closing', this.toast.duration);
   }
 
   ngOnDestroy(): void {
