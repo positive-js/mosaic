@@ -8,6 +8,7 @@ import {
     ElementRef,
     EventEmitter,
     Inject,
+    InjectionToken,
     Input,
     NgZone,
     Optional,
@@ -22,6 +23,8 @@ import { takeUntil } from 'rxjs/operators';
 import { mcPopoverAnimations } from './popover-animations';
 import { MC_POPOVER_SCROLL_STRATEGY, McPopoverComponent, McPopoverTrigger } from './popover.component';
 
+export const POPOVER_CONFIRM_TEXT = new InjectionToken<string>('');
+export const POPOVER_CONFIRM_BUTTON_TEXT = new InjectionToken<string>('');
 
 @Component({
     selector: 'mc-popover-confirm-component',
@@ -38,7 +41,7 @@ export class McPopoverConfirmComponent extends McPopoverComponent {
     onConfirm = new Subject<void>();
     confirmButtonText: string;
 
-    DEFAULT_CONFIRM_MESSAGE = 'Вы уверены что хотите продолжить?';
+    confirmText: string;
 
     constructor(changeDetectorRef: ChangeDetectorRef) {
         super(changeDetectorRef);
@@ -57,6 +60,19 @@ export class McPopoverConfirmComponent extends McPopoverComponent {
 })
 export class McPopoverConfirmTrigger extends McPopoverTrigger {
     @Output() confirm: EventEmitter<void> = new EventEmitter<void>();
+
+    @Input('mcPopoverConfirmText')
+    get confirmText(): string {
+        return this._confirmText;
+    }
+
+    set confirmText(value: string) {
+        this._confirmText = value;
+
+        this.updateData();
+    }
+
+    private _confirmText: string = 'Вы уверены, что хотите продолжить?';
 
     @Input('mcPopoverConfirmButtonText')
     get confirmButtonText(): string {
@@ -78,9 +94,18 @@ export class McPopoverConfirmTrigger extends McPopoverTrigger {
         scrollDispatcher: ScrollDispatcher,
         hostView: ViewContainerRef,
         @Inject(MC_POPOVER_SCROLL_STRATEGY) scrollStrategy,
-        @Optional() direction: Directionality
+        @Optional() direction: Directionality,
+        @Optional() @Inject(POPOVER_CONFIRM_TEXT) confirmText: string,
+        @Optional() @Inject(POPOVER_CONFIRM_BUTTON_TEXT) confirmButtonText: string
     ) {
         super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
+
+        if (confirmText) {
+            this.confirmText = confirmText;
+        }
+        if (confirmButtonText) {
+            this.confirmButtonText = confirmButtonText;
+        }
     }
 
     updateData() {
@@ -88,6 +113,7 @@ export class McPopoverConfirmTrigger extends McPopoverTrigger {
         super.updateData();
         this.setupButtonEvents();
         this.instance.confirmButtonText = this.confirmButtonText;
+        this.instance.confirmText = this.confirmText;
     }
 
     setupButtonEvents() {

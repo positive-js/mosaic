@@ -4,7 +4,7 @@
      (@state.start)="animationStart()"
      (@state.done)="animationDone($event)">
     <div class="mc-popover-confirm__container">
-        {{ content || DEFAULT_CONFIRM_MESSAGE }}
+        {{ confirmText }}
     
         <button mc-button [color]="themePalette.Primary" (click)="onConfirm.next()">{{confirmButtonText}}</button>    
     </div>

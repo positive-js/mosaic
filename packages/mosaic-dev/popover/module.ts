@@ -34,6 +34,7 @@ export class DemoComponent {
 
     ELEMENTS = {
         BUTTON: 'button',
+        CONFIRM_BUTTON: 'confirm-button',
         INPUT: 'input',
         ICON: 'icon'
     };
@@ -50,14 +51,17 @@ export class DemoComponent {
         SMALL: 'small'
     };
 
-    selectedElement: string = 'button';
+    selectedElement: string = this.ELEMENTS.BUTTON;
     selectedPlacement: PopUpPlacements = PopUpPlacements.Left;
-    selectedTrigger: string = 'click';
+    selectedTrigger: string = this.TRIGGERS.CLICK;
     selectedSize: PopUpSizes = PopUpSizes.Normal;
     layoutClass: string = 'layout-row layout-align-center-center';
     content: string = 'button text';
     userDefinedPlacementPriority: string[] = ['bottom', 'right'];
     multipleSelected: string[] = [];
+
+    confirmText: string = 'Вы уверены, что хотите продолжить?';
+    confirmButtonText: string = 'Да';
 
     constructor() {
         this.popoverActiveStage = 1;
