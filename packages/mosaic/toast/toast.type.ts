@@ -3,7 +3,7 @@ import { TemplateRef, Type, EventEmitter, InjectionToken } from '@angular/core';
 
 export type OnClickCallback<T> = ((instance: T) => (false | void | {}) | Promise<false | void | {}>);
 export type ToastType = 'default' | 'confirm' | 'custom' | 'success' | 'error' | 'warning' | 'info';
-export type ToastPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center' | 'center';
+export type ToastPosition = 'top-right' | 'top-left' | 'top-center' | 'bottom-right' | 'bottom-left' | 'bottom-center' | 'center';
 
 export interface IToastOptions<T = any> {
     mcToastType: ToastType;
@@ -33,25 +33,17 @@ export class ToastData {
 }
 
 export interface IToastConfig {
-    position: {
-        top: number;
-        right: number;
-    };
-    animation: {
-        fadeOut: number;
-        fadeIn: number;
-    };
+    position?: ToastPosition;
+    animationOut?: number;
+    animationIn?: number;
+    duration?: number;
 }
 
 export const defaultToastConfig: IToastConfig = {
-    position: {
-        top: 20,
-        right: 20
-    },
-    animation: {
-        fadeOut: 2500,
-        fadeIn: 300
-    }
+    position: 'top-center',
+    animationOut: 2500,
+    animationIn: 300,
+    duration: 4000
 };
 
 export const TOAST_CONFIG_TOKEN = new InjectionToken('toast-config');

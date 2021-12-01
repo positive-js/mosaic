@@ -6,7 +6,6 @@ export const toastAnimations: {
 } = {
     toastState: trigger('state', [
         state('default', style({
-           transform: 'translateY(0px)',
            opacity: 1
         })),
         transition(

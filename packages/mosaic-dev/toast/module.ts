@@ -40,7 +40,10 @@ export class ToastDemoComponent {
         BrowserModule,
         BrowserAnimationsModule,
         McButtonModule,
-        ToastModule.forRoot()
+        ToastModule.forRoot({
+            position: 'top-right',
+            duration: 30000
+        })
     ],
     bootstrap: [ToastDemoComponent]
 })
