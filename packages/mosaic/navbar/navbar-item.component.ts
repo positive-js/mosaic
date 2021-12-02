@@ -21,7 +21,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { DOWN_ARROW, ENTER, NUMPAD_DIVIDE, SPACE } from '@ptsecurity/cdk/keycodes';
+import { DOWN_ARROW, ENTER, NUMPAD_DIVIDE, SLASH, SPACE } from '@ptsecurity/cdk/keycodes';
 import { McButton, McButtonCssStyler } from '@ptsecurity/mosaic/button';
 import { PopUpPlacements, toBoolean } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
@@ -635,7 +635,7 @@ export class McNavbarToggle extends McTooltipTrigger implements OnDestroy {
     }
 
     private windowToggleHandler = (event: KeyboardEvent) => {
-        if (event.ctrlKey && event.keyCode === NUMPAD_DIVIDE) {
+        if (event.ctrlKey && [NUMPAD_DIVIDE, SLASH].includes(event.keyCode)) {
             this.ngZone.run(this.toggle);
         }
     }

@@ -33,7 +33,11 @@
     .mc-navbar-toggle {
         color: map-get($navbar-item, color);
 
-        & .mc-icon {
+        & > .mc-icon {
+            color: map-get($navbar-item, icon-color);
+        }
+
+        & .mc-navbar-item__arrow-icon {
             color: map-get($navbar-item, color);
         }
 
@@ -69,11 +73,13 @@
     .mc-navbar-focusable-item {
         outline: none;
 
-        &.cdk-keyboard-focused {
+        /* stylelint-disable no-descending-specificity */
+        &.cdk-keyboard-focused .mc-navbar-item__overlay {
             box-shadow:
                 inset 0 0 0 2px map-get(map-get($theme, states), focused-color),
-                inset 0 0 0 3px map-get($background, background);
+                inset 0 0 0 3px white;
         }
+        /* stylelint-enable no-descending-specificity */
     }
 
     .mc-navbar-divider {
