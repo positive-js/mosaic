@@ -75,3 +75,11 @@ providers: [
 `<mc-checkbox>` использует `<input type="checkbox">` для обеспечения Accessibility.
 
 Checkboxes без текста или label должны иметь метку `aria-label` или `aria-labelledby`.
+
+### Pseudo checkbox
+`<mc-pseudo-checkbox>` - декоративный компонент, который отображает checkbox с помощью иконки.
+
+Состояние можно изменить с помощью свойства `state`, которое по умолчанию `'unchecked'`,
+и может быть изменено на `'intermediate'` или `'checked'`
+
+<!-- example(pseudo-checkbox) -->
