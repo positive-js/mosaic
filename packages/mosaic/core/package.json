@@ -5,7 +5,7 @@
             "umdModuleIds": {
                 "@ptsecurity/cdk/datetime": "mc.cdk.datetime",
                 "@ptsecurity/cdk/keycodes": "mc.cdk.keycodes",
-                "messageformat": "messageformat"
+                "@messageformat/core": "@messageformat/core"
             }
         }
     }
