@@ -36,7 +36,8 @@ import {
     hasModifierKey,
     isLetterKey,
     isVerticalMovement,
-    isHorizontalMovement
+    isHorizontalMovement,
+    TAB
 } from '@ptsecurity/cdk/keycodes';
 import { validationTooltipHideDelay, validationTooltipShowDelay } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
@@ -436,7 +437,7 @@ export class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAcces
         } else if (
             (hasModifierKey(event) && (isVerticalMovement(keyCode) || isHorizontalMovement(keyCode))) ||
             event.ctrlKey || event.metaKey ||
-            [DELETE, BACKSPACE].includes(keyCode)
+            [DELETE, BACKSPACE, TAB].includes(keyCode)
         ) {
             noop();
         } else if (keyCode === SPACE) {
