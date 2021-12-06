@@ -248,11 +248,13 @@ export class McPopoverTrigger extends McPopUpTrigger<McPopoverComponent> {
 
     protected originSelector = '.mc-popover';
 
-    protected overlayConfig: OverlayConfig = {
-        panelClass: 'mc-popover__panel',
-        hasBackdrop: this.hasBackdrop,
-        backdropClass: this.backdropClass
-    };
+    protected get overlayConfig(): OverlayConfig {
+        return {
+            panelClass: 'mc-popover__panel',
+            hasBackdrop: this.hasBackdrop,
+            backdropClass: this.backdropClass
+        };
+    }
 
     constructor(
         overlay: Overlay,
