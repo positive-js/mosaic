@@ -3,25 +3,33 @@ import { TemplateRef, Type, EventEmitter, InjectionToken } from '@angular/core';
 
 export type OnClickCallback<T> = ((instance: T) => (false | void | {}) | Promise<false | void | {}>);
 export type ToastType = 'default' | 'confirm' | 'custom' | 'success' | 'error' | 'warning' | 'info';
-export type ToastPosition = 'top-right' | 'top-left' | 'top-center' | 'bottom-right' | 'bottom-left' | 'bottom-center' | 'center';
+export enum ToastPosition {
+    TOP_RIGHT = 'top-right',
+    TOP_LEFT = 'top-left',
+    TOP_CENTER = 'top-center',
+    BOTTOM_RIGHT = 'bottom-right',
+    BOTTOM_LEFT = 'bottom-left',
+    BOTTOM_CENTER = 'bottom-center',
+    CENTER = 'center'
+}
 
-export interface IToastOptions<T = any> {
-    mcToastType: ToastType;
-    mcTitle?: string | TemplateRef<{}>;
-    mcContent?: string | TemplateRef<{}> | Type<T>;
-    mcComponent?: Type<T>;
-    mcComponentParams?: Partial<T>;
-    mcWrapClassName?: string;
-    mcClassName?: string;
-    mcStyle?: object;
-    mcSticky: boolean;
-    mcPosition: ToastPosition;
-    mcPreventDuplicates: boolean;
-    mcDuration: number;
-    mcEasing: string;
-    mcEaseTime: number;
+export interface IToastOptions<T> {
+    toastType: ToastType;
+    title?: string | TemplateRef<{}>;
+    content?: string | TemplateRef<{}> | Type<T>;
+    component?: Type<T>;
+    componentParams?: Partial<T>;
+    wrapClassName?: string;
+    className?: string;
+    style?: object;
+    sticky: boolean;
+    position: ToastPosition;
+    preventDuplicates: boolean;
+    duration: number;
+    easing: string;
+    easeTime: number;
 
-    mcOnClose?: EventEmitter<T> | OnClickCallback<T>;
+    onClose?: EventEmitter<T> | OnClickCallback<T>;
 }
 
 export class ToastData {
@@ -40,7 +48,7 @@ export interface IToastConfig {
 }
 
 export const defaultToastConfig: IToastConfig = {
-    position: 'top-center',
+    position: ToastPosition.CENTER,
     animationOut: 2500,
     animationIn: 300,
     duration: 4000

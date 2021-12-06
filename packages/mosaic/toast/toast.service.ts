@@ -1,4 +1,5 @@
 import { GlobalPositionStrategy, Overlay } from '@angular/cdk/overlay';
+import { OverlayRef } from '@angular/cdk/overlay/overlay-ref';
 import { PortalInjector, ComponentPortal } from '@angular/cdk/portal';
 import { Injectable, Injector, Inject } from '@angular/core';
 
@@ -14,7 +15,8 @@ const INDENT_SIZE = 20;
 })
 export class ToastService {
 
-    private lastToast: ToastRef | undefined;
+    private lastToast?: ToastRef | undefined;
+    private overlayRef?: OverlayRef;
 
     constructor(
         private overlay: Overlay,
@@ -28,6 +30,10 @@ export class ToastService {
         const positionStrategy = this.getPositionStrategy(position);
         const overlayRef = this.overlay.create({ positionStrategy });
 
+        if (!this.overlayRef) {
+            this.overlayRef = overlayRef;
+        }
+
         const toastRef = new ToastRef(overlayRef);
         this.lastToast = toastRef;
 
@@ -39,26 +45,21 @@ export class ToastService {
         return toastRef;
     }
 
-    // top-center
-    getPositionStrategy(position: ToastPosition | undefined): GlobalPositionStrategy {
-        if (!position) {
-            return this.getTopCenter();
-        }
-
+    getPositionStrategy(position?: ToastPosition): GlobalPositionStrategy {
         switch (position) {
-            case 'center':
+            case ToastPosition.CENTER:
                 return this.getCenter();
-            case 'bottom-center':
+            case ToastPosition.BOTTOM_CENTER:
                 return this.getBottomCenter();
-            case 'bottom-left':
+            case ToastPosition.BOTTOM_LEFT:
                 return this.getTopCenter();
-            case 'bottom-right':
+            case ToastPosition.BOTTOM_RIGHT:
                 return this.getTopCenter();
-            case 'top-center':
+            case ToastPosition.TOP_CENTER:
                 return this.getTopCenter();
-            case 'top-left':
+            case ToastPosition.TOP_LEFT:
                 return this.getTopLeft();
-            case 'top-right':
+            case ToastPosition.TOP_RIGHT:
                 return this.getTopRight();
             default:
                 return this.getTopCenter();
@@ -66,51 +67,44 @@ export class ToastService {
     }
 
     getTopCenter(): GlobalPositionStrategy {
-        return this.overlay.position()
-            .global()
+        return this.getGlobalOverlayPosition()
             .top(this.getTopPosition())
             .centerHorizontally();
     }
 
     getTopLeft(): GlobalPositionStrategy {
-        return this.overlay.position()
-        .global()
+        return this.getGlobalOverlayPosition()
         .top(this.getTopPosition())
         .left(`${INDENT_SIZE}px`);
     }
 
     getTopRight(): GlobalPositionStrategy {
-        return this.overlay.position()
-        .global()
+        return this.getGlobalOverlayPosition()
         .top(this.getTopPosition())
         .right(`${INDENT_SIZE}px`);
     }
 
     // bottom-center
     getBottomCenter(): GlobalPositionStrategy {
-        return this.overlay.position()
-            .global()
+        return this.getGlobalOverlayPosition()
             .bottom(this.getBottomPosition())
             .centerHorizontally();
     }
 
     getBottomLeft(): GlobalPositionStrategy {
-        return this.overlay.position()
-            .global()
+        return this.getGlobalOverlayPosition()
             .bottom(this.getBottomPosition())
             .left(`${INDENT_SIZE}px`);
     }
 
     getBottomRight(): GlobalPositionStrategy {
-        return this.overlay.position()
-            .global()
+        return this.getGlobalOverlayPosition()
             .bottom(this.getBottomPosition())
             .right(`${INDENT_SIZE}px`);
     }
 
     getCenter(): GlobalPositionStrategy {
-        return this.overlay.position()
-            .global()
+        return this.getGlobalOverlayPosition()
             .centerVertically()
             .centerHorizontally();
     }
@@ -139,6 +133,10 @@ export class ToastService {
         }
 
         return `${INDENT_SIZE}px`;
+    }
+
+    getGlobalOverlayPosition(): GlobalPositionStrategy {
+        return this.overlay.position().global();
     }
 
     getInjector(data: ToastData, toastRef: ToastRef, parentInjector: Injector): PortalInjector {
