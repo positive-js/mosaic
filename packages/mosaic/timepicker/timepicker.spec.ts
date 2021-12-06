@@ -199,7 +199,7 @@ describe('McTimepicker', () => {
             expect(testComponent.timeValue.toString()).toContain('18:09');
         }));
 
-        it('Should run validation on blur', () => {
+        it('Add lead zeros on blur', () => {
             expect(testComponent.ngModel.valid).toBeTrue();
             inputElementDebug.nativeElement.value = '1';
 
@@ -208,7 +208,7 @@ describe('McTimepicker', () => {
                 { target: inputElementDebug.nativeElement }
             );
 
-            expect(testComponent.ngModel.valid).toBeFalse();
+            expect(inputElementDebug.nativeElement.value).toBe('01:00');
         });
 
         it('Convert user input (add lead zero)', fakeAsync(() => {
