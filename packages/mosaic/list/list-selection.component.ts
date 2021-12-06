@@ -722,7 +722,7 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
             this.keyManager.setNextPageItemActive();
         }
 
-        if (this.keyManager.activeItem) {
+        if (this.keyManager.activeItem && isVerticalMovement(event)) {
             this.setSelectedOptionsByKey(
                 this.keyManager.activeItem as McListOption,
                 hasModifierKey(event, 'shiftKey'),

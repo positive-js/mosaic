@@ -59,7 +59,7 @@ const markdownOptions = {
             // highlight.js expects "typescript" written out, while Github supports "ts".
             const lang = language.toLowerCase() === 'ts' ? 'typescript' : language;
 
-            return hljs.highlight(lang, code).value;
+            return hljs.highlight(code, {language: lang}).value;
         }
 
         return code;
