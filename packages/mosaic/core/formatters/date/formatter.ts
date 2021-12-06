@@ -1,7 +1,8 @@
 // tslint:disable:no-magic-numbers
 import { Inject, Injectable } from '@angular/core';
+// tslint:disable:import-name
+import MessageFormat from '@messageformat/core';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
-import * as MessageFormat from 'messageformat';
 
 import { enUS } from './templates/en-US';
 import { ruRU } from './templates/ru-RU';
@@ -436,7 +437,3 @@ export class DateFormatter<D> {
         return this.adapter.hasSame(startDate, endDate, unit) ? 'yes' : 'no';
     }
 }
-
-
-
-

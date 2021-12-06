@@ -244,14 +244,14 @@
                     mcPopover
                     [mcPopoverClass]="'popover-485'"
                     [mcPopoverHeader]="'Header text'"
-                    [mcPlacement]="selectedPlacement"
-                    [mcPlacementPriority]="multipleSelected"
+                    [mcPopoverPlacement]="selectedPlacement"
+                    [mcPopoverPlacementPriority]="multipleSelected"
                     [mcPopoverSize]="selectedSize"
                     [mcTrigger]="selectedTrigger"
                     [mcPopoverContent]="customContent"
                     [mcPopoverFooter]="customFooter"
-                    (mcPlacementChange)="onStrategyPlacementChange($event)"
-                    (mcVisibleChange)="onPopoverVisibleChange($event)">
+                    (mcPopoverPlacementChange)="onStrategyPlacementChange($event)"
+                    (mcPopoverVisibleChange)="onPopoverVisibleChange($event)">
                 Button
             </button>
             <button mc-button
@@ -273,28 +273,28 @@
                        mcPopover
                        [mcPopoverClass]="'popover-485'"
                        [mcPopoverHeader]="'Lorem ipsum'"
-                       [mcPlacement]="selectedPlacement"
-                       [mcPlacementPriority]="multipleSelected"
+                       [mcPopoverPlacement]="selectedPlacement"
+                       [mcPopoverPlacementPriority]="multipleSelected"
                        [mcPopoverSize]="selectedSize"
                        [mcTrigger]="selectedTrigger"
                        [mcPopoverContent]="customContent"
                        [mcPopoverFooter]="customFooter"
-                       (mcPlacementChange)="onStrategyPlacementChange($event)"
-                       (mcVisibleChange)="onPopoverVisibleChange($event)">
+                       (mcPopoverPlacementChange)="onStrategyPlacementChange($event)"
+                       (mcPopoverVisibleChange)="onPopoverVisibleChange($event)">
             </mc-form-field>
             <div *ngSwitchCase="ELEMENTS.ICON">
                 <i mc-icon="mc-calendar_16"
                    mcPopover
                    [mcPopoverClass]="'popover-485'"
                    [mcPopoverHeader]="'Header text'"
-                   [mcPlacement]="selectedPlacement"
-                   [mcPlacementPriority]="multipleSelected"
+                   [mcPopoverPlacement]="selectedPlacement"
+                   [mcPopoverPlacementPriority]="multipleSelected"
                    [mcPopoverSize]="selectedSize"
                    [mcTrigger]="selectedTrigger"
                    [mcPopoverContent]="customContent"
                    [mcPopoverFooter]="customFooter"
-                   (mcPlacementChange)="onStrategyPlacementChange($event)"
-                   (mcVisibleChange)="onPopoverVisibleChange($event)">
+                   (mcPopoverPlacementChange)="onStrategyPlacementChange($event)"
+                   (mcPopoverVisibleChange)="onPopoverVisibleChange($event)">
                 </i>
             </div>
         </div>

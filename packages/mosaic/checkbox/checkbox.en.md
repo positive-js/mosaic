@@ -81,3 +81,7 @@ This internal checkbox receives focus and is automatically labelled by the text 
 
 Checkboxes without text or labels should be given a meaningful label via `aria-label` or
 `aria-labelledby`.
+
+### Pseudo checkbox
+
+<!-- example(pseudo-checkbox) -->
