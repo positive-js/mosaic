@@ -16,7 +16,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { COMMA, ENTER } from '@ptsecurity/cdk/keycodes';
 import { McAutocompleteModule } from '@ptsecurity/mosaic/autocomplete';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
-import { McFormsModule, ThemePalette } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
@@ -125,8 +124,6 @@ export function ldapLoginValidator(loginRegex: RegExp): ValidatorFn {
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent {
-    themePalette = ThemePalette;
-
     reactiveTypeaheadItems: string[] = [];
     inputValue: string = '';
     selectValue: string = '';
@@ -160,9 +157,6 @@ export class DemoComponent {
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
-    inProgress = false;
-    disabled = false;
-    showError = false;
 
     constructor(private formBuilder: FormBuilder, public changeDetectorRef: ChangeDetectorRef) {
         this.treeFlattener = new McTreeFlattener(
@@ -253,20 +247,6 @@ export class DemoComponent {
         }
     }
 
-    checkForm() {
-        this.inProgress = true;
-
-        setTimeout(
-            () => {
-                this.inProgress = false;
-                this.showError = true;
-                this.disabled = true;
-            },
-            // tslint:disable-next-line:no-magic-numbers
-            2000
-        );
-    }
-
     private transformer = (node: FileNode, level: number, parent: any) => {
         const flatNode = new FileFlatNode();
 
@@ -318,8 +298,7 @@ export class DemoComponent {
         McTreeModule,
         McTreeSelectModule,
         McFormFieldModule,
-        McIconModule,
-        McFormsModule
+        McIconModule
     ],
     bootstrap: [DemoComponent]
 })
