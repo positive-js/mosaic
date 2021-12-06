@@ -83,9 +83,5 @@ Checkboxes without text or labels should be given a meaningful label via `aria-l
 `aria-labelledby`.
 
 ### Pseudo checkbox
-`<mc-pseudo-checkbox>` - decorative component, that shows checkbox by using icon.
-
-The state can be changed by using the `state` property, which is `'unchecked'` by default,
-and can be changed to `'intermediate'` or `'checked'`
 
 <!-- example(pseudo-checkbox) -->
