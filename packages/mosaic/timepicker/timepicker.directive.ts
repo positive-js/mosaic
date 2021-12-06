@@ -370,6 +370,8 @@ export class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAcces
     onBlur() {
         this.focusChanged(false);
 
+        this.setViewValue(this.insertZeros(this.viewValue));
+
         this.onInput();
     }
 
@@ -554,6 +556,10 @@ export class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAcces
         }
 
         return formattedValue;
+    }
+
+    private insertZeros(value: string): string {
+        return value.split(':').map((unit) => unit.length === 1 ? `0${unit}` : unit).join(':');
     }
 
     /** Checks whether the input is invalid based on the native validation. */
