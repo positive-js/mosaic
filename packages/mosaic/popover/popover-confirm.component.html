@@ -3,9 +3,8 @@
      [@state]="visibility"
      (@state.start)="animationStart()"
      (@state.done)="animationDone($event)">
-    <div class="mc-popover-confirm__container">
-        {{ confirmText }}
-    
+    <div class="mc-popover__content">
+        <div>{{ confirmText }}</div>
         <button mc-button [color]="themePalette.Primary" (click)="onConfirm.next()">{{confirmButtonText}}</button>    
     </div>
 

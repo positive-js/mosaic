@@ -93,9 +93,8 @@ $arrow-padding: calc(18px - var(--mc-popover-size-trigger-margin, #{$popover-siz
 
 @include popUpArrowPositions(mc-popover, $arrow-offset, $arrow-padding);
 
-.mc-popover-confirm__container {
+.mc-popover-confirm .mc-popover__content {
     padding: 24px 16px 16px;
-    background: white;
 
     button {
         margin-top: 16px;

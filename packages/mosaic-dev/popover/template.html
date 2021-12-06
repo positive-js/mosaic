@@ -260,9 +260,9 @@
                     [mcPopoverConfirmText]="confirmText"
                     [mcPopoverConfirmButtonText]="confirmButtonText"
                     [mcPopoverClass]="'popover-485'"
-                    [mcPlacement]="selectedPlacement"
-                    [mcPlacementPriority]="multipleSelected"
-                    (mcPlacementChange)="onStrategyPlacementChange($event)"
+                    [mcPopoverPlacement]="selectedPlacement"
+                    [mcPopoverPlacementPriority]="multipleSelected"
+                    (mcPopoverPlacementChange)="onStrategyPlacementChange($event)"
                     (mcVisibleChange)="onPopoverVisibleChange($event)">
                 Confirm Button
             </button>

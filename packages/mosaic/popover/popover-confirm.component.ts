@@ -23,8 +23,9 @@ import { takeUntil } from 'rxjs/operators';
 import { mcPopoverAnimations } from './popover-animations';
 import { MC_POPOVER_SCROLL_STRATEGY, McPopoverComponent, McPopoverTrigger } from './popover.component';
 
-export const POPOVER_CONFIRM_TEXT = new InjectionToken<string>('');
-export const POPOVER_CONFIRM_BUTTON_TEXT = new InjectionToken<string>('');
+
+export const MC_POPOVER_CONFIRM_TEXT = new InjectionToken<string>('');
+export const MC_POPOVER_CONFIRM_BUTTON_TEXT = new InjectionToken<string>('');
 
 @Component({
     selector: 'mc-popover-confirm-component',
@@ -95,14 +96,15 @@ export class McPopoverConfirmTrigger extends McPopoverTrigger {
         hostView: ViewContainerRef,
         @Inject(MC_POPOVER_SCROLL_STRATEGY) scrollStrategy,
         @Optional() direction: Directionality,
-        @Optional() @Inject(POPOVER_CONFIRM_TEXT) confirmText: string,
-        @Optional() @Inject(POPOVER_CONFIRM_BUTTON_TEXT) confirmButtonText: string
+        @Optional() @Inject(MC_POPOVER_CONFIRM_TEXT) confirmText: string,
+        @Optional() @Inject(MC_POPOVER_CONFIRM_BUTTON_TEXT) confirmButtonText: string
     ) {
         super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
 
         if (confirmText) {
             this.confirmText = confirmText;
         }
+
         if (confirmButtonText) {
             this.confirmButtonText = confirmButtonText;
         }

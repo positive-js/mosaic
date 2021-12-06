@@ -5,6 +5,7 @@ import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { dispatchMouseEvent, dispatchFakeEvent } from '@ptsecurity/cdk/testing';
 
+import { MC_POPOVER_CONFIRM_BUTTON_TEXT, MC_POPOVER_CONFIRM_TEXT } from './popover-confirm.component';
 import { McPopoverModule } from './popover.module';
 
 
@@ -21,7 +22,7 @@ describe('McPopover', () => {
     beforeEach(fakeAsync(() => {
         TestBed.configureTestingModule({
             imports     : [ McPopoverModule, NoopAnimationsModule ],
-            declarations: [ McPopoverTestComponent ]
+            declarations: [ McPopoverTestComponent, McPopoverConfirmTestComponent, McPopoverConfirmWithProvidersTestComponent ]
         });
         TestBed.compileComponents();
     }));
@@ -160,15 +161,44 @@ describe('McPopover', () => {
 
     describe('Check popover confirm', () => {
         beforeEach(() => {
-            componentFixture = TestBed.createComponent(McPopoverTestComponent);
+            componentFixture = TestBed.createComponent(McPopoverConfirmTestComponent);
             component = componentFixture.componentInstance;
             componentFixture.detectChanges();
         });
 
-        it('Can set button text', fakeAsync(() => {
-            const expectedValue = '_TEST8';
+        it('Default text is correct', fakeAsync(() => {
             const triggerElement = component.test8.nativeElement;
+            dispatchMouseEvent(triggerElement, 'click');
+            tick();
+            componentFixture.detectChanges();
 
+            const button = componentFixture.debugElement.query(By.css('.mc-popover-confirm button'));
+            expect(button.nativeElement.textContent).toEqual('Да');
+
+            const confirmText = componentFixture.debugElement.query(By.css('.mc-popover-confirm .mc-popover__content div'));
+            expect(confirmText.nativeElement.textContent).toEqual('Вы уверены, что хотите продолжить?');
+
+            flush();
+        }));
+
+        it('Can set confirm text through input', fakeAsync(() => {
+            const expectedValue = 'new confirm text';
+
+            const triggerElement = component.test9.nativeElement;
+            dispatchMouseEvent(triggerElement, 'click');
+            tick();
+            componentFixture.detectChanges();
+
+            const confirmText = componentFixture.debugElement.query(By.css('.mc-popover-confirm .mc-popover__content div'));
+            expect(confirmText.nativeElement.textContent).toEqual(expectedValue);
+
+            flush();
+        }));
+
+        it('Can set button text through input', fakeAsync(() => {
+            const expectedValue = 'new button text';
+
+            const triggerElement = component.test10.nativeElement;
             dispatchMouseEvent(triggerElement, 'click');
             tick();
             componentFixture.detectChanges();
@@ -178,6 +208,47 @@ describe('McPopover', () => {
 
             flush();
         }));
+
+        it('Click emits confirm', fakeAsync(() => {
+            spyOn(component, 'onConfirm');
+
+            const triggerElement = component.test11.nativeElement;
+            dispatchMouseEvent(triggerElement, 'click');
+            tick();
+
+            const confirmButton = componentFixture.debugElement.query(By.css('.mc-popover-confirm button'));
+            dispatchMouseEvent(confirmButton.nativeElement, 'click');
+            tick();
+            componentFixture.detectChanges();
+
+            expect(component.onConfirm).toHaveBeenCalled();
+
+            flush();
+        }));
+    });
+
+    describe('Check popover confirm with providers', () => {
+        beforeEach(() => {
+            componentFixture = TestBed.createComponent(McPopoverConfirmWithProvidersTestComponent);
+            component = componentFixture.componentInstance;
+            componentFixture.detectChanges();
+        });
+
+        it('Provided text is correct', fakeAsync(() => {
+            const triggerElement = component.test12.nativeElement;
+            dispatchMouseEvent(triggerElement, 'click');
+            tick();
+            componentFixture.detectChanges();
+
+            const button = componentFixture.debugElement.query(By.css('.mc-popover-confirm button'));
+            expect(button.nativeElement.textContent).toEqual('provided button text');
+
+            const confirmText = componentFixture.debugElement.query(By.css('.mc-popover-confirm .mc-popover__content div'));
+            expect(confirmText.nativeElement.textContent).toEqual('provided confirm text');
+
+            flush();
+        }));
+
     });
 });
 
@@ -193,8 +264,6 @@ describe('McPopover', () => {
         <button #test6 mcPopover [mcTrigger]="'hover'" [mcPopoverFooter]="'_TEST6'">_TEST6</button>
 
         <button #test7 mcPopover [mcPopoverClass]="'_TEST7'" [mcPopoverContent]="'_TEST7'">_TEST7</button>
-
-        <button #test8 mcPopoverConfirm mcPopoverConfirmButtonText="_TEST8">_TEST8asdasd</button>
     `
 })
 class McPopoverTestComponent {
@@ -207,5 +276,40 @@ class McPopoverTestComponent {
     @ViewChild('test5', {static: false}) test5: ElementRef;
     @ViewChild('test6', {static: false}) test6: ElementRef;
     @ViewChild('test7', {static: false}) test7: ElementRef;
+}
+
+
+@Component({
+    selector: 'mc-popover-test-component',
+    template: `
+        <button #test8 mcPopoverConfirm>_TEST8</button>
+        <button #test9 mcPopoverConfirm mcPopoverConfirmText="new confirm text">_TEST9</button>
+        <button #test10 mcPopoverConfirm mcPopoverConfirmButtonText="new button text">_TEST10</button>
+        <button #test11 mcPopoverConfirm (confirm)="onConfirm()">_TEST11</button>
+    `
+})
+class McPopoverConfirmTestComponent {
     @ViewChild('test8', {static: false}) test8: ElementRef;
+    @ViewChild('test9', {static: false}) test9: ElementRef;
+    @ViewChild('test10', {static: false}) test10: ElementRef;
+    @ViewChild('test11', {static: false}) test11: ElementRef;
+
+    onConfirm() {
+        return;
+    }
+}
+
+
+@Component({
+    selector: 'mc-popover-test-with-providers-component',
+    template: `
+        <button #test12 mcPopoverConfirm>_TEST12</button>
+    `,
+    providers: [
+        {provide: MC_POPOVER_CONFIRM_TEXT, useValue: 'provided confirm text'},
+        {provide: MC_POPOVER_CONFIRM_BUTTON_TEXT, useValue: 'provided button text'}
+    ]
+})
+class McPopoverConfirmWithProvidersTestComponent {
+    @ViewChild('test12', {static: false}) test12: ElementRef;
 }
