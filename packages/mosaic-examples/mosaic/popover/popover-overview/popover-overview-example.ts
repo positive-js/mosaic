@@ -23,6 +23,7 @@ export class PopoverOverviewExample {
 
     ELEMENTS = {
         BUTTON: 'button',
+        CONFIRM_BUTTON: 'confirm-button',
         INPUT: 'input',
         ICON: 'icon'
     };
@@ -91,5 +92,9 @@ export class PopoverOverviewExample {
 
     get isFallbackActivated(): boolean {
         return this.selectedPlacement !== this.activatedPosition && this.activatedPosition !== '';
+    }
+
+    onConfirm() {
+        alert('Подтверждено');
     }
 }

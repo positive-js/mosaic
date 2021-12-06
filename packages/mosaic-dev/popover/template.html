@@ -257,6 +257,7 @@
             <button mc-button
                     *ngSwitchCase="ELEMENTS.CONFIRM_BUTTON"
                     mcPopoverConfirm
+                    (confirm)="onConfirm()"
                     [mcPopoverConfirmText]="confirmText"
                     [mcPopoverConfirmButtonText]="confirmButtonText"
                     [mcPopoverClass]="'popover-485'"
