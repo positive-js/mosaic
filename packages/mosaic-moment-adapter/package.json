@@ -22,7 +22,7 @@
         "@angular/core": "{{NG_VERSION}}",
         "@angular/cdk": "{{NG_VERSION}}",
         "@ptsecurity/cdk": "{{VERSION}}",
-        "messageformat": "^2.0.5",
+        "@messageformat/core": "^3.0.0",
         "moment": "^2.24.0"
     },
     "dependencies": {

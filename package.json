@@ -89,7 +89,7 @@
         "lodash": "^4.17.21",
         "luxon": "^1.26.0",
         "merge2": "^1.2.3",
-        "messageformat": "^2.0.5",
+        "@messageformat/core": "^3.0.0",
         "moment": "~2.23.0",
         "ng-packagr": "^12.2.1",
         "request": "^2.88.0",
