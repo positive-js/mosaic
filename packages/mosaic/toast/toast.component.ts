@@ -1,5 +1,5 @@
 import { AnimationEvent } from '@angular/animations';
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ChangeDetectionStrategy } from '@angular/core';
 
 import { ToastAnimationState, toastAnimations } from './toast.animation';
 import { ToastRef } from './toast.ref';
@@ -10,14 +10,14 @@ import { ToastData, IToastConfig, TOAST_CONFIG_TOKEN } from './toast.type';
   selector: 'mc-toast',
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.scss'],
-  animations: [toastAnimations.toastState]
+  animations: [toastAnimations.toastState],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToastComponent implements OnInit, OnDestroy {
 
   animationState: ToastAnimationState = 'default';
 
-  // @ts-ignore
-  private intervalId;
+  private intervalId: number;
 
   constructor(
       readonly data: ToastData,

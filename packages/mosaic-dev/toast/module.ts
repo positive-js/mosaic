@@ -1,7 +1,7 @@
 import { NgModule, Component, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastService, ToastModule } from '@ptsecurity/mosaic/toast';
+import { ToastService, ToastModule, ToastPosition } from '@ptsecurity/mosaic/toast';
 
 import { McButtonModule } from '../../mosaic/button';
 
@@ -41,7 +41,7 @@ export class ToastDemoComponent {
         BrowserAnimationsModule,
         McButtonModule,
         ToastModule.forRoot({
-            position: 'top-right',
+            position: ToastPosition.TOP_RIGHT,
             duration: 30000
         })
     ],
