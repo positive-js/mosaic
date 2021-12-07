@@ -1,6 +1,6 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { fakeAsync, inject, tick, TestBed, flush } from '@angular/core/testing';
+import { fakeAsync, inject, tick, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { dispatchMouseEvent, dispatchFakeEvent } from '@ptsecurity/cdk/testing';
@@ -111,8 +111,6 @@ describe('McPopover', () => {
 
             const header = componentFixture.debugElement.query(By.css('.mc-popover__header'));
             expect(header.nativeElement.textContent).toEqual(expectedValue);
-
-            flush();
         }));
 
         it('Can set mcPopoverContent', fakeAsync(() => {
@@ -125,8 +123,6 @@ describe('McPopover', () => {
 
             const content = componentFixture.debugElement.query(By.css('.mc-popover__content'));
             expect(content.nativeElement.textContent).toEqual(expectedValue);
-
-            flush();
         }));
 
         it('Can set mcPopoverFooter', fakeAsync(() => {
@@ -139,8 +135,6 @@ describe('McPopover', () => {
 
             const footer = componentFixture.debugElement.query(By.css('.mc-popover__footer'));
             expect(footer.nativeElement.textContent).toEqual(expectedValue);
-
-            flush();
         }));
 
         it('Can set mcPopoverClass', fakeAsync(() => {
@@ -153,8 +147,6 @@ describe('McPopover', () => {
 
             const popover = componentFixture.debugElement.query(By.css('.mc-popover'));
             expect(popover.nativeElement.classList.contains(expectedValue)).toBeTruthy();
-
-            flush();
         }));
     });
 
@@ -177,8 +169,6 @@ describe('McPopover', () => {
 
             const confirmText = componentFixture.debugElement.query(By.css('.mc-popover-confirm .mc-popover__content div'));
             expect(confirmText.nativeElement.textContent).toEqual('Вы уверены, что хотите продолжить?');
-
-            flush();
         }));
 
         it('Can set confirm text through input', fakeAsync(() => {
@@ -191,8 +181,6 @@ describe('McPopover', () => {
 
             const confirmText = componentFixture.debugElement.query(By.css('.mc-popover-confirm .mc-popover__content div'));
             expect(confirmText.nativeElement.textContent).toEqual(expectedValue);
-
-            flush();
         }));
 
         it('Can set button text through input', fakeAsync(() => {
@@ -205,8 +193,6 @@ describe('McPopover', () => {
 
             const button = componentFixture.debugElement.query(By.css('.mc-popover-confirm button'));
             expect(button.nativeElement.textContent).toEqual(expectedValue);
-
-            flush();
         }));
 
         it('Click emits confirm', fakeAsync(() => {
@@ -222,8 +208,6 @@ describe('McPopover', () => {
             componentFixture.detectChanges();
 
             expect(component.onConfirm).toHaveBeenCalled();
-
-            flush();
         }));
     });
 
@@ -245,8 +229,6 @@ describe('McPopover', () => {
 
             const confirmText = componentFixture.debugElement.query(By.css('.mc-popover-confirm .mc-popover__content div'));
             expect(confirmText.nativeElement.textContent).toEqual('provided confirm text');
-
-            flush();
         }));
 
     });

@@ -73,7 +73,7 @@ export class McPopoverConfirmTrigger extends McPopoverTrigger {
         this.updateData();
     }
 
-    private _confirmText: string = 'Вы уверены, что хотите продолжить?';
+    private _confirmText: string;
 
     @Input('mcPopoverConfirmButtonText')
     get confirmButtonText(): string {
@@ -101,13 +101,8 @@ export class McPopoverConfirmTrigger extends McPopoverTrigger {
     ) {
         super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
 
-        if (confirmText) {
-            this.confirmText = confirmText;
-        }
-
-        if (confirmButtonText) {
-            this.confirmButtonText = confirmButtonText;
-        }
+        this.confirmText = confirmText || 'Вы уверены, что хотите продолжить?';
+        this.confirmButtonText = confirmButtonText || 'Да';
     }
 
     updateData() {
