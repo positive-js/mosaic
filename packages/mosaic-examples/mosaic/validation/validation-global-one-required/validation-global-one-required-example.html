@@ -1,0 +1,67 @@
+<div class="layout-margin">
+    <form class="mc-form-vertical margin docs-width" novalidate>
+        <div style="margin-bottom: 16px" class="mc-alert mc-alert_error" *ngIf="showError">
+            <i mc-icon="mc-info_16" [color]="themePalette.Error" class="mc-alert__icon"></i>
+            <div class="mc-body">
+                Заполните хотя бы одно из полей - <br> <b>Серия, Номер</b> или <b>Фамилия</b>
+            </div>
+        </div>
+
+        <div class="mc-form__fieldset">
+            <div class="mc-form__fieldset mc-horizontal">
+                <div class="mc-form__row flex-30">
+                    <label class="mc-form__label">Серия</label>
+                    <mc-form-field class="mc-form__control">
+                        <input name="input" mcInput>
+                    </mc-form-field>
+                </div>
+
+                <div class="mc-form__row flex-70">
+                    <label class="mc-form__label">Номер</label>
+                    <mc-form-field class="mc-form__control">
+                        <input name="input" mcInput>
+                    </mc-form-field>
+                </div>
+            </div>
+
+            <div class="mc-form__fieldset mc-horizontal">
+                <div class="mc-form__row flex-45">
+                    <label class="mc-form__label">Имя</label>
+                    <mc-form-field class="mc-form__control">
+                        <input name="input" mcInput>
+
+                        <mc-hint>Необязательно</mc-hint>
+                    </mc-form-field>
+                </div>
+
+                <div class="mc-form__row flex-55">
+                    <label class="mc-form__label">Отчество</label>
+                    <mc-form-field class="mc-form__control">
+                        <input name="input" mcInput>
+
+                        <mc-hint>Необязательно</mc-hint>
+                    </mc-form-field>
+                </div>
+            </div>
+
+            <div class="mc-form__row">
+                <label class="mc-form__label">Фамилия</label>
+                <mc-form-field class="mc-form__control">
+                    <input name="input" mcInput>
+                </mc-form-field>
+            </div>
+        </div>
+
+        <div class="mc-form__row">
+            <button class="flex-40"
+                    type="submit"
+                    mc-button
+                    [color]="themePalette.Primary"
+                    [class.mc-progress]="inProgress"
+                    [disabled]="disabled || inProgress"
+                    (click)="checkForm()">
+                Отправить
+            </button>
+        </div>
+    </form>
+</div>

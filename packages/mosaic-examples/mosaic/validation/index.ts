@@ -11,6 +11,7 @@ import { McTextareaModule } from '@ptsecurity/mosaic/textarea';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import { ValidationCompositeExample } from './validation-composite/validation-composite-example';
+import { ValidationGlobalOneRequiredExample } from './validation-global-one-required/validation-global-one-required-example';
 import { ValidationGlobalExample } from './validation-global/validation-global-example';
 import { ValidationOnBlurExample } from './validation-on-blur/validation-on-blur-example';
 import { ValidationOnTypeExample } from './validation-on-type/validation-on-type-example';
@@ -24,7 +25,8 @@ export {
     ValidationGlobalExample,
     ValidationOnBlurExample,
     ValidationOnTypeExample,
-    ValidationSmallExample
+    ValidationSmallExample,
+    ValidationGlobalOneRequiredExample
 };
 
 const EXAMPLES = [
@@ -33,7 +35,8 @@ const EXAMPLES = [
     ValidationGlobalExample,
     ValidationOnBlurExample,
     ValidationOnTypeExample,
-    ValidationSmallExample
+    ValidationSmallExample,
+    ValidationGlobalOneRequiredExample
 ];
 
 @NgModule({
