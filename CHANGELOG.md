@@ -1,3 +1,9 @@
+## 8.5.7 "Jumbo Go Fish" (2021-12-07)
+
+### Mosaic
+
+ * bug fix  **select:** select with search doesn't let type a space (#UIM-817) ([#743](https://github.com/positive-js/mosaic/issues/743)) ([6ea56fc](https://github.com/positive-js/mosaic/commit/6ea56fcc1a4fecb89ba4c30c0046c730bf382985)), closes [#UIM-817](https://github.com/positive-js/mosaic/issues/UIM-817)
+
 ## 8.5.6 "Selected Blaze" (2020-08-19)
 
 ### Mosaic
