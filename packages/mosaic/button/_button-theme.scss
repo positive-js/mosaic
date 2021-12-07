@@ -11,8 +11,8 @@
         color: map-get($params, icon);
     }
 
-    &:active,
-    &.mc-active {
+    &:active:not([disabled]),
+    &.mc-active:not([disabled]) {
         border-color: map-get($params, active_border);
         background: map-get($params, active_background);
     }
@@ -25,15 +25,14 @@
     border-color: transparent;
     background-color: transparent;
 
-    &:hover,
-    &.mc-hover {
+    &:hover:not([disabled]) {
         & .mc-button-overlay {
             background: map-get($background, overlay-hover);
         }
     }
 
-    &:active,
-    &.mc-active {
+    &:active:not([disabled]),
+    &.mc-active:not([disabled]) {
         border-color: transparent;
         background-color: transparent;
         box-shadow: none;
@@ -95,15 +94,14 @@
             }
         }
 
-        &:hover,
-        &.mc-hover {
+        &:hover:not([disabled]) {
             & .mc-button-overlay {
                 background: map-get($background, overlay-hover);
             }
         }
 
-        &:active,
-        &.mc-active {
+        &:active:not([disabled]),
+        &.mc-active:not([disabled]) {
             box-shadow: map-get($button, active-shadow);
         }
 
