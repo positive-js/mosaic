@@ -41,7 +41,7 @@ export class ToastData {
 }
 
 export interface IToastConfig {
-    position?: ToastPosition;
+    position: ToastPosition;
     animationOut?: number;
     animationIn?: number;
     duration?: number;
