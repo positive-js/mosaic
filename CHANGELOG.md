@@ -1,3 +1,16 @@
+# 11.6.0 "Resourceful" (2021-12-07)
+
+### Mosaic
+
+ * bug fix  **build:** declare annotation for tools scripts ([886ea32](https://github.com/positive-js/mosaic/commit/886ea32b58d2e2a62a7ed7679aefcf75cf3b38fa))
+ * bug fix  **datepicker:** fixed test error (#UIM-672) ([#715](https://github.com/positive-js/mosaic/issues/715)) ([ddb26fb](https://github.com/positive-js/mosaic/commit/ddb26fbfe52bbb88b71bd2b42b7214cf4f212f15)), closes [#UIM-672](https://github.com/positive-js/mosaic/issues/UIM-672)
+ * bug fix  **list:** Error in getHeight after window resize (#UIM-581) ([#738](https://github.com/positive-js/mosaic/issues/738)) ([a40a319](https://github.com/positive-js/mosaic/commit/a40a3193e2e50eb0e9413bd23b9b37838554656d)), closes [#UIM-581](https://github.com/positive-js/mosaic/issues/UIM-581)
+ * bug fix  **styles:** fixed using div() in sass ([#723](https://github.com/positive-js/mosaic/issues/723)) ([7bdfcea](https://github.com/positive-js/mosaic/commit/7bdfceaf206a89f32fb7524989849955d380474f))
+ * bug fix  **timepicker:** ngModelChange emitted twice on tab key (#UIM-784) ([#739](https://github.com/positive-js/mosaic/issues/739)) ([a729ec3](https://github.com/positive-js/mosaic/commit/a729ec3515e094b89310b63b53431937630c5769)), closes [#UIM-784](https://github.com/positive-js/mosaic/issues/UIM-784)
+ * feature  **checkbox:** add pseudo-checkbox to docs (#UIM-808) ([#737](https://github.com/positive-js/mosaic/issues/737)) ([81f5751](https://github.com/positive-js/mosaic/commit/81f57519a690362337ef842df778c6e383f0ee98)), closes [#UIM-808](https://github.com/positive-js/mosaic/issues/UIM-808) [#UIM-808](https://github.com/positive-js/mosaic/issues/UIM-808) [#UIM-808](https://github.com/positive-js/mosaic/issues/UIM-808)
+ * feature  fix highlight.js deprecation warning ([#732](https://github.com/positive-js/mosaic/issues/732)) ([92e80e6](https://github.com/positive-js/mosaic/commit/92e80e69db9e8d958ad5762e79cfaf82d55bcd54))
+ * feature  update favicon (#UIM-812) ([#741](https://github.com/positive-js/mosaic/issues/741)) ([9d61542](https://github.com/positive-js/mosaic/commit/9d61542b0b3adadcfaf4e856958e8190ff6acd6d)), closes [#UIM-812](https://github.com/positive-js/mosaic/issues/UIM-812)
+
 ## 11.5.1 "Mansard Ong" (2021-11-03)
 
 ### Mosaic
