@@ -6,16 +6,23 @@
 
 <div>
 
-    <button mc-button (click)="onClick()">
+    <button mc-button
+            [disabled]="disabledState"
+            (click)="onClick()">
         <i mc-icon="mc-angle-down-L_16"></i>
     </button>&nbsp;
 
-    <button mc-button (click)="onClick()">
+    <button mc-button
+            [disabled]="disabledState"
+            (click)="onClick()">
         <i mc-icon="mc-play_16"></i>
         default
     </button>&nbsp;
 
-    <a mc-button (click)="onClick()">
+    <a mc-button
+       href="#"
+       [disabled]="disabledState"
+       (click)="onClick()">
         default
         <i mc-icon="mc-angle-down-L_16"></i>
     </a>&nbsp;
@@ -32,16 +39,22 @@
     <br>
     <br>
 
-    <span mc-button (click)="onClick()">
+    <span mc-button
+          [disabled]="disabledState"
+          (click)="onClick()">
         <i mc-icon="mc-angle-down-L_16"></i>
     </span>&nbsp;
 
-    <span mc-button (click)="onClick()">
+    <span mc-button
+          [disabled]="disabledState"
+          (click)="onClick()">
         <i mc-icon="mc-play_16"></i>
         default
     </span>&nbsp;
 
-    <span mc-button (click)="onClick()">
+    <span mc-button
+          [disabled]="disabledState"
+          (click)="onClick()">
         default
         <i mc-icon="mc-angle-down-L_16"></i>
     </span>&nbsp;
