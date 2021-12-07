@@ -5,7 +5,7 @@ export class ToastRef {
     constructor(private readonly overlay: OverlayRef) { }
 
     close(): void {
-        this.overlay.dispose();
+        this.overlay.detach();
     }
 
     isVisible(): HTMLElement {

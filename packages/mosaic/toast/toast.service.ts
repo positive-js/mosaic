@@ -1,7 +1,8 @@
 import { GlobalPositionStrategy, Overlay } from '@angular/cdk/overlay';
 import { OverlayRef } from '@angular/cdk/overlay/overlay-ref';
-import { PortalInjector, ComponentPortal } from '@angular/cdk/portal';
-import { Injectable, Injector, Inject } from '@angular/core';
+import { PortalInjector, ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
+import { DOCUMENT } from '@angular/common';
+import { Injectable, Injector, Inject, ApplicationRef, ComponentFactoryResolver } from '@angular/core';
 
 import { ToastComponent } from './toast.component';
 import { ToastRef } from './toast.ref';
@@ -14,35 +15,62 @@ const INDENT_SIZE = 20;
     providedIn: 'root'
 })
 export class ToastService {
-
+    portalHost: DomPortalOutlet;
+    protected instance: any | null;
     private lastToast?: ToastRef | undefined;
     private overlayRef?: OverlayRef;
+    private portal: ComponentPortal<ToastComponent>;
 
     constructor(
-        private overlay: Overlay,
-        private parentInjector: Injector,
+        protected overlay: Overlay,
+        protected parentInjector: Injector,
+        protected appRef: ApplicationRef,
+        protected componentFactoryResolver: ComponentFactoryResolver,
+        @Inject(DOCUMENT) private document: any,
         @Inject(TOAST_CONFIG_TOKEN) private toastConfig: IToastConfig
     ) {
     }
 
-    show(data: ToastData): ToastRef {
-        const position = this.toastConfig.position;
-        const positionStrategy = this.getPositionStrategy(position);
-        const overlayRef = this.overlay.create({ positionStrategy });
+    show(data: ToastData): any {
+        this.overlayRef = this.createOverlay();
 
-        if (!this.overlayRef) {
-            this.overlayRef = overlayRef;
-        }
-
-        const toastRef = new ToastRef(overlayRef);
-        this.lastToast = toastRef;
-
+        const toastRef = new ToastRef(this.overlayRef);
         const injector = this.getInjector(data, toastRef, this.parentInjector);
-        const toastPortal = new ComponentPortal(ToastComponent, null, injector);
 
-        overlayRef.attach(toastPortal);
+        const pane = this.getPaneElement(this.toastConfig.position);
+
+        this.portalHost = new DomPortalOutlet(
+            pane,
+            this.componentFactoryResolver,
+            this.appRef,
+            injector
+        );
+
+        this.portal = this.portal || new ComponentPortal(ToastComponent, null, injector);
+        // this.portalHost.attachComponentPortal(this.portal);
+
+        this.overlayRef.attach(this.portal);
 
         return toastRef;
+    }
+
+    getPaneElement(position: any) {
+        const pane = this.document.createElement('div');
+        pane.classList.add(position);
+        pane.classList.add('toast-container');
+        pane.id = 'toast-container';
+
+        return pane;
+    }
+
+    createOverlay() {
+        if (this.overlayRef) { return this.overlayRef; }
+
+        const position = this.toastConfig.position;
+        const positionStrategy = this.getPositionStrategy(position);
+        this.overlayRef = this.overlay.create({ positionStrategy });
+
+        return this.overlayRef;
     }
 
     getPositionStrategy(position?: ToastPosition): GlobalPositionStrategy {
@@ -84,7 +112,6 @@ export class ToastService {
         .right(`${INDENT_SIZE}px`);
     }
 
-    // bottom-center
     getBottomCenter(): GlobalPositionStrategy {
         return this.getGlobalOverlayPosition()
             .bottom(this.getBottomPosition())
