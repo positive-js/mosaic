@@ -5,6 +5,7 @@ import { Overlay, ScrollDispatcher } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
 import {
     AfterContentInit,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -71,7 +72,7 @@ export class McNavbarBento {}
         '(mouseleave)': 'hovered.next(false)'
     }
 })
-export class McNavbarTitle implements AfterContentInit {
+export class McNavbarTitle implements AfterViewInit {
     readonly hovered = new Subject<boolean>();
 
     outerElementWidth: number;
@@ -98,7 +99,7 @@ export class McNavbarTitle implements AfterContentInit {
         this.isTextOverflown = this.text.length > 18;
     }
 
-    ngAfterContentInit(): void {
+    ngAfterViewInit(): void {
         this.outerElementWidth = this.getOuterElementWidth();
     }
 }
