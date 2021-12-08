@@ -111,8 +111,9 @@ class PublishReleaseCITask extends BaseReleaseTask {
         console.info(green(`  ✓   Github release is posted.`));
 
         if (!process.env.DEBUG) {
-            console.info(green(bold(`  ✓   Notification to Mattermost, version: ${newVersionName}`)));
-            notify(newVersionName);
+            // TODO: await infro issue CM-53817
+            // console.info(green(bold(`  ✓   Notification to Mattermost, version: ${newVersionName}`)));
+            // notify(newVersionName);
         }
     }
 
