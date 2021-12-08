@@ -1,3 +1,10 @@
+## 12.2.1 "Viatic Interior" (2021-12-08)
+
+### Mosaic
+
+ * bug fix  **icons:** updated icons to 6.1.1 ([46f6db1](https://github.com/positive-js/mosaic/commit/46f6db1228c94692ff0e9bc0be48ce91a1050834))
+ * bug fix  **styles:** Revert "fix(styles): fixed using div() in sass (#723)"
+
 # 12.2.0 "Zigzag Liner" (2021-12-07)
 
 ### Mosaic
