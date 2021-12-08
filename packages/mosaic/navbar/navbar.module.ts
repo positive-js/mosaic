@@ -3,17 +3,22 @@ import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import {
-    McNavbarItemBase,
+    McNavbarFocusableItem,
     McNavbarBrand,
     McNavbarDivider,
     McNavbarItem,
     McNavbarLogo,
-    McNavbarTitle
+    McNavbarTitle,
+    McNavbarRectangleElement,
+    McNavbarToggle,
+    McNavbarSubTitle,
+    McNavbarBento
 } from './navbar-item.component';
 import { McNavbar, McNavbarContainer } from './navbar.component';
-import { McNavbarToggle, McVerticalNavbar } from './vertical-navbar.component';
+import { McVerticalNavbar } from './vertical-navbar.component';
 
 
 @NgModule({
@@ -21,7 +26,8 @@ import { McNavbarToggle, McVerticalNavbar } from './vertical-navbar.component';
         CommonModule,
         A11yModule,
         PlatformModule,
-        McIconModule
+        McIconModule,
+        McToolTipModule
     ],
     exports: [
         McNavbar,
@@ -33,7 +39,10 @@ import { McNavbarToggle, McVerticalNavbar } from './vertical-navbar.component';
         McNavbarToggle,
         McVerticalNavbar,
         McNavbarDivider,
-        McNavbarItemBase
+        McNavbarFocusableItem,
+        McNavbarRectangleElement,
+        McNavbarSubTitle,
+        McNavbarBento
     ],
     declarations: [
         McNavbar,
@@ -45,7 +54,10 @@ import { McNavbarToggle, McVerticalNavbar } from './vertical-navbar.component';
         McNavbarToggle,
         McVerticalNavbar,
         McNavbarDivider,
-        McNavbarItemBase
+        McNavbarFocusableItem,
+        McNavbarRectangleElement,
+        McNavbarSubTitle,
+        McNavbarBento
     ]
 })
 export class McNavbarModule {}

@@ -117,8 +117,8 @@ TypeScript type declarations are also published.
 
 ```typescript
 import {
-    VerticalNavbarSizeStatesClosedWidth as closedWidth,
-     VerticalNavbarSizeStatesOpenedWidth as openedWidth
+    VerticalNavbarSizeStatesCollapsedWidth as closedWidth,
+    VerticalNavbarSizeStatesExpandedWidth as openedWidth
 } from '@ptsecurity/mosaic/design-tokens';
 
 
