@@ -1,3 +1,7 @@
+## 11.6.1 "Sea Horse" (2021-12-08)
+
+* bug fix  **styles:** Revert "fix(styles): fixed using div() in sass (#723)"
+
 # 11.6.0 "Resourceful" (2021-12-07)
 
 ### Mosaic
