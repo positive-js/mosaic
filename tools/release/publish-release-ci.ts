@@ -9,7 +9,6 @@ import { BaseReleaseTask } from './base-release-task';
 import { CONFIG } from './config';
 import { extractReleaseNotes } from './extract-release-notes';
 import { GitClient } from './git/git-client';
-import { notify } from './notify-release';
 import { npmPublish } from './npm/npm-client';
 import { checkReleasePackage } from './release-output/check-packages';
 import { releasePackages } from './release-output/release-packages';
