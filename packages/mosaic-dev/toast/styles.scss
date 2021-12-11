@@ -1,9 +1,18 @@
-.example-button-group {
+.demo-block {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: row wrap;
 
-    button {
-        width: 100px;
-        margin-bottom: 5px;
+    .example-button-group {
+        display: flex;
+        flex-flow: column wrap;
+
+        button {
+            width: 150px;
+            margin-bottom: 5px;
+        }
+    }
+
+    .toasts-container {
+        margin-left: 20px;
     }
 }

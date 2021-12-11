@@ -1,8 +1,8 @@
 import { AnimationEvent } from '@angular/animations';
 import { Component, OnInit, OnDestroy, Inject, ChangeDetectionStrategy } from '@angular/core';
 
+import { SomeRef } from './some.ref';
 import { ToastAnimationState, toastAnimations } from './toast.animation';
-import { ToastRef } from './toast.ref';
 import { ToastData, IToastConfig, TOAST_CONFIG_TOKEN } from './toast.type';
 
 
@@ -14,14 +14,12 @@ import { ToastData, IToastConfig, TOAST_CONFIG_TOKEN } from './toast.type';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToastComponent implements OnInit, OnDestroy {
-
   animationState: ToastAnimationState = 'default';
-
   private intervalId: number;
 
   constructor(
       readonly data: ToastData,
-      readonly ref: ToastRef,
+      readonly sRef: SomeRef,
       @Inject(TOAST_CONFIG_TOKEN) readonly toast: IToastConfig
   ) {
   }
@@ -34,8 +32,8 @@ export class ToastComponent implements OnInit, OnDestroy {
     clearTimeout(this.intervalId);
   }
 
-  close(): void {
-    this.ref.close();
+  close(id: number): void {
+    this.sRef.close(id);
   }
 
   onFadeFinished({ toState }: AnimationEvent): void {
@@ -43,7 +41,7 @@ export class ToastComponent implements OnInit, OnDestroy {
     const itFinished = this.animationState === 'closing';
 
     if (isFadeOut && itFinished) {
-      this.close();
+      this.close(this.data.id || 0);
     }
   }
 
