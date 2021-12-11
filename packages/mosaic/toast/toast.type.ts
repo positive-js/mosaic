@@ -33,6 +33,7 @@ export interface IToastOptions<T> {
 }
 
 export class ToastData {
+    id?: number;
     severity?: ToastType;
     title?: string;
     content?: string;

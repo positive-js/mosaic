@@ -1,9 +1,11 @@
 import { GlobalPositionStrategy, Overlay } from '@angular/cdk/overlay';
 import { OverlayRef } from '@angular/cdk/overlay/overlay-ref';
 import { PortalInjector, ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
-import { Injectable, Injector, Inject, ApplicationRef, ComponentFactoryResolver } from '@angular/core';
+import { Injectable, Injector, Inject, ComponentFactoryResolver, ApplicationRef } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
+import { SomeRef } from './some.ref';
+import { ToastContainerComponent } from './toast-container.component';
 import { ToastComponent } from './toast.component';
 import { ToastRef } from './toast.ref';
 import { ToastData, TOAST_CONFIG_TOKEN, IToastConfig, ToastPosition } from './toast.type';
@@ -15,52 +17,50 @@ const INDENT_SIZE = 20;
     providedIn: 'root'
 })
 export class ToastService {
+    toasts: BehaviorSubject<ToastData[]> = new BehaviorSubject<ToastData[]>([]);
     portalHost: DomPortalOutlet;
-    protected instance: any | null;
+    index = 0;
+    protected instance: ToastContainerComponent;
     private lastToast?: ToastRef | undefined;
     private overlayRef?: OverlayRef;
-    private portal: ComponentPortal<ToastComponent>;
+    private portal: ComponentPortal<ToastContainerComponent>;
 
     constructor(
         protected overlay: Overlay,
         protected parentInjector: Injector,
         protected appRef: ApplicationRef,
-        protected componentFactoryResolver: ComponentFactoryResolver,
-        @Inject(DOCUMENT) private document: any,
+        protected resolver: ComponentFactoryResolver,
         @Inject(TOAST_CONFIG_TOKEN) private toastConfig: IToastConfig
     ) {
     }
 
-    show(data: ToastData): any {
+    show(data: ToastData) {
         this.overlayRef = this.createOverlay();
+        this.portal = this.portal || new ComponentPortal(ToastContainerComponent, null, this.parentInjector);
 
-        const toastRef = new ToastRef(this.overlayRef);
-        const injector = this.getInjector(data, toastRef, this.parentInjector);
+        if (!this.overlayRef.hasAttached()) {
+            this.instance = this.overlayRef.attach(this.portal).instance;
+            this.addToast(data);
+        } else {
+            this.addToast(data);
+        }
 
-        const pane = this.getPaneElement(this.toastConfig.position);
-
-        this.portalHost = new DomPortalOutlet(
-            pane,
-            this.componentFactoryResolver,
-            this.appRef,
-            injector
-        );
-
-        this.portal = this.portal || new ComponentPortal(ToastComponent, null, injector);
-        // this.portalHost.attachComponentPortal(this.portal);
-
-        this.overlayRef.attach(this.portal);
-
-        return toastRef;
+        this.toasts.next([...this.toasts.value, data]);
     }
 
-    getPaneElement(position: any) {
-        const pane = this.document.createElement('div');
-        pane.classList.add(position);
-        pane.classList.add('toast-container');
-        pane.id = 'toast-container';
+    addToast(data: ToastData) {
+        const toast = this.resolver.resolveComponentFactory(ToastComponent);
+        const someRef = new SomeRef(this.instance.container);
+        const toastData = {
+            ...data,
+            id: this.index
+        };
 
-        return pane;
+        const toastInjector = this.getInjector(toastData, someRef, this.parentInjector);
+        const toastViewRef = toast.create(toastInjector);
+
+        this.instance.container.insert(toastViewRef.hostView, this.index);
+        this.index++;
     }
 
     createOverlay() {
@@ -166,11 +166,11 @@ export class ToastService {
         return this.overlay.position().global();
     }
 
-    getInjector(data: ToastData, toastRef: ToastRef, parentInjector: Injector): PortalInjector {
+    getInjector(data: ToastData, toastRef: SomeRef, parentInjector: Injector): PortalInjector {
         const tokens = new WeakMap();
 
         tokens.set(ToastData, data);
-        tokens.set(ToastRef, toastRef);
+        tokens.set(SomeRef, toastRef);
 
         return new PortalInjector(parentInjector, tokens);
     }
