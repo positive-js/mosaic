@@ -1,20 +1,34 @@
-import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
-    ElementRef,
+    forwardRef,
     Input,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { CanDisableCtor, HasTabIndexCtor, mixinDisabled, mixinTabIndex } from '@ptsecurity/mosaic/core';
-import { McIcon } from '@ptsecurity/mosaic/icon';
+import {
+    DOWN_ARROW,
+    ENTER,
+    isVerticalMovement,
+    LEFT_ARROW,
+    RIGHT_ARROW,
+    SPACE,
+    TAB,
+    UP_ARROW
+} from '@ptsecurity/cdk/keycodes';
+import { Subject } from 'rxjs';
 
-import { McNavbarItemBase } from './navbar-item.component';
+import {
+    McNavbarBento,
+    McNavbarItem,
+    McNavbarRectangleElement
+} from './navbar-item.component';
+import { McFocusableComponent } from './navbar.component';
 import { toggleVerticalNavbarAnimation } from './vertical-navbar.animation';
 
 
@@ -22,8 +36,15 @@ import { toggleVerticalNavbarAnimation } from './vertical-navbar.animation';
     selector: 'mc-vertical-navbar',
     exportAs: 'McVerticalNavbar',
     template: `
-        <ng-content select="[mc-navbar-container], mc-navbar-container"></ng-content>
-        <ng-content select="[mc-navbar-toggle], mc-navbar-toggle"></ng-content>
+        <div class="mc-vertical-navbar__container"
+             [@toggle]="expanded"
+             (@toggle.done)="animationDone.next()"
+             [class.mc-collapsed]="!expanded"
+             [class.mc-expanded]="expanded">
+
+            <ng-content select="[mc-navbar-container], mc-navbar-container"></ng-content>
+            <ng-content select="[mc-navbar-toggle], mc-navbar-toggle"></ng-content>
+        </div>
     `,
     styleUrls: [
         './vertical-navbar.scss',
@@ -33,102 +54,100 @@ import { toggleVerticalNavbarAnimation } from './vertical-navbar.animation';
     ],
     host: {
         class: 'mc-vertical-navbar',
-        '[class.mc-closed]': '!expanded',
-        '[class.mc-opened]': 'expanded',
-        '[@toggle]': 'expanded'
+        '[attr.tabindex]': 'tabIndex',
+
+        '(focus)': 'focus()',
+        '(blur)': 'blur()',
+
+        '(keydown)': 'onKeyDown($event)'
     },
     animations: [toggleVerticalNavbarAnimation()],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class McVerticalNavbar implements AfterContentInit {
+export class McVerticalNavbar extends McFocusableComponent implements AfterContentInit {
+    @ContentChildren(forwardRef(() => McNavbarRectangleElement), { descendants: true })
+    rectangleElements: QueryList<McNavbarRectangleElement>;
+
+    @ContentChildren(forwardRef(() => McNavbarItem), { descendants: true }) items: QueryList<McNavbarItem>;
+
+    @ContentChild(forwardRef(() => McNavbarBento)) bento: McNavbarBento;
+
+    readonly animationDone = new Subject<void>();
+
+    @Input()
     get expanded() {
         return this._expanded;
     }
 
-    @Input()
     set expanded(value: boolean) {
         this._expanded = coerceBooleanProperty(value);
 
-        this.setClosedStateForItems(value);
+        this.updateExpandedStateForItems();
     }
 
     private _expanded: boolean = false;
 
-    @ContentChildren(McNavbarItemBase, { descendants: true }) navbarBaseItems: QueryList<McNavbarItemBase>;
+    constructor(changeDetectorRef: ChangeDetectorRef) {
+        super(changeDetectorRef);
 
-    toggle(): void {
-        this.expanded = !this.expanded;
+        this.animationDone
+            .subscribe(this.updateTooltipForItems);
     }
 
     ngAfterContentInit(): void {
         this.setItemsState();
-        this.setClosedStateForItems(this.expanded);
+        this.updateExpandedStateForItems();
+        this.updateTooltipForItems();
 
-        this.navbarBaseItems.changes
+        this.rectangleElements.changes
             .subscribe(this.setItemsState);
+
+        super.ngAfterContentInit();
+
+        this.keyManager.withVerticalOrientation(true);
     }
 
-    private setClosedStateForItems(value: boolean) {
-        this.navbarBaseItems?.forEach((item) => {
-            item.closed = !value;
+    toggle(): void {
+        this.expanded = !this.expanded;
+
+        this.changeDetectorRef.markForCheck();
+    }
+
+    onKeyDown(event: KeyboardEvent) {
+        // tslint:disable-next-line: deprecation
+        const keyCode = event.keyCode;
+
+        if ([SPACE, ENTER, LEFT_ARROW, RIGHT_ARROW].includes(keyCode) || isVerticalMovement(event)) {
+            event.preventDefault();
+        }
+
+        if (keyCode === TAB) {
+            this.keyManager.tabOut.next();
+
+            return;
+        } else if (keyCode === DOWN_ARROW) {
+            this.keyManager.setNextItemActive();
+        } else if (keyCode === UP_ARROW) {
+            this.keyManager.setPreviousItemActive();
+        } else {
+            this.keyManager.onKeydown(event);
+        }
+    }
+
+    private updateExpandedStateForItems = () => {
+        this.rectangleElements?.forEach((item) => {
+            item.collapsed = !this.expanded;
             setTimeout(() => item.button?.updateClassModifierForIcons());
         });
     }
 
+    private updateTooltipForItems = () => {
+        this.items.forEach((item) => item.updateTooltip());
+    }
+
     private setItemsState = () => {
-        Promise.resolve().then(() => this.navbarBaseItems?.forEach((item) => item.vertical = true));
-    }
-}
-
-export class McNavbarToggleBase {
-    // tslint:disable-next-line:naming-convention
-    constructor(public _elementRef: ElementRef) {}
-}
-
-// tslint:disable-next-line:naming-convention
-export const McNavbarToggleMixinBase: HasTabIndexCtor & CanDisableCtor &
-    typeof McNavbarToggleBase = mixinTabIndex(mixinDisabled(McNavbarToggleBase));
-
-@Component({
-    selector: 'mc-navbar-toggle',
-    template: `
-        <i mc-icon
-           [class.mc-angle-left-M_16]="mcNavbar.expanded"
-           [class.mc-angle-right-M_16]="!mcNavbar.expanded"
-           *ngIf="!customIcon">
-        </i>
-
-        <ng-content select="[mc-icon]"></ng-content>
-        <ng-content select="mc-navbar-title" *ngIf="mcNavbar.expanded"></ng-content>
-    `,
-    styleUrls: ['./navbar.scss'],
-    host: {
-        class: 'mc-navbar-item mc-navbar-toggle mc-vertical',
-
-        '[attr.tabindex]': 'tabIndex',
-        '[attr.disabled]': 'disabled || null'
-    },
-    inputs: ['tabIndex'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
-})
-export class McNavbarToggle extends McNavbarToggleMixinBase {
-    @ContentChild(McIcon) customIcon: McIcon;
-
-    constructor(
-        public mcNavbar: McVerticalNavbar,
-        private focusMonitor: FocusMonitor,
-        private elementRef: ElementRef
-    ) {
-        super(elementRef);
-    }
-
-    ngOnDestroy() {
-        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
-    }
-
-    ngAfterContentInit(): void {
-        this.focusMonitor.monitor(this.elementRef.nativeElement, true);
+        Promise.resolve()
+            .then(() => this.rectangleElements?.forEach((item) => item.vertical = true));
     }
 }

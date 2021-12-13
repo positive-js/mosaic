@@ -10,3 +10,16 @@ body {
 .mc-vertical-navbar {
     height: 700px;
 }
+
+
+.vertical-navbar-container {
+    display: flex;
+    flex-direction: row;
+
+    height: 130%;
+}
+
+.vertical-navbar-content {
+    width: 100%;
+    border: 1px solid red;
+}

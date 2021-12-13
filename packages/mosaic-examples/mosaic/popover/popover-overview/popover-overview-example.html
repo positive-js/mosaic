@@ -46,6 +46,7 @@
                 <mc-form-field id="element" class="mc-form__control">
                     <mc-select [(value)]="selectedElement" [placeholder]="'Select element'">
                         <mc-option [value]="'button'">Button</mc-option>
+                        <mc-option [value]="'confirm-button'">Confirm Button</mc-option>
                         <mc-option [value]="'icon'">Icon</mc-option>
                         <mc-option [value]="'input'">Input</mc-option>
                     </mc-select>
@@ -216,6 +217,17 @@
                     (mcPlacementChange)="onStrategyPlacementChange($event)"
                     (mcVisibleChange)="onPopoverVisibleChange($event)">
                 Button
+            </button>
+            <button mc-button
+                    *ngSwitchCase="ELEMENTS.CONFIRM_BUTTON"
+                    mcPopoverConfirm
+                    (confirm)="onConfirm()"
+                    [mcPopoverClass]="'popover-485'"
+                    [mcPopoverPlacement]="selectedPlacement"
+                    [mcPopoverPlacementPriority]="multipleSelected"
+                    (mcPopoverPlacementChange)="onStrategyPlacementChange($event)"
+                    (mcVisibleChange)="onPopoverVisibleChange($event)">
+                Confirm Button
             </button>
             <mc-form-field *ngSwitchCase="ELEMENTS.INPUT">
                 <input mcInput

@@ -249,7 +249,13 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     }
 
     getHeight(): number {
-        return this.elementRef.nativeElement.getClientRects()[0].height;
+        const clientRects = this.elementRef.nativeElement.getClientRects();
+
+        if (clientRects.length) {
+            return clientRects[0].height;
+        }
+
+        return 0;
     }
 
     handleClick($event) {
@@ -661,7 +667,13 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     }
 
     getHeight(): number {
-        return this.elementRef.nativeElement.getClientRects()[0].height;
+        const clientRects = this.elementRef.nativeElement.getClientRects();
+
+        if (clientRects.length) {
+            return clientRects[0].height;
+        }
+
+        return 0;
     }
 
     // View to model callback that should be called if the list or its options lost focus.

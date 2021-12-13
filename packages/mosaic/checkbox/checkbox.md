@@ -75,3 +75,7 @@ providers: [
 `<mc-checkbox>` использует `<input type="checkbox">` для обеспечения Accessibility.
 
 Checkboxes без текста или label должны иметь метку `aria-label` или `aria-labelledby`.
+
+### Pseudo checkbox
+
+<!-- example(pseudo-checkbox) -->

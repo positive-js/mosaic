@@ -44,4 +44,12 @@
     .mc-theme-loaded-marker {
         display: none;
     }
+
+    .mc-error {
+        color: mc-color(map-get($theme, error), 500);
+    }
+
+    .mc-success {
+        color: mc-color(map-get($theme, success), 500);
+    }
 }

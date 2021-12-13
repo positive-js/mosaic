@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 28 Oct 2021 12:33:14 GMT
+ * Generated on Tue, 23 Nov 2021 14:04:40 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#E04D36";
@@ -673,23 +673,26 @@ export const NavbarLightColorSchemeBackground = "#832112";
 export const NavbarLightColorSchemeDividerBackground = "rgba(255, 255, 255, 0.3)";
 export const NavbarDarkColorSchemeBackground = "#832112";
 export const NavbarDarkColorSchemeDividerBackground = "rgba(255, 255, 255, 0.3)";
-export const NavbarSizeIconMargin = "4px";
+export const NavbarSizeIconMargin = "6px";
 export const NavbarFontTitle = "body";
-export const VerticalNavbarSizeStatesOpenedWidth = "240px";
-export const VerticalNavbarSizeStatesClosedWidth = "48px";
-export const VerticalNavbarSizeIconMargin = "10px";
+export const VerticalNavbarSizeStatesExpandedWidth = "240px";
+export const VerticalNavbarSizeStatesCollapsedWidth = "56px";
+export const VerticalNavbarSizeIconMargin = "16px";
 export const NavbarItemLightColorSchemeText = "#FADEDA";
-export const NavbarItemLightColorSchemeStatesActive = "#B23522";
-export const NavbarItemLightColorSchemeStatesHover = "#B23522";
+export const NavbarItemLightColorSchemeIcon = "#FADEDA";
+export const NavbarItemLightColorSchemeStatesActive = "rgba(0, 0, 0, 0.1)";
+export const NavbarItemLightColorSchemeStatesHover = "rgba(255, 255, 255, 0.1)";
 export const NavbarItemLightColorSchemeStatesProgress = "#541208";
 export const NavbarItemLightColorSchemeStatesDisabledOpacity = 0.3;
 export const NavbarItemDarkColorSchemeText = "#FADEDA";
-export const NavbarItemDarkColorSchemeStatesActive = "#832112";
-export const NavbarItemDarkColorSchemeStatesHover = "#832112";
+export const NavbarItemDarkColorSchemeIcon = "#FADEDA";
+export const NavbarItemDarkColorSchemeStatesActive = "rgba(0, 0, 0, 0.1)";
+export const NavbarItemDarkColorSchemeStatesHover = "rgba(255, 255, 255, 0.1)";
 export const NavbarItemDarkColorSchemeStatesProgress = "#541208";
 export const NavbarItemDarkColorSchemeStatesDisabledOpacity = 0.3;
 export const NavbarItemSizePadding = "16px";
 export const NavbarItemSizeHeight = "48px";
+export const NavbarItemSizeHeightVertical = "56px";
 export const NavbarBrandSizePadding = "12px";
 export const NavbarBrandSizeMarginRight = "24px";
 export const NavbarBrandFontTitle = "title";

@@ -12,10 +12,12 @@
                     [mcEnterDelay]="10"
                     #tooltip="mcWarningTooltip"
                     [mcTrigger]="'manual'"
-                    [mcPlacement]="popUpPlacements.Bottom">
+                    [mcPlacement]="popUpPlacements.Top">
                     <input mcInput formControlName="folderName" (input)="onInput($event)">
 
                     <mc-cleaner></mc-cleaner>
+
+                    <mc-hint>Только буквы и цифры</mc-hint>
                 </mc-form-field>
             </div>
         </div>
