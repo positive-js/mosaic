@@ -153,7 +153,6 @@ export class McButton extends McButtonMixinBase implements OnDestroy, CanDisable
         this.focusMonitor.focusVia(this.getHostElement(), 'keyboard');
     }
 
-
     haltDisabledEvents(event: Event) {
         if (this.disabled) {
             event.preventDefault();
@@ -163,11 +162,11 @@ export class McButton extends McButtonMixinBase implements OnDestroy, CanDisable
     }
 
     private runFocusMonitor() {
-        this._focusMonitor.monitor(this._elementRef.nativeElement, true);
+        this.focusMonitor.monitor(this._elementRef.nativeElement, true);
     }
 
     private stopFocusMonitor() {
-        this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
+        this.focusMonitor.stopMonitoring(this._elementRef.nativeElement);
     }
 }
 
