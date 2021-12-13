@@ -640,7 +640,9 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         // Reformat the input only if we have a valid value.
         this.parseOnBlur();
 
-        this.incorrectInput.emit();
+        if (/[a-z]/gi.test(this.elementRef.nativeElement.value)) {
+            this.incorrectInput.emit();
+        }
 
         this.focusChanged(false);
     }
