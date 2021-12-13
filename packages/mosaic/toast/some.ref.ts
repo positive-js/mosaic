@@ -1,4 +1,4 @@
-import { ViewContainerRef } from '@angular/core';
+import { ViewContainerRef, ViewRef } from '@angular/core';
 
 
 export class SomeRef {
@@ -6,13 +6,8 @@ export class SomeRef {
         private ref: ViewContainerRef
     ) {}
 
-    close(id: number) {
-        this.ref.detach(id);
-        console.log(this.ref.length);
-    }
-
-    getRef() {
-        console.log(this.ref);
-        console.log(this);
+    close(viewRef: ViewRef) {
+        const viewRefIndex = this.ref.indexOf(viewRef);
+        this.ref.detach(viewRefIndex);
     }
 }

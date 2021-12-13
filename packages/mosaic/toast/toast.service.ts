@@ -19,7 +19,7 @@ const INDENT_SIZE = 20;
 export class ToastService {
     toasts: BehaviorSubject<ToastData[]> = new BehaviorSubject<ToastData[]>([]);
     portalHost: DomPortalOutlet;
-    index = 0;
+
     protected instance: ToastContainerComponent;
     private lastToast?: ToastRef | undefined;
     private overlayRef?: OverlayRef;
@@ -27,7 +27,7 @@ export class ToastService {
 
     constructor(
         protected overlay: Overlay,
-        protected parentInjector: Injector,
+        protected injector: Injector,
         protected appRef: ApplicationRef,
         protected resolver: ComponentFactoryResolver,
         @Inject(TOAST_CONFIG_TOKEN) private toastConfig: IToastConfig
@@ -36,11 +36,11 @@ export class ToastService {
 
     show(data: ToastData) {
         this.overlayRef = this.createOverlay();
-        this.portal = this.portal || new ComponentPortal(ToastContainerComponent, null, this.parentInjector);
+        this.portal = this.portal || new ComponentPortal(ToastContainerComponent, null, this.injector);
 
         if (!this.overlayRef.hasAttached()) {
             this.instance = this.overlayRef.attach(this.portal).instance;
-            this.addToast(data);
+            setTimeout(() => this.addToast(data), 0);
         } else {
             this.addToast(data);
         }
@@ -50,17 +50,12 @@ export class ToastService {
 
     addToast(data: ToastData) {
         const toast = this.resolver.resolveComponentFactory(ToastComponent);
+        // TODO :: replace someRef var with other name
         const someRef = new SomeRef(this.instance.container);
-        const toastData = {
-            ...data,
-            id: this.index
-        };
-
-        const toastInjector = this.getInjector(toastData, someRef, this.parentInjector);
+        const toastInjector = this.getInjector(data, someRef, this.injector);
         const toastViewRef = toast.create(toastInjector);
 
-        this.instance.container.insert(toastViewRef.hostView, this.index);
-        this.index++;
+        this.instance.container.insert(toastViewRef.hostView, 0);
     }
 
     createOverlay() {
