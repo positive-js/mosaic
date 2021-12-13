@@ -47,7 +47,7 @@ class TestApp {
 }
 
 
-describe('McTimepicker', () => {
+fdescribe('McTimepicker', () => {
     let fixture: ComponentFixture<TestApp>;
     let testComponent: TestApp;
     let inputElementDebug;
@@ -209,6 +209,18 @@ describe('McTimepicker', () => {
             );
 
             expect(inputElementDebug.nativeElement.value).toBe('01:00');
+        });
+
+        it('Should run validation on blur', () => {
+            expect(testComponent.ngModel.valid).toBeTrue();
+            inputElementDebug.nativeElement.value = 'a';
+
+            inputElementDebug.triggerEventHandler(
+                'blur',
+                { target: inputElementDebug.nativeElement }
+            );
+
+            expect(testComponent.ngModel.valid).toBeFalse();
         });
 
         it('Convert user input (add lead zero)', fakeAsync(() => {

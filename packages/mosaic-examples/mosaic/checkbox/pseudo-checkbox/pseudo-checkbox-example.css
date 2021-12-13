@@ -1,0 +1,8 @@
+.mc-body {
+    display: flex;
+    flex-direction: column;
+}
+
+mc-pseudo-checkbox + mc-pseudo-checkbox {
+    margin-top: 16px;
+}

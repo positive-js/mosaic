@@ -37,5 +37,5 @@ Disable state also could be combined with other states but it is **disabled** at
 ## Collapsing
 In the case that absence of space the following elements is collapsed:
 
--  mc-navbar-item is collapsed to [mc-icon] if exists (if not then the item is not collapsed). The title attribute is added for [mc-icon] from mc-navbar-item's [collapsedTitle] input value;
+-  mc-navbar-item is collapsed to [mc-icon] if exists (if not then the item is not collapsed). The title attribute is added for [mc-icon] from mc-navbar-item text;
 -  mc-navbar-item is collapsed to [mc-icon] if exists (if not then the item is not collapsed). 

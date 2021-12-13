@@ -234,6 +234,7 @@
 
     $navbar-item: (
         color: $navbar-item-light-color-scheme-text,
+        icon-color: $navbar-item-light-color-scheme-icon,
 
         state-active: $navbar-item-light-color-scheme-states-active,
         state-hover: $navbar-item-light-color-scheme-states-hover,
@@ -604,6 +605,7 @@
 
     $navbar-item: (
         color: $navbar-item-dark-color-scheme-text,
+        icon-color: $navbar-item-dark-color-scheme-icon,
 
         state-active: $navbar-item-dark-color-scheme-states-active,
         state-hover: $navbar-item-dark-color-scheme-states-hover,

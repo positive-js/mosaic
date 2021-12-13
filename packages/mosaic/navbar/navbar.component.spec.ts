@@ -72,8 +72,8 @@ describe('McNavbar', () => {
                 const collapsedElements = fixture.debugElement.queryAll(By.css('.mc-navbar-item_collapsed'));
                 const elementWithCustomTitle = collapsedElements[collapsedElements.length - 1];
 
-                expect(elementWithCustomTitle.nativeElement.getAttribute('title'))
-                    .toBe('customTitle');
+                expect(elementWithCustomTitle.componentInstance.titleText)
+                    .toBe('Right icon');
 
                 done();
             },

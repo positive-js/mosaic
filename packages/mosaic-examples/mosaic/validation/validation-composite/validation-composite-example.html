@@ -1,4 +1,4 @@
-<div class="docs-width">
+<div class="docs-width layout-padding">
     <form class="mc-form-horizontal"
           [formGroup]="compositeFormGroup"
           [class.validation-error]="compositeFormGroup.errors?.range"
@@ -15,7 +15,7 @@
                     [mcEnterDelay]="10"
                     #startTooltip="mcWarningTooltip"
                     [mcTrigger]="'manual'"
-                    [mcPlacement]="popUpPlacements.Bottom">
+                    [mcPlacement]="popUpPlacements.Top">
                     <input mcInput formControlName="start" (input)="onInput($event, startTooltip, 'start')">
 
                     <mc-hint *ngIf="compositeFormGroup.controls.start.invalid">
@@ -34,7 +34,7 @@
                     [mcEnterDelay]="10"
                     #endTooltip="mcWarningTooltip"
                     [mcTrigger]="'manual'"
-                    [mcPlacement]="popUpPlacements.Bottom">
+                    [mcPlacement]="popUpPlacements.Top">
                     <input mcInput formControlName="end" (input)="onInput($event, endTooltip, 'end')">
 
                     <mc-hint *ngIf="compositeFormGroup.controls.end.invalid">
@@ -45,7 +45,7 @@
                 </mc-form-field>
             </div>
 
-            <mc-hint *ngIf="compositeFormGroup.errors?.range">
+            <mc-hint style="margin-top: 4px" class="mc-error" *ngIf="compositeFormGroup.errors?.range">
                 IP-адрес окончания диапазона должен быть больше, чем IP-адрес начала
             </mc-hint>
         </div>
