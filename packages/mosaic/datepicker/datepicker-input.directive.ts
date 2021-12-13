@@ -640,10 +640,6 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         // Reformat the input only if we have a valid value.
         this.parseOnBlur();
 
-        if (/[a-z]/gi.test(this.elementRef.nativeElement.value)) {
-            this.incorrectInput.emit();
-        }
-
         this.focusChanged(false);
     }
 
@@ -656,6 +652,10 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             rawValue = `0${rawValue}`;
         }
         rawValue.replace(/[^A-Za-z0-9]+/g, this.separator);
+
+        if (/[a-z]/gi.test(rawValue)) {
+            this.incorrectInput.emit();
+        }
 
         const match: RegExpMatchArray | null = rawValue.match(/^(?<first>\d+)\W(?<second>\d+)\W(?<third>\d+)$/);
 
