@@ -1,10 +1,9 @@
 import { GlobalPositionStrategy, Overlay } from '@angular/cdk/overlay';
 import { OverlayRef } from '@angular/cdk/overlay/overlay-ref';
 import { PortalInjector, ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
-import { Injectable, Injector, Inject, ComponentFactoryResolver, ApplicationRef } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, Injector, Inject, ComponentFactoryResolver, ApplicationRef, ComponentRef } from '@angular/core';
 
-import { SomeRef } from './some.ref';
+import { ContainerRef } from './container.ref';
 import { ToastContainerComponent } from './toast-container.component';
 import { ToastComponent } from './toast.component';
 import { ToastRef } from './toast.ref';
@@ -17,8 +16,9 @@ const INDENT_SIZE = 20;
     providedIn: 'root'
 })
 export class ToastService {
-    toasts: BehaviorSubject<ToastData[]> = new BehaviorSubject<ToastData[]>([]);
     portalHost: DomPortalOutlet;
+    index: number = 0;
+    componentsReferences: ComponentRef<ToastComponent>[] = [];
 
     protected instance: ToastContainerComponent;
     private lastToast?: ToastRef | undefined;
@@ -44,18 +44,17 @@ export class ToastService {
         } else {
             this.addToast(data);
         }
-
-        this.toasts.next([...this.toasts.value, data]);
     }
 
     addToast(data: ToastData) {
         const toast = this.resolver.resolveComponentFactory(ToastComponent);
-        // TODO :: replace someRef var with other name
-        const someRef = new SomeRef(this.instance.container);
-        const toastInjector = this.getInjector(data, someRef, this.injector);
-        const toastViewRef = toast.create(toastInjector);
+        const containerRef = new ContainerRef(this.instance.container, this);
+        const toastInjector = this.getInjector(data, containerRef, this.injector);
+        const componentRef = this.instance.container.createComponent(toast, 0, toastInjector);
+        const currentComponent = componentRef.instance;
+        currentComponent.index = ++this.index;
+        this.componentsReferences = [...this.componentsReferences, componentRef];
 
-        this.instance.container.insert(toastViewRef.hostView, 0);
     }
 
     createOverlay() {
@@ -161,11 +160,11 @@ export class ToastService {
         return this.overlay.position().global();
     }
 
-    getInjector(data: ToastData, toastRef: SomeRef, parentInjector: Injector): PortalInjector {
+    getInjector(data: ToastData, toastRef: ContainerRef, parentInjector: Injector): PortalInjector {
         const tokens = new WeakMap();
 
         tokens.set(ToastData, data);
-        tokens.set(SomeRef, toastRef);
+        tokens.set(ContainerRef, toastRef);
 
         return new PortalInjector(parentInjector, tokens);
     }

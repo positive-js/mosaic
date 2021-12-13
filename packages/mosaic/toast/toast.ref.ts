@@ -5,7 +5,6 @@ export class ToastRef {
     constructor(private readonly overlay: OverlayRef) { }
 
     close(): void {
-        console.log(this);
         // this.overlay.dispose();
     }
 

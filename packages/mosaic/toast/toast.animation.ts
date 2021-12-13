@@ -12,12 +12,12 @@ export const toastAnimations: {
             'void => *',
             [
                 style({ opacity: 0 }),
-                animate('150ms cubic-bezier(0.0, 0.0, 0.2, 1)')
+                animate('120ms cubic-bezier(0.0, 0.0, 0.2, 1)')
             ]
         ),
         transition(
             'default => closing',
-            animate('150ms cubic-bezier(0.4, 0.0, 1, 1)', style({ opacity: 0 }))
+            animate('120ms cubic-bezier(0.4, 0.0, 1, 1)', style({ opacity: 0 }))
         )
     ])
 };
