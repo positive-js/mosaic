@@ -6,9 +6,7 @@ import { ToastData } from './toast.type';
 
 @Component({
     selector: 'mc-toast-container',
-    template: `<div class="mc-toast-container" #container>
-        <h1 class="mc-title">Toast Container</h1>
-    </div>`,
+    template: `<ng-container #container></ng-container>`,
     styleUrls: ['./toast.component.scss']
 })
 export class ToastContainerComponent {

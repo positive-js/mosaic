@@ -9,9 +9,9 @@
 
         <div>
             <header *ngIf="data.title">{{ data.title }}</header>
-            {{ data.content }} {{ data.id }}
+            {{ data.content }}
         </div>
-        <button class="mc-alert__close" (click)="close(data.id || 0)">
+        <button class="mc-alert__close" (click)="close()">
             <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="'second'"></i>
         </button>
     </div>
