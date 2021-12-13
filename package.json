@@ -13,10 +13,10 @@
         "node": ">= 12",
         "yarn": ">= 1.0.0"
     },
-    "requiredAngularVersion": ">=12.0.0",
+    "requiredAngularVersion": ">=13.0.0",
     "dependencies": {
         "@angular/animations": "^13.1.0",
-        "@angular/cdk": "^11.2.2",
+        "@angular/cdk": "^13.1.0",
         "@angular/common": "^13.1.0",
         "@angular/compiler": "^13.1.0",
         "@angular/core": "^13.1.0",
@@ -24,12 +24,12 @@
         "@angular/platform-browser": "^13.1.0",
         "@ptsecurity/mosaic-icons": "6.1.1",
         "core-js": "^3.6.5",
-        "rxjs": "^6.5.5",
-        "tslib": "^2.0.0",
+        "rxjs": "^6.6.7",
+        "tslib": "^2.3.1",
         "zone.js": "~0.11.4"
     },
     "devDependencies": {
-        "@angular-devkit/architect-cli": "^0.1202.6",
+        "@angular-devkit/architect-cli": "^0.1301.1",
         "@angular-devkit/build-angular": "^13.1.0",
         "@angular-devkit/core": "^13.1.0",
         "@angular-devkit/schematics": "^13.1.0",
@@ -143,7 +143,7 @@
         "docs:publish-preview": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/publish-docs-preview.ts",
         "docs:cleanup-preview": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/cleanup-preview.ts",
         "preinstall": "node tools/npm/check-npm.js",
-        "postinstall": "tsc -p tools/builders/tsconfig.json && ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
+        "postinstall": "tsc -p tools/builders/tsconfig.json",
         "publish": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/publish-artifacts.ts",
         "linter:mosaic": "gulp tslint",
         "linter:mosaic:json": "gulp tslint:json",
