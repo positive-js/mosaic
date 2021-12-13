@@ -57,20 +57,18 @@ export class DemoComponent {
         },
         relative: {
             long: {
-                secondsAgo: '',
-                minutesAgo: '',
                 today: '',
                 yesterday: '',
-                beforeYesterdayCurrentYear: '',
-                beforeYesterdayNotCurrentYear: ''
+                tomorrow: '',
+                fewDaysDiff: '',
+                notCurrentYear: ''
             },
             short: {
-                secondsAgo: '',
-                minutesAgo: '',
                 today: '',
                 yesterday: '',
-                beforeYesterdayCurrentYear: '',
-                beforeYesterdayNotCurrentYear: ''
+                tomorrow: '',
+                fewDaysDiff: '',
+                notCurrentYear: ''
             }
         },
         range: {
@@ -144,20 +142,18 @@ export class DemoComponent {
         },
         relative: {
             long: {
-                secondsAgo: '',
-                minutesAgo: '',
                 today: '',
                 yesterday: '',
-                beforeYesterdayCurrentYear: '',
-                beforeYesterdayNotCurrentYear: ''
+                tomorrow: '',
+                fewDaysDiff: '',
+                notCurrentYear: ''
             },
             short: {
-                secondsAgo: '',
-                minutesAgo: '',
                 today: '',
                 yesterday: '',
-                beforeYesterdayCurrentYear: '',
-                beforeYesterdayNotCurrentYear: ''
+                tomorrow: '',
+                fewDaysDiff: '',
+                notCurrentYear: ''
             }
         },
         range: {
@@ -340,14 +336,13 @@ export class DemoComponent {
 
         const relativeShort = this[locale].relative.short;
 
-        relativeShort.secondsAgo = this.dateAdapter.relativeShortDate(moment().subtract(1, 'seconds'));
-        relativeShort.minutesAgo = this.dateAdapter.relativeShortDate(moment().subtract(1, 'minutes'));
         relativeShort.today = this.dateAdapter.relativeShortDate(moment().subtract(1, 'hours'));
         relativeShort.yesterday = this.dateAdapter.relativeShortDate(moment().subtract(1, 'days'));
-        relativeShort.beforeYesterdayCurrentYear = this.dateAdapter.relativeShortDate(
+        relativeShort.tomorrow = this.dateAdapter.relativeShortDate(moment().add(1, 'days'));
+        relativeShort.fewDaysDiff = this.dateAdapter.relativeShortDate(
             moment().subtract(2, 'days')
         );
-        relativeShort.beforeYesterdayNotCurrentYear = this.dateAdapter.relativeShortDate(
+        relativeShort.notCurrentYear = this.dateAdapter.relativeShortDate(
             moment().subtract(1, 'years').subtract(2, 'days')
         );
     }
@@ -357,14 +352,13 @@ export class DemoComponent {
 
         const relativeLong = this[locale].relative.long;
 
-        relativeLong.secondsAgo = this.dateAdapter.relativeLongDate(moment().subtract(1, 'seconds'));
-        relativeLong.minutesAgo = this.dateAdapter.relativeLongDate(moment().subtract(1, 'minutes'));
         relativeLong.today = this.dateAdapter.relativeLongDate(moment().subtract(1, 'hours'));
         relativeLong.yesterday = this.dateAdapter.relativeLongDate(moment().subtract(1, 'days'));
-        relativeLong.beforeYesterdayCurrentYear = this.dateAdapter.relativeLongDate(
+        relativeLong.tomorrow = this.dateAdapter.relativeLongDate(moment().add(1, 'days'));
+        relativeLong.fewDaysDiff = this.dateAdapter.relativeLongDate(
             moment().subtract(2, 'days')
         );
-        relativeLong.beforeYesterdayNotCurrentYear = this.dateAdapter.relativeLongDate(
+        relativeLong.notCurrentYear = this.dateAdapter.relativeLongDate(
             moment().subtract(1, 'years').subtract(2, 'days')
         );
     }
