@@ -1,4 +1,5 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -9,15 +10,14 @@ import {
     Renderer2,
     QueryList,
     ContentChildren,
-    AfterContentInit
+    AfterContentInit,
+    Input
 } from '@angular/core';
 import {
     mixinColor,
-    mixinDisabled,
     mixinTabIndex,
     CanColor,
     CanDisable,
-    CanDisableCtor,
     CanColorCtor,
     HasTabIndexCtor
 } from '@ptsecurity/mosaic/core';
@@ -25,7 +25,7 @@ import { McIcon } from '@ptsecurity/mosaic/icon';
 
 
 @Directive({
-    selector: 'button[mc-button], a[mc-button]',
+    selector: '[mc-button]',
     host: {
         '[class.mc-button]': '!isIconButton',
         '[class.mc-icon-button]': 'isIconButton'
@@ -82,17 +82,17 @@ export class McButtonBase {
 }
 
 // tslint:disable-next-line:naming-convention
-export const McButtonMixinBase: HasTabIndexCtor & CanDisableCtor & CanColorCtor &
-    typeof McButtonBase = mixinTabIndex(mixinColor(mixinDisabled(McButtonBase)));
+export const McButtonMixinBase: HasTabIndexCtor & CanColorCtor &
+    typeof McButtonBase = mixinTabIndex(mixinColor(McButtonBase));
 
 
 @Component({
-    selector: 'button[mc-button]',
+    selector: '[mc-button]',
     templateUrl: './button.component.html',
     styleUrls: ['./button.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    inputs: ['tabIndex', 'disabled', 'color'],
+    inputs: ['color', 'tabIndex'],
     host: {
         '[attr.disabled]': 'disabled || null',
         '[attr.tabIndex]': 'tabIndex',
@@ -104,14 +104,27 @@ export const McButtonMixinBase: HasTabIndexCtor & CanDisableCtor & CanColorCtor 
 export class McButton extends McButtonMixinBase implements OnDestroy, CanDisable, CanColor {
     hasFocus: boolean = false;
 
+    @Input()
+    get disabled() {
+        return this._disabled;
+    }
+
+    set disabled(value: any) {
+        this._disabled = coerceBooleanProperty(value);
+
+        this._disabled ? this.stopFocusMonitor() : this.runFocusMonitor();
+    }
+
+    private _disabled: boolean = false;
+
     constructor(elementRef: ElementRef, private focusMonitor: FocusMonitor) {
         super(elementRef);
 
-        this.focusMonitor.monitor(this._elementRef.nativeElement, true);
+        this.runFocusMonitor();
     }
 
     ngOnDestroy() {
-        this.focusMonitor.stopMonitoring(this._elementRef.nativeElement);
+        this.stopFocusMonitor();
     }
 
     onFocus($event) {
@@ -140,31 +153,20 @@ export class McButton extends McButtonMixinBase implements OnDestroy, CanDisable
         this.focusMonitor.focusVia(this.getHostElement(), 'keyboard');
     }
 
-}
-
-
-@Component({
-    selector: 'a[mc-button]',
-    templateUrl: './button.component.html',
-    styleUrls: ['button.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    inputs: ['disabled', 'color', 'tabIndex'],
-    host: {
-        '[attr.tabindex]': 'tabIndex',
-        '[attr.disabled]': 'disabled || null',
-        '(click)': 'haltDisabledEvents($event)'
-    }
-})
-export class McAnchor extends McButton {
-    constructor(focusMonitor: FocusMonitor, elementRef: ElementRef) {
-        super(elementRef, focusMonitor);
-    }
-
     haltDisabledEvents(event: Event) {
         if (this.disabled) {
             event.preventDefault();
             event.stopImmediatePropagation();
+            event.stopPropagation();
         }
     }
+
+    private runFocusMonitor() {
+        this.focusMonitor.monitor(this._elementRef.nativeElement, true);
+    }
+
+    private stopFocusMonitor() {
+        this.focusMonitor.stopMonitoring(this._elementRef.nativeElement);
+    }
 }
+

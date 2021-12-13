@@ -103,7 +103,7 @@ describe('McButton', () => {
         it('should not redirect if disabled', () => {
             const fixture = TestBed.createComponent(TestApp);
             const testComponent = fixture.debugElement.componentInstance;
-            const buttonDebugElement = fixture.debugElement.query(By.css('a'));
+            const buttonDebugElement = fixture.debugElement.query(By.css('.mc-button-overlay'));
 
             testComponent.isDisabled = true;
             fixture.detectChanges();
