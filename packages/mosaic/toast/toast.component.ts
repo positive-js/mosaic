@@ -1,7 +1,7 @@
 import { AnimationEvent } from '@angular/animations';
-import { Component, OnInit, Inject, ChangeDetectionStrategy, ViewRef, ChangeDetectorRef } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
 
-import { SomeRef } from './some.ref';
+import { ContainerRef } from './container.ref';
 import { ToastAnimationState, toastAnimations } from './toast.animation';
 import { ToastData, IToastConfig, TOAST_CONFIG_TOKEN } from './toast.type';
 
@@ -13,19 +13,19 @@ import { ToastData, IToastConfig, TOAST_CONFIG_TOKEN } from './toast.type';
   animations: [toastAnimations.toastState],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToastComponent implements OnInit {
+export class ToastComponent implements AfterViewInit {
   animationState: ToastAnimationState = 'default';
+  index: number;
   private intervalId: number;
 
   constructor(
       readonly data: ToastData,
-      readonly sRef: SomeRef,
-      @Inject(TOAST_CONFIG_TOKEN) readonly toast: IToastConfig,
-      @Inject(ChangeDetectorRef) readonly viewRef: ViewRef
+      readonly sRef: ContainerRef,
+      @Inject(TOAST_CONFIG_TOKEN) readonly toast: IToastConfig
   ) {
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.intervalId = setTimeout(() => this.animationState = 'closing', this.toast.duration);
   }
 
@@ -34,14 +34,16 @@ export class ToastComponent implements OnInit {
   }
 
   close(): void {
-    this.sRef.close(this.viewRef);
+    this.sRef.close(this.index);
   }
 
   onFadeFinished({ toState }: AnimationEvent): void {
     const isFadeOut = (toState as ToastAnimationState) === 'closing';
     const itFinished = this.animationState === 'closing';
 
-    if (isFadeOut && itFinished && this.data.id) {
+    console.log('finished');
+
+    if (isFadeOut && itFinished) {
       this.close();
     }
   }
