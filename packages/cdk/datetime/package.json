@@ -1,8 +1,0 @@
-{
-    "ngPackage": {
-        "lib": {
-            "entryFile": "index.ts",
-            "umdId": "mc.cdk.datetime"
-        }
-    }
-}
