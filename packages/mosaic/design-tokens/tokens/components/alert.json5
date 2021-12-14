@@ -29,29 +29,29 @@
         },
         'dark-color-scheme': {
             error: {
-                background: { value: '{dark-color-scheme.error.palette.value.700.value}' },
+                background: { value: '{dark-color-scheme.error.palette.value.900.value}' },
                 border: { value: '{dark-color-scheme.error.palette.value.700.value}' },
-                icon: { value: '{dark-color-scheme.error.default.value}' }
+                icon: { value: '{dark-color-scheme.error.palette.value.300.value}' }
             },
             warning: {
-                background: { value: '{dark-color-scheme.warning.palette.value.700.value}' },
+                background: { value: '{dark-color-scheme.warning.palette.value.800.value}' },
                 border: { value: '{dark-color-scheme.warning.palette.value.700.value}' },
-                icon: { value: '{dark-color-scheme.warning.default.value}' }
+                icon: { value: '{dark-color-scheme.warning.palette.value.300.value}' }
             },
             success: {
-                background: { value: '{dark-color-scheme.success.palette.value.700.value}' },
+                background: { value: '{dark-color-scheme.success.palette.value.800.value}' },
                 border: { value: '{dark-color-scheme.success.palette.value.700.value}' },
-                icon: { value: '{dark-color-scheme.success.default.value}' }
+                icon: { value: '{dark-color-scheme.success.palette.value.300.value}' }
             },
             info: {
-                background: { value: '{dark-color-scheme.info.palette.value.700.value}' },
+                background: { value: '{dark-color-scheme.info.palette.value.800.value}' },
                 border: { value: '{dark-color-scheme.info.palette.value.700.value}' },
-                icon: { value: '{dark-color-scheme.info.default.value}' }
+                icon: { value: '{dark-color-scheme.palette.value.300.value}' }
             },
             default: {
-                background: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+                background: { value: '{dark-color-scheme.second.palette.value.800.value}' },
                 border: { value: '{dark-color-scheme.second.palette.value.700.value}' },
-                icon: { value: '{dark-color-scheme.second.default.value}' }
+                icon: { value: '{dark-color-scheme.second.palette.value.300.value}' }
             }
         },
         size: {
