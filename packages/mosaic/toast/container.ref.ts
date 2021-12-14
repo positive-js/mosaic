@@ -14,9 +14,9 @@ export class ContainerRef {
             return;
         }
 
-        const componentRef = this.toastService.componentsReferences.filter((x) => x.instance.index === index)[0];
+        const componentRef = this.toastService.componentsRef.filter((x) => x.instance.index === index)[0];
         const vcrIndex: number = this.ref.indexOf(componentRef.hostView);
         this.ref.remove(vcrIndex);
-        this.toastService.componentsReferences = this.toastService.componentsReferences.filter((x) => x.instance.index !== index);
+        this.toastService.componentsRef = this.toastService.componentsRef.filter((x) => x.instance.index !== index);
     }
 }

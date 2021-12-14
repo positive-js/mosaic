@@ -28,7 +28,6 @@ export interface IToastOptions<T> {
     duration: number;
     easing: string;
     easeTime: number;
-
     onClose?: EventEmitter<T> | OnClickCallback<T>;
 }
 
