@@ -371,6 +371,8 @@ export class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAcces
     onBlur() {
         this.focusChanged(false);
 
+        this.setViewValue(this.formatUserPaste(this.viewValue));
+
         this.onInput();
     }
 
