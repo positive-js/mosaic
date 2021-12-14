@@ -3,7 +3,7 @@
             *ngIf="data"
             [ngClass]="'mc-alert_' + data.severity || ''"
             [@state]="{value: animationState}"
-            (@state.done)="onFadeFinished($event)"
+            (@state.done)="onAnimationDone($event)"
             class="mc-alert mc-alert_dismissible">
         <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
 

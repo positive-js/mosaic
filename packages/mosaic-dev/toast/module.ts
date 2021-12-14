@@ -1,7 +1,7 @@
-import { NgModule, Component, ViewEncapsulation, ViewChild, ComponentRef, ViewContainerRef, Injector } from '@angular/core';
+import { NgModule, Component, ViewEncapsulation, ViewChild, ComponentRef, ViewContainerRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastModule, ToastPosition, ToastData, ToastService } from '@ptsecurity/mosaic/toast';
+import { ToastModule, ToastPosition, ToastService } from '@ptsecurity/mosaic/toast';
 
 import { McButtonModule } from '../../mosaic/button';
 
@@ -23,15 +23,7 @@ export class ToastDemoComponent {
 
     constructor(
         private toast: ToastService
-    ) {
-    }
-
-    getInjector(data: ToastData, parentInjector: Injector): Injector {
-        return Injector.create({
-            providers: [{provide: ToastData, useValue: data}],
-            parent: parentInjector
-        });
-    }
+    ) {}
 
     showSuccessAlert() {
         this.toast.show({ severity: 'success', title: 'Success', content: 'Message Content' });
@@ -57,7 +49,7 @@ export class ToastDemoComponent {
         BrowserAnimationsModule,
         McButtonModule,
         ToastModule.forRoot({
-            position: ToastPosition.TOP_RIGHT,
+            position: ToastPosition.TOP_CENTER,
             duration: 5000
         })
     ],

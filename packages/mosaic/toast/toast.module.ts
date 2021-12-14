@@ -12,7 +12,7 @@ import { defaultToastConfig, TOAST_CONFIG_TOKEN } from './toast.type';
 @NgModule({
     declarations: [
         ToastComponent,
-        ToastContainerComponent,
+        ToastContainerComponent
     ],
     imports: [
         CommonModule,
