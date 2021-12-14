@@ -29,7 +29,7 @@
         },
         'dark-color-scheme': {
             error: {
-                background: { value: '{dark-color-scheme.error.palette.value.800.value}' }, //change to -900
+                background: { value: '{dark-color-scheme.error.palette.value.800.value}' }, //FIXME: change to -900
                 border: { value: '{dark-color-scheme.error.palette.value.700.value}' },
                 icon: { value: '{dark-color-scheme.error.palette.value.300.value}' }
             },

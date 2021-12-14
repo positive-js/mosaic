@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 23 Nov 2021 14:04:39 GMT
+ * Generated on Tue, 14 Dec 2021 12:31:01 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#52A832";
@@ -292,36 +292,36 @@ export const TypographyExtraSmallTextMonoLetterSpacing = "0px";
 export const TypographyExtraSmallTextMonoFontWeight = "normal";
 export const TypographyExtraSmallTextMonoFontFamily = "'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace";
 export const TypographyExtraSmallTextMonoTextTransform = "null";
-export const AlertLightColorSchemeErrorBackground = "#FCEFEC";
-export const AlertLightColorSchemeErrorBorder = "#E76E5C";
-export const AlertLightColorSchemeErrorIcon = "#E76E5C";
-export const AlertLightColorSchemeWarningBackground = "#FCF5E8";
-export const AlertLightColorSchemeWarningBorder = "#F0D49B";
-export const AlertLightColorSchemeWarningIcon = "#DFA739";
-export const AlertLightColorSchemeSuccessBackground = "#EDF8E9";
-export const AlertLightColorSchemeSuccessBorder = "#B4DEA4";
-export const AlertLightColorSchemeSuccessIcon = "#6FBA53";
-export const AlertLightColorSchemeInfoBackground = "#EBF4FB";
-export const AlertLightColorSchemeInfoBorder = "#AAD1EC";
-export const AlertLightColorSchemeInfoIcon = "#57A4D7";
-export const AlertLightColorSchemeDefaultBackground = "#F0F0F0";
-export const AlertLightColorSchemeDefaultBorder = "#B3B3B3";
-export const AlertLightColorSchemeDefaultIcon = "#CCCCCC";
-export const AlertDarkColorSchemeErrorBackground = "#832112";
+export const AlertLightColorSchemeErrorBackground = "#FEF7F6";
+export const AlertLightColorSchemeErrorBorder = "#FADEDA";
+export const AlertLightColorSchemeErrorIcon = "#ED9284";
+export const AlertLightColorSchemeWarningBackground = "#FDFAF3";
+export const AlertLightColorSchemeWarningBorder = "#F8EBD1";
+export const AlertLightColorSchemeWarningIcon = "#E7BD68";
+export const AlertLightColorSchemeSuccessBackground = "#F6FBF4";
+export const AlertLightColorSchemeSuccessBorder = "#DCF1D4";
+export const AlertLightColorSchemeSuccessIcon = "#8FCC79";
+export const AlertLightColorSchemeInfoBackground = "#F5FAFD";
+export const AlertLightColorSchemeInfoBorder = "#D8EAF7";
+export const AlertLightColorSchemeInfoIcon = "#7FBAE1";
+export const AlertLightColorSchemeDefaultBackground = "#F5F5F5";
+export const AlertLightColorSchemeDefaultBorder = "#E6E6E6";
+export const AlertLightColorSchemeDefaultIcon = "#B3B3B3";
+export const AlertDarkColorSchemeErrorBackground = "#541208";
 export const AlertDarkColorSchemeErrorBorder = "#832112";
-export const AlertDarkColorSchemeErrorIcon = "#E76E5C";
-export const AlertDarkColorSchemeWarningBackground = "#7D5504";
+export const AlertDarkColorSchemeErrorIcon = "#ED9284";
+export const AlertDarkColorSchemeWarningBackground = "#503602";
 export const AlertDarkColorSchemeWarningBorder = "#7D5504";
-export const AlertDarkColorSchemeWarningIcon = "#DFA739";
-export const AlertDarkColorSchemeSuccessBackground = "#276211";
+export const AlertDarkColorSchemeWarningIcon = "#E7BD68";
+export const AlertDarkColorSchemeSuccessBackground = "#163F07";
 export const AlertDarkColorSchemeSuccessBorder = "#276211";
-export const AlertDarkColorSchemeSuccessIcon = "#6FBA53";
-export const AlertDarkColorSchemeInfoBackground = "#114E77";
+export const AlertDarkColorSchemeSuccessIcon = "#8FCC79";
+export const AlertDarkColorSchemeInfoBackground = "#07314D";
 export const AlertDarkColorSchemeInfoBorder = "#114E77";
-export const AlertDarkColorSchemeInfoIcon = "#57A4D7";
-export const AlertDarkColorSchemeDefaultBackground = "#4D4D4D";
+export const AlertDarkColorSchemeInfoIcon = "#7FBAE1";
+export const AlertDarkColorSchemeDefaultBackground = "#333333";
 export const AlertDarkColorSchemeDefaultBorder = "#4D4D4D";
-export const AlertDarkColorSchemeDefaultIcon = "#999999";
+export const AlertDarkColorSchemeDefaultIcon = "#B3B3B3";
 export const AlertSizeBorderWidth = "1px";
 export const AlertSizeBorderRadius = "4px";
 export const AlertSizeHorizontalPadding = "16px";
