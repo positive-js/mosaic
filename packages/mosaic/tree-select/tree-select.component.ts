@@ -88,6 +88,7 @@ import {
     McValidationOptions
 } from '@ptsecurity/mosaic/core';
 import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McSelectSearch } from '@ptsecurity/mosaic/select';
 import { McTag } from '@ptsecurity/mosaic/tags';
 import { McTree, McTreeSelection, McTreeOption } from '@ptsecurity/mosaic/tree';
 import { defer, merge, Observable, Subject, Subscription } from 'rxjs';
@@ -113,6 +114,8 @@ export class McTreeSelectChange {
 @Directive({ selector: 'mc-tree-select-trigger' })
 export class McTreeSelectTrigger {}
 
+@Directive({ selector: 'mc-tree-select-footer' })
+export class McTreeSelectFooter {}
 
 class McTreeSelectBase {
     constructor(
@@ -234,6 +237,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     @ContentChild(McTreeSelectTrigger, { static: false }) customTrigger: McTreeSelectTrigger;
 
     @ContentChild(McTreeSelection, { static: false }) tree: McTreeSelection;
+
+    @ContentChild(McSelectSearch, { static: false }) search: McSelectSearch;
 
     @Input() hiddenItemsText: string = '...ещё';
 
@@ -410,6 +415,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     get canShowCleaner(): boolean {
         return this.cleaner && this.selectionModel.hasValue();
+    }
+
+    get isEmptySearchResult(): boolean {
+        return this.search && this.options.length === 0 && !!this.search.input.value;
     }
 
     private closeSubscription = Subscription.EMPTY;
