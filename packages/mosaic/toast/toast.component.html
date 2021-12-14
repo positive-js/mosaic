@@ -1,10 +1,8 @@
 <div class="mc-toast">
-    <div
-            *ngIf="data"
-            [ngClass]="'mc-alert_' + data.severity || ''"
-            [@state]="{value: animationState}"
-            (@state.done)="onAnimationDone($event)"
-            class="mc-alert mc-alert_dismissible">
+    <div class="mc-alert mc-alert_dismissible"
+        *ngIf="data"
+        [ngClass]="'mc-alert_' + data.severity || 'default'"
+    >
         <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
 
         <div>
@@ -15,5 +13,4 @@
             <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="'second'"></i>
         </button>
     </div>
-
 </div>

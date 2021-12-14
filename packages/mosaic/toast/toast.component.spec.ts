@@ -3,13 +3,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ToastComponent } from './toast.component';
 
 
-describe('ToastComponent', () => {
+describe('ToastService', () => {
     let component: ToastComponent;
     let fixture: ComponentFixture<ToastComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ToastComponent],
+            declarations: [ToastComponent]
         })
         .compileComponents();
     });

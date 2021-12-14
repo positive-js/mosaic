@@ -1,8 +1,6 @@
-import { AnimationEvent } from '@angular/animations';
 import { Component, Inject, ChangeDetectionStrategy, OnInit } from '@angular/core';
 
 import { ContainerRef } from './container.ref';
-import { ToastAnimationState, toastAnimations } from './toast.animation';
 import { ToastData, IToastConfig, TOAST_CONFIG_TOKEN } from './toast.type';
 
 
@@ -10,11 +8,9 @@ import { ToastData, IToastConfig, TOAST_CONFIG_TOKEN } from './toast.type';
     selector: 'mc-toast',
     templateUrl: './toast.component.html',
     styleUrls: ['./toast.component.scss'],
-    animations: [toastAnimations.toastState],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToastComponent implements OnInit {
-    animationState: ToastAnimationState = 'default';
     index: number;
     private intervalId: number;
 
@@ -26,7 +22,9 @@ export class ToastComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.intervalId = setTimeout(() => this.animationState = 'closing', this.toast.duration);
+        this.intervalId = setTimeout(() => {
+            this.close();
+        }, this.toast.duration);
     }
 
     ngOnDestroy(): void {
@@ -35,15 +33,6 @@ export class ToastComponent implements OnInit {
 
     close(): void {
         this.containerRef.close(this.index);
-    }
-
-    onAnimationDone({ toState }: AnimationEvent): void {
-        const isFadeOut = (toState as ToastAnimationState) === 'closing';
-        const itFinished = this.animationState === 'closing';
-
-        if (isFadeOut && itFinished) {
-            this.close();
-        }
     }
 
 }
