@@ -27,5 +27,10 @@
     },
     "dependencies": {
         "tslib": "^2.0.1"
+    },
+    "exports": {
+        "./fesm2020": {
+            "default": "./fesm2020"
+        }
     }
 }
