@@ -1,7 +1,7 @@
 import { GlobalPositionStrategy, Overlay } from '@angular/cdk/overlay';
 import { OverlayRef } from '@angular/cdk/overlay/overlay-ref';
 import { ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
-import { Injectable, Injector, Inject, ComponentFactoryResolver, ApplicationRef, ComponentRef } from '@angular/core';
+import { Injectable, Injector, Inject, ComponentFactoryResolver, ApplicationRef, ComponentRef, ViewContainerRef } from '@angular/core';
 
 import { ContainerRef } from './container.ref';
 import { ToastContainerComponent } from './toast-container.component';
@@ -19,7 +19,7 @@ export class ToastService {
     index: number = 0;
     componentsRef: ComponentRef<ToastComponent>[] = [];
 
-    protected instance: ToastContainerComponent;
+    protected instance: ViewContainerRef;
     protected overlayRef?: OverlayRef;
     protected portal: ComponentPortal<ToastContainerComponent>;
 
@@ -37,7 +37,7 @@ export class ToastService {
         this.portal = this.portal || new ComponentPortal(ToastContainerComponent, null, this.injector);
 
         if (!this.overlayRef.hasAttached()) {
-            this.instance = this.overlayRef.attach(this.portal).instance;
+            this.instance = this.overlayRef.attach(this.portal).instance.container;
             setTimeout(() => this.addToast(data), 0);
         } else {
             this.addToast(data);
@@ -46,9 +46,9 @@ export class ToastService {
 
     addToast(data: ToastData): void {
         const toast = this.resolver.resolveComponentFactory(ToastComponent);
-        const containerRef = new ContainerRef(this.instance.container, this);
+        const containerRef = new ContainerRef(this.instance, this);
         const toastInjector = this.getInjector(data, containerRef, this.injector);
-        const componentRef = this.instance.container.createComponent(toast, 0, toastInjector);
+        const componentRef = this.instance.createComponent(toast, 0, toastInjector);
         const currentComponent = componentRef.instance;
         currentComponent.index = ++this.index;
         this.componentsRef = [...this.componentsRef, componentRef];
