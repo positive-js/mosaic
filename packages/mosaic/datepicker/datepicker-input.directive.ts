@@ -646,7 +646,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     onPaste($event) {
         $event.preventDefault();
 
-        const rawValue = $event.clipboardData.getData('text');
+        let rawValue = $event.clipboardData.getData('text');
 
         if (rawValue.match(/^\d\D/)) {
             rawValue = `0${rawValue}`;
