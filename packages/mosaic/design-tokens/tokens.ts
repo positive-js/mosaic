@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 15 Dec 2021 09:59:05 GMT
+ * Generated on Wed, 15 Dec 2021 14:52:38 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#0374eb";
@@ -27,6 +27,7 @@ export const LightColorSchemeBackgroundOverlayHover = "rgba(25, 37, 47, 0.05)";
 export const LightColorSchemeBackgroundOverlayActive = "rgba(black, 0.1)";
 export const LightColorSchemeBackgroundOverlayDisabled = "rgba(white, 0.3)";
 export const LightColorSchemeStatesFocusedColor = "#0374eb";
+export const LightColorSchemeStatesFocusedColorError = "#db3c55";
 export const LightColorSchemeStatesSelectedColor = "#e7f1ff";
 export const LightColorSchemeStatesPressedShadow = "inset 0 1px 2px 0 rgba(black, 0.2)";
 export const LightColorSchemeStatesDisabledOpacity = 0.3;
@@ -54,6 +55,7 @@ export const DarkColorSchemeBackgroundOverlayHover = "rgba(25, 37, 47, 0.05)";
 export const DarkColorSchemeBackgroundOverlayActive = "rgba(black, 0.1)";
 export const DarkColorSchemeBackgroundOverlayDisabled = "rgba(white, 0.2)";
 export const DarkColorSchemeStatesFocusedColor = "#4187ff";
+export const DarkColorSchemeStatesFocusedColorError = "#b9023a";
 export const DarkColorSchemeStatesSelectedColor = "#023c7f";
 export const DarkColorSchemeStatesPressedShadow = "inset 1px 2px 2px 0 rgba(black, 0.2)";
 export const DarkColorSchemeStatesDisabledOpacity = 0.3;

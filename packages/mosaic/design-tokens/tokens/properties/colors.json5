@@ -48,6 +48,7 @@
         },
         states: {
             'focused-color': { value: '{light-color-scheme.primary.palette.value.500.value}' },
+            'focused-color-error': { value: '{light-color-scheme.error.palette.value.500.value}' },
             'selected-color': { value: '{light-color-scheme.primary.palette.value.60.value}' },
             'pressed-shadow': { value: 'inset 0 1px 2px 0 rgba(black, 0.2)' },
             'disabled-opacity': { value: 0.3 }
@@ -102,6 +103,7 @@
         },
         states: {
             'focused-color': { value: '{dark-color-scheme.primary.palette.value.400.value}' },
+            'focused-color-error': { value: '{light-color-scheme.error.palette.value.560.value}' },
             'selected-color': { value: '{dark-color-scheme.primary.palette.value.700.value}' },
             'pressed-shadow': { value: 'inset 1px 2px 2px 0 rgba(black, 0.2)' },
             'disabled-opacity': { value: 0.3 }

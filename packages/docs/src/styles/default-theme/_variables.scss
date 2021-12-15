@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Wed, 15 Dec 2021 09:59:12 GMT
+// Generated on Wed, 15 Dec 2021 14:52:40 GMT
 
 $light-color-scheme-primary-default: #0374eb;
 $light-color-scheme-second-default: #8c99a5;
@@ -20,6 +20,7 @@ $light-color-scheme-background-overlay-hover: rgba(25, 37, 47, 0.05);
 $light-color-scheme-background-overlay-active: rgba(black, 0.1);
 $light-color-scheme-background-overlay-disabled: rgba(white, 0.3);
 $light-color-scheme-states-focused-color: #0374eb;
+$light-color-scheme-states-focused-color-error: #db3c55;
 $light-color-scheme-states-selected-color: #e7f1ff;
 $light-color-scheme-states-pressed-shadow: inset 0 1px 2px 0 rgba(black, 0.2);
 $light-color-scheme-states-disabled-opacity: 0.3;
@@ -41,6 +42,7 @@ $dark-color-scheme-background-overlay-hover: rgba(25, 37, 47, 0.05);
 $dark-color-scheme-background-overlay-active: rgba(black, 0.1);
 $dark-color-scheme-background-overlay-disabled: rgba(white, 0.2);
 $dark-color-scheme-states-focused-color: #4187ff;
+$dark-color-scheme-states-focused-color-error: #b9023a;
 $dark-color-scheme-states-selected-color: #023c7f;
 $dark-color-scheme-states-pressed-shadow: inset 1px 2px 2px 0 rgba(black, 0.2);
 $dark-color-scheme-states-disabled-opacity: 0.3;
