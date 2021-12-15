@@ -15,6 +15,20 @@
             "900": { value: '#00224f' },
             "A100": { value: 'rgba(3, 116, 235, 0.15)' },
             "A200": { value: 'rgba(3, 116, 235, 0.3)' },
+            "contrast": {
+                "40": { value: '#4D4D4D' },
+                "60": { value: '#4D4D4D' },
+                "100": { value: '#4D4D4D' },
+                "200": { value: '#4D4D4D' },
+                "300": { value: '#4D4D4D' },
+                "400": { value: 'white' },
+                "500": { value: 'white' },
+                "560": { value: 'white' },
+                "600": { value: 'white' },
+                "700": { value: 'white' },
+                "800": { value: 'white' },
+                "A100": { value: '#4D4D4D' },
+                "A200": { value: 'white' }
             }
         },
         "green": {
@@ -31,22 +45,49 @@
             "800": { value: '#103920' },
             "900": { value: '#002a12' },
             "A100": { value: 'rgba(2, 139, 73, 0.15)' },
+            "contrast": {
+                "40": { value: '#4D4D4D' },
+                "60": { value: '#4D4D4D' },
+                "100": { value: '#4D4D4D' },
+                "200": { value: '#4D4D4D' },
+                "300": { value: '#4D4D4D' },
+                "400": { value: 'white' },
+                "500": { value: 'white' },
+                "560": { value: 'white' },
+                "600": { value: 'white' },
+                "700": { value: 'white' },
+                "800": { value: 'white' },
+                "A100": { value: '#4D4D4D' }
             }
         },
         "red": {
-            "40": { value": '#fff3f3' },
-            "60": { value": '#ffeaea' },
-            "100": { value": '#fbd6d6' },
-            "200": { value": '#fcb2b4' },
-            "300": { value": '#ee6f79' },
-            "400": { value": '#ea5868' },
-            "500": { value": '#db3c55' },
-            "560": { value": '#b9023a' },
-            "600": { value": '#9e0130' },
-            "700": { value": '#800025' },
-            "800": { value": '#621420' },
-            "900": { value": '#500013' },
+            "40": { value: '#fff3f3' },
+            "60": { value: '#ffeaea' },
+            "100": { value: '#fbd6d6' },
+            "200": { value: '#fcb2b4' },
+            "300": { value: '#ee6f79' },
+            "400": { value: '#ea5868' },
+            "500": { value: '#db3c55' },
+            "560": { value: '#b9023a' },
+            "600": { value: '#9e0130' },
+            "700": { value: '#800025' },
+            "800": { value: '#621420' },
+            "900": { value: '#500013' },
             "A100": { value: 'rgba(219, 60, 85, 0.15)' },
+
+            "contrast": {
+                "40": { value: '#4D4D4D' },
+                "60": { value: '#4D4D4D' },
+                "100": { value: '#4D4D4D' },
+                "200": { value: '#4D4D4D' },
+                "300": { value: '#4D4D4D' },
+                "400": { value: 'white' },
+                "500": { value: 'white' },
+                "560": { value: 'white' },
+                "600": { value: 'white' },
+                "700": { value: 'white' },
+                "800": { value: 'white' },
+                "A100": { value: '#4D4D4D' }
             }
         },
         "grey": {
@@ -68,6 +109,19 @@
             "A200": { value: 'rgba(25, 37, 47, 0.2)' },
             "A300": { value: 'rgba(25, 37, 47, 0.3)' },
             "A500": { value: 'rgba(25, 37, 47, 0.5)' },
+
+            "contrast": {
+                "40": { value: '#4D4D4D' },
+                "60": { value: '#4D4D4D' },
+                "100": { value: '#4D4D4D' },
+                "200": { value: '#4D4D4D' },
+                "300": { value: '#4D4D4D' },
+                "400": { value: 'white' },
+                "500": { value: 'white' },
+                "560": { value: 'white' },
+                "600": { value: 'white' },
+                "700": { value: 'white' },
+                "800": { value: 'white' }
             }
         },
         "yellow": {
@@ -84,6 +138,20 @@
             "800": { value: '#3e3015' },
             "900": { value: '#312001' },
             "A100": { value: 'rgba(255, 159, 18, 0.15)' },
+
+            "contrast": {
+                "40": { value: '#4D4D4D' },
+                "60": { value: '#4D4D4D' },
+                "100": { value: '#4D4D4D' },
+                "200": { value: '#4D4D4D' },
+                "300": { value: '#4D4D4D' },
+                "400": { value: 'white' },
+                "500": { value: 'white' },
+                "560": { value: 'white' },
+                "600": { value: 'white' },
+                "700": { value: 'white' },
+                "800": { value: 'white' },
+                "A100": { value: '#4D4D4D' }
             }
         },
         "teal": {
@@ -99,7 +167,6 @@
             "700": { value: '#084453' },
             "800": { value: '#143641' },
             "900": { value: '#022731' },
-          }
         },
         "purple": {
             "40": { value: '#fff3fb' },
@@ -114,7 +181,6 @@
             "700": { value: '#612853' },
             "800": { value: '#48273f' },
             "900": { value: '#36172e' },
-            }
         }
     },
 
