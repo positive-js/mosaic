@@ -38,7 +38,6 @@ export interface FormatterRangeTemplate {
 // tslint:disable-next-line:naming-convention
 export interface FormatterRelativeTemplate {
     variables?: { [name: string]: string };
-    MINUTES_AGO: string;
     TODAY: string;
     YESTERDAY: string;
     BEFORE_YESTERDAY: string;
@@ -114,10 +113,7 @@ export class DateFormatter<D> {
         const variables = this.compileVariables(date, templateVariables);
         let newTemplate;
 
-        if (totalMinutes <= 59) { // minutes ago
-            variables.MINUTES_PASSED = totalMinutes;
-            newTemplate = template.MINUTES_AGO;
-        } else if (isToday) {
+        if (isToday) {
             newTemplate = template.TODAY;
         } else if (isYesterday) {
             newTemplate = template.YESTERDAY;

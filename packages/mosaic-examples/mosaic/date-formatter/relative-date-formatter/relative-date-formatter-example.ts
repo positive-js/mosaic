@@ -23,14 +23,12 @@ export class RelativeDateFormatterExample {
         ru: {
             relative: {
                 long: {
-                    minutesAgo: '',
                     today: '',
                     yesterday: '',
                     beforeYesterdayCurrentYear: '',
                     beforeYesterdayNotCurrentYear: ''
                 },
                 short: {
-                    minutesAgo: '',
                     today: '',
                     yesterday: '',
                     beforeYesterdayCurrentYear: '',
@@ -41,14 +39,12 @@ export class RelativeDateFormatterExample {
         en: {
             relative: {
                 long: {
-                    minutesAgo: '',
                     today: '',
                     yesterday: '',
                     beforeYesterdayCurrentYear: '',
                     beforeYesterdayNotCurrentYear: ''
                 },
                 short: {
-                    minutesAgo: '',
                     today: '',
                     yesterday: '',
                     beforeYesterdayCurrentYear: '',
@@ -73,7 +69,6 @@ export class RelativeDateFormatterExample {
         const relativeShort = this.formats[locale].relative.short;
         const now = this.adapter.today();
 
-        relativeShort.minutesAgo = this.formatter.relativeShortDate(now.minus({ minute: 1 }));
         relativeShort.today = this.formatter.relativeShortDate(now.minus({ hours: 1 }));
         relativeShort.yesterday = this.formatter.relativeShortDate(now.minus({ days: 1 }));
         relativeShort.beforeYesterdayCurrentYear = this.formatter.relativeShortDate(now.minus({ days: 2 }));
@@ -89,7 +84,6 @@ export class RelativeDateFormatterExample {
         const relativeLong = this.formats[locale].relative.long;
         const now = this.adapter.today();
 
-        relativeLong.minutesAgo = this.formatter.relativeLongDate(now.minus({ minute: 1 }));
         relativeLong.today = this.formatter.relativeLongDate(now.minus({ hours: 1 }));
         relativeLong.yesterday = this.formatter.relativeLongDate(now.minus({ days: 1 }));
         relativeLong.beforeYesterdayCurrentYear = this.formatter.relativeLongDate(now.minus({ days: 2 }));

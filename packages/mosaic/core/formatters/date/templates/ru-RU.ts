@@ -1,13 +1,11 @@
 export const ruRU = {
     relativeTemplates: {
         short: {
-            MINUTES_AGO: '{MINUTES_PASSED}{NBSP}мин назад',
             TODAY: '{TIME}',
             YESTERDAY: 'Вчера, {TIME}',
             BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE} {YEAR}}}'
         },
         long: {
-            MINUTES_AGO: '{MINUTES_PASSED, plural, =1{#{NBSP}минуту} =2{#{NBSP}минуты} other{#{NBSP}минут}} назад',
             TODAY: '{TIME}',
             YESTERDAY: 'Вчера, {TIME}',
             BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE} {YEAR}}}'

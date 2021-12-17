@@ -46,14 +46,12 @@ export class DemoComponent {
         },
         relative: {
             long: {
-                minutesAgo: '',
                 today: '',
                 yesterday: '',
                 beforeYesterdayCurrentYear: '',
                 beforeYesterdayNotCurrentYear: ''
             },
             short: {
-                minutesAgo: '',
                 today: '',
                 yesterday: '',
                 beforeYesterdayCurrentYear: '',
@@ -131,14 +129,12 @@ export class DemoComponent {
         },
         relative: {
             long: {
-                minutesAgo: '',
                 today: '',
                 yesterday: '',
                 beforeYesterdayCurrentYear: '',
                 beforeYesterdayNotCurrentYear: ''
             },
             short: {
-                minutesAgo: '',
                 today: '',
                 yesterday: '',
                 beforeYesterdayCurrentYear: '',
@@ -332,7 +328,6 @@ export class DemoComponent {
         const relativeShort = this[locale].relative.short;
         const now = this.dateAdapter.today();
 
-        relativeShort.minutesAgo = this.dateAdapter.relativeShortDate(now.minus({ minute: 1 }));
         relativeShort.today = this.dateAdapter.relativeShortDate(now.minus({ hours: 1 }));
         relativeShort.yesterday = this.dateAdapter.relativeShortDate(now.minus({ days: 1 }));
         relativeShort.beforeYesterdayCurrentYear = this.dateAdapter.relativeShortDate(now.minus({ days: 2 }));
@@ -347,7 +342,6 @@ export class DemoComponent {
         const relativeLong = this[locale].relative.long;
         const now = this.dateAdapter.today();
 
-        relativeLong.minutesAgo = this.dateAdapter.relativeLongDate(now.minus({ minute: 1 }));
         relativeLong.today = this.dateAdapter.relativeLongDate(now.minus({ hours: 1 }));
         relativeLong.yesterday = this.dateAdapter.relativeLongDate(now.minus({ days: 1 }));
         relativeLong.beforeYesterdayCurrentYear = this.dateAdapter.relativeLongDate(now.minus({ days: 2 }));
