@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 15 Dec 2021 14:52:40 GMT
+ * Generated on Fri, 17 Dec 2021 17:16:18 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#0374eb";
@@ -638,15 +638,15 @@ export const DropdownPanelSizeMaxWidth = "640px";
 export const DropdownPanelSizePadding = "4px 0";
 export const DropdownPanelSizeBorderWidth = "1px";
 export const DropdownPanelSizeBorderRadius = "3px";
-export const FormFieldLightColorSchemeBorder = "#8c99a5";
+export const FormFieldLightColorSchemeBorder = "#bdc7d1";
 export const FormFieldLightColorSchemeBackground = "white";
-export const FormFieldLightColorSchemeStatesHoverBorder = "#7f8c98";
-export const FormFieldLightColorSchemeStatesInvalidBorder = "#ea5868";
+export const FormFieldLightColorSchemeStatesHoverBorder = "#bdc7d1";
+export const FormFieldLightColorSchemeStatesInvalidBorder = "#db3c55";
 export const FormFieldLightColorSchemeStatesInvalidBackground = "transparent";
-export const FormFieldDarkColorSchemeBorder = "#7f8c98";
+export const FormFieldDarkColorSchemeBorder = "#515e69";
 export const FormFieldDarkColorSchemeBackground = "#19252f";
-export const FormFieldDarkColorSchemeStatesHoverBorder = "#bdc7d1";
-export const FormFieldDarkColorSchemeStatesInvalidBorder = "#ea5868";
+export const FormFieldDarkColorSchemeStatesHoverBorder = "#515e69";
+export const FormFieldDarkColorSchemeStatesInvalidBorder = "#b9023a";
 export const FormFieldDarkColorSchemeStatesInvalidBackground = "transparent";
 export const FormFieldSizeBorderWidth = "1px";
 export const FormFieldSizeBorderRadius = "3px";
