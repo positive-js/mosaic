@@ -47,7 +47,6 @@ export class DemoComponent {
         },
         relative: {
             long: {
-                secondsAgo: '',
                 minutesAgo: '',
                 today: '',
                 yesterday: '',
@@ -55,7 +54,6 @@ export class DemoComponent {
                 beforeYesterdayNotCurrentYear: ''
             },
             short: {
-                secondsAgo: '',
                 minutesAgo: '',
                 today: '',
                 yesterday: '',
@@ -134,7 +132,6 @@ export class DemoComponent {
         },
         relative: {
             long: {
-                secondsAgo: '',
                 minutesAgo: '',
                 today: '',
                 yesterday: '',
@@ -142,7 +139,6 @@ export class DemoComponent {
                 beforeYesterdayNotCurrentYear: ''
             },
             short: {
-                secondsAgo: '',
                 minutesAgo: '',
                 today: '',
                 yesterday: '',
@@ -340,7 +336,6 @@ export class DemoComponent {
         const relativeShort = this[locale].relative.short;
         const now = this.dateAdapter.today();
 
-        relativeShort.secondsAgo = this.dateFormatter.relativeShortDate(now.minus({ seconds: 1 }));
         relativeShort.minutesAgo = this.dateFormatter.relativeShortDate(now.minus({ minute: 1 }));
         relativeShort.today = this.dateFormatter.relativeShortDate(now.minus({ hours: 1 }));
         relativeShort.yesterday = this.dateFormatter.relativeShortDate(now.minus({ days: 1 }));
@@ -356,7 +351,6 @@ export class DemoComponent {
         const relativeLong = this[locale].relative.long;
         const now = this.dateAdapter.today();
 
-        relativeLong.secondsAgo = this.dateFormatter.relativeLongDate(now.minus({ seconds: 1 }));
         relativeLong.minutesAgo = this.dateFormatter.relativeLongDate(now.minus({ minute: 1 }));
         relativeLong.today = this.dateFormatter.relativeLongDate(now.minus({ hours: 1 }));
         relativeLong.yesterday = this.dateFormatter.relativeLongDate(now.minus({ days: 1 }));

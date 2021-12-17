@@ -560,13 +560,6 @@ describe('LuxonDateAdapter formatter', () => {
 
         describe('relative formats', () => {
             describe('Relative short (relativeShortDate method)', () => {
-                it('secondsAgo', () => {
-                    const date = adapter.today().minus({ seconds: 1.7 });
-
-                    expect(adapter.relativeShortDate(date))
-                        .toBe(`Только что`);
-                });
-
                 it('minutesAgo', () => {
                     const date = adapter.today().minus({ minutes: 1.5 });
 
@@ -610,14 +603,6 @@ describe('LuxonDateAdapter formatter', () => {
             });
 
             describe('Relative long (relativeLongDate method)', () => {
-                it('secondsAgo', () => {
-                    const date = adapter.today()
-                        .minus({ seconds: 1 });
-
-                    expect(adapter.relativeLongDate(date))
-                        .toBe(`Только что`);
-                });
-
                 it('minutesAgo', () => {
                     const date = adapter.today()
                         .minus({ minutes: 1 });
@@ -1267,12 +1252,6 @@ describe('LuxonDateAdapter formatter', () => {
 
         describe('relative formats', () => {
             describe('Relative short (relativeShortDate method)', () => {
-                it('secondsAgo', () => {
-                    const date = adapter.today().minus({ seconds: 1 });
-                    expect(adapter.relativeShortDate(date))
-                        .toBe(`Just now`);
-                });
-
                 it('minutesAgo', () => {
                     const date = adapter.today().minus({ minutes: 1 });
                     expect(adapter.relativeShortDate(date))
@@ -1317,12 +1296,6 @@ describe('LuxonDateAdapter formatter', () => {
             });
 
             describe('Relative long (relativeLongDate method)', () => {
-                it('secondsAgo', () => {
-                    const date = adapter.today().minus({ seconds: 1 });
-                    expect(adapter.relativeLongDate(date))
-                        .toBe(`Just now`);
-                });
-
                 it('minutesAgo', () => {
                     const date = adapter.today().minus({ minutes: 1 });
                     expect(adapter.relativeLongDate(date))

@@ -57,7 +57,6 @@ export class DemoComponent {
         },
         relative: {
             long: {
-                secondsAgo: '',
                 minutesAgo: '',
                 today: '',
                 yesterday: '',
@@ -65,7 +64,6 @@ export class DemoComponent {
                 beforeYesterdayNotCurrentYear: ''
             },
             short: {
-                secondsAgo: '',
                 minutesAgo: '',
                 today: '',
                 yesterday: '',
@@ -144,7 +142,6 @@ export class DemoComponent {
         },
         relative: {
             long: {
-                secondsAgo: '',
                 minutesAgo: '',
                 today: '',
                 yesterday: '',
@@ -152,7 +149,6 @@ export class DemoComponent {
                 beforeYesterdayNotCurrentYear: ''
             },
             short: {
-                secondsAgo: '',
                 minutesAgo: '',
                 today: '',
                 yesterday: '',
@@ -340,7 +336,6 @@ export class DemoComponent {
 
         const relativeShort = this[locale].relative.short;
 
-        relativeShort.secondsAgo = this.dateAdapter.relativeShortDate(moment().subtract(1, 'seconds'));
         relativeShort.minutesAgo = this.dateAdapter.relativeShortDate(moment().subtract(1, 'minutes'));
         relativeShort.today = this.dateAdapter.relativeShortDate(moment().subtract(1, 'hours'));
         relativeShort.yesterday = this.dateAdapter.relativeShortDate(moment().subtract(1, 'days'));
@@ -357,7 +352,6 @@ export class DemoComponent {
 
         const relativeLong = this[locale].relative.long;
 
-        relativeLong.secondsAgo = this.dateAdapter.relativeLongDate(moment().subtract(1, 'seconds'));
         relativeLong.minutesAgo = this.dateAdapter.relativeLongDate(moment().subtract(1, 'minutes'));
         relativeLong.today = this.dateAdapter.relativeLongDate(moment().subtract(1, 'hours'));
         relativeLong.yesterday = this.dateAdapter.relativeLongDate(moment().subtract(1, 'days'));
