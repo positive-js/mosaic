@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 15 Dec 2021 14:52:40 GMT
+ * Generated on Fri, 17 Dec 2021 13:51:09 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#db3c55";
@@ -582,16 +582,16 @@ export const CardDarkColorSchemeInfoVerticalLine = "#4187ff";
 export const CardDarkColorSchemeInfoBackground = "#084453";
 export const CardDarkColorSchemeInfoShadow = "#333f4a";
 export const CardSizeVerticalLine = "4px";
-export const CheckboxLightColorSchemeBorder = "#8c99a5";
-export const CheckboxLightColorSchemeStatesCheckedBorder = "#9e0130";
+export const CheckboxLightColorSchemeBorder = "#bdc7d1";
+export const CheckboxLightColorSchemeStatesCheckedBorder = "#db3c55";
 export const CheckboxLightColorSchemeStatesCheckedBackground = "#db3c55";
-export const CheckboxLightColorSchemeStatesFocusedBorder = "#9e0130";
-export const CheckboxLightColorSchemeStatesFocusedShadow = "inset 0 0 0 1px white, 0 0 0 1px #9e0130";
-export const CheckboxDarkColorSchemeBorder = "#7f8c98";
-export const CheckboxDarkColorSchemeStatesCheckedBorder = "#ea5868";
-export const CheckboxDarkColorSchemeStatesCheckedBackground = "#9e0130";
-export const CheckboxDarkColorSchemeStatesFocusedBorder = "#ea5868";
-export const CheckboxDarkColorSchemeStatesFocusedShadow = "inset 0 0 0 1px #19252f, 0 0 0 1px #ea5868";
+export const CheckboxLightColorSchemeStatesFocusedBorder = "#db3c55";
+export const CheckboxLightColorSchemeStatesFocusedShadow = "inset 0 0 0 0px transparent";
+export const CheckboxDarkColorSchemeBorder = "#515e69";
+export const CheckboxDarkColorSchemeStatesCheckedBorder = "#db3c55";
+export const CheckboxDarkColorSchemeStatesCheckedBackground = "#db3c55";
+export const CheckboxDarkColorSchemeStatesFocusedBorder = "#db3c55";
+export const CheckboxDarkColorSchemeStatesFocusedShadow = "inset 0 0 0 0px transparent";
 export const CheckboxSizeWidth = "16px";
 export const CheckboxSizeLabelMargin = "8px";
 export const CheckboxSizeBorderWidth = "1px";
