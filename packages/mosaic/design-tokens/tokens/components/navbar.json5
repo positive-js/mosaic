@@ -1,14 +1,14 @@
 {
     navbar: {
         'light-color-scheme': {
-            background: { value: '{light-color-scheme.primary.palette.value.700.value}' },
+            background: { value: '{light-color-scheme.second.palette.value.900.value}' },
 
-            'divider-background': { value: 'rgba(255, 255, 255, 0.3)' }
+            'divider-background': { value: '{light-color-scheme.second.palette.value.560.value}' }
         },
         'dark-color-scheme': {
-            background: { value: '{dark-color-scheme.primary.palette.value.700.value}' },
+            background: { value: '{dark-color-scheme.second.palette.value.700.value}' },
 
-            'divider-background': { value: 'rgba(255, 255, 255, 0.3)' }
+            'divider-background': { value: '{dark-color-scheme.second.palette.value.560.value}' }
         },
         size: {
             'icon-margin': { value: '6px' }
@@ -28,24 +28,24 @@
     },
     'navbar-item': {
         'light-color-scheme': {
-            text: { value: '{light-color-scheme.primary.palette.value.100.value}' },
-            icon: { value: '{light-color-scheme.primary.palette.value.100.value}' },
+            text: { value: '{light-color-scheme.second.palette.value.40.value}' },
+            icon: { value: '{light-color-scheme.second.palette.value.200.value}' },
 
             states: {
                 active: { value: 'rgba(0, 0, 0, 0.1)' },
                 hover: { value: 'rgba(255, 255, 255, 0.1)' },
-                progress: { value: '{light-color-scheme.primary.palette.value.800.value}' },
+                progress: { value: '{light-color-scheme.second.palette.value.700.value}' },
                 'disabled-opacity': { value: 0.3 }
             }
         },
         'dark-color-scheme': {
-            text: { value: '{dark-color-scheme.primary.palette.value.100.value}' },
-            icon: { value: '{dark-color-scheme.primary.palette.value.100.value}' },
+            text: { value: '{dark-color-scheme.second.palette.value.40.value}' },
+            icon: { value: '{dark-color-scheme.second.palette.value.200.value}' },
 
             states: {
                 active: { value: 'rgba(0, 0, 0, 0.1)' },
                 hover: { value: 'rgba(255, 255, 255, 0.1)' },
-                progress: { value: '{dark-color-scheme.primary.palette.value.800.value}' },
+                progress: { value: '{dark-color-scheme.second.palette.value.700.value}' },
                 'disabled-opacity': { value: 0.3 }
             }
         },
