@@ -1,12 +1,12 @@
 export const enUS = {
     relativeTemplates: {
         short: {
-            TODAY: '{TIME}',
+            TODAY: 'Today, {TIME}',
             YESTERDAY: 'Yesterday, {TIME}',
             BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}'
         },
         long: {
-            TODAY: '{TIME}',
+            TODAY: 'Today, {TIME}',
             YESTERDAY: 'Yesterday, {TIME}',
             BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}'
         }
