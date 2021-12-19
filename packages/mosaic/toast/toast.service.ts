@@ -1,7 +1,7 @@
 import { GlobalPositionStrategy, Overlay } from '@angular/cdk/overlay';
 import { OverlayRef } from '@angular/cdk/overlay/overlay-ref';
 import { ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
-import { Injectable, Injector, Inject, ComponentFactoryResolver, ApplicationRef, ComponentRef, ViewContainerRef } from '@angular/core';
+import { Injectable, Injector, Inject, ComponentFactoryResolver, ComponentRef, ViewContainerRef } from '@angular/core';
 
 import { ContainerRef } from './container.ref';
 import { ToastContainerComponent } from './toast-container.component';
@@ -26,7 +26,6 @@ export class ToastService {
     constructor(
         protected overlay: Overlay,
         protected injector: Injector,
-        protected appRef: ApplicationRef,
         protected resolver: ComponentFactoryResolver,
         @Inject(TOAST_CONFIG_TOKEN) private toastConfig: IToastConfig
     ) {
