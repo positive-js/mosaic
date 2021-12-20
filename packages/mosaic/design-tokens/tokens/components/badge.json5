@@ -41,8 +41,8 @@
         'light-color-scheme': {
             solid: {
                 primary: {
-                    background: { value: '{light-color-scheme.primary.palette.value.500.value}' },
-                    border: { value: '{light-color-scheme.primary.palette.value.500.value}' },
+                    background: { value: '{light-color-scheme.primary.palette.value.400.value}' },
+                    border: { value: '{light-color-scheme.primary.palette.value.400.value}' },
                     color: { value: 'white' },
                 },
                 info: {
@@ -85,12 +85,12 @@
                 primary: {
                     background: { value: '{light-color-scheme.primary.palette.value.40.value}' },
                     border: { value: '{light-color-scheme.primary.palette.value.200.value}' },
-                    color: { value: '{light-color-scheme.primary.palette.value.500.value}' }
+                    color: { value: '{light-color-scheme.primary.palette.value.400.value}' }
                 },
                 info: {
                     background: { value: '{light-color-scheme.info.palette.value.40.value}' },
-                    border: { value: '{light-color-scheme.info.palette.value.200.value}' },
-                    color: { value: '{light-color-scheme.info.palette.value.500.value}' }
+                    border: { value: '{light-color-scheme.primary.palette.value.200.value}' },
+                    color: { value: '{light-color-scheme.info.palette.value.400.value}' }
                 },
                 success: {
                     background: { value: '{light-color-scheme.success.palette.value.40.value}' },
@@ -165,8 +165,8 @@
                 },
                 transparent: {
                     background: { value: 'transparent' },
-                    border: { value: '{light-color-scheme.second.palette.value.500.value}' },
-                    color: { value: '{light-color-scheme.second.palette.value.40.value}' },
+                    border: { value: '{light-color-scheme.second.palette.value.560.value}' },
+                    color: { value: 'white' },                    
                 },
                 light: {
                     background: { value: '{light-color-scheme.second.palette.value.400.value}' },
@@ -174,8 +174,8 @@
                     color: { value: 'white' }
                 },
                 second: {
-                    background: { value: '{light-color-scheme.second.palette.value.700.value}' },
-                    border: { value: '{light-color-scheme.second.palette.value.700.value}' },
+                    background: { value: '{light-color-scheme.second.palette.value.560.value}' },
+                    border: { value: '{light-color-scheme.second.palette.value.560.value}' },
                     color: { value: 'white' }
                 }
             }
