@@ -42,7 +42,7 @@
             background: { value: 'white' },
             'background-disabled': { value: '{palette.grey.40.value}' },
 
-            'overlay-hover': { value: 'rgba(25, 37, 47, 0.05)' },
+            'overlay-hover': { value: 'rgba(black, 0.05)' },
             'overlay-active': { value: 'rgba(black, 0.1)' },
             'overlay-disabled': { value: 'rgba(white, 0.3)' }
         },
@@ -71,7 +71,7 @@
             palette: { value: '{palette.red}' }
         },
         info: {
-            default: { value: '{palette.blue.400.value}' },
+            default: { value: '{palette.teal.400.value}' },
 
             palette: { value: '{palette.teal}' }
         },
@@ -97,7 +97,7 @@
             background: { value: '{palette.grey.900.value}' },
             'background-disabled': { value: '{palette.grey.700.value}' },
 
-            'overlay-hover': { value: 'rgba(25, 37, 47, 0.05)' },
+            'overlay-hover': { value: 'rgba(black, 0.05)' },
             'overlay-active': { value: 'rgba(black, 0.1)' },
             'overlay-disabled': { value: 'rgba(white, 0.2)' }
         },
