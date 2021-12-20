@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 15 Dec 2021 09:59:12 GMT
+ * Generated on Mon, 20 Dec 2021 08:19:37 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#a26e0c";
@@ -677,19 +677,19 @@ export const InputFontDefault = "body";
 export const InputFontMonospace = "body-mono";
 export const LinkLightColorSchemeText = "#a26e0c";
 export const LinkLightColorSchemeBorderBottom = "rgba(#a26e0c, 0.32)";
-export const LinkLightColorSchemeStateVisitedText = "#6A2795";
-export const LinkLightColorSchemeStateVisitedBorderBottom = "rgba(106, 39, 149, 0.32)";
-export const LinkLightColorSchemeStateHoverText = "#6b4804";
-export const LinkLightColorSchemeStateHoverBorderBottom = "rgba(#6b4804, 0.32)";
-export const LinkLightColorSchemeStateActive = "#543803";
+export const LinkLightColorSchemeStateVisitedText = "#864775";
+export const LinkLightColorSchemeStateVisitedBorderBottom = "rgba(#864775, 0.32)";
+export const LinkLightColorSchemeStateHoverText = "#7e5406";
+export const LinkLightColorSchemeStateHoverBorderBottom = "rgba(#7e5406, 0.32)";
+export const LinkLightColorSchemeStateActive = "#6b4804";
 export const LinkLightColorSchemeStateFocusedOutline = "#a26e0c";
 export const LinkDarkColorSchemeText = "#c78816";
 export const LinkDarkColorSchemeBorderBottom = "rgba(#c78816, 0.32)";
-export const LinkDarkColorSchemeStateVisitedText = "#a23ee2";
-export const LinkDarkColorSchemeStateVisitedBorderBottom = "rgba(162, 62, 226, 0.32)";
-export const LinkDarkColorSchemeStateHoverText = "#e19f12";
-export const LinkDarkColorSchemeStateHoverBorderBottom = "rgba(#e19f12, 0.32)";
-export const LinkDarkColorSchemeStateActive = "#e19f12";
+export const LinkDarkColorSchemeStateVisitedText = "#bb78a7";
+export const LinkDarkColorSchemeStateVisitedBorderBottom = "rgba(#bb78a7, 0.32)";
+export const LinkDarkColorSchemeStateHoverText = "#a26e0c";
+export const LinkDarkColorSchemeStateHoverBorderBottom = "rgba(#a26e0c, 0.32)";
+export const LinkDarkColorSchemeStateActive = "#7e5406";
 export const LinkDarkColorSchemeStateFocusedOutline = "#c78816";
 export const LinkSizeIconMargin = "4px";
 export const LinkSizeStateFocusedOutlineOffset = "2px";
