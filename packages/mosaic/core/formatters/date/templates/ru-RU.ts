@@ -1,14 +1,18 @@
 export const ruRU = {
     relativeTemplates: {
         short: {
-            TODAY: 'Сегодня, {TIME}',
+            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE} {YEAR}}}',
             YESTERDAY: 'Вчера, {TIME}',
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE} {YEAR}}}'
+            TODAY: 'Сегодня, {TIME}',
+            TOMORROW: 'Завтра, {TIME}',
+            AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE} {YEAR}}}'
         },
         long: {
-            TODAY: 'Сегодня, {TIME}',
+            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE} {YEAR}}}',
             YESTERDAY: 'Вчера, {TIME}',
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE} {YEAR}}}'
+            TODAY: 'Сегодня, {TIME}',
+            TOMORROW: 'Завтра, {TIME}',
+            AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE} {YEAR}}}'
         }
     },
     absoluteTemplates: {

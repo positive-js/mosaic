@@ -38,9 +38,11 @@ export interface FormatterRangeTemplate {
 // tslint:disable-next-line:naming-convention
 export interface FormatterRelativeTemplate {
     variables?: { [name: string]: string };
-    TODAY: string;
-    YESTERDAY: string;
     BEFORE_YESTERDAY: string;
+    YESTERDAY: string;
+    TODAY: string;
+    TOMORROW: string;
+    AFTER_TOMORROW: string;
 }
 
 // tslint:disable-next-line:naming-convention
@@ -103,22 +105,26 @@ export class DateFormatter<D> {
     relativeDate(date: D, template: FormatterRelativeTemplate): string {
         if (!this.adapter.isDateInstance(date)) { throw new Error(this.invalidDateErrorText); }
 
-        const totalSeconds = Math.abs(this.adapter.diffNow(date, 'seconds'));
-        const totalMinutes = Math.floor(Math.abs(this.adapter.diffNow(date, 'minutes')));
-
-        const isToday = this.adapter.hasSame(this.adapter.today(), date, 'days');
+        const isBeforeYesterday = this.adapter.diffNow(date, 'days') < -2;
         const isYesterday = this.adapter.diffNow(date, 'days') <= -1 && this.adapter.diffNow(date, 'days') > -2;
+        const isToday = this.adapter.hasSame(this.adapter.today(), date, 'days');
+        const isTomorrow = this.adapter.diffNow(date, 'days') === 1;
+        const isAfterTomorrow = this.adapter.diffNow(date, 'days') > 1;
 
         const templateVariables = {...this.adapter.config.variables, ...template.variables};
         const variables = this.compileVariables(date, templateVariables);
         let newTemplate;
 
-        if (isToday) {
-            newTemplate = template.TODAY;
+        if (isBeforeYesterday) {
+            newTemplate = template.BEFORE_YESTERDAY;
         } else if (isYesterday) {
             newTemplate = template.YESTERDAY;
-        } else { // before yesterday
-            newTemplate = template.BEFORE_YESTERDAY;
+        } else if (isToday) {
+            newTemplate = template.TODAY;
+        } else if (isTomorrow) {
+            newTemplate = template.TOMORROW;
+        } else if (isAfterTomorrow) {
+            newTemplate = template.AFTER_TOMORROW;
         }
 
         return this.messageFormat.compile(newTemplate)(variables);

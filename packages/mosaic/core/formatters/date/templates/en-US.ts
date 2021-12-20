@@ -1,14 +1,18 @@
 export const enUS = {
     relativeTemplates: {
         short: {
-            TODAY: 'Today, {TIME}',
+            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}',
             YESTERDAY: 'Yesterday, {TIME}',
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}'
+            TODAY: 'Today, {TIME}',
+            TOMORROW: 'Tomorrow, {TIME}',
+            AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}'
         },
         long: {
-            TODAY: 'Today, {TIME}',
+            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}',
             YESTERDAY: 'Yesterday, {TIME}',
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}'
+            TODAY: 'Today, {TIME}',
+            TOMORROW: 'Tomorrow, {TIME}',
+            AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}'
         }
     },
     absoluteTemplates: {
