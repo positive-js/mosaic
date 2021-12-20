@@ -108,7 +108,7 @@ export class DateFormatter<D> {
         const isBeforeYesterday = this.adapter.diffNow(date, 'days') < -2;
         const isYesterday = this.adapter.diffNow(date, 'days') <= -1 && this.adapter.diffNow(date, 'days') > -2;
         const isToday = this.adapter.hasSame(this.adapter.today(), date, 'days');
-        const isTomorrow = this.adapter.diffNow(date, 'days') === 1;
+        const isTomorrow = this.adapter.diffNow(date, 'days') >= 1 && this.adapter.diffNow(date, 'days') < 2;
         const isAfterTomorrow = this.adapter.diffNow(date, 'days') > 1;
 
         const templateVariables = {...this.adapter.config.variables, ...template.variables};
