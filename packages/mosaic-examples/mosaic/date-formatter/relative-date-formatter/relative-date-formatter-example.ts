@@ -103,7 +103,7 @@ export class RelativeDateFormatterExample {
         const relativeLong = this.formats[locale].relative.long;
         const now = this.adapter.today();
 
-        relativeShort.beforeYesterdayNotCurrentYear = this.dateFormatter.relativeShortDate(
+        relativeLong.beforeYesterdayNotCurrentYear = this.dateFormatter.relativeLongDate(
             now.minus({ years: 1, days: 2 })
         );
         relativeLong.beforeYesterdayCurrentYear = this.dateFormatter.relativeLongDate(now.minus({ days: 2 }));
