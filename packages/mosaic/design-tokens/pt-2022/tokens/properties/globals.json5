@@ -1,0 +1,30 @@
+{
+    size: {
+        'option-height': '32px',
+        'panel-height': '48px',
+        // у radio и checkbox в макетах 20px, у тоггла есть две модификации на 16px и 14px
+        'control_S-height': '16px',
+        // в form-field это реализовано через отступы
+        'control_M-height': '32px',
+        // этого нет сейчас
+        'button-minWidth': '64px',
+        // badge на padding
+        'badge_tag-height': '24px',
+        // modal; sidepanel - сейчас в этих компонентах paddings
+        'header-height': '56px',
+        'footer-height': '64px'
+    },
+    padding: {
+        'control-horizontal': '16px',
+        'option-horizontal': '16px',
+        'badge_tag-horizontal': '8px',
+        'header-right': '8px',
+        'headerFooter-horizontal': '16px',
+    },
+    margin: {
+        // у radio-group нет таких отступов, а у checkbox вообще нет группы
+        'controlGroup_S-vertical': '8px',
+        'iconText_M-horizontal': '8px',
+        'iconText_S-horizontal': '4px'
+    }
+}

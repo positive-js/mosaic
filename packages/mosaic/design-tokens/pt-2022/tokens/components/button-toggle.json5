@@ -1,0 +1,10 @@
+{
+    'button-toggle': {
+        size: {
+            border: {
+                size: { value: '1px' },
+                radius: { value: '3px' }
+            }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    'dropdown-item': {
+        size: {
+            padding: { value: '5px 15px' },
+            'icon-padding': { value: '0 8px 2px 0' }
+        },
+        font: {
+            default: { value: 'body' },
+            caption: { value: 'caption' }
+        }
+    },
+    'dropdown-group-header': {
+        size: {
+            default: {
+                padding: { value: '6px 15px' }
+            },
+            small: {
+                padding: { value: '8px 15px' }
+            }
+        },
+        font: {
+            default: { value: 'body-strong' },
+            small: { value: 'caption-caps' }
+        }
+    },
+    'dropdown-divider': {
+        size: {
+            'height': { value: '1px' },
+            'margin': { value: '4px 0' }
+        }
+    },
+    'dropdown-trigger': {
+        size: {
+            'icon-padding-right': { value: '8px' }
+        }
+    },
+    'dropdown-panel': {
+        size: {
+            'max-width': { value: '640px' },
+            padding: { value: '4px 0' },
+            border: {
+                width: { value: '1px' },
+                radius: { value: '3px' }
+            }
+        }
+    }
+}
