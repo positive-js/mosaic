@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Mon, 20 Dec 2021 11:28:18 GMT
+// Generated on Mon, 20 Dec 2021 13:57:12 GMT
 
 $light-color-scheme-primary-default: #028b49;
 $light-color-scheme-second-default: #8c99a5;
@@ -464,12 +464,12 @@ $checkbox-light-color-scheme-border: #bdc7d1;
 $checkbox-light-color-scheme-states-checked-border: #028b49;
 $checkbox-light-color-scheme-states-checked-background: #028b49;
 $checkbox-light-color-scheme-states-focused-border: #028b49;
-$checkbox-light-color-scheme-states-focused-shadow: inset 0 0 0 0px transparent;
+$checkbox-light-color-scheme-states-focused-shadow: inset 0 0 0 1px white, 0 0 0 1px #028b49;
 $checkbox-dark-color-scheme-border: #515e69;
 $checkbox-dark-color-scheme-states-checked-border: #028b49;
 $checkbox-dark-color-scheme-states-checked-background: #028b49;
 $checkbox-dark-color-scheme-states-focused-border: #028b49;
-$checkbox-dark-color-scheme-states-focused-shadow: inset 0 0 0 0px transparent;
+$checkbox-dark-color-scheme-states-focused-shadow: inset 0 0 0 1px #19252f, 0 0 0 1px #028b49;
 $checkbox-size-width: 16px;
 $checkbox-size-label-margin: 8px;
 $checkbox-size-border-width: 1px;

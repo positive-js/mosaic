@@ -181,7 +181,8 @@
         state-checked-border: $checkbox-light-color-scheme-states-checked-border,
         state-checked-background: $checkbox-light-color-scheme-states-checked-background,
 
-        state-focused-border: $checkbox-light-color-scheme-states-focused-border
+        state-focused-border: $checkbox-light-color-scheme-states-focused-border,
+        state-focused-shadow: $checkbox-light-color-scheme-states-focused-shadow
     );
 
     $datepicker: (
@@ -552,6 +553,7 @@
         state-checked-background: $checkbox-dark-color-scheme-states-checked-background,
 
         state-focused-border: $checkbox-dark-color-scheme-states-focused-border,
+        state-focused-shadow: $checkbox-dark-color-scheme-states-focused-shadow
     );
 
     $datepicker: (

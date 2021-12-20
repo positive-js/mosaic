@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 20 Dec 2021 11:28:18 GMT
+ * Generated on Mon, 20 Dec 2021 13:57:12 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#db3c55";
@@ -586,12 +586,12 @@ export const CheckboxLightColorSchemeBorder = "#bdc7d1";
 export const CheckboxLightColorSchemeStatesCheckedBorder = "#db3c55";
 export const CheckboxLightColorSchemeStatesCheckedBackground = "#db3c55";
 export const CheckboxLightColorSchemeStatesFocusedBorder = "#db3c55";
-export const CheckboxLightColorSchemeStatesFocusedShadow = "inset 0 0 0 0px transparent";
+export const CheckboxLightColorSchemeStatesFocusedShadow = "inset 0 0 0 1px white, 0 0 0 1px #db3c55";
 export const CheckboxDarkColorSchemeBorder = "#515e69";
 export const CheckboxDarkColorSchemeStatesCheckedBorder = "#db3c55";
 export const CheckboxDarkColorSchemeStatesCheckedBackground = "#db3c55";
 export const CheckboxDarkColorSchemeStatesFocusedBorder = "#db3c55";
-export const CheckboxDarkColorSchemeStatesFocusedShadow = "inset 0 0 0 0px transparent";
+export const CheckboxDarkColorSchemeStatesFocusedShadow = "inset 0 0 0 1px #19252f, 0 0 0 1px #db3c55";
 export const CheckboxSizeWidth = "16px";
 export const CheckboxSizeLabelMargin = "8px";
 export const CheckboxSizeBorderWidth = "1px";
