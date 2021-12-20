@@ -1,0 +1,112 @@
+{
+    'light-color-scheme': {
+        primary: {
+            default: { value: '{palette.blue.500.value}' },
+
+            palette: { value: '{palette.blue}' }
+        },
+        second: {
+            default: { value: '{palette.grey.500.value}' },
+
+            palette: { value: '{palette.grey}' }
+        },
+        error: {
+            default: { value: '{palette.red.500.value}' },
+
+            palette: { value: '{palette.red}' }
+        },
+        info: {
+            default: { value: '{palette.blue.500.value}' },
+
+            palette: { value: '{palette.teal}' }
+        },
+        success: {
+            default: { value: '{palette.green.500.value}' },
+
+            palette: { value: '{palette.green}' }
+        },
+        warning: {
+            default: { value: '{palette.yellow.500.value}' },
+
+            palette: { value: '{palette.yellow}' }
+        },
+        foreground: {
+            text: { value: '{palette.grey.900.value}' },
+            'text-less-contrast': { value: '{palette.grey.500.value}'},
+            'text-disabled': { value: '{palette.grey.300.value}' },
+            divider: { value: '{palette.grey.100.value}' },
+            border: { value: '{palette.grey.200.value}' },
+            icon: { value: '{palette.grey.300.value}' }
+        },
+        background: {
+            background: { value: 'white' },
+            'background-disabled': { value: '{palette.grey.40.value}' },
+
+            'overlay-hover': { value: 'rgba(black, 0.05)' },
+            'overlay-active': { value: 'rgba(black, 0.1)' },
+            'overlay-disabled': { value: 'rgba(white, 0.3)' }
+        },
+        states: {
+            'focused-color': { value: '{light-color-scheme.primary.palette.value.500.value}' },
+            'focused-color-error': { value: '{light-color-scheme.error.palette.value.500.value}' },
+            'selected-color': { value: '{light-color-scheme.primary.palette.value.60.value}' },
+            'pressed-shadow': { value: 'inset 0 1px 2px 0 rgba(black, 0.2)' },
+            'disabled-opacity': { value: 0.3 }
+        }
+    },
+    'dark-color-scheme': {
+        primary: {
+            default: { value: '{palette.blue.560.value}' },
+
+            palette: { value: '{palette.blue}' }
+        },
+        second: {
+            default: { value: '{palette.grey.560.value}' },
+
+            palette: { value: '{palette.grey}' }
+        },
+        error: {
+            default: { value: '{palette.red.560.value}' },
+
+            palette: { value: '{palette.red}' }
+        },
+        info: {
+            default: { value: '{palette.teal.560.value}' },
+
+            palette: { value: '{palette.teal}' }
+        },
+        success: {
+            default: { value: '{palette.green.560.value}' },
+
+            palette: { value: '{palette.green}' }
+        },
+        warning: {
+            default: { value: '{palette.yellow.560.value}' },
+
+            palette: { value: '{palette.yellow}' }
+        },
+        foreground: {
+            text: { value: '{palette.grey.40.value}' },
+            'text-less-contrast': { value: '{palette.grey.300.value}'},
+            'text-disabled': { value: '{palette.grey.500.value}' },
+            divider: { value: '{palette.grey.700.value}' },
+            border: { value: '{palette.grey.560.value}' },
+            icon: { value: '{palette.grey.300.value}' }
+        },
+        background: {
+            background: { value: '{palette.grey.900.value}' },
+            'background-disabled': { value: '{palette.grey.700.value}' },
+
+            'overlay-hover': { value: 'rgba(black, 0.05)' },
+            'overlay-active': { value: 'rgba(black, 0.1)' },
+            'overlay-disabled': { value: 'rgba(black, 0.2)' }
+        },
+        states: {
+            'focused-color': { value: '{dark-color-scheme.primary.palette.value.400.value}' },
+            'focused-color-error': { value: '{light-color-scheme.error.palette.value.560.value}' },
+            'selected-color': { value: '{dark-color-scheme.primary.palette.value.600.value}' },
+            'pressed-shadow': { value: 'inset 1px 2px 2px 0 rgba(black, 0.2)' },
+            'disabled-opacity': { value: 0.3 }
+        }
+    }
+}

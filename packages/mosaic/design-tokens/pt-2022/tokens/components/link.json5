@@ -1,0 +1,56 @@
+{
+    link: {
+        'light-color-scheme': {
+            text: { value: '{light-color-scheme.primary.palette.value.500.value}' },
+            'border-bottom': { value: 'rgba({link.light-color-scheme.text.value}, 0.32)' },
+
+            'state-visited': {
+                'text': { value: '{palette.purple.560.value}' },
+                'border-bottom': { value: 'rgba({link.light-color-scheme.state-visited.text.value}, 0.32)' }
+            },
+            'state-hover': {
+                'text': { value: '{light-color-scheme.primary.palette.value.560.value}' },
+                'border-bottom': { value: 'rgba({link.light-color-scheme.state-hover.text.value}, 0.32)' }
+            },
+
+            'state-active': { value: '{light-color-scheme.primary.palette.value.600.value}' },
+
+            'state-focused': {
+                outline: { value: '{light-color-scheme.states.focused-color.value}' }
+            }
+        },
+        'dark-color-scheme': {
+            text: { value: '{dark-color-scheme.primary.palette.value.400.value}' },
+            'border-bottom': { value: 'rgba({link.dark-color-scheme.text.value}, 0.32)' },
+
+            'state-visited': {
+                'text': { value: '{palette.purple.400.value}' },
+                'border-bottom': { value: 'rgba({link.dark-color-scheme.state-visited.text.value}, 0.32)' }
+            },
+            'state-hover': {
+                'text': { value: '{dark-color-scheme.primary.palette.value.500.value}' },
+                'border-bottom': { value: 'rgba({link.dark-color-scheme.state-hover.text.value}, 0.32)' }
+            },
+            'state-active': { value: '{dark-color-scheme.primary.palette.value.560.value}' },
+            'state-focused': {
+                outline: { value: '{dark-color-scheme.states.focused-color.value}' }
+            }
+        },
+        size: {
+            'icon-margin': { value: '{margin.iconText_S-horizontal}' },
+            'state-focused': {
+                'outline-offset': { value: '2px' },
+                'outline-width': { value: '2px' }
+            }
+        },
+        animation: {
+            'transition': { value: 'color ease-out 300ms' },
+            'state-hover': {
+                'transition': { value: 'color 0ms' }
+            }
+        },
+        font: {
+            default: { value: 'body' }
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+    divider: {
+        size: {
+            width: { value: '1px' },
+            'inset-margin': { value: '80px' }
+        }
+    }
+}

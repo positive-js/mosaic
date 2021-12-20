@@ -1,0 +1,18 @@
+{
+    popup: {
+        'light-color-scheme': {
+            shadow: { value: '0 3px 8px 0 rgba(39, 51, 62, 0.2)' },
+            border: { value: '{light-color-scheme.foreground.divider.value}' },
+            divider: { value: '{light-color-scheme.foreground.divider.value}' },
+            background: { value: '{light-color-scheme.background.background.value}' },
+            'footer-background': { value: '{light-color-scheme.background.background-disabled.value}' }
+        },
+        'dark-color-scheme': {
+            shadow: { value: '0 3px 8px 0 rgba(0, 0, 0, 0.2)' },
+            border: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+            divider: { value: '{dark-color-scheme.second.palette.value.600.value}' },
+            background: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+            'footer-background': { value: 'transparent' }
+        }
+    }
+}

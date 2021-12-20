@@ -20,29 +20,18 @@
         }]
     },
     "ignoreFiles": [
-        "packages/mosaic/design-tokens/_palette.scss",
-        "packages/mosaic/design-tokens/_variables.scss",
-        "packages/mosaic/design-tokens/_typography.scss",
-        "packages/mosaic/design-tokens/css-tokens.css",
+        "packages/mosaic/design-tokens/pt-2022/*.scss",
+        "packages/mosaic/design-tokens/pt-2022/*.css",
+        "packages/mosaic/design-tokens/legacy-2017/*.scss",
+        "packages/mosaic/design-tokens/legacy-2017/*.css",
 
-        "packages/docs/src/styles/default-theme/_palette.scss",
-        "packages/docs/src/styles/default-theme/_variables.scss",
-        "packages/docs/src/styles/default-theme/_typography.scss",
-        "packages/docs/src/styles/default-theme/css-tokens.css",
-
-        "packages/docs/src/styles/green-theme/_palette.scss",
-        "packages/docs/src/styles/green-theme/_variables.scss",
-        "packages/docs/src/styles/green-theme/_typography.scss",
-        "packages/docs/src/styles/green-theme/css-tokens.css",
-
-        "packages/docs/src/styles/red-theme/_palette.scss",
-        "packages/docs/src/styles/red-theme/_variables.scss",
-        "packages/docs/src/styles/red-theme/_typography.scss",
-        "packages/docs/src/styles/red-theme/css-tokens.css",
-
-        "packages/docs/src/styles/yellow-theme/_palette.scss",
-        "packages/docs/src/styles/yellow-theme/_variables.scss",
-        "packages/docs/src/styles/yellow-theme/_typography.scss",
-        "packages/docs/src/styles/yellow-theme/css-tokens.css"
+        "packages/docs/src/styles/default-theme/*.scss",
+        "packages/docs/src/styles/default-theme/*.css",
+        "packages/docs/src/styles/green-theme/*.scss",
+        "packages/docs/src/styles/green-theme/*.css",
+        "packages/docs/src/styles/red-theme/*.scss",
+        "packages/docs/src/styles/red-theme/*.css",
+        "packages/docs/src/styles/yellow-theme/*.scss",
+        "packages/docs/src/styles/yellow-theme/*.css"
     ]
 }
