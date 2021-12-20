@@ -4,6 +4,8 @@ import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { ToastService } from './toast.service';
 
 
+const ENTER_QUERY_TIMING = 50;
+
 @Component({
     selector: 'mc-toast-container',
     template: `<div class="toast-container" [@animate]="containerLength"><ng-container #container></ng-container></div>`,
@@ -13,15 +15,15 @@ import { ToastService } from './toast.service';
            transition(':increment', [
                query(':enter', [
                    style({ opacity: 0 }),
-                   stagger(50, [
+                   stagger(ENTER_QUERY_TIMING, [
                        animate('300ms ease-out', style({ opacity: 1, width: '*' }))
                    ])
-               ], { optional: true })
+               ],    { optional: true })
            ]),
            transition(':decrement', [
                query(':leave', [
                    animate('120ms cubic-bezier(0.4, 0.0, 1, 1)', style({ opacity: 0 }))
-               ], { optional: true })
+               ],    { optional: true })
            ])
        ])
     ]

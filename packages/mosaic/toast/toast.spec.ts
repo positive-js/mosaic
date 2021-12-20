@@ -7,6 +7,8 @@ import { ToastService } from './toast.service';
 import { ToastPosition } from './toast.type';
 
 
+const TICK_TIME = 1000;
+
 describe('ToastService', () => {
     let toastService: ToastService;
     let overlayContainer: OverlayContainer;
@@ -33,7 +35,7 @@ describe('ToastService', () => {
     describe('created by service', () => {
         it('should create one success toast', fakeAsync(() => {
             const toastRef = toastService.show({ severity: 'success', title: 'Success', content: 'Message Content' });
-            tick(100);
+            tick(TICK_TIME);
 
             expect(toastService.componentsRef.indexOf(toastRef)).toBeGreaterThan(-1);
             expect(toastService.componentsRef.length).toBe(1);
