@@ -100,8 +100,8 @@
 
                 states: {
                     active: {
-                        border: { value: '{light-color-scheme.second.palette.value.700.value}' },
-                        background: { value: '{light-color-scheme.second.palette.value.700.value}' }
+                        border: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+                        background: { value: '{dark-color-scheme.second.palette.value.700.value}' }
                     }
                 }
             },
