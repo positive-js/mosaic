@@ -1,11 +1,10 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { NgModule } from '@angular/core';
-import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 
-import { ToastComponent } from './toast.component';
 import { ToastModule } from './toast.module';
 import { ToastService } from './toast.service';
+import { ToastPosition } from './toast.type';
 
 
 describe('ToastService', () => {
@@ -32,15 +31,22 @@ describe('ToastService', () => {
     });
 
     describe('created by service', () => {
-        let fixture: ComponentFixture<ToastComponent>;
+        it('should create one success toast', fakeAsync(() => {
+            const toastRef = toastService.show({ severity: 'success', title: 'Success', content: 'Message Content' });
+            tick(100);
 
-        beforeEach(() => {
-            fixture = TestBed.createComponent();
-        });
+            expect(toastService.componentsRef.indexOf(toastRef)).toBeGreaterThan(-1);
+            expect(toastService.componentsRef.length).toBe(1);
+        }));
     });
 });
 
 @NgModule({
-    imports: [ ToastModule, McButtonModule ]
+    imports: [
+        ToastModule.forRoot({
+            position: ToastPosition.TOP_CENTER,
+            duration: 5000
+        })
+    ]
 })
 class ToastTestModule { }

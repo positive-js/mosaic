@@ -1,5 +1,6 @@
 import { query, style, trigger, animate, transition, stagger } from '@angular/animations';
 import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+
 import { ToastService } from './toast.service';
 
 
@@ -13,8 +14,8 @@ import { ToastService } from './toast.service';
                query(':enter', [
                    style({ opacity: 0 }),
                    stagger(50, [
-                       animate('300ms ease-out', style({ opacity: 1, width: '*' })),
-                   ]),
+                       animate('300ms ease-out', style({ opacity: 1, width: '*' }))
+                   ])
                ], { optional: true })
            ]),
            transition(':decrement', [
