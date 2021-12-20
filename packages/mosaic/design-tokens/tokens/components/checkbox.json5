@@ -8,8 +8,8 @@
                     background: { value: '{light-color-scheme.primary.palette.value.500.value}' }
                 },
                 focused: {
-                    border: { value: '{light-color-scheme.primary.palette.value.500.value}' },
-                    shadow: { value: 'inset 0 0 0 1px {light-color-scheme.background.background.value}, 0 0 0 1px {light-color-scheme.primary.palette.value.500.value}' }
+                    border: { value: '{light-color-scheme.states.focused-color.value}' },
+                    shadow: { value: 'inset 0 0 0 1px {light-color-scheme.background.background.value}, 0 0 0 1px {light-color-scheme.states.focused-color.value}' }
                 }
             }
         },
@@ -21,8 +21,8 @@
                     background: { value: '{dark-color-scheme.primary.palette.value.500.value}' }
                 },
                 focused: {
-                    border: { value: '{dark-color-scheme.primary.palette.value.500.value}' },
-                    shadow: { value: 'inset 0 0 0 1px {dark-color-scheme.background.background.value}, 0 0 0 1px {dark-color-scheme.primary.palette.value.500.value}' }
+                    border: { value: '{dark-color-scheme.states.focused-color.value}' },
+                    shadow: { value: 'inset 0 0 0 1px {dark-color-scheme.background.background.value}, 0 0 0 1px {dark-color-scheme.states.focused-color.value}' }
                 }
             }
         },
