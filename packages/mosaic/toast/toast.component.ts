@@ -22,9 +22,12 @@ export class ToastComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.intervalId = setTimeout(() => {
-            // this.close();
-        }, this.toast.duration);
+        this.intervalId = setTimeout(
+            () => {
+                this.close();
+            },
+            this.toast.duration
+        );
     }
 
     ngOnDestroy(): void {
