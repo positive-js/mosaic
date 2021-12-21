@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 21 Dec 2021 06:46:05 GMT
+ * Generated on Tue, 21 Dec 2021 07:26:50 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#a26e0c";
@@ -925,14 +925,14 @@ export const TextareaFontDefault = "body";
 export const TextareaFontMono = "body-mono";
 export const TimepickerSizePaddingRight = "16px";
 export const ToggleLightColorSchemeBorder = "#bdc7d1";
-export const ToggleLightColorSchemeBackground = "linear-gradient(to bottom, #d7dee4, #f2f5f9)";
+export const ToggleLightColorSchemeBackground = "white";
 export const ToggleLightColorSchemeCircleBorder = "#bdc7d1";
-export const ToggleLightColorSchemeCircleBackground = "linear-gradient(to bottom, white, #d7dee4)";
+export const ToggleLightColorSchemeCircleBackground = "#d7dee4";
 export const ToggleLightColorSchemeStatesFocusedShadow = "inset 0 0 0 1px white, 0 0 0 2px #a26e0c";
 export const ToggleDarkColorSchemeBorder = "#515e69";
 export const ToggleDarkColorSchemeBackground = "#19252f";
 export const ToggleDarkColorSchemeCircleBorder = "#515e69";
-export const ToggleDarkColorSchemeCircleBackground = "white";
+export const ToggleDarkColorSchemeCircleBackground = "#6d7a86";
 export const ToggleDarkColorSchemeStatesFocusedShadow = "inset 0 0 0 1px #19252f, 0 0 0 2px #c78816";
 export const ToggleSizeHeight = "16px";
 export const ToggleSizeWidth = "28px";
