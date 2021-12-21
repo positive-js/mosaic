@@ -12,7 +12,7 @@ import { ToastData, IToastConfig, TOAST_CONFIG_TOKEN } from './toast.type';
 })
 export class ToastComponent implements OnInit {
     index: number;
-    private intervalId: number;
+    private intervalId: NodeJS.Timeout;
 
     constructor(
         readonly data: ToastData,

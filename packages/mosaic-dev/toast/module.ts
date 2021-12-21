@@ -50,7 +50,8 @@ export class ToastDemoComponent {
         McButtonModule,
         ToastModule.forRoot({
             position: ToastPosition.TOP_CENTER,
-            duration: 5000
+            duration: 5000,
+            newOnTop: false
         })
     ],
     bootstrap: [ToastDemoComponent]
