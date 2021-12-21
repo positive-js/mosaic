@@ -4,7 +4,7 @@
 
 [![npm version](https://badge.fury.io/js/%40ptsecurity%2Fmosaic.svg)](https://badge.fury.io/js/%40ptsecurity%2Fmosaic)
 [![CircleCI](https://circleci.com/gh/positive-js/mosaic/tree/master.svg?style=shield)](https://circleci.com/gh/positive-js/mosaic/tree/master)
-[![Dependency Status](https://david-dm.org/positive-js/mosaic.svg)](https://david-dm.org/positive-js/mosaic)
+[![Libraries.io dependency status for latest release, scoped npm package](https://img.shields.io/librariesio/release/npm/@ptsecurity/mosaic)](https://libraries.io/npm/@ptsecurity%2Fmosaic)
 [![Known Vulnerabilities](https://snyk.io/test/github/positive-js/mosaic/badge.svg)](https://snyk.io/test/github/positive-js/mosaic)
 [![Wallaby.js](https://img.shields.io/badge/wallaby.js-configured-green.svg)](https://wallabyjs.com)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/positive-js/mosaic/blob/master/LICENSE)
