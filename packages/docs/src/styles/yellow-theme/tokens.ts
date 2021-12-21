@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 21 Dec 2021 04:23:41 GMT
+ * Generated on Tue, 21 Dec 2021 04:43:43 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#a26e0c";
@@ -520,8 +520,8 @@ export const ButtonLightColorSchemeErrorBorder = "#d7dee4";
 export const ButtonLightColorSchemeErrorBackground = "#d7dee4";
 export const ButtonLightColorSchemeErrorColor = "#ea5868";
 export const ButtonLightColorSchemeErrorIcon = "#ea5868";
-export const ButtonLightColorSchemeErrorStatesActiveBorder = "darken(#bdc7d1, 5)";
-export const ButtonLightColorSchemeErrorStatesActiveBackground = "darken(#f2f5f9, 5)";
+export const ButtonLightColorSchemeErrorStatesActiveBorder = "#bdc7d1";
+export const ButtonLightColorSchemeErrorStatesActiveBackground = "#bdc7d1";
 export const ButtonDarkColorSchemeActiveShadow = "inset 1px 2px 2px 0 rgba(black, 0.2)";
 export const ButtonDarkColorSchemePrimaryColor = "white";
 export const ButtonDarkColorSchemePrimaryBorder = "#7e5406";

@@ -53,8 +53,8 @@
 
                 states: {
                     active: {
-                        border: { value: 'darken({light-color-scheme.foreground.border.value}, 5)' },
-                        background: { value: 'darken({light-color-scheme.background.background-disabled.value}, 5)' }
+                        border: { value: '{light-color-scheme.second.palette.value.200.value}' },
+                        background: { value: '{light-color-scheme.second.palette.value.200.value}' },
                     }
                 }
             }
