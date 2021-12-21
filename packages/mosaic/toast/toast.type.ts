@@ -14,7 +14,7 @@ export enum ToastPosition {
 }
 
 export interface IToastOptions<T> {
-    toastType: ToastType;
+    severity: ToastType;
     title?: string | TemplateRef<{}>;
     content?: string | TemplateRef<{}> | Type<T>;
     component?: Type<T>;
@@ -33,26 +33,21 @@ export interface IToastOptions<T> {
 }
 
 export class ToastData {
-    id?: number;
-    severity?: ToastType;
-    title?: string;
-    content?: string;
-    template?: TemplateRef<any>;
-    templateContext?: {};
+    severity: ToastType;
+    title: string;
+    content: string;
 }
 
 export interface IToastConfig {
     position: ToastPosition;
-    animationOut?: number;
-    animationIn?: number;
-    duration?: number;
+    duration: number;
+    newOnTop: boolean;
 }
 
 export const defaultToastConfig: IToastConfig = {
-    position: ToastPosition.CENTER,
-    animationOut: 2500,
-    animationIn: 300,
-    duration: 4000
+    position: ToastPosition.TOP_CENTER,
+    duration: 3000,
+    newOnTop: true
 };
 
 export const TOAST_CONFIG_TOKEN = new InjectionToken('toast-config');

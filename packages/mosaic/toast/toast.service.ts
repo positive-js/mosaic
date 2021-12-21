@@ -49,7 +49,9 @@ export class ToastService {
         const toast = this.resolver.resolveComponentFactory(ToastComponent);
         const containerRef = new ContainerRef(this.instance.container, this);
         const toastInjector = this.getInjector(data, containerRef, this.injector);
-        const componentRef = this.instance.container.createComponent(toast, 0, toastInjector);
+        const newOnTop = this.toastConfig.newOnTop ? 0 : undefined;
+
+        const componentRef = this.instance.container.createComponent(toast, newOnTop, toastInjector);
         const currentComponent = componentRef.instance;
         currentComponent.index = ++this.index;
         this.componentsRef = [...this.componentsRef, componentRef];
