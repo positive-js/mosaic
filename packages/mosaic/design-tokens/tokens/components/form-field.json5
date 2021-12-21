@@ -9,7 +9,7 @@
                     border: { value: '{light-color-scheme.second.palette.value.200.value}' }
                 },
                 invalid: {
-                    border: { value: '{light-color-scheme.error.palette.value.500.value}' },
+                    border: { value: '{light-color-scheme.states.focused-color-error.value}' },
                     background: { value: 'transparent' }
                 }
             }
@@ -23,7 +23,7 @@
                     border: { value: '{dark-color-scheme.second.palette.value.560.value}' }
                 },
                 invalid: {
-                    border: { value: '{dark-color-scheme.error.palette.value.560.value}' },
+                    border: { value: '{dark-color-scheme.states.focused-color-error.value}' },
                     background: { value: 'transparent' }
                 }
             }
