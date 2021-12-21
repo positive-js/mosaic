@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 20 Dec 2021 15:06:05 GMT
+ * Generated on Tue, 21 Dec 2021 04:17:40 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#db3c55";
@@ -527,8 +527,8 @@ export const ButtonDarkColorSchemePrimaryColor = "white";
 export const ButtonDarkColorSchemePrimaryBorder = "#b9023a";
 export const ButtonDarkColorSchemePrimaryBackground = "#b9023a";
 export const ButtonDarkColorSchemePrimaryIcon = "white";
-export const ButtonDarkColorSchemePrimaryStatesActiveBorder = "darken(#b9023a, 5)";
-export const ButtonDarkColorSchemePrimaryStatesActiveBackground = "darken(#ea5868, 5)";
+export const ButtonDarkColorSchemePrimaryStatesActiveBorder = "darken(#9e0130, 5)";
+export const ButtonDarkColorSchemePrimaryStatesActiveBackground = "darken(#9e0130, 5)";
 export const ButtonDarkColorSchemePrimaryTransparentColor = "#db3c55";
 export const ButtonDarkColorSchemePrimaryTransparentIcon = "#db3c55";
 export const ButtonDarkColorSchemePrimaryTransparentStatesHoverColor = "#9e0130";
@@ -545,8 +545,8 @@ export const ButtonDarkColorSchemeErrorBorder = "#515e69";
 export const ButtonDarkColorSchemeErrorBackground = "#515e69";
 export const ButtonDarkColorSchemeErrorColor = "#ea5868";
 export const ButtonDarkColorSchemeErrorIcon = "#ea5868";
-export const ButtonDarkColorSchemeErrorStatesActiveBorder = "darken(#515e69, 5)";
-export const ButtonDarkColorSchemeErrorStatesActiveBackground = "darken(#333f4a, 5)";
+export const ButtonDarkColorSchemeErrorStatesActiveBorder = "#333f4a";
+export const ButtonDarkColorSchemeErrorStatesActiveBackground = "#333f4a";
 export const ButtonSizeBorderWidth = "1px";
 export const ButtonSizeBorderRadius = "3px";
 export const ButtonSizeVerticalPadding = "6px";

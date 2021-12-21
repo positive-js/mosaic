@@ -71,8 +71,8 @@
 
                 states: {
                     active: {
-                        border: { value: 'darken({dark-color-scheme.primary.palette.value.560.value}, 5)' },
-                        background: { value: 'darken({dark-color-scheme.primary.palette.value.400.value}, 5)' }
+                        border: { value: 'darken({dark-color-scheme.primary.palette.value.600.value}, 5)' },
+                        background: { value: 'darken({dark-color-scheme.primary.palette.value.600.value}, 5)' }
                     }
                 }
             },
@@ -113,8 +113,8 @@
 
                 states: {
                     active: {
-                        border: { value: 'darken({dark-color-scheme.foreground.border.value}, 5)' },
-                        background: { value: 'darken({dark-color-scheme.background.background-disabled.value}, 5)' }
+                        border: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+                        background: { value: '{dark-color-scheme.second.palette.value.700.value}' }
                     }
                 }
             }
