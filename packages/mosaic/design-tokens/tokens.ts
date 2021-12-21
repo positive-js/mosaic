@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 21 Dec 2021 08:23:04 GMT
+ * Generated on Tue, 21 Dec 2021 10:01:54 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#0374eb";
@@ -557,30 +557,30 @@ export const ButtonFontPrimaryTransparent = "body";
 export const IconButtonSizeVerticalPadding = "6px";
 export const IconButtonSizeHorizontalPadding = "8px";
 export const IconButtonSizeIconHorizontalPadding = "16px";
-export const CardLightColorSchemeErrorVerticalLine = "#ea5868";
-export const CardLightColorSchemeErrorBackground = "#ffeaea";
-export const CardLightColorSchemeErrorShadow = "#d7dee4";
-export const CardLightColorSchemeWarningVerticalLine = "#f5c23c";
-export const CardLightColorSchemeWarningBackground = "#ffecce";
-export const CardLightColorSchemeWarningShadow = "#d7dee4";
-export const CardLightColorSchemeSuccessVerticalLine = "#8ed5a1";
-export const CardLightColorSchemeSuccessBackground = "#d2f7db";
-export const CardLightColorSchemeSuccessShadow = "#d7dee4";
-export const CardLightColorSchemeInfoVerticalLine = "#a2c7fe";
-export const CardLightColorSchemeInfoBackground = "#d9f3fd";
-export const CardLightColorSchemeInfoShadow = "#d7dee4";
-export const CardDarkColorSchemeErrorVerticalLine = "#ea5868";
-export const CardDarkColorSchemeErrorBackground = "#800025";
-export const CardDarkColorSchemeErrorShadow = "#333f4a";
-export const CardDarkColorSchemeWarningVerticalLine = "#c78816";
-export const CardDarkColorSchemeWarningBackground = "#543803";
-export const CardDarkColorSchemeWarningShadow = "#333f4a";
-export const CardDarkColorSchemeSuccessVerticalLine = "#319d5c";
-export const CardDarkColorSchemeSuccessBackground = "#004823";
-export const CardDarkColorSchemeSuccessShadow = "#333f4a";
-export const CardDarkColorSchemeInfoVerticalLine = "#2099b7";
-export const CardDarkColorSchemeInfoBackground = "#084453";
-export const CardDarkColorSchemeInfoShadow = "#333f4a";
+export const CardLightColorSchemeErrorVerticalLine = "#fbd6d6";
+export const CardLightColorSchemeErrorBackground = "#fff3f3";
+export const CardLightColorSchemeErrorShadow = "#fbd6d6";
+export const CardLightColorSchemeWarningVerticalLine = "#fcdda6";
+export const CardLightColorSchemeWarningBackground = "#fff4dd";
+export const CardLightColorSchemeWarningShadow = "#fcdda6";
+export const CardLightColorSchemeSuccessVerticalLine = "#b6ebc3";
+export const CardLightColorSchemeSuccessBackground = "#ecf9ef";
+export const CardLightColorSchemeSuccessShadow = "#b6ebc3";
+export const CardLightColorSchemeInfoVerticalLine = "#afe6f9";
+export const CardLightColorSchemeInfoBackground = "#ebf8fd";
+export const CardLightColorSchemeInfoShadow = "#afe6f9";
+export const CardDarkColorSchemeErrorVerticalLine = "#800025";
+export const CardDarkColorSchemeErrorBackground = "#500013";
+export const CardDarkColorSchemeErrorShadow = "#800025";
+export const CardDarkColorSchemeWarningVerticalLine = "#543803";
+export const CardDarkColorSchemeWarningBackground = "#3e3015";
+export const CardDarkColorSchemeWarningShadow = "#543803";
+export const CardDarkColorSchemeSuccessVerticalLine = "#004823";
+export const CardDarkColorSchemeSuccessBackground = "#103920";
+export const CardDarkColorSchemeSuccessShadow = "#004823";
+export const CardDarkColorSchemeInfoVerticalLine = "#084453";
+export const CardDarkColorSchemeInfoBackground = "#143641";
+export const CardDarkColorSchemeInfoShadow = "#084453";
 export const CardSizeVerticalLine = "4px";
 export const CheckboxLightColorSchemeBorder = "#bdc7d1";
 export const CheckboxLightColorSchemeStatesCheckedBorder = "#0374eb";
