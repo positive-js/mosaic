@@ -1,7 +1,6 @@
 // tslint:disable:no-magic-numbers
 // tslint:disable:mocha-no-side-effect-code
 /* tslint:disable:match-default-export-name */
-import ru from '@angular/common/locales/ru';
 import { LOCALE_ID } from '@angular/core';
 import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
