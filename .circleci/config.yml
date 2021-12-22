@@ -57,17 +57,11 @@ var_10: &filter_by_release_tag
     tags:
         only: /^\d+\.\d+\.\d+$/
 
-#var_11: &docs_stable_version
-#    branches:
-#        ignore: /.*/
-#    tags:
-#        only: /11\.\d+\.\d+$/
-
 var_12: &docs_stable_version
     branches:
         ignore: /.*/
     tags:
-        only: /12\.\d+\.\d+$/
+        only: /13\.\d+\.\d+$/
 
 # Configures CircleCI orbs for this pipeline. Orbs allow consumption of publicly shared
 # CircleCI commands, jobs, configuration elements or executors.
@@ -82,8 +76,12 @@ orbs:
 executors:
     mosaic:
         working_directory: ~/mosaic
+        parameters:
+            resource_class:
+                type: string
+                default: medium
         docker:
-            - image: circleci/node:lts-buster
+            - image: cimg/node:16.10.0
               auth:
                   username: $DOCKER_HUB_USERNAME
                   password: $DOCKER_HUB_TOKEN
@@ -91,7 +89,7 @@ executors:
     mosaic-browsers:
         working_directory: ~/mosaic
         docker:
-            -   image: circleci/node:lts-browsers
+            -   image: cimg/node:16.10.0-browsers
                 auth:
                     username: $DOCKER_HUB_USERNAME
                     password: $DOCKER_HUB_TOKEN
@@ -107,6 +105,13 @@ commands:
             - attach_workspace:
                   at: ~/mosaic
 
+    yarn_install:
+        description: Install NPM dependencies
+        steps:
+            - run:
+                name: yarn install
+                command: yarn install --frozen-lockfile --non-interactive
+
 # Job definitions
 # Jobs can include parameters that are passed in the workflow job invocation.
 # https://circleci.com/docs/2.0/reusing-config/#authoring-parameterized-jobs
@@ -117,10 +122,7 @@ jobs:
         steps:
             - checkout
             - *restore_cache
-            - run:
-                  name: Install NPM dependencies 🦎
-                  command: |
-                      yarn install --frozen-lockfile --non-interactive
+            - yarn_install
             - save_cache:
                   key: *cache_key
                   paths:
