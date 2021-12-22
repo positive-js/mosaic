@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Wed, 22 Dec 2021 13:34:15 GMT
+// Generated on Wed, 22 Dec 2021 13:44:24 GMT
 
 $light-color-scheme-primary-default: #028b49;
 $light-color-scheme-second-default: #8c99a5;
@@ -40,10 +40,10 @@ $dark-color-scheme-background-background: #19252f;
 $dark-color-scheme-background-background-disabled: #333f4a;
 $dark-color-scheme-background-overlay-hover: rgba(black, 0.05);
 $dark-color-scheme-background-overlay-active: rgba(black, 0.1);
-$dark-color-scheme-background-overlay-disabled: rgba(white, 0.2);
+$dark-color-scheme-background-overlay-disabled: rgba(black, 0.2);
 $dark-color-scheme-states-focused-color: #319d5c;
 $dark-color-scheme-states-focused-color-error: #b9023a;
-$dark-color-scheme-states-selected-color: #004823;
+$dark-color-scheme-states-selected-color: #015a2d;
 $dark-color-scheme-states-pressed-shadow: inset 1px 2px 2px 0 rgba(black, 0.2);
 $dark-color-scheme-states-disabled-opacity: 0.3;
 $font-family-base: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
@@ -403,7 +403,7 @@ $button-light-color-scheme-error-states-active-background: #bdc7d1;
 $button-dark-color-scheme-active-shadow: inset 1px 2px 2px 0 rgba(black, 0.2);
 $button-dark-color-scheme-primary-color: white;
 $button-dark-color-scheme-primary-border: #016b37;
-$button-dark-color-scheme-primary-background: #016b37;
+$button-dark-color-scheme-primary-background: #319d5c;
 $button-dark-color-scheme-primary-icon: white;
 $button-dark-color-scheme-primary-states-active-border: darken(#015a2d, 5);
 $button-dark-color-scheme-primary-states-active-background: darken(#015a2d, 5);
@@ -478,9 +478,9 @@ $checkbox-font-default: body;
 $datepicker-toggle-size-width: 30px;
 $datepicker-toggle-size-height: 30px;
 $datepicker-body-light-color-scheme-states-selected-color: #028b49;
-$datepicker-body-light-color-scheme-states-selected-background: #b6ebc3;
-$datepicker-body-dark-color-scheme-states-selected-color: #028b49;
-$datepicker-body-dark-color-scheme-states-selected-background: #004823;
+$datepicker-body-light-color-scheme-states-selected-background: #d2f7db;
+$datepicker-body-dark-color-scheme-states-selected-color: #319d5c;
+$datepicker-body-dark-color-scheme-states-selected-background: #015a2d;
 $datepicker-body-size-label-paddings: 8px 28px 12px 12px;
 $datepicker-body-size-cell-min-size: 32px;
 $datepicker-body-size-cell-margin: 5%;
@@ -728,12 +728,12 @@ $table-size-row-padding-vertical: 8px;
 $table-size-row-padding-horizontal: 16px;
 $table-font-header: caption;
 $table-font-body: body;
-$tabs-light-color-scheme-border: #8c99a5;
+$tabs-light-color-scheme-border: #d7dee4;
 $tabs-light-color-scheme-state-active: #028b49;
-$tabs-light-color-scheme-state-disabled-overlay: rgba(white, 0.5);
-$tabs-dark-color-scheme-border: #8c99a5;
+$tabs-light-color-scheme-state-disabled-overlay: rgba(white, 0.3);
+$tabs-dark-color-scheme-border: #333f4a;
 $tabs-dark-color-scheme-state-active: #319d5c;
-$tabs-dark-color-scheme-state-disabled-overlay: rgba(white, 0.5);
+$tabs-dark-color-scheme-state-disabled-overlay: rgba(black, 0.2);
 $tabs-size-height: 40px;
 $tabs-size-highlight-height: 4px;
 $tabs-size-padding-horizontal: 16px;

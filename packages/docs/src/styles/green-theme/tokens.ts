@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 22 Dec 2021 13:34:15 GMT
+ * Generated on Wed, 22 Dec 2021 13:44:24 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#028b49";
@@ -53,10 +53,10 @@ export const DarkColorSchemeBackgroundBackground = "#19252f";
 export const DarkColorSchemeBackgroundBackgroundDisabled = "#333f4a";
 export const DarkColorSchemeBackgroundOverlayHover = "rgba(black, 0.05)";
 export const DarkColorSchemeBackgroundOverlayActive = "rgba(black, 0.1)";
-export const DarkColorSchemeBackgroundOverlayDisabled = "rgba(white, 0.2)";
+export const DarkColorSchemeBackgroundOverlayDisabled = "rgba(black, 0.2)";
 export const DarkColorSchemeStatesFocusedColor = "#319d5c";
 export const DarkColorSchemeStatesFocusedColorError = "#b9023a";
-export const DarkColorSchemeStatesSelectedColor = "#004823";
+export const DarkColorSchemeStatesSelectedColor = "#015a2d";
 export const DarkColorSchemeStatesPressedShadow = "inset 1px 2px 2px 0 rgba(black, 0.2)";
 export const DarkColorSchemeStatesDisabledOpacity = 0.3;
 export const FontFamilyBase = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
@@ -525,7 +525,7 @@ export const ButtonLightColorSchemeErrorStatesActiveBackground = "#bdc7d1";
 export const ButtonDarkColorSchemeActiveShadow = "inset 1px 2px 2px 0 rgba(black, 0.2)";
 export const ButtonDarkColorSchemePrimaryColor = "white";
 export const ButtonDarkColorSchemePrimaryBorder = "#016b37";
-export const ButtonDarkColorSchemePrimaryBackground = "#016b37";
+export const ButtonDarkColorSchemePrimaryBackground = "#319d5c";
 export const ButtonDarkColorSchemePrimaryIcon = "white";
 export const ButtonDarkColorSchemePrimaryStatesActiveBorder = "darken(#015a2d, 5)";
 export const ButtonDarkColorSchemePrimaryStatesActiveBackground = "darken(#015a2d, 5)";
@@ -600,9 +600,9 @@ export const CheckboxFontDefault = "body";
 export const DatepickerToggleSizeWidth = "30px";
 export const DatepickerToggleSizeHeight = "30px";
 export const DatepickerBodyLightColorSchemeStatesSelectedColor = "#028b49";
-export const DatepickerBodyLightColorSchemeStatesSelectedBackground = "#b6ebc3";
-export const DatepickerBodyDarkColorSchemeStatesSelectedColor = "#028b49";
-export const DatepickerBodyDarkColorSchemeStatesSelectedBackground = "#004823";
+export const DatepickerBodyLightColorSchemeStatesSelectedBackground = "#d2f7db";
+export const DatepickerBodyDarkColorSchemeStatesSelectedColor = "#319d5c";
+export const DatepickerBodyDarkColorSchemeStatesSelectedBackground = "#015a2d";
 export const DatepickerBodySizeLabelPaddings = "8px 28px 12px 12px";
 export const DatepickerBodySizeCellMinSize = "32px";
 export const DatepickerBodySizeCellMargin = "5%";
@@ -850,12 +850,12 @@ export const TableSizeRowPaddingVertical = "8px";
 export const TableSizeRowPaddingHorizontal = "16px";
 export const TableFontHeader = "caption";
 export const TableFontBody = "body";
-export const TabsLightColorSchemeBorder = "#8c99a5";
+export const TabsLightColorSchemeBorder = "#d7dee4";
 export const TabsLightColorSchemeStateActive = "#028b49";
-export const TabsLightColorSchemeStateDisabledOverlay = "rgba(white, 0.5)";
-export const TabsDarkColorSchemeBorder = "#8c99a5";
+export const TabsLightColorSchemeStateDisabledOverlay = "rgba(white, 0.3)";
+export const TabsDarkColorSchemeBorder = "#333f4a";
 export const TabsDarkColorSchemeStateActive = "#319d5c";
-export const TabsDarkColorSchemeStateDisabledOverlay = "rgba(white, 0.5)";
+export const TabsDarkColorSchemeStateDisabledOverlay = "rgba(black, 0.2)";
 export const TabsSizeHeight = "40px";
 export const TabsSizeHighlightHeight = "4px";
 export const TabsSizePaddingHorizontal = "16px";
