@@ -23,46 +23,50 @@ export class RelativeDateFormatterExample {
         ru: {
             relative: {
                 long: {
-                    secondsAgo: '',
-                    minutesAgo: '',
-                    today: '',
-                    yesterday: '',
+                    beforeYesterdayNotCurrentYear: '',
                     beforeYesterdayCurrentYear: '',
-                    beforeYesterdayNotCurrentYear: ''
+                    yesterday: '',
+                    today: '',
+                    tomorrow: '',
+                    afterTomorrowCurrentYear: '',
+                    afterTomorrowNotCurrentYear: ''
                 },
                 short: {
-                    secondsAgo: '',
-                    minutesAgo: '',
-                    today: '',
-                    yesterday: '',
+                    beforeYesterdayNotCurrentYear: '',
                     beforeYesterdayCurrentYear: '',
-                    beforeYesterdayNotCurrentYear: ''
+                    yesterday: '',
+                    today: '',
+                    tomorrow: '',
+                    afterTomorrowCurrentYear: '',
+                    afterTomorrowNotCurrentYear: ''
                 }
             }
         },
         en: {
             relative: {
                 long: {
-                    secondsAgo: '',
-                    minutesAgo: '',
-                    today: '',
-                    yesterday: '',
+                    beforeYesterdayNotCurrentYear: '',
                     beforeYesterdayCurrentYear: '',
-                    beforeYesterdayNotCurrentYear: ''
+                    yesterday: '',
+                    today: '',
+                    tomorrow: '',
+                    afterTomorrowCurrentYear: '',
+                    afterTomorrowNotCurrentYear: ''
                 },
                 short: {
-                    secondsAgo: '',
-                    minutesAgo: '',
-                    today: '',
-                    yesterday: '',
+                    beforeYesterdayNotCurrentYear: '',
                     beforeYesterdayCurrentYear: '',
-                    beforeYesterdayNotCurrentYear: ''
+                    yesterday: '',
+                    today: '',
+                    tomorrow: '',
+                    afterTomorrowCurrentYear: '',
+                    afterTomorrowNotCurrentYear: ''
                 }
             }
         }
     };
 
-    constructor(private adapter: DateAdapter<DateTime>, private formatter: DateFormatter<DateTime>) {
+    constructor(private adapter: DateAdapter<DateTime>, private dateFormatter: DateFormatter<DateTime>) {
         this.populateRelativeLong('ru');
         this.populateRelativeLong('en');
 
@@ -71,36 +75,46 @@ export class RelativeDateFormatterExample {
     }
 
     private populateRelativeShort(locale: string) {
-        this.formatter.setLocale(locale);
+        this.dateFormatter.setLocale(locale);
         this.adapter.setLocale(locale);
 
         const relativeShort = this.formats[locale].relative.short;
         const now = this.adapter.today();
 
-        relativeShort.secondsAgo = this.formatter.relativeShortDate(now.minus({ seconds: 1 }));
-        relativeShort.minutesAgo = this.formatter.relativeShortDate(now.minus({ minute: 1 }));
-        relativeShort.today = this.formatter.relativeShortDate(now.minus({ hours: 1 }));
-        relativeShort.yesterday = this.formatter.relativeShortDate(now.minus({ days: 1 }));
-        relativeShort.beforeYesterdayCurrentYear = this.formatter.relativeShortDate(now.minus({ days: 2 }));
-        relativeShort.beforeYesterdayNotCurrentYear = this.formatter.relativeShortDate(
+        relativeShort.beforeYesterdayNotCurrentYear = this.dateFormatter.relativeShortDate(
             now.minus({ years: 1, days: 2 })
+        );
+        relativeShort.beforeYesterdayCurrentYear = this.dateFormatter.relativeShortDate(now.minus({ days: 2 }));
+        relativeShort.yesterday = this.dateFormatter.relativeShortDate(now.minus({ days: 1 }));
+
+        relativeShort.today = this.dateFormatter.relativeShortDate(now.minus({ hours: 1 }));
+
+        relativeShort.tomorrow = this.dateFormatter.relativeShortDate(now.plus({ days: 1, hours: 1 }));
+        relativeShort.afterTomorrowCurrentYear = this.dateFormatter.relativeShortDate(now.plus({ days: 2, hours: 1 }));
+        relativeShort.afterTomorrowNotCurrentYear = this.dateFormatter.relativeShortDate(
+            now.plus({ years: 1, days: 2 })
         );
     }
 
     private populateRelativeLong(locale: string) {
-        this.formatter.setLocale(locale);
+        this.dateFormatter.setLocale(locale);
         this.adapter.setLocale(locale);
 
         const relativeLong = this.formats[locale].relative.long;
         const now = this.adapter.today();
 
-        relativeLong.secondsAgo = this.formatter.relativeLongDate(now.minus({ seconds: 1 }));
-        relativeLong.minutesAgo = this.formatter.relativeLongDate(now.minus({ minute: 1 }));
-        relativeLong.today = this.formatter.relativeLongDate(now.minus({ hours: 1 }));
-        relativeLong.yesterday = this.formatter.relativeLongDate(now.minus({ days: 1 }));
-        relativeLong.beforeYesterdayCurrentYear = this.formatter.relativeLongDate(now.minus({ days: 2 }));
-        relativeLong.beforeYesterdayNotCurrentYear = this.formatter.relativeLongDate(
+        relativeLong.beforeYesterdayNotCurrentYear = this.dateFormatter.relativeLongDate(
             now.minus({ years: 1, days: 2 })
+        );
+        relativeLong.beforeYesterdayCurrentYear = this.dateFormatter.relativeLongDate(now.minus({ days: 2 }));
+        relativeLong.yesterday = this.dateFormatter.relativeLongDate(now.minus({ days: 1 }));
+
+        relativeLong.today = this.dateFormatter.relativeLongDate(now.minus({ hours: 1 }));
+
+        relativeLong.tomorrow = this.dateFormatter.relativeLongDate(now.plus({ days: 1, hours: 1 }));
+        relativeLong.afterTomorrowCurrentYear = this.dateFormatter.relativeLongDate(now.plus({ days: 2, hours: 1 }));
+        relativeLong.afterTomorrowNotCurrentYear = this.dateFormatter.relativeLongDate(
+            now.plus({ years: 1, days: 2 })
         );
     }
 }
