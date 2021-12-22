@@ -99,7 +99,7 @@
 
             'overlay-hover': { value: 'rgba(black, 0.05)' },
             'overlay-active': { value: 'rgba(black, 0.1)' },
-            'overlay-disabled': { value: 'rgba(white, 0.2)' }
+            'overlay-disabled': { value: 'rgba(black, 0.2)' }
         },
         states: {
             'focused-color': { value: '{dark-color-scheme.primary.palette.value.400.value}' },
