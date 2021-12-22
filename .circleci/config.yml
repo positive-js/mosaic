@@ -81,7 +81,7 @@ executors:
                 type: string
                 default: medium
         docker:
-            - image: cimg/node:16.10.0
+            - image: cimg/node:16.13.0
               auth:
                   username: $DOCKER_HUB_USERNAME
                   password: $DOCKER_HUB_TOKEN
@@ -89,7 +89,7 @@ executors:
     mosaic-browsers:
         working_directory: ~/mosaic
         docker:
-            -   image: cimg/node:16.10.0-browsers
+              - image: cimg/node:16.13.0-browsers
                 auth:
                     username: $DOCKER_HUB_USERNAME
                     password: $DOCKER_HUB_TOKEN
