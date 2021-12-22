@@ -1,27 +1,27 @@
 {
     tooltip: {
         'light-color-scheme': {
-            background: { value: '{light-color-scheme.second.palette.value.700.value}' },
+            background: { value: '{light-color-scheme.second.palette.value.600.value}' },
             text: { value: '{light-color-scheme.second.palette.value.contrast.700.value}' },
             border: { value: 'transparent' },
             shadow: { value: '0 2px 4px 0 rgba(0, 0, 0, 0.2)' },
 
             'warning': {
-                background: { value: '{light-color-scheme.warning.palette.value.60.value}' },
-                text: { value: '{light-color-scheme.second.palette.value.700.value}' },
-                border: { value: '{light-color-scheme.warning.palette.value.200.value}' }
+                background: { value: '{light-color-scheme.warning.palette.value.40.value}' },
+                text: { value: '{light-color-scheme.foreground.text.value}' },
+                border: { value: '{light-color-scheme.warning.palette.value.100.value}' }
             }
         },
         'dark-color-scheme': {
-            background: { value: '{dark-color-scheme.second.palette.value.40.value}' },
-            text: { value: '{dark-color-scheme.second.palette.value.contrast.40.value}' },
+            background: { value: '{popup.light-color-scheme.background.value}' },
+            text: { value: '{dark-color-scheme.second.palette.value.900.value}' },
             border: { value: 'transparent' },
             shadow: { value: '0 2px 4px 0 rgba(0, 0, 0, 0.2)' },
 
             'warning': {
-                background: { value: '{dark-color-scheme.warning.palette.value.60.value}' },
-                text: { value: '{dark-color-scheme.second.palette.value.700.value}' },
-                border: { value: '{dark-color-scheme.warning.palette.value.200.value}' }
+                background: { value: '{dark-color-scheme.warning.palette.value.560.value}' },
+                text: { value: '{dark-color-scheme.foreground.text.value}' },
+                border: { value: '{dark-color-scheme.warning.palette.value.560.value}' }
             }
         },
         size: {
@@ -62,14 +62,14 @@
     },
     'extended-tooltip-header': {
         'light-color-scheme': {
-            border: { value: '{light-color-scheme.second.palette.value.100.value}' },
+            border: { value: '{popup.light-color-scheme.border.value}' },
             text: { value: '{light-color-scheme.foreground.text.value}' },
-            background: { value: 'white' }
+            background: { value: '{popup.light-color-scheme.background.value}' }
         },
         'dark-color-scheme': {
-            border: { value: '{light-color-scheme.second.palette.value.60.value}' },
+            border: { value: '{popup.dark-color-scheme.border.value}' },
             text: { value: '{dark-color-scheme.foreground.text.value}' },
-            background: { value: '{light-color-scheme.second.palette.value.700.value}' }
+            background: { value: '{popup.dark-color-scheme.background.value}' }
         },
         size: {
             height: { value: '40px' },
