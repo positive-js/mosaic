@@ -5,10 +5,12 @@ import {
     Component,
     Directive,
     ElementRef,
+    EventEmitter,
     Input,
     NgZone,
     OnDestroy,
     OnInit,
+    Output,
     QueryList,
     Renderer2,
     ViewChildren,
@@ -46,7 +48,6 @@ export enum Direction {
     Horizontal = 'horizontal',
     Vertical = 'vertical'
 }
-
 
 @Directive({
     selector: 'mc-gutter',
@@ -185,6 +186,8 @@ export class McSplitterComponent implements OnInit {
         const size = coerceNumberProperty(gutterSize);
         this._gutterSize = size > 0 ? size : this.gutterSize;
     }
+
+    @Output() gutterPositionChange: EventEmitter<void> = new EventEmitter<void>();
 
     private _gutterSize: number = 6;
 
@@ -342,6 +345,8 @@ export class McSplitterComponent implements OnInit {
         this.isDragging = false;
 
         this.updateGutter();
+
+        this.gutterPositionChange.emit();
     }
 
     private setStyle(property: StyleProperty, value: string | number) {
@@ -356,6 +361,8 @@ export class McSplitterComponent implements OnInit {
     }
 })
 export class McSplitterAreaDirective implements OnInit, OnDestroy {
+    @Output() sizeChange: EventEmitter<number> = new EventEmitter<number>();
+
     constructor(
         private elementRef: ElementRef,
         private renderer: Renderer2,
@@ -378,6 +385,8 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
             this.setStyle(StyleProperty.Height, '100%');
             this.removeStyle(StyleProperty.Width);
         }
+
+        this.splitter.gutterPositionChange.subscribe(() => this.emitSizeChange() );
     }
 
     ngOnDestroy(): void {
@@ -433,5 +442,9 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
 
     private removeStyle(style: StyleProperty) {
         this.renderer.removeStyle(this.elementRef.nativeElement, style);
+    }
+
+    private emitSizeChange(): void {
+        this.sizeChange.emit(this.getSize());
     }
 }
