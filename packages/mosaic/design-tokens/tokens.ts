@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 22 Dec 2021 07:46:33 GMT
+ * Generated on Wed, 22 Dec 2021 10:55:28 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#0374eb";
@@ -685,8 +685,8 @@ export const LinkLightColorSchemeStateHoverText = "#0059b8";
 export const LinkLightColorSchemeStateHoverBorderBottom = "rgba(#0059b8, 0.32)";
 export const LinkLightColorSchemeStateActive = "#014b9d";
 export const LinkLightColorSchemeStateFocusedOutline = "#0374eb";
-export const LinkDarkColorSchemeText = "#0059b8";
-export const LinkDarkColorSchemeBorderBottom = "rgba(#0059b8, 0.32)";
+export const LinkDarkColorSchemeText = "#4187ff";
+export const LinkDarkColorSchemeBorderBottom = "rgba(#4187ff, 0.32)";
 export const LinkDarkColorSchemeStateVisitedText = "#bb78a7";
 export const LinkDarkColorSchemeStateVisitedBorderBottom = "rgba(#bb78a7, 0.32)";
 export const LinkDarkColorSchemeStateHoverText = "#0374eb";
