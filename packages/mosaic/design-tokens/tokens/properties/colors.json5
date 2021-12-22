@@ -56,7 +56,7 @@
     },
     'dark-color-scheme': {
         primary: {
-            default: { value: '{palette.blue.400.value}' },
+            default: { value: '{palette.blue.560.value}' },
 
             palette: { value: '{palette.blue}' }
         },

@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Wed, 22 Dec 2021 07:09:22 GMT
+// Generated on Wed, 22 Dec 2021 07:46:35 GMT
 
 $light-color-scheme-primary-default: #0374eb;
 $light-color-scheme-second-default: #8c99a5;
@@ -24,7 +24,7 @@ $light-color-scheme-states-focused-color-error: #db3c55;
 $light-color-scheme-states-selected-color: #e7f1ff;
 $light-color-scheme-states-pressed-shadow: inset 0 1px 2px 0 rgba(black, 0.2);
 $light-color-scheme-states-disabled-opacity: 0.3;
-$dark-color-scheme-primary-default: #4187ff;
+$dark-color-scheme-primary-default: #0059b8;
 $dark-color-scheme-second-default: #7f8c98;
 $dark-color-scheme-error-default: #ea5868;
 $dark-color-scheme-info-default: #2099b7;
@@ -479,7 +479,7 @@ $datepicker-toggle-size-width: 30px;
 $datepicker-toggle-size-height: 30px;
 $datepicker-body-light-color-scheme-states-selected-color: #0374eb;
 $datepicker-body-light-color-scheme-states-selected-background: #e7f1ff;
-$datepicker-body-dark-color-scheme-states-selected-color: #4187ff;
+$datepicker-body-dark-color-scheme-states-selected-color: #0059b8;
 $datepicker-body-dark-color-scheme-states-selected-background: #014b9d;
 $datepicker-body-size-label-paddings: 8px 28px 12px 12px;
 $datepicker-body-size-cell-min-size: 32px;
@@ -563,8 +563,8 @@ $link-light-color-scheme-state-hover-text: #0059b8;
 $link-light-color-scheme-state-hover-border-bottom: rgba(#0059b8, 0.32);
 $link-light-color-scheme-state-active: #014b9d;
 $link-light-color-scheme-state-focused-outline: #0374eb;
-$link-dark-color-scheme-text: #4187ff;
-$link-dark-color-scheme-border-bottom: rgba(#4187ff, 0.32);
+$link-dark-color-scheme-text: #0059b8;
+$link-dark-color-scheme-border-bottom: rgba(#0059b8, 0.32);
 $link-dark-color-scheme-state-visited-text: #bb78a7;
 $link-dark-color-scheme-state-visited-border-bottom: rgba(#bb78a7, 0.32);
 $link-dark-color-scheme-state-hover-text: #0374eb;
@@ -730,10 +730,10 @@ $table-font-header: caption;
 $table-font-body: body;
 $tabs-light-color-scheme-border: #d7dee4;
 $tabs-light-color-scheme-state-active: #0374eb;
-$tabs-light-color-scheme-state-disabled-overlay: rgba(white, 0.5);
+$tabs-light-color-scheme-state-disabled-overlay: rgba(white, 0.3);
 $tabs-dark-color-scheme-border: #333f4a;
 $tabs-dark-color-scheme-state-active: #0059b8;
-$tabs-dark-color-scheme-state-disabled-overlay: rgba(white, 0.5);
+$tabs-dark-color-scheme-state-disabled-overlay: rgba(black, 0.2);
 $tabs-size-height: 40px;
 $tabs-size-highlight-height: 4px;
 $tabs-size-padding-horizontal: 16px;
