@@ -48,9 +48,8 @@ module.exports = () => {
 
         customLaunchers: {
             'ChromeHeadlessLocal': {
-                'base': 'Chrome',
+                'base': 'ChromeHeadless',
                 'flags': [
-                    '--headless',
                     '--disable-gpu',
                     '--disable-dev-shm-usage',
                     '--window-size=1024,768',
