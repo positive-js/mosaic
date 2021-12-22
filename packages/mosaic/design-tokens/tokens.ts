@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 22 Dec 2021 07:46:33 GMT
+ * Generated on Wed, 22 Dec 2021 10:55:53 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#0374eb";
@@ -601,7 +601,7 @@ export const DatepickerToggleSizeWidth = "30px";
 export const DatepickerToggleSizeHeight = "30px";
 export const DatepickerBodyLightColorSchemeStatesSelectedColor = "#0374eb";
 export const DatepickerBodyLightColorSchemeStatesSelectedBackground = "#e7f1ff";
-export const DatepickerBodyDarkColorSchemeStatesSelectedColor = "#0059b8";
+export const DatepickerBodyDarkColorSchemeStatesSelectedColor = "#4187ff";
 export const DatepickerBodyDarkColorSchemeStatesSelectedBackground = "#014b9d";
 export const DatepickerBodySizeLabelPaddings = "8px 28px 12px 12px";
 export const DatepickerBodySizeCellMinSize = "32px";
