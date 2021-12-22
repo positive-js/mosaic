@@ -7,7 +7,7 @@
             primary: {
                 color: { value: '{light-color-scheme.primary.palette.value.contrast.500.value}' },
                 border: { value: '{light-color-scheme.primary.palette.value.500.value}' },
-                background: { value: '{light-color-scheme.primary.palette.value.500.value}' },
+                background: { value: '{light-color-scheme.primary.default.value}' },
                 icon: { value: '{light-color-scheme.primary.palette.value.contrast.500.value}' },
 
                 states: {
@@ -66,7 +66,7 @@
             primary: {
                 color: { value: '{dark-color-scheme.primary.palette.value.contrast.500.value}' },
                 border: { value: '{dark-color-scheme.primary.palette.value.560.value}' },
-                background: { value: '{dark-color-scheme.primary.palette.value.560.value}' },
+                background: { value: '{dark-color-scheme.primary.default.value}' },
                 icon: { value: '{dark-color-scheme.primary.palette.value.contrast.500.value}' },
 
                 states: {
