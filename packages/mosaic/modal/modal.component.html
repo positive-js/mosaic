@@ -72,7 +72,7 @@
             </ng-container>
         </ng-container>
     </div>
-    <div *ngIf="mcFooter !== null" class="mc-modal-footer" [class.mc-modal-body_bottom-overflow]="isBottomOverflow">
+    <div *ngIf="mcFooter !== null || mcOkText !== null || mcCancelText !== null" class="mc-modal-footer" [class.mc-modal-body_bottom-overflow]="isBottomOverflow">
         <ng-container [ngSwitch]="true">
             <ng-container *ngSwitchCase="isTemplateRef(mcFooter)" [ngTemplateOutlet]="$any(mcFooter)"></ng-container>
             <ng-container *ngSwitchCase="isNonEmptyString(mcFooter)">
@@ -135,19 +135,19 @@
             </div>
         </div> <!-- /.mc-confirm-body-wrapper -->
     </div>
-    <div class="mc-confirm-btns">
+    <div class="mc-confirm-btns" *ngIf="mcOkText !== null || mcCancelText !== null">
         <button
             mc-button
             #autoFocusedButton
             [color]="mcOkType"
             [attr.autofocus]="true"
-            *ngIf="mcOkText !== ''"
+            *ngIf="mcOkText !== null"
             (click)="onClickOkCancel('ok')">
 
             {{ okText }}
         </button>
 
-        <button mc-button [color]="themePalette.Second" *ngIf="mcCancelText !== ''" (click)="onClickOkCancel('cancel')">
+        <button mc-button [color]="themePalette.Second" *ngIf="mcCancelText !== null" (click)="onClickOkCancel('cancel')">
             {{ cancelText }}
         </button>
     </div>

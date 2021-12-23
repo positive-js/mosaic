@@ -94,6 +94,20 @@ export class McModalService {
         if (!('mcCloseByESC' in options)) {
             options.mcCloseByESC = true;
         }
+        // Remove the Cancel button if the user not specify a Cancel button
+        if (!('mcCancelText' in options)) {
+            // @ts-ignore
+            options.mcCancelText = null;
+        }
+        // Remove the Ok button if the user not specify a Ok button
+        if (!('mcOkText' in options)) {
+            // @ts-ignore
+            options.mcOkText = null;
+        }
+        if (!('mcFooter' in options)) {
+            // @ts-ignore
+            options.mcFooter = null;
+        }
 
         return new ModalBuilderForService(this.overlay, options).getInstance()!;
     }
@@ -133,12 +147,6 @@ export class McModalService {
     }
 
     private simpleConfirm<T>(options: IModalOptionsForService<T> = {}, confirmType: ConfirmType): McModalRef<T> {
-        // Remove the Cancel button if the user not specify a Cancel button
-        if (!('mcCancelText' in options)) {
-            // @ts-ignore
-            options.mcCancelText = null;
-        }
-
         return this.confirm(options, confirmType);
     }
 }
