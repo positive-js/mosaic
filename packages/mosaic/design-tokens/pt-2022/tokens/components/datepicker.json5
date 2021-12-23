@@ -9,16 +9,16 @@
         'light-color-scheme': {
             states: {
                 selected: {
-                    color: { value: '{light-color-scheme.primary.default.value}' },
-                    background: { value: '{light-color-scheme.primary.palette.value.100.value}' }
+                    color: { value: '{light-color-scheme.primary.palette.value.500.value}' },
+                    background: { value: '{light-color-scheme.states.selected-color.value}' }
                 }
             }
         },
         'dark-color-scheme': {
             states: {
                 selected: {
-                    color: { value: '{dark-color-scheme.primary.palette.value.500.value}' },
-                    background: { value: '{dark-color-scheme.primary.palette.value.700.value}' }
+                    color: { value: '{dark-color-scheme.primary.palette.value.400.value}' },
+                    background: { value: '{dark-color-scheme.states.selected-color.value}' }
                 }
             }
         },
