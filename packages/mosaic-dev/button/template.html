@@ -1,23 +1,73 @@
+<button mc-button (click)="disabledState = !disabledState">
+    Toggle disable state
+</button>
+
+<br><br><br>
+
 <div>
-    <button mc-button>
+
+    <button mc-button
+            [disabled]="disabledState"
+            (click)="onClick()">
         <i mc-icon="mc-angle-down-L_16"></i>
     </button>&nbsp;
 
-    <button mc-button>
+    <button mc-button
+            [disabled]="disabledState"
+            (click)="onClick()">
         <i mc-icon="mc-play_16"></i>
         default
     </button>&nbsp;
 
-    <a mc-button>
+    <a mc-button
+       href="#"
+       [disabled]="disabledState"
+       (click)="onClick()">
         default
         <i mc-icon="mc-angle-down-L_16"></i>
     </a>&nbsp;
 
-    <button mc-button>
+    <button mc-button
+            (click)="onClick()"
+            [disabled]="disabledState"
+            [mcTooltip]="'Tooltip text'">
         <i mc-icon="mc-play_16"></i>
         default
         <i mc-icon="mc-angle-down-L_16"></i>
     </button>&nbsp;
+
+    <br>
+    <br>
+
+    <span mc-button
+          [disabled]="disabledState"
+          (click)="onClick()">
+        <i mc-icon="mc-angle-down-L_16"></i>
+    </span>&nbsp;
+
+    <span mc-button
+          [disabled]="disabledState"
+          (click)="onClick()">
+        <i mc-icon="mc-play_16"></i>
+        default
+    </span>&nbsp;
+
+    <span mc-button
+          [disabled]="disabledState"
+          (click)="onClick()">
+        default
+        <i mc-icon="mc-angle-down-L_16"></i>
+    </span>&nbsp;
+
+    <div mc-button
+         (click)="onClick()"
+         [disabled]="disabledState"
+         [mcTooltip]="'Tooltip text'">
+
+        <i mc-icon="mc-play_16"></i>
+        default
+        <i mc-icon="mc-angle-down-L_16"></i>
+    </div>&nbsp;
 
     <br>
     <br>

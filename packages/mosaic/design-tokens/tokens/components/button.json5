@@ -1,19 +1,19 @@
 {
     button: {
         'light-color-scheme': {
-            active: {
+             active: {
                 shadow: { value: 'inset 0 1px 2px 0 rgba(black, 0.2)' }
             },
             primary: {
                 color: { value: '{light-color-scheme.primary.palette.value.contrast.500.value}' },
-                border: { value: '{light-color-scheme.primary.palette.value.560.value}' },
-                background: { value: '{light-color-scheme.primary.palette.value.500.value}' },
+                border: { value: '{light-color-scheme.primary.palette.value.500.value}' },
+                background: { value: '{light-color-scheme.primary.default.value}' },
                 icon: { value: '{light-color-scheme.primary.palette.value.contrast.500.value}' },
 
                 states: {
                     active: {
-                        border: { value: 'darken({light-color-scheme.primary.palette.value.560.value}, 5)' },
-                        background: { value: 'darken({light-color-scheme.primary.palette.value.500.value}, 5)' }
+                        border: { value: '{light-color-scheme.primary.palette.value.560.value}' },
+                        background: { value: '{light-color-scheme.primary.palette.value.560.value}' }
                     }
                 }
             },
@@ -23,38 +23,38 @@
 
                 states: {
                     hover: {
-                        color: { value: '{light-color-scheme.primary.palette.value.600.value}' },
-                        icon: { value: '{light-color-scheme.primary.palette.value.600.value}' }
+                        color: { value: '{light-color-scheme.primary.palette.value.560.value}' },
+                        icon: { value: '{light-color-scheme.primary.palette.value.560.value}' }
                     },
                     active: {
-                        color: { value: '{light-color-scheme.primary.palette.value.700.value}' },
-                        icon: { value: '{light-color-scheme.primary.palette.value.700.value}' }
+                        color: { value: '{light-color-scheme.primary.palette.value.600.value}' },
+                        icon: { value: '{light-color-scheme.primary.palette.value.600.value}' }
                     }
                 }
             },
             second: {
-                border: { value: '{light-color-scheme.foreground.border.value}' },
-                background: { value: '{light-color-scheme.background.background-disabled.value}' },
-                color: { value: '{light-color-scheme.foreground.text.value}' },
-                icon: { value: '{light-color-scheme.foreground.text-less-contrast.value}' },
+                border: { value: '{light-color-scheme.second.palette.value.100.value}' },
+                background: { value: '{light-color-scheme.second.palette.value.100.value}' },
+                color: { value: '{light-color-scheme.second.palette.value.900.value}' },
+                icon: { value: '{light-color-scheme.second.palette.value.300.value}' },
 
                 states: {
                     active: {
-                        border: { value: 'darken({light-color-scheme.foreground.border.value}, 5)' },
-                        background: { value: 'darken({light-color-scheme.background.background-disabled.value}, 5)' }
+                        border: { value: '{light-color-scheme.second.palette.value.200.value}' },
+                        background: { value: '{light-color-scheme.second.palette.value.200.value}' },
                     }
                 }
             },
             error: {
-                border: { value: '{light-color-scheme.foreground.border.value}' },
-                background: { value: '{light-color-scheme.background.background-disabled.value}' },
+                border: { value: '{light-color-scheme.second.palette.value.100.value}' },
+                background: { value: '{light-color-scheme.second.palette.value.100.value}' },
                 color: { value: '{light-color-scheme.error.palette.value.400.value}' },
                 icon: { value: '{light-color-scheme.error.palette.value.400.value}' },
 
                 states: {
                     active: {
-                        border: { value: 'darken({light-color-scheme.foreground.border.value}, 5)' },
-                        background: { value: 'darken({light-color-scheme.background.background-disabled.value}, 5)' }
+                        border: { value: '{light-color-scheme.second.palette.value.200.value}' },
+                        background: { value: '{light-color-scheme.second.palette.value.200.value}' },
                     }
                 }
             }
@@ -66,13 +66,13 @@
             primary: {
                 color: { value: '{dark-color-scheme.primary.palette.value.contrast.500.value}' },
                 border: { value: '{dark-color-scheme.primary.palette.value.560.value}' },
-                background: { value: '{dark-color-scheme.primary.palette.value.500.value}' },
+                background: { value: '{dark-color-scheme.primary.default.value}' },
                 icon: { value: '{dark-color-scheme.primary.palette.value.contrast.500.value}' },
 
                 states: {
                     active: {
-                        border: { value: 'darken({dark-color-scheme.primary.palette.value.560.value}, 5)' },
-                        background: { value: 'darken({dark-color-scheme.primary.palette.value.400.value}, 5)' }
+                        border: { value: 'darken({dark-color-scheme.primary.palette.value.600.value}, 5)' },
+                        background: { value: 'darken({dark-color-scheme.primary.palette.value.600.value}, 5)' }
                     }
                 }
             },
@@ -93,28 +93,28 @@
                 }
             },
             second: {
-                border: { value: '{dark-color-scheme.foreground.border.value}' },
-                background: { value: '{dark-color-scheme.background.background-disabled.value}' },
-                color: { value: '{dark-color-scheme.foreground.text.value}' },
-                icon: { value: '{dark-color-scheme.foreground.text-less-contrast.value}' },
+                border: { value: '{dark-color-scheme.second.palette.value.560.value}' },
+                background: { value: '{dark-color-scheme.second.palette.value.560.value}' },
+                color: { value: '{dark-color-scheme.second.palette.value.40.value}' },
+                icon: { value: '{dark-color-scheme.second.palette.value.300.value}' },
 
                 states: {
                     active: {
-                        border: { value: 'darken({dark-color-scheme.foreground.border.value}, 5)' },
-                        background: { value: 'darken({dark-color-scheme.background.background-disabled.value}, 5)' }
+                        border: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+                        background: { value: '{dark-color-scheme.second.palette.value.700.value}' }
                     }
                 }
             },
             error: {
-                border: { value: '{dark-color-scheme.foreground.border.value}' },
-                background: { value: '{dark-color-scheme.background.background-disabled.value}' },
+                border: { value: '{dark-color-scheme.second.palette.value.560.value}' },
+                background: { value: '{dark-color-scheme.second.palette.value.560.value}' },
                 color: { value: '{dark-color-scheme.error.palette.value.400.value}' },
                 icon: { value: '{dark-color-scheme.error.palette.value.400.value}' },
 
                 states: {
                     active: {
-                        border: { value: 'darken({dark-color-scheme.foreground.border.value}, 5)' },
-                        background: { value: 'darken({dark-color-scheme.background.background-disabled.value}, 5)' }
+                        border: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+                        background: { value: '{dark-color-scheme.second.palette.value.700.value}' }
                     }
                 }
             }

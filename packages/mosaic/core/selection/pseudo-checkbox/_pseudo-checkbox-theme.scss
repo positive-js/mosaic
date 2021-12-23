@@ -18,7 +18,8 @@
             color: white;
         }
 
-        &.mc-checked {
+        &.mc-checked,
+        &.mc-indeterminate {
             border-color: map-get($checkbox, state-checked-border);
 
             background: map-get($checkbox, state-checked-background);

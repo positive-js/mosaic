@@ -13,11 +13,13 @@ import {
     Component,
     Directive,
     ElementRef,
+    EventEmitter,
     Inject,
     InjectionToken,
     Input,
     NgZone,
     Optional,
+    Output,
     TemplateRef,
     Type,
     ViewContainerRef,
@@ -26,6 +28,7 @@ import {
 import {
     McPopUp,
     McPopUpTrigger,
+    PopUpPlacements,
     PopUpSizes,
     PopUpTriggers,
     POSITION_TO_CSS_MAP
@@ -97,6 +100,33 @@ export function getMcPopoverInvalidPositionError(position: string) {
     }
 })
 export class McPopoverTrigger extends McPopUpTrigger<McPopoverComponent> {
+    @Input('mcPopoverVisible')
+    get popoverVisible(): boolean {
+        return this.visible;
+    }
+
+    set popoverVisible(value: boolean) {
+        super.updateVisible(value);
+    }
+
+    @Input('mcPopoverPlacement')
+    get popoverPlacement(): PopUpPlacements {
+        return this.placement;
+    }
+
+    set popoverPlacement(value: PopUpPlacements) {
+        super.updatePlacement(value);
+    }
+
+    @Input('mcPopoverPlacementPriority')
+    get popoverPlacementPriority() {
+        return this.placementPriority;
+    }
+
+    set popoverPlacementPriority(value) {
+        super.updatePlacementPriority(value);
+    }
+
     @Input()
     get hasBackdrop(): boolean {
         return this._hasBackdrop;
@@ -212,13 +242,19 @@ export class McPopoverTrigger extends McPopUpTrigger<McPopoverComponent> {
 
     @Input() backdropClass: string = 'cdk-overlay-transparent-backdrop';
 
+    @Output('mcPopoverPlacementChange') placementChange = new EventEmitter();
+
+    @Output('mcPopoverVisibleChange') visibleChange = new EventEmitter<boolean>();
+
     protected originSelector = '.mc-popover';
 
-    protected overlayConfig: OverlayConfig = {
-        panelClass: 'mc-popover__panel',
-        hasBackdrop: this.hasBackdrop,
-        backdropClass: this.backdropClass
-    };
+    protected get overlayConfig(): OverlayConfig {
+        return {
+            panelClass: 'mc-popover__panel',
+            hasBackdrop: this.hasBackdrop,
+            backdropClass: this.backdropClass
+        };
+    }
 
     constructor(
         overlay: Overlay,

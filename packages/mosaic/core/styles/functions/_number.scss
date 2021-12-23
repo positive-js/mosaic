@@ -1,5 +1,3 @@
-@use 'sass:math';
-
 
 @function unit-length($number, $unit) {
     $strings: 'px' 'cm' 'mm' '%' 'ch' 'in' 'em' 'rem' 'pt' 'pc' 'ex' 'vw' 'vh' 'vmin' 'vmax';
@@ -54,7 +52,7 @@
             @else {
                 // Move the decimal dot to the left
                 $divider: $divider * 10;
-                $number: math.div($number, $divider);
+                $number: div($number, $divider);
             }
 
             $result: $result + $number;

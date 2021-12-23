@@ -12,17 +12,19 @@ import {
     Component,
     Directive,
     ElementRef,
+    EventEmitter,
     Inject,
     InjectionToken,
     Input,
     NgZone,
     Optional,
+    Output,
     TemplateRef,
     Type,
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { McPopUp, McPopUpTrigger, PopUpTriggers, POSITION_TO_CSS_MAP } from '@ptsecurity/mosaic/core';
+import { McPopUp, McPopUpTrigger, PopUpPlacements, PopUpTriggers, POSITION_TO_CSS_MAP } from '@ptsecurity/mosaic/core';
 import { merge } from 'rxjs';
 
 import { mcTooltipAnimations } from './tooltip.animations';
@@ -106,6 +108,33 @@ export const MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     }
 })
 export class McTooltipTrigger extends McPopUpTrigger<McTooltipComponent> {
+    @Input('mcVisible')
+    get tooltipVisible(): boolean {
+        return this.visible;
+    }
+
+    set tooltipVisible(value: boolean) {
+        super.updateVisible(value);
+    }
+
+    @Input('mcPlacement')
+    get tooltipPlacement(): PopUpPlacements {
+        return this.placement;
+    }
+
+    set tooltipPlacement(value: PopUpPlacements) {
+        super.updatePlacement(value);
+    }
+
+    @Input('mcPlacementPriority')
+    get tooltipPlacementPriority() {
+        return this.placementPriority;
+    }
+
+    set tooltipPlacementPriority(value) {
+        super.updatePlacementPriority(value);
+    }
+
     @Input('mcTooltip')
     get content(): string | TemplateRef<any> {
         return this._content;
@@ -127,6 +156,7 @@ export class McTooltipTrigger extends McPopUpTrigger<McTooltipComponent> {
     }
 
     @Input('mcEnterDelay') enterDelay = 400;
+    @Input('mcLeaveDelay') leaveDelay = 0;
 
     @Input('mcTrigger')
     get trigger(): string {
@@ -159,6 +189,10 @@ export class McTooltipTrigger extends McPopUpTrigger<McTooltipComponent> {
             this._customClass = '';
         }
     }
+
+    @Output('mcPlacementChange') placementChange = new EventEmitter();
+
+    @Output('mcVisibleChange') visibleChange = new EventEmitter<boolean>();
 
     protected originSelector = '.mc-tooltip';
 

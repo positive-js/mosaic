@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 
 import {
     McButton,
-    McAnchor,
     McButtonCssStyler
 } from './button.component';
 
@@ -18,12 +17,10 @@ import {
     ],
     exports: [
         McButton,
-        McAnchor,
         McButtonCssStyler
     ],
     declarations: [
         McButton,
-        McAnchor,
         McButtonCssStyler
     ]
 })

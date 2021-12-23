@@ -55,7 +55,7 @@ export const McOptionActionMixinBase:
     styleUrls: ['./action.scss'],
     host: {
         class: 'mc-option-action',
-        '[class.mc-opened]': 'false',
+        '[class.mc-expanded]': 'false',
 
         '[attr.disabled]': 'disabled || null',
         '[attr.tabIndex]': '-1',

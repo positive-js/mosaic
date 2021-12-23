@@ -18,7 +18,7 @@
         info: {
             default: { value: '{palette.blue.200.value}' },
 
-            palette: { value: '{palette.blue}' }
+            palette: { value: '{palette.teal}' }
         },
         success: {
             default: { value: '{palette.green.200.value}' },
@@ -31,16 +31,16 @@
             palette: { value: '{palette.yellow}' }
         },
         foreground: {
-            text: { value: '{palette.grey.700.value}' },
-            'text-less-contrast': { value: '{palette.grey.400.value}'},
+            text: { value: '{palette.grey.900.value}' },
+            'text-less-contrast': { value: '{palette.grey.500.value}'},
             'text-disabled': { value: '{palette.grey.300.value}' },
             divider: { value: '{palette.grey.100.value}' },
-            border: { value: '{palette.grey.300.value}' },
-            icon: { value: '{palette.grey.400.value}' }
+            border: { value: '{palette.grey.200.value}' },
+            icon: { value: '{palette.grey.300.value}' }
         },
         background: {
             background: { value: 'white' },
-            'background-disabled': { value: '{palette.grey.60.value}' },
+            'background-disabled': { value: '{palette.grey.40.value}' },
 
             'overlay-hover': { value: 'rgba(black, 0.05)' },
             'overlay-active': { value: 'rgba(black, 0.1)' },
@@ -48,14 +48,15 @@
         },
         states: {
             'focused-color': { value: '{light-color-scheme.primary.palette.value.500.value}' },
-            'selected-color': { value: '{light-color-scheme.primary.palette.value.100.value}' },
+            'focused-color-error': { value: '{light-color-scheme.error.palette.value.500.value}' },
+            'selected-color': { value: '{light-color-scheme.primary.palette.value.60.value}' },
             'pressed-shadow': { value: 'inset 0 1px 2px 0 rgba(black, 0.2)' },
             'disabled-opacity': { value: 0.3 }
         }
     },
     'dark-color-scheme': {
         primary: {
-            default: { value: '{palette.blue.400.value}' },
+            default: { value: '{palette.blue.560.value}' },
 
             palette: { value: '{palette.blue}' }
         },
@@ -70,9 +71,9 @@
             palette: { value: '{palette.red}' }
         },
         info: {
-            default: { value: '{palette.blue.400.value}' },
+            default: { value: '{palette.teal.400.value}' },
 
-            palette: { value: '{palette.blue}' }
+            palette: { value: '{palette.teal}' }
         },
         success: {
             default: { value: '{palette.green.400.value}' },
@@ -85,24 +86,25 @@
             palette: { value: '{palette.yellow}' }
         },
         foreground: {
-            text: { value: '{palette.grey.60.value}' },
-            'text-less-contrast': { value: '{palette.grey.400.value}'},
-            'text-disabled': { value: '{palette.grey.400.value}' },
-            divider: { value: '{palette.grey.600.value}' },
-            border: { value: '{palette.grey.500.value}' },
-            icon: { value: '{palette.grey.400.value}' }
+            text: { value: '{palette.grey.40.value}' },
+            'text-less-contrast': { value: '{palette.grey.300.value}'},
+            'text-disabled': { value: '{palette.grey.500.value}' },
+            divider: { value: '{palette.grey.700.value}' },
+            border: { value: '{palette.grey.560.value}' },
+            icon: { value: '{palette.grey.300.value}' }
         },
         background: {
-            background: { value: '{palette.grey.800.value}' },
-            'background-disabled': { value: '{palette.grey.600.value}' },
+            background: { value: '{palette.grey.900.value}' },
+            'background-disabled': { value: '{palette.grey.700.value}' },
 
             'overlay-hover': { value: 'rgba(black, 0.05)' },
             'overlay-active': { value: 'rgba(black, 0.1)' },
-            'overlay-disabled': { value: 'rgba(white, 0.2)' }
+            'overlay-disabled': { value: 'rgba(black, 0.2)' }
         },
         states: {
             'focused-color': { value: '{dark-color-scheme.primary.palette.value.400.value}' },
-            'selected-color': { value: '{dark-color-scheme.primary.palette.value.700.value}' },
+            'focused-color-error': { value: '{light-color-scheme.error.palette.value.560.value}' },
+            'selected-color': { value: '{dark-color-scheme.primary.palette.value.600.value}' },
             'pressed-shadow': { value: 'inset 1px 2px 2px 0 rgba(black, 0.2)' },
             'disabled-opacity': { value: 0.3 }
         }

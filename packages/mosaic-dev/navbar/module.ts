@@ -3,12 +3,14 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
-import { ThemePalette } from '@ptsecurity/mosaic/core';
+import { PopUpPlacements, ThemePalette } from '@ptsecurity/mosaic/core';
 import { McDropdownModule } from '@ptsecurity/mosaic/dropdown';
 import { McLinkModule } from '@ptsecurity/mosaic/link';
+import { McPopoverModule } from '@ptsecurity/mosaic/popover';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import { McIconModule } from '../../mosaic/icon';
-import { McNavbarModule, McNavbar, McNavbarItem } from '../../mosaic/navbar';
+import { McNavbarModule, McNavbar } from '../../mosaic/navbar';
 
 
 @Component({
@@ -19,8 +21,9 @@ import { McNavbarModule, McNavbar, McNavbarItem } from '../../mosaic/navbar';
 })
 export class NavbarDemoComponent {
     themePalette = ThemePalette;
+    popUpPlacements = PopUpPlacements;
 
-    @ViewChild('verticalNavbar', {static: false}) navbar: McNavbar;
+    @ViewChild('verticalNavbar', { static: false }) navbar: McNavbar;
 
     readonly minNavbarWidth: number = 940;
 
@@ -37,12 +40,10 @@ export class NavbarDemoComponent {
     private _collapsedNavbarWidth: number = 1280;
 
     collapsedNavbarWidthChange() {
-        this.navbar.updateCollapsed();
+        this.navbar.updateExpandedStateForItems();
     }
 
-    onItemClick(event: MouseEvent, disabledItem?: McNavbarItem) {
-        if (disabledItem?.disabled) { return; }
-
+    onItemClick(event: MouseEvent) {
         alert(`innerText: ${(<HTMLElement> event.target).innerText}`);
     }
 }
@@ -58,7 +59,9 @@ export class NavbarDemoComponent {
         McButtonModule,
         FormsModule,
         McDropdownModule,
-        McLinkModule
+        McLinkModule,
+        McPopoverModule,
+        McToolTipModule
     ],
     bootstrap: [NavbarDemoComponent]
 })

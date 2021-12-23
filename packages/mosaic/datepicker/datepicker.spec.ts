@@ -856,7 +856,7 @@ describe('McDatepicker', () => {
                 const fixture = createComponent(DatepickerWithTabindexOnToggle, [McMomentDateModule]);
                 fixture.detectChanges();
 
-                const button = fixture.nativeElement.querySelector('.mc-button');
+                const button = fixture.nativeElement.querySelector('.mc-datepicker-toggle__button');
 
                 expect(button.getAttribute('tabindex')).toBe('7');
             });

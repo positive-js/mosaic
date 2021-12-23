@@ -616,6 +616,10 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             return setTimeout(() => this.control.updateValueAndValidity());
         }
 
+        if (Object.values(date).some(isNaN)) {
+            return;
+        }
+
         const newTimeObj = this.getValidDateOrNull(this.dateAdapter.createDateTime(
             date.year, date.month - 1, date.date, date.hours, date.minutes, date.seconds, date.milliseconds
         ));
@@ -642,7 +646,16 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
     onPaste($event) {
         $event.preventDefault();
 
-        const rawValue = $event.clipboardData.getData('text');
+        let rawValue = $event.clipboardData.getData('text');
+
+        if (rawValue.match(/^\d\D/)) {
+            rawValue = `0${rawValue}`;
+        }
+        rawValue.replace(/[^A-Za-z0-9]+/g, this.separator);
+
+        if (/[a-z]/gi.test(rawValue)) {
+            this.incorrectInput.emit();
+        }
 
         const match: RegExpMatchArray | null = rawValue.match(/^(?<first>\d+)\W(?<second>\d+)\W(?<third>\d+)$/);
 

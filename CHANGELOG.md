@@ -1,3 +1,30 @@
+## 12.2.1 "Viatic Interior" (2021-12-08)
+
+### Mosaic
+
+ * bug fix  **icons:** updated icons to 6.1.1 ([46f6db1](https://github.com/positive-js/mosaic/commit/46f6db1228c94692ff0e9bc0be48ce91a1050834))
+ * bug fix  **styles:** Revert "fix(styles): fixed using div() in sass (#723)"
+
+# 12.2.0 "Zigzag Liner" (2021-12-07)
+
+### Mosaic
+
+ * bug fix  **chore:** turns on strictTemplates (#UIM-794) ([#717](https://github.com/positive-js/mosaic/issues/717)) ([105df43](https://github.com/positive-js/mosaic/commit/105df438f7791a78eddac7f5f51ce968b4dd54a8)), closes [#UIM-794](https://github.com/positive-js/mosaic/issues/UIM-794) [#UIM-794](https://github.com/positive-js/mosaic/issues/UIM-794)
+ * bug fix  **list:** Error in getHeight after window resize (#UIM-581) ([#738](https://github.com/positive-js/mosaic/issues/738)) ([47d5368](https://github.com/positive-js/mosaic/commit/47d5368e7d9bd03140ac910f48820ec2ea4ec555)), closes [#UIM-581](https://github.com/positive-js/mosaic/issues/UIM-581)
+ * bug fix  **popover:** change name mcPopoverVisible, mcPopoverPlacement, mcPopoverPlacementPriority, mcPopoverPlacementChange and mcPopoverVisibleChange (#UIM-811) ([#730](https://github.com/positive-js/mosaic/issues/730)) ([c9244cc](https://github.com/positive-js/mosaic/commit/c9244cc576c8837bdadfbda6e942768df6c9678f)), closes [#UIM-811](https://github.com/positive-js/mosaic/issues/UIM-811)
+ * bug fix  **popover:** fix not working hasBackdrop and backdropClass (#UIM-799) ([#742](https://github.com/positive-js/mosaic/issues/742)) ([4c31e6b](https://github.com/positive-js/mosaic/commit/4c31e6b09caa400890661224d985147d8af35d5a)), closes [#UIM-799](https://github.com/positive-js/mosaic/issues/UIM-799)
+ * bug fix  **styles:** fixed using div() in sass ([#723](https://github.com/positive-js/mosaic/issues/723)) ([c1521e0](https://github.com/positive-js/mosaic/commit/c1521e0d616d8e2c59a77745819b8d8e82946984))
+ * bug fix  **timepicker:** ngModelChange emitted twice on tab key (#UIM-784) ([#739](https://github.com/positive-js/mosaic/issues/739)) ([339b8f7](https://github.com/positive-js/mosaic/commit/339b8f70d42fac968daafc9747b9cc08c516858b)), closes [#UIM-784](https://github.com/positive-js/mosaic/issues/UIM-784)
+ * bug fix  restrict keyDown event ([#734](https://github.com/positive-js/mosaic/issues/734)) ([bd304f5](https://github.com/positive-js/mosaic/commit/bd304f558449226b308e5c48a266691e895200fd))
+ * bug fix  **sidebar:** fix width on content overflow with indent ([#727](https://github.com/positive-js/mosaic/issues/727)) ([b927e5a](https://github.com/positive-js/mosaic/commit/b927e5ad407104148531fe8354ab9c7d6a455002))
+ * bug fix  **tooltip:** invalid offset ([#724](https://github.com/positive-js/mosaic/issues/724)) ([214b518](https://github.com/positive-js/mosaic/commit/214b518e6aa5a7d287b94d73f91f45d4ff20326c))
+ * feature  new popover-confirm component (#UIM-810) ([#729](https://github.com/positive-js/mosaic/issues/729)) ([b1e7c68](https://github.com/positive-js/mosaic/commit/b1e7c68803740b5a940727f2acff6ac9e5047bbe)), closes [#UIM-810](https://github.com/positive-js/mosaic/issues/UIM-810) [#UIM-810](https://github.com/positive-js/mosaic/issues/UIM-810) [#UIM-810](https://github.com/positive-js/mosaic/issues/UIM-810) [#UIM-810](https://github.com/positive-js/mosaic/issues/UIM-810)
+ * feature  **checkbox:** add pseudo-checkbox to docs (#UIM-808) ([#737](https://github.com/positive-js/mosaic/issues/737)) ([28985a8](https://github.com/positive-js/mosaic/commit/28985a85bc0922cbce3d46effcd4f3abf7fe7e15)), closes [#UIM-808](https://github.com/positive-js/mosaic/issues/UIM-808) [#UIM-808](https://github.com/positive-js/mosaic/issues/UIM-808) [#UIM-808](https://github.com/positive-js/mosaic/issues/UIM-808)
+ * feature  fix highlight.js deprecation warning ([#732](https://github.com/positive-js/mosaic/issues/732)) ([08c4352](https://github.com/positive-js/mosaic/commit/08c4352fd681fb3c4187a46322e02a637c38e7d3))
+ * feature  migrate messageformat ([#733](https://github.com/positive-js/mosaic/issues/733)) ([990c8e6](https://github.com/positive-js/mosaic/commit/990c8e6eeeb56eb1c421301a108cd1deb096d609))
+ * feature  update favicon (#UIM-812) ([#741](https://github.com/positive-js/mosaic/issues/741)) ([0ca15d7](https://github.com/positive-js/mosaic/commit/0ca15d7b3b1aef6fc44094745c318b1f313828e3)), closes [#UIM-812](https://github.com/positive-js/mosaic/issues/UIM-812)
+ * feature  **sidepanel:** implementation by guideline (#UIM-789) ([#720](https://github.com/positive-js/mosaic/issues/720)) ([2422c26](https://github.com/positive-js/mosaic/commit/2422c264e92f6c445ae8a42ca9666189086a93be)), closes [#UIM-789](https://github.com/positive-js/mosaic/issues/UIM-789) [#UIM-789](https://github.com/positive-js/mosaic/issues/UIM-789)
+
 # 12.1.0 "Dissipated Marshes" (2021-11-03)
 
 ### Mosaic

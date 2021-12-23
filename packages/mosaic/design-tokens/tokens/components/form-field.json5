@@ -1,29 +1,29 @@
 {
     'form-field': {
         'light-color-scheme': {
-            border: { value: '{light-color-scheme.second.default.value}' },
+            border: { value: '{light-color-scheme.foreground.border.value}' },
             background: { value: '{light-color-scheme.background.background.value}' },
 
             states: {
                 hover: {
-                    border: { value: '{light-color-scheme.second.palette.value.400.value}' }
+                    border: { value: '{light-color-scheme.second.palette.value.200.value}' }
                 },
                 invalid: {
-                    border: { value: '{light-color-scheme.error.default.value}' },
+                    border: { value: '{light-color-scheme.states.focused-color-error.value}' },
                     background: { value: 'transparent' }
                 }
             }
         },
         'dark-color-scheme': {
-            border: { value: '{dark-color-scheme.second.default.value}' },
+            border: { value: '{dark-color-scheme.foreground.border.value}' },
             background: { value: '{dark-color-scheme.background.background.value}' },
 
             states: {
                 hover: {
-                    border: { value: '{dark-color-scheme.second.palette.value.200.value}' }
+                    border: { value: '{dark-color-scheme.second.palette.value.560.value}' }
                 },
                 invalid: {
-                    border: { value: '{dark-color-scheme.error.default.value}' },
+                    border: { value: '{dark-color-scheme.states.focused-color-error.value}' },
                     background: { value: 'transparent' }
                 }
             }
