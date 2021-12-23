@@ -135,6 +135,8 @@ export class McGutterDirective implements OnInit {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McSplitterComponent implements OnInit {
+    @Output() gutterPositionChange: EventEmitter<void> = new EventEmitter<void>();
+
     readonly areas: IArea[] = [];
 
     @ViewChildren(McGutterDirective) gutters: QueryList<McGutterDirective>;
@@ -186,8 +188,6 @@ export class McSplitterComponent implements OnInit {
         const size = coerceNumberProperty(gutterSize);
         this._gutterSize = size > 0 ? size : this.gutterSize;
     }
-
-    @Output() gutterPositionChange: EventEmitter<void> = new EventEmitter<void>();
 
     private _gutterSize: number = 6;
 
@@ -386,7 +386,7 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
             this.removeStyle(StyleProperty.Width);
         }
 
-        this.splitter.gutterPositionChange.subscribe(() => this.emitSizeChange() );
+        this.splitter.gutterPositionChange.subscribe(() => this.emitSizeChange());
     }
 
     ngOnDestroy(): void {
