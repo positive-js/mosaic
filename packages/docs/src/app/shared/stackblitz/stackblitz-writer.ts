@@ -57,7 +57,7 @@ const angularVersion = '^12.0.0';
 const dependencies = {
     '@ptsecurity/cdk': mosaicVersion,
     '@ptsecurity/mosaic': mosaicVersion,
-    '@ptsecurity/mosaic-icons': '^5.3.0',
+    '@ptsecurity/mosaic-icons': '^6.1.1',
     '@ptsecurity/mosaic-luxon-adapter': mosaicVersion,
     '@ptsecurity/mosaic-moment-adapter': mosaicVersion,
     '@angular/cdk': angularVersion,
@@ -81,7 +81,7 @@ const dependencies = {
 const testDependencies = {
     '@ptsecurity/cdk': mosaicVersion,
     '@ptsecurity/mosaic': mosaicVersion,
-    '@ptsecurity/mosaic-icons': '^5.3.0',
+    '@ptsecurity/mosaic-icons': '^6.1.1',
     '@ptsecurity/mosaic-luxon-adapter': mosaicVersion,
     '@ptsecurity/mosaic-moment-adapter': mosaicVersion,
     '@angular/cdk': angularVersion,
