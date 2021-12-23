@@ -790,9 +790,8 @@ export class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAcces
             return null;
         }
         // tslint:enable
-
         const date = this.value || this.dateAdapter.today();
-        // tslint:enable
+
         const resultDate = this.dateAdapter.createDateTime(
             this.dateAdapter.getYear(date),
             this.dateAdapter.getMonth(date),
