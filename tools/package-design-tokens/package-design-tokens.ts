@@ -10,7 +10,8 @@ if (require.main === module) {
 
     ensureDirSync(dirname(outDir));
 
-    copySync(`${execPath}/tokens`, `${outDir}/tokens`);
+    copySync(`${execPath}/legacy-2017/tokens`, `${outDir}/legacy-2017/tokens`);
+    copySync(`${execPath}/pt-2022/tokens`, `${outDir}/pt-2022/tokens`);
 
     copySync(`${execPath}/style-dictionary`, `${outDir}/style-dictionary`);
 }
