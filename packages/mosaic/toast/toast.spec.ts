@@ -47,7 +47,8 @@ describe('ToastService', () => {
     imports: [
         ToastModule.forRoot({
             position: ToastPosition.TOP_CENTER,
-            duration: 5000
+            duration: 5000,
+            newOnTop: true
         })
     ]
 })
