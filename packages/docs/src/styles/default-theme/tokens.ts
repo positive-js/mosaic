@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 23 Dec 2021 12:04:04 GMT
+ * Generated on Fri, 24 Dec 2021 06:40:21 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#0374eb";
@@ -805,8 +805,8 @@ export const PopupDarkColorSchemeBorder = "#515e69";
 export const PopupDarkColorSchemeDivider = "#333f4a";
 export const PopupDarkColorSchemeBackground = "#434f5a";
 export const PopupDarkColorSchemeFooterBackground = "transparent";
-export const ProgressBarLightColorSchemeBackground = "#ebeef2";
-export const ProgressBarDarkColorSchemeBackground = "#434f5a";
+export const ProgressBarLightColorSchemeBackground = "rgba(25, 37, 47, 0.06)";
+export const ProgressBarDarkColorSchemeBackground = "rgba(white,0.06)";
 export const ProgressBarSizeHeight = "4px";
 export const ProgressSpinnerSizeSize = "16px";
 export const RadioLightColorSchemeOuterCircleBorder = "#8c99a5";
