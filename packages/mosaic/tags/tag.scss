@@ -30,6 +30,15 @@
     &.mc-right-icon {
         padding-right: var(--mc-tags-size-icon-padding, $tags-size-icon-padding);
     }
+
+    &:not(.mc-tag-with-trailing-icon) {
+        .mc-tag__text {
+            margin-right: calc(
+                var(--mc-tags-size-text-margin, #{$tags-size-text-margin}) -
+                var(--mc-tags-size-border-width, #{$tags-size-border-width})
+            );
+        }
+    }
 }
 
 .mc-tag__wrapper {
