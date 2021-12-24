@@ -600,7 +600,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
         date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
         date[this.secondDigit.fullName] = this.secondDigit.parse(secondViewDigit);
-        date[this.thirdDigit.fullName] = this.thirdDigit.parse(thirdViewDigit);
+        date[this.thirdDigit.fullName] = thirdViewDigit;
 
         const [digitWithYear, viewDigitWithYear] = [this.firstDigit, this.secondDigit, this.thirdDigit]
             .reduce((acc, digit, index) => digit.value === DateParts.year ? [digit, viewDigits[index]] : acc, []);
@@ -804,7 +804,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
             date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
             date[this.secondDigit.fullName] = this.secondDigit.parse(secondViewDigit);
-            date[this.thirdDigit.fullName] = this.thirdDigit.parse(thirdViewDigit);
+            date[this.thirdDigit.fullName] = thirdViewDigit;
         } else {
             return null;
         }
