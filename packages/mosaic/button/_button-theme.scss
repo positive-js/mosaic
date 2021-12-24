@@ -27,6 +27,7 @@
 
     &:hover:not([disabled]) {
         background-color: map-get($background, overlay-hover);
+
         & .mc-button-overlay {
             background-color: transparent;
         }
