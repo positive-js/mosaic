@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 22 Dec 2021 13:44:24 GMT
+ * Generated on Fri, 24 Dec 2021 04:30:34 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#028b49";
@@ -809,17 +809,17 @@ export const ProgressBarLightColorSchemeBackground = "#ebeef2";
 export const ProgressBarDarkColorSchemeBackground = "#434f5a";
 export const ProgressBarSizeHeight = "4px";
 export const ProgressSpinnerSizeSize = "16px";
-export const RadioLightColorSchemeOuterCircleBorder = "#8c99a5";
+export const RadioLightColorSchemeOuterCircleBorder = "#bdc7d1";
 export const RadioLightColorSchemeInnerCircleBorder = "transparent";
 export const RadioLightColorSchemeStatesCheckedOuterCircleBorder = "#028b49";
 export const RadioLightColorSchemeStatesCheckedInnerCircleBorder = "#028b49";
 export const RadioLightColorSchemeStatesFocusedOuterCircleBorder = "#028b49";
-export const RadioLightColorSchemeStatesFocusedOuterCircleShadow = "0 0 0 2px #8c99a5";
+export const RadioLightColorSchemeStatesFocusedOuterCircleShadow = "0 0 0 2px #028b49";
 export const RadioLightColorSchemeStatesFocusedInnerCircleShadow = "0 0 0 1px white";
-export const RadioDarkColorSchemeOuterCircleBorder = "#7f8c98";
+export const RadioDarkColorSchemeOuterCircleBorder = "#515e69";
 export const RadioDarkColorSchemeInnerCircleBorder = "transparent";
 export const RadioDarkColorSchemeStatesCheckedOuterCircleBorder = "#319d5c";
-export const RadioDarkColorSchemeStatesCheckedInnerCircleBorder = "#015a2d";
+export const RadioDarkColorSchemeStatesCheckedInnerCircleBorder = "#319d5c";
 export const RadioDarkColorSchemeStatesFocusedOuterCircleBorder = "#319d5c";
 export const RadioDarkColorSchemeStatesFocusedOuterCircleShadow = "0 0 0 2px #319d5c";
 export const RadioDarkColorSchemeStatesFocusedInnerCircleShadow = "0 0 0 1px #19252f";
