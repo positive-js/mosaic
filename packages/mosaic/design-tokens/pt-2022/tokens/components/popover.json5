@@ -35,7 +35,7 @@
             background: { value: '{light-color-scheme.background.background.value}' }
         },
         'dark-color-scheme': {
-            border: { value: '{popup.dark-color-scheme.border.value}' },
+            border: { value: '{dark-color-scheme.foreground.border.value}' },
             text: { value: '{dark-color-scheme.foreground.text.value}' },
             background: { value: '{dark-color-scheme.second.palette.value.700.value}' }
         },
@@ -53,7 +53,7 @@
             background: { value: '{popup.light-color-scheme.footer-background.value}' }
         },
         'dark-color-scheme': {
-            border: { value: '{popup.dark-color-scheme.border.value}' },
+            border: { value: '{dark-color-scheme.foreground.border.value}' },
             background: { value: '{dark-color-scheme.second.palette.value.700.value}' }
         },
         size: {
@@ -66,3 +66,4 @@
         }
     }
 }
+
