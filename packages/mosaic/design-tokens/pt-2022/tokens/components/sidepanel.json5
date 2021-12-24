@@ -1,10 +1,10 @@
 {
     sidepanel: {
         'light-color-scheme': {
-            border: { value: '{light-color-scheme.second.palette.value.300.value}' }
+            border: { value: '{light-color-scheme.foreground.border.value}' }
         },
         'dark-color-scheme': {
-            border: { value: '{dark-color-scheme.second.palette.value.800.value}' }
+            border: { value: '{dark-color-scheme.second.palette.value.900.value}' }
         },
         font: {
             default: { value: 'body' }

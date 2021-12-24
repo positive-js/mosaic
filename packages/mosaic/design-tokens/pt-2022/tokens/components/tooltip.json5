@@ -2,7 +2,7 @@
     tooltip: {
         'light-color-scheme': {
             background: { value: '{light-color-scheme.second.palette.value.600.value}' },
-            text: { value: '{light-color-scheme.second.palette.value.contrast.700.value}' },
+            text: { value: '{dark-color-scheme.foreground.text.value}' },
             border: { value: 'transparent' },
             shadow: { value: '0 2px 4px 0 rgba(0, 0, 0, 0.2)' },
 
@@ -14,7 +14,7 @@
         },
         'dark-color-scheme': {
             background: { value: '{popup.light-color-scheme.background.value}' },
-            text: { value: '{dark-color-scheme.second.palette.value.900.value}' },
+            text: { value: '{light-color-scheme.foreground.text.value}' },
             border: { value: 'transparent' },
             shadow: { value: '0 2px 4px 0 rgba(0, 0, 0, 0.2)' },
 
