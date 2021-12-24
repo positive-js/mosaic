@@ -4,8 +4,8 @@
             border: { value: '{light-color-scheme.second.palette.value.200.value}' },
             states: {
                 checked: {
-                    border: { value: '{light-color-scheme.primary.palette.value.500.value}' },
-                    background: { value: '{light-color-scheme.primary.palette.value.500.value}' }
+                    border: { value: '{light-color-scheme.primary.default.value}' },
+                    background: { value: '{light-color-scheme.primary.default.value}' }
                 },
                 focused: {
                     border: { value: '{light-color-scheme.states.focused-color.value}' },
@@ -17,8 +17,8 @@
             border: { value: '{dark-color-scheme.second.palette.value.560.value}' },
             states: {
                 checked: {
-                    border: { value: '{dark-color-scheme.primary.palette.value.500.value}' },
-                    background: { value: '{dark-color-scheme.primary.palette.value.500.value}' }
+                    border: { value: '{dark-color-scheme.primary.default.value}' },
+                    background: { value: '{dark-color-scheme.primary.default.value}' }
                 },
                 focused: {
                     border: { value: '{dark-color-scheme.states.focused-color.value}' },

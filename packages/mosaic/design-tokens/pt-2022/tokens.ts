@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 24 Dec 2021 06:40:18 GMT
+ * Generated on Fri, 24 Dec 2021 07:11:53 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#0374eb";
@@ -588,8 +588,8 @@ export const CheckboxLightColorSchemeStatesCheckedBackground = "#0374eb";
 export const CheckboxLightColorSchemeStatesFocusedBorder = "#0374eb";
 export const CheckboxLightColorSchemeStatesFocusedShadow = "inset 0 0 0 1px white, 0 0 0 1px #0374eb";
 export const CheckboxDarkColorSchemeBorder = "#515e69";
-export const CheckboxDarkColorSchemeStatesCheckedBorder = "#0374eb";
-export const CheckboxDarkColorSchemeStatesCheckedBackground = "#0374eb";
+export const CheckboxDarkColorSchemeStatesCheckedBorder = "#0059b8";
+export const CheckboxDarkColorSchemeStatesCheckedBackground = "#0059b8";
 export const CheckboxDarkColorSchemeStatesFocusedBorder = "#4187ff";
 export const CheckboxDarkColorSchemeStatesFocusedShadow = "inset 0 0 0 1px #19252f, 0 0 0 1px #4187ff";
 export const CheckboxSizeWidth = "16px";
@@ -809,17 +809,17 @@ export const ProgressBarLightColorSchemeBackground = "rgba(25, 37, 47, 0.06)";
 export const ProgressBarDarkColorSchemeBackground = "rgba(white,0.06)";
 export const ProgressBarSizeHeight = "4px";
 export const ProgressSpinnerSizeSize = "16px";
-export const RadioLightColorSchemeOuterCircleBorder = "#8c99a5";
+export const RadioLightColorSchemeOuterCircleBorder = "#bdc7d1";
 export const RadioLightColorSchemeInnerCircleBorder = "transparent";
 export const RadioLightColorSchemeStatesCheckedOuterCircleBorder = "#0374eb";
 export const RadioLightColorSchemeStatesCheckedInnerCircleBorder = "#0374eb";
 export const RadioLightColorSchemeStatesFocusedOuterCircleBorder = "#0374eb";
-export const RadioLightColorSchemeStatesFocusedOuterCircleShadow = "0 0 0 2px #8c99a5";
+export const RadioLightColorSchemeStatesFocusedOuterCircleShadow = "0 0 0 2px #0374eb";
 export const RadioLightColorSchemeStatesFocusedInnerCircleShadow = "0 0 0 1px white";
-export const RadioDarkColorSchemeOuterCircleBorder = "#7f8c98";
+export const RadioDarkColorSchemeOuterCircleBorder = "#515e69";
 export const RadioDarkColorSchemeInnerCircleBorder = "transparent";
-export const RadioDarkColorSchemeStatesCheckedOuterCircleBorder = "#4187ff";
-export const RadioDarkColorSchemeStatesCheckedInnerCircleBorder = "#014b9d";
+export const RadioDarkColorSchemeStatesCheckedOuterCircleBorder = "#0059b8";
+export const RadioDarkColorSchemeStatesCheckedInnerCircleBorder = "#0059b8";
 export const RadioDarkColorSchemeStatesFocusedOuterCircleBorder = "#4187ff";
 export const RadioDarkColorSchemeStatesFocusedOuterCircleShadow = "0 0 0 2px #4187ff";
 export const RadioDarkColorSchemeStatesFocusedInnerCircleShadow = "0 0 0 1px #19252f";
