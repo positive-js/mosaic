@@ -592,9 +592,6 @@ describe('McTimepicker with null formControl value', () => {
     it('Paste value from clipboard when formControl value is null', () => {
         testComponent.timeFormat = 'HH:mm:ss';
         fixture.detectChanges();
-        /*
-                    jasmine.clock().install();
-                    jasmine.clock().mockDate(new Date('2020-02-02'));*/
 
         expect(testComponent.formControl.value).toBeNull();
 
@@ -678,9 +675,6 @@ describe('McTimepicker with null model value', () => {
     it('Paste value from clipboard when model value is null', () => {
         testComponent.timeFormat = 'HH:mm:ss';
         fixture.detectChanges();
-        /*
-                    jasmine.clock().install();
-                    jasmine.clock().mockDate(new Date('2020-02-02'));*/
 
         expect(testComponent.model).toBeNull();
 
