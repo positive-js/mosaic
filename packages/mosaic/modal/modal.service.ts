@@ -96,17 +96,14 @@ export class McModalService {
         }
         // Remove the Cancel button if the user not specify a Cancel button
         if (!('mcCancelText' in options)) {
-            // @ts-ignore
-            options.mcCancelText = null;
+            options.mcCancelText = undefined;
         }
         // Remove the Ok button if the user not specify a Ok button
         if (!('mcOkText' in options)) {
-            // @ts-ignore
-            options.mcOkText = null;
+            options.mcOkText = undefined;
         }
         if (!('mcFooter' in options)) {
-            // @ts-ignore
-            options.mcFooter = null;
+            options.mcFooter = undefined;
         }
 
         return new ModalBuilderForService(this.overlay, options).getInstance()!;
