@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 24 Dec 2021 08:07:45 GMT
+ * Generated on Fri, 24 Dec 2021 10:12:13 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#0374eb";
@@ -764,7 +764,7 @@ export const OptionFontDefault = "body";
 export const PopoverLightColorSchemeBackground = "white";
 export const PopoverLightColorSchemeText = "#19252f";
 export const PopoverLightColorSchemeShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
-export const PopoverLightColorSchemeBorder = "#bdc7d1";
+export const PopoverLightColorSchemeBorder = "#d7dee4";
 export const PopoverDarkColorSchemeBackground = "#333f4a";
 export const PopoverDarkColorSchemeText = "#f2f5f9";
 export const PopoverDarkColorSchemeShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
@@ -781,7 +781,7 @@ export const PopoverFontDefault = "body";
 export const PopoverHeaderLightColorSchemeBorder = "#d7dee4";
 export const PopoverHeaderLightColorSchemeText = "#19252f";
 export const PopoverHeaderLightColorSchemeBackground = "white";
-export const PopoverHeaderDarkColorSchemeBorder = "#515e69";
+export const PopoverHeaderDarkColorSchemeBorder = "#333f4a";
 export const PopoverHeaderDarkColorSchemeText = "#f2f5f9";
 export const PopoverHeaderDarkColorSchemeBackground = "#333f4a";
 export const PopoverHeaderSizeHeight = "10px 16px";
@@ -789,19 +789,19 @@ export const PopoverHeaderSizePadding = "10px 16px";
 export const PopoverHeaderFontDefault = "subheading";
 export const PopoverFooterLightColorSchemeBorder = "#f2f5f9";
 export const PopoverFooterLightColorSchemeBackground = "#f2f5f9";
-export const PopoverFooterDarkColorSchemeBorder = "#515e69";
+export const PopoverFooterDarkColorSchemeBorder = "#333f4a";
 export const PopoverFooterDarkColorSchemeBackground = "#333f4a";
 export const PopoverFooterSizeMarginTop = "8px";
 export const PopoverFooterSizePadding = "12px 16px";
 export const PopoverFooterSizeHeight = "56px";
 export const PopoverFooterFontDefault = "body";
 export const PopupLightColorSchemeShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
-export const PopupLightColorSchemeBorder = "#bdc7d1";
+export const PopupLightColorSchemeBorder = "#d7dee4";
 export const PopupLightColorSchemeDivider = "#d7dee4";
 export const PopupLightColorSchemeBackground = "white";
 export const PopupLightColorSchemeFooterBackground = "#f2f5f9";
 export const PopupDarkColorSchemeShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
-export const PopupDarkColorSchemeBorder = "#515e69";
+export const PopupDarkColorSchemeBorder = "#333f4a";
 export const PopupDarkColorSchemeDivider = "#333f4a";
 export const PopupDarkColorSchemeBackground = "#333f4a";
 export const PopupDarkColorSchemeFooterBackground = "transparent";
@@ -966,11 +966,11 @@ export const TooltipSizeTriggerMargin = "9px";
 export const TooltipFontDefault = "caption";
 export const ExtendedTooltipLightColorSchemeBackground = "white";
 export const ExtendedTooltipLightColorSchemeText = "#19252f";
-export const ExtendedTooltipLightColorSchemeBorder = "#bdc7d1";
+export const ExtendedTooltipLightColorSchemeBorder = "#d7dee4";
 export const ExtendedTooltipLightColorSchemeShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
 export const ExtendedTooltipDarkColorSchemeBackground = "#333f4a";
 export const ExtendedTooltipDarkColorSchemeText = "#f2f5f9";
-export const ExtendedTooltipDarkColorSchemeBorder = "#515e69";
+export const ExtendedTooltipDarkColorSchemeBorder = "#333f4a";
 export const ExtendedTooltipDarkColorSchemeShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
 export const ExtendedTooltipSizeBorderRadius = "3px";
 export const ExtendedTooltipSizeArrowSize = "12px";
@@ -978,10 +978,10 @@ export const ExtendedTooltipSizeTriggerMargin = "9px";
 export const ExtendedTooltipSizePadding = "8px 16px";
 export const ExtendedTooltipSizeMaxHeight = "480px";
 export const ExtendedTooltipFontDefault = "caption";
-export const ExtendedTooltipHeaderLightColorSchemeBorder = "#bdc7d1";
+export const ExtendedTooltipHeaderLightColorSchemeBorder = "#d7dee4";
 export const ExtendedTooltipHeaderLightColorSchemeText = "#19252f";
 export const ExtendedTooltipHeaderLightColorSchemeBackground = "white";
-export const ExtendedTooltipHeaderDarkColorSchemeBorder = "#515e69";
+export const ExtendedTooltipHeaderDarkColorSchemeBorder = "#333f4a";
 export const ExtendedTooltipHeaderDarkColorSchemeText = "#f2f5f9";
 export const ExtendedTooltipHeaderDarkColorSchemeBackground = "#333f4a";
 export const ExtendedTooltipHeaderSizeHeight = "40px";
