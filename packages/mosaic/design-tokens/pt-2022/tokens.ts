@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 27 Dec 2021 04:27:59 GMT
+ * Generated on Mon, 27 Dec 2021 09:32:20 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#0374eb";
@@ -645,7 +645,7 @@ export const FormFieldLightColorSchemeStatesHoverBorder = "#bdc7d1";
 export const FormFieldLightColorSchemeStatesInvalidBorder = "#db3c55";
 export const FormFieldLightColorSchemeStatesInvalidBackground = "transparent";
 export const FormFieldDarkColorSchemeBorder = "#515e69";
-export const FormFieldDarkColorSchemeBackground = "#19252f";
+export const FormFieldDarkColorSchemeBackground = "transparent";
 export const FormFieldDarkColorSchemeStatesHoverBorder = "#515e69";
 export const FormFieldDarkColorSchemeStatesInvalidBorder = "#b9023a";
 export const FormFieldDarkColorSchemeStatesInvalidBackground = "transparent";
