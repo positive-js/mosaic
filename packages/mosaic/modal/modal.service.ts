@@ -102,6 +102,7 @@ export class McModalService {
         if (!('mcOkText' in options)) {
             options.mcOkText = undefined;
         }
+        // Remove the footer if the user not specify a footer
         if (!('mcFooter' in options)) {
             options.mcFooter = undefined;
         }
