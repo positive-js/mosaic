@@ -6,27 +6,27 @@
             palette: { value: '{palette.blue}' }
         },
         second: {
-            default: { value: '{palette.grey.300.value}' },
+            default: { value: '{palette.grey.500.value}' },
 
             palette: { value: '{palette.grey}' }
         },
         error: {
-            default: { value: '{palette.red.400.value}' },
+            default: { value: '{palette.red.500.value}' },
 
             palette: { value: '{palette.red}' }
         },
         info: {
-            default: { value: '{palette.blue.200.value}' },
+            default: { value: '{palette.blue.500.value}' },
 
             palette: { value: '{palette.teal}' }
         },
         success: {
-            default: { value: '{palette.green.200.value}' },
+            default: { value: '{palette.green.500.value}' },
 
             palette: { value: '{palette.green}' }
         },
         warning: {
-            default: { value: '{palette.yellow.200.value}' },
+            default: { value: '{palette.yellow.500.value}' },
 
             palette: { value: '{palette.yellow}' }
         },
@@ -61,27 +61,27 @@
             palette: { value: '{palette.blue}' }
         },
         second: {
-            default: { value: '{palette.grey.400.value}' },
+            default: { value: '{palette.grey.560.value}' },
 
             palette: { value: '{palette.grey}' }
         },
         error: {
-            default: { value: '{palette.red.400.value}' },
+            default: { value: '{palette.red.560.value}' },
 
             palette: { value: '{palette.red}' }
         },
         info: {
-            default: { value: '{palette.teal.400.value}' },
+            default: { value: '{palette.teal.560.value}' },
 
             palette: { value: '{palette.teal}' }
         },
         success: {
-            default: { value: '{palette.green.400.value}' },
+            default: { value: '{palette.green.560.value}' },
 
             palette: { value: '{palette.green}' }
         },
         warning: {
-            default: { value: '{palette.yellow.400.value}' },
+            default: { value: '{palette.yellow.560.value}' },
 
             palette: { value: '{palette.yellow}' }
         },
