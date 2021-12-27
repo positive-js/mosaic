@@ -4,13 +4,13 @@
             background: { value: '{light-color-scheme.background.background.value}' },
             text: { value: '{light-color-scheme.foreground.text.value}' },
             shadow: { value: '{popup.light-color-scheme.shadow.value}' },
-            border: { value: '{light-color-scheme.foreground.divider.value}' }
+            border: { value: '{popup.light-color-scheme.border.value}' }
         },
         'dark-color-scheme': {
             background: { value: '{dark-color-scheme.second.palette.value.700.value}' },
             text: { value: '{dark-color-scheme.foreground.text.value}' },
             shadow: { value: '{popup.dark-color-scheme.shadow.value}' },
-            border: { value: '{dark-color-scheme.foreground.divider.value}' }
+            border: { value: '{dark-color-scheme.second.palette.value.700.value}' }
         },
         size: {
             'max-height': { value: '480px' },
@@ -30,12 +30,12 @@
 },
 'popover-header': {
     'light-color-scheme': {
-        border: { value: '{light-color-scheme.foreground.divider.value}' },
+        border: { value: '{popup.light-color-scheme.border.value}' },
         text: { value: '{light-color-scheme.foreground.text.value}' },
-        background: { value: '{light-color-scheme.background.background.value}' }
+        background: { value: '{popup.light-color-scheme.background.value}' }
     },
     'dark-color-scheme': {
-        border: { value: '{dark-color-scheme.foreground.divider.value}' },
+        border: { value: '{dark-color-scheme.second.palette.value.600.value}' },
         text: { value: '{dark-color-scheme.foreground.text.value}' },
         background: { value: '{dark-color-scheme.second.palette.value.700.value}' }
     },
@@ -53,8 +53,8 @@
         background: { value: '{popup.light-color-scheme.footer-background.value}' }
     },
     'dark-color-scheme': {
-        border: { value: '{dark-color-scheme.foreground.divider.value}' },
-        background: { value: '{dark-color-scheme.second.palette.value.700.value}' }
+        border: { value: '{dark-color-scheme.second.palette.value.600.value}' },
+        background: { value: '{dark-color-scheme.background.background-disabled.value}' }
     },
     size: {
         'margin-top': { value: '8px' },
