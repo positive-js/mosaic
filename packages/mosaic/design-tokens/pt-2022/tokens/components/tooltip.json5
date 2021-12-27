@@ -1,10 +1,10 @@
 {
     tooltip: {
         'light-color-scheme': {
-            background: { value: '{light-color-scheme.second.palette.value.600.value}' },
+            background: { value: '{popup.dark-color-scheme.background.value}' },
             text: { value: '{dark-color-scheme.foreground.text.value}' },
             border: { value: 'transparent' },
-            shadow: { value: '0 2px 4px 0 rgba(0, 0, 0, 0.2)' },
+            shadow: { value: '0 2px 4px 0 rgba(39, 51, 62, 0.2)' },
 
             'warning': {
                 background: { value: '{light-color-scheme.warning.palette.value.40.value}' },
@@ -16,7 +16,7 @@
             background: { value: '{popup.light-color-scheme.background.value}' },
             text: { value: '{light-color-scheme.foreground.text.value}' },
             border: { value: 'transparent' },
-            shadow: { value: '0 2px 4px 0 rgba(0, 0, 0, 0.2)' },
+            shadow: { value: '0 2px 4px 0 rgba(39, 51, 62, 0.2)' },
 
             'warning': {
                 background: { value: '{dark-color-scheme.warning.palette.value.560.value}' },
@@ -41,13 +41,13 @@
             background: { value: '{popup.light-color-scheme.background.value}' },
             text: { value: '{light-color-scheme.foreground.text.value}' },
             border: { value: '{popup.light-color-scheme.border.value}' },
-            shadow: { value: '0 2px 4px 0 rgba(0, 0, 0, 0.2)' }
+            shadow: { value: '0 2px 4px 0 rgba(39, 51, 62, 0.2)' },
         },
         'dark-color-scheme': {
-            background: { value: '{popup.dark-color-scheme.background.value}' },
+            background: { value: '{dark-color-scheme.second.palette.value.700.value}' },
             text: { value: '{dark-color-scheme.foreground.text.value}' },
-            border: { value: '{popup.dark-color-scheme.border.value}' },
-            shadow: { value: '0 2px 4px 0 rgba(0, 0, 0, 0.2)' }
+            border: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+            shadow: { value: '0 2px 4px 0 rgba(39, 51, 62, 0.2)' },
         },
         size: {
             'border-radius': { value: '3px' },
@@ -67,9 +67,9 @@
             background: { value: '{popup.light-color-scheme.background.value}' }
         },
         'dark-color-scheme': {
-            border: { value: '{popup.dark-color-scheme.border.value}' },
+            border: { value: '{dark-color-scheme.second.palette.value.600.value}' },
             text: { value: '{dark-color-scheme.foreground.text.value}' },
-            background: { value: '{popup.dark-color-scheme.background.value}' }
+            background: { value: '{dark-color-scheme.second.palette.value.700.value}' }
         },
         size: {
             height: { value: '40px' },

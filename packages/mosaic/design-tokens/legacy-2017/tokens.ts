@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 27 Dec 2021 09:32:20 GMT
+ * Generated on Mon, 27 Dec 2021 10:35:01 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#338FCC";
