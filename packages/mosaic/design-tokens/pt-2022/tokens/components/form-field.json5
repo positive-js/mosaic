@@ -16,7 +16,7 @@
         },
         'dark-color-scheme': {
             border: { value: '{dark-color-scheme.foreground.border.value}' },
-            background: { value: '{dark-color-scheme.background.background.value}' },
+            background: { value: 'transparent' },
 
             states: {
                 hover: {
