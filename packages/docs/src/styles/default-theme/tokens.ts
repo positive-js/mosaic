@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 27 Dec 2021 10:35:01 GMT
+ * Generated on Mon, 27 Dec 2021 11:05:17 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#0374eb";
@@ -765,7 +765,7 @@ export const OptionFontDefault = "body";
 export const PopoverLightColorSchemeBackground = "white";
 export const PopoverLightColorSchemeText = "#19252f";
 export const PopoverLightColorSchemeShadow = "0 3px 8px 0 rgba(39, 51, 62, 0.2)";
-export const PopoverLightColorSchemeBorder = "#bdc7d1";
+export const PopoverLightColorSchemeBorder = "#d7dee4";
 export const PopoverDarkColorSchemeBackground = "#333f4a";
 export const PopoverDarkColorSchemeText = "#f2f5f9";
 export const PopoverDarkColorSchemeShadow = "0 3px 8px 0 rgba(39, 51, 62, 0.2)";
@@ -779,7 +779,7 @@ export const PopoverSizeSmallWidth = "200px";
 export const PopoverSizeNormalWidth = "400px";
 export const PopoverSizeLargeWidth = "640px";
 export const PopoverFontDefault = "body";
-export const PopoverHeaderLightColorSchemeBorder = "#bdc7d1";
+export const PopoverHeaderLightColorSchemeBorder = "#d7dee4";
 export const PopoverHeaderLightColorSchemeText = "#19252f";
 export const PopoverHeaderLightColorSchemeBackground = "white";
 export const PopoverHeaderDarkColorSchemeBorder = "#434f5a";
@@ -797,7 +797,7 @@ export const PopoverFooterSizePadding = "12px 16px";
 export const PopoverFooterSizeHeight = "56px";
 export const PopoverFooterFontDefault = "body";
 export const PopupLightColorSchemeShadow = "0 3px 8px 0 rgba(39, 51, 62, 0.2)";
-export const PopupLightColorSchemeBorder = "#bdc7d1";
+export const PopupLightColorSchemeBorder = "#d7dee4";
 export const PopupLightColorSchemeDivider = "#d7dee4";
 export const PopupLightColorSchemeBackground = "white";
 export const PopupLightColorSchemeFooterBackground = "#f2f5f9";
@@ -967,7 +967,7 @@ export const TooltipSizeTriggerMargin = "9px";
 export const TooltipFontDefault = "caption";
 export const ExtendedTooltipLightColorSchemeBackground = "white";
 export const ExtendedTooltipLightColorSchemeText = "#19252f";
-export const ExtendedTooltipLightColorSchemeBorder = "#bdc7d1";
+export const ExtendedTooltipLightColorSchemeBorder = "#d7dee4";
 export const ExtendedTooltipLightColorSchemeShadow = "0 2px 4px 0 rgba(39, 51, 62, 0.2)";
 export const ExtendedTooltipDarkColorSchemeBackground = "#333f4a";
 export const ExtendedTooltipDarkColorSchemeText = "#f2f5f9";
@@ -979,7 +979,7 @@ export const ExtendedTooltipSizeTriggerMargin = "9px";
 export const ExtendedTooltipSizePadding = "8px 16px";
 export const ExtendedTooltipSizeMaxHeight = "480px";
 export const ExtendedTooltipFontDefault = "caption";
-export const ExtendedTooltipHeaderLightColorSchemeBorder = "#bdc7d1";
+export const ExtendedTooltipHeaderLightColorSchemeBorder = "#d7dee4";
 export const ExtendedTooltipHeaderLightColorSchemeText = "#19252f";
 export const ExtendedTooltipHeaderLightColorSchemeBackground = "white";
 export const ExtendedTooltipHeaderDarkColorSchemeBorder = "#434f5a";
