@@ -1,4 +1,5 @@
 // tslint:disable:no-magic-numbers
+// tslint:disable:max-func-body-length
 // tslint:disable:mocha-no-side-effect-code
 /* tslint:disable:match-default-export-name */
 import { LOCALE_ID } from '@angular/core';
