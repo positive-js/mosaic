@@ -312,6 +312,53 @@ describe('McModal', () => {
             expect(spyOk).toHaveBeenCalled();
         });
 
+        it('should show the footer, when mcFooter is specified', fakeAsync(() => {
+            const modalRef = modalService.create({
+                mcFooter: [
+                    {
+                        label: 'button 1',
+                        type: 'primary'
+                    }
+                ]
+            });
+
+            fixture.detectChanges();
+            tick(600);
+
+            expect(modalRef.getElement().querySelectorAll('.mc-modal-footer').length).toBe(1);
+        }));
+
+        it('should show the footer, when mcOkText is specified', fakeAsync(() => {
+            const modalRef = modalService.create({
+                mcOkText: 'OK'
+            });
+
+            fixture.detectChanges();
+            tick(600);
+
+            expect(modalRef.getElement().querySelectorAll('.mc-modal-footer').length).toBe(1);
+        }));
+
+        it('should show the footer, when mcCancelText is specified', fakeAsync(() => {
+            const modalRef = modalService.create({
+                mcCancelText: 'OK'
+            });
+
+            fixture.detectChanges();
+            tick(600);
+
+            expect(modalRef.getElement().querySelectorAll('.mc-modal-footer').length).toBe(1);
+        }));
+
+        it('should not show the footer, when mcOkText, mcOkCancel and mcFooter are not specified', fakeAsync(() => {
+            const modalRef = modalService.create();
+
+            fixture.detectChanges();
+            tick(600);
+
+            expect(modalRef.getElement().querySelectorAll('.mc-modal-footer').length).toBe(0);
+        }));
+
     });
 });
 
