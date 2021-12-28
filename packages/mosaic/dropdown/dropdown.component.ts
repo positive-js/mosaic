@@ -353,15 +353,6 @@ export class McDropdown implements AfterContentInit, McDropdownPanel, OnInit, On
         }
     }
 
-    handleClick(event: MouseEvent) {
-        if (this.shouldPreventClickEvent(event)) {
-            event.preventDefault();
-            event.stopPropagation();
-        } else {
-            this.close();
-        }
-    }
-
     close() {
         const focusOrigin = this.keyManager.getFocusOrigin() === 'keyboard' ? 'keydown' : 'click';
 
@@ -381,22 +372,5 @@ export class McDropdown implements AfterContentInit, McDropdownPanel, OnInit, On
                 this.directDescendantItems.reset(items.filter((item) => item.parentDropdownPanel === this));
                 this.directDescendantItems.notifyOnChanges();
             });
-    }
-
-    private shouldPreventClickEvent(event: MouseEvent): boolean {
-        // Check that there is no disabled button used as mc-dropdown-item
-        // because it can't receive and prevent click event by itself
-        let element: HTMLElement | null = event.target as HTMLElement;
-        while (element !== null) {
-            if (element.tagName === 'BUTTON' &&
-                element.classList.contains('mc-dropdown-item') &&
-                (element as HTMLButtonElement).disabled) {
-
-                return true;
-            }
-            element = element.parentElement;
-        }
-
-        return false;
     }
 }

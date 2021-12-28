@@ -4,7 +4,7 @@
          [class.mc-dropdown__panel_nested]="parent"
          [style.min-width]="triggerWidth"
          (keydown)="handleKeydown($event)"
-         (click)="handleClick($event)"
+         (click)="close()"
          [@transformDropdown]="panelAnimationState"
          (@transformDropdown.start)="onAnimationStart($event)"
          (@transformDropdown.done)="onAnimationDone($event)"

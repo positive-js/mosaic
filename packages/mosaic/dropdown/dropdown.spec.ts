@@ -55,8 +55,6 @@ import {
 
 const PANEL_SELECTOR = '.mc-dropdown__panel';
 const ITEM_SELECTOR = '[mc-dropdown-item]';
-const ENABLED_ITEM_SELECTOR = '[mc-dropdown-item]:not([disabled])';
-const DISABLED_ITEM_SELECTOR = '[mc-dropdown-item][disabled=true]';
 
 describe('McDropdown', () => {
     let overlayContainer: OverlayContainer;
@@ -984,18 +982,17 @@ describe('McDropdown', () => {
     });
 
     describe('close event', () => {
-        let fixture: ComponentFixture<DropdownWithDisabledItems>;
+        let fixture: ComponentFixture<SimpleDropdown>;
 
         beforeEach(() => {
-            fixture = createComponent(DropdownWithDisabledItems, [], []);
+            fixture = createComponent(SimpleDropdown, [], []);
             fixture.detectChanges();
-            fixture.componentInstance.dropdown.hasBackdrop = true;
             fixture.componentInstance.trigger.open();
             fixture.detectChanges();
         });
 
         it('should emit an event when a dropdown item is clicked', () => {
-            const dropdownItem = overlayContainerElement.querySelector(ENABLED_ITEM_SELECTOR) as HTMLElement;
+            const dropdownItem = overlayContainerElement.querySelector(ITEM_SELECTOR) as HTMLElement;
 
             dropdownItem.click();
             fixture.detectChanges();
@@ -1035,39 +1032,6 @@ describe('McDropdown', () => {
             expect(emitCallback).toHaveBeenCalled();
             expect(emitCallback).toHaveBeenCalledTimes(1);
             expect(completeCallback).toHaveBeenCalled();
-        });
-
-        it('should close after clicking on the enabled button element item', () => {
-            const enabledButtonItemItem = overlayContainerElement.querySelector(`button${ENABLED_ITEM_SELECTOR}`) as HTMLElement;
-
-            enabledButtonItemItem.click();
-            fixture.detectChanges();
-
-            expect(fixture.componentInstance.closeCallback).toHaveBeenCalledWith('click');
-            expect(fixture.componentInstance.closeCallback).toHaveBeenCalledTimes(1);
-        });
-
-        it('should close after clicking on the enabled not button element item', () => {
-            const enabledSpanItemItem = overlayContainerElement.querySelector(`span${ENABLED_ITEM_SELECTOR}`) as HTMLElement;
-
-            enabledSpanItemItem.click();
-            fixture.detectChanges();
-
-            expect(fixture.componentInstance.closeCallback).toHaveBeenCalledWith('click');
-            expect(fixture.componentInstance.closeCallback).toHaveBeenCalledTimes(1);
-        });
-
-        it('should not close after clicking on the disabled item', () => {
-            const disabledButtonItemItem = overlayContainerElement.querySelector(`button${DISABLED_ITEM_SELECTOR}`) as HTMLElement;
-            const disabledSpanItemItem = overlayContainerElement.querySelector(`span${DISABLED_ITEM_SELECTOR}`) as HTMLElement;
-
-            disabledButtonItemItem.click();
-            fixture.detectChanges();
-
-            disabledSpanItemItem.click();
-            fixture.detectChanges();
-
-            expect(fixture.componentInstance.closeCallback).toHaveBeenCalledTimes(0);
         });
     });
 
@@ -1692,6 +1656,7 @@ describe('McDropdown', () => {
             expect(document.activeElement)
                 .not.toBe(levelOneTrigger, 'Expected focus not to be returned to the initial trigger.');
         }));
+
     });
 
 });
@@ -1924,6 +1889,7 @@ class NestedDropdownRepeater {
     items = ['one', 'two', 'three'];
 }
 
+
 @Component({
     template: `
         <button [mcDropdownTriggerFor]="root" #rootTriggerEl>Toggle dropdown</button>
@@ -1941,6 +1907,7 @@ class NestedDropdownDeclaredInsideParentDropdown {
     @ViewChild('rootTriggerEl', {static: false}) rootTriggerEl: ElementRef;
 }
 
+
 @Component({
     template: `
         <button [mcDropdownTriggerFor]="dropdown" #triggerEl>Toggle dropdown</button>
@@ -1957,6 +1924,7 @@ class SimpleLazyDropdown {
     @ViewChild('triggerEl', {static: false}) triggerEl: ElementRef<HTMLElement>;
     @ViewChildren(McDropdownItem) items: QueryList<McDropdownItem>;
 }
+
 
 @Component({
     template: `
@@ -1982,6 +1950,7 @@ class LazyDropdownWithContext {
     @ViewChild('triggerTwo', {static: false}) triggerTwo: McDropdownTrigger;
 }
 
+
 @Component({
     template: `
         <button [mcDropdownTriggerFor]="one">Toggle dropdown</button>
@@ -1998,24 +1967,4 @@ class DynamicPanelDropdown {
     @ViewChild(McDropdownTrigger, {static: false}) trigger: McDropdownTrigger;
     @ViewChild('one', {static: false}) first: McDropdown;
     @ViewChild('two', {static: false}) second: McDropdown;
-}
-
-@Component({
-    template: `
-        <button [mcDropdownTriggerFor]="dropdown">Toggle dropdown</button>
-        <mc-dropdown
-            #dropdown="mcDropdown"
-            (closed)="closeCallback($event)">
-
-            <button mc-dropdown-item> Item </button>
-            <button mc-dropdown-item disabled> Disabled </button>
-            <span mc-dropdown-item> Item </span>
-            <span mc-dropdown-item disabled> Disabled </span>
-        </mc-dropdown>
-    `
-})
-class DropdownWithDisabledItems {
-    @ViewChild(McDropdownTrigger, {static: false}) trigger: McDropdownTrigger;
-    @ViewChild(McDropdown, {static: false}) dropdown: McDropdown;
-    closeCallback = jasmine.createSpy('dropdown closed callback', (name: string | undefined) => name);
 }
