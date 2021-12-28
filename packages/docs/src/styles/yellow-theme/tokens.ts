@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 27 Dec 2021 11:05:18 GMT
+ * Generated on Tue, 28 Dec 2021 07:49:03 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#a26e0c";
@@ -56,7 +56,7 @@ export const DarkColorSchemeBackgroundOverlayActive = "rgba(black, 0.1)";
 export const DarkColorSchemeBackgroundOverlayDisabled = "rgba(black, 0.2)";
 export const DarkColorSchemeStatesFocusedColor = "#c78816";
 export const DarkColorSchemeStatesFocusedColorError = "#b9023a";
-export const DarkColorSchemeStatesSelectedColor = "#6b4804";
+export const DarkColorSchemeStatesSelectedColor = "#543803";
 export const DarkColorSchemeStatesPressedShadow = "inset 1px 2px 2px 0 rgba(black, 0.2)";
 export const DarkColorSchemeStatesDisabledOpacity = 0.3;
 export const FontFamilyAccent = "'TT Positive', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
@@ -603,7 +603,7 @@ export const DatepickerToggleSizeHeight = "30px";
 export const DatepickerBodyLightColorSchemeStatesSelectedColor = "#a26e0c";
 export const DatepickerBodyLightColorSchemeStatesSelectedBackground = "#ffecce";
 export const DatepickerBodyDarkColorSchemeStatesSelectedColor = "#c78816";
-export const DatepickerBodyDarkColorSchemeStatesSelectedBackground = "#6b4804";
+export const DatepickerBodyDarkColorSchemeStatesSelectedBackground = "#543803";
 export const DatepickerBodySizeLabelPaddings = "8px 28px 12px 12px";
 export const DatepickerBodySizeCellMinSize = "32px";
 export const DatepickerBodySizeCellMargin = "5%";
