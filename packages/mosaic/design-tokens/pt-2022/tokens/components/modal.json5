@@ -2,19 +2,19 @@
     modal: {
         'light-color-scheme': {
             shadow: {
-                value: '(0 0 0 1px {light-color-scheme.second.palette.value.300.value}, 0 6px 12px 0 rgba(0, 0, 0, 0.5))'
+                value: '(0 0 0 1px {light-color-scheme.foreground.divider.value}, 0 6px 12px 0 rgba(39, 51, 62, 0.5))'
             },
             'body-top-shadow':{
-                value: '0 2px 4px 0 rgba(0, 0, 0, 0.16)'
+                value: '0 2px 4px 0 rgba(39, 51, 62, 0.16)'
             },
             'body-bottom-shadow':{
-                value: '0 -2px 4px 0 rgba(0, 0, 0, 0.16)'
+                value: '0 -2px 4px 0 rgba(39, 51, 62, 0.16)'
             },
-            'background-mask': { value: 'rgba(0, 0, 0, 0.5)' }
+            'background-mask': { value: 'rgba(39, 51, 62, 0.5)' }
         },
         'dark-color-scheme': {
             shadow: {
-                value: '(0 0 0 1px {dark-color-scheme.second.palette.value.800.value}, 0 6px 12px 0 rgba(0, 0, 0, 0.5))'
+                value: '(0 0 0 1px {dark-color-scheme.background.background.value}, 0 6px 12px 0 rgba(0, 0, 0, 0.5))'
             },
             'body-top-shadow':{
                 value: '0 2px 4px 0 rgba(0, 0, 0, 0.16)'

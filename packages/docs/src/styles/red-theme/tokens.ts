@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 28 Dec 2021 07:49:03 GMT
+ * Generated on Tue, 28 Dec 2021 09:20:13 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#db3c55";
@@ -705,11 +705,11 @@ export const ListSizeIconPadding = "4px";
 export const ListSizeItemHeight = "32px";
 export const ListSizeIconWidth = "24px";
 export const ListFontItem = "body";
-export const ModalLightColorSchemeShadow = "(0 0 0 1px #8c99a5, 0 6px 12px 0 rgba(0, 0, 0, 0.5))";
-export const ModalLightColorSchemeBodyTopShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.16)";
-export const ModalLightColorSchemeBodyBottomShadow = "0 -2px 4px 0 rgba(0, 0, 0, 0.16)";
-export const ModalLightColorSchemeBackgroundMask = "rgba(0, 0, 0, 0.5)";
-export const ModalDarkColorSchemeShadow = "(0 0 0 1px #27333e, 0 6px 12px 0 rgba(0, 0, 0, 0.5))";
+export const ModalLightColorSchemeShadow = "(0 0 0 1px #d7dee4, 0 6px 12px 0 rgba(39, 51, 62, 0.5))";
+export const ModalLightColorSchemeBodyTopShadow = "0 2px 4px 0 rgba(39, 51, 62, 0.16)";
+export const ModalLightColorSchemeBodyBottomShadow = "0 -2px 4px 0 rgba(39, 51, 62, 0.16)";
+export const ModalLightColorSchemeBackgroundMask = "rgba(39, 51, 62, 0.5)";
+export const ModalDarkColorSchemeShadow = "(0 0 0 1px #19252f, 0 6px 12px 0 rgba(0, 0, 0, 0.5))";
 export const ModalDarkColorSchemeBodyTopShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.16)";
 export const ModalDarkColorSchemeBodyBottomShadow = "0 -2px 4px 0 rgba(0, 0, 0, 0.16)";
 export const ModalDarkColorSchemeBackgroundMask = "rgba(0, 0, 0, 0.5)";
@@ -768,7 +768,7 @@ export const PopoverLightColorSchemeShadow = "0 3px 8px 0 rgba(39, 51, 62, 0.2)"
 export const PopoverLightColorSchemeBorder = "#d7dee4";
 export const PopoverDarkColorSchemeBackground = "#333f4a";
 export const PopoverDarkColorSchemeText = "#f2f5f9";
-export const PopoverDarkColorSchemeShadow = "0 3px 8px 0 rgba(39, 51, 62, 0.2)";
+export const PopoverDarkColorSchemeShadow = "0 3px 8px 0 rgba(0, 0, 0, 0.2)";
 export const PopoverDarkColorSchemeBorder = "#333f4a";
 export const PopoverSizeMaxHeight = "480px";
 export const PopoverSizePadding = "16px";
@@ -801,10 +801,10 @@ export const PopupLightColorSchemeBorder = "#d7dee4";
 export const PopupLightColorSchemeDivider = "#d7dee4";
 export const PopupLightColorSchemeBackground = "white";
 export const PopupLightColorSchemeFooterBackground = "#f2f5f9";
-export const PopupDarkColorSchemeShadow = "0 3px 8px 0 rgba(39, 51, 62, 0.2)";
-export const PopupDarkColorSchemeBorder = "#515e69";
-export const PopupDarkColorSchemeDivider = "#333f4a";
-export const PopupDarkColorSchemeBackground = "#19252f";
+export const PopupDarkColorSchemeShadow = "0 3px 8px 0 rgba(0, 0, 0, 0.2)";
+export const PopupDarkColorSchemeBorder = "#333f4a";
+export const PopupDarkColorSchemeDivider = "#434f5a";
+export const PopupDarkColorSchemeBackground = "#333f4a";
 export const PopupDarkColorSchemeFooterBackground = "transparent";
 export const ProgressBarLightColorSchemeBackground = "rgba(25, 37, 47, 0.06)";
 export const ProgressBarDarkColorSchemeBackground = "rgba(white,0.06)";
@@ -944,7 +944,7 @@ export const ToggleSmallSizeHeight = "14px";
 export const ToggleSmallSizeWidth = "24px";
 export const ToggleSmallSizeBorderRadius = "8px";
 export const ToggleSmallFontDefault = "caption";
-export const TooltipLightColorSchemeBackground = "#19252f";
+export const TooltipLightColorSchemeBackground = "#333f4a";
 export const TooltipLightColorSchemeText = "#f2f5f9";
 export const TooltipLightColorSchemeBorder = "transparent";
 export const TooltipLightColorSchemeShadow = "0 2px 4px 0 rgba(39, 51, 62, 0.2)";
