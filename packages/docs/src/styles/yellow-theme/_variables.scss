@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Tue, 28 Dec 2021 07:49:03 GMT
+// Generated on Tue, 28 Dec 2021 09:20:14 GMT
 
 $light-color-scheme-primary-default: #a26e0c;
 $light-color-scheme-second-default: #6d7a86;
@@ -583,11 +583,11 @@ $list-size-icon-padding: 4px;
 $list-size-item-height: 32px;
 $list-size-icon-width: 24px;
 $list-font-item: body;
-$modal-light-color-scheme-shadow: (0 0 0 1px #8c99a5, 0 6px 12px 0 rgba(0, 0, 0, 0.5));
-$modal-light-color-scheme-body-top-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
-$modal-light-color-scheme-body-bottom-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.16);
-$modal-light-color-scheme-background-mask: rgba(0, 0, 0, 0.5);
-$modal-dark-color-scheme-shadow: (0 0 0 1px #27333e, 0 6px 12px 0 rgba(0, 0, 0, 0.5));
+$modal-light-color-scheme-shadow: (0 0 0 1px #d7dee4, 0 6px 12px 0 rgba(39, 51, 62, 0.5));
+$modal-light-color-scheme-body-top-shadow: 0 2px 4px 0 rgba(39, 51, 62, 0.16);
+$modal-light-color-scheme-body-bottom-shadow: 0 -2px 4px 0 rgba(39, 51, 62, 0.16);
+$modal-light-color-scheme-background-mask: rgba(39, 51, 62, 0.5);
+$modal-dark-color-scheme-shadow: (0 0 0 1px #19252f, 0 6px 12px 0 rgba(0, 0, 0, 0.5));
 $modal-dark-color-scheme-body-top-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
 $modal-dark-color-scheme-body-bottom-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.16);
 $modal-dark-color-scheme-background-mask: rgba(0, 0, 0, 0.5);
@@ -646,7 +646,7 @@ $popover-light-color-scheme-shadow: 0 3px 8px 0 rgba(39, 51, 62, 0.2);
 $popover-light-color-scheme-border: #d7dee4;
 $popover-dark-color-scheme-background: #333f4a;
 $popover-dark-color-scheme-text: #f2f5f9;
-$popover-dark-color-scheme-shadow: 0 3px 8px 0 rgba(39, 51, 62, 0.2);
+$popover-dark-color-scheme-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2);
 $popover-dark-color-scheme-border: #333f4a;
 $popover-size-max-height: 480px;
 $popover-size-padding: 16px;
@@ -679,10 +679,10 @@ $popup-light-color-scheme-border: #d7dee4;
 $popup-light-color-scheme-divider: #d7dee4;
 $popup-light-color-scheme-background: white;
 $popup-light-color-scheme-footer-background: #f2f5f9;
-$popup-dark-color-scheme-shadow: 0 3px 8px 0 rgba(39, 51, 62, 0.2);
-$popup-dark-color-scheme-border: #515e69;
-$popup-dark-color-scheme-divider: #333f4a;
-$popup-dark-color-scheme-background: #19252f;
+$popup-dark-color-scheme-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2);
+$popup-dark-color-scheme-border: #333f4a;
+$popup-dark-color-scheme-divider: #434f5a;
+$popup-dark-color-scheme-background: #333f4a;
 $popup-dark-color-scheme-footer-background: transparent;
 $progress-bar-light-color-scheme-background: rgba(25, 37, 47, 0.06);
 $progress-bar-dark-color-scheme-background: rgba(white,0.06);
@@ -822,7 +822,7 @@ $toggle-small-size-height: 14px;
 $toggle-small-size-width: 24px;
 $toggle-small-size-border-radius: 8px;
 $toggle-small-font-default: caption;
-$tooltip-light-color-scheme-background: #19252f;
+$tooltip-light-color-scheme-background: #333f4a;
 $tooltip-light-color-scheme-text: #f2f5f9;
 $tooltip-light-color-scheme-border: transparent;
 $tooltip-light-color-scheme-shadow: 0 2px 4px 0 rgba(39, 51, 62, 0.2);
