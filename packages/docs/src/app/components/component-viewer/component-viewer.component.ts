@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectorRef, Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router, Params, NavigationStart } from '@angular/router';
 import { combineLatest, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
@@ -78,7 +79,8 @@ export class ComponentOverviewComponent implements OnDestroy {
 
     constructor(public componentViewer: ComponentViewerComponent,
                 private router: Router,
-                private ref: ChangeDetectorRef) {
+                private ref: ChangeDetectorRef,
+                private titleService: Title) {
         this.currentUrl = this.getRoute(router.url);
 
         this.router.events.pipe(takeUntil(this.destroyed)).subscribe((event) => {
@@ -175,6 +177,15 @@ export class ComponentOverviewComponent implements OnDestroy {
 
     showView() {
         this.documentName = this.componentViewer.componentDocItem.id;
+        const defaultTitle = 'Mosaic';
+
+        if (this.documentName) {
+            this.titleService.setTitle(
+                `${this.documentName.charAt(0).toUpperCase()}${this.documentName.slice(1)} \u00B7 ${defaultTitle}`
+            );
+        } else {
+            this.titleService.setTitle(defaultTitle);
+        }
         this.isLoad = true;
         this.ref.detectChanges();
     }
