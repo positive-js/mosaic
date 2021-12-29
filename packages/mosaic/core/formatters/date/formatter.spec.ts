@@ -6,12 +6,25 @@ import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 import { LuxonDateAdapter, LuxonDateModule } from '@ptsecurity/mosaic-luxon-adapter/adapter';
 import { DateFormatter, McFormattersModule } from '@ptsecurity/mosaic/core';
-import { DateTime } from 'luxon';
+import { DateTime, DurationUnit } from 'luxon';
 
 
 describe('Date formatter', () => {
     let adapter: LuxonDateAdapter;
     let formatter: DateFormatter<DateTime>;
+    let currentDate: DateTime;
+
+    const mockAdapterAndFormatterForRelativeTests = () => {
+        // @ts-ignore
+        adapter.diffNow = function (date: DateTime, unit: DurationUnit) {
+            return date.diff(currentDate, unit)[unit];
+        }
+
+        // @ts-ignore
+        formatter.hasSame = function(startDate: DateTime, endDate: DateTime, unit: string): string {
+            return this.adapter.hasSame(startDate, currentDate, unit) ? 'yes' : 'no';
+        }
+    }
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -27,6 +40,8 @@ describe('Date formatter', () => {
     beforeEach(inject([DateAdapter, DateFormatter], (d: LuxonDateAdapter, f: DateFormatter<DateTime>) => {
         adapter = d;
         formatter = f;
+
+        currentDate = adapter.createDateTime(2000, 10, 10, 10, 0, 0, 0);
     }));
 
     const YEAR = 'yyyy';
@@ -64,21 +79,23 @@ describe('Date formatter', () => {
                 });
 
                 it('before yesterday, more than 2 days ago', () => {
-                    let date = adapter.today()
-                        .minus({ days: 3 });
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    let date = currentDate.minus({ days: 3 });
 
                     expect(formatter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${DAY}${NBSP}${SHORT_MONTH}, ${TIME}`));
 
-                    date = adapter.today().minus({ days: 5 });
+                    date = currentDate.minus({ days: 5 });
 
                     expect(formatter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${DAY}${NBSP}${SHORT_MONTH}, ${TIME}`));
                 });
 
                 it('yesterday', () => {
-                    const date = adapter.today()
-                        .minus({ days: 1 });
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    const date = currentDate.minus({ days: 1 });
 
                     expect(formatter.relativeShortDate(date))
                         .toBe(`Вчера, ${date.toFormat(TIME)}`);
@@ -92,27 +109,30 @@ describe('Date formatter', () => {
                 });
 
                 it('tomorrow', () => {
-                    const date = adapter.today().plus({ days: 1, hours: 1 });
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    const date = currentDate.plus({ days: 1, hours: 1 });
 
                     expect(formatter.relativeShortDate(date))
                         .toBe(`Завтра, ${date.toFormat(TIME)}`);
                 });
 
                 it('after tomorrow (current year)', () => {
-                    let date = adapter.today()
-                        .plus({ days: 3 });
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    let date = currentDate.plus({ days: 3 });
 
                     expect(formatter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${DAY}${NBSP}${SHORT_MONTH}, ${TIME}`));
 
-                    date = adapter.today().plus({ days: 5 });
+                    date = currentDate.plus({ days: 5 });
 
                     expect(formatter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${DAY}${NBSP}${SHORT_MONTH}, ${TIME}`));
                 });
 
                 it('after tomorrow (other year)', () => {
-                    const date = adapter.createDate(2015).plus({ hours: 49 });
+                    const date = currentDate.plus({ hours: 49 });
                     expect(formatter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${DAY}${NBSP}${SHORT_MONTH} ${YEAR}`));
                 });
@@ -120,27 +140,29 @@ describe('Date formatter', () => {
 
             describe('Relative long (relativeLongDate method)', () => {
                 it('before yesterday (other year)', () => {
-                    const date = adapter.createDate(2015).minus({ hours: 49 });
+                    const date = currentDate.minus({ hours: 49 });
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH} ${YEAR}`));
                 });
 
                 it('before yesterday, more than 2 days ago', () => {
-                    let date = adapter.today()
-                        .minus({ days: 3 });
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    let date = currentDate.minus({ days: 3 });
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH}, ${TIME}`));
 
-                    date = adapter.today().minus({ days: 5 });
+                    date = currentDate.minus({ days: 5 });
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH}, ${TIME}`));
                 });
 
                 it('yesterday', () => {
-                    const date = adapter.today()
-                        .minus({ days: 1 });
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    const date = currentDate.minus({ days: 1 });
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(`Вчера, ${date.toFormat(TIME)}`);
@@ -154,27 +176,30 @@ describe('Date formatter', () => {
                 });
 
                 it('tomorrow', () => {
-                    const date = adapter.today().plus({ days: 1, hours: 1 });
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    const date = currentDate.plus({ days: 1, hours: 1 });
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(`Завтра, ${date.toFormat(TIME)}`);
                 });
 
                 it('after tomorrow (current year)', () => {
-                    let date = adapter.today()
-                        .plus({ days: 3 });
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    let date = currentDate.plus({ days: 3 });
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH}, ${TIME}`));
 
-                    date = adapter.today().plus({ days: 5 });
+                    date = currentDate.plus({ days: 5 });
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH}, ${TIME}`));
                 });
 
                 it('after tomorrow (other year)', () => {
-                    const date = adapter.createDate(2015).plus({ hours: 49 });
+                    const date = currentDate.plus({ hours: 49 });
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH} ${YEAR}`));
                 });
@@ -792,20 +817,23 @@ describe('Date formatter', () => {
                 });
 
                 it('before yesterday, more than 2 days ago', () => {
-                    let date = adapter.today()
-                        .minus({ days: 3 });
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    let date = currentDate.minus({ days: 3 });
 
                     expect(formatter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${SHORT_MONTH}${NBSP}${DAY}, ${TIME}`));
 
-                    date = adapter.today().minus({ days: 5 });
+                    date = currentDate.minus({ days: 5 });
 
                     expect(formatter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${SHORT_MONTH}${NBSP}${DAY}, ${TIME}`));
                 });
 
                 it('yesterday', () => {
-                    const date = adapter.today()
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    const date = currentDate
                         .minus({ days: 1 });
 
                     expect(formatter.relativeShortDate(date))
@@ -820,20 +848,23 @@ describe('Date formatter', () => {
                 });
 
                 it('tomorrow', () => {
-                    const date = adapter.today().plus({ days: 1, hours: 1 });
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    const date = currentDate.plus({ days: 1, hours: 1 });
 
                     expect(formatter.relativeShortDate(date))
                         .toBe(`Tomorrow, ${date.toFormat(TIME)}`);
                 });
 
                 it('after tomorrow (current year)', () => {
-                    let date = adapter.today()
-                        .plus({ days: 3 });
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    let date = currentDate.plus({ days: 3 });
 
                     expect(formatter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${SHORT_MONTH}${NBSP}${DAY}, ${TIME}`));
 
-                    date = adapter.today().plus({ days: 5 });
+                    date = currentDate.plus({ days: 5 });
 
                     expect(formatter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${SHORT_MONTH}${NBSP}${DAY}, ${TIME}`));
@@ -855,21 +886,23 @@ describe('Date formatter', () => {
                 });
 
                 it('before yesterday, more than 2 days ago', () => {
-                    let date = adapter.today()
-                        .minus({ days: 3 });
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    let date = currentDate.minus({ days: 3 });
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH}, ${TIME}`));
 
-                    date = adapter.today().minus({ days: 5 });
+                    date = currentDate.minus({ days: 5 });
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH}, ${TIME}`));
                 });
 
                 it('yesterday', () => {
-                    const date = adapter.today()
-                        .minus({ days: 1 });
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    const date = currentDate.minus({ days: 1 });
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(`Yesterday, ${date.toFormat(TIME)}`);
@@ -883,20 +916,23 @@ describe('Date formatter', () => {
                 });
 
                 it('tomorrow', () => {
-                    const date = adapter.today().plus({ days: 1, hours: 1 });
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    const date = currentDate.plus({ days: 1, hours: 1 });
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(`Tomorrow, ${date.toFormat(TIME)}`);
                 });
 
                 it('after tomorrow (current year)', () => {
-                    let date = adapter.today()
-                        .plus({ days: 3 });
+                    mockAdapterAndFormatterForRelativeTests();
+
+                    let date = currentDate.plus({ days: 3 });
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH}, ${TIME}`));
 
-                    date = adapter.today().plus({ days: 5 });
+                    date = currentDate.plus({ days: 5 });
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH}, ${TIME}`));
