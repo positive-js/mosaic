@@ -140,6 +140,8 @@
 }
 
 .mc-tree-select__panel {
+    min-width: 100%; // prevents some animcion twitching and test inconsistencies in IE11
+
     border: {
         width: var(--mc-select-panel-size-border-width, $select-panel-size-border-width);
         style: solid;
@@ -158,16 +160,11 @@
     }
 }
 
-.mc-tree-select__scroll-container {
+.mc-tree-select__content {
     max-height: var(--mc-select-panel-size-max-height, $select-panel-size-max-height);
-    min-width: 100%; // prevents some animcion twitching and test inconsistencies in IE11
 
     overflow: auto;
     padding: 4px 0;
-}
-
-.mc-tree-select__content {
-    height: 100%;
 
     & .mc-tree-selection {
         height: 100%;

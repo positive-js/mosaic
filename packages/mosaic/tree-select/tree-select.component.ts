@@ -417,7 +417,9 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         return this.cleaner && this.selectionModel.hasValue();
     }
 
-    isEmptySearchResult: boolean;
+    get isEmptySearchResult(): boolean {
+        return this.search && this.tree.isEmpty && !!this.search.input.value;
+    }
 
     private closeSubscription = Subscription.EMPTY;
 
@@ -534,6 +536,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
                 this.onChange(this.selectedValues);
 
                 this.selectionChange.emit(new McTreeSelectChange(this, event.option));
+
+                if (this.search) {
+                    this.search.focus();
+                }
             });
 
         this.selectionModel.changed
@@ -546,8 +552,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
                     );
                 }
             });
-
-        this.setIsSearchEmpty();
     }
 
     ngAfterViewInit() {
@@ -968,6 +972,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
                     this.tree.keyManager.activeItem, hasModifierKey(event, 'shiftKey'), hasModifierKey(event, 'ctrlKey')
                 );
             }
+
+            if (this.search) {
+                this.search.focus();
+            }
         }
     }
 
@@ -1099,22 +1107,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         // blurry content in some browsers.
         this.overlayDir.offsetX = Math.round(offsetX);
         this.overlayDir.overlayRef.updatePosition();
-    }
-
-    private setIsSearchEmpty() {
-        if (this.search && this.search.input.ngControl.valueChanges) {
-            this.search.input.ngControl.valueChanges
-                .pipe(takeUntil(this.destroy))
-                .subscribe((value) => {
-                    setTimeout(
-                        () => {
-                            this.isEmptySearchResult = this.options.length === 0 && !!value;
-                            this.changeDetectorRef.markForCheck();
-                        },
-                        0
-                    );
-                });
-        }
     }
 
     /** Comparison function to specify which option is displayed. Defaults to object equality. */
