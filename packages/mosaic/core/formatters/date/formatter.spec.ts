@@ -16,15 +16,15 @@ describe('Date formatter', () => {
 
     const mockAdapterAndFormatterForRelativeTests = () => {
         // @ts-ignore
-        adapter.diffNow = function (date: DateTime, unit: DurationUnit) {
+        adapter.diffNow = (date: DateTime, unit: DurationUnit): number => {
             return date.diff(currentDate, unit)[unit];
-        }
+        };
 
         // @ts-ignore
-        formatter.hasSame = function(startDate: DateTime, endDate: DateTime, unit: string): string {
-            return this.adapter.hasSame(startDate, currentDate, unit) ? 'yes' : 'no';
-        }
-    }
+        formatter.hasSame = (startDate: DateTime, endDate: DateTime, unit: DurationUnit): string => {
+            return adapter.hasSame(startDate, currentDate, unit) ? 'yes' : 'no';
+        };
+    };
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
