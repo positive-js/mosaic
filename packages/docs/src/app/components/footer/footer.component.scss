@@ -38,3 +38,22 @@
         opacity: 0.8;
     }
 }
+
+@media (max-width: 600px) {
+    .docs-footer {
+        position: relative;
+        padding: 0;
+
+        &__wrapper {
+            margin: {
+                right: 10px;
+                left: 10px;
+            };
+            padding: {
+                top: 12px;
+                bottom: 12px;
+            };
+        }
+    }
+}
+

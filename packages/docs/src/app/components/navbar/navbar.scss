@@ -90,3 +90,15 @@ $doc-navbar-padding: 10px;
 .color-picker .mc.mc-icon {
     margin-right: 0;
 }
+
+@media (max-width: 600px) {
+    .docs-navbar-header {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .docs-navbar-header_fixed {
+        position: relative;
+    }
+
+}
