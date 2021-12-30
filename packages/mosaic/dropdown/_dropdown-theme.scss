@@ -44,10 +44,6 @@
         background: map-get($background, overlay-hover);
     }
 
-    .mc-dropdown-item-overlay {
-        background: transparent;
-    }
-
     .mc-dropdown__divider {
         background-color: map-get($foreground, divider);
     }

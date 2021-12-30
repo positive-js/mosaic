@@ -26,21 +26,19 @@
     background-color: transparent;
 
     &:hover:not([disabled]) {
-        background-color: map-get($background, overlay-hover);
-
         & .mc-button-overlay {
-            background-color: transparent;
+            background: map-get($background, overlay-hover);
         }
     }
 
     &:active:not([disabled]),
     &.mc-active:not([disabled]) {
         border-color: transparent;
-        background-color: map-get($background, overlay-active);
+        background-color: transparent;
         box-shadow: none;
 
         & .mc-button-overlay {
-            background-color: transparent;
+            background: map-get($background, overlay-active);
         }
     }
 

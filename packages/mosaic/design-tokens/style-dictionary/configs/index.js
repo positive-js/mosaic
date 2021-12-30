@@ -6,8 +6,7 @@ const cssConfig = require('./css');
 
 const filterObj = {
     options: {
-        showFileHeader: true,
-        fileHeader: 'customHeader'
+        showFileHeader: true
     }
 };
 

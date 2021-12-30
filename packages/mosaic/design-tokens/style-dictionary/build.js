@@ -26,12 +26,6 @@ console.log('Build started...');
 console.log('==============================================');
 
 module.exports = (themeConfig) => {
-    StyleDictionary.registerFileHeader({
-        name: 'customHeader',
-        fileHeader: () => {
-            return [`Do not edit directly`];
-        }
-    });
     console.log('themeConfig: ', themeConfig);
 
     if (!themeConfig || themeConfig.length === 0) {

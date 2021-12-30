@@ -1,7 +1,6 @@
-import { Component, Type, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { Component, Type } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { dispatchMouseEvent } from '@ptsecurity/cdk/testing';
 
 import { Direction, McGutterDirective, McSplitterAreaDirective, McSplitterComponent, McSplitterModule } from './index';
 
@@ -73,24 +72,6 @@ class McSplitterDirection {
     direction: Direction = Direction.Vertical;
 }
 
-
-@Component({
-    selector: 'mc-demo-spllitter',
-    template: `
-        <mc-splitter (gutterPositionChange)="gutterPositionChange()">
-            <div #areaA mc-splitter-area (sizeChange)="areaASizeChange($event)">first</div>
-            <div #areaB mc-splitter-area (sizeChange)="areaBSizeChange($event)">second</div>
-        </mc-splitter>
-    `
-})
-class McSplitterEvents {
-    gutterPositionChange = jasmine.createSpy('gutter position change callback');
-    areaASizeChange = jasmine.createSpy('area A size change callback', (size: number) => size);
-    areaBSizeChange = jasmine.createSpy('area B size change callback', (size: number) => size);
-    @ViewChild('areaA', { static: false, read: McSplitterAreaDirective }) areaA: McSplitterAreaDirective;
-    @ViewChild('areaB', { static: false, read: McSplitterAreaDirective }) areaB: McSplitterAreaDirective;
-}
-
 describe('McSplitter', () => {
     describe('direction', () => {
         it('should be default', () => {
@@ -130,26 +111,5 @@ describe('McSplitter', () => {
 
             checkDirection(fixture, Direction.Vertical, expectedGuttersCount, expectedGutterSize);
         });
-    });
-    describe('events', () => {
-        it('should emit events after releasing gutter', fakeAsync(() => {
-            const fixture = createTestComponent(McSplitterEvents);
-            fixture.detectChanges();
-
-            tick();
-
-            const gutters = fixture.debugElement.queryAll(By.directive(McGutterDirective));
-
-            dispatchMouseEvent(gutters[0].nativeElement, 'mousedown');
-            document.dispatchEvent(new Event('mouseup'));
-
-            fixture.detectChanges();
-
-            expect(fixture.componentInstance.gutterPositionChange).toHaveBeenCalledTimes(1);
-            expect(fixture.componentInstance.areaASizeChange).toHaveBeenCalledTimes(1);
-            expect(fixture.componentInstance.areaASizeChange).toHaveBeenCalledWith(fixture.componentInstance.areaA.getSize());
-            expect(fixture.componentInstance.areaBSizeChange).toHaveBeenCalledTimes(1);
-            expect(fixture.componentInstance.areaBSizeChange).toHaveBeenCalledWith(fixture.componentInstance.areaB.getSize());
-        }));
     });
 });
