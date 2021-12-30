@@ -18,6 +18,7 @@ import {
 } from './tree-multiple-checklist/tree-multiple-checklist-example';
 import { TreeMultipleKeyboardExample } from './tree-multiple-keyboard/tree-multiple-keyboard-example';
 import { TreeOverviewExample } from './tree-overview/tree-overview-example';
+import { TreeLazyloadExample } from './tree-lazyload/tree-lazyload-example';
 
 
 export {
@@ -26,7 +27,8 @@ export {
     TreeMultipleCheckboxExample,
     TreeMultipleChecklistExample,
     TreeMultipleKeyboardExample,
-    TreeFilteringExample
+    TreeFilteringExample,
+    TreeLazyloadExample
 };
 
 const EXAMPLES = [
@@ -35,7 +37,8 @@ const EXAMPLES = [
     TreeMultipleCheckboxExample,
     TreeMultipleChecklistExample,
     TreeMultipleKeyboardExample,
-    TreeFilteringExample
+    TreeFilteringExample,
+    TreeLazyloadExample
 ];
 
 @NgModule({
