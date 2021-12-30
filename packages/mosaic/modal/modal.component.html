@@ -72,7 +72,7 @@
             </ng-container>
         </ng-container>
     </div>
-    <div *ngIf="mcFooter !== null" class="mc-modal-footer" [class.mc-modal-body_bottom-overflow]="isBottomOverflow">
+    <div *ngIf="mcFooter || mcOkText || mcCancelText" class="mc-modal-footer" [class.mc-modal-body_bottom-overflow]="isBottomOverflow">
         <ng-container [ngSwitch]="true">
             <ng-container *ngSwitchCase="isTemplateRef(mcFooter)" [ngTemplateOutlet]="$any(mcFooter)"></ng-container>
             <ng-container *ngSwitchCase="isNonEmptyString(mcFooter)">
@@ -98,14 +98,14 @@
                 <button
                     #autoFocusedButton
                     [attr.autofocus]="true"
-                    *ngIf="mcOkText !== null"
+                    *ngIf="mcOkText"
                     mc-button
                     [color]="themePalette.Primary"
                     (click)="onClickOkCancel('ok')">
 
                     {{ okText }}
                 </button>
-                <button *ngIf="mcCancelText!==null" mc-button (click)="onClickOkCancel('cancel')">
+                <button *ngIf="mcCancelText" mc-button (click)="onClickOkCancel('cancel')">
                     {{ cancelText }}
                 </button>
             </ng-container>
@@ -135,19 +135,19 @@
             </div>
         </div> <!-- /.mc-confirm-body-wrapper -->
     </div>
-    <div class="mc-confirm-btns">
+    <div class="mc-confirm-btns" *ngIf="mcOkText || mcCancelText">
         <button
             mc-button
             #autoFocusedButton
             [color]="mcOkType"
             [attr.autofocus]="true"
-            *ngIf="mcOkText !== ''"
+            *ngIf="mcOkText"
             (click)="onClickOkCancel('ok')">
 
             {{ okText }}
         </button>
 
-        <button mc-button [color]="themePalette.Second" *ngIf="mcCancelText !== ''" (click)="onClickOkCancel('cancel')">
+        <button mc-button [color]="themePalette.Second" *ngIf="mcCancelText" (click)="onClickOkCancel('cancel')">
             {{ cancelText }}
         </button>
     </div>
