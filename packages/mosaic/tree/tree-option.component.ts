@@ -232,6 +232,10 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
 
         this._selected = true;
 
+        if (!this.hasFocus) {
+            this.focus();
+        }
+
         this.changeDetectorRef.markForCheck();
         this.emitSelectionChangeEvent();
     }

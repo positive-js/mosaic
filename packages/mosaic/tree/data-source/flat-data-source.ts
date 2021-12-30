@@ -1,4 +1,4 @@
-import { CollectionViewer, DataSource } from '@angular/cdk/collections';
+import { CollectionViewer, DataSource, SelectionChange } from '@angular/cdk/collections';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
@@ -171,11 +171,11 @@ export class McTreeFlatDataSource<T, F> extends DataSource<F> {
                 if (changeObj.value && changeObj.value.length > 0) {
                     return this.filterHandler();
                 } else {
-                    return this.expansionHandler();
+                    return this.expansionHandler(changeObj.value);
                 }
             }
 
-            return this.expansionHandler();
+            return this.expansionHandler(changeObj.value);
         }));
     }
 
@@ -185,7 +185,7 @@ export class McTreeFlatDataSource<T, F> extends DataSource<F> {
         return this.filteredData.value;
     }
 
-    expansionHandler(): F[] {
+    expansionHandler(_change: SelectionChange<F>): F[] {
         const expandedNodes = this.treeFlattener.expandFlattenedNodes(this.flattenedData.value, this.treeControl);
         this.expandedData.next(expandedNodes);
 

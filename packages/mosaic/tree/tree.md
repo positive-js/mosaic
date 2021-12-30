@@ -15,3 +15,6 @@
 
 ### Action button
 <!-- example(tree-action-button) -->
+
+### Lazy loading
+<!-- example(tree-lazyload) -->

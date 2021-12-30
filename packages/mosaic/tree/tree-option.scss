@@ -31,6 +31,10 @@
         cursor: pointer;
     }
 
+    & > .mc-progress-spinner {
+        margin-right: 8px;
+    }
+
     &:focus {
         outline: none;
     }
