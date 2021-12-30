@@ -71,7 +71,7 @@ describe('Date formatter', () => {
         const DAY_MONTH = `${DAY}${NBSP}${MONTH}`;
         const DAY_SHORT_MONTH = `${DAY}${NBSP}${SHORT_MONTH}`;
 
-        xdescribe('relative formats', () => {
+        describe('relative formats', () => {
             describe('Relative short (relativeShortDate method)', () => {
                 it('before yesterday (other year)', () => {
                     const date = adapter.createDate(2015).minus({ hours: 49 });
@@ -809,7 +809,7 @@ describe('Date formatter', () => {
         const DAY_MONTH = `${MONTH}${NBSP}${DAY}`;
         const DAY_SHORT_MONTH = `${SHORT_MONTH}${NBSP}${DAY}`;
 
-        xdescribe('relative formats', () => {
+        describe('relative formats', () => {
             describe('Relative short (relativeShortDate method)', () => {
                 it('before yesterday (other year)', () => {
                     const date = adapter.createDate(2015).minus({ hours: 49 });
