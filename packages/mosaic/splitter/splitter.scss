@@ -1,6 +1,6 @@
 .mc-splitter {
     display: flex;
-
+    position: relative;
     flex-wrap: nowrap;
     align-items: stretch;
 
@@ -24,5 +24,30 @@
 
     &.mc-gutter_vertical > .mc-icon {
         transform: rotate(90deg);
+    }
+
+    &.mc-gutter_ghost {
+        position: absolute;
+        display: none;
+    }
+
+    &.mc-gutter_ghost.mc-gutter_dragged {
+        display: block;
+    }
+}
+
+.mc-gutter-ghost {
+    position: absolute;
+    z-index: 999;
+    display: none;
+    overflow: hidden;
+    background: rgba(255,255,255, 0.2);
+
+    &.mc-gutter-ghost_vertical > .mc-icon {
+        transform: rotate(90deg);
+    }
+
+    &.mc-gutter-ghost_visible {
+        display: block;
     }
 }

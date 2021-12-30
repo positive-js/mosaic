@@ -10,3 +10,5 @@
                (mousedown)="onMouseDown($event, index, index + 1)">
     </mc-gutter>
 </ng-template>
+
+<mc-gutter-ghost *ngIf="useGhost"></mc-gutter-ghost>
