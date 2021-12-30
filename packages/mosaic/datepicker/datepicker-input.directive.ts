@@ -624,6 +624,13 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
             date.year, date.month - 1, date.date, date.hours, date.minutes, date.seconds, date.milliseconds
         ));
 
+        if (!newTimeObj) {
+            this.lastValueValid = false;
+            this._value = null;
+
+            return setTimeout(() => this.control.updateValueAndValidity());
+        }
+
         this.lastValueValid = !!newTimeObj;
 
         this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.dateFormats.dateInput), true);
