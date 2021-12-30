@@ -14,7 +14,7 @@ import {
 import { McButtonCssStyler } from '@ptsecurity/mosaic/button';
 import { CanDisable, CanDisableCtor, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
-import { merge, Subject } from 'rxjs';
+import { EMPTY, merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 
@@ -79,8 +79,8 @@ export class McNavbarBrand implements AfterContentInit, OnDestroy {
 
     ngAfterContentInit(): void {
         merge(
-            this.logo.hovered,
-            this.title.hovered
+            this.logo ? this.logo.hovered : EMPTY,
+            this.title ? this.title.hovered : EMPTY
         )
         .pipe(takeUntil(this.destroyed))
         .subscribe((value: boolean) => this.hovered = value);
