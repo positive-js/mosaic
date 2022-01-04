@@ -731,7 +731,6 @@ export const PopoverFooterLightColorSchemeBorder = "#F0F0F0";
 export const PopoverFooterLightColorSchemeBackground = "#F0F0F0";
 export const PopoverFooterDarkColorSchemeBorder = "transparent";
 export const PopoverFooterDarkColorSchemeBackground = "transparent";
-export const PopoverFooterSizeMarginTop = "8px";
 export const PopoverFooterSizePadding = "12px 16px";
 export const PopoverFooterSizeHeight = "56px";
 export const PopoverFooterFontDefault = "body";

@@ -65,8 +65,6 @@
 .mc-popover__footer {
     box-sizing: border-box;
 
-    margin-top: var(--mc-popover-footer-size-margin-top, $popover-footer-size-margin-top);
-
     height: var(--mc-popover-footer-size-height, $popover-footer-size-height);
 
     padding: var(--mc-popover-footer-size-padding, $popover-footer-size-padding);
