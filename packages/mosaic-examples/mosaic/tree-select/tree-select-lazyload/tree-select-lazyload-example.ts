@@ -11,12 +11,12 @@ interface INodeResponse {
     hasChildren: boolean;
 }
 
-class LazyLoadFlatNode {
+class FlatNode {
     id: string;
     name: string;
     expandable: boolean;
     level: number;
-    parent: LazyLoadFlatNode;
+    parent: FlatNode;
     loading: boolean;
 }
 
@@ -57,7 +57,7 @@ export class LazyLoadDataService {
         });*/
 
         this.dataChange.next(
-            Array(5).fill({}).map((value, index) => {
+            Array(10).fill({}).map((value, index) => {
                 const id = index.toString();
 
                 return {
@@ -136,30 +136,29 @@ export class LazyLoadDataService {
 }
 
 /**
- * @title Basic tree
+ * @title Basic Select
  */
 @Component({
-    selector: 'tree-lazyload-example',
-    templateUrl: 'tree-lazyload-example.html',
-    styleUrls: ['tree-lazyload-example.css'],
+    selector: 'tree-select-lazyload-example',
+    templateUrl: 'tree-select-lazyload-example.html',
+    styleUrls: ['tree-select-lazyload-example.css'],
     providers: [LazyLoadDataService]
 })
-export class TreeLazyloadExample {
-    treeControl: FlatTreeControl<LazyLoadFlatNode>;
-    treeFlattener: McTreeFlattener<LazyLoadNode, LazyLoadFlatNode>;
+export class TreeSelectLazyloadExample {
+    selected = '';
+    treeControl: FlatTreeControl<FlatNode>;
+    treeFlattener: McTreeFlattener<LazyLoadNode, FlatNode>;
 
-    dataSource: McTreeFlatDataSource<LazyLoadNode, LazyLoadFlatNode>;
+    dataSource: McTreeFlatDataSource<LazyLoadNode, FlatNode>;
 
-    modelValue: any = '';
-
-    nodeMap = new Map<string, LazyLoadFlatNode>();
+    nodeMap = new Map<string, FlatNode>();
 
     constructor(private dataService: LazyLoadDataService) {
         this.treeFlattener = new McTreeFlattener(
             this.transformer, this.getLevel, this.isExpandable, this.getChildren
         );
 
-        this.treeControl = new FlatTreeControl<LazyLoadFlatNode>(
+        this.treeControl = new FlatTreeControl<FlatNode>(
             this.getLevel, this.isExpandable, this.getValue, this.getViewValue
         );
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
@@ -174,18 +173,18 @@ export class TreeLazyloadExample {
 
     }
 
-    hasChild(_: number, nodeData: LazyLoadFlatNode): boolean {
+    hasChild(_: number, nodeData: FlatNode): boolean {
         return nodeData.expandable;
     }
 
-    clickNode(node: LazyLoadFlatNode): void {
+    clickNode(node: FlatNode): void {
         this.dataService.loadChildren(node.id);
     }
 
-    private transformer = (node: LazyLoadNode, level: number, parent: any): LazyLoadFlatNode => {
+    private transformer = (node: LazyLoadNode, level: number, parent: any): FlatNode => {
         const existingNode = this.nodeMap.get(node.id);
 
-        const flatNode = new LazyLoadFlatNode();
+        const flatNode = new FlatNode();
         flatNode.id = node.id;
         flatNode.name = node.name;
         flatNode.parent = parent;
@@ -207,11 +206,11 @@ export class TreeLazyloadExample {
         return flatNode;
     }
 
-    private getLevel = (node: LazyLoadFlatNode) => {
+    private getLevel = (node: FlatNode) => {
         return node.level;
     }
 
-    private isExpandable = (node: LazyLoadFlatNode) => {
+    private isExpandable = (node: FlatNode) => {
         return node.expandable;
     }
 
@@ -219,11 +218,11 @@ export class TreeLazyloadExample {
         return node.childrenChange;
     }
 
-    private getValue = (node: LazyLoadFlatNode): string => {
+    private getValue = (node: FlatNode): string => {
         return node.name;
     }
 
-    private getViewValue = (node: LazyLoadFlatNode): string => {
+    private getViewValue = (node: FlatNode): string => {
         return node.name;
     }
 }
