@@ -8,7 +8,11 @@
 
     .mc-splitter-area {
         overflow: hidden;
+        &_resizing {
+            pointer-events: none;
+        }
     }
+
 }
 
 .mc-gutter {

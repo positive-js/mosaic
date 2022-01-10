@@ -57,7 +57,7 @@ export enum Direction {
     selector: 'mc-gutter',
     host: {
         class: 'mc-gutter',
-        '[class.mc-gutter_vertical]': 'isVertical()',
+        '[class.mc-gutter_vertical]': 'isVertical',
         '[class.mc-gutter_dragged]': 'dragged',
         '(mousedown)': 'dragged = true'
     }
@@ -96,6 +96,10 @@ export class McGutterDirective implements OnInit {
 
     private _size: number = 6;
 
+    get isVertical(): boolean {
+        return this._direction === Direction.Vertical;
+    }
+
     dragged: boolean = false;
 
     constructor(
@@ -105,20 +109,15 @@ export class McGutterDirective implements OnInit {
 
     ngOnInit(): void {
         this.setStyle(StyleProperty.FlexBasis, coerceCssPixelValue(this.size));
-        this.setStyle(this.isVertical() ? StyleProperty.Height : StyleProperty.Width, coerceCssPixelValue(this.size));
+        this.setStyle(this.isVertical ? StyleProperty.Height : StyleProperty.Width, coerceCssPixelValue(this.size));
         this.setStyle(StyleProperty.Order, this.order);
 
-        if (!this.isVertical()) {
+        if (!this.isVertical) {
             this.setStyle(StyleProperty.Height, '100%');
         }
 
         // fix IE issue with gutter icon. flex-direction is requied for flex alignment options
-        this.setStyle(StyleProperty.FlexDirection, this.isVertical() ? 'row' : 'column');
-    }
-
-
-    isVertical(): boolean {
-        return this.direction === Direction.Vertical;
+        this.setStyle(StyleProperty.FlexDirection, this.isVertical ? 'row' : 'column');
     }
 
     protected setStyle(property: StyleProperty, value: string | number) {
@@ -130,7 +129,7 @@ export class McGutterDirective implements OnInit {
     selector: 'mc-gutter-ghost',
     host: {
         class: 'mc-gutter-ghost',
-        '[class.mc-gutter-ghost_vertical]': 'isVertical()',
+        '[class.mc-gutter-ghost_vertical]': 'isVertical',
         '[class.mc-gutter-ghost_visible]': 'visible',
     }
 })
@@ -186,19 +185,18 @@ export class McGutterGhostDirective {
 
     private _size: number = 6;
 
+    get isVertical(): boolean {
+        return this.direction === Direction.Vertical;
+    }
+
     constructor(
         public elementRef: ElementRef,
         private renderer: Renderer2
     ) {}
 
     private updateDimensions(): void {
-        this.setStyle(this.isVertical() ? StyleProperty.Width : StyleProperty.Height, '100%');
-        this.setStyle(this.isVertical() ? StyleProperty.Height : StyleProperty.Width, coerceCssPixelValue(this.size));
-    }
-
-
-    isVertical(): boolean {
-        return this.direction === Direction.Vertical;
+        this.setStyle(this.isVertical ? StyleProperty.Width : StyleProperty.Height, '100%');
+        this.setStyle(this.isVertical ? StyleProperty.Height : StyleProperty.Width, coerceCssPixelValue(this.size));
     }
 
     protected setStyle(property: StyleProperty, value: string | number) {
@@ -227,7 +225,10 @@ export class McSplitterComponent implements OnInit {
     @ViewChildren(McGutterDirective) gutters: QueryList<McGutterDirective>;
     @ViewChild(McGutterGhostDirective) ghost: McGutterGhostDirective;
 
-    private isDragging: boolean = false;
+    get isDragging(): boolean {
+        return this._isDragging;
+    }
+    private _isDragging: boolean = false;
 
     private readonly areaPositionDivider: number = 2;
     private readonly listeners: (() => void)[] = [];
@@ -288,6 +289,12 @@ export class McSplitterComponent implements OnInit {
 
     private _gutterSize: number = 6;
 
+    get resizing(): boolean {
+        return this._resizing;
+    }
+
+    private _resizing: boolean = false;
+
     constructor(
         public elementRef: ElementRef,
         public changeDetectorRef: ChangeDetectorRef,
@@ -344,7 +351,6 @@ export class McSplitterComponent implements OnInit {
         } else {
 
             if (currentGutter) {
-                console.log(currentGutter)
                 this.ghost.direction = currentGutter.direction;
                 this.ghost.size = currentGutter.size;
                 this.ghost.x = currentGutter.elementRef.nativeElement.offsetLeft;
@@ -354,15 +360,14 @@ export class McSplitterComponent implements OnInit {
             }
         }
 
-        this.ngZone.runOutsideAngular(() => {
-            this.listeners.push(
-                this.renderer.listen(
-                    'document',
-                    'mouseup',
-                    () => this.onMouseUp(leftArea, rightArea, currentGutter)
-                )
-            );
-        });
+
+        this.listeners.push(
+            this.renderer.listen(
+                'document',
+                'mouseup',
+                () => this.onMouseUp(leftArea, rightArea, currentGutter)
+            )
+        );
 
         this.ngZone.runOutsideAngular(() => {
             this.listeners.push(
@@ -374,7 +379,7 @@ export class McSplitterComponent implements OnInit {
             );
         });
 
-        this.isDragging = true;
+        this._isDragging = true;
     }
 
     removeArea(area: McSplitterAreaDirective): void {
@@ -429,7 +434,6 @@ export class McSplitterComponent implements OnInit {
             : startPoint.x - endPoint.x;
 
         if (this.useGhost) {
-            console.log('mm1', this.ghost.x, this.ghost.y)
             if (this.ghost.direction === Direction.Vertical) {
                 const ny = currentGutter?.elementRef.nativeElement.offsetTop - offset;
                 const maxY = this.elementRef.nativeElement.offsetHeight - currentGutter?.elementRef.nativeElement.offsetHeight;
@@ -439,9 +443,6 @@ export class McSplitterComponent implements OnInit {
                 const maxX = this.elementRef.nativeElement.offsetWidth - currentGutter?.elementRef.nativeElement.offsetWidth;
                 this.ghost.x = nx < 0 ? 0 : Math.min(nx, maxX);
             }
-            console.log('mm2',this.ghost.x, this.ghost.y)
-            console.log(currentGutter?.elementRef.nativeElement.offsetLeft, this.ghost.elementRef.nativeElement.offsetLeft, offset)
-
         } else {
            this.resizeAreas(leftArea, rightArea, offset);
         }
@@ -483,11 +484,10 @@ export class McSplitterComponent implements OnInit {
             const offset = this.ghost.direction === Direction.Vertical ?
                 currentGutter?.elementRef.nativeElement.offsetTop - this.ghost.elementRef.nativeElement.offsetTop :
                 currentGutter?.elementRef.nativeElement.offsetLeft - this.ghost.elementRef.nativeElement.offsetLeft;
-            console.log(currentGutter?.elementRef.nativeElement.offsetLeft, this.ghost.elementRef.nativeElement.offsetLeft, offset)
             this.resizeAreas(leftArea, rightArea, offset);
             this.ghost.visible = false;
         }
-        this.isDragging = false;
+        this._isDragging = false;
 
         this.updateGutter();
 
@@ -502,7 +502,8 @@ export class McSplitterComponent implements OnInit {
 @Directive({
     selector: '[mc-splitter-area]',
     host: {
-        class: 'mc-splitter-area'
+        class: 'mc-splitter-area',
+        '[class.mc-splitter-area_resizing]': 'isResizing()',
     }
 })
 export class McSplitterAreaDirective implements OnInit, OnDestroy {
@@ -512,7 +513,11 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
         private elementRef: ElementRef,
         private renderer: Renderer2,
         private splitter: McSplitterComponent
-    ) {}
+    ) { }
+
+    isResizing(): boolean {
+        return this.splitter.isDragging;
+    }
 
     disableFlex(): void {
         this.renderer.removeStyle(this.elementRef.nativeElement, 'flex');
@@ -558,6 +563,7 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
 
         return parseFloat(styles[this.getMinSizeProperty()]);
     }
+
 
     private isVertical(): boolean {
         return this.splitter.direction === Direction.Vertical;
