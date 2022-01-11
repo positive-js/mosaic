@@ -44,7 +44,8 @@ const enum StyleProperty {
     Order = 'order',
     Width = 'width',
     Top = 'top',
-    Left = 'left'
+    Left = 'left',
+    Cursor = 'cursor',
 }
 
 export enum Direction {
@@ -99,13 +100,6 @@ export class McGutterDirective implements OnInit {
         return this._direction === Direction.Vertical;
     }
 
-    get position(): IPoint {
-        return {
-            x: this.elementRef.nativeElement.offsetLeft,
-            y: this.elementRef.nativeElement.offsetTop
-        }
-    }
-
     dragged: boolean = false;
 
     constructor(
@@ -126,7 +120,14 @@ export class McGutterDirective implements OnInit {
         this.setStyle(StyleProperty.FlexDirection, this.isVertical ? 'row' : 'column');
     }
 
-    protected setStyle(property: StyleProperty, value: string | number): void {
+    getPosition(): IPoint {
+        return {
+            x: this.elementRef.nativeElement.offsetLeft,
+            y: this.elementRef.nativeElement.offsetTop
+        }
+    }
+
+    private setStyle(property: StyleProperty, value: string | number): void {
         this.renderer.setStyle(this.elementRef.nativeElement, property, value);
     }
 }
@@ -196,7 +197,7 @@ export class McGutterGhostDirective {
     }
 
     constructor(
-        public elementRef: ElementRef,
+        private elementRef: ElementRef,
         private renderer: Renderer2
     ) {}
 
@@ -355,11 +356,12 @@ export class McSplitterComponent implements OnInit {
             if (currentGutter) {
                 this.ghost.direction = currentGutter.direction;
                 this.ghost.size = currentGutter.size;
-
-                this.ghost.x = currentGutter.position.x;
-                this.ghost.y = currentGutter.position.y;
+                const gutterPosition = currentGutter.getPosition();
+                this.ghost.x = gutterPosition.x;
+                this.ghost.y = gutterPosition.y;
 
                 this.ghost.visible = true;
+                this.setStyle(StyleProperty.Cursor, currentGutter.direction === Direction.Vertical ? 'row-resize' : 'col-resize');
             }
         } else {
             this.areas.forEach((item) => {
@@ -423,7 +425,6 @@ export class McSplitterComponent implements OnInit {
                 this.changeDetectorRef.detectChanges();
             }
         });
-
     }
 
     private onMouseMove(event: MouseEvent,
@@ -445,13 +446,14 @@ export class McSplitterComponent implements OnInit {
         if (this.useGhost && currentGutter) {
             const leftMin = leftArea.area.getMinSize() || 0;
             const rightMin = rightArea.area.getMinSize() || 0;
+            const gutterPosition = currentGutter.getPosition();
             if (this.ghost.direction === Direction.Vertical) {
-                const ny = currentGutter.position.y - offset;
-                const maxY = this.elementRef.nativeElement.clientHeight - currentGutter.position.y;
+                const ny = gutterPosition.y - offset;
+                const maxY = this.elementRef.nativeElement.clientHeight - currentGutter.size;
                 this.ghost.y = ny < leftMin ? leftMin : Math.min(ny, maxY - rightMin);
             } else {
-                const nx = currentGutter.position.x - offset;
-                const maxX = this.elementRef.nativeElement.clientWidth - currentGutter.position.x;
+                const nx = gutterPosition.x - offset;
+                const maxX = this.elementRef.nativeElement.clientWidth - currentGutter.size;
                 this.ghost.x = nx < leftMin ? leftMin : Math.min(nx, maxX - rightMin);
 
             }
@@ -493,11 +495,13 @@ export class McSplitterComponent implements OnInit {
             }
         }
         if (this.useGhost && currentGutter) {
+            const gutterPosition = currentGutter.getPosition();
             const offset = this.ghost.direction === Direction.Vertical ?
-                currentGutter.position.x - this.ghost.elementRef.nativeElement.offsetTop :
-                currentGutter.position.y - this.ghost.elementRef.nativeElement.offsetLeft;
+                gutterPosition.y - this.ghost.y :
+                gutterPosition.x - this.ghost.x;
             this.resizeAreas(leftArea, rightArea, offset);
             this.ghost.visible = false;
+            this.setStyle(StyleProperty.Cursor, 'unset');
         }
         this._isDragging = false;
 
