@@ -17,6 +17,9 @@
             <ng-container *ngIf="!isTemplateRef(content)">
                 <div>{{ content }}</div>
             </ng-container>
+            <div *ngIf="footer"
+                 class="mc-popover__block_before_footer">
+            </div>
         </div>
 
         <div class="mc-popover__footer" *ngIf="footer">
