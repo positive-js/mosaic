@@ -45,7 +45,7 @@ const enum StyleProperty {
     Width = 'width',
     Top = 'top',
     Left = 'left',
-    Cursor = 'cursor',
+    Cursor = 'cursor'
 }
 
 export enum Direction {
@@ -124,7 +124,7 @@ export class McGutterDirective implements OnInit {
         return {
             x: this.elementRef.nativeElement.offsetLeft,
             y: this.elementRef.nativeElement.offsetTop
-        }
+        };
     }
 
     private setStyle(property: StyleProperty, value: string | number): void {
@@ -444,19 +444,22 @@ export class McSplitterComponent implements OnInit {
             : startPoint.x - endPoint.x;
 
         if (this.useGhost && currentGutter) {
-            const leftMin = leftArea.area.getMinSize() || 0;
-            const rightMin = rightArea.area.getMinSize() || 0;
             const gutterPosition = currentGutter.getPosition();
-            if (this.ghost.direction === Direction.Vertical) {
-                const ny = gutterPosition.y - offset;
-                const maxY = this.elementRef.nativeElement.clientHeight - currentGutter.size;
-                this.ghost.y = ny < leftMin ? leftMin : Math.min(ny, maxY - rightMin);
-            } else {
-                const nx = gutterPosition.x - offset;
-                const maxX = this.elementRef.nativeElement.clientWidth - currentGutter.size;
-                this.ghost.x = nx < leftMin ? leftMin : Math.min(nx, maxX - rightMin);
+            const leftPos = leftArea.area.getPosition();
+            const rightPos = rightArea.area.getPosition();
+            const rightMin = rightArea.area.getMinSize() || 0;
+            const leftMin = leftArea.area.getMinSize() || 0;
 
-            }
+            const key = this.isVertical() ? 'y' : 'x';
+
+            const minPos = leftPos[key] - leftMin;
+
+            const maxPos = rightPos[key] + (rightArea.area.getSize() || 0) - rightMin - currentGutter.size;
+
+            const newPos = gutterPosition[key] - offset
+
+            this.ghost[key] = newPos < minPos ? minPos : Math.min(newPos, maxPos);
+
         } else {
            this.resizeAreas(leftArea, rightArea, offset);
         }
@@ -572,6 +575,13 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
 
     getSize(): number {
         return this.elementRef.nativeElement[this.getOffsetSizeProperty()];
+    }
+
+    getPosition(): IPoint {
+        return {
+            x: this.elementRef.nativeElement.offsetLeft,
+            y: this.elementRef.nativeElement.offsetTop
+        };
     }
 
     getMinSize(): number {
