@@ -57,6 +57,7 @@
             background: { value: '{popup.dark-color-scheme.footer-background.value}' }
         },
         size: {
+            'margin-top': { value: '8px' },
             padding: { value: '12px {padding.headerFooter-horizontal}' },
             'height': { value: '56px' }
         },
