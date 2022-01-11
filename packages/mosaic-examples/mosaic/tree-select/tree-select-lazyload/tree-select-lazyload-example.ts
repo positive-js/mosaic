@@ -1,4 +1,5 @@
 /* tslint:disable:no-reserved-keywords object-literal-key-quotes no-magic-numbers */
+import { SelectionChange } from '@angular/cdk/collections';
 import { Component, Injectable } from '@angular/core';
 import { FlatTreeControl, McTreeFlatDataSource, McTreeFlattener } from '@ptsecurity/mosaic/tree';
 import { isEqual } from 'lodash';
@@ -135,6 +136,25 @@ export class LazyLoadDataService {
     }
 }
 
+export class LazyLoadDataSource<T, F> extends McTreeFlatDataSource<T, F> {
+    constructor(
+        treeControl: FlatTreeControl<F>,
+        treeFlattener: McTreeFlattener<T, F>,
+        private dataService: LazyLoadDataService
+    ) {
+        super(treeControl, treeFlattener, []);
+    }
+
+    expansionHandler(change: SelectionChange<F>): F[] {
+        if (change && (change as SelectionChange<F>).added && (change as SelectionChange<F>).added.length) {
+            // @ts-ignore
+            this.dataService.loadChildren((change.added[0] as F).id);
+        }
+
+        return super.expansionHandler(change);
+    }
+}
+
 /**
  * @title Basic Select
  */
@@ -149,7 +169,7 @@ export class TreeSelectLazyloadExample {
     treeControl: FlatTreeControl<FlatNode>;
     treeFlattener: McTreeFlattener<LazyLoadNode, FlatNode>;
 
-    dataSource: McTreeFlatDataSource<LazyLoadNode, FlatNode>;
+    dataSource: LazyLoadDataSource<LazyLoadNode, FlatNode>;
 
     nodeMap = new Map<string, FlatNode>();
 
@@ -161,7 +181,7 @@ export class TreeSelectLazyloadExample {
         this.treeControl = new FlatTreeControl<FlatNode>(
             this.getLevel, this.isExpandable, this.getValue, this.getViewValue
         );
-        this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
+        this.dataSource = new LazyLoadDataSource(this.treeControl, this.treeFlattener, this.dataService);
 
         this.dataSource.data = [];
 
@@ -175,10 +195,6 @@ export class TreeSelectLazyloadExample {
 
     hasChild(_: number, nodeData: FlatNode): boolean {
         return nodeData.expandable;
-    }
-
-    clickNode(node: FlatNode): void {
-        this.dataService.loadChildren(node.id);
     }
 
     private transformer = (node: LazyLoadNode, level: number, parent: any): FlatNode => {

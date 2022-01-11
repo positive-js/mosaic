@@ -11,8 +11,7 @@
             <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
                 <i mc-icon="mc-angle-down-S_16"
                    [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'"
-                   mcTreeNodeToggle
-                   (click)="clickNode(node)">
+                   mcTreeNodeToggle>
                 </i>
                 <mc-progress-spinner *ngIf="node.loading"
                                      mode="indeterminate">

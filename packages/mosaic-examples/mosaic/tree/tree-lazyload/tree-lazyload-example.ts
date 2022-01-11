@@ -1,4 +1,5 @@
 /* tslint:disable:no-reserved-keywords object-literal-key-quotes no-magic-numbers */
+import { SelectionChange } from '@angular/cdk/collections';
 import { Component, Injectable } from '@angular/core';
 import { FlatTreeControl, McTreeFlatDataSource, McTreeFlattener } from '@ptsecurity/mosaic/tree';
 import { isEqual } from 'lodash';
@@ -135,6 +136,25 @@ export class LazyLoadDataService {
     }
 }
 
+class LazyLoadDataSource<T, F> extends McTreeFlatDataSource<T, F> {
+    constructor(
+        treeControl: FlatTreeControl<F>,
+        treeFlattener: McTreeFlattener<T, F>,
+        private dataService: LazyLoadDataService
+    ) {
+        super(treeControl, treeFlattener, []);
+    }
+
+    expansionHandler(change: SelectionChange<F>): F[] {
+        if (change && (change as SelectionChange<F>).added && (change as SelectionChange<F>).added.length) {
+            // @ts-ignore
+            this.dataService.loadChildren((change.added[0] as F).id);
+        }
+
+        return super.expansionHandler(change);
+    }
+}
+
 /**
  * @title Basic tree
  */
@@ -148,7 +168,7 @@ export class TreeLazyloadExample {
     treeControl: FlatTreeControl<LazyLoadFlatNode>;
     treeFlattener: McTreeFlattener<LazyLoadNode, LazyLoadFlatNode>;
 
-    dataSource: McTreeFlatDataSource<LazyLoadNode, LazyLoadFlatNode>;
+    dataSource: LazyLoadDataSource<LazyLoadNode, LazyLoadFlatNode>;
 
     modelValue: any = '';
 
@@ -162,7 +182,7 @@ export class TreeLazyloadExample {
         this.treeControl = new FlatTreeControl<LazyLoadFlatNode>(
             this.getLevel, this.isExpandable, this.getValue, this.getViewValue
         );
-        this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
+        this.dataSource = new LazyLoadDataSource(this.treeControl, this.treeFlattener, this.dataService);
 
         this.dataSource.data = [];
 

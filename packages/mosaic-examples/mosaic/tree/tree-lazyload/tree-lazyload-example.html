@@ -11,7 +11,7 @@
     <mc-tree-option
         *mcTreeNodeDef="let node; when: hasChild"
         mcTreeNodePadding>
-        <mc-tree-node-toggle [node]="node" (click)="clickNode(node)"></mc-tree-node-toggle>
+        <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
         <mc-progress-spinner *ngIf="node.loading"
                              mode="indeterminate">
         </mc-progress-spinner>
