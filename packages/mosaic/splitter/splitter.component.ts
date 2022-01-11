@@ -99,10 +99,17 @@ export class McGutterDirective implements OnInit {
         return this._direction === Direction.Vertical;
     }
 
+    get position(): IPoint {
+        return {
+            x: this.elementRef.nativeElement.offsetLeft,
+            y: this.elementRef.nativeElement.offsetTop
+        }
+    }
+
     dragged: boolean = false;
 
     constructor(
-        public elementRef: ElementRef,
+        private elementRef: ElementRef,
         private renderer: Renderer2
     ) {}
 
@@ -348,8 +355,9 @@ export class McSplitterComponent implements OnInit {
             if (currentGutter) {
                 this.ghost.direction = currentGutter.direction;
                 this.ghost.size = currentGutter.size;
-                this.ghost.x = currentGutter.elementRef.nativeElement.offsetLeft;
-                this.ghost.y = currentGutter.elementRef.nativeElement.offsetTop;
+
+                this.ghost.x = currentGutter.position.x;
+                this.ghost.y = currentGutter.position.y;
 
                 this.ghost.visible = true;
             }
@@ -434,17 +442,18 @@ export class McSplitterComponent implements OnInit {
             ? startPoint.y - endPoint.y
             : startPoint.x - endPoint.x;
 
-        if (this.useGhost) {
+        if (this.useGhost && currentGutter) {
             const leftMin = leftArea.area.getMinSize() || 0;
             const rightMin = rightArea.area.getMinSize() || 0;
             if (this.ghost.direction === Direction.Vertical) {
-                const ny = currentGutter?.elementRef.nativeElement.offsetTop - offset;
-                const maxY = this.elementRef.nativeElement.clientHeight - currentGutter?.elementRef.nativeElement.offsetHeight;
+                const ny = currentGutter.position.y - offset;
+                const maxY = this.elementRef.nativeElement.clientHeight - currentGutter.position.y;
                 this.ghost.y = ny < leftMin ? leftMin : Math.min(ny, maxY - rightMin);
             } else {
-                const nx = currentGutter?.elementRef.nativeElement.offsetLeft - offset;
-                const maxX = this.elementRef.nativeElement.clientWidth - currentGutter?.elementRef.nativeElement.offsetWidth;
+                const nx = currentGutter.position.x - offset;
+                const maxX = this.elementRef.nativeElement.clientWidth - currentGutter.position.x;
                 this.ghost.x = nx < leftMin ? leftMin : Math.min(nx, maxX - rightMin);
+
             }
         } else {
            this.resizeAreas(leftArea, rightArea, offset);
@@ -483,10 +492,10 @@ export class McSplitterComponent implements OnInit {
                 unsubscribe();
             }
         }
-        if (this.useGhost) {
+        if (this.useGhost && currentGutter) {
             const offset = this.ghost.direction === Direction.Vertical ?
-                currentGutter?.elementRef.nativeElement.offsetTop - this.ghost.elementRef.nativeElement.offsetTop :
-                currentGutter?.elementRef.nativeElement.offsetLeft - this.ghost.elementRef.nativeElement.offsetLeft;
+                currentGutter.position.x - this.ghost.elementRef.nativeElement.offsetTop :
+                currentGutter.position.y - this.ghost.elementRef.nativeElement.offsetLeft;
             this.resizeAreas(leftArea, rightArea, offset);
             this.ghost.visible = false;
         }
