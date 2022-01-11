@@ -1,5 +1,4 @@
 import { coerceBooleanProperty, coerceCssPixelValue, coerceNumberProperty } from '@angular/cdk/coercion';
-
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -199,7 +198,7 @@ export class McGutterGhostDirective {
         this.setStyle(this.isVertical ? StyleProperty.Height : StyleProperty.Width, coerceCssPixelValue(this.size));
     }
 
-    protected setStyle(property: StyleProperty, value: string | number): void {
+    private setStyle(property: StyleProperty, value: string | number): void {
         this.renderer.setStyle(this.elementRef.nativeElement, property, value);
     }
 }
@@ -337,18 +336,14 @@ export class McSplitterComponent implements OnInit {
 
         const leftArea = this.areas[leftAreaIndex];
         const rightArea = this.areas[rightAreaIndex];
-        const currentGutter = this.gutters.find((gutter: McGutterDirective) => gutter.order === leftAreaIndex * 2 + 1);
-
         leftArea.initialSize = leftArea.area.getSize();
         rightArea.initialSize = rightArea.area.getSize();
+        let currentGutter: McGutterDirective | undefined;
 
-        if (!this.useGhost) {
-            this.areas.forEach((item) => {
-                const size = item.area.getSize();
-                item.area.disableFlex();
-                item.area.setSize(size);
-            });
-        } else {
+        if (this.useGhost) {
+            // tslint:disable-next-line:no-magic-numbers
+            const gutterOrder = leftAreaIndex * 2 + 1;
+            currentGutter = this.gutters.find((gutter: McGutterDirective) => gutter.order === gutterOrder);
 
             if (currentGutter) {
                 this.ghost.direction = currentGutter.direction;
@@ -358,6 +353,12 @@ export class McSplitterComponent implements OnInit {
 
                 this.ghost.visible = true;
             }
+        } else {
+            this.areas.forEach((item) => {
+                const size = item.area.getSize();
+                item.area.disableFlex();
+                item.area.setSize(size);
+            });
         }
 
 
@@ -443,7 +444,7 @@ export class McSplitterComponent implements OnInit {
             } else {
                 const nx = currentGutter?.elementRef.nativeElement.offsetLeft - offset;
                 const maxX = this.elementRef.nativeElement.clientWidth - currentGutter?.elementRef.nativeElement.offsetWidth;
-                this.ghost.x = nx < leftMin ? leftMin: Math.min(nx, maxX - rightMin);
+                this.ghost.x = nx < leftMin ? leftMin : Math.min(nx, maxX - rightMin);
             }
         } else {
            this.resizeAreas(leftArea, rightArea, offset);
@@ -472,9 +473,9 @@ export class McSplitterComponent implements OnInit {
         this.changeDetectorRef.detectChanges();
     }
 
-    private onMouseUp( leftArea: IArea,
-                       rightArea: IArea,
-                       currentGutter: McGutterDirective | undefined) {
+    private onMouseUp(leftArea: IArea,
+                      rightArea: IArea,
+                      currentGutter: McGutterDirective | undefined) {
         while (this.listeners.length > 0) {
             const unsubscribe = this.listeners.pop();
 
@@ -505,7 +506,7 @@ export class McSplitterComponent implements OnInit {
     selector: '[mc-splitter-area]',
     host: {
         class: 'mc-splitter-area',
-        '[class.mc-splitter-area_resizing]': 'isResizing()',
+        '[class.mc-splitter-area_resizing]': 'isResizing()'
     }
 })
 export class McSplitterAreaDirective implements OnInit, OnDestroy {
@@ -565,7 +566,6 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
 
         return parseFloat(styles[this.getMinSizeProperty()]);
     }
-
 
     private isVertical(): boolean {
         return this.splitter.direction === Direction.Vertical;
