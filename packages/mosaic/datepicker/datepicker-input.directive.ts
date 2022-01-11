@@ -627,6 +627,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         if (!newTimeObj) {
             this.lastValueValid = false;
             this._value = null;
+            this.cvaOnChange(null);
 
             return setTimeout(() => this.control.updateValueAndValidity());
         }
