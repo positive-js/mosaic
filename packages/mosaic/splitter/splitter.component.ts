@@ -120,7 +120,7 @@ export class McGutterDirective implements OnInit {
         this.setStyle(StyleProperty.FlexDirection, this.isVertical ? 'row' : 'column');
     }
 
-    protected setStyle(property: StyleProperty, value: string | number) {
+    protected setStyle(property: StyleProperty, value: string | number): void {
         this.renderer.setStyle(this.elementRef.nativeElement, property, value);
     }
 }
@@ -130,7 +130,7 @@ export class McGutterDirective implements OnInit {
     host: {
         class: 'mc-gutter-ghost',
         '[class.mc-gutter-ghost_vertical]': 'isVertical',
-        '[class.mc-gutter-ghost_visible]': 'visible',
+        '[class.mc-gutter-ghost_visible]': 'visible'
     }
 })
 export class McGutterGhostDirective {
@@ -199,7 +199,7 @@ export class McGutterGhostDirective {
         this.setStyle(this.isVertical ? StyleProperty.Height : StyleProperty.Width, coerceCssPixelValue(this.size));
     }
 
-    protected setStyle(property: StyleProperty, value: string | number) {
+    protected setStyle(property: StyleProperty, value: string | number): void {
         this.renderer.setStyle(this.elementRef.nativeElement, property, value);
     }
 }
@@ -434,14 +434,16 @@ export class McSplitterComponent implements OnInit {
             : startPoint.x - endPoint.x;
 
         if (this.useGhost) {
+            const leftMin = leftArea.area.getMinSize() || 0;
+            const rightMin = rightArea.area.getMinSize() || 0;
             if (this.ghost.direction === Direction.Vertical) {
                 const ny = currentGutter?.elementRef.nativeElement.offsetTop - offset;
-                const maxY = this.elementRef.nativeElement.offsetHeight - currentGutter?.elementRef.nativeElement.offsetHeight;
-                this.ghost.y = ny < 0 ? 0 : Math.min(ny, maxY);
+                const maxY = this.elementRef.nativeElement.clientHeight - currentGutter?.elementRef.nativeElement.offsetHeight;
+                this.ghost.y = ny < leftMin ? leftMin : Math.min(ny, maxY - rightMin);
             } else {
                 const nx = currentGutter?.elementRef.nativeElement.offsetLeft - offset;
-                const maxX = this.elementRef.nativeElement.offsetWidth - currentGutter?.elementRef.nativeElement.offsetWidth;
-                this.ghost.x = nx < 0 ? 0 : Math.min(nx, maxX);
+                const maxX = this.elementRef.nativeElement.clientWidth - currentGutter?.elementRef.nativeElement.offsetWidth;
+                this.ghost.x = nx < leftMin ? leftMin: Math.min(nx, maxX - rightMin);
             }
         } else {
            this.resizeAreas(leftArea, rightArea, offset);
@@ -455,7 +457,7 @@ export class McSplitterComponent implements OnInit {
         const minLeftAreaSize = leftArea.area.getMinSize();
         const minRightAreaSize = rightArea.area.getMinSize();
 
-        if (newLeftAreaSize <= minLeftAreaSize || newRightAreaSize <= minRightAreaSize) {
+        if (newLeftAreaSize < minLeftAreaSize || newRightAreaSize < minRightAreaSize) {
             return;
         } else if (newLeftAreaSize <= 0) {
             leftArea.area.setSize(0);
@@ -548,7 +550,7 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
     }
 
     setSize(size: number): void {
-        if (size) {
+        if (!isNaN(size)) {
             const sz = coerceNumberProperty(size);
             this.setStyle(this.getSizeProperty(), coerceCssPixelValue(sz));
         }

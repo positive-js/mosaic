@@ -8,23 +8,23 @@
     <br>
 
     <h2 class="mc-h2">Ghost</h2>
-    <div style="padding: 20px">
-        <mc-splitter [useGhost]="true" [direction]="DIRECTION.Horizontal" class="horizontal-block custom-gutter">
-            <div mc-splitter-area>first</div>
-            <div mc-splitter-area class="flex">second
-                <mc-splitter [useGhost]="true" class="custom-color" [direction]="DIRECTION.Vertical">
-                    <div mc-splitter-area>top</div>
-                    <div mc-splitter-area>bottom</div>
-                </mc-splitter>
-            </div>
-        </mc-splitter>
-    </div>
+    <mc-splitter [useGhost]="true" [direction]="DIRECTION.Horizontal" class="horizontal-block custom-gutter">
+        <div mc-splitter-area class="flex">first</div>
+        <div mc-splitter-area class="min-width-enabled layout">
+            <mc-splitter [useGhost]="true" class="flex custom-color" [direction]="DIRECTION.Vertical">
+                <div mc-splitter-area class="flex">min-width: 200px</div>
+                <div mc-splitter-area class="min-height-enabled">min-height: 30px</div>
+            </mc-splitter>
+        </div>
+    </mc-splitter>
 
+
+    <h2 class="mc-h2">With iframe inside</h2>
     <mc-splitter [useGhost]="true" [direction]="DIRECTION.Horizontal" class="horizontal-block custom-gutter">
         <div mc-splitter-area>first</div>
         <div mc-splitter-area class="flex">
             <iframe src="https://example.org"
-                    title="iframe Example 1" width="400" height="300">
+                    title="iframe Example" width="100%" height="100%">
             </iframe>
         </div>
     </mc-splitter>
