@@ -56,6 +56,8 @@ export class McPopoverComponent extends McPopUp {
     header: string | TemplateRef<any>;
     footer: string | TemplateRef<any>;
 
+    isTrapFocus: boolean = false;
+
     constructor(changeDetectorRef: ChangeDetectorRef) {
         super(changeDetectorRef);
     }
@@ -66,6 +68,10 @@ export class McPopoverComponent extends McPopUp {
             customClass,
             { [`${this.prefix}_${size}`]: !!size }
         );
+    }
+
+    updateTrapFocus(isTrapFocus: boolean): void {
+        this.isTrapFocus = isTrapFocus;
     }
 }
 
@@ -274,6 +280,8 @@ export class McPopoverTrigger extends McPopUpTrigger<McPopoverComponent> {
         this.instance.header = this.header;
         this.instance.content = this.content;
         this.instance.footer = this.footer;
+
+        this.instance.updateTrapFocus(this.trigger !== PopUpTriggers.Focus);
 
         if (this.isOpen) {
             this.updatePosition(true);
