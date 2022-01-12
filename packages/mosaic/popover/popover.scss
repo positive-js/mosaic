@@ -61,8 +61,8 @@
 
     padding: var(--mc-popover-size-padding, $popover-size-padding);
 
-    .mc-popover__block_before_footer {
-        margin-top: var(--mc-popover-footer-size-margin-top, $popover-footer-size-margin-top);
+    &.mc-popover__content_padding_bottom {
+        padding-bottom: calc(var(--mc-popover-size-padding, $popover-size-padding) + var(--mc-popover-footer-size-margin-top, $popover-footer-size-margin-top));
     }
 }
 
