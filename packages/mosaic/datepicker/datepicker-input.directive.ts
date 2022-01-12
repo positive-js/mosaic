@@ -61,6 +61,7 @@ enum DateParts {
 }
 
 export const MAX_YEAR = 9999;
+const YEAR_LENGTH = 4;
 
 class DateDigit {
     maxDays = 31;
@@ -127,7 +128,7 @@ class DateDigit {
 
         if (parsedValue === 0) { return 1; }
 
-        if (parsedValue > MAX_YEAR) { return MAX_YEAR; }
+        if (parsedValue > MAX_YEAR) { return parseInt(value.substring(0, YEAR_LENGTH)); }
 
         return parsedValue;
     }
@@ -600,7 +601,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
         date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
         date[this.secondDigit.fullName] = this.secondDigit.parse(secondViewDigit);
-        date[this.thirdDigit.fullName] = thirdViewDigit;
+        date[this.thirdDigit.fullName] = this.thirdDigit.parse(thirdViewDigit);
 
         const [digitWithYear, viewDigitWithYear] = [this.firstDigit, this.secondDigit, this.thirdDigit]
             .reduce((acc, digit, index) => digit.value === DateParts.year ? [digit, viewDigits[index]] : acc, []);
@@ -804,7 +805,7 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
 
             date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
             date[this.secondDigit.fullName] = this.secondDigit.parse(secondViewDigit);
-            date[this.thirdDigit.fullName] = thirdViewDigit;
+            date[this.thirdDigit.fullName] = this.thirdDigit.parse(thirdViewDigit);
         } else {
             return null;
         }
