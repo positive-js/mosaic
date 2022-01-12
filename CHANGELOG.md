@@ -1,3 +1,15 @@
+## 11.6.2 "Ominous Dodo" (2022-01-12)
+
+### Mosaic
+
+ * bug fix  **button:** btn transparent bgcolor (#UIM-776) ([#766](https://github.com/positive-js/mosaic/issues/766)) ([d847ad4](https://github.com/positive-js/mosaic/commit/d847ad4785577ee9b84951efea8612c2a49849e2)), closes [#UIM-776](https://github.com/positive-js/mosaic/issues/UIM-776)
+ * bug fix  **dropdown:** fix for processing click event on the disabled drop down item (#UIM-315) ([#768](https://github.com/positive-js/mosaic/issues/768)) ([6183a71](https://github.com/positive-js/mosaic/commit/6183a7132c4e51fcbc4a7ffec2c5f0df4d9c5d89)), closes [#UIM-315](https://github.com/positive-js/mosaic/issues/UIM-315) [#UIM-315](https://github.com/positive-js/mosaic/issues/UIM-315) [#UIM-315](https://github.com/positive-js/mosaic/issues/UIM-315) [#UIM-315](https://github.com/positive-js/mosaic/issues/UIM-315)
+ * bug fix  **dropdown:** press space by dropdown (#UIM-674) ([#778](https://github.com/positive-js/mosaic/issues/778)) ([51036e4](https://github.com/positive-js/mosaic/commit/51036e4efec6e69aa28ca04af8f7e049f30405b1)), closes [#UIM-674](https://github.com/positive-js/mosaic/issues/UIM-674)
+ * bug fix  **modal:** footer of modal (#UIM-750) ([#763](https://github.com/positive-js/mosaic/issues/763)) ([f26ad0b](https://github.com/positive-js/mosaic/commit/f26ad0b255d7ff33addee72b9522eab72055f3bd)), closes [#UIM-750](https://github.com/positive-js/mosaic/issues/UIM-750)
+ * bug fix  **splitter:** sizeChange callback for McSplitterAreaDirective (#UIM-755) ([#760](https://github.com/positive-js/mosaic/issues/760)) ([508f9f3](https://github.com/positive-js/mosaic/commit/508f9f38dd2a59cd9aa17d8841fcdb55296517f8)), closes [#UIM-755](https://github.com/positive-js/mosaic/issues/UIM-755) [#UIM-755](https://github.com/positive-js/mosaic/issues/UIM-755) [#UIM-755](https://github.com/positive-js/mosaic/issues/UIM-755) [#UIM-755](https://github.com/positive-js/mosaic/issues/UIM-755)
+ * bug fix  **tags:** tag without icon (#UIM-761) ([#765](https://github.com/positive-js/mosaic/issues/765)) ([ecd0c7e](https://github.com/positive-js/mosaic/commit/ecd0c7e439d01a354cf4259e18113b5daa1e2c99)), closes [#UIM-761](https://github.com/positive-js/mosaic/issues/UIM-761) [#UIM-761](https://github.com/positive-js/mosaic/issues/UIM-761) [#UIM-761](https://github.com/positive-js/mosaic/issues/UIM-761)
+ * bug fix  **timepicker:** fix for error when formControl has null value (#UIM-729) ([#759](https://github.com/positive-js/mosaic/issues/759)) ([6579690](https://github.com/positive-js/mosaic/commit/6579690975d76e408e176cfcbe68f949666d166c)), closes [#UIM-729](https://github.com/positive-js/mosaic/issues/UIM-729) [#UIM-729](https://github.com/positive-js/mosaic/issues/UIM-729) [#UIM-729](https://github.com/positive-js/mosaic/issues/UIM-729) [#UIM-729](https://github.com/positive-js/mosaic/issues/UIM-729)
+
 ## 11.6.1 "Sea Horse" (2021-12-08)
 
 * bug fix  **styles:** Revert "fix(styles): fixed using div() in sass (#723)"
