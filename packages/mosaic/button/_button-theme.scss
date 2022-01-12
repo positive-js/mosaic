@@ -25,7 +25,7 @@
     border-color: transparent;
     background-color: transparent;
 
-    &:hover,
+    &:hover {
         background-color: map-get($background, overlay-hover);
 
         & .mc-button-overlay {
