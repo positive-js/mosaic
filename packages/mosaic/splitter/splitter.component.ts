@@ -354,9 +354,10 @@ export class McSplitterComponent implements OnInit {
             currentGutter = this.gutters.find((gutter: McGutterDirective) => gutter.order === gutterOrder);
 
             if (currentGutter) {
+                const gutterPosition = currentGutter.getPosition();
+
                 this.ghost.direction = currentGutter.direction;
                 this.ghost.size = currentGutter.size;
-                const gutterPosition = currentGutter.getPosition();
                 this.ghost.x = gutterPosition.x;
                 this.ghost.y = gutterPosition.y;
 
@@ -456,7 +457,7 @@ export class McSplitterComponent implements OnInit {
 
             const maxPos = rightPos[key] + (rightArea.area.getSize() || 0) - rightMin - currentGutter.size;
 
-            const newPos = gutterPosition[key] - offset
+            const newPos = gutterPosition[key] - offset;
 
             this.ghost[key] = newPos < minPos ? minPos : Math.min(newPos, maxPos);
 
@@ -484,7 +485,6 @@ export class McSplitterComponent implements OnInit {
             leftArea.area.setSize(newLeftAreaSize);
             rightArea.area.setSize(newRightAreaSize);
         }
-        this.changeDetectorRef.detectChanges();
     }
 
     private onMouseUp(leftArea: IArea,
