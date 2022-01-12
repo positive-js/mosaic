@@ -1,5 +1,6 @@
 # firebase artifacts
 .firebase
+.angular
 
 package-lock.json
 
