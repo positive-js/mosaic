@@ -1,4 +1,6 @@
 <div class="mc-popover"
+     [cdkTrapFocus]="isTrapFocus"
+     [cdkTrapFocusAutoCapture]="isTrapFocus"
      [ngClass]="classMap"
      [@state]="visibility"
      (@state.start)="animationStart()"
