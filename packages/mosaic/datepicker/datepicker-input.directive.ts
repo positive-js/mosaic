@@ -61,6 +61,7 @@ enum DateParts {
 }
 
 export const MAX_YEAR = 9999;
+const YEAR_LENGTH = 4;
 
 class DateDigit {
     maxDays = 31;
@@ -127,7 +128,7 @@ class DateDigit {
 
         if (parsedValue === 0) { return 1; }
 
-        if (parsedValue > MAX_YEAR) { return MAX_YEAR; }
+        if (parsedValue > MAX_YEAR) { return parseInt(value.substring(0, YEAR_LENGTH)); }
 
         return parsedValue;
     }
