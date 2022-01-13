@@ -208,8 +208,12 @@ describe('LuxonDateAdapter', () => {
     });
 
     it('should not create DateTime date with date over/under-flow', () => {
-        expect(() => adapter.createDate(2017, 1, 32)).toThrow();
         expect(() => adapter.createDate(2017, 1, 0)).toThrow();
+    });
+
+    it('should create invalid DateTime date with date over/under-flow', () => {
+        expect(adapter.isValid(adapter.createDate(2017, 1, 30))).toBe(false);
+        expect(adapter.isValid(adapter.createDate(2017, 8, 31))).toBe(false);
     });
 
     it('should create DateTime date with low year number', () => {

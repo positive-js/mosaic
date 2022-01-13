@@ -206,14 +206,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
             throw Error(`Invalid day "${day}". Date has to be greater than 0.`);
         }
 
-        const result = this.reconfigure(DateTime.fromObject({ year, month: month + 1, day }));
-
-        // If the result isn't valid, the day must have been out of bounds for this month.
-        if (!result.isValid) {
-            throw Error(`Invalid day "${day}" for month with index "${month}".`);
-        }
-
-        return result;
+        return this.reconfigure(DateTime.fromObject({ year, month: month + 1, day }));
     }
 
     createDateTime(
