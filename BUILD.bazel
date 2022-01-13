@@ -1,0 +1,26 @@
+load("//:pkg-externals.bzl", "PKG_EXTERNALS")
+load("//tools:config.bzl", "MOSAIC_ENTRYPOINTS", "CDK_ENTRYPOINTS")
+
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    "LICENSE",
+    "package.json",
+])
+
+# Target which writes the list of package externals into a JSON file so that the
+# Starlark-configured externals (for the NPM package bundling) can be passed to
+# the `check-package-externals` Yarn script, which validates our module imports.
+genrule(
+    name = "package_externals",
+    outs = ["package_externals.json"],
+    cmd = "echo '%s' > $@" % PKG_EXTERNALS,
+)
+
+entryPoints = ["cdk/%s" % e for e in CDK_ENTRYPOINTS] + ["mosaic/%s" % e for e in MOSAIC_ENTRYPOINTS]
+
+genrule(
+    name = "entry_points_manifest",
+    outs = ["entry_points_manifest.json"],
+    cmd = "echo '%s' > $@" % entryPoints,
+)

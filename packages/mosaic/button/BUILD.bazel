@@ -1,0 +1,25 @@
+load(
+    "//tools:defaults.bzl",
+    "ng_module",
+)
+
+package(default_visibility = ["//visibility:public"])
+
+ng_module(
+    name = "button",
+    srcs = glob(
+        ["**/*.ts"],
+        exclude = ["**/*.spec.ts"],
+    ),
+    assets = glob(["**/*.html"]),
+    deps = [
+        "@npm//@angular/animations",
+        "@npm//@angular/core",
+        "@npm//@angular/platform-browser",
+    ],
+)
+
+filegroup(
+    name = "source-files",
+    srcs = glob(["**/*.ts"]),
+)

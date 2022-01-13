@@ -1,0 +1,30 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_config")
+load("//tools:config.bzl", "CDK_ENTRYPOINTS", "MOSAIC_ENTRYPOINTS")
+load("//tools:defaults.bzl", "ts_library")
+
+package(default_visibility = ["//visibility:public"])
+
+cdkApiEntryPoints = CDK_ENTRYPOINTS
+
+materialApiEntryPoints = MOSAIC_ENTRYPOINTS
+
+# List that contains all source files that need to be processed by Dgeni.
+apiSourceFiles = ["//packages/cdk/%s:source-files" % name for name in cdkApiEntryPoints] + \
+                 ["//packages/mosaic/%s:source-files" % name for name in materialApiEntryPoints]
+
+exports_files([
+    "bazel-tsconfig-build.json",
+    "bazel-tsconfig-test.json",
+    "README.md",
+])
+
+ts_config(
+    name = "tsconfig-test",
+    src = "bazel-tsconfig-test.json",
+    deps = ["bazel-tsconfig-build.json"],
+)
+
+ts_library(
+    name = "dev_mode_types",
+    srcs = ["dev-mode-types.d.ts"],
+)

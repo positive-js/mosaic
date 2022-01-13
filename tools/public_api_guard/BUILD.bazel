@@ -1,0 +1,11 @@
+load("//tools:config.bzl", "CDK_ENTRYPOINTS", "MOSAIC_ENTRYPOINTS")
+load(":generate-guard-tests.bzl", "generate_test_targets")
+
+package(default_visibility = ["//visibility:public"])
+
+golden_files = [
+                    "mosaic/mosaic.md",
+               ] + ["cdk/%s.md" % e for e in CDK_ENTRYPOINTS] + ["mosaic/%s.md" % e for e in MOSAIC_ENTRYPOINTS]
+
+# Generate the API guard test targets for each golden file in the current package.
+generate_test_targets(targets = golden_files)
