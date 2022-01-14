@@ -7,7 +7,31 @@
 
     <br>
 
+    <h2 class="mc-h2">Ghost</h2>
+    <mc-splitter [useGhost]="true" [direction]="DIRECTION.Horizontal" class="horizontal-block custom-gutter">
+        <div mc-splitter-area class="flex">first</div>
+        <div mc-splitter-area class="min-width-enabled layout">
+            <mc-splitter [useGhost]="true" class="flex custom-color" [direction]="DIRECTION.Vertical">
+                <div mc-splitter-area class="flex">min-width: 200px</div>
+                <div mc-splitter-area class="min-height-enabled">min-height: 30px</div>
+            </mc-splitter>
+        </div>
+    </mc-splitter>
+
+
+    <h2 class="mc-h2">With iframe inside</h2>
+    <mc-splitter [useGhost]="true" [direction]="DIRECTION.Horizontal" class="horizontal-block custom-gutter">
+        <div mc-splitter-area>first</div>
+        <div mc-splitter-area class="flex">
+            <iframe src="https://example.org"
+                    title="iframe Example" width="100%" height="100%">
+            </iframe>
+        </div>
+        <div mc-splitter-area class="min-width-enabled">third min-width: 200px</div>
+    </mc-splitter>
+
     <h2 class="mc-h2">Horizontal</h2>
+
 
     <mc-splitter class="horizontal-block" [direction]="DIRECTION.Horizontal">
         <div mc-splitter-area>first</div>

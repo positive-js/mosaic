@@ -3,7 +3,14 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { By } from '@angular/platform-browser';
 import { dispatchMouseEvent } from '@ptsecurity/cdk/testing';
 
-import { Direction, McGutterDirective, McSplitterAreaDirective, McSplitterComponent, McSplitterModule } from './index';
+import {
+    Direction,
+    McGutterDirective,
+    McGutterGhostDirective,
+    McSplitterAreaDirective,
+    McSplitterComponent,
+    McSplitterModule
+} from './index';
 
 
 function createTestComponent<T>(component: Type<T>) {
@@ -91,6 +98,23 @@ class McSplitterEvents {
     @ViewChild('areaB', { static: false, read: McSplitterAreaDirective }) areaB: McSplitterAreaDirective;
 }
 
+@Component({
+    selector: 'mc-demo-spllitter',
+    template: `
+        <mc-splitter #splitter [direction]="direction" [useGhost]="true" style="width: 500px;">
+            <div #areaA mc-splitter-area style="flex: 1">first</div>
+            <div #areaB mc-splitter-area style="min-width: 50px">second</div>
+        </mc-splitter>
+    `
+})
+class McSplitterGhost {
+    direction: Direction = Direction.Horizontal;
+    @ViewChild('splitter', { static: false }) splitter: McSplitterComponent;
+    @ViewChild('areaA', { static: false, read: McSplitterAreaDirective }) areaA: McSplitterAreaDirective;
+    @ViewChild('areaB', { static: false, read: McSplitterAreaDirective }) areaB: McSplitterAreaDirective;
+}
+
+
 describe('McSplitter', () => {
     describe('direction', () => {
         it('should be default', () => {
@@ -150,6 +174,126 @@ describe('McSplitter', () => {
             expect(fixture.componentInstance.areaASizeChange).toHaveBeenCalledWith(fixture.componentInstance.areaA.getSize());
             expect(fixture.componentInstance.areaBSizeChange).toHaveBeenCalledTimes(1);
             expect(fixture.componentInstance.areaBSizeChange).toHaveBeenCalledWith(fixture.componentInstance.areaB.getSize());
+        }));
+    });
+    describe('ghost', () => {
+        it('should create ghost gutter', fakeAsync(() => {
+            const fixture = createTestComponent(McSplitterGhost);
+
+            fixture.detectChanges();
+
+            tick();
+
+            const ghostGutters = fixture.debugElement.queryAll(By.directive(McGutterGhostDirective));
+
+            expect(ghostGutters.length).toBe(1);
+        }));
+        it('should display ghost gutter after mousedown and hide after mouseup', fakeAsync(() => {
+            const fixture = createTestComponent(McSplitterGhost);
+
+            fixture.detectChanges();
+
+            tick();
+
+            const gutters = fixture.debugElement.queryAll(By.directive(McGutterDirective));
+            const ghostGutters = fixture.debugElement.queryAll(By.directive(McGutterGhostDirective));
+
+            const elementStyleBeforeMouseDown = getComputedStyle(ghostGutters[0].nativeElement).display;
+
+            gutters[0].nativeElement.dispatchEvent(new MouseEvent('mousedown', { screenX: 0, screenY: 0 }));
+
+            fixture.detectChanges();
+
+            const elementStyleAfterMouseDown = getComputedStyle(ghostGutters[0].nativeElement).display;
+
+            document.dispatchEvent(new Event('mouseup'));
+
+            fixture.detectChanges();
+
+            const elementStyleAfterMouseUp = getComputedStyle(ghostGutters[0].nativeElement).display;
+
+            expect(elementStyleBeforeMouseDown === 'none').toBeTrue();
+            expect(elementStyleAfterMouseDown === 'none').toBeFalse();
+            expect(elementStyleAfterMouseUp === 'none').toBeTrue();
+        }));
+        it('should not resize areas when moving gutter', fakeAsync(() => {
+            const fixture = createTestComponent(McSplitterGhost);
+
+            fixture.detectChanges();
+
+            tick();
+
+            const areaAInitialSize = fixture.componentInstance.areaA.getSize();
+            const areaBInitialSize = fixture.componentInstance.areaB.getSize();
+            const mouseOffset = 10;
+
+            const gutters = fixture.debugElement.queryAll(By.directive(McGutterDirective));
+            gutters[0].nativeElement.dispatchEvent(new MouseEvent('mousedown', { screenX: 0, screenY: 0 }));
+
+            fixture.detectChanges();
+
+            document.dispatchEvent(new MouseEvent('mousemove', { screenX: mouseOffset, screenY: 0 }));
+
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.areaA.getSize()).toBe(areaAInitialSize);
+            expect(fixture.componentInstance.areaB.getSize()).toBe(areaBInitialSize);
+        }));
+        it('should resize areas after releasing gutter', fakeAsync(() => {
+            const fixture = createTestComponent(McSplitterGhost);
+
+            fixture.detectChanges();
+
+            tick();
+
+            const areaAInitialSize = fixture.componentInstance.areaA.getSize();
+            const areaBInitialSize = fixture.componentInstance.areaB.getSize();
+            const mouseOffset = -10;
+
+            const gutters = fixture.debugElement.queryAll(By.directive(McGutterDirective));
+            gutters[0].nativeElement.dispatchEvent(new MouseEvent('mousedown', { screenX: 0, screenY: 0 }));
+
+            fixture.detectChanges();
+
+            document.dispatchEvent(new MouseEvent('mousemove', { screenX: mouseOffset, screenY: 0 }));
+
+            fixture.detectChanges();
+
+            document.dispatchEvent(new Event('mouseup'));
+
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.areaA.getSize()).toBe(areaAInitialSize + mouseOffset);
+            expect(fixture.componentInstance.areaB.getSize()).toBe(areaBInitialSize - mouseOffset);
+        }));
+        it('should not move out of minimal areas width', fakeAsync(() => {
+            const fixture = createTestComponent(McSplitterGhost);
+
+            fixture.detectChanges();
+
+            tick();
+
+            const areaAInitialSize = fixture.componentInstance.areaA.getSize();
+            const areaBMinimalSize = fixture.componentInstance.areaB.getMinSize();
+
+            const mouseOffset = 10;
+
+            const gutters = fixture.debugElement.queryAll(By.directive(McGutterDirective));
+
+            gutters[0].nativeElement.dispatchEvent(new MouseEvent('mousedown', { screenX: 0, screenY: 0 }));
+
+            fixture.detectChanges();
+
+            document.dispatchEvent(new MouseEvent('mousemove', { screenX: mouseOffset, screenY: 0 }));
+
+            fixture.detectChanges();
+
+            document.dispatchEvent(new Event('mouseup'));
+
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.areaA.getSize()).toBe(areaAInitialSize);
+            expect(fixture.componentInstance.areaB.getSize()).toBe(areaBMinimalSize);
         }));
     });
 });

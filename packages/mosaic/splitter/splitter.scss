@@ -1,6 +1,6 @@
 .mc-splitter {
     display: flex;
-
+    position: relative;
     flex-wrap: nowrap;
     align-items: stretch;
 
@@ -8,7 +8,12 @@
 
     .mc-splitter-area {
         overflow: hidden;
+
+        &_resizing {
+            pointer-events: none;
+        }
     }
+
 }
 
 .mc-gutter {
@@ -24,5 +29,20 @@
 
     &.mc-gutter_vertical > .mc-icon {
         transform: rotate(90deg);
+    }
+}
+
+.mc-gutter-ghost {
+    position: absolute;
+    z-index: 999;
+    display: none;
+    overflow: hidden;
+
+    &.mc-gutter-ghost_vertical > .mc-icon {
+        transform: rotate(90deg);
+    }
+
+    &.mc-gutter-ghost_visible {
+        display: block;
     }
 }
