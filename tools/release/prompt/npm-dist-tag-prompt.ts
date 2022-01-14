@@ -9,6 +9,8 @@ const LATEST_TAG_CHOICE = {value: 'latest', name: 'Latest'};
 /** Inquirer choice for selecting the "next" npm dist-tag. */
 const NEXT_TAG_CHOICE = {value: 'next', name: 'Next'};
 
+const LTS_TAG_CHOICE = {value: 'lts', name: 'LTS'};
+
 /**
  * Prompts the current user-input interface for a npm dist-tag. The provided npm-dist tag
  * will be validated against the specified version and prevents that any pre-releases
@@ -35,9 +37,9 @@ export function getDistTagChoicesForVersion(version: Version) {
 
     // TODO: for refactoring
     if (!prereleaseLabel) {
-        return [LATEST_TAG_CHOICE, NEXT_TAG_CHOICE];
+        return [LATEST_TAG_CHOICE, NEXT_TAG_CHOICE, LTS_TAG_CHOICE];
     }
 
-    return [LATEST_TAG_CHOICE, NEXT_TAG_CHOICE];
+    return [LATEST_TAG_CHOICE, NEXT_TAG_CHOICE, LTS_TAG_CHOICE];
 }
 

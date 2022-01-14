@@ -53,22 +53,6 @@ export async function promptForNewVersion(currentVersion: Version): Promise<Vers
         name: 'proposedVersion',
         message: `What's the type of the new release?`,
         choices: versionChoices
-    }, {
-        type: 'confirm',
-        name: 'isPrerelease',
-        message: 'Should this be a pre-release?',
-        // Prompt whether this should a pre-release if the current release is not a pre-release
-        when: !currentVersion.prereleaseLabel,
-        default: false
-    }, {
-        type: 'list',
-        name: 'prereleaseLabel',
-        message: 'Please select a pre-release label:',
-        choices: allowedPrereleaseChoices,
-        when: ({isPrerelease, proposedVersion}) =>
-            // Only prompt for selecting a pre-release label if the current release is a pre-release,
-            // or the existing pre-release label should be changed.
-            isPrerelease || proposedVersion === 'new-prerelease-label'
     }]);
 
     const newVersion = answers.proposedVersion === 'new-prerelease-label' ?
