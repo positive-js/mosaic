@@ -73,9 +73,9 @@
         </div>
 
         <div #optionsContainer
-                class="mc-tree-select__content"
-                [@fadeInContent]="'showing'"
-                (@fadeInContent.done)="panelDoneAnimatingStream.next($event.toState)">
+            class="mc-tree-select__content"
+            [@fadeInContent]="'showing'"
+            (@fadeInContent.done)="panelDoneAnimatingStream.next($event.toState)">
             <ng-content select="mc-tree-selection"></ng-content>
         </div>
 

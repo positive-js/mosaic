@@ -99,7 +99,8 @@ import {
     take,
     takeUntil,
     distinctUntilChanged,
-    startWith
+    startWith,
+    first
 } from 'rxjs/operators';
 
 
@@ -220,6 +221,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     ];
 
     options: QueryList<McTreeOption>;
+
+    optionsArray: McTreeOption[] = [];
 
     @ViewChild('trigger', { static: false }) trigger: ElementRef;
 
@@ -417,9 +420,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         return this.cleaner && this.selectionModel.hasValue();
     }
 
-    get isEmptySearchResult(): boolean {
-        return this.search && this.tree.isEmpty && !!this.search.input.value;
-    }
+    isEmptySearchResult: boolean;
 
     private closeSubscription = Subscription.EMPTY;
 
@@ -507,6 +508,9 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.initKeyManager();
 
         this.options = this.tree.renderedOptions;
+        this.options.changes.pipe(
+            first((options) => options.length))
+            .subscribe(() => this.optionsArray = this.options.toArray());
         this.tree.autoSelect = this.autoSelect;
 
         if (this.tree.multipleMode === null) {
@@ -552,6 +556,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
                     );
                 }
             });
+
+        this.updateIsEmptySearchResult();
     }
 
     ngAfterViewInit() {
@@ -647,6 +653,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.changeDetectorRef.markForCheck();
         this.onTouched();
 
+        if (this.search) {
+            this.search.reset();
+        }
+
         setTimeout(() => this.focus(), 0);
     }
 
@@ -718,7 +728,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         if (this.empty) { return []; }
 
         return this.selectedValues
-            .map((value) => this.tree.renderedOptions.find((option) => option.value === value))
+            .map((value) => this.optionsArray.find((option) => option.value === value))
             .filter((option) => option);
     }
 
@@ -1111,4 +1121,13 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
 
     /** Comparison function to specify which option is displayed. Defaults to object equality. */
     private _compareWith = (o1: any, o2: any) => o1 === o2;
+
+    private updateIsEmptySearchResult() {
+        if (this.search) {
+            this.search.input.ngControl.valueChanges?.subscribe((value) => {
+                this.isEmptySearchResult = !!value && this.tree.isEmpty;
+                this.changeDetectorRef.markForCheck();
+            });
+        }
+    }
 }
