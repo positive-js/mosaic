@@ -39,6 +39,7 @@ const scope_types = [
     'security',
     'sidepanel',
     'splitter',
+    'table',
     'tabs',
     'tags',
     'textarea',
