@@ -36,7 +36,10 @@
                 <mc-tree-option
                     *mcTreeNodeDef="let node; when: hasChild"
                     mcTreeNodePadding
-                    [disabled]="node.name === 'Downloads'">
+                    [disabled]="node.name === 'Downloads'"
+                    [checkboxState]="descendantsAllSelected(node) ? 'checked' : 
+                                     descendantsPartiallySelected(node) ? 'indeterminate' : 
+                                     null">
                     <i mc-icon="mc-angle-down-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" mcTreeNodeToggle></i>
                     {{ treeControl.getViewValue(node) }}
                 </mc-tree-option>

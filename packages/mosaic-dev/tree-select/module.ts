@@ -1,5 +1,5 @@
 /* tslint:disable:no-console no-reserved-keywords */
-import { Component, NgModule, ViewEncapsulation } from '@angular/core';
+import { Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -7,7 +7,7 @@ import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
-import { McTreeFlatDataSource, McTreeFlattener, FlatTreeControl, McTreeModule } from '@ptsecurity/mosaic/tree';
+import { McTreeFlatDataSource, McTreeFlattener, FlatTreeControl, McTreeModule, McTreeSelection } from '@ptsecurity/mosaic/tree';
 import { McTreeSelectChange, McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
 
 
@@ -119,6 +119,7 @@ export class DemoComponent {
     singleSelectFormControl = new FormControl('', Validators.required);
 
     multiSelectSelectFormControl = new FormControl([], Validators.pattern(/^w/));
+    @ViewChild(McTreeSelection) selection: McTreeSelection;
 
     constructor() {
         this.treeFlattener = new McTreeFlattener(
@@ -139,13 +140,30 @@ export class DemoComponent {
 
     onSelectionChange($event: McTreeSelectChange) {
         console.log(`onSelectionChange: ${$event.value}`);
-        // const treeSelect = $event.source;
 
-        // if ($event.value.selected) {
-        //     treeSelect.selectionModel.select(...treeSelect.tree.treeControl.getDescendants($event.value.data));
-        // } else {
-        //     treeSelect.selectionModel.deselect(...treeSelect.tree.treeControl.getDescendants($event.value.data));
-        // }
+        const valuesToChange: any = this.treeControl.getDescendants($event.value.data);
+        if ($event.value.selected) {
+            this.selection.selectionModel.deselect(...valuesToChange);
+        } else {
+            this.selection.selectionModel.select(...valuesToChange);
+        }
+
+        this.toggleParents($event.value.data.parent);
+    }
+
+    /** Whether all the descendants of the node are selected. */
+    descendantsAllSelected(node: FileFlatNode): boolean {
+        const descendants = this.treeControl.getDescendants(node);
+
+        return descendants.every((child: any) => this.selection?.selectionModel.isSelected(child));
+    }
+
+    /** Whether part of the descendants are selected */
+    descendantsPartiallySelected(node: FileFlatNode): boolean {
+        const descendants = this.treeControl.getDescendants(node);
+        const result = descendants.some((child: any) => this.selection?.selectionModel.isSelected(child));
+
+        return result && !this.descendantsAllSelected(node);
     }
 
     hiddenItemsTextFormatter(hiddenItemsText: string, hiddenItems: number): string {
@@ -162,6 +180,25 @@ export class DemoComponent {
 
     closed($event) {
         console.log('closed: ', $event);
+    }
+
+    private toggleParents(parent) {
+        if (parent) {
+            const descendants = this.treeControl.getDescendants(parent);
+            const isParentSelected = this.selection.selectionModel.selected.includes(parent);
+
+            if (descendants.every((d: any) => this.selection.selectionModel.selected.includes(d))) {
+                if (!isParentSelected) {
+                    this.selection.selectionModel.select(parent);
+                    this.toggleParents(parent.parent);
+                }
+            } else {
+                if (isParentSelected) {
+                    this.selection.selectionModel.deselect(parent);
+                    this.toggleParents(parent.parent);
+                }
+            }
+        }
     }
 
     private transformer = (node: FileNode, level: number, parent: any) => {
