@@ -1,7 +1,8 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "outDir": "../../dist/out-tsc/mosaic-spec"
+        "outDir": "../../dist/out-tsc/mosaic-spec",
+        "target": "es5"
     },
     "files": [
         "test.ts"

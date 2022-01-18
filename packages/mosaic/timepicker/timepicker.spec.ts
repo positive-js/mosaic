@@ -6,7 +6,7 @@ import {
     TestBed,
     tick
 } from '@angular/core/testing';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormControl, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { DOWN_ARROW, ONE, SPACE, TWO, UP_ARROW } from '@ptsecurity/cdk/keycodes';
@@ -45,7 +45,6 @@ class TestApp {
         this.timeValue = adapter.createDateTime(1970, 1, 1, 12, 18, 28, 0);
     }
 }
-
 
 describe('McTimepicker', () => {
     let fixture: ComponentFixture<TestApp>;
@@ -201,7 +200,7 @@ describe('McTimepicker', () => {
 
         it('Should run validation on blur', () => {
             expect(testComponent.ngModel.valid).toBeTrue();
-            inputElementDebug.nativeElement.value = '1';
+            inputElementDebug.nativeElement.value = 'a';
 
             inputElementDebug.triggerEventHandler(
                 'blur',
@@ -209,6 +208,18 @@ describe('McTimepicker', () => {
             );
 
             expect(testComponent.ngModel.valid).toBeFalse();
+        });
+
+        it('Add lead zeros on blur', () => {
+            expect(testComponent.ngModel.valid).toBeTrue();
+            inputElementDebug.nativeElement.value = '1';
+
+            inputElementDebug.triggerEventHandler(
+                'blur',
+                { target: inputElementDebug.nativeElement }
+            );
+
+            expect(inputElementDebug.nativeElement.value).toBe('01:00');
         });
 
         it('Convert user input (add lead zero)', fakeAsync(() => {
@@ -528,4 +539,170 @@ describe('McTimepicker', () => {
             expect(inputNativeElement.value).toBe('12:00:00', 'Failed key-by-key input on 2nd key');
         });
     });
+});
+
+@Component({
+    selector: 'test-app',
+    template: `
+        <mc-form-field>
+            <i mcPrefix mc-icon="mc-clock_16"></i>
+            <input mcTimepicker
+                   [format]="timeFormat"
+                   [formControl]="formControl"
+        >
+        </mc-form-field>`
+})
+class TimePickerWithNullFormControlValue {
+    formControl: FormControl = new FormControl();
+    timeFormat: string;
+}
+
+describe('McTimepicker with null formControl value', () => {
+    let fixture: ComponentFixture<TimePickerWithNullFormControlValue>;
+    let testComponent: TimePickerWithNullFormControlValue;
+    let inputElementDebug;
+
+    beforeEach(fakeAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                McTimepickerModule,
+                FormsModule,
+                ReactiveFormsModule,
+                McFormFieldModule,
+                McTimepickerModule,
+                McIconModule,
+                McLuxonDateModule
+            ],
+            declarations: [TimePickerWithNullFormControlValue]
+        });
+        TestBed.compileComponents();
+
+        const mockedAdapter: DateAdapter<any> = TestBed.inject(DateAdapter);
+        spyOn(mockedAdapter, 'today').and.returnValue(
+            mockedAdapter.createDateTime(2020, 0, 1, 2, 3, 4, 5)
+        );
+
+        fixture = TestBed.createComponent(TimePickerWithNullFormControlValue);
+        testComponent = fixture.debugElement.componentInstance;
+        inputElementDebug = fixture.debugElement.query(By.directive(McTimepicker));
+
+        fixture.detectChanges();
+    }));
+
+    it('Paste value from clipboard when formControl value is null', () => {
+        testComponent.timeFormat = 'HH:mm:ss';
+        fixture.detectChanges();
+
+        expect(testComponent.formControl.value).toBeNull();
+
+        inputElementDebug.triggerEventHandler(
+            'paste',
+            {
+                preventDefault: () => null,
+                clipboardData: {
+                    getData: () => '19:01:02'
+                }
+            });
+        fixture.detectChanges();
+
+        expect(testComponent.formControl.value.toString()).toContain('2020-01-01T19:01:02');
+    });
+
+    it('Create time from input when formControl value is null', fakeAsync(() => {
+        testComponent.timeFormat = 'HH:mm';
+        fixture.detectChanges();
+
+        expect(testComponent.formControl.value).toBeNull();
+
+        inputElementDebug.nativeElement.value = '18:09';
+        dispatchFakeEvent(inputElementDebug.nativeElement, 'keydown');
+        tick(1);
+
+        fixture.detectChanges();
+
+        expect(testComponent.formControl.value.toString()).toContain('2020-01-01T18:09');
+    }));
+});
+
+@Component({
+    selector: 'test-app',
+    template: `
+        <mc-form-field>
+            <i mcPrefix mc-icon="mc-clock_16"></i>
+            <input mcTimepicker
+                   [format]="timeFormat"
+                   [(ngModel)]="model"
+        >
+        </mc-form-field>`
+})
+class TimePickerWithNullModelValue {
+    timeFormat: string;
+    model: any = null;
+}
+
+describe('McTimepicker with null model value', () => {
+    let fixture: ComponentFixture<TimePickerWithNullModelValue>;
+    let testComponent: TimePickerWithNullModelValue;
+    let inputElementDebug;
+
+    beforeEach(fakeAsync(() => {
+
+        TestBed.configureTestingModule({
+            imports: [
+                McTimepickerModule,
+                FormsModule,
+                McFormFieldModule,
+                McTimepickerModule,
+                McIconModule,
+                McLuxonDateModule
+            ],
+            declarations: [TimePickerWithNullModelValue]
+        });
+        TestBed.compileComponents();
+
+        const mockedAdapter: DateAdapter<any> = TestBed.inject(DateAdapter);
+        spyOn(mockedAdapter, 'today').and.returnValue(
+            mockedAdapter.createDateTime(2020, 0, 1, 2, 3, 4, 5)
+        );
+
+        fixture = TestBed.createComponent(TimePickerWithNullModelValue);
+        testComponent = fixture.debugElement.componentInstance;
+        inputElementDebug = fixture.debugElement.query(By.directive(McTimepicker));
+
+        fixture.detectChanges();
+    }));
+
+    it('Paste value from clipboard when model value is null', () => {
+        testComponent.timeFormat = 'HH:mm:ss';
+        fixture.detectChanges();
+
+        expect(testComponent.model).toBeNull();
+
+        inputElementDebug.triggerEventHandler(
+            'paste',
+            {
+                preventDefault: () => null,
+                clipboardData: {
+                    getData: () => '19:01:02'
+                }
+            });
+        fixture.detectChanges();
+
+        expect(testComponent.model.toString()).toContain('2020-01-01T19:01:02');
+    });
+
+    it('Create time from input when model value is null', fakeAsync(() => {
+        testComponent.timeFormat = 'HH:mm';
+        fixture.detectChanges();
+
+        expect(testComponent.model).toBeNull();
+
+        inputElementDebug.nativeElement.value = '18:09';
+        dispatchFakeEvent(inputElementDebug.nativeElement, 'keydown');
+        tick(1);
+
+        fixture.detectChanges();
+
+        expect(testComponent.model.toString()).toContain('2020-01-01T18:09');
+    }));
 });

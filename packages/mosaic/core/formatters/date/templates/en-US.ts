@@ -1,18 +1,18 @@
 export const enUS = {
     relativeTemplates: {
         short: {
-            SECONDS_AGO: 'Just now',
-            MINUTES_AGO: '{MINUTES_PASSED}{NBSP}min ago',
-            TODAY: '{TIME}',
+            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}',
             YESTERDAY: 'Yesterday, {TIME}',
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}'
+            TODAY: 'Today, {TIME}',
+            TOMORROW: 'Tomorrow, {TIME}',
+            AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}'
         },
         long: {
-            SECONDS_AGO: 'Just now',
-            MINUTES_AGO: '{MINUTES_PASSED, plural, =1{#{NBSP}minute} other{#{NBSP}minutes}} ago',
-            TODAY: '{TIME}',
+            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}',
             YESTERDAY: 'Yesterday, {TIME}',
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}'
+            TODAY: 'Today, {TIME}',
+            TOMORROW: 'Tomorrow, {TIME}',
+            AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}'
         }
     },
     absoluteTemplates: {

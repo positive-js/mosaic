@@ -1,9 +1,11 @@
 // tslint:disable:no-console
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 
 @Component({
@@ -14,14 +16,22 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 })
 export class ButtonDemoComponent {
     themePalette = ThemePalette;
+
+    disabledState = false;
+
+    onClick() {
+        console.log('onClick: ');
+    }
 }
 
 
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         McButtonModule,
-        McIconModule
+        McIconModule,
+        McToolTipModule
     ],
     declarations: [
         ButtonDemoComponent

@@ -11,6 +11,8 @@
 
     display: inline-block;
 
+    margin: 0; /* Safari */
+
     white-space: nowrap;
 
     text-decoration: none;
@@ -30,7 +32,6 @@
     }
 
     &[disabled] {
-        pointer-events: none;
         cursor: default;
     }
 

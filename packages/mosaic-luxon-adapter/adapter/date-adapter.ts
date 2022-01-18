@@ -6,7 +6,6 @@ import {
     DateAdapter,
     MC_DATE_LOCALE
 } from '@ptsecurity/cdk/datetime';
-import { DateFormatter } from '@ptsecurity/mosaic/core';
 import { DateTime, DateTimeOptions, DurationUnit, Info, LocaleOptions } from 'luxon';
 
 import { enUS } from './locales/en-US';
@@ -40,29 +39,10 @@ export function MC_LUXON_DATE_ADAPTER_OPTIONS_FACTORY(): McLuxonDateAdapterOptio
 const i18nLocals = ['en', 'ru'];
 
 
-// @ts-ignore
-export function DeprecatedMethod(target: any, key: string, descriptor: PropertyDescriptor) {
-    const origin = descriptor.value;
-
-    // tslint:disable-next-line:no-function-expression only-arrow-functions
-    descriptor.value = function(...args: any[]) {
-        console.warn(
-            `Found use of deprecated method ${key}, it was moved in DateFormatter. ` +
-            `The deprecated method will be removed in 13.0.0.`
-        );
-
-        return origin.apply(this, args);
-    };
-
-    return descriptor;
-}
-
-
 @Injectable()
 export class LuxonDateAdapter extends DateAdapter<DateTime> {
     private localeOptions: LocaleOptions;
     private dateTimeOptions: DateTimeOptions;
-    private dateFormatter: DateFormatter<DateTime>;
 
     // todo
     private localeData: {
@@ -88,8 +68,6 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         super.setLocale(locale);
 
         this.config = locale === 'en' ? enUS : ruRU;
-
-        this.dateFormatter = new DateFormatter<DateTime>(this, locale);
 
         this.localeOptions = { locale };
 
@@ -206,14 +184,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
             throw Error(`Invalid day "${day}". Date has to be greater than 0.`);
         }
 
-        const result = this.reconfigure(DateTime.fromObject({ year, month: month + 1, day }));
-
-        // If the result isn't valid, the day must have been out of bounds for this month.
-        if (!result.isValid) {
-            throw Error(`Invalid day "${day}" for month with index "${month}".`);
-        }
-
-        return result;
+        return this.reconfigure(DateTime.fromObject({ year, month: month + 1, day }));
     }
 
     createDateTime(
@@ -316,91 +287,6 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
     diffNow(date: DateTime, unit: DurationUnit): number {
         return date.diffNow(unit)[unit];
-    }
-
-    @DeprecatedMethod
-    absoluteDate(date: DateTime, params, datetime: boolean, milliseconds: boolean): string {
-        return this.dateFormatter.absoluteDate(date, params, datetime, milliseconds);
-    }
-
-    @DeprecatedMethod
-    absoluteLongDate(date: DateTime): string {
-        return this.dateFormatter.absoluteLongDate(date);
-    }
-
-    @DeprecatedMethod
-    absoluteLongDateTime(date: DateTime, options?): string {
-        return this.dateFormatter.absoluteLongDateTime(date, options);
-    }
-
-    @DeprecatedMethod
-    absoluteShortDate(date: DateTime): string {
-        return this.dateFormatter.absoluteShortDate(date);
-    }
-
-    @DeprecatedMethod
-    absoluteShortDateTime(date: DateTime, options?): string {
-        return this.dateFormatter.absoluteShortDateTime(date, options);
-    }
-
-    @DeprecatedMethod
-    openedRangeDate(startDate: DateTime, endDate: DateTime, template): string {
-        return this.dateFormatter.openedRangeDate(startDate, endDate, template);
-    }
-
-    @DeprecatedMethod
-    openedRangeDateTime(startDate: DateTime, endDate: DateTime, template): string {
-        return this.dateFormatter.openedRangeDateTime(startDate, endDate, template);
-    }
-
-    @DeprecatedMethod
-    rangeDate(startDate: DateTime, endDate: DateTime, template): string {
-        return this.dateFormatter.rangeDate(startDate, endDate, template);
-    }
-
-    @DeprecatedMethod
-    rangeDateTime(startDate: DateTime, endDate: DateTime, template): string {
-        return this.dateFormatter.rangeDateTime(startDate, endDate, template);
-    }
-
-    @DeprecatedMethod
-    rangeLongDate(startDate: DateTime | null, endDate?: DateTime): string {
-        return this.dateFormatter.rangeLongDate(startDate, endDate);
-    }
-
-    @DeprecatedMethod
-    rangeLongDateTime(startDate: DateTime | null, endDate?: DateTime): string {
-        return this.dateFormatter.rangeLongDateTime(startDate, endDate);
-    }
-
-    @DeprecatedMethod
-    rangeMiddleDateTime(startDate: DateTime, endDate: DateTime): string {
-        return this.dateFormatter.rangeMiddleDateTime(startDate, endDate);
-    }
-
-    @DeprecatedMethod
-    rangeShortDate(startDate: DateTime | null, endDate?: DateTime): string {
-        return this.dateFormatter.rangeShortDate(startDate, endDate);
-    }
-
-    @DeprecatedMethod
-    rangeShortDateTime(startDate: DateTime | null, endDate?: DateTime): string {
-        return this.dateFormatter.rangeShortDateTime(startDate, endDate);
-    }
-
-    @DeprecatedMethod
-    relativeDate(date: DateTime, template): string {
-        return this.dateFormatter.relativeDate(date, template);
-    }
-
-    @DeprecatedMethod
-    relativeLongDate(date: DateTime): string {
-        return this.dateFormatter.relativeLongDate(date);
-    }
-
-    @DeprecatedMethod
-    relativeShortDate(date: DateTime): string {
-        return this.dateFormatter.relativeShortDate(date);
     }
 
     private reconfigure(date: DateTime): DateTime {

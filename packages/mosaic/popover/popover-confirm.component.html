@@ -1,11 +1,13 @@
 <div class="mc-popover-confirm mc-popover"
+     cdkTrapFocus="true"
+     cdkTrapFocusAutoCapture="true"
      [ngClass]="classMap"
      [@state]="visibility"
      (@state.start)="animationStart()"
      (@state.done)="animationDone($event)">
     <div class="mc-popover__content">
         <div>{{ confirmText }}</div>
-        <button mc-button [color]="themePalette.Primary" (click)="onConfirm.next()">{{confirmButtonText}}</button>    
+        <button mc-button [color]="themePalette.Primary" (click)="onConfirm.next()">{{confirmButtonText}}</button>
     </div>
 
     <div class="mc-popover__arrow"></div>
