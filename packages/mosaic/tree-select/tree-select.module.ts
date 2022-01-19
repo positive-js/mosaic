@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MC_SELECT_SCROLL_STRATEGY_PROVIDER, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McTagsModule } from '@ptsecurity/mosaic/tags';
 import { McTreeModule } from '@ptsecurity/mosaic/tree';
 
-import { McTreeSelect, McTreeSelectTrigger } from './tree-select.component';
+import { McTreeSelect, McTreeSelectFooter, McTreeSelectTrigger } from './tree-select.component';
 
 
 @NgModule({
@@ -16,10 +17,11 @@ import { McTreeSelect, McTreeSelectTrigger } from './tree-select.component';
         McTreeModule,
         McIconModule,
         McTagsModule,
-        McPseudoCheckboxModule
+        McPseudoCheckboxModule,
+        McSelectModule
     ],
-    exports: [McTreeSelect, McTreeSelectTrigger, CommonModule],
-    declarations: [McTreeSelect, McTreeSelectTrigger],
+    exports: [McTreeSelect, McTreeSelectTrigger, McTreeSelectFooter, CommonModule],
+    declarations: [McTreeSelect, McTreeSelectTrigger, McTreeSelectFooter],
     providers: [MC_SELECT_SCROLL_STRATEGY_PROVIDER]
 })
 export class McTreeSelectModule {}
