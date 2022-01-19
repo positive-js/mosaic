@@ -12,12 +12,12 @@
             & > td {
                 padding: {
                     top: var(--mc-table-size-row-padding-vertical, $table-size-row-padding-vertical);
-                    right: (var(--mc-table-size-row-padding-horizontal, $table-size-row-padding-horizontal) / 2);
+                    right: calc((var(--mc-table-size-row-padding-horizontal, $table-size-row-padding-horizontal) / 2));
                     bottom: (
-                        var(--mc-table-size-row-padding-vertical, $table-size-row-padding-vertical) -
-                        var(--mc-table-size-border-width, $table-size-border-width)
+                        calc(var(--mc-table-size-row-padding-vertical, $table-size-row-padding-vertical) -
+                        var(--mc-table-size-border-width, $table-size-border-width))
                     );
-                    left: (var(--mc-table-size-row-padding-horizontal, $table-size-row-padding-horizontal) / 2)
+                    left: calc((var(--mc-table-size-row-padding-horizontal, $table-size-row-padding-horizontal) / 2))
                 };
 
                 vertical-align: baseline;
@@ -42,8 +42,8 @@
             padding: {
                 top: var(--mc-table-size-row-padding-vertical, $table-size-row-padding-vertical);
                 bottom: (
-                    var(--mc-table-size-row-padding-vertical, $table-size-row-padding-vertical) -
-                    var(--mc-table-size-border-width, $table-size-border-width)
+                    calc(var(--mc-table-size-row-padding-vertical, $table-size-row-padding-vertical) -
+                    var(--mc-table-size-border-width, $table-size-border-width))
                 );
             }
 
@@ -57,5 +57,6 @@
             border-bottom: var(--mc-table-size-border-width, $table-size-border-width) solid transparent;
         }
     }
+
     /* stylelint-enable no-descending-specificity */
 }
