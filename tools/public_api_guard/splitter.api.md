@@ -32,8 +32,12 @@ export class McGutterDirective implements OnInit {
     set direction(direction: Direction);
     // (undocumented)
     dragged: boolean;
+    // Warning: (ae-forgotten-export) The symbol "IPoint" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    isVertical(): boolean;
+    getPosition(): IPoint;
+    // (undocumented)
+    get isVertical(): boolean;
     // (undocumented)
     ngOnInit(): void;
     // (undocumented)
@@ -49,6 +53,31 @@ export class McGutterDirective implements OnInit {
 }
 
 // @public (undocumented)
+export class McGutterGhostDirective {
+    constructor(elementRef: ElementRef, renderer: Renderer2);
+    // (undocumented)
+    get direction(): Direction;
+    set direction(direction: Direction);
+    // (undocumented)
+    get isVertical(): boolean;
+    // (undocumented)
+    get size(): number;
+    set size(size: number);
+    // (undocumented)
+    visible: boolean;
+    // (undocumented)
+    get x(): number;
+    set x(x: number);
+    // (undocumented)
+    get y(): number;
+    set y(y: number);
+    // (undocumented)
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McGutterGhostDirective, "mc-gutter-ghost", never, { "visible": "visible"; "x": "x"; "y": "y"; "direction": "direction"; "size": "size"; }, {}, never>;
+    // (undocumented)
+    static ɵfac: i0.ɵɵFactoryDeclaration<McGutterGhostDirective, never>;
+}
+
+// @public (undocumented)
 export class McSplitterAreaDirective implements OnInit, OnDestroy {
     constructor(elementRef: ElementRef, renderer: Renderer2, splitter: McSplitterComponent);
     // (undocumented)
@@ -56,7 +85,11 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
     // (undocumented)
     getMinSize(): number;
     // (undocumented)
+    getPosition(): IPoint;
+    // (undocumented)
     getSize(): number;
+    // (undocumented)
+    isResizing(): boolean;
     // (undocumented)
     ngOnDestroy(): void;
     // (undocumented)
@@ -93,6 +126,8 @@ export class McSplitterComponent implements OnInit {
     // (undocumented)
     elementRef: ElementRef;
     // (undocumented)
+    ghost: McGutterGhostDirective;
+    // (undocumented)
     gutterPositionChange: EventEmitter<void>;
     // (undocumented)
     gutters: QueryList<McGutterDirective>;
@@ -103,6 +138,8 @@ export class McSplitterComponent implements OnInit {
     get hideGutters(): boolean;
     set hideGutters(value: boolean);
     // (undocumented)
+    get isDragging(): boolean;
+    // (undocumented)
     isVertical(): boolean;
     // (undocumented)
     ngOnInit(): void;
@@ -111,7 +148,12 @@ export class McSplitterComponent implements OnInit {
     // (undocumented)
     removeArea(area: McSplitterAreaDirective): void;
     // (undocumented)
-    static ɵcmp: i0.ɵɵComponentDeclaration<McSplitterComponent, "mc-splitter", ["mcSplitter"], { "hideGutters": "hideGutters"; "direction": "direction"; "disabled": "disabled"; "gutterSize": "gutterSize"; }, { "gutterPositionChange": "gutterPositionChange"; }, never, ["*"]>;
+    get resizing(): boolean;
+    // (undocumented)
+    get useGhost(): boolean;
+    set useGhost(useGhost: boolean);
+    // (undocumented)
+    static ɵcmp: i0.ɵɵComponentDeclaration<McSplitterComponent, "mc-splitter", ["mcSplitter"], { "hideGutters": "hideGutters"; "direction": "direction"; "disabled": "disabled"; "useGhost": "useGhost"; "gutterSize": "gutterSize"; }, { "gutterPositionChange": "gutterPositionChange"; }, never, ["*"]>;
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<McSplitterComponent, never>;
 }
@@ -125,7 +167,7 @@ export class McSplitterModule {
     // Warning: (ae-forgotten-export) The symbol "i1" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
-    static ɵmod: i0.ɵɵNgModuleDeclaration<McSplitterModule, [typeof i1.McGutterDirective, typeof i1.McSplitterAreaDirective, typeof i1.McSplitterComponent], [typeof i2.CommonModule, typeof i3.McIconModule], [typeof i1.McGutterDirective, typeof i1.McSplitterAreaDirective, typeof i1.McSplitterComponent]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<McSplitterModule, [typeof i1.McGutterDirective, typeof i1.McGutterGhostDirective, typeof i1.McSplitterAreaDirective, typeof i1.McSplitterComponent], [typeof i2.CommonModule, typeof i3.McIconModule], [typeof i1.McGutterDirective, typeof i1.McSplitterAreaDirective, typeof i1.McSplitterComponent]>;
 }
 
 // (No @packageDocumentation comment for this package)
