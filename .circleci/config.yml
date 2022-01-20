@@ -159,6 +159,12 @@ jobs:
                   paths:
                       - ./dist/reports
 
+    check_api:
+        executor: mosaic
+        steps:
+            - prepare_job
+            - run: yarn run check-api
+
     build_packages:
         executor: mosaic
         resource_class: xlarge
@@ -402,6 +408,10 @@ workflows:
                       - install
 
             # 6 Group Unit Tests
+            - check_api:
+                requires:
+                   - build_packages
+
             - test_unit_cdk:
                   requires:
                       - build_packages
@@ -417,6 +427,7 @@ workflows:
             - test_unit_mosaic:
                   requires:
                       - build_packages
+                      - check_api
 
             - test_unit_schematics:
                   requires:
