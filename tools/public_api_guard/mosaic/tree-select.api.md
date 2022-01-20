@@ -30,9 +30,11 @@ import * as i4 from '@ptsecurity/mosaic/tree';
 import * as i5 from '@ptsecurity/mosaic/icon';
 import * as i6 from '@ptsecurity/mosaic/tags';
 import * as i7 from '@ptsecurity/mosaic/core';
+import * as i8 from '@ptsecurity/mosaic/select';
 import { McCleaner } from '@ptsecurity/mosaic/form-field';
 import { McFormField } from '@ptsecurity/mosaic/form-field';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McSelectSearch } from '@ptsecurity/mosaic/select';
 import { McTag } from '@ptsecurity/mosaic/tags';
 import { McTreeOption } from '@ptsecurity/mosaic/tree';
 import { McTreeSelection } from '@ptsecurity/mosaic/tree';
@@ -106,6 +108,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements AfterContentI
     get id(): string;
     set id(value: string);
     // (undocumented)
+    isEmptySearchResult: boolean;
+    // (undocumented)
     isRtl(): boolean;
     // (undocumented)
     get multiple(): boolean;
@@ -139,6 +143,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements AfterContentI
     readonly openedStream: Observable<void>;
     // (undocumented)
     options: QueryList<McTreeOption>;
+    // (undocumented)
+    optionsArray: McTreeOption[];
     readonly optionSelectionChanges: Observable<McTreeSelectChange>;
     // (undocumented)
     overlayDir: CdkConnectedOverlay;
@@ -162,6 +168,8 @@ export class McTreeSelect extends McTreeSelectMixinBase implements AfterContentI
     get required(): boolean;
     set required(value: boolean);
     scrollStrategy: any;
+    // (undocumented)
+    search: McSelectSearch;
     // (undocumented)
     get selected(): any;
     // (undocumented)
@@ -190,7 +198,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements AfterContentI
     readonly valueChange: EventEmitter<any>;
     writeValue(value: any): void;
     // (undocumented)
-    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeSelect, "mc-tree-select", ["mcTreeSelect"], { "disabled": "disabled"; "tabIndex": "tabIndex"; "hiddenItemsText": "hiddenItemsText"; "panelClass": "panelClass"; "backdropClass": "backdropClass"; "errorStateMatcher": "errorStateMatcher"; "sortComparator": "sortComparator"; "placeholder": "placeholder"; "required": "required"; "multiple": "multiple"; "autoSelect": "autoSelect"; "compareWith": "compareWith"; "id": "id"; "hasBackdrop": "hasBackdrop"; "hiddenItemsTextFormatter": "hiddenItemsTextFormatter"; }, { "openedChange": "openedChange"; "openedStream": "opened"; "closedStream": "closed"; "selectionChange": "selectionChange"; "valueChange": "valueChange"; }, ["cleaner", "customTrigger", "tree"], ["mc-tree-select-trigger", "mc-cleaner", "mc-tree-selection"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeSelect, "mc-tree-select", ["mcTreeSelect"], { "disabled": "disabled"; "tabIndex": "tabIndex"; "hiddenItemsText": "hiddenItemsText"; "panelClass": "panelClass"; "backdropClass": "backdropClass"; "errorStateMatcher": "errorStateMatcher"; "sortComparator": "sortComparator"; "placeholder": "placeholder"; "required": "required"; "multiple": "multiple"; "autoSelect": "autoSelect"; "compareWith": "compareWith"; "id": "id"; "hasBackdrop": "hasBackdrop"; "hiddenItemsTextFormatter": "hiddenItemsTextFormatter"; }, { "openedChange": "openedChange"; "openedStream": "opened"; "closedStream": "closed"; "selectionChange": "selectionChange"; "valueChange": "valueChange"; }, ["cleaner", "customTrigger", "tree", "search"], ["mc-tree-select-trigger", "mc-cleaner", "[mcSelectSearch]", "[mc-select-search-empty-result]", "mc-tree-selection", "[mc-tree-selection-footer]"]>;
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<McTreeSelect, [null, null, null, null, null, null, null, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; self: true; }, { optional: true; self: true; }, { optional: true; self: true; }]>;
 }
@@ -207,6 +215,14 @@ export class McTreeSelectChange {
 }
 
 // @public (undocumented)
+export class McTreeSelectFooter {
+    // (undocumented)
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTreeSelectFooter, "mc-tree-select-footer", never, {}, {}, never>;
+    // (undocumented)
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTreeSelectFooter, never>;
+}
+
+// @public (undocumented)
 export class McTreeSelectModule {
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<McTreeSelectModule, never>;
@@ -215,7 +231,7 @@ export class McTreeSelectModule {
     // Warning: (ae-forgotten-export) The symbol "i1" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
-    static ɵmod: i0.ɵɵNgModuleDeclaration<McTreeSelectModule, [typeof i1.McTreeSelect, typeof i1.McTreeSelectTrigger], [typeof i2.CommonModule, typeof i3.OverlayModule, typeof i4.McTreeModule, typeof i5.McIconModule, typeof i6.McTagsModule, typeof i7.McPseudoCheckboxModule], [typeof i1.McTreeSelect, typeof i1.McTreeSelectTrigger, typeof i2.CommonModule]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<McTreeSelectModule, [typeof i1.McTreeSelect, typeof i1.McTreeSelectTrigger, typeof i1.McTreeSelectFooter], [typeof i2.CommonModule, typeof i3.OverlayModule, typeof i4.McTreeModule, typeof i5.McIconModule, typeof i6.McTagsModule, typeof i7.McPseudoCheckboxModule, typeof i8.McSelectModule], [typeof i1.McTreeSelect, typeof i1.McTreeSelectTrigger, typeof i1.McTreeSelectFooter, typeof i2.CommonModule]>;
 }
 
 // @public (undocumented)

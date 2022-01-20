@@ -495,6 +495,8 @@ export class McTreeSelection extends McTreeBase<any> implements ControlValueAcce
     // (undocumented)
     getSelectedValues(): any[];
     // (undocumented)
+    get isEmpty(): boolean;
+    // (undocumented)
     keyManager: FocusKeyManager<McTreeOption>;
     // (undocumented)
     get multiple(): boolean;
