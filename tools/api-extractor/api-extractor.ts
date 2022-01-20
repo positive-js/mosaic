@@ -22,7 +22,11 @@ const buildConfig = JsonFile.load('tools/api-extractor/config.json');
 if (params === 'onlyCheck') {
     localBuild = false;
 } else if (params) {
-    buildConfig.components = [params];
+    buildConfig.cdk = [];
+    buildConfig.mosaic = [];
+
+    const [folder, component] = params.split('/');
+    buildConfig[folder] = [component];
 }
 
 const configObjectFullPath: string = path.resolve('tools/api-extractor/api-extractor.json');
@@ -31,13 +35,19 @@ const packageJsonFullPath: string | undefined = packageJsonLookup.tryGetPackageJ
 
 let hasErrors: boolean = false;
 
-for (const component of buildConfig.components) {
+function runExtractor(folder: string, component: string): ExtractorResult {
     const configObject: IConfigFile = ExtractorConfig.loadFile(configObjectFullPath);
 
-    const mainEntryPointFilePath = configObject.mainEntryPointFilePath.replace('button', component);
-    const reportFileName = configObject!.apiReport!.reportFileName!.replace('<unscopedPackageName>', component);
+    const mainEntryPointFilePath = configObject.mainEntryPointFilePath
+        .replace('mosaic', folder)
+        .replace('button', component);
+    const reportFolder = configObject!.apiReport!.reportFolder!
+        .replace('mosaic', folder);
+    const reportFileName = configObject!.apiReport!.reportFileName!
+        .replace('<unscopedPackageName>', component);
 
     configObject.mainEntryPointFilePath = mainEntryPointFilePath;
+    configObject!.apiReport!.reportFolder = reportFolder;
     configObject!.apiReport!.reportFileName = reportFileName;
 
     const extractorConfig: ExtractorConfig = ExtractorConfig.prepare({
@@ -46,11 +56,13 @@ for (const component of buildConfig.components) {
         packageJsonFullPath
     });
 
-    const result: ExtractorResult = Extractor.invoke(extractorConfig, {
+    return Extractor.invoke(extractorConfig, {
         localBuild,
         showVerboseMessages: true
     });
+}
 
+function logErrors(result: ExtractorResult, component: string) {
     if (result.succeeded) {
         console.error(chalk.green(`API Extractor completed successfully: ${component}`));
     } else if (result.errorCount > 0) {
@@ -59,6 +71,14 @@ for (const component of buildConfig.components) {
     } else if (result.apiReportChanged) {
         process.exit(1);
     }
+}
+
+for (const component of buildConfig.cdk) {
+    logErrors(runExtractor('cdk', component), component);
+}
+
+for (const component of buildConfig.mosaic) {
+    logErrors(runExtractor('mosaic', component), component);
 }
 
 process.exitCode = hasErrors ? 1 : 0;

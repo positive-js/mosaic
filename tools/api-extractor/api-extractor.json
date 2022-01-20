@@ -6,7 +6,7 @@
     "apiReport": {
         "enabled": true,
         "reportFileName": "<unscopedPackageName>.api.md",
-        "reportFolder": "<projectFolder>/tools/public_api_guard"
+        "reportFolder": "<projectFolder>/tools/public_api_guard/mosaic"
     },
     "docModel": { "enabled": false},
     "dtsRollup": { "enabled": false },

@@ -1,5 +1,11 @@
 {
-    "components": [
+    "cdk": [
+        "a11y",
+        "datetime",
+        "keycodes",
+        "testing"
+    ],
+    "mosaic": [
         "autocomplete",
         "button",
         "button-toggle",
