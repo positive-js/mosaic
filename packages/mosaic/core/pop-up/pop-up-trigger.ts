@@ -33,9 +33,6 @@ import {
 import { PopUpPlacements, PopUpTriggers } from './constants';
 
 
-const VIEWPORT_MARGIN: number = 8;
-
-
 @Directive()
 // tslint:disable-next-line:naming-convention
 export abstract class McPopUpTrigger<T> {
@@ -215,7 +212,6 @@ export abstract class McPopUpTrigger<T> {
             .flexibleConnectedTo(this.elementRef)
             .withTransformOriginOn(this.originSelector)
             .withFlexibleDimensions(false)
-            .withViewportMargin(VIEWPORT_MARGIN)
             .withPositions([...EXTENDED_OVERLAY_POSITIONS])
             .withScrollableContainers(this.scrollDispatcher.getAncestorScrollContainers(this.elementRef));
 
