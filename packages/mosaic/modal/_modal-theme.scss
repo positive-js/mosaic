@@ -26,7 +26,7 @@
         .mc-modal-header {
             border-bottom-width: var(--mc-modal-size-border-width, $modal-size-border-width);
             border-bottom-style: solid;
-            border-bottom-color: map-get($popup, divider);
+            border-bottom-color: map-get($modal, header-border);
         }
 
         .mc-modal-header.mc-modal-body_top-overflow {
@@ -38,7 +38,9 @@
         }
 
         .mc-modal-footer {
-            border-top: var(--mc-modal-size-border-width, $modal-size-border-width) solid $border-color;
+            border-top-width: var(--mc-modal-size-border-width, $modal-size-border-width);
+            border-top-style: solid;
+            border-top-color: map-get($modal, footer-border);
 
             background-color: map-get($popup, footer-background);
         }

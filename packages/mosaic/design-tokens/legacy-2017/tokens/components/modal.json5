@@ -36,6 +36,12 @@
         }
     },
     'modal-header': {
+        'light-color-scheme': {
+            border: { value: '{light-color-scheme.foreground.divider.value}' }
+        },
+        'dark-color-scheme': {
+            border: { value: '{dark-color-scheme.foreground.divider.value}' }
+        },
         size: {
             'border-radius': { value: '4px 4px 0 0' },
             padding: { value: '14px 16px' }
@@ -54,6 +60,12 @@
         }
     },
     'modal-footer': {
+        'light-color-scheme': {
+            border: { value: '{light-color-scheme.foreground.divider.value}' }
+        },
+        'dark-color-scheme': {
+            border: { value: '{dark-color-scheme.foreground.divider.value}' }
+        },
         size: {
             'border-radius': { value: '0 0 4px 4px' },
             padding: { value: '16px {padding.headerFooter-horizontal}' }

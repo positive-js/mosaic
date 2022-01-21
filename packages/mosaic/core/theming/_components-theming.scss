@@ -222,8 +222,10 @@
     $modal: (
         background-mask: $modal-light-color-scheme-background-mask,
         shadow: $modal-light-color-scheme-shadow,
+        header-border: $modal-header-light-color-scheme-border,
         body-top-shadow: $modal-light-color-scheme-body-top-shadow,
-        body-bottom-shadow: $modal-light-color-scheme-body-bottom-shadow
+        body-bottom-shadow: $modal-light-color-scheme-body-bottom-shadow,
+        footer-border: $modal-footer-light-color-scheme-border
     );
 
     $navbar: (
@@ -594,8 +596,10 @@
     $modal: (
         background-mask: $modal-dark-color-scheme-background-mask,
         shadow: $modal-dark-color-scheme-shadow,
+        header-border: $modal-header-dark-color-scheme-border,
         body-top-shadow: $modal-dark-color-scheme-body-top-shadow,
-        body-bottom-shadow: $modal-dark-color-scheme-body-bottom-shadow
+        body-bottom-shadow: $modal-dark-color-scheme-body-bottom-shadow,
+        footer-border: $modal-footer-dark-color-scheme-border
     );
 
     $navbar: (
