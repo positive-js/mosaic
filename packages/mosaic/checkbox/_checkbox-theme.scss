@@ -13,7 +13,7 @@
 
         & .mc-checkbox-checkmark,
         & .mc-checkbox-mixedmark {
-            color: white;
+            color: map-get($background, background);
         }
     }
 
