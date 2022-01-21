@@ -71,6 +71,10 @@
             @include mc-badge-color(map-get($badge, success_solid));
         }
 
+        &.mc-badge_info {
+            @include mc-badge-color(map-get($badge, info_solid));
+        }
+
         &.mc-badge_warning {
             @include mc-badge-color(map-get($badge, warning_solid));
         }

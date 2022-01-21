@@ -239,6 +239,7 @@
         icon-color: $navbar-item-light-color-scheme-icon,
 
         state-active: $navbar-item-light-color-scheme-states-active,
+        state-selected: $navbar-item-light-color-scheme-states-selected,
         state-hover: $navbar-item-light-color-scheme-states-hover,
         state-progress: $navbar-item-light-color-scheme-states-progress,
         state-disabled-opacity: $navbar-item-light-color-scheme-states-disabled-opacity,
@@ -613,6 +614,7 @@
         icon-color: $navbar-item-dark-color-scheme-icon,
 
         state-active: $navbar-item-dark-color-scheme-states-active,
+        state-selected: $navbar-item-dark-color-scheme-states-selected,
         state-hover: $navbar-item-dark-color-scheme-states-hover,
         state-progress: $navbar-item-dark-color-scheme-states-progress,
         state-disabled-opacity: $navbar-item-dark-color-scheme-states-disabled-opacity,

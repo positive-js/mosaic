@@ -33,6 +33,7 @@
 
             states: {
                 active: { value: 'rgba(0, 0, 0, 0.1)' },
+                selected: { value: '{light-color-scheme.second.palette.value.700.value}' },
                 hover: { value: 'rgba(255, 255, 255, 0.1)' },
                 progress: { value: '{light-color-scheme.primary.palette.value.800.value}' },
                 'disabled-opacity': { value: 0.3 }
@@ -44,6 +45,7 @@
 
             states: {
                 active: { value: 'rgba(0, 0, 0, 0.1)' },
+                selected: { value: '{dark-color-scheme.second.palette.value.600.value}' },
                 hover: { value: 'rgba(255, 255, 255, 0.1)' },
                 progress: { value: '{dark-color-scheme.primary.palette.value.800.value}' },
                 'disabled-opacity': { value: 0.3 }
