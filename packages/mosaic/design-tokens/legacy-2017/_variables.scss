@@ -1,6 +1,5 @@
 
 // Do not edit directly
-// Generated on Wed, 29 Dec 2021 06:11:23 GMT
 
 $light-color-scheme-primary-default: #338FCC;
 $light-color-scheme-second-default: #B3B3B3;
@@ -631,6 +630,7 @@ $progress-bar-dark-color-scheme-background: #666666;
 $progress-bar-size-height: 4px;
 $progress-spinner-size-size: 16px;
 $radio-light-color-scheme-outer-circle-border: #B3B3B3;
+$radio-light-color-scheme-outer-circle-background: white;
 $radio-light-color-scheme-inner-circle-border: transparent;
 $radio-light-color-scheme-states-checked-outer-circle-border: #338FCC;
 $radio-light-color-scheme-states-checked-inner-circle-border: #338FCC;
@@ -638,6 +638,7 @@ $radio-light-color-scheme-states-focused-outer-circle-border: #338FCC;
 $radio-light-color-scheme-states-focused-outer-circle-shadow: 0 0 0 2px #B3B3B3;
 $radio-light-color-scheme-states-focused-inner-circle-shadow: 0 0 0 1px white;
 $radio-dark-color-scheme-outer-circle-border: #999999;
+$radio-dark-color-scheme-outer-circle-background: transparent;
 $radio-dark-color-scheme-inner-circle-border: transparent;
 $radio-dark-color-scheme-states-checked-outer-circle-border: #57A4D7;
 $radio-dark-color-scheme-states-checked-inner-circle-border: #206EA2;

@@ -1,6 +1,5 @@
 /**
  * Do not edit directly
- * Generated on Wed, 29 Dec 2021 06:11:25 GMT
  */
 
 export const LightColorSchemePrimaryDefault = "#db3c55";
@@ -811,6 +810,7 @@ export const ProgressBarDarkColorSchemeBackground = "rgba(white,0.06)";
 export const ProgressBarSizeHeight = "4px";
 export const ProgressSpinnerSizeSize = "16px";
 export const RadioLightColorSchemeOuterCircleBorder = "#bdc7d1";
+export const RadioLightColorSchemeOuterCircleBackground = "white";
 export const RadioLightColorSchemeInnerCircleBorder = "transparent";
 export const RadioLightColorSchemeStatesCheckedOuterCircleBorder = "#db3c55";
 export const RadioLightColorSchemeStatesCheckedInnerCircleBorder = "#db3c55";
@@ -818,6 +818,7 @@ export const RadioLightColorSchemeStatesFocusedOuterCircleBorder = "#db3c55";
 export const RadioLightColorSchemeStatesFocusedOuterCircleShadow = "0 0 0 2px #db3c55";
 export const RadioLightColorSchemeStatesFocusedInnerCircleShadow = "0 0 0 1px white";
 export const RadioDarkColorSchemeOuterCircleBorder = "#515e69";
+export const RadioDarkColorSchemeOuterCircleBackground = "transparent";
 export const RadioDarkColorSchemeInnerCircleBorder = "transparent";
 export const RadioDarkColorSchemeStatesCheckedOuterCircleBorder = "#ea5868";
 export const RadioDarkColorSchemeStatesCheckedInnerCircleBorder = "#ea5868";

@@ -15,7 +15,7 @@
     .mc-radio-button {
         & .mc-radio-button__outer-circle {
             border-color: map-get($radio, outer-circle_border);
-            background: map-get($background, background);
+            background: map-get($radio, outer-circle_background);
         }
 
         & .mc-radio-button__inner-circle {
@@ -31,7 +31,6 @@
         &.mc-selected {
             & .mc-radio-button__outer-circle {
                 border-color: map-get($radio, outer-circle_checked-state_border);
-                background: white;
             }
 
             & .mc-radio-button__inner-circle {
