@@ -23,11 +23,6 @@ export const ruRU = {
                 select,
                     yes{{SHORT_DATE}, {TIME}}
                     other{{SHORT_DATE} {YEAR}, {TIME}}
-            }{
-                SHOW_MILLISECONDS,
-                select,
-                    yes{:{SECONDS}{MILLISECONDS}}
-                    other{}
             }`
         },
         long: {
@@ -37,11 +32,6 @@ export const ruRU = {
                 select,
                     yes{{DATE}, {TIME}}
                     other{{DATE} {YEAR}, {TIME}}
-            }{
-                SHOW_MILLISECONDS,
-                select,
-                    yes{:{SECONDS}{MILLISECONDS}}
-                    other{}
             }`
         }
     },
