@@ -105,11 +105,18 @@ export class DateFormatter<D> {
     relativeDate(date: D, template: FormatterRelativeTemplate): string {
         if (!this.adapter.isDateInstance(date)) { throw new Error(this.invalidDateErrorText); }
 
+        const dayStart: any = this.adapter.today();
+        dayStart.c.hour = 0;
+        dayStart.c.minute = 0;
+        dayStart.c.second = 0;
+        dayStart.c.millisecond = 0;
+
         const isBeforeYesterday = this.adapter.diffNow(date, 'days') <= -2;
         const isYesterday = this.adapter.diffNow(date, 'days') <= -1 && this.adapter.diffNow(date, 'days') > -2;
         const isToday = this.adapter.hasSame(this.adapter.today(), date, 'days');
-        const isTomorrow = this.adapter.diffNow(date, 'days') >= 1 && this.adapter.diffNow(date, 'days') < 2;
-        const isAfterTomorrow = this.adapter.diffNow(date, 'days') > 1;
+        const isTomorrow = this.adapter.compareDateTime(date, dayStart) >= 1 && this.adapter.compareDateTime(date, dayStart) < 2
+            && this.adapter.hasSame(this.adapter.today(), date, 'years');
+        const isAfterTomorrow = this.adapter.compareDateTime(date, dayStart) >= 2 || !this.adapter.hasSame(this.adapter.today(), date, 'years');
 
         const templateVariables = {...this.adapter.config.variables, ...template.variables};
         const variables = this.compileVariables(date, templateVariables);
