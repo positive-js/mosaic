@@ -327,7 +327,16 @@
         circle_border: $toggle-light-color-scheme-circle-border,
         circle_background: $toggle-light-color-scheme-circle-background,
 
-        focused: $toggle-light-color-scheme-states-focused-shadow
+        focused: $toggle-light-color-scheme-states-focused-shadow,
+
+        primary: (
+            checked_border: $toggle-light-color-scheme-primary-checked-border-color,
+            checked_background: $toggle-light-color-scheme-primary-checked-background,
+        ),
+        error: (
+            checked_border: $toggle-light-color-scheme-error-checked-border-color,
+            checked_background: $toggle-light-color-scheme-error-checked-background,
+        )
     );
 
     $tooltip: (
@@ -702,7 +711,16 @@
         circle_border: $toggle-dark-color-scheme-circle-border,
         circle_background: $toggle-dark-color-scheme-circle-background,
 
-        focused: $toggle-dark-color-scheme-states-focused-shadow
+        focused: $toggle-dark-color-scheme-states-focused-shadow,
+
+        primary: (
+            checked_border: $toggle-dark-color-scheme-primary-checked-border-color,
+            checked_background: $toggle-dark-color-scheme-primary-checked-background,
+        ),
+        error: (
+            checked_border: $toggle-dark-color-scheme-error-checked-border-color,
+            checked_background: $toggle-dark-color-scheme-error-checked-background,
+        )
     );
 
     $tooltip: (

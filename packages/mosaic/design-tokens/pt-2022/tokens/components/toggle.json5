@@ -14,6 +14,18 @@
                         value: 'inset 0 0 0 1px {light-color-scheme.background.background.value}, 0 0 0 2px {light-color-scheme.primary.palette.value.500.value}'
                     }
                 }
+            },
+            primary: {
+                checked: {
+                    'border-color': { value: '{light-color-scheme.primary.default.value}'},
+                    background: { value: '{light-color-scheme.primary.default.value}'}
+                }
+            },
+            error: {
+                checked: {
+                    'border-color': { value: '{light-color-scheme.error.default.value}'},
+                    background: { value: '{light-color-scheme.error.default.value}'}
+                }
             }
         },
         'dark-color-scheme': {
@@ -29,6 +41,18 @@
                     shadow: {
                         value: 'inset 0 0 0 1px {dark-color-scheme.background.background.value}, 0 0 0 2px {dark-color-scheme.primary.palette.value.400.value}'
                     }
+                }
+            },
+            primary: {
+                checked: {
+                    'border-color': { value: '{dark-color-scheme.primary.default.value}'},
+                    background: { value: '{dark-color-scheme.primary.default.value}'}
+                }
+            },
+            error: {
+                checked: {
+                    'border-color': { value: '{dark-color-scheme.error.default.value}'},
+                    background: { value: '{dark-color-scheme.error.default.value}'}
                 }
             }
         },
