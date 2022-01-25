@@ -41,7 +41,7 @@ class DocFetcher {
 
 @Component({
     selector: 'doc-viewer',
-    template: 'Loading document...'
+    template: 'Загрузка данных...'
 })
 export class DocViewer implements OnDestroy {
 
