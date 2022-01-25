@@ -3,14 +3,14 @@ import { PopUpPlacements } from '@ptsecurity/mosaic/core';
 
 
 /**
- * @title Basic tooltip
+ * @title Multiple lines tooltip
  */
 @Component({
-    selector: 'tooltip-overview-example',
-    templateUrl: 'tooltip-overview-example.html',
-    styleUrls: ['tooltip-overview-example.css'],
+    selector: 'tooltip-multiple-lines-example',
+    templateUrl: 'tooltip-multiple-lines-example.html',
+    styleUrls: ['tooltip-multiple-lines-example.css'],
     encapsulation: ViewEncapsulation.None
 })
-export class TooltipOverviewExample {
+export class TooltipMultipleLinesExample {
     placement: PopUpPlacements = PopUpPlacements.Top;
 }
