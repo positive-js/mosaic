@@ -206,6 +206,10 @@ export class McTreeSelection extends McTreeBase<any>
         return this.multipleMode === MultipleMode.CHECKBOX;
     }
 
+    get isEmpty(): boolean {
+        return this.sortedNodes.length === 0;
+    }
+
     private readonly destroy = new Subject<void>();
 
     private optionFocusSubscription: Subscription | null;
@@ -668,4 +672,3 @@ export class McTreeSelection extends McTreeBase<any>
         return ($event.relatedTarget as HTMLElement).classList.contains('mc-tree-option');
     }
 }
-

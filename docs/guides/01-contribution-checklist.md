@@ -36,7 +36,7 @@ On top of automated testing, we should also be manually testing our examples on 
   * Chrome
   * Firefox
   * Edge
-* Mac
+  * Mac
   * Chrome
   * Firefox
   * Safari

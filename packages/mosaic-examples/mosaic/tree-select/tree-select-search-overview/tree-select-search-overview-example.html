@@ -1,0 +1,32 @@
+<mc-form-field>
+    <mc-tree-select
+        [multiple]="true"
+        [(ngModel)]="selected">
+
+        <mc-form-field mcFormFieldWithoutBorders mcSelectSearch>
+            <i mcPrefix mc-icon="mc-search_16"></i>
+            <input mcInput [formControl]="searchControl" type="text"/>
+            <mc-cleaner></mc-cleaner>
+        </mc-form-field>
+
+        <div mc-select-search-empty-result>Ничего не найдено</div>
+
+        <mc-tree-selection
+            [dataSource]="dataSource"
+            [treeControl]="treeControl">
+            <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
+            </mc-tree-option>
+
+            <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                <i mc-icon="mc-angle-down-S_16"
+                   [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'"
+                   mcTreeNodeToggle>
+                </i>
+                <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
+            </mc-tree-option>
+        </mc-tree-selection>
+
+        <mc-cleaner #mcSelectCleaner></mc-cleaner>
+    </mc-tree-select>
+</mc-form-field>

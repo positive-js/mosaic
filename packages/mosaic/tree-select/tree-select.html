@@ -63,12 +63,22 @@
          [style.transformOrigin]="transformOrigin"
          [style.font-size.px]="triggerFontSize"
          (keydown)="handleKeydown($event)">
+         
+        <div *ngIf="search" class="mc-select__search-container">
+            <ng-content select="[mcSelectSearch]"></ng-content>
+        </div>
+
+        <div *ngIf="isEmptySearchResult" class="mc-select__no-options-message">
+            <ng-content select="[mc-select-search-empty-result]"></ng-content>
+        </div>
 
         <div #optionsContainer
-             class="mc-tree-select__content"
-             [@fadeInContent]="'showing'"
-             (@fadeInContent.done)="panelDoneAnimatingStream.next($event.toState)">
+            class="mc-tree-select__content"
+            [@fadeInContent]="'showing'"
+            (@fadeInContent.done)="panelDoneAnimatingStream.next($event.toState)">
             <ng-content select="mc-tree-selection"></ng-content>
         </div>
+
+        <ng-content select="[mc-tree-selection-footer]"></ng-content>
     </div>
 </ng-template>
