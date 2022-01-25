@@ -39,8 +39,8 @@
                                 "input": "packages/docs/src",
                                 "output": "/"
                             },
-                            "packages/docs/src/robots.txt",
-                            "packages/docs/src/sitemap.xml"
+                            "src/robots.txt",
+                            "src/sitemap.xml"
                         ],
                         "styles": [
                             {
