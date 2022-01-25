@@ -1,0 +1,21 @@
+<mc-tree-selection
+    [(ngModel)]="modelValue"
+    [dataSource]="dataSource"
+    [treeControl]="treeControl">
+    <mc-tree-option
+        *mcTreeNodeDef="let node"
+        mcTreeNodePadding>
+        <span [innerHTML]="treeControl.getViewValue(node)"></span>
+    </mc-tree-option>
+
+    <mc-tree-option
+        *mcTreeNodeDef="let node; when: hasChild"
+        mcTreeNodePadding>
+        <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
+        <mc-progress-spinner *ngIf="node.loading"
+                             mode="indeterminate">
+        </mc-progress-spinner>
+
+        <span [innerHTML]="treeControl.getViewValue(node)"></span>
+    </mc-tree-option>
+</mc-tree-selection>
