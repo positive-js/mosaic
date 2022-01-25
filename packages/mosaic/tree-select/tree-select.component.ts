@@ -1036,6 +1036,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         const selectedOption = this.options.find((option) => option.value === firstSelectedValue);
 
         if (selectedOption) {
+            this.tree.keyManager.setFocusOrigin('keyboard');
             this.tree.keyManager.setActiveItem(selectedOption);
         }
     }

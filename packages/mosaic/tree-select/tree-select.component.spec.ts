@@ -1822,6 +1822,25 @@ describe('McTreeSelect', () => {
                 );
 
                 it(
+                    'should focus preselected option when select is being opened',
+                    fakeAsync(() => {
+                        fixture.destroy();
+
+                        const multiFixture = TestBed.createComponent(MultiSelect);
+                        multiFixture.detectChanges();
+
+                        multiFixture.componentInstance.control.setValue(['Applications']);
+
+                        multiFixture.componentInstance.select.open();
+                        multiFixture.detectChanges();
+                        tick(10);
+
+                        const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
+                        expect(document.activeElement).toBe(options[4]);
+                    })
+                );
+
+                it(
                     'should not shift focus when the selected options are updated programmatically in a multi select',
                     fakeAsync(() => {
                         fixture.destroy();
@@ -1830,7 +1849,6 @@ describe('McTreeSelect', () => {
                         multiFixture.detectChanges();
                         multiFixture.detectChanges();
 
-                        select = multiFixture.debugElement.query(By.css('mc-tree-select')).nativeElement;
                         multiFixture.componentInstance.select.open();
                         multiFixture.detectChanges();
                         flush();
