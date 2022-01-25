@@ -385,6 +385,8 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
     // (undocumented)
     blur(): void;
     // (undocumented)
+    checkboxState: 'checked' | 'indeterminate' | 'unchecked' | null;
+    // (undocumented)
     deselect(): void;
     // (undocumented)
     get disabled(): any;

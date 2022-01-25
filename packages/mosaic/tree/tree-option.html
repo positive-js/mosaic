@@ -2,7 +2,7 @@
 
 <mc-pseudo-checkbox
     *ngIf="showCheckbox"
-    [state]="selected ? 'checked' : 'unchecked'"
+    [state]="checkboxState || (selected ? 'checked' : 'unchecked')"
     [disabled]="disabled">
 </mc-pseudo-checkbox>
 
