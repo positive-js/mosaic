@@ -384,6 +384,8 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
     // (undocumented)
     blur(): void;
     // (undocumented)
+    checkboxState: 'checked' | 'indeterminate' | 'unchecked' | null;
+    // (undocumented)
     deselect(): void;
     // (undocumented)
     get disabled(): any;
@@ -442,7 +444,7 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
     // (undocumented)
     get viewValue(): string;
     // (undocumented)
-    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeOption, "mc-tree-option", ["mcTreeOption"], { "disabled": "disabled"; "showCheckbox": "showCheckbox"; }, { "onSelectionChange": "onSelectionChange"; }, ["toggleElement", "actionButton", "tooltipTrigger", "dropdownTrigger"], ["mc-tree-node-toggle", "mc-checkbox", "[mc-icon]", "*", "mc-option-action"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeOption, "mc-tree-option", ["mcTreeOption"], { "checkboxState": "checkboxState"; "disabled": "disabled"; "showCheckbox": "showCheckbox"; }, { "onSelectionChange": "onSelectionChange"; }, ["toggleElement", "actionButton", "tooltipTrigger", "dropdownTrigger"], ["mc-tree-node-toggle", "mc-checkbox", "[mc-icon]", "*", "mc-option-action"]>;
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<McTreeOption, never>;
 }
