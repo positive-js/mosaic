@@ -12,7 +12,7 @@ import { DateTime, DurationUnit } from 'luxon';
 describe('Date formatter', () => {
     let adapter: LuxonDateAdapter;
     let formatter: DateFormatter<DateTime>;
-    let currentDate: DateTime;
+    let currentDate: any;
 
     const mockAdapterAndFormatterForRelativeTests = () => {
         // @ts-ignore
@@ -41,7 +41,11 @@ describe('Date formatter', () => {
         adapter = d;
         formatter = f;
 
-        currentDate = adapter.createDateTime(2000, 10, 10, 10, 0, 0, 0);
+        currentDate = adapter.today();
+        currentDate.c.hour = 0;
+        currentDate.c.minute = 0;
+        currentDate.c.second = 0;
+        currentDate.c.millisecond = 0;
     }));
 
     const YEAR = 'yyyy';
@@ -132,7 +136,7 @@ describe('Date formatter', () => {
                 });
 
                 it('after tomorrow (other year)', () => {
-                    const date = currentDate.plus({ hours: 49 });
+                    const date = currentDate.plus({ year: 1 });
                     expect(formatter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${DAY}${NBSP}${SHORT_MONTH} ${YEAR}`));
                 });
@@ -140,7 +144,7 @@ describe('Date formatter', () => {
 
             describe('Relative long (relativeLongDate method)', () => {
                 it('before yesterday (other year)', () => {
-                    const date = currentDate.minus({ hours: 49 });
+                    const date = currentDate.minus({ year: 1 });
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH} ${YEAR}`));
                 });
@@ -199,7 +203,7 @@ describe('Date formatter', () => {
                 });
 
                 it('after tomorrow (other year)', () => {
-                    const date = currentDate.plus({ hours: 49 });
+                    const date = currentDate.plus({ year: 1 });
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH} ${YEAR}`));
                 });
