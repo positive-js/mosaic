@@ -9,6 +9,7 @@ import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McTreeModule } from '@ptsecurity/mosaic/tree';
 import { McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
 
+import { TreeSelectChildSelectionOverviewExample } from './tree-select-child-selection-overview/tree-select-child-selection-overview-example';
 import { TreeSelectFooterOverviewExample } from './tree-select-footer-overview/tree-select-footer-overview-example';
 import { TreeSelectMultipleOverviewExample } from './tree-select-multiple-overview/tree-select-multiple-overview-example';
 import { TreeSelectOverviewExample } from './tree-select-overview/tree-select-overview-example';
@@ -18,6 +19,7 @@ import { TreeSelectSearchOverviewExample } from './tree-select-search-overview/t
 export {
     TreeSelectOverviewExample,
     TreeSelectMultipleOverviewExample,
+    TreeSelectChildSelectionOverviewExample,
     TreeSelectSearchOverviewExample,
     TreeSelectFooterOverviewExample
 };
@@ -25,6 +27,7 @@ export {
 const EXAMPLES = [
     TreeSelectOverviewExample,
     TreeSelectMultipleOverviewExample,
+    TreeSelectChildSelectionOverviewExample,
     TreeSelectSearchOverviewExample,
     TreeSelectFooterOverviewExample
 ];
