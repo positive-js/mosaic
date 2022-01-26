@@ -185,7 +185,7 @@ jobs:
                       - .
 
     build_mosaic_docs_for_preview:
-        executor: mosaic
+        executor: mosaic-browsers
         steps:
             - prepare_job
             - run:
