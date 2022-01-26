@@ -48,7 +48,8 @@ import {
     SPACE,
     TAB,
     UP_ARROW,
-    A
+    A,
+    ESCAPE
 } from '@ptsecurity/cdk/keycodes';
 import {
     createKeyboardEvent,
@@ -63,6 +64,8 @@ import {
     getMcSelectNonFunctionValueError
 } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McInputModule } from '@ptsecurity/mosaic/input';
+import { McSelectModule } from '@ptsecurity/mosaic/select';
 import {
     FlatTreeControl,
     McTreeFlatDataSource,
@@ -491,6 +494,55 @@ class NgIfSelect {
 
     hasChild(_: number, nodeData: FileFlatNode) {
         return nodeData.expandable;
+    }
+}
+
+@Component({
+    selector: 'select-with-search',
+    template: `
+        <mc-form-field>
+            <mc-tree-select [formControl]="control">
+                <mc-form-field mcFormFieldWithoutBorders mcSelectSearch>
+                    <i mcPrefix mc-icon="mc-search_16"></i>
+                    <input mcInput [formControl]="searchControl" type="text"/>
+                    <mc-cleaner></mc-cleaner>
+                </mc-form-field>
+
+                <div mc-select-search-empty-result>Ничего не найдено</div>
+
+                <mc-tree-selection
+                    [dataSource]="dataSource"
+                    [treeControl]="treeControl">
+
+                    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                        {{ treeControl.getViewValue(node) }}
+                    </mc-tree-option>
+                </mc-tree-selection>
+            </mc-tree-select>
+        </mc-form-field>
+    `
+})
+class SelectWithSearch implements OnInit {
+    control = new FormControl();
+
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
+    treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
+
+    dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
+    searchControl: FormControl = new FormControl();
+
+    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
+
+    constructor() {
+        this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
+        // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
+        // file node as children.
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
+    }
+
+    ngOnInit(): void {
+        this.searchControl.valueChanges.subscribe((value) => this.treeControl.filterNodes(value));
     }
 }
 
@@ -1470,6 +1522,8 @@ describe('McTreeSelect', () => {
                 McFormFieldModule,
                 McTreeModule,
                 McTreeSelectModule,
+                McSelectModule,
+                McInputModule,
                 ReactiveFormsModule,
                 FormsModule,
                 NoopAnimationsModule
@@ -3096,6 +3150,107 @@ describe('McTreeSelect', () => {
             expect(overlayContainerElement.textContent).toContain('Pictures');
             expect(overlayContainerElement.textContent).toContain('Documents');
         }));
+    });
+
+    describe('with search', () => {
+        let fixture: ComponentFixture<SelectWithSearch>;
+        let trigger: HTMLElement;
+
+        beforeEach(waitForAsync(() => {
+            configureMcTreeSelectTestingModule([SelectWithSearch]);
+
+            fixture = TestBed.createComponent(SelectWithSearch);
+            fixture.detectChanges();
+            fixture.detectChanges();
+
+            trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
+        }));
+
+        it('should have search input', fakeAsync(() => {
+            trigger.click();
+            fixture.detectChanges();
+            flush();
+
+            expect(fixture.debugElement.query(By.css('input'))).toBeDefined();
+        }));
+
+        it('should search filed should be focused after open', fakeAsync(() => {
+            trigger.click();
+            fixture.detectChanges();
+            flush();
+
+            const input = fixture.debugElement.query(By.css('input')).nativeElement;
+
+            expect(input).toBe(document.activeElement);
+        }));
+
+        it('should show empty message', fakeAsync(() => {
+            trigger.click();
+            fixture.detectChanges();
+            flush();
+
+            const inputElementDebug = fixture.debugElement.query(By.css('input'));
+
+            inputElementDebug.nativeElement.value = 'cgr8e912eha';
+
+            inputElementDebug.triggerEventHandler('input', { target: inputElementDebug.nativeElement });
+            flush();
+
+            const options = fixture.debugElement.queryAll(By.css('mc-tree-option'));
+            expect(options.length).toEqual(0);
+            expect(fixture.debugElement.query(By.css('.mc-select__no-options-message'))).toBeDefined();
+        }));
+
+        it('should search', fakeAsync(() => {
+            trigger.click();
+            fixture.detectChanges();
+            flush();
+
+            const inputElementDebug = fixture.debugElement.query(By.css('input'));
+
+            inputElementDebug.nativeElement.value = 'App';
+
+            inputElementDebug.triggerEventHandler('input', { target: inputElementDebug.nativeElement });
+            flush();
+
+            const optionsTexts = fixture.debugElement.queryAll(By.css('mc-tree-option'))
+                .map((el) => el.nativeElement.innerText);
+
+            expect(optionsTexts).toEqual(['Applications', 'Chrome', 'Calendar', 'Webstorm']);
+        }));
+
+        it('should clear search by esc', (() => {
+            trigger.click();
+            fixture.detectChanges();
+
+            const inputElementDebug = fixture.debugElement.query(By.css('input'));
+
+            inputElementDebug.nativeElement.value = 'lu';
+
+            inputElementDebug.triggerEventHandler('input', { target: inputElementDebug.nativeElement });
+            fixture.detectChanges();
+
+            dispatchKeyboardEvent(inputElementDebug.nativeElement, 'keydown', ESCAPE);
+
+            fixture.detectChanges();
+
+            expect(inputElementDebug.nativeElement.value).toBe('');
+        }));
+
+        it('should close list by esc if input is empty', () => {
+            trigger.click();
+            fixture.detectChanges();
+
+            const inputElementDebug = fixture.debugElement.query(By.css('input'));
+
+            dispatchKeyboardEvent(inputElementDebug.nativeElement, 'keydown', ESCAPE);
+
+            fixture.detectChanges();
+
+            const selectInstance = fixture.componentInstance.select;
+
+            expect(selectInstance.panelOpen).toBe(false);
+        });
     });
 
     describe('with multiple mc-select elements in one view', () => {

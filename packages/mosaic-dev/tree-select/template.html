@@ -24,13 +24,21 @@
             (opened)="opened($event)"
             (closed)="closed($event)">
 
+            <mc-form-field mcFormFieldWithoutBorders mcSelectSearch>
+                <i mcPrefix mc-icon="mc-search_16"></i>
+                <input mcInput [formControl]="searchControl" type="text"/>
+                <mc-cleaner></mc-cleaner>
+            </mc-form-field>
+
+            <div mc-select-search-empty-result>Ничего не найдено</div>
+    
             <mc-tree-selection
                 [dataSource]="dataSource"
                 [treeControl]="treeControl">
                 <mc-tree-option
                     *mcTreeNodeDef="let node"
                     mcTreeNodePadding>
-                    {{ treeControl.getViewValue(node) }}
+                    <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
                 </mc-tree-option>
 
                 <mc-tree-option
@@ -41,11 +49,13 @@
                                      descendantsPartiallySelected(node) ? 'indeterminate' : 
                                      null">
                     <i mc-icon="mc-angle-down-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" mcTreeNodeToggle></i>
-                    {{ treeControl.getViewValue(node) }}
+                    <span [innerHTML]="treeControl.getViewValue(node) | mcHighlight : treeControl.filterValue.value"></span>
                 </mc-tree-option>
             </mc-tree-selection>
-
+            
             <mc-cleaner #mcSelectCleaner></mc-cleaner>
+
+            <div mc-tree-selection-footer class="custom-footer">Custom footer</div>
         </mc-tree-select>
     </mc-form-field>
 </div>

@@ -1,12 +1,14 @@
 /* tslint:disable:no-console no-reserved-keywords */
-import { Component, NgModule, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, NgModule, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McHighlightModule } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
+import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McTreeFlatDataSource, McTreeFlattener, FlatTreeControl, McTreeModule, McTreeSelection } from '@ptsecurity/mosaic/tree';
 import { McTreeSelectChange, McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
 
@@ -98,7 +100,7 @@ export const DATA_OBJECT = {
     styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class DemoComponent {
+export class DemoComponent implements OnInit {
     disabledState: boolean = false;
 
     control = new FormControl(['Downloads', 'rootNode_1']);
@@ -121,6 +123,8 @@ export class DemoComponent {
     multiSelectSelectFormControl = new FormControl([], Validators.pattern(/^w/));
     @ViewChild(McTreeSelection) selection: McTreeSelection;
 
+    searchControl: FormControl = new FormControl();
+
     constructor() {
         this.treeFlattener = new McTreeFlattener(
             this.transformer, this.getLevel, this.isExpandable, this.getChildren
@@ -130,8 +134,13 @@ export class DemoComponent {
             this.getLevel, this.isExpandable, this.getValue, this.getViewValue
         );
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
+        this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
         this.dataSource.data = buildFileTree(DATA_OBJECT, 0);
+    }
+
+    ngOnInit(): void {
+        this.searchControl.valueChanges.subscribe((value) => this.treeControl.filterNodes(value));
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -243,6 +252,8 @@ export class DemoComponent {
         FormsModule,
         McTreeModule,
         McTreeSelectModule,
+        McSelectModule,
+        McHighlightModule,
 
         McButtonModule,
         McInputModule,

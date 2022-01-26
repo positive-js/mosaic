@@ -212,8 +212,6 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
             .pipe(take(1))
             .subscribe(() => {
                 this.ngZone.run(() => {
-                    this.hasFocus = false;
-
                     if (this.actionButton?.hasFocus) { return; }
 
                     this.onBlur.next({ option: this });
