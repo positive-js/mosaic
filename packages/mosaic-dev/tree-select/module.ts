@@ -192,21 +192,17 @@ export class DemoComponent implements OnInit {
     }
 
     private toggleParents(parent) {
-        if (parent) {
-            const descendants = this.treeControl.getDescendants(parent);
-            const isParentSelected = this.selection.selectionModel.selected.includes(parent);
+        if (!parent) return;
 
-            if (descendants.every((d: any) => this.selection.selectionModel.selected.includes(d))) {
-                if (!isParentSelected) {
-                    this.selection.selectionModel.select(parent);
-                    this.toggleParents(parent.parent);
-                }
-            } else {
-                if (isParentSelected) {
-                    this.selection.selectionModel.deselect(parent);
-                    this.toggleParents(parent.parent);
-                }
-            }
+        const descendants = this.treeControl.getDescendants(parent);
+        const isParentSelected = this.selection.selectionModel.selected.includes(parent);
+
+        if (!isParentSelected && descendants.every((d: any) => this.selection.selectionModel.selected.includes(d))) {
+            this.selection.selectionModel.select(parent);
+            this.toggleParents(parent.parent);
+        } else if (isParentSelected) {
+            this.selection.selectionModel.deselect(parent);
+            this.toggleParents(parent.parent);
         }
     }
 
