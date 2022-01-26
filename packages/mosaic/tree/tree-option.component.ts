@@ -84,7 +84,7 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
     @ContentChild(McTooltipTrigger) tooltipTrigger: McTooltipTrigger;
     @ContentChild(McDropdownTrigger) dropdownTrigger: McDropdownTrigger;
 
-    @Input() checkboxState: 'checked' | 'indeterminate' | null;
+    @Input() checkboxState: 'checked' | 'indeterminate' | 'unchecked' | null;
 
     get value(): any {
         return this._value;

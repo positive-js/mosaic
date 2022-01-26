@@ -108,17 +108,10 @@ export class DemoComponent implements OnInit {
     // modelValue = 'Chrome';
     modelValue: any[] | null = ['Applications', 'Documents', 'Calendar', 'Chrome'];
 
-    select: any;
-
     treeControl: FlatTreeControl<FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
-
-    singleSelected = 'Normal';
-    multipleSelected = ['Normal', 'Hovered', 'Selected', 'Selected1'];
-
-    singleSelectFormControl = new FormControl('', Validators.required);
 
     multiSelectSelectFormControl = new FormControl([], Validators.pattern(/^w/));
     @ViewChild(McTreeSelection) selection: McTreeSelection;
@@ -133,7 +126,6 @@ export class DemoComponent implements OnInit {
         this.treeControl = new FlatTreeControl<FileFlatNode>(
             this.getLevel, this.isExpandable, this.getValue, this.getViewValue
         );
-        this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
         this.dataSource.data = buildFileTree(DATA_OBJECT, 0);
@@ -150,13 +142,7 @@ export class DemoComponent implements OnInit {
     onSelectionChange($event: McTreeSelectChange) {
         console.log(`onSelectionChange: ${$event.value}`);
 
-        const valuesToChange: any = this.treeControl.getDescendants($event.value.data);
-        if ($event.value.selected) {
-            this.selection.selectionModel.deselect(...valuesToChange);
-        } else {
-            this.selection.selectionModel.select(...valuesToChange);
-        }
-
+        this.toggleChildren($event);
         this.toggleParents($event.value.data.parent);
     }
 
@@ -191,8 +177,18 @@ export class DemoComponent implements OnInit {
         console.log('closed: ', $event);
     }
 
+    private toggleChildren($event: McTreeSelectChange) {
+        const valuesToChange: any = this.treeControl.getDescendants($event.value.data);
+        if ($event.value.selected) {
+            this.selection.selectionModel.deselect(...valuesToChange);
+        } else {
+            this.selection.selectionModel.select(...valuesToChange);
+        }
+        this.syncModel();
+    }
+
     private toggleParents(parent) {
-        if (!parent) return;
+        if (!parent) { return; }
 
         const descendants = this.treeControl.getDescendants(parent);
         const isParentSelected = this.selection.selectionModel.selected.includes(parent);
@@ -204,6 +200,11 @@ export class DemoComponent implements OnInit {
             this.selection.selectionModel.deselect(parent);
             this.toggleParents(parent.parent);
         }
+        this.syncModel();
+    }
+
+    private syncModel() {
+        this.control.setValue(this.selection.selectionModel.selected.map((o: any) => o.name));
     }
 
     private transformer = (node: FileNode, level: number, parent: any) => {
