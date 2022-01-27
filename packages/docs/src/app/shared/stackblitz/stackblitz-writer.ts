@@ -52,7 +52,7 @@ const TEST_TEMPLATE_FILES = [
 ];
 
 const TAGS: string[] = ['angular', 'mosaic', 'example'];
-const angularVersion = '^12.0.0';
+const angularVersion = '^13.0.0';
 
 const dependencies = {
     '@ptsecurity/cdk': mosaicVersion,
