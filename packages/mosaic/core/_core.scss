@@ -26,7 +26,7 @@
 @mixin mc-core($typography-config: null) {
     @include mosaic-typography($typography-config);
     @include cdk-a11y();
-    @include cdk-overlay();
+    @include overlay();
 }
 
 // Mixin that renders all of the core styles that depend on the theme.
