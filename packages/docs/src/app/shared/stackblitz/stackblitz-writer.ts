@@ -52,12 +52,12 @@ const TEST_TEMPLATE_FILES = [
 ];
 
 const TAGS: string[] = ['angular', 'mosaic', 'example'];
-const angularVersion = '^12.0.0';
+const angularVersion = '^13.0.0';
 
 const dependencies = {
     '@ptsecurity/cdk': mosaicVersion,
     '@ptsecurity/mosaic': mosaicVersion,
-    '@ptsecurity/mosaic-icons': '^5.3.0',
+    '@ptsecurity/mosaic-icons': '^6.1.1',
     '@ptsecurity/mosaic-luxon-adapter': mosaicVersion,
     '@ptsecurity/mosaic-moment-adapter': mosaicVersion,
     '@angular/cdk': angularVersion,
@@ -71,8 +71,8 @@ const dependencies = {
     '@angular/router': angularVersion,
     'core-js': '^3.6.5',
     rxjs: '^6.5.0',
-    '@messageformat/core': '^2.0.5',
-    tslib: '^2.0.1',
+    '@messageformat/core': '^3.0.0',
+    tslib: '^2.3.1',
     'zone.js': '~0.10.3',
     moment: '^2.24.0',
     luxon: '^1.27.0'
@@ -81,7 +81,7 @@ const dependencies = {
 const testDependencies = {
     '@ptsecurity/cdk': mosaicVersion,
     '@ptsecurity/mosaic': mosaicVersion,
-    '@ptsecurity/mosaic-icons': '^5.3.0',
+    '@ptsecurity/mosaic-icons': '^6.1.1',
     '@ptsecurity/mosaic-luxon-adapter': mosaicVersion,
     '@ptsecurity/mosaic-moment-adapter': mosaicVersion,
     '@angular/cdk': angularVersion,
@@ -95,8 +95,8 @@ const testDependencies = {
     '@angular/router': angularVersion,
     'core-js': '^3.6.5',
     rxjs: '^6.5.0',
-    '@messageformat/core': '^2.0.5',
-    tslib: '^2.0.1',
+    '@messageformat/core': '^3.0.0',
+    tslib: '^2.3.1',
     'zone.js': '~0.10.3',
     moment: '^2.24.0',
     luxon: '^1.27.0'
