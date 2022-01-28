@@ -44,9 +44,9 @@ jobs:
               id: vercel-action
               uses: amondnet/vercel-action@v20.0.0
               with:
-                vercel-token: ${{ secrets.ZEIT_TOKEN }}
-                github-token: ${{ secrets.GITHUB_TOKEN }}
-                vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+                vercel-token: ${{ secrets.VERCEL_TOKEN }}
+                github-token: ${{ secrets.GH_TOKEN }}
+                vercel-org-id: ${{ secrets.VERCEL_TEAM_ID}}
                 vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
                 vercel-args:
                     '--confirm ./dist/releases/mosaic-docs --scope ptsecurity'
