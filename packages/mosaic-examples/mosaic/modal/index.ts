@@ -9,10 +9,7 @@ import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McModalModule } from '@ptsecurity/mosaic/modal';
 
 import { ModalComponentExample, McModalCustomComponent } from './modal-component/modal-component-example';
-import {
-    McModalFocusContentComponent,
-    ModalFocusContentExample
-} from './modal-focus-content/modal-focus-content-example';
+import { ModalMultipleExample } from './modal-multiple/modal-multiple-example';
 import { ModalOverviewExample } from './modal-overview/modal-overview-example';
 import { McLongComponent, ModalScrollExample } from './modal-scroll/modal-scroll-example';
 import { ModalSizesExample } from './modal-sizes/modal-sizes-example';
@@ -27,8 +24,7 @@ export {
     ModalScrollExample,
     McLongComponent,
     ModalSizesExample,
-    ModalFocusContentExample,
-    McModalFocusContentComponent
+    ModalMultipleExample
 };
 
 const EXAMPLES = [
@@ -39,8 +35,7 @@ const EXAMPLES = [
     ModalScrollExample,
     McLongComponent,
     ModalSizesExample,
-    ModalFocusContentExample,
-    McModalFocusContentComponent
+    ModalMultipleExample
 ];
 
 @NgModule({

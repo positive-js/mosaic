@@ -19,12 +19,12 @@ export class ModalTemplateExample {
 
     constructor(private modalService: McModalService) {}
 
-    createTplModal(tplTitle: TemplateRef<{}>, tplContent?: TemplateRef<{}>, tplFooter?: TemplateRef<{}>) {
+    createTplModal(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>) {
         this.tplModal = this.modalService.create({
-            mcTitle       : tplTitle,
-            mcContent     : tplContent,
-            mcFooter      : tplFooter,
-            mcOnOk        : () => console.log('Click ok')
+            mcTitle: tplTitle,
+            mcContent: tplContent,
+            mcFooter: tplFooter,
+            mcOnOk: () => console.log('Click ok')
         });
 
         this.tplModal.afterClose.subscribe(() => this.modalButton.focusViaKeyboard());

@@ -1,17 +1,15 @@
 <button #modalButton mc-button class="modal-example-button" (click)="createTplModal(tplTitle, tplContent, tplFooter)">Delete</button>
 
 <ng-template #tplTitle>
-    <span>Title</span>
+    <span>Заголовок окна</span>
 </ng-template>
-
 <ng-template #tplContent>
-    <p>content...</p>
-    <p>content...</p>
-    <p>content...</p>
-    <p>content...</p>
-    <p>content...</p>
+    Кибербезопасность сегодня — это целое направление информационных технологий, которое затрагивает практически все сферы жизни человека.
 </ng-template>
-
 <ng-template #tplFooter>
-    <button mc-button (click)="destroyTplModal()">Save</button>
+    <div class="buttons-container">
+        <button mc-button mc-modal-main-action [color]="themePalette.Second" (click)="destroyTplModal()">Доп. действие</button>
+        <button mc-button mc-modal-main-action [color]="themePalette.Primary" (click)="destroyTplModal()">Сохранить</button>
+        <button mc-button mc-modal-main-action [color]="themePalette.Second" (click)="destroyTplModal()">Отмена</button>
+    </div>
 </ng-template>
