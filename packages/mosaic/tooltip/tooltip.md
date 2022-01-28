@@ -11,8 +11,8 @@
 
 #### Вариации
 
-<div class="mc-alert mc-alert_default" style="margin-top: 15px;">
-    <i class="mc mc-icon mc-info_16 mc-info__icon"></i> &nbsp;
+<div class="mc-alert mc-alert_info" style="margin-top: 15px;">
+    <i class="mc mc-icon mc-info-o_16 mc-alert__icon"></i>
     Нестандартный тултип всегда предпочтительнее системного. Не используйте системный и нестандартный тултип в одном интерфейсе. 
 </div>
 
@@ -110,7 +110,7 @@ https://www.figma.com/file/PQLjFxrEYbwjkrvGx5D2vO/Docs?node-id=20%3A1831
 
 https://www.figma.com/file/PQLjFxrEYbwjkrvGx5D2vO/Docs?node-id=20%3A1852
 
-* __Слева-сверху__ (опционально) <br>
+* __Слева-сверху__ _опционально_<br>
 
 Верхний край тултипа выравнивается по верхнему краю тригерного элемента. Дятел у верхнего края тултипа
 
@@ -120,7 +120,7 @@ https://www.figma.com/file/PQLjFxrEYbwjkrvGx5D2vO/Docs?node-id=20%3A1867
 
 https://www.figma.com/file/PQLjFxrEYbwjkrvGx5D2vO/Docs?node-id=20%3A1893
 
-* __Справа-сверху__ (опционально)<br>
+* __Справа-сверху__ _опционально_<br>
 
 Если для тултипа не хватает места в границах экрана, он попытается перейти в другое положение и остаться на экране.
 
@@ -129,6 +129,8 @@ https://www.figma.com/file/PQLjFxrEYbwjkrvGx5D2vO/Docs?node-id=20%3A1913
 ### Стилизация тултипов
 
 #### Простой тултип
+
+<font color="red">__Тут надо просто вывести тело тултипа__</font>
 
 Для светлой темы используется темный тултип:
 
@@ -146,7 +148,7 @@ https://www.figma.com/file/xDLkQRzr7g0RVrj8A0676E/Guide-patterns?node-id=17228%3
 
 <div class="mc-alert mc-alert_warning" style="margin-top: 15px;">
     <i class="mc mc-icon mc-error_16 mc-alert__icon"></i>
-	В сложном тултипе все наоборот для светлой темы используется светлый тултип, а для темной темы используется темный.
+    В сложном тултипе все наоборот для светлой темы используется светлый тултип, а для темной темы используется темный.
 </div>
 
 Предупреждающий не используется.
