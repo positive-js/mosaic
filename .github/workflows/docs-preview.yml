@@ -1,0 +1,48 @@
+name: Docs Preview
+
+on:
+    pull_request:
+        branches:
+            - master
+
+jobs:
+    deploy:
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - uses: actions/cache@v1
+              with:
+                key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+                restore-keys: |
+                  ${{ runner.os }}-node-
+
+            - name: Install
+              run: yarn install
+
+            - name: Build Mosaic Docs
+              run: |
+                yarn run build:cdk
+                yarn run build:mosaic
+                yarn run build:mosaic-luxon-adapter
+                yarn run build:mosaic-moment-adapter
+                yarn run styles:built-all
+                yarn run build:package-design-tokens
+                yarn run build:mosaic-examples-module
+                yarn run build:mosaic-examples
+                yarn run build:docs-content && yarn run build:highlight && yarn run build:package-docs-content
+                yarn run docs:prod-build --progress false --output-path dist/releases/mosaic-docs
+
+            - name: Vercel Deployment
+              id: vercel-action
+              uses: amondnet/vercel-action@v20.0.0
+              with:
+                vercel-token: ${{ secrets.ZEIT_TOKEN }}
+                github-token: ${{ secrets.GITHUB_TOKEN }}
+                vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+                vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+                vercel-args:
+                    '--confirm ./dist/releases/mosaic-docs --scope ptsecurity'
+
