@@ -11,18 +11,24 @@ import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McPopoverModule } from '@ptsecurity/mosaic/popover';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
 
+import { PopoverCommonExample } from './popover-common/popover-common-example';
 import { PopoverInstanceExample } from './popover-instance/popover-instance-example';
-import { PopoverOverviewExample } from './popover-overview/popover-overview-example';
+import { PopoverPlacementCenterExample } from './popover-placement-center/popover-placement-center-example';
+import { PopoverPlacementEdgesExample } from './popover-placement-edges/popover-placement-edges-example';
 
 
 export {
-    PopoverOverviewExample,
-    PopoverInstanceExample
+    PopoverCommonExample,
+    PopoverInstanceExample,
+    PopoverPlacementCenterExample,
+    PopoverPlacementEdgesExample
 };
 
 const EXAMPLES = [
-    PopoverOverviewExample,
-    PopoverInstanceExample
+    PopoverCommonExample,
+    PopoverInstanceExample,
+    PopoverPlacementCenterExample,
+    PopoverPlacementEdgesExample
 ];
 
 @NgModule({

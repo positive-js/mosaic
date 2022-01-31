@@ -1,0 +1,51 @@
+.buttons-container {
+    display: flex;
+    width: 364px;
+    justify-content: flex-end;
+}
+
+.buttons-container button + button {
+    margin-left: 16px;
+}
+
+.visual-box {
+    margin: 200px auto;
+    height: 90px;
+    width: 90px;
+    position: relative;
+
+    border: 1px solid #B3B3B2;
+    border-radius: 8px;
+}
+
+.popover-trigger {
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    background: #338FCB;;
+    cursor: pointer;
+}
+
+.active {
+    background: #CB3C33;
+}
+
+.popover-trigger-top {
+    top: -8px;
+    left: calc(50% - 8px);
+}
+
+.popover-trigger-left {
+    top: calc(50% - 8px);
+    left: -8px;
+}
+
+.popover-trigger-bottom {
+    bottom: -8px;
+    right: calc(50% - 8px);
+}
+
+.popover-trigger-right {
+    right: -8px;
+    bottom: calc(50% - 8px);
+}
