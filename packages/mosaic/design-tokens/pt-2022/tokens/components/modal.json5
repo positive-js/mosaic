@@ -61,7 +61,7 @@
     },
     'modal-footer': {
         'light-color-scheme': {
-            border: { value: '{light-color-scheme.foreground.divider.value}' }
+            border: { value: '{light-color-scheme.second.palette.value.100.value}' }
         },
         'dark-color-scheme': {
             border: { value: '{dark-color-scheme.foreground.divider.value}' }
