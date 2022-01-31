@@ -6,6 +6,10 @@
     background: map-get($params, background);
     border-color: map-get($params, border);
 
+    & .mc-tag__text {
+        color: map-get($params, text);
+    }
+
     &.mc-active,
     &.mc-focused {
         border-color: map-get($params, focused);
@@ -16,7 +20,6 @@
         color: map-get($params, icon);
 
         &:hover {
-            cursor: pointer;
             color: map-get($params, icon_hovered);
         }
     }
@@ -25,14 +28,13 @@
         border-color: map-get($params, background_disabled);
         background: map-get($params, background_disabled);
 
-        color: map-get($params, disabled);
+        & .mc-icon,
+        & .mc-tag__text {
+            color: map-get($params, disabled);
+        }
 
         & .mc-tag-overlay {
             background: transparent;
-        }
-
-        & .mc-icon {
-            color: inherit;
         }
     }
 }
@@ -49,8 +51,6 @@
     $tags: map-get(map-get($theme, components), tags);
 
     .mc-tag {
-        color: map-get($foreground, text);
-
         &.mc-primary {
             @include mc-tag-color(map-get($tags, primary));
         }
@@ -70,15 +70,6 @@
             }
         }
 
-        .mc-icon {
-            color: mc-color($foreground, icon);
-
-            &:hover {
-                cursor: pointer;
-                color: inherit;
-            }
-        }
-
         &.mc-disabled {
             color: map-get($foreground, text-disabled);
 
@@ -88,11 +79,6 @@
 
             & .mc-tag-overlay {
                 background: mc-color($background, overlay-disabled);
-            }
-
-            & .mc-icon {
-                color: mc-color($foreground, icon);
-                cursor: default;
             }
         }
     }
