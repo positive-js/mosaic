@@ -8,7 +8,6 @@
                 checked: {
                     'outer-circle-border': { value: '{light-color-scheme.primary.palette.value.500.value}' },
                     'inner-circle-border': { value: '{light-color-scheme.primary.palette.value.500.value}' }
-
                 },
                 focused: {
                     'outer-circle-border': { value: '{light-color-scheme.states.focused-color.value}' },

@@ -691,6 +691,7 @@ $tabs-size-label-icon-margin: 8px;
 $tabs-font-default: body;
 $tags-light-color-scheme-primary-background: #D8EAF7;
 $tags-light-color-scheme-primary-border: #D8EAF7;
+$tags-light-color-scheme-primary-text: #338FCC;
 $tags-light-color-scheme-primary-icon: mix(#57A4D7, rgba(black, 0.05));
 $tags-light-color-scheme-primary-states-hover-icon: #206EA2;
 $tags-light-color-scheme-primary-states-focused: #338FCC;
@@ -698,6 +699,7 @@ $tags-light-color-scheme-primary-states-disabled-text: mix(#338FCC, transparent,
 $tags-light-color-scheme-primary-states-disabled-background: mix(#338FCC, transparent, 10%);
 $tags-light-color-scheme-second-background: #E6E6E6;
 $tags-light-color-scheme-second-border: #E6E6E6;
+$tags-light-color-scheme-second-text: #4D4D4D;
 $tags-light-color-scheme-second-icon: mix(#999999, rgba(black, 0.05));
 $tags-light-color-scheme-second-states-hover-icon: #999999;
 $tags-light-color-scheme-second-states-focused: #338FCC;
@@ -705,6 +707,7 @@ $tags-light-color-scheme-second-states-disabled-text: mix(#B3B3B3, transparent, 
 $tags-light-color-scheme-second-states-disabled-background: mix(#B3B3B3, transparent, 10%);
 $tags-light-color-scheme-error-background: #FADEDA;
 $tags-light-color-scheme-error-border: #FADEDA;
+$tags-light-color-scheme-error-text: #E76E5C;
 $tags-light-color-scheme-error-icon: mix(#E76E5C, rgba(black, 0.05));
 $tags-light-color-scheme-error-states-hover-icon: #E04D36;
 $tags-light-color-scheme-error-states-focused: #E76E5C;
@@ -712,6 +715,7 @@ $tags-light-color-scheme-error-states-disabled-text: mix(#E76E5C, transparent, 5
 $tags-light-color-scheme-error-states-disabled-background: mix(#E76E5C, transparent, 10%);
 $tags-dark-color-scheme-primary-background: #114E77;
 $tags-dark-color-scheme-primary-border: #114E77;
+$tags-dark-color-scheme-primary-text: #AAD1EC;
 $tags-dark-color-scheme-primary-icon: mix(#57A4D7, rgba(black, 0.05));
 $tags-dark-color-scheme-primary-states-hover-icon: #338FCC;
 $tags-dark-color-scheme-primary-states-focused: #57A4D7;
@@ -719,6 +723,7 @@ $tags-dark-color-scheme-primary-states-disabled-text: mix(#57A4D7, transparent, 
 $tags-dark-color-scheme-primary-states-disabled-background: mix(#57A4D7, transparent, 10%);
 $tags-dark-color-scheme-second-background: #4D4D4D;
 $tags-dark-color-scheme-second-border: #4D4D4D;
+$tags-dark-color-scheme-second-text: #CCCCCC;
 $tags-dark-color-scheme-second-icon: mix(#999999, rgba(black, 0.05));
 $tags-dark-color-scheme-second-states-hover-icon: #E6E6E6;
 $tags-dark-color-scheme-second-states-focused: #57A4D7;
@@ -726,6 +731,7 @@ $tags-dark-color-scheme-second-states-disabled-text: mix(#999999, transparent, 5
 $tags-dark-color-scheme-second-states-disabled-background: mix(#999999, transparent, 10%);
 $tags-dark-color-scheme-error-background: #832112;
 $tags-dark-color-scheme-error-border: #832112;
+$tags-dark-color-scheme-error-text: #F4B7AE;
 $tags-dark-color-scheme-error-icon: mix(#E76E5C, rgba(black, 0.05));
 $tags-dark-color-scheme-error-states-hover-icon: #F4B7AE;
 $tags-dark-color-scheme-error-states-focused: #E76E5C;

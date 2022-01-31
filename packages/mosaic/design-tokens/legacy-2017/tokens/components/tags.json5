@@ -4,6 +4,7 @@
             primary: {
                 background: { value: '{light-color-scheme.primary.palette.value.100.value}' },
                 border: { value: '{light-color-scheme.primary.palette.value.100.value}' },
+                text: { value: '{light-color-scheme.primary.default.value}' },
                 icon: { value: 'mix({light-color-scheme.primary.palette.value.400.value}, {light-color-scheme.background.overlay-hover.value})' },
                 states:  {
                     hover: {
@@ -19,6 +20,7 @@
             second: {
                 background: { value: '{light-color-scheme.second.palette.value.100.value}' },
                 border: { value: '{light-color-scheme.second.palette.value.100.value}' },
+                text: { value: '{light-color-scheme.foreground.text.value}' },
                 icon: { value: 'mix({light-color-scheme.second.palette.value.400.value}, {light-color-scheme.background.overlay-hover.value})' },
                 states: {
                     hover: {
@@ -34,6 +36,7 @@
             error: {
                 background: { value: '{light-color-scheme.error.palette.value.100.value}' },
                 border: { value: '{light-color-scheme.error.palette.value.100.value}' },
+                text: { value: '{light-color-scheme.error.default.value}' },
                 icon: { value: 'mix({light-color-scheme.error.palette.value.400.value}, {light-color-scheme.background.overlay-hover.value})' },
                 states: {
                     hover: {
@@ -51,6 +54,7 @@
             primary: {
                 background: { value: '{dark-color-scheme.primary.palette.value.700.value}' },
                 border: { value: '{dark-color-scheme.primary.palette.value.700.value}' },
+                text: { value: '{dark-color-scheme.primary.palette.value.200.value}' },
                 icon: { value: 'mix({dark-color-scheme.primary.palette.value.400.value}, {dark-color-scheme.background.overlay-hover.value})' },
                 states: {
                     hover: {
@@ -66,6 +70,7 @@
             second: {
                 background: { value: '{dark-color-scheme.second.palette.value.700.value}' },
                 border: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+                text: { value: '{dark-color-scheme.second.palette.value.200.value}' },
                 icon: { value: 'mix({dark-color-scheme.second.palette.value.400.value}, {dark-color-scheme.background.overlay-hover.value})' },
                 states: {
                     hover: {
@@ -81,6 +86,7 @@
             error: {
                 background: { value: '{dark-color-scheme.error.palette.value.700.value}' },
                 border: { value: '{dark-color-scheme.error.palette.value.700.value}' },
+                text: { value: '{dark-color-scheme.error.palette.value.200.value}' },
                 icon: { value: 'mix({dark-color-scheme.error.palette.value.400.value}, {dark-color-scheme.background.overlay-hover.value})' },
                 states: {
                     hover: {
