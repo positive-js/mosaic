@@ -51,7 +51,7 @@ https://wiki.ptsecurity.com/pages/viewpage.action?pageId=105253786&preview=/1052
 </div>
 
 <div style="margin-top: 15px;">
-    <img src="./assets/images/tooltip/tooltip-hard__structure.jpg" alt="tooltip hard structure" style="max-width: 540px"/>
+    <img src="./assets/images/tooltip/tooltip-hard__structure.jpg" alt="tooltip hard structure" style="max-width: 352px"/>
 </div>
 
 ##### Обязательные элементы
