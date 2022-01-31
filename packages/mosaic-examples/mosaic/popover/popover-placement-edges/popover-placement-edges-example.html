@@ -4,7 +4,6 @@
         #popover="mcPopover"
         [mcPopoverHeader]="'Заголовок поповера'"
         [mcPopoverPlacement]="placement"
-        [mcPopoverVisible]="placement === placements[2]"
         mcPopoverContent="mcPopoverPlacement: {{placement}}"
         [mcPopoverFooter]="customFooter"
         (mcPopoverVisibleChange)="activePlacement = ($event ? placement : null)"

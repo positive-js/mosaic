@@ -1,1 +1,16 @@
-/** No CSS for this example */
+.buttons-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.buttons-container button + button {
+    margin-left: 16px;
+}
+
+.buttons-container button:first-child {
+    margin-right: auto;
+}
+
+mc-form-field {
+    margin-top: 8px;
+}

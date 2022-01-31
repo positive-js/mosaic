@@ -1,11 +1,16 @@
-.container {
+.buttons-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+}
 
-    width: 600px;
-    max-width: 100%;
+button + button {
+    margin-left: 16px;
+}
 
-    height: 600px;
+.buttons-container button:first-child {
+    margin-right: auto;
+}
+
+mc-form-field {
+    margin-top: 8px;
 }

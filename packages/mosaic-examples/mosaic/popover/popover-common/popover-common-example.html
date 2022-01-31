@@ -1,18 +1,23 @@
 <ng-template #customContent>
-    В западной традиции рыбой выступает фрагмент латинского текста из философского трактата Цицерона «О пределах добра
-    и зла», написанного в 45 году до нашей эры. Впервые этот текст был применен для набора шрифтовых образцов
-    неизвестным печатником еще в XVI веке.
+    Интересно, что это такое?
+    <mc-form-field>
+        <input mcInput placeholder="Интересная мысль">
+    </mc-form-field>
 </ng-template>
 
 <ng-template #customFooter>
-    <div>Popover footer</div>
+    <div class="buttons-container">
+        <button mc-button>Действие 2</button>
+        <button mc-button [color]="themePalette.Primary">Применить</button>
+        <button mc-button>Отмена</button>
+    </div>
 </ng-template>
 
 <button
     mc-button
     mcPopover
     #popover="mcPopover"
-    [mcPopoverHeader]="'Popover header'"
+    mcPopoverHeader="Заголовок поповера"
     [mcPopoverContent]="customContent"
     [mcPopoverFooter]="customFooter">
     Toggle popover
