@@ -49,6 +49,5 @@ jobs:
                 vercel-org-id: ${{ secrets.VERCEL_TEAM_ID}}
                 vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
                 working-directory: dist/mosaic-docs
-                vercel-args:
-                    '--scope ptsecurity'
+                scope: ptsecurity
 
