@@ -9,7 +9,7 @@
                 },
                 focused: {
                     border: { value: '{light-color-scheme.primary.palette.value.600.value}' },
-                    shadow: { value: 'inset 0 0 0 1px {light-color-scheme.background.background.value}, 0 0 0 1px {light-color-scheme.primary.palette.value.600.value}' }
+                    shadow: { value: '0 0 0 1px {light-color-scheme.primary.palette.value.600.value}' }
                 }
             }
         },
@@ -22,7 +22,7 @@
                 },
                 focused: {
                     border: { value: '{dark-color-scheme.primary.palette.value.400.value}' },
-                    shadow: { value: 'inset 0 0 0 1px {dark-color-scheme.background.background.value}, 0 0 0 1px {dark-color-scheme.primary.palette.value.400.value}' }
+                    shadow: { value: '0 0 0 1px {dark-color-scheme.primary.palette.value.400.value}' }
                 }
             }
         },

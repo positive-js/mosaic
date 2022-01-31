@@ -1,0 +1,12 @@
+{
+    textarea: {
+        size: {
+            'min-height': { value: '50px' },
+            padding: { value: '5px 16px' }
+        },
+        font: {
+            default: { value: 'body' },
+            mono: { value: 'body-mono' }
+        }
+    }
+}

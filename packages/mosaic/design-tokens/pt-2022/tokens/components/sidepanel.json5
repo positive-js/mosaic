@@ -1,0 +1,30 @@
+{
+    sidepanel: {
+        'light-color-scheme': {
+            border: { value: '{light-color-scheme.foreground.border.value}' }
+        },
+        'dark-color-scheme': {
+            border: { value: '{dark-color-scheme.second.palette.value.900.value}' }
+        },
+        font: {
+            default: { value: 'body' }
+        }
+    },
+    'sidepanel-header': {
+        size: {
+            padding: { value: '14px 16px' },
+            'close-padding': { value: '0 0 0 8px' }
+        },
+        font: {
+            default: { value: 'title' }
+        }
+    },
+    'sidepanel-footer': {
+        size: {
+            padding: { value: '16px' }
+        },
+        font: {
+            default: { value: 'body' }
+        }
+    }
+}

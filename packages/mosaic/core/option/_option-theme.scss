@@ -18,7 +18,7 @@
         }
 
         &.mc-active {
-            border-color: mc-color($primary);
+            border-color: map-get(map-get($theme, states), focused-color);
         }
 
         &.mc-selected {

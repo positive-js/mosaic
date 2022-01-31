@@ -5,736 +5,1889 @@
 ```ts
 
 // @public (undocumented)
-export const AlertDarkColorSchemeDefaultBackground = "#4D4D4D";
+export const AlertDarkColorSchemeDefaultBackground = "#27333e";
 
 // @public (undocumented)
-export const AlertDarkColorSchemeDefaultBorder = "#4D4D4D";
+const AlertDarkColorSchemeDefaultBackground_2 = "#4D4D4D";
 
 // @public (undocumented)
-export const AlertDarkColorSchemeDefaultIcon = "#999999";
+export const AlertDarkColorSchemeDefaultBorder = "#333f4a";
 
 // @public (undocumented)
-export const AlertDarkColorSchemeErrorBackground = "#832112";
+const AlertDarkColorSchemeDefaultBorder_2 = "#4D4D4D";
 
 // @public (undocumented)
-export const AlertDarkColorSchemeErrorBorder = "#832112";
+export const AlertDarkColorSchemeDefaultIcon = "#8c99a5";
 
 // @public (undocumented)
-export const AlertDarkColorSchemeErrorIcon = "#E76E5C";
+const AlertDarkColorSchemeDefaultIcon_2 = "#999999";
 
 // @public (undocumented)
-export const AlertDarkColorSchemeInfoBackground = "#114E77";
+export const AlertDarkColorSchemeErrorBackground = "#500013";
 
 // @public (undocumented)
-export const AlertDarkColorSchemeInfoBorder = "#114E77";
+const AlertDarkColorSchemeErrorBackground_2 = "#832112";
 
 // @public (undocumented)
-export const AlertDarkColorSchemeInfoIcon = "#57A4D7";
+export const AlertDarkColorSchemeErrorBorder = "#800025";
 
 // @public (undocumented)
-export const AlertDarkColorSchemeSuccessBackground = "#276211";
+const AlertDarkColorSchemeErrorBorder_2 = "#832112";
 
 // @public (undocumented)
-export const AlertDarkColorSchemeSuccessBorder = "#276211";
+export const AlertDarkColorSchemeErrorIcon = "#ee6f79";
 
 // @public (undocumented)
-export const AlertDarkColorSchemeSuccessIcon = "#6FBA53";
+const AlertDarkColorSchemeErrorIcon_2 = "#E76E5C";
 
 // @public (undocumented)
-export const AlertDarkColorSchemeWarningBackground = "#7D5504";
+export const AlertDarkColorSchemeInfoBackground = "#143641";
 
 // @public (undocumented)
-export const AlertDarkColorSchemeWarningBorder = "#7D5504";
+const AlertDarkColorSchemeInfoBackground_2 = "#114E77";
 
 // @public (undocumented)
-export const AlertDarkColorSchemeWarningIcon = "#DFA739";
+export const AlertDarkColorSchemeInfoBorder = "#084453";
+
+// @public (undocumented)
+const AlertDarkColorSchemeInfoBorder_2 = "#114E77";
+
+// @public (undocumented)
+export const AlertDarkColorSchemeInfoIcon = "#18a5c5";
+
+// @public (undocumented)
+const AlertDarkColorSchemeInfoIcon_2 = "#57A4D7";
+
+// @public (undocumented)
+export const AlertDarkColorSchemeSuccessBackground = "#103920";
+
+// @public (undocumented)
+const AlertDarkColorSchemeSuccessBackground_2 = "#276211";
+
+// @public (undocumented)
+export const AlertDarkColorSchemeSuccessBorder = "#004823";
+
+// @public (undocumented)
+const AlertDarkColorSchemeSuccessBorder_2 = "#276211";
+
+// @public (undocumented)
+export const AlertDarkColorSchemeSuccessIcon = "#4ba96c";
+
+// @public (undocumented)
+const AlertDarkColorSchemeSuccessIcon_2 = "#6FBA53";
+
+// @public (undocumented)
+export const AlertDarkColorSchemeWarningBackground = "#3e3015";
+
+// @public (undocumented)
+const AlertDarkColorSchemeWarningBackground_2 = "#7D5504";
+
+// @public (undocumented)
+export const AlertDarkColorSchemeWarningBorder = "#543803";
+
+// @public (undocumented)
+const AlertDarkColorSchemeWarningBorder_2 = "#7D5504";
+
+// @public (undocumented)
+export const AlertDarkColorSchemeWarningIcon = "#e19f12";
+
+// @public (undocumented)
+const AlertDarkColorSchemeWarningIcon_2 = "#DFA739";
 
 // @public (undocumented)
 export const AlertFontDefaultBody = "body";
 
 // @public (undocumented)
+const AlertFontDefaultBody_2 = "body";
+
+// @public (undocumented)
 export const AlertFontDefaultHeader = "subheading";
+
+// @public (undocumented)
+const AlertFontDefaultHeader_2 = "subheading";
 
 // @public (undocumented)
 export const AlertFontSmallBody = "caption";
 
 // @public (undocumented)
+const AlertFontSmallBody_2 = "caption";
+
+// @public (undocumented)
 export const AlertFontSmallHeader = "caption";
 
 // @public (undocumented)
-export const AlertLightColorSchemeDefaultBackground = "#F0F0F0";
+const AlertFontSmallHeader_2 = "caption";
 
 // @public (undocumented)
-export const AlertLightColorSchemeDefaultBorder = "#B3B3B3";
+export const AlertLightColorSchemeDefaultBackground = "#f2f5f9";
 
 // @public (undocumented)
-export const AlertLightColorSchemeDefaultIcon = "#CCCCCC";
+const AlertLightColorSchemeDefaultBackground_2 = "#F0F0F0";
 
 // @public (undocumented)
-export const AlertLightColorSchemeErrorBackground = "#FCEFEC";
+export const AlertLightColorSchemeDefaultBorder = "#d7dee4";
 
 // @public (undocumented)
-export const AlertLightColorSchemeErrorBorder = "#E76E5C";
+const AlertLightColorSchemeDefaultBorder_2 = "#B3B3B3";
 
 // @public (undocumented)
-export const AlertLightColorSchemeErrorIcon = "#E76E5C";
+export const AlertLightColorSchemeDefaultIcon = "#8c99a5";
 
 // @public (undocumented)
-export const AlertLightColorSchemeInfoBackground = "#EBF4FB";
+const AlertLightColorSchemeDefaultIcon_2 = "#CCCCCC";
 
 // @public (undocumented)
-export const AlertLightColorSchemeInfoBorder = "#AAD1EC";
+export const AlertLightColorSchemeErrorBackground = "#fff3f3";
 
 // @public (undocumented)
-export const AlertLightColorSchemeInfoIcon = "#57A4D7";
+const AlertLightColorSchemeErrorBackground_2 = "#FCEFEC";
 
 // @public (undocumented)
-export const AlertLightColorSchemeSuccessBackground = "#EDF8E9";
+export const AlertLightColorSchemeErrorBorder = "#fbd6d6";
 
 // @public (undocumented)
-export const AlertLightColorSchemeSuccessBorder = "#B4DEA4";
+const AlertLightColorSchemeErrorBorder_2 = "#E76E5C";
 
 // @public (undocumented)
-export const AlertLightColorSchemeSuccessIcon = "#6FBA53";
+export const AlertLightColorSchemeErrorIcon = "#ee6f79";
 
 // @public (undocumented)
-export const AlertLightColorSchemeWarningBackground = "#FCF5E8";
+const AlertLightColorSchemeErrorIcon_2 = "#E76E5C";
 
 // @public (undocumented)
-export const AlertLightColorSchemeWarningBorder = "#F0D49B";
+export const AlertLightColorSchemeInfoBackground = "#ebf8fd";
 
 // @public (undocumented)
-export const AlertLightColorSchemeWarningIcon = "#DFA739";
+const AlertLightColorSchemeInfoBackground_2 = "#EBF4FB";
+
+// @public (undocumented)
+export const AlertLightColorSchemeInfoBorder = "#afe6f9";
+
+// @public (undocumented)
+const AlertLightColorSchemeInfoBorder_2 = "#AAD1EC";
+
+// @public (undocumented)
+export const AlertLightColorSchemeInfoIcon = "#18a5c5";
+
+// @public (undocumented)
+const AlertLightColorSchemeInfoIcon_2 = "#57A4D7";
+
+// @public (undocumented)
+export const AlertLightColorSchemeSuccessBackground = "#ecf9ef";
+
+// @public (undocumented)
+const AlertLightColorSchemeSuccessBackground_2 = "#EDF8E9";
+
+// @public (undocumented)
+export const AlertLightColorSchemeSuccessBorder = "#b6ebc3";
+
+// @public (undocumented)
+const AlertLightColorSchemeSuccessBorder_2 = "#B4DEA4";
+
+// @public (undocumented)
+export const AlertLightColorSchemeSuccessIcon = "#4ba96c";
+
+// @public (undocumented)
+const AlertLightColorSchemeSuccessIcon_2 = "#6FBA53";
+
+// @public (undocumented)
+export const AlertLightColorSchemeWarningBackground = "#fff4dd";
+
+// @public (undocumented)
+const AlertLightColorSchemeWarningBackground_2 = "#FCF5E8";
+
+// @public (undocumented)
+export const AlertLightColorSchemeWarningBorder = "#fcdda6";
+
+// @public (undocumented)
+const AlertLightColorSchemeWarningBorder_2 = "#F0D49B";
+
+// @public (undocumented)
+export const AlertLightColorSchemeWarningIcon = "#e19f12";
+
+// @public (undocumented)
+const AlertLightColorSchemeWarningIcon_2 = "#DFA739";
 
 // @public (undocumented)
 export const AlertSizeBorderRadius = "4px";
 
 // @public (undocumented)
+const AlertSizeBorderRadius_2 = "4px";
+
+// @public (undocumented)
 export const AlertSizeBorderWidth = "1px";
+
+// @public (undocumented)
+const AlertSizeBorderWidth_2 = "1px";
 
 // @public (undocumented)
 export const AlertSizeCloseButtonWidth = "16px";
 
 // @public (undocumented)
+const AlertSizeCloseButtonWidth_2 = "16px";
+
+// @public (undocumented)
 export const AlertSizeHorizontalPadding = "16px";
+
+// @public (undocumented)
+const AlertSizeHorizontalPadding_2 = "16px";
 
 // @public (undocumented)
 export const AlertSizeIconMargin = "8px";
 
 // @public (undocumented)
+const AlertSizeIconMargin_2 = "8px";
+
+// @public (undocumented)
 export const AlertSizeSmallVerticalPadding = "11px";
+
+// @public (undocumented)
+const AlertSizeSmallVerticalPadding_2 = "11px";
 
 // @public (undocumented)
 export const AlertSizeVerticalPadding = "13px";
 
 // @public (undocumented)
+const AlertSizeVerticalPadding_2 = "13px";
+
+// @public (undocumented)
 export const AutocompleteSizePanelBorderRadius = "3px";
+
+// @public (undocumented)
+const AutocompleteSizePanelBorderRadius_2 = "3px";
 
 // @public (undocumented)
 export const AutocompleteSizePanelMaxHeight = "256px";
 
 // @public (undocumented)
+const AutocompleteSizePanelMaxHeight_2 = "256px";
+
+// @public (undocumented)
 export const AutocompleteSizePanelPadding = "4px 0";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemePastelErrorBackground = "rgba(224, 79, 56, 0.15)";
+const AutocompleteSizePanelPadding_2 = "4px 0";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemePastelErrorBorder = "#832112";
+export const BadgeDarkColorSchemePastelErrorBackground = "#621420";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemePastelErrorColor = "#FADEDA";
+const BadgeDarkColorSchemePastelErrorBackground_2 = "rgba(224, 79, 56, 0.15)";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemePastelInfoBackground = "#D8EAF7";
+export const BadgeDarkColorSchemePastelErrorBorder = "#9e0130";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemePastelInfoBorder = "rgba(0, 153, 255, 0.15)";
+const BadgeDarkColorSchemePastelErrorBorder_2 = "#832112";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemePastelInfoColor = "#D8EAF7";
+export const BadgeDarkColorSchemePastelErrorColor = "#fcb2b4";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemePastelPrimaryBackground = "rgba(0, 153, 255, 0.15)";
+const BadgeDarkColorSchemePastelErrorColor_2 = "#FADEDA";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemePastelPrimaryBorder = "#114E77";
+export const BadgeDarkColorSchemePastelInfoBackground = "#143641";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemePastelPrimaryColor = "#D8EAF7";
+const BadgeDarkColorSchemePastelInfoBackground_2 = "#D8EAF7";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemePastelSuccessBackground = "rgba(68, 255, 0, 0.15)";
+export const BadgeDarkColorSchemePastelInfoBorder = "#0c5567";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemePastelSuccessBorder = "#276211";
+const BadgeDarkColorSchemePastelInfoBorder_2 = "rgba(0, 153, 255, 0.15)";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemePastelSuccessColor = "#DCF1D4";
+export const BadgeDarkColorSchemePastelInfoColor = "#6ed3f2";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemePastelWarningBackground = "rgba(255, 170, 0, 0.15)";
+const BadgeDarkColorSchemePastelInfoColor_2 = "#D8EAF7";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemePastelWarningBorder = "#7D5504";
+export const BadgeDarkColorSchemePastelPrimaryBackground = "#193060";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemePastelWarningColor = "#F8EBD1";
+const BadgeDarkColorSchemePastelPrimaryBackground_2 = "rgba(0, 153, 255, 0.15)";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidErrorBackground = "#832112";
+export const BadgeDarkColorSchemePastelPrimaryBorder = "#014b9d";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidErrorBorder = "#832112";
+const BadgeDarkColorSchemePastelPrimaryBorder_2 = "#114E77";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemePastelPrimaryColor = "#a2c7fe";
+
+// @public (undocumented)
+const BadgeDarkColorSchemePastelPrimaryColor_2 = "#D8EAF7";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemePastelSuccessBackground = "#103920";
+
+// @public (undocumented)
+const BadgeDarkColorSchemePastelSuccessBackground_2 = "rgba(68, 255, 0, 0.15)";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemePastelSuccessBorder = "#015a2d";
+
+// @public (undocumented)
+const BadgeDarkColorSchemePastelSuccessBorder_2 = "#276211";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemePastelSuccessColor = "#8ed5a1";
+
+// @public (undocumented)
+const BadgeDarkColorSchemePastelSuccessColor_2 = "#DCF1D4";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemePastelWarningBackground = "#3e3015";
+
+// @public (undocumented)
+const BadgeDarkColorSchemePastelWarningBackground_2 = "rgba(255, 170, 0, 0.15)";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemePastelWarningBorder = "#6b4804";
+
+// @public (undocumented)
+const BadgeDarkColorSchemePastelWarningBorder_2 = "#7D5504";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemePastelWarningColor = "#f5c23c";
+
+// @public (undocumented)
+const BadgeDarkColorSchemePastelWarningColor_2 = "#F8EBD1";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemeSolidErrorBackground = "#b9023a";
+
+// @public (undocumented)
+const BadgeDarkColorSchemeSolidErrorBackground_2 = "#832112";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemeSolidErrorBorder = "#b9023a";
+
+// @public (undocumented)
+const BadgeDarkColorSchemeSolidErrorBorder_2 = "#832112";
 
 // @public (undocumented)
 export const BadgeDarkColorSchemeSolidErrorColor = "white";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidInfoBackground = "#07314D";
+const BadgeDarkColorSchemeSolidErrorColor_2 = "white";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidInfoBorder = "#07314D";
+export const BadgeDarkColorSchemeSolidInfoBackground = "#0c6579";
+
+// @public (undocumented)
+const BadgeDarkColorSchemeSolidInfoBackground_2 = "#07314D";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemeSolidInfoBorder = "#0c6579";
+
+// @public (undocumented)
+const BadgeDarkColorSchemeSolidInfoBorder_2 = "#07314D";
 
 // @public (undocumented)
 export const BadgeDarkColorSchemeSolidInfoColor = "white";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidLightBackground = "#999999";
+const BadgeDarkColorSchemeSolidInfoColor_2 = "white";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidLightBorder = "#999999";
+export const BadgeDarkColorSchemeSolidLightBackground = "#7f8c98";
+
+// @public (undocumented)
+const BadgeDarkColorSchemeSolidLightBackground_2 = "#999999";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemeSolidLightBorder = "#7f8c98";
+
+// @public (undocumented)
+const BadgeDarkColorSchemeSolidLightBorder_2 = "#999999";
 
 // @public (undocumented)
 export const BadgeDarkColorSchemeSolidLightColor = "white";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidPrimaryBackground = "#114E77";
+const BadgeDarkColorSchemeSolidLightColor_2 = "white";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidPrimaryBorder = "#114E77";
+export const BadgeDarkColorSchemeSolidPrimaryBackground = "#0059b8";
+
+// @public (undocumented)
+const BadgeDarkColorSchemeSolidPrimaryBackground_2 = "#114E77";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemeSolidPrimaryBorder = "#0059b8";
+
+// @public (undocumented)
+const BadgeDarkColorSchemeSolidPrimaryBorder_2 = "#114E77";
 
 // @public (undocumented)
 export const BadgeDarkColorSchemeSolidPrimaryColor = "white";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidSecondBackground = "#4D4D4D";
+const BadgeDarkColorSchemeSolidPrimaryColor_2 = "white";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidSecondBorder = "#4D4D4D";
+export const BadgeDarkColorSchemeSolidSecondBackground = "#515e69";
+
+// @public (undocumented)
+const BadgeDarkColorSchemeSolidSecondBackground_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemeSolidSecondBorder = "#515e69";
+
+// @public (undocumented)
+const BadgeDarkColorSchemeSolidSecondBorder_2 = "#4D4D4D";
 
 // @public (undocumented)
 export const BadgeDarkColorSchemeSolidSecondColor = "white";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidSuccessBackground = "#276211";
+const BadgeDarkColorSchemeSolidSecondColor_2 = "white";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidSuccessBorder = "#276211";
+export const BadgeDarkColorSchemeSolidSuccessBackground = "#016b37";
+
+// @public (undocumented)
+const BadgeDarkColorSchemeSolidSuccessBackground_2 = "#276211";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemeSolidSuccessBorder = "#016b37";
+
+// @public (undocumented)
+const BadgeDarkColorSchemeSolidSuccessBorder_2 = "#276211";
 
 // @public (undocumented)
 export const BadgeDarkColorSchemeSolidSuccessColor = "white";
 
 // @public (undocumented)
+const BadgeDarkColorSchemeSolidSuccessColor_2 = "white";
+
+// @public (undocumented)
 export const BadgeDarkColorSchemeSolidTransparentBackground = "transparent";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidTransparentBorder = "#808080";
+const BadgeDarkColorSchemeSolidTransparentBackground_2 = "transparent";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidTransparentColor = "#F5F5F5";
+export const BadgeDarkColorSchemeSolidTransparentBorder = "#515e69";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidWarningBackground = "#7D5504";
+const BadgeDarkColorSchemeSolidTransparentBorder_2 = "#808080";
 
 // @public (undocumented)
-export const BadgeDarkColorSchemeSolidWarningBorder = "#7D5504";
+export const BadgeDarkColorSchemeSolidTransparentColor = "white";
+
+// @public (undocumented)
+const BadgeDarkColorSchemeSolidTransparentColor_2 = "#F5F5F5";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemeSolidWarningBackground = "#7e5406";
+
+// @public (undocumented)
+const BadgeDarkColorSchemeSolidWarningBackground_2 = "#7D5504";
+
+// @public (undocumented)
+export const BadgeDarkColorSchemeSolidWarningBorder = "#7e5406";
+
+// @public (undocumented)
+const BadgeDarkColorSchemeSolidWarningBorder_2 = "#7D5504";
 
 // @public (undocumented)
 export const BadgeDarkColorSchemeSolidWarningColor = "white";
 
 // @public (undocumented)
+const BadgeDarkColorSchemeSolidWarningColor_2 = "white";
+
+// @public (undocumented)
 export const BadgeFontDefaultCaps = "caption-caps";
+
+// @public (undocumented)
+const BadgeFontDefaultCaps_2 = "caption-caps";
 
 // @public (undocumented)
 export const BadgeFontDefaultDefault = "caption";
 
 // @public (undocumented)
+const BadgeFontDefaultDefault_2 = "caption";
+
+// @public (undocumented)
 export const BadgeFontDefaultMono = "caption-mono";
+
+// @public (undocumented)
+const BadgeFontDefaultMono_2 = "caption-mono";
 
 // @public (undocumented)
 export const BadgeFontMiniCaps = "extra-small-text-caps";
 
 // @public (undocumented)
+const BadgeFontMiniCaps_2 = "extra-small-text-caps";
+
+// @public (undocumented)
 export const BadgeFontMiniDefault = "extra-small-text";
+
+// @public (undocumented)
+const BadgeFontMiniDefault_2 = "extra-small-text";
 
 // @public (undocumented)
 export const BadgeFontMiniMono = "extra-small-text-mono";
 
 // @public (undocumented)
-export const BadgeLightColorSchemePastelErrorBackground = "#FEF7F6";
+const BadgeFontMiniMono_2 = "extra-small-text-mono";
 
 // @public (undocumented)
-export const BadgeLightColorSchemePastelErrorBorder = "#F4B7AE";
+export const BadgeLightColorSchemePastelErrorBackground = "#fff3f3";
 
 // @public (undocumented)
-export const BadgeLightColorSchemePastelErrorColor = "#E04D36";
+const BadgeLightColorSchemePastelErrorBackground_2 = "#FEF7F6";
 
 // @public (undocumented)
-export const BadgeLightColorSchemePastelInfoBackground = "#F5FAFD";
+export const BadgeLightColorSchemePastelErrorBorder = "#fcb2b4";
 
 // @public (undocumented)
-export const BadgeLightColorSchemePastelInfoBorder = "#AAD1EC";
+const BadgeLightColorSchemePastelErrorBorder_2 = "#F4B7AE";
 
 // @public (undocumented)
-export const BadgeLightColorSchemePastelInfoColor = "#338FCC";
+export const BadgeLightColorSchemePastelErrorColor = "#db3c55";
 
 // @public (undocumented)
-export const BadgeLightColorSchemePastelPrimaryBackground = "#F5FAFD";
+const BadgeLightColorSchemePastelErrorColor_2 = "#E04D36";
 
 // @public (undocumented)
-export const BadgeLightColorSchemePastelPrimaryBorder = "#AAD1EC";
+export const BadgeLightColorSchemePastelInfoBackground = "#ebf8fd";
 
 // @public (undocumented)
-export const BadgeLightColorSchemePastelPrimaryColor = "#338FCC";
+const BadgeLightColorSchemePastelInfoBackground_2 = "#F5FAFD";
 
 // @public (undocumented)
-export const BadgeLightColorSchemePastelSuccessBackground = "#F6FBF4";
+export const BadgeLightColorSchemePastelInfoBorder = "#a2c7fe";
 
 // @public (undocumented)
-export const BadgeLightColorSchemePastelSuccessBorder = "#B4DEA4";
+const BadgeLightColorSchemePastelInfoBorder_2 = "#AAD1EC";
 
 // @public (undocumented)
-export const BadgeLightColorSchemePastelSuccessColor = "#449327";
+export const BadgeLightColorSchemePastelInfoColor = "#2099b7";
 
 // @public (undocumented)
-export const BadgeLightColorSchemePastelWarningBackground = "#FDFAF3";
+const BadgeLightColorSchemePastelInfoColor_2 = "#338FCC";
 
 // @public (undocumented)
-export const BadgeLightColorSchemePastelWarningBorder = "#F0D49B";
+export const BadgeLightColorSchemePastelPrimaryBackground = "#eff6ff";
 
 // @public (undocumented)
-export const BadgeLightColorSchemePastelWarningColor = "#BB800A";
+const BadgeLightColorSchemePastelPrimaryBackground_2 = "#F5FAFD";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidErrorBackground = "#E04D36";
+export const BadgeLightColorSchemePastelPrimaryBorder = "#a2c7fe";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidErrorBorder = "#E04D36";
+const BadgeLightColorSchemePastelPrimaryBorder_2 = "#AAD1EC";
+
+// @public (undocumented)
+export const BadgeLightColorSchemePastelPrimaryColor = "#4187ff";
+
+// @public (undocumented)
+const BadgeLightColorSchemePastelPrimaryColor_2 = "#338FCC";
+
+// @public (undocumented)
+export const BadgeLightColorSchemePastelSuccessBackground = "#ecf9ef";
+
+// @public (undocumented)
+const BadgeLightColorSchemePastelSuccessBackground_2 = "#F6FBF4";
+
+// @public (undocumented)
+export const BadgeLightColorSchemePastelSuccessBorder = "#8ed5a1";
+
+// @public (undocumented)
+const BadgeLightColorSchemePastelSuccessBorder_2 = "#B4DEA4";
+
+// @public (undocumented)
+export const BadgeLightColorSchemePastelSuccessColor = "#028b49";
+
+// @public (undocumented)
+const BadgeLightColorSchemePastelSuccessColor_2 = "#449327";
+
+// @public (undocumented)
+export const BadgeLightColorSchemePastelWarningBackground = "#fff4dd";
+
+// @public (undocumented)
+const BadgeLightColorSchemePastelWarningBackground_2 = "#FDFAF3";
+
+// @public (undocumented)
+export const BadgeLightColorSchemePastelWarningBorder = "#f5c23c";
+
+// @public (undocumented)
+const BadgeLightColorSchemePastelWarningBorder_2 = "#F0D49B";
+
+// @public (undocumented)
+export const BadgeLightColorSchemePastelWarningColor = "#a26e0c";
+
+// @public (undocumented)
+const BadgeLightColorSchemePastelWarningColor_2 = "#BB800A";
+
+// @public (undocumented)
+export const BadgeLightColorSchemeSolidErrorBackground = "#ea5868";
+
+// @public (undocumented)
+const BadgeLightColorSchemeSolidErrorBackground_2 = "#E04D36";
+
+// @public (undocumented)
+export const BadgeLightColorSchemeSolidErrorBorder = "#ea5868";
+
+// @public (undocumented)
+const BadgeLightColorSchemeSolidErrorBorder_2 = "#E04D36";
 
 // @public (undocumented)
 export const BadgeLightColorSchemeSolidErrorColor = "white";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidInfoBackground = "#338FCC";
+const BadgeLightColorSchemeSolidErrorColor_2 = "white";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidInfoBorder = "#338FCC";
+export const BadgeLightColorSchemeSolidInfoBackground = "#2099b7";
+
+// @public (undocumented)
+const BadgeLightColorSchemeSolidInfoBackground_2 = "#338FCC";
+
+// @public (undocumented)
+export const BadgeLightColorSchemeSolidInfoBorder = "#2099b7";
+
+// @public (undocumented)
+const BadgeLightColorSchemeSolidInfoBorder_2 = "#338FCC";
 
 // @public (undocumented)
 export const BadgeLightColorSchemeSolidInfoColor = "white";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidLightBackground = "#E6E6E6";
+const BadgeLightColorSchemeSolidInfoColor_2 = "white";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidLightBorder = "#E6E6E6";
+export const BadgeLightColorSchemeSolidLightBackground = "#d7dee4";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidLightColor = "#4D4D4D";
+const BadgeLightColorSchemeSolidLightBackground_2 = "#E6E6E6";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidPrimaryBackground = "#338FCC";
+export const BadgeLightColorSchemeSolidLightBorder = "#d7dee4";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidPrimaryBorder = "#338FCC";
+const BadgeLightColorSchemeSolidLightBorder_2 = "#E6E6E6";
+
+// @public (undocumented)
+export const BadgeLightColorSchemeSolidLightColor = "#19252f";
+
+// @public (undocumented)
+const BadgeLightColorSchemeSolidLightColor_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const BadgeLightColorSchemeSolidPrimaryBackground = "#4187ff";
+
+// @public (undocumented)
+const BadgeLightColorSchemeSolidPrimaryBackground_2 = "#338FCC";
+
+// @public (undocumented)
+export const BadgeLightColorSchemeSolidPrimaryBorder = "#4187ff";
+
+// @public (undocumented)
+const BadgeLightColorSchemeSolidPrimaryBorder_2 = "#338FCC";
 
 // @public (undocumented)
 export const BadgeLightColorSchemeSolidPrimaryColor = "white";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidSecondBackground = "#666666";
+const BadgeLightColorSchemeSolidPrimaryColor_2 = "white";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidSecondBorder = "#666666";
+export const BadgeLightColorSchemeSolidSecondBackground = "#7f8c98";
+
+// @public (undocumented)
+const BadgeLightColorSchemeSolidSecondBackground_2 = "#666666";
+
+// @public (undocumented)
+export const BadgeLightColorSchemeSolidSecondBorder = "#7f8c98";
+
+// @public (undocumented)
+const BadgeLightColorSchemeSolidSecondBorder_2 = "#666666";
 
 // @public (undocumented)
 export const BadgeLightColorSchemeSolidSecondColor = "white";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidSuccessBackground = "#52A832";
+const BadgeLightColorSchemeSolidSecondColor_2 = "white";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidSuccessBorder = "#52A832";
+export const BadgeLightColorSchemeSolidSuccessBackground = "#319d5c";
+
+// @public (undocumented)
+const BadgeLightColorSchemeSolidSuccessBackground_2 = "#52A832";
+
+// @public (undocumented)
+export const BadgeLightColorSchemeSolidSuccessBorder = "#319d5c";
+
+// @public (undocumented)
+const BadgeLightColorSchemeSolidSuccessBorder_2 = "#52A832";
 
 // @public (undocumented)
 export const BadgeLightColorSchemeSolidSuccessColor = "white";
 
 // @public (undocumented)
+const BadgeLightColorSchemeSolidSuccessColor_2 = "white";
+
+// @public (undocumented)
 export const BadgeLightColorSchemeSolidTransparentBackground = "transparent";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidTransparentBorder = "#CCCCCC";
+const BadgeLightColorSchemeSolidTransparentBackground_2 = "transparent";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidTransparentColor = "#4D4D4D";
+export const BadgeLightColorSchemeSolidTransparentBorder = "#bdc7d1";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidWarningBackground = "#D6930D";
+const BadgeLightColorSchemeSolidTransparentBorder_2 = "#CCCCCC";
 
 // @public (undocumented)
-export const BadgeLightColorSchemeSolidWarningBorder = "#D6930D";
+export const BadgeLightColorSchemeSolidTransparentColor = "#19252f";
+
+// @public (undocumented)
+const BadgeLightColorSchemeSolidTransparentColor_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const BadgeLightColorSchemeSolidWarningBackground = "#c78816";
+
+// @public (undocumented)
+const BadgeLightColorSchemeSolidWarningBackground_2 = "#D6930D";
+
+// @public (undocumented)
+export const BadgeLightColorSchemeSolidWarningBorder = "#c78816";
+
+// @public (undocumented)
+const BadgeLightColorSchemeSolidWarningBorder_2 = "#D6930D";
 
 // @public (undocumented)
 export const BadgeLightColorSchemeSolidWarningColor = "white";
 
 // @public (undocumented)
+const BadgeLightColorSchemeSolidWarningColor_2 = "white";
+
+// @public (undocumented)
 export const BadgeSizeDefaultBorderRadius = "4px";
+
+// @public (undocumented)
+const BadgeSizeDefaultBorderRadius_2 = "4px";
 
 // @public (undocumented)
 export const BadgeSizeDefaultBorderWidth = "1px";
 
 // @public (undocumented)
+const BadgeSizeDefaultBorderWidth_2 = "1px";
+
+// @public (undocumented)
 export const BadgeSizeDefaultFontCaps = "caption-caps";
+
+// @public (undocumented)
+const BadgeSizeDefaultFontCaps_2 = "caption-caps";
 
 // @public (undocumented)
 export const BadgeSizeDefaultFontDefault = "caption";
 
 // @public (undocumented)
+const BadgeSizeDefaultFontDefault_2 = "caption";
+
+// @public (undocumented)
 export const BadgeSizeDefaultFontMono = "caption-mono";
+
+// @public (undocumented)
+const BadgeSizeDefaultFontMono_2 = "caption-mono";
 
 // @public (undocumented)
 export const BadgeSizeDefaultHeight = "24px";
 
 // @public (undocumented)
+const BadgeSizeDefaultHeight_2 = "24px";
+
+// @public (undocumented)
 export const BadgeSizeDefaultMinWidth = "10px";
+
+// @public (undocumented)
+const BadgeSizeDefaultMinWidth_2 = "10px";
 
 // @public (undocumented)
 export const BadgeSizeDefaultPadding = "0 8px";
 
 // @public (undocumented)
+const BadgeSizeDefaultPadding_2 = "0 8px";
+
+// @public (undocumented)
 export const BadgeSizeMiniBorderRadius = "2px";
+
+// @public (undocumented)
+const BadgeSizeMiniBorderRadius_2 = "2px";
 
 // @public (undocumented)
 export const BadgeSizeMiniBorderWidth = "1px";
 
 // @public (undocumented)
+const BadgeSizeMiniBorderWidth_2 = "1px";
+
+// @public (undocumented)
 export const BadgeSizeMiniFontCaps = "extra-small-text-caps";
+
+// @public (undocumented)
+const BadgeSizeMiniFontCaps_2 = "extra-small-text-caps";
 
 // @public (undocumented)
 export const BadgeSizeMiniFontDefault = "extra-small-text";
 
 // @public (undocumented)
+const BadgeSizeMiniFontDefault_2 = "extra-small-text";
+
+// @public (undocumented)
 export const BadgeSizeMiniFontMono = "extra-small-text-mono";
+
+// @public (undocumented)
+const BadgeSizeMiniFontMono_2 = "extra-small-text-mono";
 
 // @public (undocumented)
 export const BadgeSizeMiniHeight = "16px";
 
 // @public (undocumented)
+const BadgeSizeMiniHeight_2 = "16px";
+
+// @public (undocumented)
 export const BadgeSizeMiniMinWidth = "10px";
+
+// @public (undocumented)
+const BadgeSizeMiniMinWidth_2 = "10px";
 
 // @public (undocumented)
 export const BadgeSizeMiniPadding = "0 4px";
 
 // @public (undocumented)
+const BadgeSizeMiniPadding_2 = "0 4px";
+
+// @public (undocumented)
 export const ButtonDarkColorSchemeActiveShadow = "inset 1px 2px 2px 0 rgba(black, 0.2)";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemeErrorBackground = "#666666";
+const ButtonDarkColorSchemeActiveShadow_2 = "inset 1px 2px 2px 0 rgba(black, 0.2)";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemeErrorBorder = "#808080";
+export const ButtonDarkColorSchemeErrorBackground = "#515e69";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemeErrorColor = "#E76E5C";
+const ButtonDarkColorSchemeErrorBackground_2 = "#666666";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemeErrorIcon = "#E76E5C";
+export const ButtonDarkColorSchemeErrorBorder = "#515e69";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemeErrorStatesActiveBackground = "darken(#666666, 5)";
+const ButtonDarkColorSchemeErrorBorder_2 = "#808080";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemeErrorStatesActiveBorder = "darken(#808080, 5)";
+export const ButtonDarkColorSchemeErrorColor = "#ea5868";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemePrimaryBackground = "#338FCC";
+const ButtonDarkColorSchemeErrorColor_2 = "#E76E5C";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemePrimaryBorder = "#277BB3";
+export const ButtonDarkColorSchemeErrorIcon = "#ea5868";
+
+// @public (undocumented)
+const ButtonDarkColorSchemeErrorIcon_2 = "#E76E5C";
+
+// @public (undocumented)
+export const ButtonDarkColorSchemeErrorStatesActiveBackground = "#333f4a";
+
+// @public (undocumented)
+const ButtonDarkColorSchemeErrorStatesActiveBackground_2 = "darken(#666666, 5)";
+
+// @public (undocumented)
+export const ButtonDarkColorSchemeErrorStatesActiveBorder = "#333f4a";
+
+// @public (undocumented)
+const ButtonDarkColorSchemeErrorStatesActiveBorder_2 = "darken(#808080, 5)";
+
+// @public (undocumented)
+export const ButtonDarkColorSchemePrimaryBackground = "#0059b8";
+
+// @public (undocumented)
+const ButtonDarkColorSchemePrimaryBackground_2 = "#338FCC";
+
+// @public (undocumented)
+export const ButtonDarkColorSchemePrimaryBorder = "#0059b8";
+
+// @public (undocumented)
+const ButtonDarkColorSchemePrimaryBorder_2 = "#277BB3";
 
 // @public (undocumented)
 export const ButtonDarkColorSchemePrimaryColor = "white";
 
 // @public (undocumented)
+const ButtonDarkColorSchemePrimaryColor_2 = "white";
+
+// @public (undocumented)
 export const ButtonDarkColorSchemePrimaryIcon = "white";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemePrimaryStatesActiveBackground = "darken(#57A4D7, 5)";
+const ButtonDarkColorSchemePrimaryIcon_2 = "white";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemePrimaryStatesActiveBorder = "darken(#277BB3, 5)";
+export const ButtonDarkColorSchemePrimaryStatesActiveBackground = "darken(#014b9d, 5)";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemePrimaryTransparentColor = "#338FCC";
+const ButtonDarkColorSchemePrimaryStatesActiveBackground_2 = "darken(#57A4D7, 5)";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemePrimaryTransparentIcon = "#338FCC";
+export const ButtonDarkColorSchemePrimaryStatesActiveBorder = "darken(#014b9d, 5)";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemePrimaryTransparentStatesActiveColor = "#114E77";
+const ButtonDarkColorSchemePrimaryStatesActiveBorder_2 = "darken(#277BB3, 5)";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemePrimaryTransparentStatesActiveIcon = "#114E77";
+export const ButtonDarkColorSchemePrimaryTransparentColor = "#0374eb";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemePrimaryTransparentStatesHoverColor = "#206EA2";
+const ButtonDarkColorSchemePrimaryTransparentColor_2 = "#338FCC";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemePrimaryTransparentStatesHoverIcon = "#206EA2";
+export const ButtonDarkColorSchemePrimaryTransparentIcon = "#0374eb";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemeSecondBackground = "#666666";
+const ButtonDarkColorSchemePrimaryTransparentIcon_2 = "#338FCC";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemeSecondBorder = "#808080";
+export const ButtonDarkColorSchemePrimaryTransparentStatesActiveColor = "#023c7f";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemeSecondColor = "#F0F0F0";
+const ButtonDarkColorSchemePrimaryTransparentStatesActiveColor_2 = "#114E77";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemeSecondIcon = "#999999";
+export const ButtonDarkColorSchemePrimaryTransparentStatesActiveIcon = "#023c7f";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemeSecondStatesActiveBackground = "darken(#666666, 5)";
+const ButtonDarkColorSchemePrimaryTransparentStatesActiveIcon_2 = "#114E77";
 
 // @public (undocumented)
-export const ButtonDarkColorSchemeSecondStatesActiveBorder = "darken(#808080, 5)";
+export const ButtonDarkColorSchemePrimaryTransparentStatesHoverColor = "#014b9d";
+
+// @public (undocumented)
+const ButtonDarkColorSchemePrimaryTransparentStatesHoverColor_2 = "#206EA2";
+
+// @public (undocumented)
+export const ButtonDarkColorSchemePrimaryTransparentStatesHoverIcon = "#014b9d";
+
+// @public (undocumented)
+const ButtonDarkColorSchemePrimaryTransparentStatesHoverIcon_2 = "#206EA2";
+
+// @public (undocumented)
+export const ButtonDarkColorSchemeSecondBackground = "#515e69";
+
+// @public (undocumented)
+const ButtonDarkColorSchemeSecondBackground_2 = "#666666";
+
+// @public (undocumented)
+export const ButtonDarkColorSchemeSecondBorder = "#515e69";
+
+// @public (undocumented)
+const ButtonDarkColorSchemeSecondBorder_2 = "#808080";
+
+// @public (undocumented)
+export const ButtonDarkColorSchemeSecondColor = "#f2f5f9";
+
+// @public (undocumented)
+const ButtonDarkColorSchemeSecondColor_2 = "#F0F0F0";
+
+// @public (undocumented)
+export const ButtonDarkColorSchemeSecondIcon = "#8c99a5";
+
+// @public (undocumented)
+const ButtonDarkColorSchemeSecondIcon_2 = "#999999";
+
+// @public (undocumented)
+export const ButtonDarkColorSchemeSecondStatesActiveBackground = "#333f4a";
+
+// @public (undocumented)
+const ButtonDarkColorSchemeSecondStatesActiveBackground_2 = "darken(#666666, 5)";
+
+// @public (undocumented)
+export const ButtonDarkColorSchemeSecondStatesActiveBorder = "#333f4a";
+
+// @public (undocumented)
+const ButtonDarkColorSchemeSecondStatesActiveBorder_2 = "darken(#808080, 5)";
 
 // @public (undocumented)
 export const ButtonFontDefault = "body";
 
 // @public (undocumented)
+const ButtonFontDefault_2 = "body";
+
+// @public (undocumented)
 export const ButtonFontPrimary = "body-strong";
+
+// @public (undocumented)
+const ButtonFontPrimary_2 = "body-strong";
 
 // @public (undocumented)
 export const ButtonFontPrimaryTransparent = "body";
 
 // @public (undocumented)
+const ButtonFontPrimaryTransparent_2 = "body";
+
+// @public (undocumented)
 export const ButtonLightColorSchemeActiveShadow = "inset 0 1px 2px 0 rgba(black, 0.2)";
 
 // @public (undocumented)
-export const ButtonLightColorSchemeErrorBackground = "#F0F0F0";
+const ButtonLightColorSchemeActiveShadow_2 = "inset 0 1px 2px 0 rgba(black, 0.2)";
 
 // @public (undocumented)
-export const ButtonLightColorSchemeErrorBorder = "#B3B3B3";
+export const ButtonLightColorSchemeErrorBackground = "#d7dee4";
 
 // @public (undocumented)
-export const ButtonLightColorSchemeErrorColor = "#E76E5C";
+const ButtonLightColorSchemeErrorBackground_2 = "#F0F0F0";
 
 // @public (undocumented)
-export const ButtonLightColorSchemeErrorIcon = "#E76E5C";
+export const ButtonLightColorSchemeErrorBorder = "#d7dee4";
 
 // @public (undocumented)
-export const ButtonLightColorSchemeErrorStatesActiveBackground = "darken(#F0F0F0, 5)";
+const ButtonLightColorSchemeErrorBorder_2 = "#B3B3B3";
 
 // @public (undocumented)
-export const ButtonLightColorSchemeErrorStatesActiveBorder = "darken(#B3B3B3, 5)";
+export const ButtonLightColorSchemeErrorColor = "#ea5868";
 
 // @public (undocumented)
-export const ButtonLightColorSchemePrimaryBackground = "#338FCC";
+const ButtonLightColorSchemeErrorColor_2 = "#E76E5C";
 
 // @public (undocumented)
-export const ButtonLightColorSchemePrimaryBorder = "#277BB3";
+export const ButtonLightColorSchemeErrorIcon = "#ea5868";
+
+// @public (undocumented)
+const ButtonLightColorSchemeErrorIcon_2 = "#E76E5C";
+
+// @public (undocumented)
+export const ButtonLightColorSchemeErrorStatesActiveBackground = "#bdc7d1";
+
+// @public (undocumented)
+const ButtonLightColorSchemeErrorStatesActiveBackground_2 = "darken(#F0F0F0, 5)";
+
+// @public (undocumented)
+export const ButtonLightColorSchemeErrorStatesActiveBorder = "#bdc7d1";
+
+// @public (undocumented)
+const ButtonLightColorSchemeErrorStatesActiveBorder_2 = "darken(#B3B3B3, 5)";
+
+// @public (undocumented)
+export const ButtonLightColorSchemePrimaryBackground = "#0374eb";
+
+// @public (undocumented)
+const ButtonLightColorSchemePrimaryBackground_2 = "#338FCC";
+
+// @public (undocumented)
+export const ButtonLightColorSchemePrimaryBorder = "#0374eb";
+
+// @public (undocumented)
+const ButtonLightColorSchemePrimaryBorder_2 = "#277BB3";
 
 // @public (undocumented)
 export const ButtonLightColorSchemePrimaryColor = "white";
 
 // @public (undocumented)
+const ButtonLightColorSchemePrimaryColor_2 = "white";
+
+// @public (undocumented)
 export const ButtonLightColorSchemePrimaryIcon = "white";
 
 // @public (undocumented)
-export const ButtonLightColorSchemePrimaryStatesActiveBackground = "darken(#338FCC, 5)";
+const ButtonLightColorSchemePrimaryIcon_2 = "white";
 
 // @public (undocumented)
-export const ButtonLightColorSchemePrimaryStatesActiveBorder = "darken(#277BB3, 5)";
+export const ButtonLightColorSchemePrimaryStatesActiveBackground = "#0059b8";
 
 // @public (undocumented)
-export const ButtonLightColorSchemePrimaryTransparentColor = "#338FCC";
+const ButtonLightColorSchemePrimaryStatesActiveBackground_2 = "darken(#338FCC, 5)";
 
 // @public (undocumented)
-export const ButtonLightColorSchemePrimaryTransparentIcon = "#338FCC";
+export const ButtonLightColorSchemePrimaryStatesActiveBorder = "#0059b8";
 
 // @public (undocumented)
-export const ButtonLightColorSchemePrimaryTransparentStatesActiveColor = "#114E77";
+const ButtonLightColorSchemePrimaryStatesActiveBorder_2 = "darken(#277BB3, 5)";
 
 // @public (undocumented)
-export const ButtonLightColorSchemePrimaryTransparentStatesActiveIcon = "#114E77";
+export const ButtonLightColorSchemePrimaryTransparentColor = "#0374eb";
 
 // @public (undocumented)
-export const ButtonLightColorSchemePrimaryTransparentStatesHoverColor = "#206EA2";
+const ButtonLightColorSchemePrimaryTransparentColor_2 = "#338FCC";
 
 // @public (undocumented)
-export const ButtonLightColorSchemePrimaryTransparentStatesHoverIcon = "#206EA2";
+export const ButtonLightColorSchemePrimaryTransparentIcon = "#0374eb";
 
 // @public (undocumented)
-export const ButtonLightColorSchemeSecondBackground = "#F0F0F0";
+const ButtonLightColorSchemePrimaryTransparentIcon_2 = "#338FCC";
 
 // @public (undocumented)
-export const ButtonLightColorSchemeSecondBorder = "#B3B3B3";
+export const ButtonLightColorSchemePrimaryTransparentStatesActiveColor = "#014b9d";
 
 // @public (undocumented)
-export const ButtonLightColorSchemeSecondColor = "#4D4D4D";
+const ButtonLightColorSchemePrimaryTransparentStatesActiveColor_2 = "#114E77";
 
 // @public (undocumented)
-export const ButtonLightColorSchemeSecondIcon = "#999999";
+export const ButtonLightColorSchemePrimaryTransparentStatesActiveIcon = "#014b9d";
 
 // @public (undocumented)
-export const ButtonLightColorSchemeSecondStatesActiveBackground = "darken(#F0F0F0, 5)";
+const ButtonLightColorSchemePrimaryTransparentStatesActiveIcon_2 = "#114E77";
 
 // @public (undocumented)
-export const ButtonLightColorSchemeSecondStatesActiveBorder = "darken(#B3B3B3, 5)";
+export const ButtonLightColorSchemePrimaryTransparentStatesHoverColor = "#0059b8";
+
+// @public (undocumented)
+const ButtonLightColorSchemePrimaryTransparentStatesHoverColor_2 = "#206EA2";
+
+// @public (undocumented)
+export const ButtonLightColorSchemePrimaryTransparentStatesHoverIcon = "#0059b8";
+
+// @public (undocumented)
+const ButtonLightColorSchemePrimaryTransparentStatesHoverIcon_2 = "#206EA2";
+
+// @public (undocumented)
+export const ButtonLightColorSchemeSecondBackground = "#d7dee4";
+
+// @public (undocumented)
+const ButtonLightColorSchemeSecondBackground_2 = "#F0F0F0";
+
+// @public (undocumented)
+export const ButtonLightColorSchemeSecondBorder = "#d7dee4";
+
+// @public (undocumented)
+const ButtonLightColorSchemeSecondBorder_2 = "#B3B3B3";
+
+// @public (undocumented)
+export const ButtonLightColorSchemeSecondColor = "#19252f";
+
+// @public (undocumented)
+const ButtonLightColorSchemeSecondColor_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const ButtonLightColorSchemeSecondIcon = "#8c99a5";
+
+// @public (undocumented)
+const ButtonLightColorSchemeSecondIcon_2 = "#999999";
+
+// @public (undocumented)
+export const ButtonLightColorSchemeSecondStatesActiveBackground = "#bdc7d1";
+
+// @public (undocumented)
+const ButtonLightColorSchemeSecondStatesActiveBackground_2 = "darken(#F0F0F0, 5)";
+
+// @public (undocumented)
+export const ButtonLightColorSchemeSecondStatesActiveBorder = "#bdc7d1";
+
+// @public (undocumented)
+const ButtonLightColorSchemeSecondStatesActiveBorder_2 = "darken(#B3B3B3, 5)";
 
 // @public (undocumented)
 export const ButtonSizeBorderRadius = "3px";
 
 // @public (undocumented)
+const ButtonSizeBorderRadius_2 = "3px";
+
+// @public (undocumented)
 export const ButtonSizeBorderWidth = "1px";
+
+// @public (undocumented)
+const ButtonSizeBorderWidth_2 = "1px";
 
 // @public (undocumented)
 export const ButtonSizeHorizontalPadding = "16px";
 
 // @public (undocumented)
+const ButtonSizeHorizontalPadding_2 = "16px";
+
+// @public (undocumented)
 export const ButtonSizeVerticalPadding = "6px";
+
+// @public (undocumented)
+const ButtonSizeVerticalPadding_2 = "6px";
 
 // @public (undocumented)
 export const ButtonToggleSizeBorderRadius = "3px";
 
 // @public (undocumented)
+const ButtonToggleSizeBorderRadius_2 = "3px";
+
+// @public (undocumented)
 export const ButtonToggleSizeBorderSize = "1px";
 
 // @public (undocumented)
-export const CardDarkColorSchemeErrorBackground = "#832112";
+const ButtonToggleSizeBorderSize_2 = "1px";
 
 // @public (undocumented)
-export const CardDarkColorSchemeErrorShadow = "#4D4D4D";
+export const CardDarkColorSchemeErrorBackground = "#500013";
 
 // @public (undocumented)
-export const CardDarkColorSchemeErrorVerticalLine = "#E76E5C";
+const CardDarkColorSchemeErrorBackground_2 = "#832112";
 
 // @public (undocumented)
-export const CardDarkColorSchemeInfoBackground = "#114E77";
+export const CardDarkColorSchemeErrorShadow = "#800025";
 
 // @public (undocumented)
-export const CardDarkColorSchemeInfoShadow = "#4D4D4D";
+const CardDarkColorSchemeErrorShadow_2 = "#4D4D4D";
 
 // @public (undocumented)
-export const CardDarkColorSchemeInfoVerticalLine = "#57A4D7";
+export const CardDarkColorSchemeErrorVerticalLine = "#800025";
 
 // @public (undocumented)
-export const CardDarkColorSchemeSuccessBackground = "#276211";
+const CardDarkColorSchemeErrorVerticalLine_2 = "#E76E5C";
 
 // @public (undocumented)
-export const CardDarkColorSchemeSuccessShadow = "#4D4D4D";
+export const CardDarkColorSchemeInfoBackground = "#143641";
 
 // @public (undocumented)
-export const CardDarkColorSchemeSuccessVerticalLine = "#6FBA53";
+const CardDarkColorSchemeInfoBackground_2 = "#114E77";
 
 // @public (undocumented)
-export const CardDarkColorSchemeWarningBackground = "#7D5504";
+export const CardDarkColorSchemeInfoShadow = "#084453";
 
 // @public (undocumented)
-export const CardDarkColorSchemeWarningShadow = "#4D4D4D";
+const CardDarkColorSchemeInfoShadow_2 = "#4D4D4D";
 
 // @public (undocumented)
-export const CardDarkColorSchemeWarningVerticalLine = "#DFA739";
+export const CardDarkColorSchemeInfoVerticalLine = "#084453";
 
 // @public (undocumented)
-export const CardLightColorSchemeErrorBackground = "#FCEFEC";
+const CardDarkColorSchemeInfoVerticalLine_2 = "#57A4D7";
 
 // @public (undocumented)
-export const CardLightColorSchemeErrorShadow = "#E6E6E6";
+export const CardDarkColorSchemeSuccessBackground = "#103920";
 
 // @public (undocumented)
-export const CardLightColorSchemeErrorVerticalLine = "#E76E5C";
+const CardDarkColorSchemeSuccessBackground_2 = "#276211";
 
 // @public (undocumented)
-export const CardLightColorSchemeInfoBackground = "#EBF4FB";
+export const CardDarkColorSchemeSuccessShadow = "#004823";
 
 // @public (undocumented)
-export const CardLightColorSchemeInfoShadow = "#E6E6E6";
+const CardDarkColorSchemeSuccessShadow_2 = "#4D4D4D";
 
 // @public (undocumented)
-export const CardLightColorSchemeInfoVerticalLine = "#AAD1EC";
+export const CardDarkColorSchemeSuccessVerticalLine = "#004823";
 
 // @public (undocumented)
-export const CardLightColorSchemeSuccessBackground = "#EDF8E9";
+const CardDarkColorSchemeSuccessVerticalLine_2 = "#6FBA53";
 
 // @public (undocumented)
-export const CardLightColorSchemeSuccessShadow = "#E6E6E6";
+export const CardDarkColorSchemeWarningBackground = "#3e3015";
 
 // @public (undocumented)
-export const CardLightColorSchemeSuccessVerticalLine = "#B4DEA4";
+const CardDarkColorSchemeWarningBackground_2 = "#7D5504";
 
 // @public (undocumented)
-export const CardLightColorSchemeWarningBackground = "#FCF5E8";
+export const CardDarkColorSchemeWarningShadow = "#543803";
 
 // @public (undocumented)
-export const CardLightColorSchemeWarningShadow = "#E6E6E6";
+const CardDarkColorSchemeWarningShadow_2 = "#4D4D4D";
 
 // @public (undocumented)
-export const CardLightColorSchemeWarningVerticalLine = "#F0D49B";
+export const CardDarkColorSchemeWarningVerticalLine = "#543803";
+
+// @public (undocumented)
+const CardDarkColorSchemeWarningVerticalLine_2 = "#DFA739";
+
+// @public (undocumented)
+export const CardLightColorSchemeErrorBackground = "#fff3f3";
+
+// @public (undocumented)
+const CardLightColorSchemeErrorBackground_2 = "#FCEFEC";
+
+// @public (undocumented)
+export const CardLightColorSchemeErrorShadow = "#fbd6d6";
+
+// @public (undocumented)
+const CardLightColorSchemeErrorShadow_2 = "#E6E6E6";
+
+// @public (undocumented)
+export const CardLightColorSchemeErrorVerticalLine = "#fbd6d6";
+
+// @public (undocumented)
+const CardLightColorSchemeErrorVerticalLine_2 = "#E76E5C";
+
+// @public (undocumented)
+export const CardLightColorSchemeInfoBackground = "#ebf8fd";
+
+// @public (undocumented)
+const CardLightColorSchemeInfoBackground_2 = "#EBF4FB";
+
+// @public (undocumented)
+export const CardLightColorSchemeInfoShadow = "#afe6f9";
+
+// @public (undocumented)
+const CardLightColorSchemeInfoShadow_2 = "#E6E6E6";
+
+// @public (undocumented)
+export const CardLightColorSchemeInfoVerticalLine = "#afe6f9";
+
+// @public (undocumented)
+const CardLightColorSchemeInfoVerticalLine_2 = "#AAD1EC";
+
+// @public (undocumented)
+export const CardLightColorSchemeSuccessBackground = "#ecf9ef";
+
+// @public (undocumented)
+const CardLightColorSchemeSuccessBackground_2 = "#EDF8E9";
+
+// @public (undocumented)
+export const CardLightColorSchemeSuccessShadow = "#b6ebc3";
+
+// @public (undocumented)
+const CardLightColorSchemeSuccessShadow_2 = "#E6E6E6";
+
+// @public (undocumented)
+export const CardLightColorSchemeSuccessVerticalLine = "#b6ebc3";
+
+// @public (undocumented)
+const CardLightColorSchemeSuccessVerticalLine_2 = "#B4DEA4";
+
+// @public (undocumented)
+export const CardLightColorSchemeWarningBackground = "#fff4dd";
+
+// @public (undocumented)
+const CardLightColorSchemeWarningBackground_2 = "#FCF5E8";
+
+// @public (undocumented)
+export const CardLightColorSchemeWarningShadow = "#fcdda6";
+
+// @public (undocumented)
+const CardLightColorSchemeWarningShadow_2 = "#E6E6E6";
+
+// @public (undocumented)
+export const CardLightColorSchemeWarningVerticalLine = "#fcdda6";
+
+// @public (undocumented)
+const CardLightColorSchemeWarningVerticalLine_2 = "#F0D49B";
 
 // @public (undocumented)
 export const CardSizeVerticalLine = "4px";
 
 // @public (undocumented)
-export const CheckboxDarkColorSchemeBorder = "#999999";
+const CardSizeVerticalLine_2 = "4px";
 
 // @public (undocumented)
-export const CheckboxDarkColorSchemeStatesCheckedBackground = "#206EA2";
+export const CheckboxDarkColorSchemeBorder = "#515e69";
 
 // @public (undocumented)
-export const CheckboxDarkColorSchemeStatesCheckedBorder = "#57A4D7";
+const CheckboxDarkColorSchemeBorder_2 = "#999999";
 
 // @public (undocumented)
-export const CheckboxDarkColorSchemeStatesFocusedBorder = "#57A4D7";
+export const CheckboxDarkColorSchemeStatesCheckedBackground = "#0059b8";
 
 // @public (undocumented)
-export const CheckboxDarkColorSchemeStatesFocusedShadow = "inset 0 0 0 1px #333333, 0 0 0 1px #57A4D7";
+const CheckboxDarkColorSchemeStatesCheckedBackground_2 = "#206EA2";
+
+// @public (undocumented)
+export const CheckboxDarkColorSchemeStatesCheckedBorder = "#0059b8";
+
+// @public (undocumented)
+const CheckboxDarkColorSchemeStatesCheckedBorder_2 = "#57A4D7";
+
+// @public (undocumented)
+export const CheckboxDarkColorSchemeStatesFocusedBorder = "#4187ff";
+
+// @public (undocumented)
+const CheckboxDarkColorSchemeStatesFocusedBorder_2 = "#57A4D7";
+
+// @public (undocumented)
+export const CheckboxDarkColorSchemeStatesFocusedShadow = "0 0 0 1px #4187ff";
+
+// @public (undocumented)
+const CheckboxDarkColorSchemeStatesFocusedShadow_2 = "0 0 0 1px #57A4D7";
 
 // @public (undocumented)
 export const CheckboxFontDefault = "body";
 
 // @public (undocumented)
-export const CheckboxLightColorSchemeBorder = "#B3B3B3";
+const CheckboxFontDefault_2 = "body";
 
 // @public (undocumented)
-export const CheckboxLightColorSchemeStatesCheckedBackground = "#338FCC";
+export const CheckboxLightColorSchemeBorder = "#bdc7d1";
 
 // @public (undocumented)
-export const CheckboxLightColorSchemeStatesCheckedBorder = "#206EA2";
+const CheckboxLightColorSchemeBorder_2 = "#B3B3B3";
 
 // @public (undocumented)
-export const CheckboxLightColorSchemeStatesFocusedBorder = "#206EA2";
+export const CheckboxLightColorSchemeStatesCheckedBackground = "#0374eb";
 
 // @public (undocumented)
-export const CheckboxLightColorSchemeStatesFocusedShadow = "inset 0 0 0 1px white, 0 0 0 1px #206EA2";
+const CheckboxLightColorSchemeStatesCheckedBackground_2 = "#338FCC";
+
+// @public (undocumented)
+export const CheckboxLightColorSchemeStatesCheckedBorder = "#0374eb";
+
+// @public (undocumented)
+const CheckboxLightColorSchemeStatesCheckedBorder_2 = "#206EA2";
+
+// @public (undocumented)
+export const CheckboxLightColorSchemeStatesFocusedBorder = "#0374eb";
+
+// @public (undocumented)
+const CheckboxLightColorSchemeStatesFocusedBorder_2 = "#206EA2";
+
+// @public (undocumented)
+export const CheckboxLightColorSchemeStatesFocusedShadow = "0 0 0 1px #0374eb";
+
+// @public (undocumented)
+const CheckboxLightColorSchemeStatesFocusedShadow_2 = "0 0 0 1px #206EA2";
 
 // @public (undocumented)
 export const CheckboxSizeBorderWidth = "1px";
 
 // @public (undocumented)
+const CheckboxSizeBorderWidth_2 = "1px";
+
+// @public (undocumented)
 export const CheckboxSizeLabelMargin = "8px";
+
+// @public (undocumented)
+const CheckboxSizeLabelMargin_2 = "8px";
 
 // @public (undocumented)
 export const CheckboxSizeToggleBoxShadow = "inset 0 0 1px 0 rgba(0, 0, 0, 0.2)";
 
 // @public (undocumented)
+const CheckboxSizeToggleBoxShadow_2 = "inset 0 0 1px 0 rgba(0, 0, 0, 0.2)";
+
+// @public (undocumented)
 export const CheckboxSizeWidth = "16px";
 
 // @public (undocumented)
+const CheckboxSizeWidth_2 = "16px";
+
+// @public (undocumented)
 export const ColorBluePalette: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A200: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A200: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+const ColorBluePalette_2: {
     "40": {
         value: string;
         filePath: string;
@@ -1309,6 +2462,399 @@ export const ColorGreenPalette: {
         };
         path: string[];
     };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+const ColorGreenPalette_2: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
     A100: {
         value: string;
         filePath: string;
@@ -1522,6 +3068,458 @@ export const ColorGreenPalette: {
 
 // @public (undocumented)
 export const ColorGreyPalette: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A40: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A60: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A200: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A300: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A500: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+const ColorGreyPalette_2: {
     "40": {
         value: string;
         filePath: string;
@@ -1958,7 +3956,794 @@ export const ColorGreyPalette: {
 };
 
 // @public (undocumented)
+export const ColorPurplePalette: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A200: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
 export const ColorRedPalette: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+const ColorRedPalette_2: {
     "40": {
         value: string;
         filePath: string;
@@ -2317,6 +5102,400 @@ export const ColorRedPalette: {
             path: string[];
         };
         A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+export const ColorTealPalette: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A200: {
             value: string;
             filePath: string;
             isSource: boolean;
@@ -2502,6 +5681,21 @@ export const ColorYellowPalette: {
         };
         path: string[];
     };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
     A100: {
         value: string;
         filePath: string;
@@ -2714,22 +5908,418 @@ export const ColorYellowPalette: {
 };
 
 // @public (undocumented)
-export const DarkColorSchemeBackgroundBackground = "#333333";
+const ColorYellowPalette_2: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
 
 // @public (undocumented)
-export const DarkColorSchemeBackgroundBackgroundDisabled = "#666666";
+export const DarkColorSchemeBackgroundBackground = "#19252f";
+
+// @public (undocumented)
+const DarkColorSchemeBackgroundBackground_2 = "#333333";
+
+// @public (undocumented)
+export const DarkColorSchemeBackgroundBackgroundDisabled = "#333f4a";
+
+// @public (undocumented)
+const DarkColorSchemeBackgroundBackgroundDisabled_2 = "#666666";
 
 // @public (undocumented)
 export const DarkColorSchemeBackgroundOverlayActive = "rgba(black, 0.1)";
 
 // @public (undocumented)
-export const DarkColorSchemeBackgroundOverlayDisabled = "rgba(white, 0.2)";
+const DarkColorSchemeBackgroundOverlayActive_2 = "rgba(black, 0.1)";
+
+// @public (undocumented)
+export const DarkColorSchemeBackgroundOverlayDisabled = "rgba(black, 0.2)";
+
+// @public (undocumented)
+const DarkColorSchemeBackgroundOverlayDisabled_2 = "rgba(white, 0.2)";
 
 // @public (undocumented)
 export const DarkColorSchemeBackgroundOverlayHover = "rgba(black, 0.05)";
 
 // @public (undocumented)
-export const DarkColorSchemeErrorDefault = "#E76E5C";
+const DarkColorSchemeBackgroundOverlayHover_2 = "rgba(black, 0.05)";
+
+// @public (undocumented)
+export const DarkColorSchemeErrorDefault = "#b9023a";
+
+// @public (undocumented)
+const DarkColorSchemeErrorDefault_2 = "#E76E5C";
 
 // @public (undocumented)
 export const DarkColorSchemeErrorPalette: {
@@ -2898,6 +6488,21 @@ export const DarkColorSchemeErrorPalette: {
         };
         path: string[];
     };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
     A100: {
         value: string;
         filePath: string;
@@ -3110,25 +6715,424 @@ export const DarkColorSchemeErrorPalette: {
 };
 
 // @public (undocumented)
-export const DarkColorSchemeForegroundBorder = "#808080";
+const DarkColorSchemeErrorPalette_2: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
 
 // @public (undocumented)
-export const DarkColorSchemeForegroundDivider = "#666666";
+export const DarkColorSchemeForegroundBorder = "#515e69";
 
 // @public (undocumented)
-export const DarkColorSchemeForegroundIcon = "#999999";
+const DarkColorSchemeForegroundBorder_2 = "#808080";
 
 // @public (undocumented)
-export const DarkColorSchemeForegroundText = "#F0F0F0";
+export const DarkColorSchemeForegroundDivider = "#333f4a";
 
 // @public (undocumented)
-export const DarkColorSchemeForegroundTextDisabled = "#999999";
+const DarkColorSchemeForegroundDivider_2 = "#666666";
 
 // @public (undocumented)
-export const DarkColorSchemeForegroundTextLessContrast = "#999999";
+export const DarkColorSchemeForegroundIcon = "#8c99a5";
 
 // @public (undocumented)
-export const DarkColorSchemeInfoDefault = "#57A4D7";
+const DarkColorSchemeForegroundIcon_2 = "#999999";
+
+// @public (undocumented)
+export const DarkColorSchemeForegroundText = "#f2f5f9";
+
+// @public (undocumented)
+const DarkColorSchemeForegroundText_2 = "#F0F0F0";
+
+// @public (undocumented)
+export const DarkColorSchemeForegroundTextDisabled = "#6d7a86";
+
+// @public (undocumented)
+const DarkColorSchemeForegroundTextDisabled_2 = "#999999";
+
+// @public (undocumented)
+export const DarkColorSchemeForegroundTextLessContrast = "#8c99a5";
+
+// @public (undocumented)
+const DarkColorSchemeForegroundTextLessContrast_2 = "#999999";
+
+// @public (undocumented)
+export const DarkColorSchemeInfoDefault = "#0c6579";
+
+// @public (undocumented)
+const DarkColorSchemeInfoDefault_2 = "#57A4D7";
 
 // @public (undocumented)
 export const DarkColorSchemeInfoPalette: {
@@ -3297,22 +7301,7 @@ export const DarkColorSchemeInfoPalette: {
         };
         path: string[];
     };
-    A100: {
-        value: string;
-        filePath: string;
-        isSource: boolean;
-        original: {
-            value: string;
-        };
-        name: string;
-        attributes: {
-            category: string;
-            type: string;
-            item: string;
-        };
-        path: string[];
-    };
-    A200: {
+    "900": {
         value: string;
         filePath: string;
         isSource: boolean;
@@ -3540,10 +7529,7 @@ export const DarkColorSchemeInfoPalette: {
 };
 
 // @public (undocumented)
-export const DarkColorSchemePrimaryDefault = "#57A4D7";
-
-// @public (undocumented)
-export const DarkColorSchemePrimaryPalette: {
+const DarkColorSchemeInfoPalette_2: {
     "40": {
         value: string;
         filePath: string;
@@ -3952,10 +7938,1304 @@ export const DarkColorSchemePrimaryPalette: {
 };
 
 // @public (undocumented)
-export const DarkColorSchemeSecondDefault = "#999999";
+export const DarkColorSchemePrimaryDefault = "#0059b8";
+
+// @public (undocumented)
+const DarkColorSchemePrimaryDefault_2 = "#57A4D7";
+
+// @public (undocumented)
+export const DarkColorSchemePrimaryPalette: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A200: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A200: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+const DarkColorSchemePrimaryPalette_2: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A200: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A200: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+export const DarkColorSchemeSecondDefault = "#515e69";
+
+// @public (undocumented)
+const DarkColorSchemeSecondDefault_2 = "#999999";
 
 // @public (undocumented)
 export const DarkColorSchemeSecondPalette: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A40: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A60: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A200: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A300: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A500: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+const DarkColorSchemeSecondPalette_2: {
     "40": {
         value: string;
         filePath: string;
@@ -4395,16 +9675,34 @@ export const DarkColorSchemeSecondPalette: {
 export const DarkColorSchemeStatesDisabledOpacity = 0.3;
 
 // @public (undocumented)
-export const DarkColorSchemeStatesFocusedColor = "#57A4D7";
+const DarkColorSchemeStatesDisabledOpacity_2 = 0.3;
+
+// @public (undocumented)
+export const DarkColorSchemeStatesFocusedColor = "#4187ff";
+
+// @public (undocumented)
+const DarkColorSchemeStatesFocusedColor_2 = "#57A4D7";
+
+// @public (undocumented)
+export const DarkColorSchemeStatesFocusedColorError = "#b9023a";
 
 // @public (undocumented)
 export const DarkColorSchemeStatesPressedShadow = "inset 1px 2px 2px 0 rgba(black, 0.2)";
 
 // @public (undocumented)
-export const DarkColorSchemeStatesSelectedColor = "#114E77";
+const DarkColorSchemeStatesPressedShadow_2 = "inset 1px 2px 2px 0 rgba(black, 0.2)";
 
 // @public (undocumented)
-export const DarkColorSchemeSuccessDefault = "#6FBA53";
+export const DarkColorSchemeStatesSelectedColor = "#014b9d";
+
+// @public (undocumented)
+const DarkColorSchemeStatesSelectedColor_2 = "#114E77";
+
+// @public (undocumented)
+export const DarkColorSchemeSuccessDefault = "#016b37";
+
+// @public (undocumented)
+const DarkColorSchemeSuccessDefault_2 = "#6FBA53";
 
 // @public (undocumented)
 export const DarkColorSchemeSuccessPalette: {
@@ -4573,6 +9871,21 @@ export const DarkColorSchemeSuccessPalette: {
         };
         path: string[];
     };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
     A100: {
         value: string;
         filePath: string;
@@ -4785,7 +10098,388 @@ export const DarkColorSchemeSuccessPalette: {
 };
 
 // @public (undocumented)
-export const DarkColorSchemeWarningDefault = "#DFA739";
+const DarkColorSchemeSuccessPalette_2: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+export const DarkColorSchemeWarningDefault = "#7e5406";
+
+// @public (undocumented)
+const DarkColorSchemeWarningDefault_2 = "#DFA739";
 
 // @public (undocumented)
 export const DarkColorSchemeWarningPalette: {
@@ -4954,6 +10648,21 @@ export const DarkColorSchemeWarningPalette: {
         };
         path: string[];
     };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
     A100: {
         value: string;
         filePath: string;
@@ -5166,349 +10875,7 @@ export const DarkColorSchemeWarningPalette: {
 };
 
 // @public (undocumented)
-export const DatepickerBodyDarkColorSchemeStatesSelectedBackground = "#114E77";
-
-// @public (undocumented)
-export const DatepickerBodyDarkColorSchemeStatesSelectedColor = "#338FCC";
-
-// @public (undocumented)
-export const DatepickerBodyFontLabel = "body-strong";
-
-// @public (undocumented)
-export const DatepickerBodyFontToday = "body-strong";
-
-// @public (undocumented)
-export const DatepickerBodyLightColorSchemeStatesSelectedBackground = "#D8EAF7";
-
-// @public (undocumented)
-export const DatepickerBodyLightColorSchemeStatesSelectedColor = "#338FCC";
-
-// @public (undocumented)
-export const DatepickerBodySizeCellBorderWidth = "1px";
-
-// @public (undocumented)
-export const DatepickerBodySizeCellMargin = "5%";
-
-// @public (undocumented)
-export const DatepickerBodySizeCellMinSize = "32px";
-
-// @public (undocumented)
-export const DatepickerBodySizeCellPadding = "8px";
-
-// @public (undocumented)
-export const DatepickerBodySizeLabelPaddings = "8px 28px 12px 12px";
-
-// @public (undocumented)
-export const DatepickerCalendarFontDefault = "body";
-
-// @public (undocumented)
-export const DatepickerCalendarFontHeader = "caption";
-
-// @public (undocumented)
-export const DatepickerCalendarSizeDividerWidth = "1px";
-
-// @public (undocumented)
-export const DatepickerCalendarSizeIconBorderWidth = "2px";
-
-// @public (undocumented)
-export const DatepickerCalendarSizeIconNexIconTransform = "translateX(-2px) rotate(45deg)";
-
-// @public (undocumented)
-export const DatepickerCalendarSizeIconPrevIconTransform = "translateX(2px) rotate(-45deg)";
-
-// @public (undocumented)
-export const DatepickerCalendarSizePaddingBlocks = "12px";
-
-// @public (undocumented)
-export const DatepickerCalendarSizePaddingBottom = "8px";
-
-// @public (undocumented)
-export const DatepickerCalendarSizePaddingHorizontal = "8px";
-
-// @public (undocumented)
-export const DatepickerCalendarSizePaddingTop = "16px";
-
-// @public (undocumented)
-export const DatepickerInputSizeWidth = "130px";
-
-// @public (undocumented)
-export const DatepickerToggleSizeHeight = "30px";
-
-// @public (undocumented)
-export const DatepickerToggleSizeWidth = "30px";
-
-// @public (undocumented)
-export const DividerSizeInsetMargin = "80px";
-
-// @public (undocumented)
-export const DividerSizeWidth = "1px";
-
-// @public (undocumented)
-export const DropdownDividerSizeHeight = "1px";
-
-// @public (undocumented)
-export const DropdownDividerSizeMargin = "4px 0";
-
-// @public (undocumented)
-export const DropdownGroupHeaderFontDefault = "body-strong";
-
-// @public (undocumented)
-export const DropdownGroupHeaderFontSmall = "caption-caps";
-
-// @public (undocumented)
-export const DropdownGroupHeaderSizeDefaultPadding = "6px 15px";
-
-// @public (undocumented)
-export const DropdownGroupHeaderSizeSmallPadding = "8px 15px";
-
-// @public (undocumented)
-export const DropdownItemFontCaption = "caption";
-
-// @public (undocumented)
-export const DropdownItemFontDefault = "body";
-
-// @public (undocumented)
-export const DropdownItemSizeIconPadding = "0 8px 2px 0";
-
-// @public (undocumented)
-export const DropdownItemSizePadding = "5px 15px";
-
-// @public (undocumented)
-export const DropdownPanelSizeBorderRadius = "3px";
-
-// @public (undocumented)
-export const DropdownPanelSizeBorderWidth = "1px";
-
-// @public (undocumented)
-export const DropdownPanelSizeMaxWidth = "640px";
-
-// @public (undocumented)
-export const DropdownPanelSizePadding = "4px 0";
-
-// @public (undocumented)
-export const DropdownTriggerSizeIconPaddingRight = "8px";
-
-// @public (undocumented)
-export const ExtendedTooltipDarkColorSchemeBackground = "#4D4D4D";
-
-// @public (undocumented)
-export const ExtendedTooltipDarkColorSchemeBorder = "#999999";
-
-// @public (undocumented)
-export const ExtendedTooltipDarkColorSchemeShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
-
-// @public (undocumented)
-export const ExtendedTooltipDarkColorSchemeText = "#F0F0F0";
-
-// @public (undocumented)
-export const ExtendedTooltipFontDefault = "caption";
-
-// @public (undocumented)
-export const ExtendedTooltipHeaderDarkColorSchemeBackground = "#4D4D4D";
-
-// @public (undocumented)
-export const ExtendedTooltipHeaderDarkColorSchemeBorder = "#F0F0F0";
-
-// @public (undocumented)
-export const ExtendedTooltipHeaderDarkColorSchemeText = "#F0F0F0";
-
-// @public (undocumented)
-export const ExtendedTooltipHeaderFontDefault = "subheading";
-
-// @public (undocumented)
-export const ExtendedTooltipHeaderLightColorSchemeBackground = "white";
-
-// @public (undocumented)
-export const ExtendedTooltipHeaderLightColorSchemeBorder = "#E6E6E6";
-
-// @public (undocumented)
-export const ExtendedTooltipHeaderLightColorSchemeText = "#4D4D4D";
-
-// @public (undocumented)
-export const ExtendedTooltipHeaderSizeHeight = "40px";
-
-// @public (undocumented)
-export const ExtendedTooltipHeaderSizePadding = "10px 16px";
-
-// @public (undocumented)
-export const ExtendedTooltipLightColorSchemeBackground = "white";
-
-// @public (undocumented)
-export const ExtendedTooltipLightColorSchemeBorder = "#B3B3B3";
-
-// @public (undocumented)
-export const ExtendedTooltipLightColorSchemeShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
-
-// @public (undocumented)
-export const ExtendedTooltipLightColorSchemeText = "#4D4D4D";
-
-// @public (undocumented)
-export const ExtendedTooltipSizeArrowSize = "12px";
-
-// @public (undocumented)
-export const ExtendedTooltipSizeBorderRadius = "3px";
-
-// @public (undocumented)
-export const ExtendedTooltipSizeMaxHeight = "480px";
-
-// @public (undocumented)
-export const ExtendedTooltipSizePadding = "8px 16px";
-
-// @public (undocumented)
-export const ExtendedTooltipSizeTriggerMargin = "9px";
-
-// @public (undocumented)
-export const FontFamilyBase = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
-
-// @public (undocumented)
-export const FontFamilyMonospace = "'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace";
-
-// @public (undocumented)
-export const FormFieldDarkColorSchemeBackground = "#333333";
-
-// @public (undocumented)
-export const FormFieldDarkColorSchemeBorder = "#999999";
-
-// @public (undocumented)
-export const FormFieldDarkColorSchemeStatesHoverBorder = "#CCCCCC";
-
-// @public (undocumented)
-export const FormFieldDarkColorSchemeStatesInvalidBackground = "transparent";
-
-// @public (undocumented)
-export const FormFieldDarkColorSchemeStatesInvalidBorder = "#E76E5C";
-
-// @public (undocumented)
-export const FormFieldFontDefault = "body";
-
-// @public (undocumented)
-export const FormFieldHintFontDefault = "caption";
-
-// @public (undocumented)
-export const FormFieldHintSizeMarginTop = "4px";
-
-// @public (undocumented)
-export const FormFieldLightColorSchemeBackground = "white";
-
-// @public (undocumented)
-export const FormFieldLightColorSchemeBorder = "#B3B3B3";
-
-// @public (undocumented)
-export const FormFieldLightColorSchemeStatesHoverBorder = "#999999";
-
-// @public (undocumented)
-export const FormFieldLightColorSchemeStatesInvalidBackground = "transparent";
-
-// @public (undocumented)
-export const FormFieldLightColorSchemeStatesInvalidBorder = "#E76E5C";
-
-// @public (undocumented)
-export const FormFieldSizeBorderRadius = "3px";
-
-// @public (undocumented)
-export const FormFieldSizeBorderWidth = "1px";
-
-// @public (undocumented)
-export const FormFieldSizeButtonWidth = "32px";
-
-// @public (undocumented)
-export const FormsDarkColorSchemeLabel = "#999999";
-
-// @public (undocumented)
-export const FormsDarkColorSchemeLegend = "#F0F0F0";
-
-// @public (undocumented)
-export const FormsFontDefaultLabel = "body";
-
-// @public (undocumented)
-export const FormsFontDefaultLegend = "subheading";
-
-// @public (undocumented)
-export const FormsLightColorSchemeLabel = "#999999";
-
-// @public (undocumented)
-export const FormsLightColorSchemeLegend = "#4D4D4D";
-
-// @public (undocumented)
-export const FormsSizeHorizontalControlPaddingLeft = "16px";
-
-// @public (undocumented)
-export const FormsSizeHorizontalLabelPaddingBottom = "0";
-
-// @public (undocumented)
-export const FormsSizeHorizontalLabelPaddingTop = "6px";
-
-// @public (undocumented)
-export const FormsSizeHorizontalLegendMarginBottom = "16px";
-
-// @public (undocumented)
-export const FormsSizeHorizontalLegendMarginTop = "32px";
-
-// @public (undocumented)
-export const FormsSizeHorizontalRowMarginBottom = "20px";
-
-// @public (undocumented)
-export const FormsSizeVerticalControlPaddingLeft = "24px";
-
-// @public (undocumented)
-export const FormsSizeVerticalLabelPaddingBottom = "4px";
-
-// @public (undocumented)
-export const FormsSizeVerticalLabelPaddingTop = "0";
-
-// @public (undocumented)
-export const FormsSizeVerticalLegendMarginBottom = "12px";
-
-// @public (undocumented)
-export const FormsSizeVerticalLegendMarginTop = "32px";
-
-// @public (undocumented)
-export const FormsSizeVerticalRowMarginBottom = "16px";
-
-// @public (undocumented)
-export const IconButtonSizeHorizontalPadding = "8px";
-
-// @public (undocumented)
-export const IconButtonSizeIconHorizontalPadding = "16px";
-
-// @public (undocumented)
-export const IconButtonSizeVerticalPadding = "6px";
-
-// @public (undocumented)
-export const InputFontDefault = "body";
-
-// @public (undocumented)
-export const InputFontMonospace = "body-mono";
-
-// @public (undocumented)
-export const InputSizeMinHeight = "30px";
-
-// @public (undocumented)
-export const InputSizePadding = "5px 16px";
-
-// @public (undocumented)
-export const InputSizeWidth = "100%";
-
-// @public (undocumented)
-export const LightColorSchemeBackgroundBackground = "white";
-
-// @public (undocumented)
-export const LightColorSchemeBackgroundBackgroundDisabled = "#F0F0F0";
-
-// @public (undocumented)
-export const LightColorSchemeBackgroundOverlayActive = "rgba(black, 0.1)";
-
-// @public (undocumented)
-export const LightColorSchemeBackgroundOverlayDisabled = "rgba(white, 0.3)";
-
-// @public (undocumented)
-export const LightColorSchemeBackgroundOverlayHover = "rgba(black, 0.05)";
-
-// @public (undocumented)
-export const LightColorSchemeErrorDefault = "#E76E5C";
-
-// @public (undocumented)
-export const LightColorSchemeErrorPalette: {
+const DarkColorSchemeWarningPalette_2: {
     "40": {
         value: string;
         filePath: string;
@@ -5886,28 +11253,2850 @@ export const LightColorSchemeErrorPalette: {
 };
 
 // @public (undocumented)
-export const LightColorSchemeForegroundBorder = "#B3B3B3";
+export const DatepickerBodyDarkColorSchemeStatesSelectedBackground = "#014b9d";
 
 // @public (undocumented)
-export const LightColorSchemeForegroundDivider = "#E6E6E6";
+const DatepickerBodyDarkColorSchemeStatesSelectedBackground_2 = "#114E77";
 
 // @public (undocumented)
-export const LightColorSchemeForegroundIcon = "#999999";
+export const DatepickerBodyDarkColorSchemeStatesSelectedColor = "#4187ff";
 
 // @public (undocumented)
-export const LightColorSchemeForegroundText = "#4D4D4D";
+const DatepickerBodyDarkColorSchemeStatesSelectedColor_2 = "#338FCC";
 
 // @public (undocumented)
-export const LightColorSchemeForegroundTextDisabled = "#B3B3B3";
+export const DatepickerBodyFontLabel = "body-strong";
 
 // @public (undocumented)
-export const LightColorSchemeForegroundTextLessContrast = "#999999";
+const DatepickerBodyFontLabel_2 = "body-strong";
 
 // @public (undocumented)
-export const LightColorSchemeInfoDefault = "#AAD1EC";
+export const DatepickerBodyFontToday = "body-strong";
+
+// @public (undocumented)
+const DatepickerBodyFontToday_2 = "body-strong";
+
+// @public (undocumented)
+export const DatepickerBodyLightColorSchemeStatesSelectedBackground = "#e7f1ff";
+
+// @public (undocumented)
+const DatepickerBodyLightColorSchemeStatesSelectedBackground_2 = "#D8EAF7";
+
+// @public (undocumented)
+export const DatepickerBodyLightColorSchemeStatesSelectedColor = "#0374eb";
+
+// @public (undocumented)
+const DatepickerBodyLightColorSchemeStatesSelectedColor_2 = "#338FCC";
+
+// @public (undocumented)
+export const DatepickerBodySizeCellBorderWidth = "1px";
+
+// @public (undocumented)
+const DatepickerBodySizeCellBorderWidth_2 = "1px";
+
+// @public (undocumented)
+export const DatepickerBodySizeCellMargin = "5%";
+
+// @public (undocumented)
+const DatepickerBodySizeCellMargin_2 = "5%";
+
+// @public (undocumented)
+export const DatepickerBodySizeCellMinSize = "32px";
+
+// @public (undocumented)
+const DatepickerBodySizeCellMinSize_2 = "32px";
+
+// @public (undocumented)
+export const DatepickerBodySizeCellPadding = "8px";
+
+// @public (undocumented)
+const DatepickerBodySizeCellPadding_2 = "8px";
+
+// @public (undocumented)
+export const DatepickerBodySizeLabelPaddings = "8px 28px 12px 12px";
+
+// @public (undocumented)
+const DatepickerBodySizeLabelPaddings_2 = "8px 28px 12px 12px";
+
+// @public (undocumented)
+export const DatepickerCalendarFontDefault = "body";
+
+// @public (undocumented)
+const DatepickerCalendarFontDefault_2 = "body";
+
+// @public (undocumented)
+export const DatepickerCalendarFontHeader = "caption";
+
+// @public (undocumented)
+const DatepickerCalendarFontHeader_2 = "caption";
+
+// @public (undocumented)
+export const DatepickerCalendarSizeDividerWidth = "1px";
+
+// @public (undocumented)
+const DatepickerCalendarSizeDividerWidth_2 = "1px";
+
+// @public (undocumented)
+export const DatepickerCalendarSizeIconBorderWidth = "2px";
+
+// @public (undocumented)
+const DatepickerCalendarSizeIconBorderWidth_2 = "2px";
+
+// @public (undocumented)
+export const DatepickerCalendarSizeIconNexIconTransform = "translateX(-2px) rotate(45deg)";
+
+// @public (undocumented)
+const DatepickerCalendarSizeIconNexIconTransform_2 = "translateX(-2px) rotate(45deg)";
+
+// @public (undocumented)
+export const DatepickerCalendarSizeIconPrevIconTransform = "translateX(2px) rotate(-45deg)";
+
+// @public (undocumented)
+const DatepickerCalendarSizeIconPrevIconTransform_2 = "translateX(2px) rotate(-45deg)";
+
+// @public (undocumented)
+export const DatepickerCalendarSizePaddingBlocks = "12px";
+
+// @public (undocumented)
+const DatepickerCalendarSizePaddingBlocks_2 = "12px";
+
+// @public (undocumented)
+export const DatepickerCalendarSizePaddingBottom = "8px";
+
+// @public (undocumented)
+const DatepickerCalendarSizePaddingBottom_2 = "8px";
+
+// @public (undocumented)
+export const DatepickerCalendarSizePaddingHorizontal = "8px";
+
+// @public (undocumented)
+const DatepickerCalendarSizePaddingHorizontal_2 = "8px";
+
+// @public (undocumented)
+export const DatepickerCalendarSizePaddingTop = "16px";
+
+// @public (undocumented)
+const DatepickerCalendarSizePaddingTop_2 = "16px";
+
+// @public (undocumented)
+export const DatepickerInputSizeWidth = "130px";
+
+// @public (undocumented)
+const DatepickerInputSizeWidth_2 = "130px";
+
+// @public (undocumented)
+export const DatepickerToggleSizeHeight = "30px";
+
+// @public (undocumented)
+const DatepickerToggleSizeHeight_2 = "30px";
+
+// @public (undocumented)
+export const DatepickerToggleSizeWidth = "30px";
+
+// @public (undocumented)
+const DatepickerToggleSizeWidth_2 = "30px";
+
+// @public (undocumented)
+export const DividerSizeInsetMargin = "80px";
+
+// @public (undocumented)
+const DividerSizeInsetMargin_2 = "80px";
+
+// @public (undocumented)
+export const DividerSizeWidth = "1px";
+
+// @public (undocumented)
+const DividerSizeWidth_2 = "1px";
+
+// @public (undocumented)
+export const DropdownDividerSizeHeight = "1px";
+
+// @public (undocumented)
+const DropdownDividerSizeHeight_2 = "1px";
+
+// @public (undocumented)
+export const DropdownDividerSizeMargin = "4px 0";
+
+// @public (undocumented)
+const DropdownDividerSizeMargin_2 = "4px 0";
+
+// @public (undocumented)
+export const DropdownGroupHeaderFontDefault = "body-strong";
+
+// @public (undocumented)
+const DropdownGroupHeaderFontDefault_2 = "body-strong";
+
+// @public (undocumented)
+export const DropdownGroupHeaderFontSmall = "caption-caps";
+
+// @public (undocumented)
+const DropdownGroupHeaderFontSmall_2 = "caption-caps";
+
+// @public (undocumented)
+export const DropdownGroupHeaderSizeDefaultPadding = "6px 15px";
+
+// @public (undocumented)
+const DropdownGroupHeaderSizeDefaultPadding_2 = "6px 15px";
+
+// @public (undocumented)
+export const DropdownGroupHeaderSizeSmallPadding = "8px 15px";
+
+// @public (undocumented)
+const DropdownGroupHeaderSizeSmallPadding_2 = "8px 15px";
+
+// @public (undocumented)
+export const DropdownItemFontCaption = "caption";
+
+// @public (undocumented)
+const DropdownItemFontCaption_2 = "caption";
+
+// @public (undocumented)
+export const DropdownItemFontDefault = "body";
+
+// @public (undocumented)
+const DropdownItemFontDefault_2 = "body";
+
+// @public (undocumented)
+export const DropdownItemSizeIconPadding = "0 8px 2px 0";
+
+// @public (undocumented)
+const DropdownItemSizeIconPadding_2 = "0 8px 2px 0";
+
+// @public (undocumented)
+export const DropdownItemSizePadding = "5px 15px";
+
+// @public (undocumented)
+const DropdownItemSizePadding_2 = "5px 15px";
+
+// @public (undocumented)
+export const DropdownPanelSizeBorderRadius = "3px";
+
+// @public (undocumented)
+const DropdownPanelSizeBorderRadius_2 = "3px";
+
+// @public (undocumented)
+export const DropdownPanelSizeBorderWidth = "1px";
+
+// @public (undocumented)
+const DropdownPanelSizeBorderWidth_2 = "1px";
+
+// @public (undocumented)
+export const DropdownPanelSizeMaxWidth = "640px";
+
+// @public (undocumented)
+const DropdownPanelSizeMaxWidth_2 = "640px";
+
+// @public (undocumented)
+export const DropdownPanelSizePadding = "4px 0";
+
+// @public (undocumented)
+const DropdownPanelSizePadding_2 = "4px 0";
+
+// @public (undocumented)
+export const DropdownTriggerSizeIconPaddingRight = "8px";
+
+// @public (undocumented)
+const DropdownTriggerSizeIconPaddingRight_2 = "8px";
+
+// @public (undocumented)
+export const ExtendedTooltipDarkColorSchemeBackground = "#333f4a";
+
+// @public (undocumented)
+const ExtendedTooltipDarkColorSchemeBackground_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const ExtendedTooltipDarkColorSchemeBorder = "#333f4a";
+
+// @public (undocumented)
+const ExtendedTooltipDarkColorSchemeBorder_2 = "#999999";
+
+// @public (undocumented)
+export const ExtendedTooltipDarkColorSchemeShadow = "0 2px 4px 0 rgba(39, 51, 62, 0.2)";
+
+// @public (undocumented)
+const ExtendedTooltipDarkColorSchemeShadow_2 = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
+
+// @public (undocumented)
+export const ExtendedTooltipDarkColorSchemeText = "#f2f5f9";
+
+// @public (undocumented)
+const ExtendedTooltipDarkColorSchemeText_2 = "#F0F0F0";
+
+// @public (undocumented)
+export const ExtendedTooltipFontDefault = "caption";
+
+// @public (undocumented)
+const ExtendedTooltipFontDefault_2 = "caption";
+
+// @public (undocumented)
+export const ExtendedTooltipHeaderDarkColorSchemeBackground = "#333f4a";
+
+// @public (undocumented)
+const ExtendedTooltipHeaderDarkColorSchemeBackground_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const ExtendedTooltipHeaderDarkColorSchemeBorder = "#434f5a";
+
+// @public (undocumented)
+const ExtendedTooltipHeaderDarkColorSchemeBorder_2 = "#F0F0F0";
+
+// @public (undocumented)
+export const ExtendedTooltipHeaderDarkColorSchemeText = "#f2f5f9";
+
+// @public (undocumented)
+const ExtendedTooltipHeaderDarkColorSchemeText_2 = "#F0F0F0";
+
+// @public (undocumented)
+export const ExtendedTooltipHeaderFontDefault = "subheading";
+
+// @public (undocumented)
+const ExtendedTooltipHeaderFontDefault_2 = "subheading";
+
+// @public (undocumented)
+export const ExtendedTooltipHeaderLightColorSchemeBackground = "white";
+
+// @public (undocumented)
+const ExtendedTooltipHeaderLightColorSchemeBackground_2 = "white";
+
+// @public (undocumented)
+export const ExtendedTooltipHeaderLightColorSchemeBorder = "#d7dee4";
+
+// @public (undocumented)
+const ExtendedTooltipHeaderLightColorSchemeBorder_2 = "#E6E6E6";
+
+// @public (undocumented)
+export const ExtendedTooltipHeaderLightColorSchemeText = "#19252f";
+
+// @public (undocumented)
+const ExtendedTooltipHeaderLightColorSchemeText_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const ExtendedTooltipHeaderSizeHeight = "40px";
+
+// @public (undocumented)
+const ExtendedTooltipHeaderSizeHeight_2 = "40px";
+
+// @public (undocumented)
+export const ExtendedTooltipHeaderSizePadding = "10px 16px";
+
+// @public (undocumented)
+const ExtendedTooltipHeaderSizePadding_2 = "10px 16px";
+
+// @public (undocumented)
+export const ExtendedTooltipLightColorSchemeBackground = "white";
+
+// @public (undocumented)
+const ExtendedTooltipLightColorSchemeBackground_2 = "white";
+
+// @public (undocumented)
+export const ExtendedTooltipLightColorSchemeBorder = "#d7dee4";
+
+// @public (undocumented)
+const ExtendedTooltipLightColorSchemeBorder_2 = "#B3B3B3";
+
+// @public (undocumented)
+export const ExtendedTooltipLightColorSchemeShadow = "0 2px 4px 0 rgba(39, 51, 62, 0.2)";
+
+// @public (undocumented)
+const ExtendedTooltipLightColorSchemeShadow_2 = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
+
+// @public (undocumented)
+export const ExtendedTooltipLightColorSchemeText = "#19252f";
+
+// @public (undocumented)
+const ExtendedTooltipLightColorSchemeText_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const ExtendedTooltipSizeArrowSize = "12px";
+
+// @public (undocumented)
+const ExtendedTooltipSizeArrowSize_2 = "12px";
+
+// @public (undocumented)
+export const ExtendedTooltipSizeBorderRadius = "3px";
+
+// @public (undocumented)
+const ExtendedTooltipSizeBorderRadius_2 = "3px";
+
+// @public (undocumented)
+export const ExtendedTooltipSizeMaxHeight = "480px";
+
+// @public (undocumented)
+const ExtendedTooltipSizeMaxHeight_2 = "480px";
+
+// @public (undocumented)
+export const ExtendedTooltipSizePadding = "8px 16px";
+
+// @public (undocumented)
+const ExtendedTooltipSizePadding_2 = "8px 16px";
+
+// @public (undocumented)
+export const ExtendedTooltipSizeTriggerMargin = "9px";
+
+// @public (undocumented)
+const ExtendedTooltipSizeTriggerMargin_2 = "9px";
+
+// @public (undocumented)
+export const FontFamilyAccent = "'TT Positive', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+export const FontFamilyBase = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+const FontFamilyBase_2 = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+export const FontFamilyMonospace = "'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace";
+
+// @public (undocumented)
+const FontFamilyMonospace_2 = "'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace";
+
+// @public (undocumented)
+export const FormFieldDarkColorSchemeBackground = "transparent";
+
+// @public (undocumented)
+const FormFieldDarkColorSchemeBackground_2 = "#333333";
+
+// @public (undocumented)
+export const FormFieldDarkColorSchemeBorder = "#515e69";
+
+// @public (undocumented)
+const FormFieldDarkColorSchemeBorder_2 = "#999999";
+
+// @public (undocumented)
+export const FormFieldDarkColorSchemeStatesHoverBorder = "#515e69";
+
+// @public (undocumented)
+const FormFieldDarkColorSchemeStatesHoverBorder_2 = "#CCCCCC";
+
+// @public (undocumented)
+export const FormFieldDarkColorSchemeStatesInvalidBackground = "transparent";
+
+// @public (undocumented)
+const FormFieldDarkColorSchemeStatesInvalidBackground_2 = "transparent";
+
+// @public (undocumented)
+export const FormFieldDarkColorSchemeStatesInvalidBorder = "#b9023a";
+
+// @public (undocumented)
+const FormFieldDarkColorSchemeStatesInvalidBorder_2 = "#E76E5C";
+
+// @public (undocumented)
+export const FormFieldFontDefault = "body";
+
+// @public (undocumented)
+const FormFieldFontDefault_2 = "body";
+
+// @public (undocumented)
+export const FormFieldHintFontDefault = "caption";
+
+// @public (undocumented)
+const FormFieldHintFontDefault_2 = "caption";
+
+// @public (undocumented)
+export const FormFieldHintSizeMarginTop = "4px";
+
+// @public (undocumented)
+const FormFieldHintSizeMarginTop_2 = "4px";
+
+// @public (undocumented)
+export const FormFieldLightColorSchemeBackground = "white";
+
+// @public (undocumented)
+const FormFieldLightColorSchemeBackground_2 = "white";
+
+// @public (undocumented)
+export const FormFieldLightColorSchemeBorder = "#bdc7d1";
+
+// @public (undocumented)
+const FormFieldLightColorSchemeBorder_2 = "#B3B3B3";
+
+// @public (undocumented)
+export const FormFieldLightColorSchemeStatesHoverBorder = "#bdc7d1";
+
+// @public (undocumented)
+const FormFieldLightColorSchemeStatesHoverBorder_2 = "#999999";
+
+// @public (undocumented)
+export const FormFieldLightColorSchemeStatesInvalidBackground = "transparent";
+
+// @public (undocumented)
+const FormFieldLightColorSchemeStatesInvalidBackground_2 = "transparent";
+
+// @public (undocumented)
+export const FormFieldLightColorSchemeStatesInvalidBorder = "#db3c55";
+
+// @public (undocumented)
+const FormFieldLightColorSchemeStatesInvalidBorder_2 = "#E76E5C";
+
+// @public (undocumented)
+export const FormFieldSizeBorderRadius = "3px";
+
+// @public (undocumented)
+const FormFieldSizeBorderRadius_2 = "3px";
+
+// @public (undocumented)
+export const FormFieldSizeBorderWidth = "1px";
+
+// @public (undocumented)
+const FormFieldSizeBorderWidth_2 = "1px";
+
+// @public (undocumented)
+export const FormFieldSizeButtonWidth = "32px";
+
+// @public (undocumented)
+const FormFieldSizeButtonWidth_2 = "32px";
+
+// @public (undocumented)
+export const FormsDarkColorSchemeLabel = "#8c99a5";
+
+// @public (undocumented)
+const FormsDarkColorSchemeLabel_2 = "#999999";
+
+// @public (undocumented)
+export const FormsDarkColorSchemeLegend = "#f2f5f9";
+
+// @public (undocumented)
+const FormsDarkColorSchemeLegend_2 = "#F0F0F0";
+
+// @public (undocumented)
+export const FormsFontDefaultLabel = "body";
+
+// @public (undocumented)
+const FormsFontDefaultLabel_2 = "body";
+
+// @public (undocumented)
+export const FormsFontDefaultLegend = "subheading";
+
+// @public (undocumented)
+const FormsFontDefaultLegend_2 = "subheading";
+
+// @public (undocumented)
+export const FormsLightColorSchemeLabel = "#6d7a86";
+
+// @public (undocumented)
+const FormsLightColorSchemeLabel_2 = "#999999";
+
+// @public (undocumented)
+export const FormsLightColorSchemeLegend = "#19252f";
+
+// @public (undocumented)
+const FormsLightColorSchemeLegend_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const FormsSizeHorizontalControlPaddingLeft = "16px";
+
+// @public (undocumented)
+const FormsSizeHorizontalControlPaddingLeft_2 = "16px";
+
+// @public (undocumented)
+export const FormsSizeHorizontalLabelPaddingBottom = "0";
+
+// @public (undocumented)
+const FormsSizeHorizontalLabelPaddingBottom_2 = "0";
+
+// @public (undocumented)
+export const FormsSizeHorizontalLabelPaddingTop = "6px";
+
+// @public (undocumented)
+const FormsSizeHorizontalLabelPaddingTop_2 = "6px";
+
+// @public (undocumented)
+export const FormsSizeHorizontalLegendMarginBottom = "16px";
+
+// @public (undocumented)
+const FormsSizeHorizontalLegendMarginBottom_2 = "16px";
+
+// @public (undocumented)
+export const FormsSizeHorizontalLegendMarginTop = "32px";
+
+// @public (undocumented)
+const FormsSizeHorizontalLegendMarginTop_2 = "32px";
+
+// @public (undocumented)
+export const FormsSizeHorizontalRowMarginBottom = "20px";
+
+// @public (undocumented)
+const FormsSizeHorizontalRowMarginBottom_2 = "20px";
+
+// @public (undocumented)
+export const FormsSizeVerticalControlPaddingLeft = "24px";
+
+// @public (undocumented)
+const FormsSizeVerticalControlPaddingLeft_2 = "24px";
+
+// @public (undocumented)
+export const FormsSizeVerticalLabelPaddingBottom = "4px";
+
+// @public (undocumented)
+const FormsSizeVerticalLabelPaddingBottom_2 = "4px";
+
+// @public (undocumented)
+export const FormsSizeVerticalLabelPaddingTop = "0";
+
+// @public (undocumented)
+const FormsSizeVerticalLabelPaddingTop_2 = "0";
+
+// @public (undocumented)
+export const FormsSizeVerticalLegendMarginBottom = "12px";
+
+// @public (undocumented)
+const FormsSizeVerticalLegendMarginBottom_2 = "12px";
+
+// @public (undocumented)
+export const FormsSizeVerticalLegendMarginTop = "32px";
+
+// @public (undocumented)
+const FormsSizeVerticalLegendMarginTop_2 = "32px";
+
+// @public (undocumented)
+export const FormsSizeVerticalRowMarginBottom = "16px";
+
+// @public (undocumented)
+const FormsSizeVerticalRowMarginBottom_2 = "16px";
+
+// @public (undocumented)
+export const IconButtonSizeHorizontalPadding = "8px";
+
+// @public (undocumented)
+const IconButtonSizeHorizontalPadding_2 = "8px";
+
+// @public (undocumented)
+export const IconButtonSizeIconHorizontalPadding = "16px";
+
+// @public (undocumented)
+const IconButtonSizeIconHorizontalPadding_2 = "16px";
+
+// @public (undocumented)
+export const IconButtonSizeVerticalPadding = "6px";
+
+// @public (undocumented)
+const IconButtonSizeVerticalPadding_2 = "6px";
+
+// @public (undocumented)
+export const InputFontDefault = "body";
+
+// @public (undocumented)
+const InputFontDefault_2 = "body";
+
+// @public (undocumented)
+export const InputFontMonospace = "body-mono";
+
+// @public (undocumented)
+const InputFontMonospace_2 = "body-mono";
+
+// @public (undocumented)
+export const InputSizeMinHeight = "30px";
+
+// @public (undocumented)
+const InputSizeMinHeight_2 = "30px";
+
+// @public (undocumented)
+export const InputSizePadding = "5px 16px";
+
+// @public (undocumented)
+const InputSizePadding_2 = "5px 16px";
+
+// @public (undocumented)
+export const InputSizeWidth = "100%";
+
+// @public (undocumented)
+const InputSizeWidth_2 = "100%";
+
+declare namespace legacyTokens {
+    export {
+        LightColorSchemePrimaryDefault_2 as LightColorSchemePrimaryDefault,
+        LightColorSchemePrimaryPalette_2 as LightColorSchemePrimaryPalette,
+        LightColorSchemeSecondDefault_2 as LightColorSchemeSecondDefault,
+        LightColorSchemeSecondPalette_2 as LightColorSchemeSecondPalette,
+        LightColorSchemeErrorDefault_2 as LightColorSchemeErrorDefault,
+        LightColorSchemeErrorPalette_2 as LightColorSchemeErrorPalette,
+        LightColorSchemeInfoDefault_2 as LightColorSchemeInfoDefault,
+        LightColorSchemeInfoPalette_2 as LightColorSchemeInfoPalette,
+        LightColorSchemeSuccessDefault_2 as LightColorSchemeSuccessDefault,
+        LightColorSchemeSuccessPalette_2 as LightColorSchemeSuccessPalette,
+        LightColorSchemeWarningDefault_2 as LightColorSchemeWarningDefault,
+        LightColorSchemeWarningPalette_2 as LightColorSchemeWarningPalette,
+        LightColorSchemeForegroundText_2 as LightColorSchemeForegroundText,
+        LightColorSchemeForegroundTextLessContrast_2 as LightColorSchemeForegroundTextLessContrast,
+        LightColorSchemeForegroundTextDisabled_2 as LightColorSchemeForegroundTextDisabled,
+        LightColorSchemeForegroundDivider_2 as LightColorSchemeForegroundDivider,
+        LightColorSchemeForegroundBorder_2 as LightColorSchemeForegroundBorder,
+        LightColorSchemeForegroundIcon_2 as LightColorSchemeForegroundIcon,
+        LightColorSchemeBackgroundBackground_2 as LightColorSchemeBackgroundBackground,
+        LightColorSchemeBackgroundBackgroundDisabled_2 as LightColorSchemeBackgroundBackgroundDisabled,
+        LightColorSchemeBackgroundOverlayHover_2 as LightColorSchemeBackgroundOverlayHover,
+        LightColorSchemeBackgroundOverlayActive_2 as LightColorSchemeBackgroundOverlayActive,
+        LightColorSchemeBackgroundOverlayDisabled_2 as LightColorSchemeBackgroundOverlayDisabled,
+        LightColorSchemeStatesFocusedColor_2 as LightColorSchemeStatesFocusedColor,
+        LightColorSchemeStatesSelectedColor_2 as LightColorSchemeStatesSelectedColor,
+        LightColorSchemeStatesPressedShadow_2 as LightColorSchemeStatesPressedShadow,
+        LightColorSchemeStatesDisabledOpacity_2 as LightColorSchemeStatesDisabledOpacity,
+        DarkColorSchemePrimaryDefault_2 as DarkColorSchemePrimaryDefault,
+        DarkColorSchemePrimaryPalette_2 as DarkColorSchemePrimaryPalette,
+        DarkColorSchemeSecondDefault_2 as DarkColorSchemeSecondDefault,
+        DarkColorSchemeSecondPalette_2 as DarkColorSchemeSecondPalette,
+        DarkColorSchemeErrorDefault_2 as DarkColorSchemeErrorDefault,
+        DarkColorSchemeErrorPalette_2 as DarkColorSchemeErrorPalette,
+        DarkColorSchemeInfoDefault_2 as DarkColorSchemeInfoDefault,
+        DarkColorSchemeInfoPalette_2 as DarkColorSchemeInfoPalette,
+        DarkColorSchemeSuccessDefault_2 as DarkColorSchemeSuccessDefault,
+        DarkColorSchemeSuccessPalette_2 as DarkColorSchemeSuccessPalette,
+        DarkColorSchemeWarningDefault_2 as DarkColorSchemeWarningDefault,
+        DarkColorSchemeWarningPalette_2 as DarkColorSchemeWarningPalette,
+        DarkColorSchemeForegroundText_2 as DarkColorSchemeForegroundText,
+        DarkColorSchemeForegroundTextLessContrast_2 as DarkColorSchemeForegroundTextLessContrast,
+        DarkColorSchemeForegroundTextDisabled_2 as DarkColorSchemeForegroundTextDisabled,
+        DarkColorSchemeForegroundDivider_2 as DarkColorSchemeForegroundDivider,
+        DarkColorSchemeForegroundBorder_2 as DarkColorSchemeForegroundBorder,
+        DarkColorSchemeForegroundIcon_2 as DarkColorSchemeForegroundIcon,
+        DarkColorSchemeBackgroundBackground_2 as DarkColorSchemeBackgroundBackground,
+        DarkColorSchemeBackgroundBackgroundDisabled_2 as DarkColorSchemeBackgroundBackgroundDisabled,
+        DarkColorSchemeBackgroundOverlayHover_2 as DarkColorSchemeBackgroundOverlayHover,
+        DarkColorSchemeBackgroundOverlayActive_2 as DarkColorSchemeBackgroundOverlayActive,
+        DarkColorSchemeBackgroundOverlayDisabled_2 as DarkColorSchemeBackgroundOverlayDisabled,
+        DarkColorSchemeStatesFocusedColor_2 as DarkColorSchemeStatesFocusedColor,
+        DarkColorSchemeStatesSelectedColor_2 as DarkColorSchemeStatesSelectedColor,
+        DarkColorSchemeStatesPressedShadow_2 as DarkColorSchemeStatesPressedShadow,
+        DarkColorSchemeStatesDisabledOpacity_2 as DarkColorSchemeStatesDisabledOpacity,
+        FontFamilyBase_2 as FontFamilyBase,
+        FontFamilyMonospace_2 as FontFamilyMonospace,
+        PaletteBlue40_2 as PaletteBlue40,
+        PaletteBlue60_2 as PaletteBlue60,
+        PaletteBlue100_2 as PaletteBlue100,
+        PaletteBlue200_2 as PaletteBlue200,
+        PaletteBlue300_2 as PaletteBlue300,
+        PaletteBlue400_2 as PaletteBlue400,
+        PaletteBlue500_2 as PaletteBlue500,
+        PaletteBlue560_2 as PaletteBlue560,
+        PaletteBlue600_2 as PaletteBlue600,
+        PaletteBlue700_2 as PaletteBlue700,
+        PaletteBlue800_2 as PaletteBlue800,
+        PaletteBlueA100_2 as PaletteBlueA100,
+        PaletteBlueA200_2 as PaletteBlueA200,
+        PaletteBlueContrast40_2 as PaletteBlueContrast40,
+        PaletteBlueContrast60_2 as PaletteBlueContrast60,
+        PaletteBlueContrast100_2 as PaletteBlueContrast100,
+        PaletteBlueContrast200_2 as PaletteBlueContrast200,
+        PaletteBlueContrast300_2 as PaletteBlueContrast300,
+        PaletteBlueContrast400_2 as PaletteBlueContrast400,
+        PaletteBlueContrast500_2 as PaletteBlueContrast500,
+        PaletteBlueContrast560_2 as PaletteBlueContrast560,
+        PaletteBlueContrast600_2 as PaletteBlueContrast600,
+        PaletteBlueContrast700_2 as PaletteBlueContrast700,
+        PaletteBlueContrast800_2 as PaletteBlueContrast800,
+        PaletteBlueContrastA100_2 as PaletteBlueContrastA100,
+        PaletteBlueContrastA200_2 as PaletteBlueContrastA200,
+        PaletteGreen40_2 as PaletteGreen40,
+        PaletteGreen60_2 as PaletteGreen60,
+        PaletteGreen100_2 as PaletteGreen100,
+        PaletteGreen200_2 as PaletteGreen200,
+        PaletteGreen300_2 as PaletteGreen300,
+        PaletteGreen400_2 as PaletteGreen400,
+        PaletteGreen500_2 as PaletteGreen500,
+        PaletteGreen560_2 as PaletteGreen560,
+        PaletteGreen600_2 as PaletteGreen600,
+        PaletteGreen700_2 as PaletteGreen700,
+        PaletteGreen800_2 as PaletteGreen800,
+        PaletteGreenA100_2 as PaletteGreenA100,
+        PaletteGreenContrast40_2 as PaletteGreenContrast40,
+        PaletteGreenContrast60_2 as PaletteGreenContrast60,
+        PaletteGreenContrast100_2 as PaletteGreenContrast100,
+        PaletteGreenContrast200_2 as PaletteGreenContrast200,
+        PaletteGreenContrast300_2 as PaletteGreenContrast300,
+        PaletteGreenContrast400_2 as PaletteGreenContrast400,
+        PaletteGreenContrast500_2 as PaletteGreenContrast500,
+        PaletteGreenContrast560_2 as PaletteGreenContrast560,
+        PaletteGreenContrast600_2 as PaletteGreenContrast600,
+        PaletteGreenContrast700_2 as PaletteGreenContrast700,
+        PaletteGreenContrast800_2 as PaletteGreenContrast800,
+        PaletteGreenContrastA100_2 as PaletteGreenContrastA100,
+        PaletteRed40_2 as PaletteRed40,
+        PaletteRed60_2 as PaletteRed60,
+        PaletteRed100_2 as PaletteRed100,
+        PaletteRed200_2 as PaletteRed200,
+        PaletteRed300_2 as PaletteRed300,
+        PaletteRed400_2 as PaletteRed400,
+        PaletteRed500_2 as PaletteRed500,
+        PaletteRed560_2 as PaletteRed560,
+        PaletteRed600_2 as PaletteRed600,
+        PaletteRed700_2 as PaletteRed700,
+        PaletteRed800_2 as PaletteRed800,
+        PaletteRedA100_2 as PaletteRedA100,
+        PaletteRedContrast40_2 as PaletteRedContrast40,
+        PaletteRedContrast60_2 as PaletteRedContrast60,
+        PaletteRedContrast100_2 as PaletteRedContrast100,
+        PaletteRedContrast200_2 as PaletteRedContrast200,
+        PaletteRedContrast300_2 as PaletteRedContrast300,
+        PaletteRedContrast400_2 as PaletteRedContrast400,
+        PaletteRedContrast500_2 as PaletteRedContrast500,
+        PaletteRedContrast560_2 as PaletteRedContrast560,
+        PaletteRedContrast600_2 as PaletteRedContrast600,
+        PaletteRedContrast700_2 as PaletteRedContrast700,
+        PaletteRedContrast800_2 as PaletteRedContrast800,
+        PaletteRedContrastA100_2 as PaletteRedContrastA100,
+        PaletteGrey40_2 as PaletteGrey40,
+        PaletteGrey60_2 as PaletteGrey60,
+        PaletteGrey100_2 as PaletteGrey100,
+        PaletteGrey200_2 as PaletteGrey200,
+        PaletteGrey300_2 as PaletteGrey300,
+        PaletteGrey400_2 as PaletteGrey400,
+        PaletteGrey500_2 as PaletteGrey500,
+        PaletteGrey560_2 as PaletteGrey560,
+        PaletteGrey600_2 as PaletteGrey600,
+        PaletteGrey700_2 as PaletteGrey700,
+        PaletteGrey800_2 as PaletteGrey800,
+        PaletteGreyA40_2 as PaletteGreyA40,
+        PaletteGreyA60_2 as PaletteGreyA60,
+        PaletteGreyA100_2 as PaletteGreyA100,
+        PaletteGreyA200_2 as PaletteGreyA200,
+        PaletteGreyA300_2 as PaletteGreyA300,
+        PaletteGreyA500_2 as PaletteGreyA500,
+        PaletteGreyContrast40_2 as PaletteGreyContrast40,
+        PaletteGreyContrast60_2 as PaletteGreyContrast60,
+        PaletteGreyContrast100_2 as PaletteGreyContrast100,
+        PaletteGreyContrast200_2 as PaletteGreyContrast200,
+        PaletteGreyContrast300_2 as PaletteGreyContrast300,
+        PaletteGreyContrast400_2 as PaletteGreyContrast400,
+        PaletteGreyContrast500_2 as PaletteGreyContrast500,
+        PaletteGreyContrast560_2 as PaletteGreyContrast560,
+        PaletteGreyContrast600_2 as PaletteGreyContrast600,
+        PaletteGreyContrast700_2 as PaletteGreyContrast700,
+        PaletteGreyContrast800_2 as PaletteGreyContrast800,
+        PaletteYellow40_2 as PaletteYellow40,
+        PaletteYellow60_2 as PaletteYellow60,
+        PaletteYellow100_2 as PaletteYellow100,
+        PaletteYellow200_2 as PaletteYellow200,
+        PaletteYellow300_2 as PaletteYellow300,
+        PaletteYellow400_2 as PaletteYellow400,
+        PaletteYellow500_2 as PaletteYellow500,
+        PaletteYellow560_2 as PaletteYellow560,
+        PaletteYellow600_2 as PaletteYellow600,
+        PaletteYellow700_2 as PaletteYellow700,
+        PaletteYellow800_2 as PaletteYellow800,
+        PaletteYellowA100_2 as PaletteYellowA100,
+        PaletteYellowContrast40_2 as PaletteYellowContrast40,
+        PaletteYellowContrast60_2 as PaletteYellowContrast60,
+        PaletteYellowContrast100_2 as PaletteYellowContrast100,
+        PaletteYellowContrast200_2 as PaletteYellowContrast200,
+        PaletteYellowContrast300_2 as PaletteYellowContrast300,
+        PaletteYellowContrast400_2 as PaletteYellowContrast400,
+        PaletteYellowContrast500_2 as PaletteYellowContrast500,
+        PaletteYellowContrast560_2 as PaletteYellowContrast560,
+        PaletteYellowContrast600_2 as PaletteYellowContrast600,
+        PaletteYellowContrast700_2 as PaletteYellowContrast700,
+        PaletteYellowContrast800_2 as PaletteYellowContrast800,
+        PaletteYellowContrastA100_2 as PaletteYellowContrastA100,
+        ColorBluePalette_2 as ColorBluePalette,
+        ColorGreenPalette_2 as ColorGreenPalette,
+        ColorRedPalette_2 as ColorRedPalette,
+        ColorGreyPalette_2 as ColorGreyPalette,
+        ColorYellowPalette_2 as ColorYellowPalette,
+        TypographyDisplay1FontSize_2 as TypographyDisplay1FontSize,
+        TypographyDisplay1LineHeight_2 as TypographyDisplay1LineHeight,
+        TypographyDisplay1LetterSpacing_2 as TypographyDisplay1LetterSpacing,
+        TypographyDisplay1FontWeight_2 as TypographyDisplay1FontWeight,
+        TypographyDisplay1FontFamily_2 as TypographyDisplay1FontFamily,
+        TypographyDisplay1TextTransform_2 as TypographyDisplay1TextTransform,
+        TypographyDisplay2FontSize_2 as TypographyDisplay2FontSize,
+        TypographyDisplay2LineHeight_2 as TypographyDisplay2LineHeight,
+        TypographyDisplay2LetterSpacing_2 as TypographyDisplay2LetterSpacing,
+        TypographyDisplay2FontWeight_2 as TypographyDisplay2FontWeight,
+        TypographyDisplay2FontFamily_2 as TypographyDisplay2FontFamily,
+        TypographyDisplay2TextTransform_2 as TypographyDisplay2TextTransform,
+        TypographyDisplay3FontSize_2 as TypographyDisplay3FontSize,
+        TypographyDisplay3LineHeight_2 as TypographyDisplay3LineHeight,
+        TypographyDisplay3LetterSpacing_2 as TypographyDisplay3LetterSpacing,
+        TypographyDisplay3FontWeight_2 as TypographyDisplay3FontWeight,
+        TypographyDisplay3FontFamily_2 as TypographyDisplay3FontFamily,
+        TypographyDisplay3TextTransform_2 as TypographyDisplay3TextTransform,
+        TypographyHeadlineFontSize_2 as TypographyHeadlineFontSize,
+        TypographyHeadlineLineHeight_2 as TypographyHeadlineLineHeight,
+        TypographyHeadlineLetterSpacing_2 as TypographyHeadlineLetterSpacing,
+        TypographyHeadlineFontWeight_2 as TypographyHeadlineFontWeight,
+        TypographyHeadlineFontFamily_2 as TypographyHeadlineFontFamily,
+        TypographyHeadlineTextTransform_2 as TypographyHeadlineTextTransform,
+        TypographyTitleFontSize_2 as TypographyTitleFontSize,
+        TypographyTitleLineHeight_2 as TypographyTitleLineHeight,
+        TypographyTitleLetterSpacing_2 as TypographyTitleLetterSpacing,
+        TypographyTitleFontWeight_2 as TypographyTitleFontWeight,
+        TypographyTitleFontFamily_2 as TypographyTitleFontFamily,
+        TypographyTitleTextTransform_2 as TypographyTitleTextTransform,
+        TypographySubheadingFontSize_2 as TypographySubheadingFontSize,
+        TypographySubheadingLineHeight_2 as TypographySubheadingLineHeight,
+        TypographySubheadingLetterSpacing_2 as TypographySubheadingLetterSpacing,
+        TypographySubheadingFontWeight_2 as TypographySubheadingFontWeight,
+        TypographySubheadingFontFamily_2 as TypographySubheadingFontFamily,
+        TypographySubheadingTextTransform_2 as TypographySubheadingTextTransform,
+        TypographyBodyFontSize_2 as TypographyBodyFontSize,
+        TypographyBodyLineHeight_2 as TypographyBodyLineHeight,
+        TypographyBodyLetterSpacing_2 as TypographyBodyLetterSpacing,
+        TypographyBodyFontWeight_2 as TypographyBodyFontWeight,
+        TypographyBodyFontFamily_2 as TypographyBodyFontFamily,
+        TypographyBodyTextTransform_2 as TypographyBodyTextTransform,
+        TypographyBodyStrongFontSize_2 as TypographyBodyStrongFontSize,
+        TypographyBodyStrongLineHeight_2 as TypographyBodyStrongLineHeight,
+        TypographyBodyStrongLetterSpacing_2 as TypographyBodyStrongLetterSpacing,
+        TypographyBodyStrongFontWeight_2 as TypographyBodyStrongFontWeight,
+        TypographyBodyStrongFontFamily_2 as TypographyBodyStrongFontFamily,
+        TypographyBodyStrongTextTransform_2 as TypographyBodyStrongTextTransform,
+        TypographyBodyCapsFontSize_2 as TypographyBodyCapsFontSize,
+        TypographyBodyCapsLineHeight_2 as TypographyBodyCapsLineHeight,
+        TypographyBodyCapsLetterSpacing_2 as TypographyBodyCapsLetterSpacing,
+        TypographyBodyCapsFontWeight_2 as TypographyBodyCapsFontWeight,
+        TypographyBodyCapsFontFamily_2 as TypographyBodyCapsFontFamily,
+        TypographyBodyCapsTextTransform_2 as TypographyBodyCapsTextTransform,
+        TypographyBodyMonoFontSize_2 as TypographyBodyMonoFontSize,
+        TypographyBodyMonoLineHeight_2 as TypographyBodyMonoLineHeight,
+        TypographyBodyMonoLetterSpacing_2 as TypographyBodyMonoLetterSpacing,
+        TypographyBodyMonoFontWeight_2 as TypographyBodyMonoFontWeight,
+        TypographyBodyMonoFontFamily_2 as TypographyBodyMonoFontFamily,
+        TypographyBodyMonoTextTransform_2 as TypographyBodyMonoTextTransform,
+        TypographyCaptionFontSize_2 as TypographyCaptionFontSize,
+        TypographyCaptionLineHeight_2 as TypographyCaptionLineHeight,
+        TypographyCaptionLetterSpacing_2 as TypographyCaptionLetterSpacing,
+        TypographyCaptionFontWeight_2 as TypographyCaptionFontWeight,
+        TypographyCaptionFontFamily_2 as TypographyCaptionFontFamily,
+        TypographyCaptionTextTransform_2 as TypographyCaptionTextTransform,
+        TypographyCaptionCapsFontSize_2 as TypographyCaptionCapsFontSize,
+        TypographyCaptionCapsLineHeight_2 as TypographyCaptionCapsLineHeight,
+        TypographyCaptionCapsLetterSpacing_2 as TypographyCaptionCapsLetterSpacing,
+        TypographyCaptionCapsFontWeight_2 as TypographyCaptionCapsFontWeight,
+        TypographyCaptionCapsFontFamily_2 as TypographyCaptionCapsFontFamily,
+        TypographyCaptionCapsTextTransform_2 as TypographyCaptionCapsTextTransform,
+        TypographyCaptionMonoFontSize_2 as TypographyCaptionMonoFontSize,
+        TypographyCaptionMonoLineHeight_2 as TypographyCaptionMonoLineHeight,
+        TypographyCaptionMonoLetterSpacing_2 as TypographyCaptionMonoLetterSpacing,
+        TypographyCaptionMonoFontWeight_2 as TypographyCaptionMonoFontWeight,
+        TypographyCaptionMonoFontFamily_2 as TypographyCaptionMonoFontFamily,
+        TypographyCaptionMonoTextTransform_2 as TypographyCaptionMonoTextTransform,
+        TypographySmallTextFontSize_2 as TypographySmallTextFontSize,
+        TypographySmallTextLineHeight_2 as TypographySmallTextLineHeight,
+        TypographySmallTextLetterSpacing_2 as TypographySmallTextLetterSpacing,
+        TypographySmallTextFontWeight_2 as TypographySmallTextFontWeight,
+        TypographySmallTextFontFamily_2 as TypographySmallTextFontFamily,
+        TypographySmallTextTextTransform_2 as TypographySmallTextTextTransform,
+        TypographyExtraSmallTextFontSize_2 as TypographyExtraSmallTextFontSize,
+        TypographyExtraSmallTextLineHeight_2 as TypographyExtraSmallTextLineHeight,
+        TypographyExtraSmallTextLetterSpacing_2 as TypographyExtraSmallTextLetterSpacing,
+        TypographyExtraSmallTextFontWeight_2 as TypographyExtraSmallTextFontWeight,
+        TypographyExtraSmallTextFontFamily_2 as TypographyExtraSmallTextFontFamily,
+        TypographyExtraSmallTextTextTransform_2 as TypographyExtraSmallTextTextTransform,
+        TypographyExtraSmallTextCapsFontSize_2 as TypographyExtraSmallTextCapsFontSize,
+        TypographyExtraSmallTextCapsLineHeight_2 as TypographyExtraSmallTextCapsLineHeight,
+        TypographyExtraSmallTextCapsLetterSpacing_2 as TypographyExtraSmallTextCapsLetterSpacing,
+        TypographyExtraSmallTextCapsFontWeight_2 as TypographyExtraSmallTextCapsFontWeight,
+        TypographyExtraSmallTextCapsFontFamily_2 as TypographyExtraSmallTextCapsFontFamily,
+        TypographyExtraSmallTextCapsTextTransform_2 as TypographyExtraSmallTextCapsTextTransform,
+        TypographyExtraSmallTextMonoFontSize_2 as TypographyExtraSmallTextMonoFontSize,
+        TypographyExtraSmallTextMonoLineHeight_2 as TypographyExtraSmallTextMonoLineHeight,
+        TypographyExtraSmallTextMonoLetterSpacing_2 as TypographyExtraSmallTextMonoLetterSpacing,
+        TypographyExtraSmallTextMonoFontWeight_2 as TypographyExtraSmallTextMonoFontWeight,
+        TypographyExtraSmallTextMonoFontFamily_2 as TypographyExtraSmallTextMonoFontFamily,
+        TypographyExtraSmallTextMonoTextTransform_2 as TypographyExtraSmallTextMonoTextTransform,
+        AlertLightColorSchemeErrorBackground_2 as AlertLightColorSchemeErrorBackground,
+        AlertLightColorSchemeErrorBorder_2 as AlertLightColorSchemeErrorBorder,
+        AlertLightColorSchemeErrorIcon_2 as AlertLightColorSchemeErrorIcon,
+        AlertLightColorSchemeWarningBackground_2 as AlertLightColorSchemeWarningBackground,
+        AlertLightColorSchemeWarningBorder_2 as AlertLightColorSchemeWarningBorder,
+        AlertLightColorSchemeWarningIcon_2 as AlertLightColorSchemeWarningIcon,
+        AlertLightColorSchemeSuccessBackground_2 as AlertLightColorSchemeSuccessBackground,
+        AlertLightColorSchemeSuccessBorder_2 as AlertLightColorSchemeSuccessBorder,
+        AlertLightColorSchemeSuccessIcon_2 as AlertLightColorSchemeSuccessIcon,
+        AlertLightColorSchemeInfoBackground_2 as AlertLightColorSchemeInfoBackground,
+        AlertLightColorSchemeInfoBorder_2 as AlertLightColorSchemeInfoBorder,
+        AlertLightColorSchemeInfoIcon_2 as AlertLightColorSchemeInfoIcon,
+        AlertLightColorSchemeDefaultBackground_2 as AlertLightColorSchemeDefaultBackground,
+        AlertLightColorSchemeDefaultBorder_2 as AlertLightColorSchemeDefaultBorder,
+        AlertLightColorSchemeDefaultIcon_2 as AlertLightColorSchemeDefaultIcon,
+        AlertDarkColorSchemeErrorBackground_2 as AlertDarkColorSchemeErrorBackground,
+        AlertDarkColorSchemeErrorBorder_2 as AlertDarkColorSchemeErrorBorder,
+        AlertDarkColorSchemeErrorIcon_2 as AlertDarkColorSchemeErrorIcon,
+        AlertDarkColorSchemeWarningBackground_2 as AlertDarkColorSchemeWarningBackground,
+        AlertDarkColorSchemeWarningBorder_2 as AlertDarkColorSchemeWarningBorder,
+        AlertDarkColorSchemeWarningIcon_2 as AlertDarkColorSchemeWarningIcon,
+        AlertDarkColorSchemeSuccessBackground_2 as AlertDarkColorSchemeSuccessBackground,
+        AlertDarkColorSchemeSuccessBorder_2 as AlertDarkColorSchemeSuccessBorder,
+        AlertDarkColorSchemeSuccessIcon_2 as AlertDarkColorSchemeSuccessIcon,
+        AlertDarkColorSchemeInfoBackground_2 as AlertDarkColorSchemeInfoBackground,
+        AlertDarkColorSchemeInfoBorder_2 as AlertDarkColorSchemeInfoBorder,
+        AlertDarkColorSchemeInfoIcon_2 as AlertDarkColorSchemeInfoIcon,
+        AlertDarkColorSchemeDefaultBackground_2 as AlertDarkColorSchemeDefaultBackground,
+        AlertDarkColorSchemeDefaultBorder_2 as AlertDarkColorSchemeDefaultBorder,
+        AlertDarkColorSchemeDefaultIcon_2 as AlertDarkColorSchemeDefaultIcon,
+        AlertSizeBorderWidth_2 as AlertSizeBorderWidth,
+        AlertSizeBorderRadius_2 as AlertSizeBorderRadius,
+        AlertSizeHorizontalPadding_2 as AlertSizeHorizontalPadding,
+        AlertSizeVerticalPadding_2 as AlertSizeVerticalPadding,
+        AlertSizeIconMargin_2 as AlertSizeIconMargin,
+        AlertSizeCloseButtonWidth_2 as AlertSizeCloseButtonWidth,
+        AlertSizeSmallVerticalPadding_2 as AlertSizeSmallVerticalPadding,
+        AlertFontDefaultHeader_2 as AlertFontDefaultHeader,
+        AlertFontDefaultBody_2 as AlertFontDefaultBody,
+        AlertFontSmallHeader_2 as AlertFontSmallHeader,
+        AlertFontSmallBody_2 as AlertFontSmallBody,
+        AutocompleteSizePanelPadding_2 as AutocompleteSizePanelPadding,
+        AutocompleteSizePanelMaxHeight_2 as AutocompleteSizePanelMaxHeight,
+        AutocompleteSizePanelBorderRadius_2 as AutocompleteSizePanelBorderRadius,
+        BadgeSizeDefaultMinWidth_2 as BadgeSizeDefaultMinWidth,
+        BadgeSizeDefaultPadding_2 as BadgeSizeDefaultPadding,
+        BadgeSizeDefaultBorderWidth_2 as BadgeSizeDefaultBorderWidth,
+        BadgeSizeDefaultBorderRadius_2 as BadgeSizeDefaultBorderRadius,
+        BadgeSizeDefaultHeight_2 as BadgeSizeDefaultHeight,
+        BadgeSizeDefaultFontDefault_2 as BadgeSizeDefaultFontDefault,
+        BadgeSizeDefaultFontCaps_2 as BadgeSizeDefaultFontCaps,
+        BadgeSizeDefaultFontMono_2 as BadgeSizeDefaultFontMono,
+        BadgeSizeMiniHeight_2 as BadgeSizeMiniHeight,
+        BadgeSizeMiniMinWidth_2 as BadgeSizeMiniMinWidth,
+        BadgeSizeMiniBorderWidth_2 as BadgeSizeMiniBorderWidth,
+        BadgeSizeMiniBorderRadius_2 as BadgeSizeMiniBorderRadius,
+        BadgeSizeMiniPadding_2 as BadgeSizeMiniPadding,
+        BadgeSizeMiniFontDefault_2 as BadgeSizeMiniFontDefault,
+        BadgeSizeMiniFontCaps_2 as BadgeSizeMiniFontCaps,
+        BadgeSizeMiniFontMono_2 as BadgeSizeMiniFontMono,
+        BadgeFontDefaultDefault_2 as BadgeFontDefaultDefault,
+        BadgeFontDefaultCaps_2 as BadgeFontDefaultCaps,
+        BadgeFontDefaultMono_2 as BadgeFontDefaultMono,
+        BadgeFontMiniDefault_2 as BadgeFontMiniDefault,
+        BadgeFontMiniCaps_2 as BadgeFontMiniCaps,
+        BadgeFontMiniMono_2 as BadgeFontMiniMono,
+        BadgeLightColorSchemeSolidPrimaryBackground_2 as BadgeLightColorSchemeSolidPrimaryBackground,
+        BadgeLightColorSchemeSolidPrimaryColor_2 as BadgeLightColorSchemeSolidPrimaryColor,
+        BadgeLightColorSchemeSolidPrimaryBorder_2 as BadgeLightColorSchemeSolidPrimaryBorder,
+        BadgeLightColorSchemeSolidInfoBorder_2 as BadgeLightColorSchemeSolidInfoBorder,
+        BadgeLightColorSchemeSolidInfoBackground_2 as BadgeLightColorSchemeSolidInfoBackground,
+        BadgeLightColorSchemeSolidInfoColor_2 as BadgeLightColorSchemeSolidInfoColor,
+        BadgeLightColorSchemeSolidSuccessBorder_2 as BadgeLightColorSchemeSolidSuccessBorder,
+        BadgeLightColorSchemeSolidSuccessBackground_2 as BadgeLightColorSchemeSolidSuccessBackground,
+        BadgeLightColorSchemeSolidSuccessColor_2 as BadgeLightColorSchemeSolidSuccessColor,
+        BadgeLightColorSchemeSolidWarningBorder_2 as BadgeLightColorSchemeSolidWarningBorder,
+        BadgeLightColorSchemeSolidWarningBackground_2 as BadgeLightColorSchemeSolidWarningBackground,
+        BadgeLightColorSchemeSolidWarningColor_2 as BadgeLightColorSchemeSolidWarningColor,
+        BadgeLightColorSchemeSolidErrorBorder_2 as BadgeLightColorSchemeSolidErrorBorder,
+        BadgeLightColorSchemeSolidErrorBackground_2 as BadgeLightColorSchemeSolidErrorBackground,
+        BadgeLightColorSchemeSolidErrorColor_2 as BadgeLightColorSchemeSolidErrorColor,
+        BadgeLightColorSchemeSolidTransparentBorder_2 as BadgeLightColorSchemeSolidTransparentBorder,
+        BadgeLightColorSchemeSolidTransparentColor_2 as BadgeLightColorSchemeSolidTransparentColor,
+        BadgeLightColorSchemeSolidTransparentBackground_2 as BadgeLightColorSchemeSolidTransparentBackground,
+        BadgeLightColorSchemeSolidLightBorder_2 as BadgeLightColorSchemeSolidLightBorder,
+        BadgeLightColorSchemeSolidLightBackground_2 as BadgeLightColorSchemeSolidLightBackground,
+        BadgeLightColorSchemeSolidLightColor_2 as BadgeLightColorSchemeSolidLightColor,
+        BadgeLightColorSchemeSolidSecondBorder_2 as BadgeLightColorSchemeSolidSecondBorder,
+        BadgeLightColorSchemeSolidSecondBackground_2 as BadgeLightColorSchemeSolidSecondBackground,
+        BadgeLightColorSchemeSolidSecondColor_2 as BadgeLightColorSchemeSolidSecondColor,
+        BadgeLightColorSchemePastelPrimaryBackground_2 as BadgeLightColorSchemePastelPrimaryBackground,
+        BadgeLightColorSchemePastelPrimaryBorder_2 as BadgeLightColorSchemePastelPrimaryBorder,
+        BadgeLightColorSchemePastelPrimaryColor_2 as BadgeLightColorSchemePastelPrimaryColor,
+        BadgeLightColorSchemePastelInfoBackground_2 as BadgeLightColorSchemePastelInfoBackground,
+        BadgeLightColorSchemePastelInfoBorder_2 as BadgeLightColorSchemePastelInfoBorder,
+        BadgeLightColorSchemePastelInfoColor_2 as BadgeLightColorSchemePastelInfoColor,
+        BadgeLightColorSchemePastelSuccessBackground_2 as BadgeLightColorSchemePastelSuccessBackground,
+        BadgeLightColorSchemePastelSuccessBorder_2 as BadgeLightColorSchemePastelSuccessBorder,
+        BadgeLightColorSchemePastelSuccessColor_2 as BadgeLightColorSchemePastelSuccessColor,
+        BadgeLightColorSchemePastelWarningBackground_2 as BadgeLightColorSchemePastelWarningBackground,
+        BadgeLightColorSchemePastelWarningBorder_2 as BadgeLightColorSchemePastelWarningBorder,
+        BadgeLightColorSchemePastelWarningColor_2 as BadgeLightColorSchemePastelWarningColor,
+        BadgeLightColorSchemePastelErrorBackground_2 as BadgeLightColorSchemePastelErrorBackground,
+        BadgeLightColorSchemePastelErrorBorder_2 as BadgeLightColorSchemePastelErrorBorder,
+        BadgeLightColorSchemePastelErrorColor_2 as BadgeLightColorSchemePastelErrorColor,
+        BadgeDarkColorSchemePastelPrimaryBackground_2 as BadgeDarkColorSchemePastelPrimaryBackground,
+        BadgeDarkColorSchemePastelPrimaryColor_2 as BadgeDarkColorSchemePastelPrimaryColor,
+        BadgeDarkColorSchemePastelPrimaryBorder_2 as BadgeDarkColorSchemePastelPrimaryBorder,
+        BadgeDarkColorSchemePastelInfoBackground_2 as BadgeDarkColorSchemePastelInfoBackground,
+        BadgeDarkColorSchemePastelInfoColor_2 as BadgeDarkColorSchemePastelInfoColor,
+        BadgeDarkColorSchemePastelInfoBorder_2 as BadgeDarkColorSchemePastelInfoBorder,
+        BadgeDarkColorSchemePastelSuccessBorder_2 as BadgeDarkColorSchemePastelSuccessBorder,
+        BadgeDarkColorSchemePastelSuccessBackground_2 as BadgeDarkColorSchemePastelSuccessBackground,
+        BadgeDarkColorSchemePastelSuccessColor_2 as BadgeDarkColorSchemePastelSuccessColor,
+        BadgeDarkColorSchemePastelWarningBorder_2 as BadgeDarkColorSchemePastelWarningBorder,
+        BadgeDarkColorSchemePastelWarningBackground_2 as BadgeDarkColorSchemePastelWarningBackground,
+        BadgeDarkColorSchemePastelWarningColor_2 as BadgeDarkColorSchemePastelWarningColor,
+        BadgeDarkColorSchemePastelErrorBorder_2 as BadgeDarkColorSchemePastelErrorBorder,
+        BadgeDarkColorSchemePastelErrorBackground_2 as BadgeDarkColorSchemePastelErrorBackground,
+        BadgeDarkColorSchemePastelErrorColor_2 as BadgeDarkColorSchemePastelErrorColor,
+        BadgeDarkColorSchemeSolidPrimaryBackground_2 as BadgeDarkColorSchemeSolidPrimaryBackground,
+        BadgeDarkColorSchemeSolidPrimaryColor_2 as BadgeDarkColorSchemeSolidPrimaryColor,
+        BadgeDarkColorSchemeSolidPrimaryBorder_2 as BadgeDarkColorSchemeSolidPrimaryBorder,
+        BadgeDarkColorSchemeSolidInfoBorder_2 as BadgeDarkColorSchemeSolidInfoBorder,
+        BadgeDarkColorSchemeSolidInfoBackground_2 as BadgeDarkColorSchemeSolidInfoBackground,
+        BadgeDarkColorSchemeSolidInfoColor_2 as BadgeDarkColorSchemeSolidInfoColor,
+        BadgeDarkColorSchemeSolidSuccessBorder_2 as BadgeDarkColorSchemeSolidSuccessBorder,
+        BadgeDarkColorSchemeSolidSuccessBackground_2 as BadgeDarkColorSchemeSolidSuccessBackground,
+        BadgeDarkColorSchemeSolidSuccessColor_2 as BadgeDarkColorSchemeSolidSuccessColor,
+        BadgeDarkColorSchemeSolidWarningBorder_2 as BadgeDarkColorSchemeSolidWarningBorder,
+        BadgeDarkColorSchemeSolidWarningBackground_2 as BadgeDarkColorSchemeSolidWarningBackground,
+        BadgeDarkColorSchemeSolidWarningColor_2 as BadgeDarkColorSchemeSolidWarningColor,
+        BadgeDarkColorSchemeSolidErrorBorder_2 as BadgeDarkColorSchemeSolidErrorBorder,
+        BadgeDarkColorSchemeSolidErrorBackground_2 as BadgeDarkColorSchemeSolidErrorBackground,
+        BadgeDarkColorSchemeSolidErrorColor_2 as BadgeDarkColorSchemeSolidErrorColor,
+        BadgeDarkColorSchemeSolidTransparentBorder_2 as BadgeDarkColorSchemeSolidTransparentBorder,
+        BadgeDarkColorSchemeSolidTransparentColor_2 as BadgeDarkColorSchemeSolidTransparentColor,
+        BadgeDarkColorSchemeSolidTransparentBackground_2 as BadgeDarkColorSchemeSolidTransparentBackground,
+        BadgeDarkColorSchemeSolidLightBorder_2 as BadgeDarkColorSchemeSolidLightBorder,
+        BadgeDarkColorSchemeSolidLightBackground_2 as BadgeDarkColorSchemeSolidLightBackground,
+        BadgeDarkColorSchemeSolidLightColor_2 as BadgeDarkColorSchemeSolidLightColor,
+        BadgeDarkColorSchemeSolidSecondBorder_2 as BadgeDarkColorSchemeSolidSecondBorder,
+        BadgeDarkColorSchemeSolidSecondBackground_2 as BadgeDarkColorSchemeSolidSecondBackground,
+        BadgeDarkColorSchemeSolidSecondColor_2 as BadgeDarkColorSchemeSolidSecondColor,
+        ButtonToggleSizeBorderSize_2 as ButtonToggleSizeBorderSize,
+        ButtonToggleSizeBorderRadius_2 as ButtonToggleSizeBorderRadius,
+        ButtonLightColorSchemeActiveShadow_2 as ButtonLightColorSchemeActiveShadow,
+        ButtonLightColorSchemePrimaryColor_2 as ButtonLightColorSchemePrimaryColor,
+        ButtonLightColorSchemePrimaryBorder_2 as ButtonLightColorSchemePrimaryBorder,
+        ButtonLightColorSchemePrimaryBackground_2 as ButtonLightColorSchemePrimaryBackground,
+        ButtonLightColorSchemePrimaryIcon_2 as ButtonLightColorSchemePrimaryIcon,
+        ButtonLightColorSchemePrimaryStatesActiveBorder_2 as ButtonLightColorSchemePrimaryStatesActiveBorder,
+        ButtonLightColorSchemePrimaryStatesActiveBackground_2 as ButtonLightColorSchemePrimaryStatesActiveBackground,
+        ButtonLightColorSchemePrimaryTransparentColor_2 as ButtonLightColorSchemePrimaryTransparentColor,
+        ButtonLightColorSchemePrimaryTransparentIcon_2 as ButtonLightColorSchemePrimaryTransparentIcon,
+        ButtonLightColorSchemePrimaryTransparentStatesHoverColor_2 as ButtonLightColorSchemePrimaryTransparentStatesHoverColor,
+        ButtonLightColorSchemePrimaryTransparentStatesHoverIcon_2 as ButtonLightColorSchemePrimaryTransparentStatesHoverIcon,
+        ButtonLightColorSchemePrimaryTransparentStatesActiveColor_2 as ButtonLightColorSchemePrimaryTransparentStatesActiveColor,
+        ButtonLightColorSchemePrimaryTransparentStatesActiveIcon_2 as ButtonLightColorSchemePrimaryTransparentStatesActiveIcon,
+        ButtonLightColorSchemeSecondBorder_2 as ButtonLightColorSchemeSecondBorder,
+        ButtonLightColorSchemeSecondBackground_2 as ButtonLightColorSchemeSecondBackground,
+        ButtonLightColorSchemeSecondColor_2 as ButtonLightColorSchemeSecondColor,
+        ButtonLightColorSchemeSecondIcon_2 as ButtonLightColorSchemeSecondIcon,
+        ButtonLightColorSchemeSecondStatesActiveBorder_2 as ButtonLightColorSchemeSecondStatesActiveBorder,
+        ButtonLightColorSchemeSecondStatesActiveBackground_2 as ButtonLightColorSchemeSecondStatesActiveBackground,
+        ButtonLightColorSchemeErrorBorder_2 as ButtonLightColorSchemeErrorBorder,
+        ButtonLightColorSchemeErrorBackground_2 as ButtonLightColorSchemeErrorBackground,
+        ButtonLightColorSchemeErrorColor_2 as ButtonLightColorSchemeErrorColor,
+        ButtonLightColorSchemeErrorIcon_2 as ButtonLightColorSchemeErrorIcon,
+        ButtonLightColorSchemeErrorStatesActiveBorder_2 as ButtonLightColorSchemeErrorStatesActiveBorder,
+        ButtonLightColorSchemeErrorStatesActiveBackground_2 as ButtonLightColorSchemeErrorStatesActiveBackground,
+        ButtonDarkColorSchemeActiveShadow_2 as ButtonDarkColorSchemeActiveShadow,
+        ButtonDarkColorSchemePrimaryColor_2 as ButtonDarkColorSchemePrimaryColor,
+        ButtonDarkColorSchemePrimaryBorder_2 as ButtonDarkColorSchemePrimaryBorder,
+        ButtonDarkColorSchemePrimaryBackground_2 as ButtonDarkColorSchemePrimaryBackground,
+        ButtonDarkColorSchemePrimaryIcon_2 as ButtonDarkColorSchemePrimaryIcon,
+        ButtonDarkColorSchemePrimaryStatesActiveBorder_2 as ButtonDarkColorSchemePrimaryStatesActiveBorder,
+        ButtonDarkColorSchemePrimaryStatesActiveBackground_2 as ButtonDarkColorSchemePrimaryStatesActiveBackground,
+        ButtonDarkColorSchemePrimaryTransparentColor_2 as ButtonDarkColorSchemePrimaryTransparentColor,
+        ButtonDarkColorSchemePrimaryTransparentIcon_2 as ButtonDarkColorSchemePrimaryTransparentIcon,
+        ButtonDarkColorSchemePrimaryTransparentStatesHoverColor_2 as ButtonDarkColorSchemePrimaryTransparentStatesHoverColor,
+        ButtonDarkColorSchemePrimaryTransparentStatesHoverIcon_2 as ButtonDarkColorSchemePrimaryTransparentStatesHoverIcon,
+        ButtonDarkColorSchemePrimaryTransparentStatesActiveColor_2 as ButtonDarkColorSchemePrimaryTransparentStatesActiveColor,
+        ButtonDarkColorSchemePrimaryTransparentStatesActiveIcon_2 as ButtonDarkColorSchemePrimaryTransparentStatesActiveIcon,
+        ButtonDarkColorSchemeSecondBorder_2 as ButtonDarkColorSchemeSecondBorder,
+        ButtonDarkColorSchemeSecondBackground_2 as ButtonDarkColorSchemeSecondBackground,
+        ButtonDarkColorSchemeSecondColor_2 as ButtonDarkColorSchemeSecondColor,
+        ButtonDarkColorSchemeSecondIcon_2 as ButtonDarkColorSchemeSecondIcon,
+        ButtonDarkColorSchemeSecondStatesActiveBorder_2 as ButtonDarkColorSchemeSecondStatesActiveBorder,
+        ButtonDarkColorSchemeSecondStatesActiveBackground_2 as ButtonDarkColorSchemeSecondStatesActiveBackground,
+        ButtonDarkColorSchemeErrorBorder_2 as ButtonDarkColorSchemeErrorBorder,
+        ButtonDarkColorSchemeErrorBackground_2 as ButtonDarkColorSchemeErrorBackground,
+        ButtonDarkColorSchemeErrorColor_2 as ButtonDarkColorSchemeErrorColor,
+        ButtonDarkColorSchemeErrorIcon_2 as ButtonDarkColorSchemeErrorIcon,
+        ButtonDarkColorSchemeErrorStatesActiveBorder_2 as ButtonDarkColorSchemeErrorStatesActiveBorder,
+        ButtonDarkColorSchemeErrorStatesActiveBackground_2 as ButtonDarkColorSchemeErrorStatesActiveBackground,
+        ButtonSizeBorderWidth_2 as ButtonSizeBorderWidth,
+        ButtonSizeBorderRadius_2 as ButtonSizeBorderRadius,
+        ButtonSizeVerticalPadding_2 as ButtonSizeVerticalPadding,
+        ButtonSizeHorizontalPadding_2 as ButtonSizeHorizontalPadding,
+        ButtonFontDefault_2 as ButtonFontDefault,
+        ButtonFontPrimary_2 as ButtonFontPrimary,
+        ButtonFontPrimaryTransparent_2 as ButtonFontPrimaryTransparent,
+        IconButtonSizeVerticalPadding_2 as IconButtonSizeVerticalPadding,
+        IconButtonSizeHorizontalPadding_2 as IconButtonSizeHorizontalPadding,
+        IconButtonSizeIconHorizontalPadding_2 as IconButtonSizeIconHorizontalPadding,
+        CardLightColorSchemeErrorVerticalLine_2 as CardLightColorSchemeErrorVerticalLine,
+        CardLightColorSchemeErrorBackground_2 as CardLightColorSchemeErrorBackground,
+        CardLightColorSchemeErrorShadow_2 as CardLightColorSchemeErrorShadow,
+        CardLightColorSchemeWarningVerticalLine_2 as CardLightColorSchemeWarningVerticalLine,
+        CardLightColorSchemeWarningBackground_2 as CardLightColorSchemeWarningBackground,
+        CardLightColorSchemeWarningShadow_2 as CardLightColorSchemeWarningShadow,
+        CardLightColorSchemeSuccessVerticalLine_2 as CardLightColorSchemeSuccessVerticalLine,
+        CardLightColorSchemeSuccessBackground_2 as CardLightColorSchemeSuccessBackground,
+        CardLightColorSchemeSuccessShadow_2 as CardLightColorSchemeSuccessShadow,
+        CardLightColorSchemeInfoVerticalLine_2 as CardLightColorSchemeInfoVerticalLine,
+        CardLightColorSchemeInfoBackground_2 as CardLightColorSchemeInfoBackground,
+        CardLightColorSchemeInfoShadow_2 as CardLightColorSchemeInfoShadow,
+        CardDarkColorSchemeErrorVerticalLine_2 as CardDarkColorSchemeErrorVerticalLine,
+        CardDarkColorSchemeErrorBackground_2 as CardDarkColorSchemeErrorBackground,
+        CardDarkColorSchemeErrorShadow_2 as CardDarkColorSchemeErrorShadow,
+        CardDarkColorSchemeWarningVerticalLine_2 as CardDarkColorSchemeWarningVerticalLine,
+        CardDarkColorSchemeWarningBackground_2 as CardDarkColorSchemeWarningBackground,
+        CardDarkColorSchemeWarningShadow_2 as CardDarkColorSchemeWarningShadow,
+        CardDarkColorSchemeSuccessVerticalLine_2 as CardDarkColorSchemeSuccessVerticalLine,
+        CardDarkColorSchemeSuccessBackground_2 as CardDarkColorSchemeSuccessBackground,
+        CardDarkColorSchemeSuccessShadow_2 as CardDarkColorSchemeSuccessShadow,
+        CardDarkColorSchemeInfoVerticalLine_2 as CardDarkColorSchemeInfoVerticalLine,
+        CardDarkColorSchemeInfoBackground_2 as CardDarkColorSchemeInfoBackground,
+        CardDarkColorSchemeInfoShadow_2 as CardDarkColorSchemeInfoShadow,
+        CardSizeVerticalLine_2 as CardSizeVerticalLine,
+        CheckboxLightColorSchemeBorder_2 as CheckboxLightColorSchemeBorder,
+        CheckboxLightColorSchemeStatesCheckedBorder_2 as CheckboxLightColorSchemeStatesCheckedBorder,
+        CheckboxLightColorSchemeStatesCheckedBackground_2 as CheckboxLightColorSchemeStatesCheckedBackground,
+        CheckboxLightColorSchemeStatesFocusedBorder_2 as CheckboxLightColorSchemeStatesFocusedBorder,
+        CheckboxLightColorSchemeStatesFocusedShadow_2 as CheckboxLightColorSchemeStatesFocusedShadow,
+        CheckboxDarkColorSchemeBorder_2 as CheckboxDarkColorSchemeBorder,
+        CheckboxDarkColorSchemeStatesCheckedBorder_2 as CheckboxDarkColorSchemeStatesCheckedBorder,
+        CheckboxDarkColorSchemeStatesCheckedBackground_2 as CheckboxDarkColorSchemeStatesCheckedBackground,
+        CheckboxDarkColorSchemeStatesFocusedBorder_2 as CheckboxDarkColorSchemeStatesFocusedBorder,
+        CheckboxDarkColorSchemeStatesFocusedShadow_2 as CheckboxDarkColorSchemeStatesFocusedShadow,
+        CheckboxSizeWidth_2 as CheckboxSizeWidth,
+        CheckboxSizeLabelMargin_2 as CheckboxSizeLabelMargin,
+        CheckboxSizeBorderWidth_2 as CheckboxSizeBorderWidth,
+        CheckboxSizeToggleBoxShadow_2 as CheckboxSizeToggleBoxShadow,
+        CheckboxFontDefault_2 as CheckboxFontDefault,
+        DatepickerToggleSizeWidth_2 as DatepickerToggleSizeWidth,
+        DatepickerToggleSizeHeight_2 as DatepickerToggleSizeHeight,
+        DatepickerBodyLightColorSchemeStatesSelectedColor_2 as DatepickerBodyLightColorSchemeStatesSelectedColor,
+        DatepickerBodyLightColorSchemeStatesSelectedBackground_2 as DatepickerBodyLightColorSchemeStatesSelectedBackground,
+        DatepickerBodyDarkColorSchemeStatesSelectedColor_2 as DatepickerBodyDarkColorSchemeStatesSelectedColor,
+        DatepickerBodyDarkColorSchemeStatesSelectedBackground_2 as DatepickerBodyDarkColorSchemeStatesSelectedBackground,
+        DatepickerBodySizeLabelPaddings_2 as DatepickerBodySizeLabelPaddings,
+        DatepickerBodySizeCellMinSize_2 as DatepickerBodySizeCellMinSize,
+        DatepickerBodySizeCellMargin_2 as DatepickerBodySizeCellMargin,
+        DatepickerBodySizeCellPadding_2 as DatepickerBodySizeCellPadding,
+        DatepickerBodySizeCellBorderWidth_2 as DatepickerBodySizeCellBorderWidth,
+        DatepickerBodyFontLabel_2 as DatepickerBodyFontLabel,
+        DatepickerBodyFontToday_2 as DatepickerBodyFontToday,
+        DatepickerCalendarSizePaddingTop_2 as DatepickerCalendarSizePaddingTop,
+        DatepickerCalendarSizePaddingHorizontal_2 as DatepickerCalendarSizePaddingHorizontal,
+        DatepickerCalendarSizePaddingBottom_2 as DatepickerCalendarSizePaddingBottom,
+        DatepickerCalendarSizePaddingBlocks_2 as DatepickerCalendarSizePaddingBlocks,
+        DatepickerCalendarSizeDividerWidth_2 as DatepickerCalendarSizeDividerWidth,
+        DatepickerCalendarSizeIconBorderWidth_2 as DatepickerCalendarSizeIconBorderWidth,
+        DatepickerCalendarSizeIconPrevIconTransform_2 as DatepickerCalendarSizeIconPrevIconTransform,
+        DatepickerCalendarSizeIconNexIconTransform_2 as DatepickerCalendarSizeIconNexIconTransform,
+        DatepickerCalendarFontDefault_2 as DatepickerCalendarFontDefault,
+        DatepickerCalendarFontHeader_2 as DatepickerCalendarFontHeader,
+        DatepickerInputSizeWidth_2 as DatepickerInputSizeWidth,
+        DividerSizeWidth_2 as DividerSizeWidth,
+        DividerSizeInsetMargin_2 as DividerSizeInsetMargin,
+        DropdownItemSizePadding_2 as DropdownItemSizePadding,
+        DropdownItemSizeIconPadding_2 as DropdownItemSizeIconPadding,
+        DropdownItemFontDefault_2 as DropdownItemFontDefault,
+        DropdownItemFontCaption_2 as DropdownItemFontCaption,
+        DropdownGroupHeaderSizeDefaultPadding_2 as DropdownGroupHeaderSizeDefaultPadding,
+        DropdownGroupHeaderSizeSmallPadding_2 as DropdownGroupHeaderSizeSmallPadding,
+        DropdownGroupHeaderFontDefault_2 as DropdownGroupHeaderFontDefault,
+        DropdownGroupHeaderFontSmall_2 as DropdownGroupHeaderFontSmall,
+        DropdownDividerSizeHeight_2 as DropdownDividerSizeHeight,
+        DropdownDividerSizeMargin_2 as DropdownDividerSizeMargin,
+        DropdownTriggerSizeIconPaddingRight_2 as DropdownTriggerSizeIconPaddingRight,
+        DropdownPanelSizeMaxWidth_2 as DropdownPanelSizeMaxWidth,
+        DropdownPanelSizePadding_2 as DropdownPanelSizePadding,
+        DropdownPanelSizeBorderWidth_2 as DropdownPanelSizeBorderWidth,
+        DropdownPanelSizeBorderRadius_2 as DropdownPanelSizeBorderRadius,
+        FormFieldLightColorSchemeBorder_2 as FormFieldLightColorSchemeBorder,
+        FormFieldLightColorSchemeBackground_2 as FormFieldLightColorSchemeBackground,
+        FormFieldLightColorSchemeStatesHoverBorder_2 as FormFieldLightColorSchemeStatesHoverBorder,
+        FormFieldLightColorSchemeStatesInvalidBorder_2 as FormFieldLightColorSchemeStatesInvalidBorder,
+        FormFieldLightColorSchemeStatesInvalidBackground_2 as FormFieldLightColorSchemeStatesInvalidBackground,
+        FormFieldDarkColorSchemeBorder_2 as FormFieldDarkColorSchemeBorder,
+        FormFieldDarkColorSchemeBackground_2 as FormFieldDarkColorSchemeBackground,
+        FormFieldDarkColorSchemeStatesHoverBorder_2 as FormFieldDarkColorSchemeStatesHoverBorder,
+        FormFieldDarkColorSchemeStatesInvalidBorder_2 as FormFieldDarkColorSchemeStatesInvalidBorder,
+        FormFieldDarkColorSchemeStatesInvalidBackground_2 as FormFieldDarkColorSchemeStatesInvalidBackground,
+        FormFieldSizeBorderWidth_2 as FormFieldSizeBorderWidth,
+        FormFieldSizeBorderRadius_2 as FormFieldSizeBorderRadius,
+        FormFieldSizeButtonWidth_2 as FormFieldSizeButtonWidth,
+        FormFieldFontDefault_2 as FormFieldFontDefault,
+        FormFieldHintSizeMarginTop_2 as FormFieldHintSizeMarginTop,
+        FormFieldHintFontDefault_2 as FormFieldHintFontDefault,
+        FormsLightColorSchemeLabel_2 as FormsLightColorSchemeLabel,
+        FormsLightColorSchemeLegend_2 as FormsLightColorSchemeLegend,
+        FormsDarkColorSchemeLabel_2 as FormsDarkColorSchemeLabel,
+        FormsDarkColorSchemeLegend_2 as FormsDarkColorSchemeLegend,
+        FormsSizeHorizontalRowMarginBottom_2 as FormsSizeHorizontalRowMarginBottom,
+        FormsSizeHorizontalLabelPaddingTop_2 as FormsSizeHorizontalLabelPaddingTop,
+        FormsSizeHorizontalLabelPaddingBottom_2 as FormsSizeHorizontalLabelPaddingBottom,
+        FormsSizeHorizontalControlPaddingLeft_2 as FormsSizeHorizontalControlPaddingLeft,
+        FormsSizeHorizontalLegendMarginTop_2 as FormsSizeHorizontalLegendMarginTop,
+        FormsSizeHorizontalLegendMarginBottom_2 as FormsSizeHorizontalLegendMarginBottom,
+        FormsSizeVerticalRowMarginBottom_2 as FormsSizeVerticalRowMarginBottom,
+        FormsSizeVerticalLabelPaddingTop_2 as FormsSizeVerticalLabelPaddingTop,
+        FormsSizeVerticalLabelPaddingBottom_2 as FormsSizeVerticalLabelPaddingBottom,
+        FormsSizeVerticalControlPaddingLeft_2 as FormsSizeVerticalControlPaddingLeft,
+        FormsSizeVerticalLegendMarginTop_2 as FormsSizeVerticalLegendMarginTop,
+        FormsSizeVerticalLegendMarginBottom_2 as FormsSizeVerticalLegendMarginBottom,
+        FormsFontDefaultLabel_2 as FormsFontDefaultLabel,
+        FormsFontDefaultLegend_2 as FormsFontDefaultLegend,
+        InputSizePadding_2 as InputSizePadding,
+        InputSizeWidth_2 as InputSizeWidth,
+        InputSizeMinHeight_2 as InputSizeMinHeight,
+        InputFontDefault_2 as InputFontDefault,
+        InputFontMonospace_2 as InputFontMonospace,
+        LinkLightColorSchemeText_2 as LinkLightColorSchemeText,
+        LinkLightColorSchemeBorderBottom_2 as LinkLightColorSchemeBorderBottom,
+        LinkLightColorSchemeStateVisitedText_2 as LinkLightColorSchemeStateVisitedText,
+        LinkLightColorSchemeStateVisitedBorderBottom_2 as LinkLightColorSchemeStateVisitedBorderBottom,
+        LinkLightColorSchemeStateHoverText_2 as LinkLightColorSchemeStateHoverText,
+        LinkLightColorSchemeStateHoverBorderBottom_2 as LinkLightColorSchemeStateHoverBorderBottom,
+        LinkLightColorSchemeStateActive_2 as LinkLightColorSchemeStateActive,
+        LinkLightColorSchemeStateFocusedOutline_2 as LinkLightColorSchemeStateFocusedOutline,
+        LinkDarkColorSchemeText_2 as LinkDarkColorSchemeText,
+        LinkDarkColorSchemeBorderBottom_2 as LinkDarkColorSchemeBorderBottom,
+        LinkDarkColorSchemeStateVisitedText_2 as LinkDarkColorSchemeStateVisitedText,
+        LinkDarkColorSchemeStateVisitedBorderBottom_2 as LinkDarkColorSchemeStateVisitedBorderBottom,
+        LinkDarkColorSchemeStateHoverText_2 as LinkDarkColorSchemeStateHoverText,
+        LinkDarkColorSchemeStateHoverBorderBottom_2 as LinkDarkColorSchemeStateHoverBorderBottom,
+        LinkDarkColorSchemeStateActive_2 as LinkDarkColorSchemeStateActive,
+        LinkDarkColorSchemeStateFocusedOutline_2 as LinkDarkColorSchemeStateFocusedOutline,
+        LinkSizeIconMargin_2 as LinkSizeIconMargin,
+        LinkSizeStateFocusedOutlineOffset_2 as LinkSizeStateFocusedOutlineOffset,
+        LinkSizeStateFocusedOutlineWidth_2 as LinkSizeStateFocusedOutlineWidth,
+        LinkAnimationTransition_2 as LinkAnimationTransition,
+        LinkAnimationStateHoverTransition_2 as LinkAnimationStateHoverTransition,
+        LinkFontDefault_2 as LinkFontDefault,
+        ListSizeHorizontalPadding_2 as ListSizeHorizontalPadding,
+        ListSizeIconPadding_2 as ListSizeIconPadding,
+        ListSizeItemHeight_2 as ListSizeItemHeight,
+        ListSizeIconWidth_2 as ListSizeIconWidth,
+        ListFontItem_2 as ListFontItem,
+        ModalLightColorSchemeShadow_2 as ModalLightColorSchemeShadow,
+        ModalLightColorSchemeBodyTopShadow_2 as ModalLightColorSchemeBodyTopShadow,
+        ModalLightColorSchemeBodyBottomShadow_2 as ModalLightColorSchemeBodyBottomShadow,
+        ModalLightColorSchemeBackgroundMask_2 as ModalLightColorSchemeBackgroundMask,
+        ModalDarkColorSchemeShadow_2 as ModalDarkColorSchemeShadow,
+        ModalDarkColorSchemeBodyTopShadow_2 as ModalDarkColorSchemeBodyTopShadow,
+        ModalDarkColorSchemeBodyBottomShadow_2 as ModalDarkColorSchemeBodyBottomShadow,
+        ModalDarkColorSchemeBackgroundMask_2 as ModalDarkColorSchemeBackgroundMask,
+        ModalSizeSmall_2 as ModalSizeSmall,
+        ModalSizeNormal_2 as ModalSizeNormal,
+        ModalSizeLarge_2 as ModalSizeLarge,
+        ModalSizeTop_2 as ModalSizeTop,
+        ModalSizeCloseWidth_2 as ModalSizeCloseWidth,
+        ModalSizeBorderRadius_2 as ModalSizeBorderRadius,
+        ModalSizeBorderWidth_2 as ModalSizeBorderWidth,
+        ModalHeaderLightColorSchemeBorder_2 as ModalHeaderLightColorSchemeBorder,
+        ModalHeaderDarkColorSchemeBorder_2 as ModalHeaderDarkColorSchemeBorder,
+        ModalHeaderSizeBorderRadius_2 as ModalHeaderSizeBorderRadius,
+        ModalHeaderSizePadding_2 as ModalHeaderSizePadding,
+        ModalHeaderFontDefault_2 as ModalHeaderFontDefault,
+        ModalBodySizeMaxHeight_2 as ModalBodySizeMaxHeight,
+        ModalBodySizePadding_2 as ModalBodySizePadding,
+        ModalBodyFontDefault_2 as ModalBodyFontDefault,
+        ModalFooterLightColorSchemeBorder_2 as ModalFooterLightColorSchemeBorder,
+        ModalFooterDarkColorSchemeBorder_2 as ModalFooterDarkColorSchemeBorder,
+        ModalFooterSizeBorderRadius_2 as ModalFooterSizeBorderRadius,
+        ModalFooterSizePadding_2 as ModalFooterSizePadding,
+        ModalConfirmSizePadding_2 as ModalConfirmSizePadding,
+        NavbarLightColorSchemeBackground_2 as NavbarLightColorSchemeBackground,
+        NavbarLightColorSchemeDividerBackground_2 as NavbarLightColorSchemeDividerBackground,
+        NavbarDarkColorSchemeBackground_2 as NavbarDarkColorSchemeBackground,
+        NavbarDarkColorSchemeDividerBackground_2 as NavbarDarkColorSchemeDividerBackground,
+        NavbarSizeIconMargin_2 as NavbarSizeIconMargin,
+        NavbarFontTitle_2 as NavbarFontTitle,
+        VerticalNavbarSizeStatesExpandedWidth_2 as VerticalNavbarSizeStatesExpandedWidth,
+        VerticalNavbarSizeStatesCollapsedWidth_2 as VerticalNavbarSizeStatesCollapsedWidth,
+        VerticalNavbarSizeIconMargin_2 as VerticalNavbarSizeIconMargin,
+        NavbarItemLightColorSchemeText_2 as NavbarItemLightColorSchemeText,
+        NavbarItemLightColorSchemeIcon_2 as NavbarItemLightColorSchemeIcon,
+        NavbarItemLightColorSchemeStatesActive_2 as NavbarItemLightColorSchemeStatesActive,
+        NavbarItemLightColorSchemeStatesSelected_2 as NavbarItemLightColorSchemeStatesSelected,
+        NavbarItemLightColorSchemeStatesHover_2 as NavbarItemLightColorSchemeStatesHover,
+        NavbarItemLightColorSchemeStatesProgress_2 as NavbarItemLightColorSchemeStatesProgress,
+        NavbarItemLightColorSchemeStatesDisabledOpacity_2 as NavbarItemLightColorSchemeStatesDisabledOpacity,
+        NavbarItemDarkColorSchemeText_2 as NavbarItemDarkColorSchemeText,
+        NavbarItemDarkColorSchemeIcon_2 as NavbarItemDarkColorSchemeIcon,
+        NavbarItemDarkColorSchemeStatesActive_2 as NavbarItemDarkColorSchemeStatesActive,
+        NavbarItemDarkColorSchemeStatesSelected_2 as NavbarItemDarkColorSchemeStatesSelected,
+        NavbarItemDarkColorSchemeStatesHover_2 as NavbarItemDarkColorSchemeStatesHover,
+        NavbarItemDarkColorSchemeStatesProgress_2 as NavbarItemDarkColorSchemeStatesProgress,
+        NavbarItemDarkColorSchemeStatesDisabledOpacity_2 as NavbarItemDarkColorSchemeStatesDisabledOpacity,
+        NavbarItemSizePadding_2 as NavbarItemSizePadding,
+        NavbarItemSizeHeight_2 as NavbarItemSizeHeight,
+        NavbarItemSizeHeightVertical_2 as NavbarItemSizeHeightVertical,
+        NavbarBrandSizePadding_2 as NavbarBrandSizePadding,
+        NavbarBrandSizeMarginRight_2 as NavbarBrandSizeMarginRight,
+        NavbarBrandFontTitle_2 as NavbarBrandFontTitle,
+        OptgroupSizePaddingLeft_2 as OptgroupSizePaddingLeft,
+        OptgroupFontDefault_2 as OptgroupFontDefault,
+        OptionSizeHorizontalPadding_2 as OptionSizeHorizontalPadding,
+        OptionSizeHeight_2 as OptionSizeHeight,
+        OptionSizeBorderWidth_2 as OptionSizeBorderWidth,
+        OptionFontDefault_2 as OptionFontDefault,
+        PopoverLightColorSchemeBackground_2 as PopoverLightColorSchemeBackground,
+        PopoverLightColorSchemeText_2 as PopoverLightColorSchemeText,
+        PopoverLightColorSchemeShadow_2 as PopoverLightColorSchemeShadow,
+        PopoverLightColorSchemeBorder_2 as PopoverLightColorSchemeBorder,
+        PopoverDarkColorSchemeBackground_2 as PopoverDarkColorSchemeBackground,
+        PopoverDarkColorSchemeText_2 as PopoverDarkColorSchemeText,
+        PopoverDarkColorSchemeShadow_2 as PopoverDarkColorSchemeShadow,
+        PopoverDarkColorSchemeBorder_2 as PopoverDarkColorSchemeBorder,
+        PopoverSizeMaxHeight_2 as PopoverSizeMaxHeight,
+        PopoverSizePadding_2 as PopoverSizePadding,
+        PopoverSizeBorderRadius_2 as PopoverSizeBorderRadius,
+        PopoverSizeArrowSize_2 as PopoverSizeArrowSize,
+        PopoverSizeTriggerMargin_2 as PopoverSizeTriggerMargin,
+        PopoverSizeSmallWidth_2 as PopoverSizeSmallWidth,
+        PopoverSizeNormalWidth_2 as PopoverSizeNormalWidth,
+        PopoverSizeLargeWidth_2 as PopoverSizeLargeWidth,
+        PopoverFontDefault_2 as PopoverFontDefault,
+        PopoverHeaderLightColorSchemeBorder_2 as PopoverHeaderLightColorSchemeBorder,
+        PopoverHeaderLightColorSchemeText_2 as PopoverHeaderLightColorSchemeText,
+        PopoverHeaderLightColorSchemeBackground_2 as PopoverHeaderLightColorSchemeBackground,
+        PopoverHeaderDarkColorSchemeBorder_2 as PopoverHeaderDarkColorSchemeBorder,
+        PopoverHeaderDarkColorSchemeText_2 as PopoverHeaderDarkColorSchemeText,
+        PopoverHeaderDarkColorSchemeBackground_2 as PopoverHeaderDarkColorSchemeBackground,
+        PopoverHeaderSizeHeight_2 as PopoverHeaderSizeHeight,
+        PopoverHeaderSizePadding_2 as PopoverHeaderSizePadding,
+        PopoverHeaderFontDefault_2 as PopoverHeaderFontDefault,
+        PopoverFooterLightColorSchemeBorder_2 as PopoverFooterLightColorSchemeBorder,
+        PopoverFooterLightColorSchemeBackground_2 as PopoverFooterLightColorSchemeBackground,
+        PopoverFooterDarkColorSchemeBorder_2 as PopoverFooterDarkColorSchemeBorder,
+        PopoverFooterDarkColorSchemeBackground_2 as PopoverFooterDarkColorSchemeBackground,
+        PopoverFooterSizeMarginTop_2 as PopoverFooterSizeMarginTop,
+        PopoverFooterSizePadding_2 as PopoverFooterSizePadding,
+        PopoverFooterSizeHeight_2 as PopoverFooterSizeHeight,
+        PopoverFooterFontDefault_2 as PopoverFooterFontDefault,
+        PopupLightColorSchemeShadow_2 as PopupLightColorSchemeShadow,
+        PopupLightColorSchemeBorder_2 as PopupLightColorSchemeBorder,
+        PopupLightColorSchemeDivider_2 as PopupLightColorSchemeDivider,
+        PopupLightColorSchemeBackground_2 as PopupLightColorSchemeBackground,
+        PopupLightColorSchemeFooterBackground_2 as PopupLightColorSchemeFooterBackground,
+        PopupDarkColorSchemeShadow_2 as PopupDarkColorSchemeShadow,
+        PopupDarkColorSchemeBorder_2 as PopupDarkColorSchemeBorder,
+        PopupDarkColorSchemeDivider_2 as PopupDarkColorSchemeDivider,
+        PopupDarkColorSchemeBackground_2 as PopupDarkColorSchemeBackground,
+        PopupDarkColorSchemeFooterBackground_2 as PopupDarkColorSchemeFooterBackground,
+        ProgressBarLightColorSchemeBackground_2 as ProgressBarLightColorSchemeBackground,
+        ProgressBarDarkColorSchemeBackground_2 as ProgressBarDarkColorSchemeBackground,
+        ProgressBarSizeHeight_2 as ProgressBarSizeHeight,
+        ProgressSpinnerSizeSize_2 as ProgressSpinnerSizeSize,
+        RadioLightColorSchemeOuterCircleBorder_2 as RadioLightColorSchemeOuterCircleBorder,
+        RadioLightColorSchemeInnerCircleBorder_2 as RadioLightColorSchemeInnerCircleBorder,
+        RadioLightColorSchemeStatesCheckedOuterCircleBorder_2 as RadioLightColorSchemeStatesCheckedOuterCircleBorder,
+        RadioLightColorSchemeStatesCheckedInnerCircleBorder_2 as RadioLightColorSchemeStatesCheckedInnerCircleBorder,
+        RadioLightColorSchemeStatesFocusedOuterCircleBorder_2 as RadioLightColorSchemeStatesFocusedOuterCircleBorder,
+        RadioLightColorSchemeStatesFocusedOuterCircleShadow_2 as RadioLightColorSchemeStatesFocusedOuterCircleShadow,
+        RadioLightColorSchemeStatesFocusedInnerCircleShadow_2 as RadioLightColorSchemeStatesFocusedInnerCircleShadow,
+        RadioDarkColorSchemeOuterCircleBorder_2 as RadioDarkColorSchemeOuterCircleBorder,
+        RadioDarkColorSchemeInnerCircleBorder_2 as RadioDarkColorSchemeInnerCircleBorder,
+        RadioDarkColorSchemeStatesCheckedOuterCircleBorder_2 as RadioDarkColorSchemeStatesCheckedOuterCircleBorder,
+        RadioDarkColorSchemeStatesCheckedInnerCircleBorder_2 as RadioDarkColorSchemeStatesCheckedInnerCircleBorder,
+        RadioDarkColorSchemeStatesFocusedOuterCircleBorder_2 as RadioDarkColorSchemeStatesFocusedOuterCircleBorder,
+        RadioDarkColorSchemeStatesFocusedOuterCircleShadow_2 as RadioDarkColorSchemeStatesFocusedOuterCircleShadow,
+        RadioDarkColorSchemeStatesFocusedInnerCircleShadow_2 as RadioDarkColorSchemeStatesFocusedInnerCircleShadow,
+        RadioSizeSize_2 as RadioSizeSize,
+        RadioSizeLabelMargin_2 as RadioSizeLabelMargin,
+        RadioFontDefault_2 as RadioFontDefault,
+        SelectSizeHeight_2 as SelectSizeHeight,
+        SelectSizeLeftPadding_2 as SelectSizeLeftPadding,
+        SelectSizeRightPadding_2 as SelectSizeRightPadding,
+        SelectSizeLeftPaddingMultiple_2 as SelectSizeLeftPaddingMultiple,
+        SelectFontDefault_2 as SelectFontDefault,
+        SelectPanelSizeMaxHeight_2 as SelectPanelSizeMaxHeight,
+        SelectPanelSizeMaxWidth_2 as SelectPanelSizeMaxWidth,
+        SelectPanelSizeVerticalPadding_2 as SelectPanelSizeVerticalPadding,
+        SelectPanelSizeBorderWidth_2 as SelectPanelSizeBorderWidth,
+        SelectPanelSizeBorderRadius_2 as SelectPanelSizeBorderRadius,
+        SelectPanelFontDefault_2 as SelectPanelFontDefault,
+        SidepanelLightColorSchemeBorder_2 as SidepanelLightColorSchemeBorder,
+        SidepanelDarkColorSchemeBorder_2 as SidepanelDarkColorSchemeBorder,
+        SidepanelFontDefault_2 as SidepanelFontDefault,
+        SidepanelHeaderSizePadding_2 as SidepanelHeaderSizePadding,
+        SidepanelHeaderSizeClosePadding_2 as SidepanelHeaderSizeClosePadding,
+        SidepanelHeaderFontDefault_2 as SidepanelHeaderFontDefault,
+        SidepanelFooterSizePadding_2 as SidepanelFooterSizePadding,
+        SidepanelFooterFontDefault_2 as SidepanelFooterFontDefault,
+        TableSizeBorderWidth_2 as TableSizeBorderWidth,
+        TableSizeRowPaddingVertical_2 as TableSizeRowPaddingVertical,
+        TableSizeRowPaddingHorizontal_2 as TableSizeRowPaddingHorizontal,
+        TableFontHeader_2 as TableFontHeader,
+        TableFontBody_2 as TableFontBody,
+        TabsLightColorSchemeBorder_2 as TabsLightColorSchemeBorder,
+        TabsLightColorSchemeStateActive_2 as TabsLightColorSchemeStateActive,
+        TabsLightColorSchemeStateDisabledOverlay_2 as TabsLightColorSchemeStateDisabledOverlay,
+        TabsDarkColorSchemeBorder_2 as TabsDarkColorSchemeBorder,
+        TabsDarkColorSchemeStateActive_2 as TabsDarkColorSchemeStateActive,
+        TabsDarkColorSchemeStateDisabledOverlay_2 as TabsDarkColorSchemeStateDisabledOverlay,
+        TabsSizeHeight_2 as TabsSizeHeight,
+        TabsSizeHighlightHeight_2 as TabsSizeHighlightHeight,
+        TabsSizePaddingHorizontal_2 as TabsSizePaddingHorizontal,
+        TabsSizeBorderWidth_2 as TabsSizeBorderWidth,
+        TabsSizeBorderRadius_2 as TabsSizeBorderRadius,
+        TabsSizeLabelIconMargin_2 as TabsSizeLabelIconMargin,
+        TabsFontDefault_2 as TabsFontDefault,
+        TagsLightColorSchemePrimaryBackground_2 as TagsLightColorSchemePrimaryBackground,
+        TagsLightColorSchemePrimaryBorder_2 as TagsLightColorSchemePrimaryBorder,
+        TagsLightColorSchemePrimaryIcon_2 as TagsLightColorSchemePrimaryIcon,
+        TagsLightColorSchemePrimaryStatesHoverIcon_2 as TagsLightColorSchemePrimaryStatesHoverIcon,
+        TagsLightColorSchemePrimaryStatesFocused_2 as TagsLightColorSchemePrimaryStatesFocused,
+        TagsLightColorSchemePrimaryStatesDisabledText_2 as TagsLightColorSchemePrimaryStatesDisabledText,
+        TagsLightColorSchemePrimaryStatesDisabledBackground_2 as TagsLightColorSchemePrimaryStatesDisabledBackground,
+        TagsLightColorSchemeSecondBackground_2 as TagsLightColorSchemeSecondBackground,
+        TagsLightColorSchemeSecondBorder_2 as TagsLightColorSchemeSecondBorder,
+        TagsLightColorSchemeSecondIcon_2 as TagsLightColorSchemeSecondIcon,
+        TagsLightColorSchemeSecondStatesHoverIcon_2 as TagsLightColorSchemeSecondStatesHoverIcon,
+        TagsLightColorSchemeSecondStatesFocused_2 as TagsLightColorSchemeSecondStatesFocused,
+        TagsLightColorSchemeSecondStatesDisabledText_2 as TagsLightColorSchemeSecondStatesDisabledText,
+        TagsLightColorSchemeSecondStatesDisabledBackground_2 as TagsLightColorSchemeSecondStatesDisabledBackground,
+        TagsLightColorSchemeErrorBackground_2 as TagsLightColorSchemeErrorBackground,
+        TagsLightColorSchemeErrorBorder_2 as TagsLightColorSchemeErrorBorder,
+        TagsLightColorSchemeErrorIcon_2 as TagsLightColorSchemeErrorIcon,
+        TagsLightColorSchemeErrorStatesHoverIcon_2 as TagsLightColorSchemeErrorStatesHoverIcon,
+        TagsLightColorSchemeErrorStatesFocused_2 as TagsLightColorSchemeErrorStatesFocused,
+        TagsLightColorSchemeErrorStatesDisabledText_2 as TagsLightColorSchemeErrorStatesDisabledText,
+        TagsLightColorSchemeErrorStatesDisabledBackground_2 as TagsLightColorSchemeErrorStatesDisabledBackground,
+        TagsDarkColorSchemePrimaryBackground_2 as TagsDarkColorSchemePrimaryBackground,
+        TagsDarkColorSchemePrimaryBorder_2 as TagsDarkColorSchemePrimaryBorder,
+        TagsDarkColorSchemePrimaryIcon_2 as TagsDarkColorSchemePrimaryIcon,
+        TagsDarkColorSchemePrimaryStatesHoverIcon_2 as TagsDarkColorSchemePrimaryStatesHoverIcon,
+        TagsDarkColorSchemePrimaryStatesFocused_2 as TagsDarkColorSchemePrimaryStatesFocused,
+        TagsDarkColorSchemePrimaryStatesDisabledText_2 as TagsDarkColorSchemePrimaryStatesDisabledText,
+        TagsDarkColorSchemePrimaryStatesDisabledBackground_2 as TagsDarkColorSchemePrimaryStatesDisabledBackground,
+        TagsDarkColorSchemeSecondBackground_2 as TagsDarkColorSchemeSecondBackground,
+        TagsDarkColorSchemeSecondBorder_2 as TagsDarkColorSchemeSecondBorder,
+        TagsDarkColorSchemeSecondIcon_2 as TagsDarkColorSchemeSecondIcon,
+        TagsDarkColorSchemeSecondStatesHoverIcon_2 as TagsDarkColorSchemeSecondStatesHoverIcon,
+        TagsDarkColorSchemeSecondStatesFocused_2 as TagsDarkColorSchemeSecondStatesFocused,
+        TagsDarkColorSchemeSecondStatesDisabledText_2 as TagsDarkColorSchemeSecondStatesDisabledText,
+        TagsDarkColorSchemeSecondStatesDisabledBackground_2 as TagsDarkColorSchemeSecondStatesDisabledBackground,
+        TagsDarkColorSchemeErrorBackground_2 as TagsDarkColorSchemeErrorBackground,
+        TagsDarkColorSchemeErrorBorder_2 as TagsDarkColorSchemeErrorBorder,
+        TagsDarkColorSchemeErrorIcon_2 as TagsDarkColorSchemeErrorIcon,
+        TagsDarkColorSchemeErrorStatesHoverIcon_2 as TagsDarkColorSchemeErrorStatesHoverIcon,
+        TagsDarkColorSchemeErrorStatesFocused_2 as TagsDarkColorSchemeErrorStatesFocused,
+        TagsDarkColorSchemeErrorStatesDisabledText_2 as TagsDarkColorSchemeErrorStatesDisabledText,
+        TagsDarkColorSchemeErrorStatesDisabledBackground_2 as TagsDarkColorSchemeErrorStatesDisabledBackground,
+        TagsSizeMargin_2 as TagsSizeMargin,
+        TagsSizeHeight_2 as TagsSizeHeight,
+        TagsSizeBorderWidth_2 as TagsSizeBorderWidth,
+        TagsSizeBorderRadius_2 as TagsSizeBorderRadius,
+        TagsSizeIconPadding_2 as TagsSizeIconPadding,
+        TagsSizeTextMargin_2 as TagsSizeTextMargin,
+        TagsFontDefault_2 as TagsFontDefault,
+        TagsFontMono_2 as TagsFontMono,
+        TagsFontCaps_2 as TagsFontCaps,
+        TagListSizePadding_2 as TagListSizePadding,
+        TagListSizeMinHeight_2 as TagListSizeMinHeight,
+        TagInputSizeHeight_2 as TagInputSizeHeight,
+        TagInputSizeMargin_2 as TagInputSizeMargin,
+        TagInputFontDefault_2 as TagInputFontDefault,
+        TextareaSizeMinHeight_2 as TextareaSizeMinHeight,
+        TextareaSizePadding_2 as TextareaSizePadding,
+        TextareaFontDefault_2 as TextareaFontDefault,
+        TextareaFontMono_2 as TextareaFontMono,
+        TimepickerSizePaddingRight_2 as TimepickerSizePaddingRight,
+        ToggleLightColorSchemeBorder_2 as ToggleLightColorSchemeBorder,
+        ToggleLightColorSchemeBackground_2 as ToggleLightColorSchemeBackground,
+        ToggleLightColorSchemeCircleBorder_2 as ToggleLightColorSchemeCircleBorder,
+        ToggleLightColorSchemeCircleBackground_2 as ToggleLightColorSchemeCircleBackground,
+        ToggleLightColorSchemeStatesFocusedShadow_2 as ToggleLightColorSchemeStatesFocusedShadow,
+        ToggleLightColorSchemePrimaryCheckedBorderColor_2 as ToggleLightColorSchemePrimaryCheckedBorderColor,
+        ToggleLightColorSchemePrimaryCheckedBackground_2 as ToggleLightColorSchemePrimaryCheckedBackground,
+        ToggleLightColorSchemeErrorCheckedBorderColor_2 as ToggleLightColorSchemeErrorCheckedBorderColor,
+        ToggleLightColorSchemeErrorCheckedBackground_2 as ToggleLightColorSchemeErrorCheckedBackground,
+        ToggleDarkColorSchemeBorder_2 as ToggleDarkColorSchemeBorder,
+        ToggleDarkColorSchemeBackground_2 as ToggleDarkColorSchemeBackground,
+        ToggleDarkColorSchemeCircleBorder_2 as ToggleDarkColorSchemeCircleBorder,
+        ToggleDarkColorSchemeCircleBackground_2 as ToggleDarkColorSchemeCircleBackground,
+        ToggleDarkColorSchemeStatesFocusedShadow_2 as ToggleDarkColorSchemeStatesFocusedShadow,
+        ToggleDarkColorSchemePrimaryCheckedBorderColor_2 as ToggleDarkColorSchemePrimaryCheckedBorderColor,
+        ToggleDarkColorSchemePrimaryCheckedBackground_2 as ToggleDarkColorSchemePrimaryCheckedBackground,
+        ToggleDarkColorSchemeErrorCheckedBorderColor_2 as ToggleDarkColorSchemeErrorCheckedBorderColor,
+        ToggleDarkColorSchemeErrorCheckedBackground_2 as ToggleDarkColorSchemeErrorCheckedBackground,
+        ToggleSizeHeight_2 as ToggleSizeHeight,
+        ToggleSizeWidth_2 as ToggleSizeWidth,
+        ToggleSizeBorderRadius_2 as ToggleSizeBorderRadius,
+        ToggleSizeLabelMargin_2 as ToggleSizeLabelMargin,
+        ToggleFontDefault_2 as ToggleFontDefault,
+        ToggleSmallSizeHeight_2 as ToggleSmallSizeHeight,
+        ToggleSmallSizeWidth_2 as ToggleSmallSizeWidth,
+        ToggleSmallSizeBorderRadius_2 as ToggleSmallSizeBorderRadius,
+        ToggleSmallFontDefault_2 as ToggleSmallFontDefault,
+        TooltipLightColorSchemeBackground_2 as TooltipLightColorSchemeBackground,
+        TooltipLightColorSchemeText_2 as TooltipLightColorSchemeText,
+        TooltipLightColorSchemeBorder_2 as TooltipLightColorSchemeBorder,
+        TooltipLightColorSchemeShadow_2 as TooltipLightColorSchemeShadow,
+        TooltipLightColorSchemeWarningBackground_2 as TooltipLightColorSchemeWarningBackground,
+        TooltipLightColorSchemeWarningText_2 as TooltipLightColorSchemeWarningText,
+        TooltipLightColorSchemeWarningBorder_2 as TooltipLightColorSchemeWarningBorder,
+        TooltipDarkColorSchemeBackground_2 as TooltipDarkColorSchemeBackground,
+        TooltipDarkColorSchemeText_2 as TooltipDarkColorSchemeText,
+        TooltipDarkColorSchemeBorder_2 as TooltipDarkColorSchemeBorder,
+        TooltipDarkColorSchemeShadow_2 as TooltipDarkColorSchemeShadow,
+        TooltipDarkColorSchemeWarningBackground_2 as TooltipDarkColorSchemeWarningBackground,
+        TooltipDarkColorSchemeWarningText_2 as TooltipDarkColorSchemeWarningText,
+        TooltipDarkColorSchemeWarningBorder_2 as TooltipDarkColorSchemeWarningBorder,
+        TooltipSizeMaxWidth_2 as TooltipSizeMaxWidth,
+        TooltipSizeBorderWidth_2 as TooltipSizeBorderWidth,
+        TooltipSizeBorderRadius_2 as TooltipSizeBorderRadius,
+        TooltipSizePadding_2 as TooltipSizePadding,
+        TooltipSizeArrowSize_2 as TooltipSizeArrowSize,
+        TooltipSizeTriggerMargin_2 as TooltipSizeTriggerMargin,
+        TooltipFontDefault_2 as TooltipFontDefault,
+        ExtendedTooltipLightColorSchemeBackground_2 as ExtendedTooltipLightColorSchemeBackground,
+        ExtendedTooltipLightColorSchemeText_2 as ExtendedTooltipLightColorSchemeText,
+        ExtendedTooltipLightColorSchemeBorder_2 as ExtendedTooltipLightColorSchemeBorder,
+        ExtendedTooltipLightColorSchemeShadow_2 as ExtendedTooltipLightColorSchemeShadow,
+        ExtendedTooltipDarkColorSchemeBackground_2 as ExtendedTooltipDarkColorSchemeBackground,
+        ExtendedTooltipDarkColorSchemeText_2 as ExtendedTooltipDarkColorSchemeText,
+        ExtendedTooltipDarkColorSchemeBorder_2 as ExtendedTooltipDarkColorSchemeBorder,
+        ExtendedTooltipDarkColorSchemeShadow_2 as ExtendedTooltipDarkColorSchemeShadow,
+        ExtendedTooltipSizeBorderRadius_2 as ExtendedTooltipSizeBorderRadius,
+        ExtendedTooltipSizeArrowSize_2 as ExtendedTooltipSizeArrowSize,
+        ExtendedTooltipSizeTriggerMargin_2 as ExtendedTooltipSizeTriggerMargin,
+        ExtendedTooltipSizePadding_2 as ExtendedTooltipSizePadding,
+        ExtendedTooltipSizeMaxHeight_2 as ExtendedTooltipSizeMaxHeight,
+        ExtendedTooltipFontDefault_2 as ExtendedTooltipFontDefault,
+        ExtendedTooltipHeaderLightColorSchemeBorder_2 as ExtendedTooltipHeaderLightColorSchemeBorder,
+        ExtendedTooltipHeaderLightColorSchemeText_2 as ExtendedTooltipHeaderLightColorSchemeText,
+        ExtendedTooltipHeaderLightColorSchemeBackground_2 as ExtendedTooltipHeaderLightColorSchemeBackground,
+        ExtendedTooltipHeaderDarkColorSchemeBorder_2 as ExtendedTooltipHeaderDarkColorSchemeBorder,
+        ExtendedTooltipHeaderDarkColorSchemeText_2 as ExtendedTooltipHeaderDarkColorSchemeText,
+        ExtendedTooltipHeaderDarkColorSchemeBackground_2 as ExtendedTooltipHeaderDarkColorSchemeBackground,
+        ExtendedTooltipHeaderSizeHeight_2 as ExtendedTooltipHeaderSizeHeight,
+        ExtendedTooltipHeaderSizePadding_2 as ExtendedTooltipHeaderSizePadding,
+        ExtendedTooltipHeaderFontDefault_2 as ExtendedTooltipHeaderFontDefault,
+        TreeSizeNodeHeight_2 as TreeSizeNodeHeight,
+        TreeSizePaddingLeft_2 as TreeSizePaddingLeft,
+        TreeSizePaddingRight_2 as TreeSizePaddingRight,
+        TreeFontNode_2 as TreeFontNode
+    }
+}
+export { legacyTokens }
+
+// @public (undocumented)
+export const LightColorSchemeBackgroundBackground = "white";
+
+// @public (undocumented)
+const LightColorSchemeBackgroundBackground_2 = "white";
+
+// @public (undocumented)
+export const LightColorSchemeBackgroundBackgroundDisabled = "#f2f5f9";
+
+// @public (undocumented)
+const LightColorSchemeBackgroundBackgroundDisabled_2 = "#F0F0F0";
+
+// @public (undocumented)
+export const LightColorSchemeBackgroundOverlayActive = "rgba(black, 0.1)";
+
+// @public (undocumented)
+const LightColorSchemeBackgroundOverlayActive_2 = "rgba(black, 0.1)";
+
+// @public (undocumented)
+export const LightColorSchemeBackgroundOverlayDisabled = "rgba(white, 0.3)";
+
+// @public (undocumented)
+const LightColorSchemeBackgroundOverlayDisabled_2 = "rgba(white, 0.3)";
+
+// @public (undocumented)
+export const LightColorSchemeBackgroundOverlayHover = "rgba(black, 0.05)";
+
+// @public (undocumented)
+const LightColorSchemeBackgroundOverlayHover_2 = "rgba(black, 0.05)";
+
+// @public (undocumented)
+export const LightColorSchemeErrorDefault = "#db3c55";
+
+// @public (undocumented)
+const LightColorSchemeErrorDefault_2 = "#E76E5C";
+
+// @public (undocumented)
+export const LightColorSchemeErrorPalette: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+const LightColorSchemeErrorPalette_2: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+export const LightColorSchemeForegroundBorder = "#bdc7d1";
+
+// @public (undocumented)
+const LightColorSchemeForegroundBorder_2 = "#B3B3B3";
+
+// @public (undocumented)
+export const LightColorSchemeForegroundDivider = "#d7dee4";
+
+// @public (undocumented)
+const LightColorSchemeForegroundDivider_2 = "#E6E6E6";
+
+// @public (undocumented)
+export const LightColorSchemeForegroundIcon = "#8c99a5";
+
+// @public (undocumented)
+const LightColorSchemeForegroundIcon_2 = "#999999";
+
+// @public (undocumented)
+export const LightColorSchemeForegroundText = "#19252f";
+
+// @public (undocumented)
+const LightColorSchemeForegroundText_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const LightColorSchemeForegroundTextDisabled = "#8c99a5";
+
+// @public (undocumented)
+const LightColorSchemeForegroundTextDisabled_2 = "#B3B3B3";
+
+// @public (undocumented)
+export const LightColorSchemeForegroundTextLessContrast = "#6d7a86";
+
+// @public (undocumented)
+const LightColorSchemeForegroundTextLessContrast_2 = "#999999";
+
+// @public (undocumented)
+export const LightColorSchemeInfoDefault = "#0374eb";
+
+// @public (undocumented)
+const LightColorSchemeInfoDefault_2 = "#AAD1EC";
 
 // @public (undocumented)
 export const LightColorSchemeInfoPalette: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A200: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+const LightColorSchemeInfoPalette_2: {
     "40": {
         value: string;
         filePath: string;
@@ -6316,10 +14505,437 @@ export const LightColorSchemeInfoPalette: {
 };
 
 // @public
-export const LightColorSchemePrimaryDefault = "#338FCC";
+export const LightColorSchemePrimaryDefault = "#0374eb";
+
+// @public
+const LightColorSchemePrimaryDefault_2 = "#338FCC";
 
 // @public (undocumented)
 export const LightColorSchemePrimaryPalette: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A200: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A200: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+const LightColorSchemePrimaryPalette_2: {
     "40": {
         value: string;
         filePath: string;
@@ -6728,10 +15344,465 @@ export const LightColorSchemePrimaryPalette: {
 };
 
 // @public (undocumented)
-export const LightColorSchemeSecondDefault = "#B3B3B3";
+export const LightColorSchemeSecondDefault = "#6d7a86";
+
+// @public (undocumented)
+const LightColorSchemeSecondDefault_2 = "#B3B3B3";
 
 // @public (undocumented)
 export const LightColorSchemeSecondPalette: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A40: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A60: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A200: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A300: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A500: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+const LightColorSchemeSecondPalette_2: {
     "40": {
         value: string;
         filePath: string;
@@ -7171,19 +16242,430 @@ export const LightColorSchemeSecondPalette: {
 export const LightColorSchemeStatesDisabledOpacity = 0.3;
 
 // @public (undocumented)
-export const LightColorSchemeStatesFocusedColor = "#338FCC";
+const LightColorSchemeStatesDisabledOpacity_2 = 0.3;
+
+// @public (undocumented)
+export const LightColorSchemeStatesFocusedColor = "#0374eb";
+
+// @public (undocumented)
+const LightColorSchemeStatesFocusedColor_2 = "#338FCC";
+
+// @public (undocumented)
+export const LightColorSchemeStatesFocusedColorError = "#db3c55";
 
 // @public (undocumented)
 export const LightColorSchemeStatesPressedShadow = "inset 0 1px 2px 0 rgba(black, 0.2)";
 
 // @public (undocumented)
-export const LightColorSchemeStatesSelectedColor = "#D8EAF7";
+const LightColorSchemeStatesPressedShadow_2 = "inset 0 1px 2px 0 rgba(black, 0.2)";
 
 // @public (undocumented)
-export const LightColorSchemeSuccessDefault = "#B4DEA4";
+export const LightColorSchemeStatesSelectedColor = "#e7f1ff";
+
+// @public (undocumented)
+const LightColorSchemeStatesSelectedColor_2 = "#D8EAF7";
+
+// @public (undocumented)
+export const LightColorSchemeSuccessDefault = "#028b49";
+
+// @public (undocumented)
+const LightColorSchemeSuccessDefault_2 = "#B4DEA4";
 
 // @public (undocumented)
 export const LightColorSchemeSuccessPalette: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+const LightColorSchemeSuccessPalette_2: {
     "40": {
         value: string;
         filePath: string;
@@ -7561,10 +17043,406 @@ export const LightColorSchemeSuccessPalette: {
 };
 
 // @public (undocumented)
-export const LightColorSchemeWarningDefault = "#F0D49B";
+export const LightColorSchemeWarningDefault = "#a26e0c";
+
+// @public (undocumented)
+const LightColorSchemeWarningDefault_2 = "#F0D49B";
 
 // @public (undocumented)
 export const LightColorSchemeWarningPalette: {
+    "40": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "60": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "100": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "200": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "300": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "400": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "500": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "560": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "600": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "700": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "800": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    "900": {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    A100: {
+        value: string;
+        filePath: string;
+        isSource: boolean;
+        original: {
+            value: string;
+        };
+        name: string;
+        attributes: {
+            category: string;
+            type: string;
+            item: string;
+        };
+        path: string[];
+    };
+    contrast: {
+        "40": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "60": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "100": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "200": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "300": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "400": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "500": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "560": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "600": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "700": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        "800": {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+        A100: {
+            value: string;
+            filePath: string;
+            isSource: boolean;
+            original: {
+                value: string;
+            };
+            name: string;
+            attributes: {
+                category: string;
+                type: string;
+                item: string;
+                subitem: string;
+            };
+            path: string[];
+        };
+    };
+};
+
+// @public (undocumented)
+const LightColorSchemeWarningPalette_2: {
     "40": {
         value: string;
         filePath: string;
@@ -7945,292 +17823,622 @@ export const LightColorSchemeWarningPalette: {
 export const LinkAnimationStateHoverTransition = "color 0ms";
 
 // @public (undocumented)
+const LinkAnimationStateHoverTransition_2 = "color 0ms";
+
+// @public (undocumented)
 export const LinkAnimationTransition = "color ease-out 300ms";
 
 // @public (undocumented)
-export const LinkDarkColorSchemeBorderBottom = "rgba(#57A4D7, 0.32)";
+const LinkAnimationTransition_2 = "color ease-out 300ms";
 
 // @public (undocumented)
-export const LinkDarkColorSchemeStateActive = "#7FBAE1";
+export const LinkDarkColorSchemeBorderBottom = "rgba(#4187ff, 0.32)";
 
 // @public (undocumented)
-export const LinkDarkColorSchemeStateFocusedOutline = "#57A4D7";
+const LinkDarkColorSchemeBorderBottom_2 = "rgba(#57A4D7, 0.32)";
 
 // @public (undocumented)
-export const LinkDarkColorSchemeStateHoverBorderBottom = "rgba(#7FBAE1, 0.32)";
+export const LinkDarkColorSchemeStateActive = "#0059b8";
 
 // @public (undocumented)
-export const LinkDarkColorSchemeStateHoverText = "#7FBAE1";
+const LinkDarkColorSchemeStateActive_2 = "#7FBAE1";
 
 // @public (undocumented)
-export const LinkDarkColorSchemeStateVisitedBorderBottom = "rgba(162, 62, 226, 0.32)";
+export const LinkDarkColorSchemeStateFocusedOutline = "#4187ff";
 
 // @public (undocumented)
-export const LinkDarkColorSchemeStateVisitedText = "#a23ee2";
+const LinkDarkColorSchemeStateFocusedOutline_2 = "#57A4D7";
 
 // @public (undocumented)
-export const LinkDarkColorSchemeText = "#57A4D7";
+export const LinkDarkColorSchemeStateHoverBorderBottom = "rgba(#0374eb, 0.32)";
+
+// @public (undocumented)
+const LinkDarkColorSchemeStateHoverBorderBottom_2 = "rgba(#7FBAE1, 0.32)";
+
+// @public (undocumented)
+export const LinkDarkColorSchemeStateHoverText = "#0374eb";
+
+// @public (undocumented)
+const LinkDarkColorSchemeStateHoverText_2 = "#7FBAE1";
+
+// @public (undocumented)
+export const LinkDarkColorSchemeStateVisitedBorderBottom = "rgba(#bb78a7, 0.32)";
+
+// @public (undocumented)
+const LinkDarkColorSchemeStateVisitedBorderBottom_2 = "rgba(162, 62, 226, 0.32)";
+
+// @public (undocumented)
+export const LinkDarkColorSchemeStateVisitedText = "#bb78a7";
+
+// @public (undocumented)
+const LinkDarkColorSchemeStateVisitedText_2 = "#a23ee2";
+
+// @public (undocumented)
+export const LinkDarkColorSchemeText = "#4187ff";
+
+// @public (undocumented)
+const LinkDarkColorSchemeText_2 = "#57A4D7";
 
 // @public (undocumented)
 export const LinkFontDefault = "body";
 
 // @public (undocumented)
-export const LinkLightColorSchemeBorderBottom = "rgba(#338FCC, 0.32)";
+const LinkFontDefault_2 = "body";
 
 // @public (undocumented)
-export const LinkLightColorSchemeStateActive = "#114E77";
+export const LinkLightColorSchemeBorderBottom = "rgba(#0374eb, 0.32)";
 
 // @public (undocumented)
-export const LinkLightColorSchemeStateFocusedOutline = "#338FCC";
+const LinkLightColorSchemeBorderBottom_2 = "rgba(#338FCC, 0.32)";
 
 // @public (undocumented)
-export const LinkLightColorSchemeStateHoverBorderBottom = "rgba(#206EA2, 0.32)";
+export const LinkLightColorSchemeStateActive = "#014b9d";
 
 // @public (undocumented)
-export const LinkLightColorSchemeStateHoverText = "#206EA2";
+const LinkLightColorSchemeStateActive_2 = "#114E77";
 
 // @public (undocumented)
-export const LinkLightColorSchemeStateVisitedBorderBottom = "rgba(106, 39, 149, 0.32)";
+export const LinkLightColorSchemeStateFocusedOutline = "#0374eb";
 
 // @public (undocumented)
-export const LinkLightColorSchemeStateVisitedText = "#6A2795";
+const LinkLightColorSchemeStateFocusedOutline_2 = "#338FCC";
 
 // @public (undocumented)
-export const LinkLightColorSchemeText = "#338FCC";
+export const LinkLightColorSchemeStateHoverBorderBottom = "rgba(#0059b8, 0.32)";
+
+// @public (undocumented)
+const LinkLightColorSchemeStateHoverBorderBottom_2 = "rgba(#206EA2, 0.32)";
+
+// @public (undocumented)
+export const LinkLightColorSchemeStateHoverText = "#0059b8";
+
+// @public (undocumented)
+const LinkLightColorSchemeStateHoverText_2 = "#206EA2";
+
+// @public (undocumented)
+export const LinkLightColorSchemeStateVisitedBorderBottom = "rgba(#864775, 0.32)";
+
+// @public (undocumented)
+const LinkLightColorSchemeStateVisitedBorderBottom_2 = "rgba(106, 39, 149, 0.32)";
+
+// @public (undocumented)
+export const LinkLightColorSchemeStateVisitedText = "#864775";
+
+// @public (undocumented)
+const LinkLightColorSchemeStateVisitedText_2 = "#6A2795";
+
+// @public (undocumented)
+export const LinkLightColorSchemeText = "#0374eb";
+
+// @public (undocumented)
+const LinkLightColorSchemeText_2 = "#338FCC";
 
 // @public (undocumented)
 export const LinkSizeIconMargin = "4px";
 
 // @public (undocumented)
+const LinkSizeIconMargin_2 = "4px";
+
+// @public (undocumented)
 export const LinkSizeStateFocusedOutlineOffset = "2px";
+
+// @public (undocumented)
+const LinkSizeStateFocusedOutlineOffset_2 = "2px";
 
 // @public (undocumented)
 export const LinkSizeStateFocusedOutlineWidth = "2px";
 
 // @public (undocumented)
+const LinkSizeStateFocusedOutlineWidth_2 = "2px";
+
+// @public (undocumented)
 export const ListFontItem = "body";
+
+// @public (undocumented)
+const ListFontItem_2 = "body";
 
 // @public (undocumented)
 export const ListSizeHorizontalPadding = "16px";
 
 // @public (undocumented)
+const ListSizeHorizontalPadding_2 = "16px";
+
+// @public (undocumented)
 export const ListSizeIconPadding = "4px";
+
+// @public (undocumented)
+const ListSizeIconPadding_2 = "4px";
 
 // @public (undocumented)
 export const ListSizeIconWidth = "24px";
 
 // @public (undocumented)
+const ListSizeIconWidth_2 = "24px";
+
+// @public (undocumented)
 export const ListSizeItemHeight = "32px";
+
+// @public (undocumented)
+const ListSizeItemHeight_2 = "32px";
 
 // @public (undocumented)
 export const ModalBodyFontDefault = "body";
 
 // @public (undocumented)
+const ModalBodyFontDefault_2 = "body";
+
+// @public (undocumented)
 export const ModalBodySizeMaxHeight = "calc(100vh - 260px)";
+
+// @public (undocumented)
+const ModalBodySizeMaxHeight_2 = "calc(100vh - 260px)";
 
 // @public (undocumented)
 export const ModalBodySizePadding = "16px 24px 24px";
 
 // @public (undocumented)
+const ModalBodySizePadding_2 = "16px 24px 24px";
+
+// @public (undocumented)
 export const ModalConfirmSizePadding = "24px";
+
+// @public (undocumented)
+const ModalConfirmSizePadding_2 = "24px";
 
 // @public (undocumented)
 export const ModalDarkColorSchemeBackgroundMask = "rgba(0, 0, 0, 0.5)";
 
 // @public (undocumented)
+const ModalDarkColorSchemeBackgroundMask_2 = "rgba(0, 0, 0, 0.5)";
+
+// @public (undocumented)
 export const ModalDarkColorSchemeBodyBottomShadow = "0 -2px 4px 0 rgba(0, 0, 0, 0.16)";
+
+// @public (undocumented)
+const ModalDarkColorSchemeBodyBottomShadow_2 = "0 -2px 4px 0 rgba(0, 0, 0, 0.16)";
 
 // @public (undocumented)
 export const ModalDarkColorSchemeBodyTopShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.16)";
 
 // @public (undocumented)
-export const ModalDarkColorSchemeShadow = "(0 0 0 1px #333333, 0 6px 12px 0 rgba(0, 0, 0, 0.5))";
+const ModalDarkColorSchemeBodyTopShadow_2 = "0 2px 4px 0 rgba(0, 0, 0, 0.16)";
+
+// @public (undocumented)
+export const ModalDarkColorSchemeShadow = "(0 0 0 1px #19252f, 0 6px 12px 0 rgba(0, 0, 0, 0.5))";
+
+// @public (undocumented)
+const ModalDarkColorSchemeShadow_2 = "(0 0 0 1px #333333, 0 6px 12px 0 rgba(0, 0, 0, 0.5))";
+
+// @public (undocumented)
+export const ModalFooterDarkColorSchemeBorder = "#333f4a";
+
+// @public (undocumented)
+const ModalFooterDarkColorSchemeBorder_2 = "#666666";
+
+// @public (undocumented)
+export const ModalFooterLightColorSchemeBorder = "#f2f5f9";
+
+// @public (undocumented)
+const ModalFooterLightColorSchemeBorder_2 = "#E6E6E6";
 
 // @public (undocumented)
 export const ModalFooterSizeBorderRadius = "0 0 4px 4px";
 
 // @public (undocumented)
+const ModalFooterSizeBorderRadius_2 = "0 0 4px 4px";
+
+// @public (undocumented)
 export const ModalFooterSizePadding = "16px 16px";
+
+// @public (undocumented)
+const ModalFooterSizePadding_2 = "16px 16px";
+
+// @public (undocumented)
+export const ModalHeaderDarkColorSchemeBorder = "#333f4a";
+
+// @public (undocumented)
+const ModalHeaderDarkColorSchemeBorder_2 = "#666666";
 
 // @public (undocumented)
 export const ModalHeaderFontDefault = "title";
 
 // @public (undocumented)
+const ModalHeaderFontDefault_2 = "title";
+
+// @public (undocumented)
+export const ModalHeaderLightColorSchemeBorder = "#d7dee4";
+
+// @public (undocumented)
+const ModalHeaderLightColorSchemeBorder_2 = "#E6E6E6";
+
+// @public (undocumented)
 export const ModalHeaderSizeBorderRadius = "4px 4px 0 0";
+
+// @public (undocumented)
+const ModalHeaderSizeBorderRadius_2 = "4px 4px 0 0";
 
 // @public (undocumented)
 export const ModalHeaderSizePadding = "14px 16px";
 
 // @public (undocumented)
-export const ModalLightColorSchemeBackgroundMask = "rgba(0, 0, 0, 0.5)";
+const ModalHeaderSizePadding_2 = "14px 16px";
 
 // @public (undocumented)
-export const ModalLightColorSchemeBodyBottomShadow = "0 -2px 4px 0 rgba(0, 0, 0, 0.16)";
+export const ModalLightColorSchemeBackgroundMask = "rgba(39, 51, 62, 0.5)";
 
 // @public (undocumented)
-export const ModalLightColorSchemeBodyTopShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.16)";
+const ModalLightColorSchemeBackgroundMask_2 = "rgba(0, 0, 0, 0.5)";
 
 // @public (undocumented)
-export const ModalLightColorSchemeShadow = "(0 0 0 1px #B3B3B3, 0 6px 12px 0 rgba(0, 0, 0, 0.5))";
+export const ModalLightColorSchemeBodyBottomShadow = "0 -2px 4px 0 rgba(39, 51, 62, 0.16)";
+
+// @public (undocumented)
+const ModalLightColorSchemeBodyBottomShadow_2 = "0 -2px 4px 0 rgba(0, 0, 0, 0.16)";
+
+// @public (undocumented)
+export const ModalLightColorSchemeBodyTopShadow = "0 2px 4px 0 rgba(39, 51, 62, 0.16)";
+
+// @public (undocumented)
+const ModalLightColorSchemeBodyTopShadow_2 = "0 2px 4px 0 rgba(0, 0, 0, 0.16)";
+
+// @public (undocumented)
+export const ModalLightColorSchemeShadow = "(0 0 0 1px #d7dee4, 0 6px 12px 0 rgba(39, 51, 62, 0.5))";
+
+// @public (undocumented)
+const ModalLightColorSchemeShadow_2 = "(0 0 0 1px #B3B3B3, 0 6px 12px 0 rgba(0, 0, 0, 0.5))";
 
 // @public (undocumented)
 export const ModalSizeBorderRadius = "4px";
 
 // @public (undocumented)
+const ModalSizeBorderRadius_2 = "4px";
+
+// @public (undocumented)
 export const ModalSizeBorderWidth = "1px";
+
+// @public (undocumented)
+const ModalSizeBorderWidth_2 = "1px";
 
 // @public (undocumented)
 export const ModalSizeCloseWidth = "56px";
 
 // @public (undocumented)
+const ModalSizeCloseWidth_2 = "56px";
+
+// @public (undocumented)
 export const ModalSizeLarge = "960px";
+
+// @public (undocumented)
+const ModalSizeLarge_2 = "960px";
 
 // @public (undocumented)
 export const ModalSizeNormal = "640px";
 
 // @public (undocumented)
+const ModalSizeNormal_2 = "640px";
+
+// @public (undocumented)
 export const ModalSizeSmall = "400px";
+
+// @public (undocumented)
+const ModalSizeSmall_2 = "400px";
 
 // @public (undocumented)
 export const ModalSizeTop = "48px";
 
 // @public (undocumented)
+const ModalSizeTop_2 = "48px";
+
+// @public (undocumented)
 export const NavbarBrandFontTitle = "title";
+
+// @public (undocumented)
+const NavbarBrandFontTitle_2 = "title";
 
 // @public (undocumented)
 export const NavbarBrandSizeMarginRight = "24px";
 
 // @public (undocumented)
+const NavbarBrandSizeMarginRight_2 = "24px";
+
+// @public (undocumented)
 export const NavbarBrandSizePadding = "12px";
 
 // @public (undocumented)
-export const NavbarDarkColorSchemeBackground = "#114E77";
+const NavbarBrandSizePadding_2 = "12px";
 
 // @public (undocumented)
-export const NavbarDarkColorSchemeDividerBackground = "rgba(255, 255, 255, 0.3)";
+export const NavbarDarkColorSchemeBackground = "#333f4a";
+
+// @public (undocumented)
+const NavbarDarkColorSchemeBackground_2 = "#114E77";
+
+// @public (undocumented)
+export const NavbarDarkColorSchemeDividerBackground = "#515e69";
+
+// @public (undocumented)
+const NavbarDarkColorSchemeDividerBackground_2 = "rgba(255, 255, 255, 0.3)";
 
 // @public (undocumented)
 export const NavbarFontTitle = "body";
 
 // @public (undocumented)
-export const NavbarItemDarkColorSchemeIcon = "#D8EAF7";
+const NavbarFontTitle_2 = "body";
+
+// @public (undocumented)
+export const NavbarItemDarkColorSchemeIcon = "#bdc7d1";
+
+// @public (undocumented)
+const NavbarItemDarkColorSchemeIcon_2 = "#D8EAF7";
 
 // @public (undocumented)
 export const NavbarItemDarkColorSchemeStatesActive = "rgba(0, 0, 0, 0.1)";
 
 // @public (undocumented)
+const NavbarItemDarkColorSchemeStatesActive_2 = "rgba(0, 0, 0, 0.1)";
+
+// @public (undocumented)
 export const NavbarItemDarkColorSchemeStatesDisabledOpacity = 0.3;
+
+// @public (undocumented)
+const NavbarItemDarkColorSchemeStatesDisabledOpacity_2 = 0.3;
 
 // @public (undocumented)
 export const NavbarItemDarkColorSchemeStatesHover = "rgba(255, 255, 255, 0.1)";
 
 // @public (undocumented)
-export const NavbarItemDarkColorSchemeStatesProgress = "#07314D";
+const NavbarItemDarkColorSchemeStatesHover_2 = "rgba(255, 255, 255, 0.1)";
 
 // @public (undocumented)
-export const NavbarItemDarkColorSchemeText = "#D8EAF7";
+export const NavbarItemDarkColorSchemeStatesProgress = "#333f4a";
 
 // @public (undocumented)
-export const NavbarItemLightColorSchemeIcon = "#D8EAF7";
+const NavbarItemDarkColorSchemeStatesProgress_2 = "#07314D";
+
+// @public (undocumented)
+export const NavbarItemDarkColorSchemeStatesSelected = "#434f5a";
+
+// @public (undocumented)
+const NavbarItemDarkColorSchemeStatesSelected_2 = "#666666";
+
+// @public (undocumented)
+export const NavbarItemDarkColorSchemeText = "#f2f5f9";
+
+// @public (undocumented)
+const NavbarItemDarkColorSchemeText_2 = "#D8EAF7";
+
+// @public (undocumented)
+export const NavbarItemLightColorSchemeIcon = "#bdc7d1";
+
+// @public (undocumented)
+const NavbarItemLightColorSchemeIcon_2 = "#D8EAF7";
 
 // @public (undocumented)
 export const NavbarItemLightColorSchemeStatesActive = "rgba(0, 0, 0, 0.1)";
 
 // @public (undocumented)
+const NavbarItemLightColorSchemeStatesActive_2 = "rgba(0, 0, 0, 0.1)";
+
+// @public (undocumented)
 export const NavbarItemLightColorSchemeStatesDisabledOpacity = 0.3;
+
+// @public (undocumented)
+const NavbarItemLightColorSchemeStatesDisabledOpacity_2 = 0.3;
 
 // @public (undocumented)
 export const NavbarItemLightColorSchemeStatesHover = "rgba(255, 255, 255, 0.1)";
 
 // @public (undocumented)
-export const NavbarItemLightColorSchemeStatesProgress = "#07314D";
+const NavbarItemLightColorSchemeStatesHover_2 = "rgba(255, 255, 255, 0.1)";
 
 // @public (undocumented)
-export const NavbarItemLightColorSchemeText = "#D8EAF7";
+export const NavbarItemLightColorSchemeStatesProgress = "#333f4a";
+
+// @public (undocumented)
+const NavbarItemLightColorSchemeStatesProgress_2 = "#07314D";
+
+// @public (undocumented)
+export const NavbarItemLightColorSchemeStatesSelected = "#333f4a";
+
+// @public (undocumented)
+const NavbarItemLightColorSchemeStatesSelected_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const NavbarItemLightColorSchemeText = "#f2f5f9";
+
+// @public (undocumented)
+const NavbarItemLightColorSchemeText_2 = "#D8EAF7";
 
 // @public (undocumented)
 export const NavbarItemSizeHeight = "48px";
 
 // @public (undocumented)
+const NavbarItemSizeHeight_2 = "48px";
+
+// @public (undocumented)
 export const NavbarItemSizeHeightVertical = "56px";
+
+// @public (undocumented)
+const NavbarItemSizeHeightVertical_2 = "56px";
 
 // @public (undocumented)
 export const NavbarItemSizePadding = "16px";
 
 // @public (undocumented)
-export const NavbarLightColorSchemeBackground = "#114E77";
+const NavbarItemSizePadding_2 = "16px";
 
 // @public (undocumented)
-export const NavbarLightColorSchemeDividerBackground = "rgba(255, 255, 255, 0.3)";
+export const NavbarLightColorSchemeBackground = "#19252f";
+
+// @public (undocumented)
+const NavbarLightColorSchemeBackground_2 = "#114E77";
+
+// @public (undocumented)
+export const NavbarLightColorSchemeDividerBackground = "#515e69";
+
+// @public (undocumented)
+const NavbarLightColorSchemeDividerBackground_2 = "rgba(255, 255, 255, 0.3)";
 
 // @public (undocumented)
 export const NavbarSizeIconMargin = "6px";
 
 // @public (undocumented)
+const NavbarSizeIconMargin_2 = "6px";
+
+// @public (undocumented)
 export const OptgroupFontDefault = "subheading";
+
+// @public (undocumented)
+const OptgroupFontDefault_2 = "subheading";
 
 // @public (undocumented)
 export const OptgroupSizePaddingLeft = "17px";
 
 // @public (undocumented)
+const OptgroupSizePaddingLeft_2 = "17px";
+
+// @public (undocumented)
 export const OptionFontDefault = "body";
+
+// @public (undocumented)
+const OptionFontDefault_2 = "body";
 
 // @public (undocumented)
 export const OptionSizeBorderWidth = "2px";
 
 // @public (undocumented)
+const OptionSizeBorderWidth_2 = "2px";
+
+// @public (undocumented)
 export const OptionSizeHeight = "32px";
+
+// @public (undocumented)
+const OptionSizeHeight_2 = "32px";
 
 // @public (undocumented)
 export const OptionSizeHorizontalPadding = "16px";
 
 // @public (undocumented)
-export const PaletteBlue100 = "#D8EAF7";
+const OptionSizeHorizontalPadding_2 = "16px";
 
 // @public (undocumented)
-export const PaletteBlue200 = "#AAD1EC";
+export const PaletteBlue100 = "#c8dfff";
 
 // @public (undocumented)
-export const PaletteBlue300 = "#7FBAE1";
+const PaletteBlue100_2 = "#D8EAF7";
 
 // @public (undocumented)
-export const PaletteBlue40 = "#F5FAFD";
+export const PaletteBlue200 = "#a2c7fe";
 
 // @public (undocumented)
-export const PaletteBlue400 = "#57A4D7";
+const PaletteBlue200_2 = "#AAD1EC";
 
 // @public (undocumented)
-export const PaletteBlue500 = "#338FCC";
+export const PaletteBlue300 = "#5697ff";
 
 // @public (undocumented)
-export const PaletteBlue560 = "#277BB3";
+const PaletteBlue300_2 = "#7FBAE1";
 
 // @public (undocumented)
-export const PaletteBlue60 = "#EBF4FB";
+export const PaletteBlue40 = "#eff6ff";
 
 // @public (undocumented)
-export const PaletteBlue600 = "#206EA2";
+export const PaletteBlue400 = "#4187ff";
 
 // @public (undocumented)
-export const PaletteBlue700 = "#114E77";
+const PaletteBlue400_2 = "#57A4D7";
 
 // @public (undocumented)
-export const PaletteBlue800 = "#07314D";
+const PaletteBlue40_2 = "#F5FAFD";
 
 // @public (undocumented)
-export const PaletteBlueA100 = "rgba(0, 153, 255, 0.15)";
+export const PaletteBlue500 = "#0374eb";
 
 // @public (undocumented)
-export const PaletteBlueA200 = "rgba(0, 153, 255, 0.3)";
+const PaletteBlue500_2 = "#338FCC";
+
+// @public (undocumented)
+export const PaletteBlue560 = "#0059b8";
+
+// @public (undocumented)
+const PaletteBlue560_2 = "#277BB3";
+
+// @public (undocumented)
+export const PaletteBlue60 = "#e7f1ff";
+
+// @public (undocumented)
+export const PaletteBlue600 = "#014b9d";
+
+// @public (undocumented)
+const PaletteBlue600_2 = "#206EA2";
+
+// @public (undocumented)
+const PaletteBlue60_2 = "#EBF4FB";
+
+// @public (undocumented)
+export const PaletteBlue700 = "#023c7f";
+
+// @public (undocumented)
+const PaletteBlue700_2 = "#114E77";
+
+// @public (undocumented)
+export const PaletteBlue800 = "#193060";
+
+// @public (undocumented)
+const PaletteBlue800_2 = "#07314D";
+
+// @public (undocumented)
+export const PaletteBlue900 = "#00224f";
+
+// @public (undocumented)
+export const PaletteBlueA100 = "rgba(3, 116, 235, 0.15)";
+
+// @public (undocumented)
+const PaletteBlueA100_2 = "rgba(0, 153, 255, 0.15)";
+
+// @public (undocumented)
+export const PaletteBlueA200 = "rgba(3, 116, 235, 0.3)";
+
+// @public (undocumented)
+const PaletteBlueA200_2 = "rgba(0, 153, 255, 0.3)";
 
 // @public (undocumented)
 export const PaletteBlueContrast100 = "#4D4D4D";
 
 // @public (undocumented)
+const PaletteBlueContrast100_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteBlueContrast200 = "#4D4D4D";
 
 // @public (undocumented)
+const PaletteBlueContrast200_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteBlueContrast300 = "#4D4D4D";
+
+// @public (undocumented)
+const PaletteBlueContrast300_2 = "#4D4D4D";
 
 // @public (undocumented)
 export const PaletteBlueContrast40 = "#4D4D4D";
@@ -8239,10 +18447,22 @@ export const PaletteBlueContrast40 = "#4D4D4D";
 export const PaletteBlueContrast400 = "white";
 
 // @public (undocumented)
+const PaletteBlueContrast400_2 = "white";
+
+// @public (undocumented)
+const PaletteBlueContrast40_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteBlueContrast500 = "white";
 
 // @public (undocumented)
+const PaletteBlueContrast500_2 = "white";
+
+// @public (undocumented)
 export const PaletteBlueContrast560 = "white";
+
+// @public (undocumented)
+const PaletteBlueContrast560_2 = "white";
 
 // @public (undocumented)
 export const PaletteBlueContrast60 = "#4D4D4D";
@@ -8251,61 +18471,127 @@ export const PaletteBlueContrast60 = "#4D4D4D";
 export const PaletteBlueContrast600 = "white";
 
 // @public (undocumented)
+const PaletteBlueContrast600_2 = "white";
+
+// @public (undocumented)
+const PaletteBlueContrast60_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteBlueContrast700 = "white";
+
+// @public (undocumented)
+const PaletteBlueContrast700_2 = "white";
 
 // @public (undocumented)
 export const PaletteBlueContrast800 = "white";
 
 // @public (undocumented)
+const PaletteBlueContrast800_2 = "white";
+
+// @public (undocumented)
 export const PaletteBlueContrastA100 = "#4D4D4D";
+
+// @public (undocumented)
+const PaletteBlueContrastA100_2 = "#4D4D4D";
 
 // @public (undocumented)
 export const PaletteBlueContrastA200 = "white";
 
 // @public (undocumented)
-export const PaletteGreen100 = "#DCF1D4";
+const PaletteBlueContrastA200_2 = "white";
 
 // @public (undocumented)
-export const PaletteGreen200 = "#B4DEA4";
+export const PaletteGreen100 = "#b6ebc3";
 
 // @public (undocumented)
-export const PaletteGreen300 = "#8FCC79";
+const PaletteGreen100_2 = "#DCF1D4";
 
 // @public (undocumented)
-export const PaletteGreen40 = "#F6FBF4";
+export const PaletteGreen200 = "#8ed5a1";
 
 // @public (undocumented)
-export const PaletteGreen400 = "#6FBA53";
+const PaletteGreen200_2 = "#B4DEA4";
 
 // @public (undocumented)
-export const PaletteGreen500 = "#52A832";
+export const PaletteGreen300 = "#4ba96c";
 
 // @public (undocumented)
-export const PaletteGreen560 = "#449327";
+const PaletteGreen300_2 = "#8FCC79";
 
 // @public (undocumented)
-export const PaletteGreen60 = "#EDF8E9";
+export const PaletteGreen40 = "#ecf9ef";
 
 // @public (undocumented)
-export const PaletteGreen600 = "#3B8520";
+export const PaletteGreen400 = "#319d5c";
 
 // @public (undocumented)
-export const PaletteGreen700 = "#276211";
+const PaletteGreen400_2 = "#6FBA53";
 
 // @public (undocumented)
-export const PaletteGreen800 = "#163F07";
+const PaletteGreen40_2 = "#F6FBF4";
 
 // @public (undocumented)
-export const PaletteGreenA100 = "rgba(68, 255, 0, 0.15)";
+export const PaletteGreen500 = "#028b49";
+
+// @public (undocumented)
+const PaletteGreen500_2 = "#52A832";
+
+// @public (undocumented)
+export const PaletteGreen560 = "#016b37";
+
+// @public (undocumented)
+const PaletteGreen560_2 = "#449327";
+
+// @public (undocumented)
+export const PaletteGreen60 = "#d2f7db";
+
+// @public (undocumented)
+export const PaletteGreen600 = "#015a2d";
+
+// @public (undocumented)
+const PaletteGreen600_2 = "#3B8520";
+
+// @public (undocumented)
+const PaletteGreen60_2 = "#EDF8E9";
+
+// @public (undocumented)
+export const PaletteGreen700 = "#004823";
+
+// @public (undocumented)
+const PaletteGreen700_2 = "#276211";
+
+// @public (undocumented)
+export const PaletteGreen800 = "#103920";
+
+// @public (undocumented)
+const PaletteGreen800_2 = "#163F07";
+
+// @public (undocumented)
+export const PaletteGreen900 = "#002a12";
+
+// @public (undocumented)
+export const PaletteGreenA100 = "rgba(2, 139, 73, 0.15)";
+
+// @public (undocumented)
+const PaletteGreenA100_2 = "rgba(68, 255, 0, 0.15)";
 
 // @public (undocumented)
 export const PaletteGreenContrast100 = "#4D4D4D";
 
 // @public (undocumented)
+const PaletteGreenContrast100_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteGreenContrast200 = "#4D4D4D";
 
 // @public (undocumented)
+const PaletteGreenContrast200_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteGreenContrast300 = "#4D4D4D";
+
+// @public (undocumented)
+const PaletteGreenContrast300_2 = "#4D4D4D";
 
 // @public (undocumented)
 export const PaletteGreenContrast40 = "#4D4D4D";
@@ -8314,10 +18600,22 @@ export const PaletteGreenContrast40 = "#4D4D4D";
 export const PaletteGreenContrast400 = "white";
 
 // @public (undocumented)
+const PaletteGreenContrast400_2 = "white";
+
+// @public (undocumented)
+const PaletteGreenContrast40_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteGreenContrast500 = "white";
 
 // @public (undocumented)
+const PaletteGreenContrast500_2 = "white";
+
+// @public (undocumented)
 export const PaletteGreenContrast560 = "white";
+
+// @public (undocumented)
+const PaletteGreenContrast560_2 = "white";
 
 // @public (undocumented)
 export const PaletteGreenContrast60 = "#4D4D4D";
@@ -8326,73 +18624,151 @@ export const PaletteGreenContrast60 = "#4D4D4D";
 export const PaletteGreenContrast600 = "white";
 
 // @public (undocumented)
+const PaletteGreenContrast600_2 = "white";
+
+// @public (undocumented)
+const PaletteGreenContrast60_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteGreenContrast700 = "white";
+
+// @public (undocumented)
+const PaletteGreenContrast700_2 = "white";
 
 // @public (undocumented)
 export const PaletteGreenContrast800 = "white";
 
 // @public (undocumented)
+const PaletteGreenContrast800_2 = "white";
+
+// @public (undocumented)
 export const PaletteGreenContrastA100 = "#4D4D4D";
 
 // @public (undocumented)
-export const PaletteGrey100 = "#E6E6E6";
+const PaletteGreenContrastA100_2 = "#4D4D4D";
 
 // @public (undocumented)
-export const PaletteGrey200 = "#CCCCCC";
+export const PaletteGrey100 = "#d7dee4";
 
 // @public (undocumented)
-export const PaletteGrey300 = "#B3B3B3";
+const PaletteGrey100_2 = "#E6E6E6";
 
 // @public (undocumented)
-export const PaletteGrey40 = "#F5F5F5";
+export const PaletteGrey200 = "#bdc7d1";
 
 // @public (undocumented)
-export const PaletteGrey400 = "#999999";
+const PaletteGrey200_2 = "#CCCCCC";
 
 // @public (undocumented)
-export const PaletteGrey500 = "#808080";
+export const PaletteGrey300 = "#8c99a5";
 
 // @public (undocumented)
-export const PaletteGrey560 = "#707070";
+const PaletteGrey300_2 = "#B3B3B3";
 
 // @public (undocumented)
-export const PaletteGrey60 = "#F0F0F0";
+export const PaletteGrey40 = "#f2f5f9";
 
 // @public (undocumented)
-export const PaletteGrey600 = "#666666";
+export const PaletteGrey400 = "#7f8c98";
 
 // @public (undocumented)
-export const PaletteGrey700 = "#4D4D4D";
+const PaletteGrey400_2 = "#999999";
 
 // @public (undocumented)
-export const PaletteGrey800 = "#333333";
+const PaletteGrey40_2 = "#F5F5F5";
 
 // @public (undocumented)
-export const PaletteGreyA100 = "rgba(0, 0, 0, 0.1)";
+export const PaletteGrey500 = "#6d7a86";
 
 // @public (undocumented)
-export const PaletteGreyA200 = "rgba(0, 0, 0, 0.2)";
+const PaletteGrey500_2 = "#808080";
 
 // @public (undocumented)
-export const PaletteGreyA300 = "rgba(0, 0, 0, 0.3)";
+export const PaletteGrey560 = "#515e69";
 
 // @public (undocumented)
-export const PaletteGreyA40 = "rgba(0, 0, 0, 0.04)";
+const PaletteGrey560_2 = "#707070";
 
 // @public (undocumented)
-export const PaletteGreyA500 = "rgba(0, 0, 0, 0.5)";
+export const PaletteGrey60 = "#ebeef2";
 
 // @public (undocumented)
-export const PaletteGreyA60 = "rgba(0, 0, 0, 0.06)";
+export const PaletteGrey600 = "#434f5a";
+
+// @public (undocumented)
+const PaletteGrey600_2 = "#666666";
+
+// @public (undocumented)
+const PaletteGrey60_2 = "#F0F0F0";
+
+// @public (undocumented)
+export const PaletteGrey700 = "#333f4a";
+
+// @public (undocumented)
+const PaletteGrey700_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const PaletteGrey800 = "#27333e";
+
+// @public (undocumented)
+const PaletteGrey800_2 = "#333333";
+
+// @public (undocumented)
+export const PaletteGrey900 = "#19252f";
+
+// @public (undocumented)
+export const PaletteGreyA100 = "rgba(25, 37, 47, 0.1)";
+
+// @public (undocumented)
+const PaletteGreyA100_2 = "rgba(0, 0, 0, 0.1)";
+
+// @public (undocumented)
+export const PaletteGreyA200 = "rgba(25, 37, 47, 0.2)";
+
+// @public (undocumented)
+const PaletteGreyA200_2 = "rgba(0, 0, 0, 0.2)";
+
+// @public (undocumented)
+export const PaletteGreyA300 = "rgba(25, 37, 47, 0.3)";
+
+// @public (undocumented)
+const PaletteGreyA300_2 = "rgba(0, 0, 0, 0.3)";
+
+// @public (undocumented)
+export const PaletteGreyA40 = "rgba(25, 37, 47, 0.04)";
+
+// @public (undocumented)
+const PaletteGreyA40_2 = "rgba(0, 0, 0, 0.04)";
+
+// @public (undocumented)
+export const PaletteGreyA500 = "rgba(25, 37, 47, 0.5)";
+
+// @public (undocumented)
+const PaletteGreyA500_2 = "rgba(0, 0, 0, 0.5)";
+
+// @public (undocumented)
+export const PaletteGreyA60 = "rgba(25, 37, 47, 0.06)";
+
+// @public (undocumented)
+const PaletteGreyA60_2 = "rgba(0, 0, 0, 0.06)";
 
 // @public (undocumented)
 export const PaletteGreyContrast100 = "#4D4D4D";
 
 // @public (undocumented)
+const PaletteGreyContrast100_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteGreyContrast200 = "#4D4D4D";
 
 // @public (undocumented)
+const PaletteGreyContrast200_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteGreyContrast300 = "#4D4D4D";
+
+// @public (undocumented)
+const PaletteGreyContrast300_2 = "#4D4D4D";
 
 // @public (undocumented)
 export const PaletteGreyContrast40 = "#4D4D4D";
@@ -8401,10 +18777,22 @@ export const PaletteGreyContrast40 = "#4D4D4D";
 export const PaletteGreyContrast400 = "white";
 
 // @public (undocumented)
+const PaletteGreyContrast400_2 = "white";
+
+// @public (undocumented)
+const PaletteGreyContrast40_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteGreyContrast500 = "white";
 
 // @public (undocumented)
+const PaletteGreyContrast500_2 = "white";
+
+// @public (undocumented)
 export const PaletteGreyContrast560 = "white";
+
+// @public (undocumented)
+const PaletteGreyContrast560_2 = "white";
 
 // @public (undocumented)
 export const PaletteGreyContrast60 = "#4D4D4D";
@@ -8413,55 +18801,190 @@ export const PaletteGreyContrast60 = "#4D4D4D";
 export const PaletteGreyContrast600 = "white";
 
 // @public (undocumented)
+const PaletteGreyContrast600_2 = "white";
+
+// @public (undocumented)
+const PaletteGreyContrast60_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteGreyContrast700 = "white";
+
+// @public (undocumented)
+const PaletteGreyContrast700_2 = "white";
 
 // @public (undocumented)
 export const PaletteGreyContrast800 = "white";
 
 // @public (undocumented)
-export const PaletteRed100 = "#FADEDA";
+const PaletteGreyContrast800_2 = "white";
 
 // @public (undocumented)
-export const PaletteRed200 = "#F4B7AE";
+export const PalettePurple100 = "#f2d4e8";
 
 // @public (undocumented)
-export const PaletteRed300 = "#ED9284";
+export const PalettePurple200 = "#e4bbd7";
 
 // @public (undocumented)
-export const PaletteRed40 = "#FEF7F6";
+export const PalettePurple300 = "#c692b5";
 
 // @public (undocumented)
-export const PaletteRed400 = "#E76E5C";
+export const PalettePurple40 = "#fff3fb";
 
 // @public (undocumented)
-export const PaletteRed500 = "#E04D36";
+export const PalettePurple400 = "#bb78a7";
 
 // @public (undocumented)
-export const PaletteRed560 = "#C43E29";
+export const PalettePurple500 = "#a65d92";
 
 // @public (undocumented)
-export const PaletteRed60 = "#FCEFEC";
+export const PalettePurple560 = "#864775";
 
 // @public (undocumented)
-export const PaletteRed600 = "#B23522";
+export const PalettePurple60 = "#ffe9f8";
 
 // @public (undocumented)
-export const PaletteRed700 = "#832112";
+export const PalettePurple600 = "#753865";
 
 // @public (undocumented)
-export const PaletteRed800 = "#541208";
+export const PalettePurple700 = "#612853";
 
 // @public (undocumented)
-export const PaletteRedA100 = "rgba(224, 79, 56, 0.15)";
+export const PalettePurple800 = "#48273f";
+
+// @public (undocumented)
+export const PalettePurple900 = "#36172e";
+
+// @public (undocumented)
+export const PalettePurpleContrast100 = "#4D4D4D";
+
+// @public (undocumented)
+export const PalettePurpleContrast200 = "#4D4D4D";
+
+// @public (undocumented)
+export const PalettePurpleContrast300 = "#4D4D4D";
+
+// @public (undocumented)
+export const PalettePurpleContrast40 = "#4D4D4D";
+
+// @public (undocumented)
+export const PalettePurpleContrast400 = "white";
+
+// @public (undocumented)
+export const PalettePurpleContrast500 = "white";
+
+// @public (undocumented)
+export const PalettePurpleContrast560 = "white";
+
+// @public (undocumented)
+export const PalettePurpleContrast60 = "#4D4D4D";
+
+// @public (undocumented)
+export const PalettePurpleContrast600 = "white";
+
+// @public (undocumented)
+export const PalettePurpleContrast700 = "white";
+
+// @public (undocumented)
+export const PalettePurpleContrast800 = "white";
+
+// @public (undocumented)
+export const PalettePurpleContrastA100 = "#4D4D4D";
+
+// @public (undocumented)
+export const PalettePurpleContrastA200 = "white";
+
+// @public (undocumented)
+export const PaletteRed100 = "#fbd6d6";
+
+// @public (undocumented)
+const PaletteRed100_2 = "#FADEDA";
+
+// @public (undocumented)
+export const PaletteRed200 = "#fcb2b4";
+
+// @public (undocumented)
+const PaletteRed200_2 = "#F4B7AE";
+
+// @public (undocumented)
+export const PaletteRed300 = "#ee6f79";
+
+// @public (undocumented)
+const PaletteRed300_2 = "#ED9284";
+
+// @public (undocumented)
+export const PaletteRed40 = "#fff3f3";
+
+// @public (undocumented)
+export const PaletteRed400 = "#ea5868";
+
+// @public (undocumented)
+const PaletteRed400_2 = "#E76E5C";
+
+// @public (undocumented)
+const PaletteRed40_2 = "#FEF7F6";
+
+// @public (undocumented)
+export const PaletteRed500 = "#db3c55";
+
+// @public (undocumented)
+const PaletteRed500_2 = "#E04D36";
+
+// @public (undocumented)
+export const PaletteRed560 = "#b9023a";
+
+// @public (undocumented)
+const PaletteRed560_2 = "#C43E29";
+
+// @public (undocumented)
+export const PaletteRed60 = "#ffeaea";
+
+// @public (undocumented)
+export const PaletteRed600 = "#9e0130";
+
+// @public (undocumented)
+const PaletteRed600_2 = "#B23522";
+
+// @public (undocumented)
+const PaletteRed60_2 = "#FCEFEC";
+
+// @public (undocumented)
+export const PaletteRed700 = "#800025";
+
+// @public (undocumented)
+const PaletteRed700_2 = "#832112";
+
+// @public (undocumented)
+export const PaletteRed800 = "#621420";
+
+// @public (undocumented)
+const PaletteRed800_2 = "#541208";
+
+// @public (undocumented)
+export const PaletteRed900 = "#500013";
+
+// @public (undocumented)
+export const PaletteRedA100 = "rgba(219, 60, 85, 0.15)";
+
+// @public (undocumented)
+const PaletteRedA100_2 = "rgba(224, 79, 56, 0.15)";
 
 // @public (undocumented)
 export const PaletteRedContrast100 = "#4D4D4D";
 
 // @public (undocumented)
+const PaletteRedContrast100_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteRedContrast200 = "#4D4D4D";
 
 // @public (undocumented)
+const PaletteRedContrast200_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteRedContrast300 = "#4D4D4D";
+
+// @public (undocumented)
+const PaletteRedContrast300_2 = "#4D4D4D";
 
 // @public (undocumented)
 export const PaletteRedContrast40 = "#4D4D4D";
@@ -8470,10 +18993,22 @@ export const PaletteRedContrast40 = "#4D4D4D";
 export const PaletteRedContrast400 = "white";
 
 // @public (undocumented)
+const PaletteRedContrast400_2 = "white";
+
+// @public (undocumented)
+const PaletteRedContrast40_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteRedContrast500 = "white";
 
 // @public (undocumented)
+const PaletteRedContrast500_2 = "white";
+
+// @public (undocumented)
 export const PaletteRedContrast560 = "white";
+
+// @public (undocumented)
+const PaletteRedContrast560_2 = "white";
 
 // @public (undocumented)
 export const PaletteRedContrast60 = "#4D4D4D";
@@ -8482,58 +19017,196 @@ export const PaletteRedContrast60 = "#4D4D4D";
 export const PaletteRedContrast600 = "white";
 
 // @public (undocumented)
+const PaletteRedContrast600_2 = "white";
+
+// @public (undocumented)
+const PaletteRedContrast60_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteRedContrast700 = "white";
+
+// @public (undocumented)
+const PaletteRedContrast700_2 = "white";
 
 // @public (undocumented)
 export const PaletteRedContrast800 = "white";
 
 // @public (undocumented)
+const PaletteRedContrast800_2 = "white";
+
+// @public (undocumented)
 export const PaletteRedContrastA100 = "#4D4D4D";
 
 // @public (undocumented)
-export const PaletteYellow100 = "#F8EBD1";
+const PaletteRedContrastA100_2 = "#4D4D4D";
 
 // @public (undocumented)
-export const PaletteYellow200 = "#F0D49B";
+export const PaletteTeal100 = "#afe6f9";
 
 // @public (undocumented)
-export const PaletteYellow300 = "#E7BD68";
+export const PaletteTeal200 = "#6ed3f2";
 
 // @public (undocumented)
-export const PaletteYellow40 = "#FDFAF3";
+export const PaletteTeal300 = "#18a5c5";
 
 // @public (undocumented)
-export const PaletteYellow400 = "#DFA739";
+export const PaletteTeal40 = "#ebf8fd";
 
 // @public (undocumented)
-export const PaletteYellow500 = "#D6930D";
+export const PaletteTeal400 = "#2099b7";
 
 // @public (undocumented)
-export const PaletteYellow560 = "#BB800A";
+export const PaletteTeal500 = "#218ca8";
 
 // @public (undocumented)
-export const PaletteYellow60 = "#FCF5E8";
+export const PaletteTeal560 = "#0c6579";
 
 // @public (undocumented)
-export const PaletteYellow600 = "#AA7408";
+export const PaletteTeal60 = "#d9f3fd";
 
 // @public (undocumented)
-export const PaletteYellow700 = "#7D5504";
+export const PaletteTeal600 = "#0c5567";
 
 // @public (undocumented)
-export const PaletteYellow800 = "#503602";
+export const PaletteTeal700 = "#084453";
 
 // @public (undocumented)
-export const PaletteYellowA100 = "rgba(255, 170, 0, 0.15)";
+export const PaletteTeal800 = "#143641";
+
+// @public (undocumented)
+export const PaletteTeal900 = "#022731";
+
+// @public (undocumented)
+export const PaletteTealContrast100 = "#4D4D4D";
+
+// @public (undocumented)
+export const PaletteTealContrast200 = "#4D4D4D";
+
+// @public (undocumented)
+export const PaletteTealContrast300 = "#4D4D4D";
+
+// @public (undocumented)
+export const PaletteTealContrast40 = "#4D4D4D";
+
+// @public (undocumented)
+export const PaletteTealContrast400 = "white";
+
+// @public (undocumented)
+export const PaletteTealContrast500 = "white";
+
+// @public (undocumented)
+export const PaletteTealContrast560 = "white";
+
+// @public (undocumented)
+export const PaletteTealContrast60 = "#4D4D4D";
+
+// @public (undocumented)
+export const PaletteTealContrast600 = "white";
+
+// @public (undocumented)
+export const PaletteTealContrast700 = "white";
+
+// @public (undocumented)
+export const PaletteTealContrast800 = "white";
+
+// @public (undocumented)
+export const PaletteTealContrastA100 = "#4D4D4D";
+
+// @public (undocumented)
+export const PaletteTealContrastA200 = "white";
+
+// @public (undocumented)
+export const PaletteYellow100 = "#fcdda6";
+
+// @public (undocumented)
+const PaletteYellow100_2 = "#F8EBD1";
+
+// @public (undocumented)
+export const PaletteYellow200 = "#f5c23c";
+
+// @public (undocumented)
+const PaletteYellow200_2 = "#F0D49B";
+
+// @public (undocumented)
+export const PaletteYellow300 = "#e19f12";
+
+// @public (undocumented)
+const PaletteYellow300_2 = "#E7BD68";
+
+// @public (undocumented)
+export const PaletteYellow40 = "#fff4dd";
+
+// @public (undocumented)
+export const PaletteYellow400 = "#c78816";
+
+// @public (undocumented)
+const PaletteYellow400_2 = "#DFA739";
+
+// @public (undocumented)
+const PaletteYellow40_2 = "#FDFAF3";
+
+// @public (undocumented)
+export const PaletteYellow500 = "#a26e0c";
+
+// @public (undocumented)
+const PaletteYellow500_2 = "#D6930D";
+
+// @public (undocumented)
+export const PaletteYellow560 = "#7e5406";
+
+// @public (undocumented)
+const PaletteYellow560_2 = "#BB800A";
+
+// @public (undocumented)
+export const PaletteYellow60 = "#ffecce";
+
+// @public (undocumented)
+export const PaletteYellow600 = "#6b4804";
+
+// @public (undocumented)
+const PaletteYellow600_2 = "#AA7408";
+
+// @public (undocumented)
+const PaletteYellow60_2 = "#FCF5E8";
+
+// @public (undocumented)
+export const PaletteYellow700 = "#543803";
+
+// @public (undocumented)
+const PaletteYellow700_2 = "#7D5504";
+
+// @public (undocumented)
+export const PaletteYellow800 = "#3e3015";
+
+// @public (undocumented)
+const PaletteYellow800_2 = "#503602";
+
+// @public (undocumented)
+export const PaletteYellow900 = "#312001";
+
+// @public (undocumented)
+export const PaletteYellowA100 = "rgba(255, 159, 18, 0.15)";
+
+// @public (undocumented)
+const PaletteYellowA100_2 = "rgba(255, 170, 0, 0.15)";
 
 // @public (undocumented)
 export const PaletteYellowContrast100 = "#4D4D4D";
 
 // @public (undocumented)
+const PaletteYellowContrast100_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteYellowContrast200 = "#4D4D4D";
 
 // @public (undocumented)
+const PaletteYellowContrast200_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteYellowContrast300 = "#4D4D4D";
+
+// @public (undocumented)
+const PaletteYellowContrast300_2 = "#4D4D4D";
 
 // @public (undocumented)
 export const PaletteYellowContrast40 = "#4D4D4D";
@@ -8542,10 +19215,22 @@ export const PaletteYellowContrast40 = "#4D4D4D";
 export const PaletteYellowContrast400 = "white";
 
 // @public (undocumented)
+const PaletteYellowContrast400_2 = "white";
+
+// @public (undocumented)
+const PaletteYellowContrast40_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteYellowContrast500 = "white";
 
 // @public (undocumented)
+const PaletteYellowContrast500_2 = "white";
+
+// @public (undocumented)
 export const PaletteYellowContrast560 = "white";
+
+// @public (undocumented)
+const PaletteYellowContrast560_2 = "white";
 
 // @public (undocumented)
 export const PaletteYellowContrast60 = "#4D4D4D";
@@ -8554,949 +19239,1966 @@ export const PaletteYellowContrast60 = "#4D4D4D";
 export const PaletteYellowContrast600 = "white";
 
 // @public (undocumented)
+const PaletteYellowContrast600_2 = "white";
+
+// @public (undocumented)
+const PaletteYellowContrast60_2 = "#4D4D4D";
+
+// @public (undocumented)
 export const PaletteYellowContrast700 = "white";
+
+// @public (undocumented)
+const PaletteYellowContrast700_2 = "white";
 
 // @public (undocumented)
 export const PaletteYellowContrast800 = "white";
 
 // @public (undocumented)
+const PaletteYellowContrast800_2 = "white";
+
+// @public (undocumented)
 export const PaletteYellowContrastA100 = "#4D4D4D";
 
 // @public (undocumented)
-export const PopoverDarkColorSchemeBackground = "#4D4D4D";
+const PaletteYellowContrastA100_2 = "#4D4D4D";
 
 // @public (undocumented)
-export const PopoverDarkColorSchemeBorder = "#4D4D4D";
+export const PopoverDarkColorSchemeBackground = "#333f4a";
 
 // @public (undocumented)
-export const PopoverDarkColorSchemeShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
+const PopoverDarkColorSchemeBackground_2 = "#4D4D4D";
 
 // @public (undocumented)
-export const PopoverDarkColorSchemeText = "#F0F0F0";
+export const PopoverDarkColorSchemeBorder = "#333f4a";
+
+// @public (undocumented)
+const PopoverDarkColorSchemeBorder_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const PopoverDarkColorSchemeShadow = "0 3px 8px 0 rgba(0, 0, 0, 0.2)";
+
+// @public (undocumented)
+const PopoverDarkColorSchemeShadow_2 = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
+
+// @public (undocumented)
+export const PopoverDarkColorSchemeText = "#f2f5f9";
+
+// @public (undocumented)
+const PopoverDarkColorSchemeText_2 = "#F0F0F0";
 
 // @public (undocumented)
 export const PopoverFontDefault = "body";
 
 // @public (undocumented)
-export const PopoverFooterDarkColorSchemeBackground = "transparent";
+const PopoverFontDefault_2 = "body";
 
 // @public (undocumented)
-export const PopoverFooterDarkColorSchemeBorder = "transparent";
+export const PopoverFooterDarkColorSchemeBackground = "#333f4a";
+
+// @public (undocumented)
+const PopoverFooterDarkColorSchemeBackground_2 = "transparent";
+
+// @public (undocumented)
+export const PopoverFooterDarkColorSchemeBorder = "#434f5a";
+
+// @public (undocumented)
+const PopoverFooterDarkColorSchemeBorder_2 = "transparent";
 
 // @public (undocumented)
 export const PopoverFooterFontDefault = "body";
 
 // @public (undocumented)
-export const PopoverFooterLightColorSchemeBackground = "#F0F0F0";
+const PopoverFooterFontDefault_2 = "body";
 
 // @public (undocumented)
-export const PopoverFooterLightColorSchemeBorder = "#F0F0F0";
+export const PopoverFooterLightColorSchemeBackground = "#f2f5f9";
+
+// @public (undocumented)
+const PopoverFooterLightColorSchemeBackground_2 = "#F0F0F0";
+
+// @public (undocumented)
+export const PopoverFooterLightColorSchemeBorder = "#f2f5f9";
+
+// @public (undocumented)
+const PopoverFooterLightColorSchemeBorder_2 = "#F0F0F0";
 
 // @public (undocumented)
 export const PopoverFooterSizeHeight = "56px";
 
 // @public (undocumented)
+const PopoverFooterSizeHeight_2 = "56px";
+
+// @public (undocumented)
 export const PopoverFooterSizeMarginTop = "8px";
+
+// @public (undocumented)
+const PopoverFooterSizeMarginTop_2 = "8px";
 
 // @public (undocumented)
 export const PopoverFooterSizePadding = "12px 16px";
 
 // @public (undocumented)
-export const PopoverHeaderDarkColorSchemeBackground = "#4D4D4D";
+const PopoverFooterSizePadding_2 = "12px 16px";
 
 // @public (undocumented)
-export const PopoverHeaderDarkColorSchemeBorder = "transparent";
+export const PopoverHeaderDarkColorSchemeBackground = "#333f4a";
 
 // @public (undocumented)
-export const PopoverHeaderDarkColorSchemeText = "#F0F0F0";
+const PopoverHeaderDarkColorSchemeBackground_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const PopoverHeaderDarkColorSchemeBorder = "#434f5a";
+
+// @public (undocumented)
+const PopoverHeaderDarkColorSchemeBorder_2 = "transparent";
+
+// @public (undocumented)
+export const PopoverHeaderDarkColorSchemeText = "#f2f5f9";
+
+// @public (undocumented)
+const PopoverHeaderDarkColorSchemeText_2 = "#F0F0F0";
 
 // @public (undocumented)
 export const PopoverHeaderFontDefault = "subheading";
 
 // @public (undocumented)
+const PopoverHeaderFontDefault_2 = "subheading";
+
+// @public (undocumented)
 export const PopoverHeaderLightColorSchemeBackground = "white";
 
 // @public (undocumented)
-export const PopoverHeaderLightColorSchemeBorder = "#E6E6E6";
+const PopoverHeaderLightColorSchemeBackground_2 = "white";
 
 // @public (undocumented)
-export const PopoverHeaderLightColorSchemeText = "#4D4D4D";
+export const PopoverHeaderLightColorSchemeBorder = "#d7dee4";
+
+// @public (undocumented)
+const PopoverHeaderLightColorSchemeBorder_2 = "#E6E6E6";
+
+// @public (undocumented)
+export const PopoverHeaderLightColorSchemeText = "#19252f";
+
+// @public (undocumented)
+const PopoverHeaderLightColorSchemeText_2 = "#4D4D4D";
 
 // @public (undocumented)
 export const PopoverHeaderSizeHeight = "10px 16px";
 
 // @public (undocumented)
+const PopoverHeaderSizeHeight_2 = "10px 16px";
+
+// @public (undocumented)
 export const PopoverHeaderSizePadding = "10px 16px";
+
+// @public (undocumented)
+const PopoverHeaderSizePadding_2 = "10px 16px";
 
 // @public (undocumented)
 export const PopoverLightColorSchemeBackground = "white";
 
 // @public (undocumented)
-export const PopoverLightColorSchemeBorder = "#B3B3B3";
+const PopoverLightColorSchemeBackground_2 = "white";
 
 // @public (undocumented)
-export const PopoverLightColorSchemeShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
+export const PopoverLightColorSchemeBorder = "#d7dee4";
 
 // @public (undocumented)
-export const PopoverLightColorSchemeText = "#4D4D4D";
+const PopoverLightColorSchemeBorder_2 = "#B3B3B3";
+
+// @public (undocumented)
+export const PopoverLightColorSchemeShadow = "0 3px 8px 0 rgba(39, 51, 62, 0.2)";
+
+// @public (undocumented)
+const PopoverLightColorSchemeShadow_2 = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
+
+// @public (undocumented)
+export const PopoverLightColorSchemeText = "#19252f";
+
+// @public (undocumented)
+const PopoverLightColorSchemeText_2 = "#4D4D4D";
 
 // @public (undocumented)
 export const PopoverSizeArrowSize = "12px";
 
 // @public (undocumented)
+const PopoverSizeArrowSize_2 = "12px";
+
+// @public (undocumented)
 export const PopoverSizeBorderRadius = "3px";
+
+// @public (undocumented)
+const PopoverSizeBorderRadius_2 = "3px";
 
 // @public (undocumented)
 export const PopoverSizeLargeWidth = "640px";
 
 // @public (undocumented)
+const PopoverSizeLargeWidth_2 = "640px";
+
+// @public (undocumented)
 export const PopoverSizeMaxHeight = "480px";
+
+// @public (undocumented)
+const PopoverSizeMaxHeight_2 = "480px";
 
 // @public (undocumented)
 export const PopoverSizeNormalWidth = "400px";
 
 // @public (undocumented)
+const PopoverSizeNormalWidth_2 = "400px";
+
+// @public (undocumented)
 export const PopoverSizePadding = "16px";
+
+// @public (undocumented)
+const PopoverSizePadding_2 = "16px";
 
 // @public (undocumented)
 export const PopoverSizeSmallWidth = "200px";
 
 // @public (undocumented)
+const PopoverSizeSmallWidth_2 = "200px";
+
+// @public (undocumented)
 export const PopoverSizeTriggerMargin = "9px";
 
 // @public (undocumented)
-export const PopupDarkColorSchemeBackground = "#4D4D4D";
+const PopoverSizeTriggerMargin_2 = "9px";
 
 // @public (undocumented)
-export const PopupDarkColorSchemeBorder = "#999999";
+export const PopupDarkColorSchemeBackground = "#333f4a";
 
 // @public (undocumented)
-export const PopupDarkColorSchemeDivider = "#666666";
+const PopupDarkColorSchemeBackground_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const PopupDarkColorSchemeBorder = "#333f4a";
+
+// @public (undocumented)
+const PopupDarkColorSchemeBorder_2 = "#999999";
+
+// @public (undocumented)
+export const PopupDarkColorSchemeDivider = "#434f5a";
+
+// @public (undocumented)
+const PopupDarkColorSchemeDivider_2 = "#666666";
 
 // @public (undocumented)
 export const PopupDarkColorSchemeFooterBackground = "transparent";
 
 // @public (undocumented)
-export const PopupDarkColorSchemeShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
+const PopupDarkColorSchemeFooterBackground_2 = "transparent";
+
+// @public (undocumented)
+export const PopupDarkColorSchemeShadow = "0 3px 8px 0 rgba(0, 0, 0, 0.2)";
+
+// @public (undocumented)
+const PopupDarkColorSchemeShadow_2 = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
 
 // @public (undocumented)
 export const PopupLightColorSchemeBackground = "white";
 
 // @public (undocumented)
-export const PopupLightColorSchemeBorder = "#B3B3B3";
+const PopupLightColorSchemeBackground_2 = "white";
 
 // @public (undocumented)
-export const PopupLightColorSchemeDivider = "#CCCCCC";
+export const PopupLightColorSchemeBorder = "#d7dee4";
 
 // @public (undocumented)
-export const PopupLightColorSchemeFooterBackground = "#F0F0F0";
+const PopupLightColorSchemeBorder_2 = "#B3B3B3";
 
 // @public (undocumented)
-export const PopupLightColorSchemeShadow = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
+export const PopupLightColorSchemeDivider = "#d7dee4";
 
 // @public (undocumented)
-export const ProgressBarDarkColorSchemeBackground = "#666666";
+const PopupLightColorSchemeDivider_2 = "#CCCCCC";
 
 // @public (undocumented)
-export const ProgressBarLightColorSchemeBackground = "#F0F0F0";
+export const PopupLightColorSchemeFooterBackground = "#f2f5f9";
+
+// @public (undocumented)
+const PopupLightColorSchemeFooterBackground_2 = "#F0F0F0";
+
+// @public (undocumented)
+export const PopupLightColorSchemeShadow = "0 3px 8px 0 rgba(39, 51, 62, 0.2)";
+
+// @public (undocumented)
+const PopupLightColorSchemeShadow_2 = "0 3px 3px 0 rgba(0, 0, 0, 0.2)";
+
+// @public (undocumented)
+export const ProgressBarDarkColorSchemeBackground = "rgba(white,0.06)";
+
+// @public (undocumented)
+const ProgressBarDarkColorSchemeBackground_2 = "#666666";
+
+// @public (undocumented)
+export const ProgressBarLightColorSchemeBackground = "rgba(25, 37, 47, 0.06)";
+
+// @public (undocumented)
+const ProgressBarLightColorSchemeBackground_2 = "#F0F0F0";
 
 // @public (undocumented)
 export const ProgressBarSizeHeight = "4px";
 
 // @public (undocumented)
+const ProgressBarSizeHeight_2 = "4px";
+
+// @public (undocumented)
 export const ProgressSpinnerSizeSize = "16px";
+
+// @public (undocumented)
+const ProgressSpinnerSizeSize_2 = "16px";
 
 // @public (undocumented)
 export const RadioDarkColorSchemeInnerCircleBorder = "transparent";
 
 // @public (undocumented)
-export const RadioDarkColorSchemeOuterCircleBorder = "#999999";
+const RadioDarkColorSchemeInnerCircleBorder_2 = "transparent";
 
 // @public (undocumented)
-export const RadioDarkColorSchemeStatesCheckedInnerCircleBorder = "#206EA2";
+export const RadioDarkColorSchemeOuterCircleBorder = "#515e69";
 
 // @public (undocumented)
-export const RadioDarkColorSchemeStatesCheckedOuterCircleBorder = "#57A4D7";
+const RadioDarkColorSchemeOuterCircleBorder_2 = "#999999";
 
 // @public (undocumented)
-export const RadioDarkColorSchemeStatesFocusedInnerCircleShadow = "0 0 0 1px #333333";
+export const RadioDarkColorSchemeStatesCheckedInnerCircleBorder = "#0059b8";
 
 // @public (undocumented)
-export const RadioDarkColorSchemeStatesFocusedOuterCircleBorder = "#57A4D7";
+const RadioDarkColorSchemeStatesCheckedInnerCircleBorder_2 = "#206EA2";
 
 // @public (undocumented)
-export const RadioDarkColorSchemeStatesFocusedOuterCircleShadow = "0 0 0 2px #57A4D7";
+export const RadioDarkColorSchemeStatesCheckedOuterCircleBorder = "#0059b8";
+
+// @public (undocumented)
+const RadioDarkColorSchemeStatesCheckedOuterCircleBorder_2 = "#57A4D7";
+
+// @public (undocumented)
+export const RadioDarkColorSchemeStatesFocusedInnerCircleShadow = "0 0 0 1px #19252f";
+
+// @public (undocumented)
+const RadioDarkColorSchemeStatesFocusedInnerCircleShadow_2 = "0 0 0 1px #333333";
+
+// @public (undocumented)
+export const RadioDarkColorSchemeStatesFocusedOuterCircleBorder = "#4187ff";
+
+// @public (undocumented)
+const RadioDarkColorSchemeStatesFocusedOuterCircleBorder_2 = "#57A4D7";
+
+// @public (undocumented)
+export const RadioDarkColorSchemeStatesFocusedOuterCircleShadow = "0 0 0 2px #4187ff";
+
+// @public (undocumented)
+const RadioDarkColorSchemeStatesFocusedOuterCircleShadow_2 = "0 0 0 2px #57A4D7";
 
 // @public (undocumented)
 export const RadioFontDefault = "body";
 
 // @public (undocumented)
+const RadioFontDefault_2 = "body";
+
+// @public (undocumented)
 export const RadioLightColorSchemeInnerCircleBorder = "transparent";
 
 // @public (undocumented)
-export const RadioLightColorSchemeOuterCircleBorder = "#B3B3B3";
+const RadioLightColorSchemeInnerCircleBorder_2 = "transparent";
 
 // @public (undocumented)
-export const RadioLightColorSchemeStatesCheckedInnerCircleBorder = "#338FCC";
+export const RadioLightColorSchemeOuterCircleBorder = "#bdc7d1";
 
 // @public (undocumented)
-export const RadioLightColorSchemeStatesCheckedOuterCircleBorder = "#338FCC";
+const RadioLightColorSchemeOuterCircleBorder_2 = "#B3B3B3";
+
+// @public (undocumented)
+export const RadioLightColorSchemeStatesCheckedInnerCircleBorder = "#0374eb";
+
+// @public (undocumented)
+const RadioLightColorSchemeStatesCheckedInnerCircleBorder_2 = "#338FCC";
+
+// @public (undocumented)
+export const RadioLightColorSchemeStatesCheckedOuterCircleBorder = "#0374eb";
+
+// @public (undocumented)
+const RadioLightColorSchemeStatesCheckedOuterCircleBorder_2 = "#338FCC";
 
 // @public (undocumented)
 export const RadioLightColorSchemeStatesFocusedInnerCircleShadow = "0 0 0 1px white";
 
 // @public (undocumented)
-export const RadioLightColorSchemeStatesFocusedOuterCircleBorder = "#338FCC";
+const RadioLightColorSchemeStatesFocusedInnerCircleShadow_2 = "0 0 0 1px white";
 
 // @public (undocumented)
-export const RadioLightColorSchemeStatesFocusedOuterCircleShadow = "0 0 0 2px #B3B3B3";
+export const RadioLightColorSchemeStatesFocusedOuterCircleBorder = "#0374eb";
+
+// @public (undocumented)
+const RadioLightColorSchemeStatesFocusedOuterCircleBorder_2 = "#338FCC";
+
+// @public (undocumented)
+export const RadioLightColorSchemeStatesFocusedOuterCircleShadow = "0 0 0 2px #0374eb";
+
+// @public (undocumented)
+const RadioLightColorSchemeStatesFocusedOuterCircleShadow_2 = "0 0 0 2px #B3B3B3";
 
 // @public (undocumented)
 export const RadioSizeLabelMargin = "8px";
 
 // @public (undocumented)
+const RadioSizeLabelMargin_2 = "8px";
+
+// @public (undocumented)
 export const RadioSizeSize = "14px";
+
+// @public (undocumented)
+const RadioSizeSize_2 = "14px";
 
 // @public (undocumented)
 export const SelectFontDefault = "body";
 
 // @public (undocumented)
+const SelectFontDefault_2 = "body";
+
+// @public (undocumented)
 export const SelectPanelFontDefault = "body";
+
+// @public (undocumented)
+const SelectPanelFontDefault_2 = "body";
 
 // @public (undocumented)
 export const SelectPanelSizeBorderRadius = "3px";
 
 // @public (undocumented)
+const SelectPanelSizeBorderRadius_2 = "3px";
+
+// @public (undocumented)
 export const SelectPanelSizeBorderWidth = "1px";
+
+// @public (undocumented)
+const SelectPanelSizeBorderWidth_2 = "1px";
 
 // @public (undocumented)
 export const SelectPanelSizeMaxHeight = "232px";
 
 // @public (undocumented)
+const SelectPanelSizeMaxHeight_2 = "232px";
+
+// @public (undocumented)
 export const SelectPanelSizeMaxWidth = "640px";
+
+// @public (undocumented)
+const SelectPanelSizeMaxWidth_2 = "640px";
 
 // @public (undocumented)
 export const SelectPanelSizeVerticalPadding = "4px";
 
 // @public (undocumented)
+const SelectPanelSizeVerticalPadding_2 = "4px";
+
+// @public (undocumented)
 export const SelectSizeHeight = "30px";
+
+// @public (undocumented)
+const SelectSizeHeight_2 = "30px";
 
 // @public (undocumented)
 export const SelectSizeLeftPadding = "16px";
 
 // @public (undocumented)
+const SelectSizeLeftPadding_2 = "16px";
+
+// @public (undocumented)
 export const SelectSizeLeftPaddingMultiple = "8px";
+
+// @public (undocumented)
+const SelectSizeLeftPaddingMultiple_2 = "8px";
 
 // @public (undocumented)
 export const SelectSizeRightPadding = "8px";
 
 // @public (undocumented)
-export const SidepanelDarkColorSchemeBorder = "#333333";
+const SelectSizeRightPadding_2 = "8px";
+
+// @public (undocumented)
+export const SidepanelDarkColorSchemeBorder = "#19252f";
+
+// @public (undocumented)
+const SidepanelDarkColorSchemeBorder_2 = "#333333";
 
 // @public (undocumented)
 export const SidepanelFontDefault = "body";
 
 // @public (undocumented)
+const SidepanelFontDefault_2 = "body";
+
+// @public (undocumented)
 export const SidepanelFooterFontDefault = "body";
+
+// @public (undocumented)
+const SidepanelFooterFontDefault_2 = "body";
 
 // @public (undocumented)
 export const SidepanelFooterSizePadding = "16px";
 
 // @public (undocumented)
+const SidepanelFooterSizePadding_2 = "16px";
+
+// @public (undocumented)
 export const SidepanelHeaderFontDefault = "title";
+
+// @public (undocumented)
+const SidepanelHeaderFontDefault_2 = "title";
 
 // @public (undocumented)
 export const SidepanelHeaderSizeClosePadding = "0 0 0 8px";
 
 // @public (undocumented)
+const SidepanelHeaderSizeClosePadding_2 = "0 0 0 8px";
+
+// @public (undocumented)
 export const SidepanelHeaderSizePadding = "14px 16px";
 
 // @public (undocumented)
-export const SidepanelLightColorSchemeBorder = "#B3B3B3";
+const SidepanelHeaderSizePadding_2 = "14px 16px";
+
+// @public (undocumented)
+export const SidepanelLightColorSchemeBorder = "#bdc7d1";
+
+// @public (undocumented)
+const SidepanelLightColorSchemeBorder_2 = "#B3B3B3";
 
 // @public (undocumented)
 export const TableFontBody = "body";
 
 // @public (undocumented)
+const TableFontBody_2 = "body";
+
+// @public (undocumented)
 export const TableFontHeader = "caption";
+
+// @public (undocumented)
+const TableFontHeader_2 = "caption";
 
 // @public (undocumented)
 export const TableSizeBorderWidth = "1px";
 
 // @public (undocumented)
+const TableSizeBorderWidth_2 = "1px";
+
+// @public (undocumented)
 export const TableSizeRowPaddingHorizontal = "16px";
+
+// @public (undocumented)
+const TableSizeRowPaddingHorizontal_2 = "16px";
 
 // @public (undocumented)
 export const TableSizeRowPaddingVertical = "8px";
 
 // @public (undocumented)
-export const TabsDarkColorSchemeBorder = "#B3B3B3";
+const TableSizeRowPaddingVertical_2 = "8px";
 
 // @public (undocumented)
-export const TabsDarkColorSchemeStateActive = "#57A4D7";
+export const TabsDarkColorSchemeBorder = "#333f4a";
 
 // @public (undocumented)
-export const TabsDarkColorSchemeStateDisabledOverlay = "rgba(white, 0.5)";
+const TabsDarkColorSchemeBorder_2 = "#B3B3B3";
+
+// @public (undocumented)
+export const TabsDarkColorSchemeStateActive = "#0059b8";
+
+// @public (undocumented)
+const TabsDarkColorSchemeStateActive_2 = "#57A4D7";
+
+// @public (undocumented)
+export const TabsDarkColorSchemeStateDisabledOverlay = "rgba(black, 0.2)";
+
+// @public (undocumented)
+const TabsDarkColorSchemeStateDisabledOverlay_2 = "rgba(white, 0.5)";
 
 // @public (undocumented)
 export const TabsFontDefault = "body";
 
 // @public (undocumented)
-export const TabsLightColorSchemeBorder = "#B3B3B3";
+const TabsFontDefault_2 = "body";
 
 // @public (undocumented)
-export const TabsLightColorSchemeStateActive = "#338FCC";
+export const TabsLightColorSchemeBorder = "#d7dee4";
 
 // @public (undocumented)
-export const TabsLightColorSchemeStateDisabledOverlay = "rgba(white, 0.5)";
+const TabsLightColorSchemeBorder_2 = "#B3B3B3";
+
+// @public (undocumented)
+export const TabsLightColorSchemeStateActive = "#0374eb";
+
+// @public (undocumented)
+const TabsLightColorSchemeStateActive_2 = "#338FCC";
+
+// @public (undocumented)
+export const TabsLightColorSchemeStateDisabledOverlay = "rgba(white, 0.3)";
+
+// @public (undocumented)
+const TabsLightColorSchemeStateDisabledOverlay_2 = "rgba(white, 0.5)";
 
 // @public (undocumented)
 export const TabsSizeBorderRadius = "3px";
 
 // @public (undocumented)
+const TabsSizeBorderRadius_2 = "3px";
+
+// @public (undocumented)
 export const TabsSizeBorderWidth = "1px";
+
+// @public (undocumented)
+const TabsSizeBorderWidth_2 = "1px";
 
 // @public (undocumented)
 export const TabsSizeHeight = "40px";
 
 // @public (undocumented)
+const TabsSizeHeight_2 = "40px";
+
+// @public (undocumented)
 export const TabsSizeHighlightHeight = "4px";
+
+// @public (undocumented)
+const TabsSizeHighlightHeight_2 = "4px";
 
 // @public (undocumented)
 export const TabsSizeLabelIconMargin = "8px";
 
 // @public (undocumented)
+const TabsSizeLabelIconMargin_2 = "8px";
+
+// @public (undocumented)
 export const TabsSizePaddingHorizontal = "16px";
+
+// @public (undocumented)
+const TabsSizePaddingHorizontal_2 = "16px";
 
 // @public (undocumented)
 export const TagInputFontDefault = "body";
 
 // @public (undocumented)
+const TagInputFontDefault_2 = "body";
+
+// @public (undocumented)
 export const TagInputSizeHeight = "22px";
+
+// @public (undocumented)
+const TagInputSizeHeight_2 = "22px";
 
 // @public (undocumented)
 export const TagInputSizeMargin = "2px 4px";
 
 // @public (undocumented)
+const TagInputSizeMargin_2 = "2px 4px";
+
+// @public (undocumented)
 export const TagListSizeMinHeight = "30px";
+
+// @public (undocumented)
+const TagListSizeMinHeight_2 = "30px";
 
 // @public (undocumented)
 export const TagListSizePadding = "1px 6px";
 
 // @public (undocumented)
-export const TagsDarkColorSchemeErrorBackground = "#832112";
+const TagListSizePadding_2 = "1px 6px";
 
 // @public (undocumented)
-export const TagsDarkColorSchemeErrorBorder = "#832112";
+export const TagsDarkColorSchemeErrorBackground = "#800025";
 
 // @public (undocumented)
-export const TagsDarkColorSchemeErrorIcon = "mix(#E76E5C, rgba(black, 0.05))";
+const TagsDarkColorSchemeErrorBackground_2 = "#832112";
 
 // @public (undocumented)
-export const TagsDarkColorSchemeErrorStatesDisabledBackground = "mix(#E76E5C, transparent, 10%)";
+export const TagsDarkColorSchemeErrorBorder = "#800025";
 
 // @public (undocumented)
-export const TagsDarkColorSchemeErrorStatesDisabledText = "mix(#E76E5C, transparent, 50%)";
+const TagsDarkColorSchemeErrorBorder_2 = "#832112";
 
 // @public (undocumented)
-export const TagsDarkColorSchemeErrorStatesFocused = "#E76E5C";
+export const TagsDarkColorSchemeErrorIcon = "mix(#ee6f79, rgba(black, 0.05))";
 
 // @public (undocumented)
-export const TagsDarkColorSchemeErrorStatesHoverIcon = "#F4B7AE";
+const TagsDarkColorSchemeErrorIcon_2 = "mix(#E76E5C, rgba(black, 0.05))";
 
 // @public (undocumented)
-export const TagsDarkColorSchemePrimaryBackground = "#114E77";
+export const TagsDarkColorSchemeErrorStatesDisabledBackground = "mix(#ea5868, transparent, 10%)";
 
 // @public (undocumented)
-export const TagsDarkColorSchemePrimaryBorder = "#114E77";
+const TagsDarkColorSchemeErrorStatesDisabledBackground_2 = "mix(#E76E5C, transparent, 10%)";
 
 // @public (undocumented)
-export const TagsDarkColorSchemePrimaryIcon = "mix(#57A4D7, rgba(black, 0.05))";
+export const TagsDarkColorSchemeErrorStatesDisabledText = "mix(#ea5868, transparent, 50%)";
 
 // @public (undocumented)
-export const TagsDarkColorSchemePrimaryStatesDisabledBackground = "mix(#57A4D7, transparent, 10%)";
+const TagsDarkColorSchemeErrorStatesDisabledText_2 = "mix(#E76E5C, transparent, 50%)";
 
 // @public (undocumented)
-export const TagsDarkColorSchemePrimaryStatesDisabledText = "mix(#57A4D7, transparent, 50%)";
+export const TagsDarkColorSchemeErrorStatesFocused = "#b9023a";
 
 // @public (undocumented)
-export const TagsDarkColorSchemePrimaryStatesFocused = "#57A4D7";
+const TagsDarkColorSchemeErrorStatesFocused_2 = "#E76E5C";
 
 // @public (undocumented)
-export const TagsDarkColorSchemePrimaryStatesHoverIcon = "#338FCC";
+export const TagsDarkColorSchemeErrorStatesHoverIcon = "#ee6f79";
 
 // @public (undocumented)
-export const TagsDarkColorSchemeSecondBackground = "#4D4D4D";
+const TagsDarkColorSchemeErrorStatesHoverIcon_2 = "#F4B7AE";
 
 // @public (undocumented)
-export const TagsDarkColorSchemeSecondBorder = "#4D4D4D";
+export const TagsDarkColorSchemeErrorText = "#fcb2b4";
 
 // @public (undocumented)
-export const TagsDarkColorSchemeSecondIcon = "mix(#999999, rgba(black, 0.05))";
+export const TagsDarkColorSchemePrimaryBackground = "#023c7f";
 
 // @public (undocumented)
-export const TagsDarkColorSchemeSecondStatesDisabledBackground = "mix(#999999, transparent, 10%)";
+const TagsDarkColorSchemePrimaryBackground_2 = "#114E77";
 
 // @public (undocumented)
-export const TagsDarkColorSchemeSecondStatesDisabledText = "mix(#999999, transparent, 50%)";
+export const TagsDarkColorSchemePrimaryBorder = "#023c7f";
 
 // @public (undocumented)
-export const TagsDarkColorSchemeSecondStatesFocused = "#57A4D7";
+const TagsDarkColorSchemePrimaryBorder_2 = "#114E77";
 
 // @public (undocumented)
-export const TagsDarkColorSchemeSecondStatesHoverIcon = "#E6E6E6";
+export const TagsDarkColorSchemePrimaryIcon = "mix(#a2c7fe, rgba(black, 0.05))";
+
+// @public (undocumented)
+const TagsDarkColorSchemePrimaryIcon_2 = "mix(#57A4D7, rgba(black, 0.05))";
+
+// @public (undocumented)
+export const TagsDarkColorSchemePrimaryStatesDisabledBackground = "mix(#5697ff, transparent, 10%)";
+
+// @public (undocumented)
+const TagsDarkColorSchemePrimaryStatesDisabledBackground_2 = "mix(#57A4D7, transparent, 10%)";
+
+// @public (undocumented)
+export const TagsDarkColorSchemePrimaryStatesDisabledText = "mix(#5697ff, transparent, 50%)";
+
+// @public (undocumented)
+const TagsDarkColorSchemePrimaryStatesDisabledText_2 = "mix(#57A4D7, transparent, 50%)";
+
+// @public (undocumented)
+export const TagsDarkColorSchemePrimaryStatesFocused = "#4187ff";
+
+// @public (undocumented)
+const TagsDarkColorSchemePrimaryStatesFocused_2 = "#57A4D7";
+
+// @public (undocumented)
+export const TagsDarkColorSchemePrimaryStatesHoverIcon = "#0374eb";
+
+// @public (undocumented)
+const TagsDarkColorSchemePrimaryStatesHoverIcon_2 = "#338FCC";
+
+// @public (undocumented)
+export const TagsDarkColorSchemePrimaryText = "#a2c7fe";
+
+// @public (undocumented)
+export const TagsDarkColorSchemeSecondBackground = "#333f4a";
+
+// @public (undocumented)
+const TagsDarkColorSchemeSecondBackground_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const TagsDarkColorSchemeSecondBorder = "#333f4a";
+
+// @public (undocumented)
+const TagsDarkColorSchemeSecondBorder_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const TagsDarkColorSchemeSecondIcon = "mix(#8c99a5, rgba(black, 0.05))";
+
+// @public (undocumented)
+const TagsDarkColorSchemeSecondIcon_2 = "mix(#999999, rgba(black, 0.05))";
+
+// @public (undocumented)
+export const TagsDarkColorSchemeSecondStatesDisabledBackground = "mix(#7f8c98, transparent, 10%)";
+
+// @public (undocumented)
+const TagsDarkColorSchemeSecondStatesDisabledBackground_2 = "mix(#999999, transparent, 10%)";
+
+// @public (undocumented)
+export const TagsDarkColorSchemeSecondStatesDisabledText = "mix(#7f8c98, transparent, 50%)";
+
+// @public (undocumented)
+const TagsDarkColorSchemeSecondStatesDisabledText_2 = "mix(#999999, transparent, 50%)";
+
+// @public (undocumented)
+export const TagsDarkColorSchemeSecondStatesFocused = "#4187ff";
+
+// @public (undocumented)
+const TagsDarkColorSchemeSecondStatesFocused_2 = "#57A4D7";
+
+// @public (undocumented)
+export const TagsDarkColorSchemeSecondStatesHoverIcon = "#d7dee4";
+
+// @public (undocumented)
+const TagsDarkColorSchemeSecondStatesHoverIcon_2 = "#E6E6E6";
+
+// @public (undocumented)
+export const TagsDarkColorSchemeSecondText = "#bdc7d1";
 
 // @public (undocumented)
 export const TagsFontCaps = "caption-caps";
 
 // @public (undocumented)
+const TagsFontCaps_2 = "caption-caps";
+
+// @public (undocumented)
 export const TagsFontDefault = "caption";
+
+// @public (undocumented)
+const TagsFontDefault_2 = "caption";
 
 // @public (undocumented)
 export const TagsFontMono = "caption-mono";
 
 // @public (undocumented)
-export const TagsLightColorSchemeErrorBackground = "#FADEDA";
+const TagsFontMono_2 = "caption-mono";
 
 // @public (undocumented)
-export const TagsLightColorSchemeErrorBorder = "#FADEDA";
+export const TagsLightColorSchemeErrorBackground = "#ffeaea";
 
 // @public (undocumented)
-export const TagsLightColorSchemeErrorIcon = "mix(#E76E5C, rgba(black, 0.05))";
+const TagsLightColorSchemeErrorBackground_2 = "#FADEDA";
 
 // @public (undocumented)
-export const TagsLightColorSchemeErrorStatesDisabledBackground = "mix(#E76E5C, transparent, 10%)";
+export const TagsLightColorSchemeErrorBorder = "#ffeaea";
 
 // @public (undocumented)
-export const TagsLightColorSchemeErrorStatesDisabledText = "mix(#E76E5C, transparent, 50%)";
+const TagsLightColorSchemeErrorBorder_2 = "#FADEDA";
 
 // @public (undocumented)
-export const TagsLightColorSchemeErrorStatesFocused = "#E76E5C";
+export const TagsLightColorSchemeErrorIcon = "mix(#ee6f79, rgba(black, 0.05))";
 
 // @public (undocumented)
-export const TagsLightColorSchemeErrorStatesHoverIcon = "#E04D36";
+const TagsLightColorSchemeErrorIcon_2 = "mix(#E76E5C, rgba(black, 0.05))";
 
 // @public (undocumented)
-export const TagsLightColorSchemePrimaryBackground = "#D8EAF7";
+export const TagsLightColorSchemeErrorStatesDisabledBackground = "mix(#ea5868, transparent, 10%)";
 
 // @public (undocumented)
-export const TagsLightColorSchemePrimaryBorder = "#D8EAF7";
+const TagsLightColorSchemeErrorStatesDisabledBackground_2 = "mix(#E76E5C, transparent, 10%)";
 
 // @public (undocumented)
-export const TagsLightColorSchemePrimaryIcon = "mix(#57A4D7, rgba(black, 0.05))";
+export const TagsLightColorSchemeErrorStatesDisabledText = "mix(#ea5868, transparent, 50%)";
 
 // @public (undocumented)
-export const TagsLightColorSchemePrimaryStatesDisabledBackground = "mix(#338FCC, transparent, 10%)";
+const TagsLightColorSchemeErrorStatesDisabledText_2 = "mix(#E76E5C, transparent, 50%)";
 
 // @public (undocumented)
-export const TagsLightColorSchemePrimaryStatesDisabledText = "mix(#338FCC, transparent, 50%)";
+export const TagsLightColorSchemeErrorStatesFocused = "#db3c55";
 
 // @public (undocumented)
-export const TagsLightColorSchemePrimaryStatesFocused = "#338FCC";
+const TagsLightColorSchemeErrorStatesFocused_2 = "#E76E5C";
 
 // @public (undocumented)
-export const TagsLightColorSchemePrimaryStatesHoverIcon = "#206EA2";
+export const TagsLightColorSchemeErrorStatesHoverIcon = "#db3c55";
 
 // @public (undocumented)
-export const TagsLightColorSchemeSecondBackground = "#E6E6E6";
+const TagsLightColorSchemeErrorStatesHoverIcon_2 = "#E04D36";
 
 // @public (undocumented)
-export const TagsLightColorSchemeSecondBorder = "#E6E6E6";
+export const TagsLightColorSchemeErrorText = "#db3c55";
 
 // @public (undocumented)
-export const TagsLightColorSchemeSecondIcon = "mix(#999999, rgba(black, 0.05))";
+export const TagsLightColorSchemePrimaryBackground = "#e7f1ff";
 
 // @public (undocumented)
-export const TagsLightColorSchemeSecondStatesDisabledBackground = "mix(#B3B3B3, transparent, 10%)";
+const TagsLightColorSchemePrimaryBackground_2 = "#D8EAF7";
 
 // @public (undocumented)
-export const TagsLightColorSchemeSecondStatesDisabledText = "mix(#B3B3B3, transparent, 50%)";
+export const TagsLightColorSchemePrimaryBorder = "#e7f1ff";
 
 // @public (undocumented)
-export const TagsLightColorSchemeSecondStatesFocused = "#338FCC";
+const TagsLightColorSchemePrimaryBorder_2 = "#D8EAF7";
 
 // @public (undocumented)
-export const TagsLightColorSchemeSecondStatesHoverIcon = "#999999";
+export const TagsLightColorSchemePrimaryIcon = "mix(#5697ff, rgba(black, 0.05))";
+
+// @public (undocumented)
+const TagsLightColorSchemePrimaryIcon_2 = "mix(#57A4D7, rgba(black, 0.05))";
+
+// @public (undocumented)
+export const TagsLightColorSchemePrimaryStatesDisabledBackground = "mix(#0374eb, transparent, 10%)";
+
+// @public (undocumented)
+const TagsLightColorSchemePrimaryStatesDisabledBackground_2 = "mix(#338FCC, transparent, 10%)";
+
+// @public (undocumented)
+export const TagsLightColorSchemePrimaryStatesDisabledText = "mix(#0374eb, transparent, 50%)";
+
+// @public (undocumented)
+const TagsLightColorSchemePrimaryStatesDisabledText_2 = "mix(#338FCC, transparent, 50%)";
+
+// @public (undocumented)
+export const TagsLightColorSchemePrimaryStatesFocused = "#0374eb";
+
+// @public (undocumented)
+const TagsLightColorSchemePrimaryStatesFocused_2 = "#338FCC";
+
+// @public (undocumented)
+export const TagsLightColorSchemePrimaryStatesHoverIcon = "#0059b8";
+
+// @public (undocumented)
+const TagsLightColorSchemePrimaryStatesHoverIcon_2 = "#206EA2";
+
+// @public (undocumented)
+export const TagsLightColorSchemePrimaryText = "#0374eb";
+
+// @public (undocumented)
+export const TagsLightColorSchemeSecondBackground = "#d7dee4";
+
+// @public (undocumented)
+const TagsLightColorSchemeSecondBackground_2 = "#E6E6E6";
+
+// @public (undocumented)
+export const TagsLightColorSchemeSecondBorder = "#d7dee4";
+
+// @public (undocumented)
+const TagsLightColorSchemeSecondBorder_2 = "#E6E6E6";
+
+// @public (undocumented)
+export const TagsLightColorSchemeSecondIcon = "mix(#8c99a5, rgba(black, 0.05))";
+
+// @public (undocumented)
+const TagsLightColorSchemeSecondIcon_2 = "mix(#999999, rgba(black, 0.05))";
+
+// @public (undocumented)
+export const TagsLightColorSchemeSecondStatesDisabledBackground = "mix(#8c99a5, transparent, 10%)";
+
+// @public (undocumented)
+const TagsLightColorSchemeSecondStatesDisabledBackground_2 = "mix(#B3B3B3, transparent, 10%)";
+
+// @public (undocumented)
+export const TagsLightColorSchemeSecondStatesDisabledText = "mix(#8c99a5, transparent, 50%)";
+
+// @public (undocumented)
+const TagsLightColorSchemeSecondStatesDisabledText_2 = "mix(#B3B3B3, transparent, 50%)";
+
+// @public (undocumented)
+export const TagsLightColorSchemeSecondStatesFocused = "#0374eb";
+
+// @public (undocumented)
+const TagsLightColorSchemeSecondStatesFocused_2 = "#338FCC";
+
+// @public (undocumented)
+export const TagsLightColorSchemeSecondStatesHoverIcon = "#515e69";
+
+// @public (undocumented)
+const TagsLightColorSchemeSecondStatesHoverIcon_2 = "#999999";
+
+// @public (undocumented)
+export const TagsLightColorSchemeSecondText = "#19252f";
 
 // @public (undocumented)
 export const TagsSizeBorderRadius = "4px";
 
 // @public (undocumented)
+const TagsSizeBorderRadius_2 = "4px";
+
+// @public (undocumented)
 export const TagsSizeBorderWidth = "1px";
+
+// @public (undocumented)
+const TagsSizeBorderWidth_2 = "1px";
 
 // @public (undocumented)
 export const TagsSizeHeight = "24px";
 
 // @public (undocumented)
+const TagsSizeHeight_2 = "24px";
+
+// @public (undocumented)
 export const TagsSizeIconPadding = "3px";
+
+// @public (undocumented)
+const TagsSizeIconPadding_2 = "3px";
 
 // @public (undocumented)
 export const TagsSizeMargin = "2px";
 
 // @public (undocumented)
+const TagsSizeMargin_2 = "2px";
+
+// @public (undocumented)
 export const TagsSizeTextMargin = "8px";
+
+// @public (undocumented)
+const TagsSizeTextMargin_2 = "8px";
 
 // @public (undocumented)
 export const TextareaFontDefault = "body";
 
 // @public (undocumented)
+const TextareaFontDefault_2 = "body";
+
+// @public (undocumented)
 export const TextareaFontMono = "body-mono";
+
+// @public (undocumented)
+const TextareaFontMono_2 = "body-mono";
 
 // @public (undocumented)
 export const TextareaSizeMinHeight = "50px";
 
 // @public (undocumented)
+const TextareaSizeMinHeight_2 = "50px";
+
+// @public (undocumented)
 export const TextareaSizePadding = "5px 16px";
+
+// @public (undocumented)
+const TextareaSizePadding_2 = "5px 16px";
 
 // @public (undocumented)
 export const TimepickerSizePaddingRight = "16px";
 
 // @public (undocumented)
-export const ToggleDarkColorSchemeBackground = "#333333";
+const TimepickerSizePaddingRight_2 = "16px";
 
 // @public (undocumented)
-export const ToggleDarkColorSchemeBorder = "#808080";
+export const ToggleDarkColorSchemeBackground = "#19252f";
 
 // @public (undocumented)
-export const ToggleDarkColorSchemeCircleBackground = "white";
+const ToggleDarkColorSchemeBackground_2 = "#333333";
 
 // @public (undocumented)
-export const ToggleDarkColorSchemeCircleBorder = "#808080";
+export const ToggleDarkColorSchemeBorder = "#515e69";
 
 // @public (undocumented)
-export const ToggleDarkColorSchemeStatesFocusedShadow = "inset 0 0 0 1px #333333, 0 0 0 2px #57A4D7";
+const ToggleDarkColorSchemeBorder_2 = "#808080";
+
+// @public (undocumented)
+export const ToggleDarkColorSchemeCircleBackground = "#6d7a86";
+
+// @public (undocumented)
+const ToggleDarkColorSchemeCircleBackground_2 = "white";
+
+// @public (undocumented)
+export const ToggleDarkColorSchemeCircleBorder = "#515e69";
+
+// @public (undocumented)
+const ToggleDarkColorSchemeCircleBorder_2 = "#808080";
+
+// @public (undocumented)
+export const ToggleDarkColorSchemeErrorCheckedBackground = "#b9023a";
+
+// @public (undocumented)
+const ToggleDarkColorSchemeErrorCheckedBackground_2 = "#E76E5C";
+
+// @public (undocumented)
+export const ToggleDarkColorSchemeErrorCheckedBorderColor = "#b9023a";
+
+// @public (undocumented)
+const ToggleDarkColorSchemeErrorCheckedBorderColor_2 = "#E76E5C";
+
+// @public (undocumented)
+export const ToggleDarkColorSchemePrimaryCheckedBackground = "#0059b8";
+
+// @public (undocumented)
+const ToggleDarkColorSchemePrimaryCheckedBackground_2 = "#57A4D7";
+
+// @public (undocumented)
+export const ToggleDarkColorSchemePrimaryCheckedBorderColor = "#0059b8";
+
+// @public (undocumented)
+const ToggleDarkColorSchemePrimaryCheckedBorderColor_2 = "#57A4D7";
+
+// @public (undocumented)
+export const ToggleDarkColorSchemeStatesFocusedShadow = "inset 0 0 0 1px #19252f, 0 0 0 2px #4187ff";
+
+// @public (undocumented)
+const ToggleDarkColorSchemeStatesFocusedShadow_2 = "inset 0 0 0 1px #333333, 0 0 0 2px #57A4D7";
 
 // @public (undocumented)
 export const ToggleFontDefault = "body";
 
 // @public (undocumented)
-export const ToggleLightColorSchemeBackground = "linear-gradient(to bottom, #E6E6E6, #F0F0F0)";
+const ToggleFontDefault_2 = "body";
 
 // @public (undocumented)
-export const ToggleLightColorSchemeBorder = "#B3B3B3";
+export const ToggleLightColorSchemeBackground = "white";
 
 // @public (undocumented)
-export const ToggleLightColorSchemeCircleBackground = "linear-gradient(to bottom, white, #E6E6E6)";
+const ToggleLightColorSchemeBackground_2 = "linear-gradient(to bottom, #E6E6E6, #F0F0F0)";
 
 // @public (undocumented)
-export const ToggleLightColorSchemeCircleBorder = "#B3B3B3";
+export const ToggleLightColorSchemeBorder = "#bdc7d1";
 
 // @public (undocumented)
-export const ToggleLightColorSchemeStatesFocusedShadow = "inset 0 0 0 1px white, 0 0 0 2px #338FCC";
+const ToggleLightColorSchemeBorder_2 = "#B3B3B3";
+
+// @public (undocumented)
+export const ToggleLightColorSchemeCircleBackground = "#d7dee4";
+
+// @public (undocumented)
+const ToggleLightColorSchemeCircleBackground_2 = "linear-gradient(to bottom, white, #E6E6E6)";
+
+// @public (undocumented)
+export const ToggleLightColorSchemeCircleBorder = "#bdc7d1";
+
+// @public (undocumented)
+const ToggleLightColorSchemeCircleBorder_2 = "#B3B3B3";
+
+// @public (undocumented)
+export const ToggleLightColorSchemeErrorCheckedBackground = "#db3c55";
+
+// @public (undocumented)
+const ToggleLightColorSchemeErrorCheckedBackground_2 = "#E76E5C";
+
+// @public (undocumented)
+export const ToggleLightColorSchemeErrorCheckedBorderColor = "#db3c55";
+
+// @public (undocumented)
+const ToggleLightColorSchemeErrorCheckedBorderColor_2 = "#E76E5C";
+
+// @public (undocumented)
+export const ToggleLightColorSchemePrimaryCheckedBackground = "#0374eb";
+
+// @public (undocumented)
+const ToggleLightColorSchemePrimaryCheckedBackground_2 = "#338FCC";
+
+// @public (undocumented)
+export const ToggleLightColorSchemePrimaryCheckedBorderColor = "#0374eb";
+
+// @public (undocumented)
+const ToggleLightColorSchemePrimaryCheckedBorderColor_2 = "#338FCC";
+
+// @public (undocumented)
+export const ToggleLightColorSchemeStatesFocusedShadow = "inset 0 0 0 1px white, 0 0 0 2px #0374eb";
+
+// @public (undocumented)
+const ToggleLightColorSchemeStatesFocusedShadow_2 = "inset 0 0 0 1px white, 0 0 0 2px #338FCC";
 
 // @public (undocumented)
 export const ToggleSizeBorderRadius = "9px";
 
 // @public (undocumented)
+const ToggleSizeBorderRadius_2 = "9px";
+
+// @public (undocumented)
 export const ToggleSizeHeight = "16px";
+
+// @public (undocumented)
+const ToggleSizeHeight_2 = "16px";
 
 // @public (undocumented)
 export const ToggleSizeLabelMargin = "8px";
 
 // @public (undocumented)
+const ToggleSizeLabelMargin_2 = "8px";
+
+// @public (undocumented)
 export const ToggleSizeWidth = "28px";
+
+// @public (undocumented)
+const ToggleSizeWidth_2 = "28px";
 
 // @public (undocumented)
 export const ToggleSmallFontDefault = "caption";
 
 // @public (undocumented)
+const ToggleSmallFontDefault_2 = "caption";
+
+// @public (undocumented)
 export const ToggleSmallSizeBorderRadius = "8px";
+
+// @public (undocumented)
+const ToggleSmallSizeBorderRadius_2 = "8px";
 
 // @public (undocumented)
 export const ToggleSmallSizeHeight = "14px";
 
 // @public (undocumented)
+const ToggleSmallSizeHeight_2 = "14px";
+
+// @public (undocumented)
 export const ToggleSmallSizeWidth = "24px";
 
 // @public (undocumented)
-export const TooltipDarkColorSchemeBackground = "#F5F5F5";
+const ToggleSmallSizeWidth_2 = "24px";
+
+// @public (undocumented)
+export const TooltipDarkColorSchemeBackground = "white";
+
+// @public (undocumented)
+const TooltipDarkColorSchemeBackground_2 = "#F5F5F5";
 
 // @public (undocumented)
 export const TooltipDarkColorSchemeBorder = "transparent";
 
 // @public (undocumented)
-export const TooltipDarkColorSchemeShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
+const TooltipDarkColorSchemeBorder_2 = "transparent";
 
 // @public (undocumented)
-export const TooltipDarkColorSchemeText = "#4D4D4D";
+export const TooltipDarkColorSchemeShadow = "0 2px 4px 0 rgba(39, 51, 62, 0.2)";
 
 // @public (undocumented)
-export const TooltipDarkColorSchemeWarningBackground = "#FCF5E8";
+const TooltipDarkColorSchemeShadow_2 = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
 
 // @public (undocumented)
-export const TooltipDarkColorSchemeWarningBorder = "#F0D49B";
+export const TooltipDarkColorSchemeText = "#19252f";
 
 // @public (undocumented)
-export const TooltipDarkColorSchemeWarningText = "#4D4D4D";
+const TooltipDarkColorSchemeText_2 = "#4D4D4D";
+
+// @public (undocumented)
+export const TooltipDarkColorSchemeWarningBackground = "#7e5406";
+
+// @public (undocumented)
+const TooltipDarkColorSchemeWarningBackground_2 = "#FCF5E8";
+
+// @public (undocumented)
+export const TooltipDarkColorSchemeWarningBorder = "#7e5406";
+
+// @public (undocumented)
+const TooltipDarkColorSchemeWarningBorder_2 = "#F0D49B";
+
+// @public (undocumented)
+export const TooltipDarkColorSchemeWarningText = "#f2f5f9";
+
+// @public (undocumented)
+const TooltipDarkColorSchemeWarningText_2 = "#4D4D4D";
 
 // @public (undocumented)
 export const TooltipFontDefault = "caption";
 
 // @public (undocumented)
-export const TooltipLightColorSchemeBackground = "#4D4D4D";
+const TooltipFontDefault_2 = "caption";
+
+// @public (undocumented)
+export const TooltipLightColorSchemeBackground = "#333f4a";
+
+// @public (undocumented)
+const TooltipLightColorSchemeBackground_2 = "#4D4D4D";
 
 // @public (undocumented)
 export const TooltipLightColorSchemeBorder = "transparent";
 
 // @public (undocumented)
-export const TooltipLightColorSchemeShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
+const TooltipLightColorSchemeBorder_2 = "transparent";
 
 // @public (undocumented)
-export const TooltipLightColorSchemeText = "white";
+export const TooltipLightColorSchemeShadow = "0 2px 4px 0 rgba(39, 51, 62, 0.2)";
 
 // @public (undocumented)
-export const TooltipLightColorSchemeWarningBackground = "#FCF5E8";
+const TooltipLightColorSchemeShadow_2 = "0 2px 4px 0 rgba(0, 0, 0, 0.2)";
 
 // @public (undocumented)
-export const TooltipLightColorSchemeWarningBorder = "#F0D49B";
+export const TooltipLightColorSchemeText = "#f2f5f9";
 
 // @public (undocumented)
-export const TooltipLightColorSchemeWarningText = "#4D4D4D";
+const TooltipLightColorSchemeText_2 = "white";
+
+// @public (undocumented)
+export const TooltipLightColorSchemeWarningBackground = "#fff4dd";
+
+// @public (undocumented)
+const TooltipLightColorSchemeWarningBackground_2 = "#FCF5E8";
+
+// @public (undocumented)
+export const TooltipLightColorSchemeWarningBorder = "#fcdda6";
+
+// @public (undocumented)
+const TooltipLightColorSchemeWarningBorder_2 = "#F0D49B";
+
+// @public (undocumented)
+export const TooltipLightColorSchemeWarningText = "#19252f";
+
+// @public (undocumented)
+const TooltipLightColorSchemeWarningText_2 = "#4D4D4D";
 
 // @public (undocumented)
 export const TooltipSizeArrowSize = "12px";
 
 // @public (undocumented)
+const TooltipSizeArrowSize_2 = "12px";
+
+// @public (undocumented)
 export const TooltipSizeBorderRadius = "3px";
+
+// @public (undocumented)
+const TooltipSizeBorderRadius_2 = "3px";
 
 // @public (undocumented)
 export const TooltipSizeBorderWidth = "1px";
 
 // @public (undocumented)
+const TooltipSizeBorderWidth_2 = "1px";
+
+// @public (undocumented)
 export const TooltipSizeMaxWidth = "300px";
+
+// @public (undocumented)
+const TooltipSizeMaxWidth_2 = "300px";
 
 // @public (undocumented)
 export const TooltipSizePadding = "8px 16px";
 
 // @public (undocumented)
+const TooltipSizePadding_2 = "8px 16px";
+
+// @public (undocumented)
 export const TooltipSizeTriggerMargin = "9px";
+
+// @public (undocumented)
+const TooltipSizeTriggerMargin_2 = "9px";
 
 // @public (undocumented)
 export const TreeFontNode = "body";
 
 // @public (undocumented)
+const TreeFontNode_2 = "body";
+
+// @public (undocumented)
 export const TreeSizeNodeHeight = "32px";
+
+// @public (undocumented)
+const TreeSizeNodeHeight_2 = "32px";
 
 // @public (undocumented)
 export const TreeSizePaddingLeft = "8px";
 
 // @public (undocumented)
+const TreeSizePaddingLeft_2 = "8px";
+
+// @public (undocumented)
 export const TreeSizePaddingRight = "16px";
 
 // @public (undocumented)
-export const TypographyBodyCapsFontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+const TreeSizePaddingRight_2 = "16px";
+
+// @public (undocumented)
+export const TypographyBodyCapsFontFamily = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+const TypographyBodyCapsFontFamily_2 = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 
 // @public (undocumented)
 export const TypographyBodyCapsFontSize = "15px";
 
 // @public (undocumented)
+const TypographyBodyCapsFontSize_2 = "15px";
+
+// @public (undocumented)
 export const TypographyBodyCapsFontWeight = "normal";
+
+// @public (undocumented)
+const TypographyBodyCapsFontWeight_2 = "normal";
 
 // @public (undocumented)
 export const TypographyBodyCapsLetterSpacing = "1.7px";
 
 // @public (undocumented)
+const TypographyBodyCapsLetterSpacing_2 = "1.7px";
+
+// @public (undocumented)
 export const TypographyBodyCapsLineHeight = "20px";
+
+// @public (undocumented)
+const TypographyBodyCapsLineHeight_2 = "20px";
 
 // @public (undocumented)
 export const TypographyBodyCapsTextTransform = "uppercase";
 
 // @public (undocumented)
-export const TypographyBodyFontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+const TypographyBodyCapsTextTransform_2 = "uppercase";
+
+// @public (undocumented)
+export const TypographyBodyFontFamily = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+const TypographyBodyFontFamily_2 = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 
 // @public (undocumented)
 export const TypographyBodyFontSize = "15px";
 
 // @public (undocumented)
+const TypographyBodyFontSize_2 = "15px";
+
+// @public (undocumented)
 export const TypographyBodyFontWeight = "normal";
 
 // @public (undocumented)
-export const TypographyBodyLetterSpacing = "0.15px";
+const TypographyBodyFontWeight_2 = "normal";
+
+// @public (undocumented)
+export const TypographyBodyLetterSpacing = "-0.009em";
+
+// @public (undocumented)
+const TypographyBodyLetterSpacing_2 = "0.15px";
 
 // @public (undocumented)
 export const TypographyBodyLineHeight = "20px";
 
 // @public (undocumented)
+const TypographyBodyLineHeight_2 = "20px";
+
+// @public (undocumented)
 export const TypographyBodyMonoFontFamily = "'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace";
+
+// @public (undocumented)
+const TypographyBodyMonoFontFamily_2 = "'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace";
 
 // @public (undocumented)
 export const TypographyBodyMonoFontSize = "15px";
 
 // @public (undocumented)
+const TypographyBodyMonoFontSize_2 = "15px";
+
+// @public (undocumented)
 export const TypographyBodyMonoFontWeight = "normal";
+
+// @public (undocumented)
+const TypographyBodyMonoFontWeight_2 = "normal";
 
 // @public (undocumented)
 export const TypographyBodyMonoLetterSpacing = "normal";
 
 // @public (undocumented)
+const TypographyBodyMonoLetterSpacing_2 = "normal";
+
+// @public (undocumented)
 export const TypographyBodyMonoLineHeight = "20px";
+
+// @public (undocumented)
+const TypographyBodyMonoLineHeight_2 = "20px";
 
 // @public (undocumented)
 export const TypographyBodyMonoTextTransform = "null";
 
 // @public (undocumented)
-export const TypographyBodyStrongFontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+const TypographyBodyMonoTextTransform_2 = "null";
+
+// @public (undocumented)
+export const TypographyBodyStrongFontFamily = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+const TypographyBodyStrongFontFamily_2 = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 
 // @public (undocumented)
 export const TypographyBodyStrongFontSize = "15px";
 
 // @public (undocumented)
+const TypographyBodyStrongFontSize_2 = "15px";
+
+// @public (undocumented)
 export const TypographyBodyStrongFontWeight = "500";
 
 // @public (undocumented)
-export const TypographyBodyStrongLetterSpacing = "0.15px";
+const TypographyBodyStrongFontWeight_2 = "500";
+
+// @public (undocumented)
+export const TypographyBodyStrongLetterSpacing = "-0.009em";
+
+// @public (undocumented)
+const TypographyBodyStrongLetterSpacing_2 = "0.15px";
 
 // @public (undocumented)
 export const TypographyBodyStrongLineHeight = "20px";
 
 // @public (undocumented)
+const TypographyBodyStrongLineHeight_2 = "20px";
+
+// @public (undocumented)
 export const TypographyBodyStrongTextTransform = "null";
+
+// @public (undocumented)
+const TypographyBodyStrongTextTransform_2 = "null";
 
 // @public (undocumented)
 export const TypographyBodyTextTransform = "null";
 
 // @public (undocumented)
-export const TypographyCaptionCapsFontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+const TypographyBodyTextTransform_2 = "null";
+
+// @public (undocumented)
+export const TypographyCaptionCapsFontFamily = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+const TypographyCaptionCapsFontFamily_2 = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 
 // @public (undocumented)
 export const TypographyCaptionCapsFontSize = "13px";
 
 // @public (undocumented)
+const TypographyCaptionCapsFontSize_2 = "13px";
+
+// @public (undocumented)
 export const TypographyCaptionCapsFontWeight = "normal";
+
+// @public (undocumented)
+const TypographyCaptionCapsFontWeight_2 = "normal";
 
 // @public (undocumented)
 export const TypographyCaptionCapsLetterSpacing = "1.5px";
 
 // @public (undocumented)
+const TypographyCaptionCapsLetterSpacing_2 = "1.5px";
+
+// @public (undocumented)
 export const TypographyCaptionCapsLineHeight = "16px";
+
+// @public (undocumented)
+const TypographyCaptionCapsLineHeight_2 = "16px";
 
 // @public (undocumented)
 export const TypographyCaptionCapsTextTransform = "uppercase";
 
 // @public (undocumented)
-export const TypographyCaptionFontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+const TypographyCaptionCapsTextTransform_2 = "uppercase";
+
+// @public (undocumented)
+export const TypographyCaptionFontFamily = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+const TypographyCaptionFontFamily_2 = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 
 // @public (undocumented)
 export const TypographyCaptionFontSize = "13px";
 
 // @public (undocumented)
+const TypographyCaptionFontSize_2 = "13px";
+
+// @public (undocumented)
 export const TypographyCaptionFontWeight = "normal";
 
 // @public (undocumented)
-export const TypographyCaptionLetterSpacing = "0.25px";
+const TypographyCaptionFontWeight_2 = "normal";
+
+// @public (undocumented)
+export const TypographyCaptionLetterSpacing = "-0.0025em";
+
+// @public (undocumented)
+const TypographyCaptionLetterSpacing_2 = "0.25px";
 
 // @public (undocumented)
 export const TypographyCaptionLineHeight = "16px";
 
 // @public (undocumented)
+const TypographyCaptionLineHeight_2 = "16px";
+
+// @public (undocumented)
 export const TypographyCaptionMonoFontFamily = "'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace";
+
+// @public (undocumented)
+const TypographyCaptionMonoFontFamily_2 = "'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace";
 
 // @public (undocumented)
 export const TypographyCaptionMonoFontSize = "13px";
 
 // @public (undocumented)
+const TypographyCaptionMonoFontSize_2 = "13px";
+
+// @public (undocumented)
 export const TypographyCaptionMonoFontWeight = "normal";
+
+// @public (undocumented)
+const TypographyCaptionMonoFontWeight_2 = "normal";
 
 // @public (undocumented)
 export const TypographyCaptionMonoLetterSpacing = "normal";
 
 // @public (undocumented)
+const TypographyCaptionMonoLetterSpacing_2 = "normal";
+
+// @public (undocumented)
 export const TypographyCaptionMonoLineHeight = "16px";
+
+// @public (undocumented)
+const TypographyCaptionMonoLineHeight_2 = "16px";
 
 // @public (undocumented)
 export const TypographyCaptionMonoTextTransform = "null";
 
 // @public (undocumented)
+const TypographyCaptionMonoTextTransform_2 = "null";
+
+// @public (undocumented)
 export const TypographyCaptionTextTransform = "null";
 
 // @public (undocumented)
-export const TypographyDisplay1FontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+const TypographyCaptionTextTransform_2 = "null";
+
+// @public (undocumented)
+export const TypographyDisplay1FontFamily = "'TT Positive', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+const TypographyDisplay1FontFamily_2 = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 
 // @public (undocumented)
 export const TypographyDisplay1FontSize = "56px";
 
 // @public (undocumented)
+const TypographyDisplay1FontSize_2 = "56px";
+
+// @public (undocumented)
 export const TypographyDisplay1FontWeight = "normal";
 
 // @public (undocumented)
-export const TypographyDisplay1LetterSpacing = "-0.4px";
+const TypographyDisplay1FontWeight_2 = "normal";
+
+// @public (undocumented)
+export const TypographyDisplay1LetterSpacing = "normal";
+
+// @public (undocumented)
+const TypographyDisplay1LetterSpacing_2 = "-0.4px";
 
 // @public (undocumented)
 export const TypographyDisplay1LineHeight = "76px";
 
 // @public (undocumented)
+const TypographyDisplay1LineHeight_2 = "76px";
+
+// @public (undocumented)
 export const TypographyDisplay1TextTransform = "null";
 
 // @public (undocumented)
-export const TypographyDisplay2FontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+const TypographyDisplay1TextTransform_2 = "null";
+
+// @public (undocumented)
+export const TypographyDisplay2FontFamily = "'TT Positive', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+const TypographyDisplay2FontFamily_2 = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 
 // @public (undocumented)
 export const TypographyDisplay2FontSize = "45px";
 
 // @public (undocumented)
+const TypographyDisplay2FontSize_2 = "45px";
+
+// @public (undocumented)
 export const TypographyDisplay2FontWeight = "normal";
+
+// @public (undocumented)
+const TypographyDisplay2FontWeight_2 = "normal";
 
 // @public (undocumented)
 export const TypographyDisplay2LetterSpacing = "normal";
 
 // @public (undocumented)
+const TypographyDisplay2LetterSpacing_2 = "normal";
+
+// @public (undocumented)
 export const TypographyDisplay2LineHeight = "56px";
+
+// @public (undocumented)
+const TypographyDisplay2LineHeight_2 = "56px";
 
 // @public (undocumented)
 export const TypographyDisplay2TextTransform = "null";
 
 // @public (undocumented)
-export const TypographyDisplay3FontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+const TypographyDisplay2TextTransform_2 = "null";
+
+// @public (undocumented)
+export const TypographyDisplay3FontFamily = "'TT Positive', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+const TypographyDisplay3FontFamily_2 = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 
 // @public (undocumented)
 export const TypographyDisplay3FontSize = "34px";
 
 // @public (undocumented)
+const TypographyDisplay3FontSize_2 = "34px";
+
+// @public (undocumented)
 export const TypographyDisplay3FontWeight = "normal";
 
 // @public (undocumented)
-export const TypographyDisplay3LetterSpacing = "0.25px";
+const TypographyDisplay3FontWeight_2 = "normal";
+
+// @public (undocumented)
+export const TypographyDisplay3LetterSpacing = "normal";
+
+// @public (undocumented)
+const TypographyDisplay3LetterSpacing_2 = "0.25px";
 
 // @public (undocumented)
 export const TypographyDisplay3LineHeight = "44px";
 
 // @public (undocumented)
+const TypographyDisplay3LineHeight_2 = "44px";
+
+// @public (undocumented)
 export const TypographyDisplay3TextTransform = "null";
 
 // @public (undocumented)
-export const TypographyExtraSmallTextCapsFontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+const TypographyDisplay3TextTransform_2 = "null";
+
+// @public (undocumented)
+export const TypographyExtraSmallTextCapsFontFamily = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+const TypographyExtraSmallTextCapsFontFamily_2 = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 
 // @public (undocumented)
 export const TypographyExtraSmallTextCapsFontSize = "11px";
 
 // @public (undocumented)
+const TypographyExtraSmallTextCapsFontSize_2 = "11px";
+
+// @public (undocumented)
 export const TypographyExtraSmallTextCapsFontWeight = "normal";
+
+// @public (undocumented)
+const TypographyExtraSmallTextCapsFontWeight_2 = "normal";
 
 // @public (undocumented)
 export const TypographyExtraSmallTextCapsLetterSpacing = "1px";
 
 // @public (undocumented)
+const TypographyExtraSmallTextCapsLetterSpacing_2 = "1px";
+
+// @public (undocumented)
 export const TypographyExtraSmallTextCapsLineHeight = "16px";
+
+// @public (undocumented)
+const TypographyExtraSmallTextCapsLineHeight_2 = "16px";
 
 // @public (undocumented)
 export const TypographyExtraSmallTextCapsTextTransform = "uppercase";
 
 // @public (undocumented)
-export const TypographyExtraSmallTextFontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+const TypographyExtraSmallTextCapsTextTransform_2 = "uppercase";
+
+// @public (undocumented)
+export const TypographyExtraSmallTextFontFamily = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+const TypographyExtraSmallTextFontFamily_2 = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 
 // @public (undocumented)
 export const TypographyExtraSmallTextFontSize = "11px";
 
 // @public (undocumented)
+const TypographyExtraSmallTextFontSize_2 = "11px";
+
+// @public (undocumented)
 export const TypographyExtraSmallTextFontWeight = "normal";
 
 // @public (undocumented)
-export const TypographyExtraSmallTextLetterSpacing = "0.22px";
+const TypographyExtraSmallTextFontWeight_2 = "normal";
+
+// @public (undocumented)
+export const TypographyExtraSmallTextLetterSpacing = "0.005em";
+
+// @public (undocumented)
+const TypographyExtraSmallTextLetterSpacing_2 = "0.22px";
 
 // @public (undocumented)
 export const TypographyExtraSmallTextLineHeight = "16px";
 
 // @public (undocumented)
+const TypographyExtraSmallTextLineHeight_2 = "16px";
+
+// @public (undocumented)
 export const TypographyExtraSmallTextMonoFontFamily = "'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace";
+
+// @public (undocumented)
+const TypographyExtraSmallTextMonoFontFamily_2 = "'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace";
 
 // @public (undocumented)
 export const TypographyExtraSmallTextMonoFontSize = "11px";
 
 // @public (undocumented)
+const TypographyExtraSmallTextMonoFontSize_2 = "11px";
+
+// @public (undocumented)
 export const TypographyExtraSmallTextMonoFontWeight = "normal";
+
+// @public (undocumented)
+const TypographyExtraSmallTextMonoFontWeight_2 = "normal";
 
 // @public (undocumented)
 export const TypographyExtraSmallTextMonoLetterSpacing = "0px";
 
 // @public (undocumented)
+const TypographyExtraSmallTextMonoLetterSpacing_2 = "0px";
+
+// @public (undocumented)
 export const TypographyExtraSmallTextMonoLineHeight = "16px";
+
+// @public (undocumented)
+const TypographyExtraSmallTextMonoLineHeight_2 = "16px";
 
 // @public (undocumented)
 export const TypographyExtraSmallTextMonoTextTransform = "null";
 
 // @public (undocumented)
+const TypographyExtraSmallTextMonoTextTransform_2 = "null";
+
+// @public (undocumented)
 export const TypographyExtraSmallTextTextTransform = "null";
 
 // @public (undocumented)
-export const TypographyHeadlineFontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+const TypographyExtraSmallTextTextTransform_2 = "null";
+
+// @public (undocumented)
+export const TypographyHeadlineFontFamily = "'TT Positive', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+const TypographyHeadlineFontFamily_2 = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 
 // @public (undocumented)
 export const TypographyHeadlineFontSize = "24px";
 
 // @public (undocumented)
+const TypographyHeadlineFontSize_2 = "24px";
+
+// @public (undocumented)
 export const TypographyHeadlineFontWeight = "normal";
+
+// @public (undocumented)
+const TypographyHeadlineFontWeight_2 = "normal";
 
 // @public (undocumented)
 export const TypographyHeadlineLetterSpacing = "normal";
 
 // @public (undocumented)
+const TypographyHeadlineLetterSpacing_2 = "normal";
+
+// @public (undocumented)
 export const TypographyHeadlineLineHeight = "32px";
+
+// @public (undocumented)
+const TypographyHeadlineLineHeight_2 = "32px";
 
 // @public (undocumented)
 export const TypographyHeadlineTextTransform = "null";
 
 // @public (undocumented)
-export const TypographySmallTextFontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+const TypographyHeadlineTextTransform_2 = "null";
+
+// @public (undocumented)
+export const TypographySmallTextFontFamily = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+const TypographySmallTextFontFamily_2 = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 
 // @public (undocumented)
 export const TypographySmallTextFontSize = "13px";
 
 // @public (undocumented)
+const TypographySmallTextFontSize_2 = "13px";
+
+// @public (undocumented)
 export const TypographySmallTextFontWeight = "normal";
 
 // @public (undocumented)
-export const TypographySmallTextLetterSpacing = "0.25px";
+const TypographySmallTextFontWeight_2 = "normal";
+
+// @public (undocumented)
+export const TypographySmallTextLetterSpacing = "-0.0025em";
+
+// @public (undocumented)
+const TypographySmallTextLetterSpacing_2 = "0.25px";
 
 // @public (undocumented)
 export const TypographySmallTextLineHeight = "16px";
 
 // @public (undocumented)
+const TypographySmallTextLineHeight_2 = "16px";
+
+// @public (undocumented)
 export const TypographySmallTextTextTransform = "null";
 
 // @public (undocumented)
-export const TypographySubheadingFontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+const TypographySmallTextTextTransform_2 = "null";
+
+// @public (undocumented)
+export const TypographySubheadingFontFamily = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+const TypographySubheadingFontFamily_2 = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 
 // @public (undocumented)
 export const TypographySubheadingFontSize = "15px";
 
 // @public (undocumented)
-export const TypographySubheadingFontWeight = "700";
+const TypographySubheadingFontSize_2 = "15px";
 
 // @public (undocumented)
-export const TypographySubheadingLetterSpacing = "0.15px";
+export const TypographySubheadingFontWeight = "600";
+
+// @public (undocumented)
+const TypographySubheadingFontWeight_2 = "700";
+
+// @public (undocumented)
+export const TypographySubheadingLetterSpacing = "-0.009em";
+
+// @public (undocumented)
+const TypographySubheadingLetterSpacing_2 = "0.15px";
 
 // @public (undocumented)
 export const TypographySubheadingLineHeight = "20px";
 
 // @public (undocumented)
+const TypographySubheadingLineHeight_2 = "20px";
+
+// @public (undocumented)
 export const TypographySubheadingTextTransform = "null";
 
 // @public (undocumented)
-export const TypographyTitleFontFamily = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+const TypographySubheadingTextTransform_2 = "null";
+
+// @public (undocumented)
+export const TypographyTitleFontFamily = "'TT Positive', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
+
+// @public (undocumented)
+const TypographyTitleFontFamily_2 = "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 
 // @public (undocumented)
 export const TypographyTitleFontSize = "20px";
 
 // @public (undocumented)
-export const TypographyTitleFontWeight = "500";
+const TypographyTitleFontSize_2 = "20px";
 
 // @public (undocumented)
-export const TypographyTitleLetterSpacing = "0.15px";
+export const TypographyTitleFontWeight = "600";
+
+// @public (undocumented)
+const TypographyTitleFontWeight_2 = "500";
+
+// @public (undocumented)
+export const TypographyTitleLetterSpacing = "normal";
+
+// @public (undocumented)
+const TypographyTitleLetterSpacing_2 = "0.15px";
 
 // @public (undocumented)
 export const TypographyTitleLineHeight = "28px";
 
 // @public (undocumented)
+const TypographyTitleLineHeight_2 = "28px";
+
+// @public (undocumented)
 export const TypographyTitleTextTransform = "null";
+
+// @public (undocumented)
+const TypographyTitleTextTransform_2 = "null";
 
 // @public (undocumented)
 export const VerticalNavbarSizeIconMargin = "16px";
 
 // @public (undocumented)
+const VerticalNavbarSizeIconMargin_2 = "16px";
+
+// @public (undocumented)
 export const VerticalNavbarSizeStatesCollapsedWidth = "56px";
 
 // @public (undocumented)
+const VerticalNavbarSizeStatesCollapsedWidth_2 = "56px";
+
+// @public (undocumented)
 export const VerticalNavbarSizeStatesExpandedWidth = "240px";
+
+// @public (undocumented)
+const VerticalNavbarSizeStatesExpandedWidth_2 = "240px";
 
 // (No @packageDocumentation comment for this package)
 

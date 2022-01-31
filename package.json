@@ -127,6 +127,7 @@
         "build:schematics-test": "ng build schematics-test",
         "build:tokens:mosaic": "node ./packages/mosaic/design-tokens/build-tokens.js",
         "build:tokens:docs": "node ./packages/docs/scripts/build-tokens.js",
+        "build:tokens": "yarn run build:tokens:mosaic && yarn run build:tokens:docs",
         "build:docs-content": "gulp docs-content",
         "build:highlight": "ts-node --project ./tools/highlight-files/tsconfig.json ./tools/highlight-files/highlight-files.ts",
         "build:package-design-tokens": "ts-node --project ./tools/package-design-tokens/tsconfig.json ./tools/package-design-tokens/package-design-tokens.ts",
