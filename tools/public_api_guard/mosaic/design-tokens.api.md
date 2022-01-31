@@ -12659,7 +12659,6 @@ declare namespace legacyTokens {
         ProgressBarSizeHeight_2 as ProgressBarSizeHeight,
         ProgressSpinnerSizeSize_2 as ProgressSpinnerSizeSize,
         RadioLightColorSchemeOuterCircleBorder_2 as RadioLightColorSchemeOuterCircleBorder,
-        RadioLightColorSchemeOuterCircleBackground_2 as RadioLightColorSchemeOuterCircleBackground,
         RadioLightColorSchemeInnerCircleBorder_2 as RadioLightColorSchemeInnerCircleBorder,
         RadioLightColorSchemeStatesCheckedOuterCircleBorder_2 as RadioLightColorSchemeStatesCheckedOuterCircleBorder,
         RadioLightColorSchemeStatesCheckedInnerCircleBorder_2 as RadioLightColorSchemeStatesCheckedInnerCircleBorder,
@@ -12667,7 +12666,6 @@ declare namespace legacyTokens {
         RadioLightColorSchemeStatesFocusedOuterCircleShadow_2 as RadioLightColorSchemeStatesFocusedOuterCircleShadow,
         RadioLightColorSchemeStatesFocusedInnerCircleShadow_2 as RadioLightColorSchemeStatesFocusedInnerCircleShadow,
         RadioDarkColorSchemeOuterCircleBorder_2 as RadioDarkColorSchemeOuterCircleBorder,
-        RadioDarkColorSchemeOuterCircleBackground_2 as RadioDarkColorSchemeOuterCircleBackground,
         RadioDarkColorSchemeInnerCircleBorder_2 as RadioDarkColorSchemeInnerCircleBorder,
         RadioDarkColorSchemeStatesCheckedOuterCircleBorder_2 as RadioDarkColorSchemeStatesCheckedOuterCircleBorder,
         RadioDarkColorSchemeStatesCheckedInnerCircleBorder_2 as RadioDarkColorSchemeStatesCheckedInnerCircleBorder,
@@ -18038,7 +18036,7 @@ export const ModalFooterDarkColorSchemeBorder = "#333f4a";
 const ModalFooterDarkColorSchemeBorder_2 = "#666666";
 
 // @public (undocumented)
-export const ModalFooterLightColorSchemeBorder = "#d7dee4";
+export const ModalFooterLightColorSchemeBorder = "#f2f5f9";
 
 // @public (undocumented)
 const ModalFooterLightColorSchemeBorder_2 = "#E6E6E6";
@@ -19559,12 +19557,6 @@ export const RadioDarkColorSchemeInnerCircleBorder = "transparent";
 const RadioDarkColorSchemeInnerCircleBorder_2 = "transparent";
 
 // @public (undocumented)
-export const RadioDarkColorSchemeOuterCircleBackground = "transparent";
-
-// @public (undocumented)
-const RadioDarkColorSchemeOuterCircleBackground_2 = "transparent";
-
-// @public (undocumented)
 export const RadioDarkColorSchemeOuterCircleBorder = "#515e69";
 
 // @public (undocumented)
@@ -19611,12 +19603,6 @@ export const RadioLightColorSchemeInnerCircleBorder = "transparent";
 
 // @public (undocumented)
 const RadioLightColorSchemeInnerCircleBorder_2 = "transparent";
-
-// @public (undocumented)
-export const RadioLightColorSchemeOuterCircleBackground = "white";
-
-// @public (undocumented)
-const RadioLightColorSchemeOuterCircleBackground_2 = "white";
 
 // @public (undocumented)
 export const RadioLightColorSchemeOuterCircleBorder = "#bdc7d1";
@@ -19961,6 +19947,9 @@ export const TagsDarkColorSchemeErrorStatesHoverIcon = "#ee6f79";
 const TagsDarkColorSchemeErrorStatesHoverIcon_2 = "#F4B7AE";
 
 // @public (undocumented)
+export const TagsDarkColorSchemeErrorText = "#fcb2b4";
+
+// @public (undocumented)
 export const TagsDarkColorSchemePrimaryBackground = "#023c7f";
 
 // @public (undocumented)
@@ -20003,6 +19992,9 @@ export const TagsDarkColorSchemePrimaryStatesHoverIcon = "#0374eb";
 const TagsDarkColorSchemePrimaryStatesHoverIcon_2 = "#338FCC";
 
 // @public (undocumented)
+export const TagsDarkColorSchemePrimaryText = "#a2c7fe";
+
+// @public (undocumented)
 export const TagsDarkColorSchemeSecondBackground = "#333f4a";
 
 // @public (undocumented)
@@ -20043,6 +20035,9 @@ export const TagsDarkColorSchemeSecondStatesHoverIcon = "#d7dee4";
 
 // @public (undocumented)
 const TagsDarkColorSchemeSecondStatesHoverIcon_2 = "#E6E6E6";
+
+// @public (undocumented)
+export const TagsDarkColorSchemeSecondText = "#bdc7d1";
 
 // @public (undocumented)
 export const TagsFontCaps = "caption-caps";
@@ -20105,6 +20100,9 @@ export const TagsLightColorSchemeErrorStatesHoverIcon = "#db3c55";
 const TagsLightColorSchemeErrorStatesHoverIcon_2 = "#E04D36";
 
 // @public (undocumented)
+export const TagsLightColorSchemeErrorText = "#db3c55";
+
+// @public (undocumented)
 export const TagsLightColorSchemePrimaryBackground = "#e7f1ff";
 
 // @public (undocumented)
@@ -20147,6 +20145,9 @@ export const TagsLightColorSchemePrimaryStatesHoverIcon = "#0059b8";
 const TagsLightColorSchemePrimaryStatesHoverIcon_2 = "#206EA2";
 
 // @public (undocumented)
+export const TagsLightColorSchemePrimaryText = "#0374eb";
+
+// @public (undocumented)
 export const TagsLightColorSchemeSecondBackground = "#d7dee4";
 
 // @public (undocumented)
@@ -20187,6 +20188,9 @@ export const TagsLightColorSchemeSecondStatesHoverIcon = "#515e69";
 
 // @public (undocumented)
 const TagsLightColorSchemeSecondStatesHoverIcon_2 = "#999999";
+
+// @public (undocumented)
+export const TagsLightColorSchemeSecondText = "#19252f";
 
 // @public (undocumented)
 export const TagsSizeBorderRadius = "4px";
