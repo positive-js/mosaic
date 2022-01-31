@@ -105,27 +105,22 @@ export class DateFormatter<D> {
     relativeDate(date: D, template: FormatterRelativeTemplate): string {
         if (!this.adapter.isDateInstance(date)) { throw new Error(this.invalidDateErrorText); }
 
-        const isBeforeYesterday = this.adapter.diffNow(date, 'days') <= -2;
-        const isYesterday = this.adapter.diffNow(date, 'days') <= -1 && this.adapter.diffNow(date, 'days') > -2;
-        const isToday = this.adapter.hasSame(this.adapter.today(), date, 'days');
-        const isTomorrow = this.adapter.diffNow(date, 'days') >= 1 && this.adapter.diffNow(date, 'days') < 2;
-        const isAfterTomorrow = this.adapter.diffNow(date, 'days') > 1;
+        let newTemplate;
+
+        if (this.isBeforeYesterday(date)) {
+            newTemplate = template.BEFORE_YESTERDAY;
+        } else if (this.isYesterday(date)) {
+            newTemplate = template.YESTERDAY;
+        } else if (this.isToday(date)) {
+            newTemplate = template.TODAY;
+        } else if (this.isTomorrow(date)) {
+            newTemplate = template.TOMORROW;
+        } else if (this.isAfterTomorrow(date)) {
+            newTemplate = template.AFTER_TOMORROW;
+        }
 
         const templateVariables = {...this.adapter.config.variables, ...template.variables};
         const variables = this.compileVariables(date, templateVariables);
-        let newTemplate;
-
-        if (isBeforeYesterday) {
-            newTemplate = template.BEFORE_YESTERDAY;
-        } else if (isYesterday) {
-            newTemplate = template.YESTERDAY;
-        } else if (isToday) {
-            newTemplate = template.TODAY;
-        } else if (isTomorrow) {
-            newTemplate = template.TOMORROW;
-        } else if (isAfterTomorrow) {
-            newTemplate = template.AFTER_TOMORROW;
-        }
 
         return this.messageFormat.compile(newTemplate)(variables);
     }
@@ -429,6 +424,30 @@ export class DateFormatter<D> {
         compiledVariables.CURRENT_YEAR = this.hasSame(date, this.adapter.today(), 'year');
 
         return compiledVariables;
+    }
+
+    private isBeforeYesterday(date: D): boolean {
+        return this.adapter.daysFromToday(date) <= -2;
+    }
+
+    private isYesterday(date: D): boolean {
+        const interval = this.adapter.daysFromToday(date);
+
+        return interval > -2 && interval <= -1;
+    }
+
+    private isToday(date: D): boolean {
+        return this.adapter.daysFromToday(date) === 0;
+    }
+
+    private isTomorrow(date: any): boolean {
+        const interval = this.adapter.daysFromToday(date);
+
+        return interval >= 1 && interval < 2;
+    }
+
+    private isAfterTomorrow(date: D): boolean {
+        return this.adapter.daysFromToday(date) >= 2;
     }
 
     private hasSame(startDate: D, endDate: D, unit: string): string {

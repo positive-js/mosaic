@@ -310,6 +310,10 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         return date.diff(this.today(), unit);
     }
 
+    daysFromToday(date: Moment): number {
+        return this.diffNow(date, 'days');
+    }
+
     /** Creates a Moment instance while respecting the current UTC settings. */
     private createMoment(...args: any[]): Moment {
         return this.options?.useUtc ? moment.utc(...args) : moment(...args);

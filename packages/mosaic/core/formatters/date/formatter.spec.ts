@@ -17,9 +17,7 @@ describe('Date formatter', () => {
 
     const mockAdapterAndFormatterForRelativeTests = () => {
         // @ts-ignore
-        adapter.diffNow = (date: DateTime, unit: DurationUnit): number => {
-            return date.diff(currentDate, unit)[unit];
-        };
+        adapter.today = (): DateTime => currentDate;
 
         // @ts-ignore
         formatter.hasSame = (startDate: DateTime, endDate: DateTime, unit: DurationUnit): string => {
@@ -42,7 +40,8 @@ describe('Date formatter', () => {
         adapter = d;
         formatter = f;
 
-        currentDate = adapter.createDateTime(2000, 10, 10, 10, 0, 0, 0);
+
+        currentDate = adapter.createDateTime(adapter.today().year, 5, 15, 0, 0, 0, 0);
     }));
 
     const YEAR = 'yyyy';
@@ -74,7 +73,7 @@ describe('Date formatter', () => {
         describe('relative formats', () => {
             describe('Relative short (relativeShortDate method)', () => {
                 it('before yesterday (other year)', () => {
-                    const date = adapter.createDate(2015).minus({ hours: 49 });
+                    const date = adapter.createDate(2015).minus({ days: 3 });
                     expect(formatter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${DAY}${NBSP}${SHORT_MONTH} ${YEAR}`));
                 });
@@ -103,7 +102,7 @@ describe('Date formatter', () => {
                 });
 
                 it('today', () => {
-                    const date = adapter.today().minus({ hours: 1 });
+                    const date = adapter.today();
 
                     expect(formatter.relativeShortDate(date))
                         .toBe(`Сегодня, ${date.toFormat(TIME)}`);
@@ -112,7 +111,7 @@ describe('Date formatter', () => {
                 it('tomorrow', () => {
                     mockAdapterAndFormatterForRelativeTests();
 
-                    const date = currentDate.plus({ days: 1, hours: 1 });
+                    const date = currentDate.plus({ days: 1 });
 
                     expect(formatter.relativeShortDate(date))
                         .toBe(`Завтра, ${date.toFormat(TIME)}`);
@@ -133,7 +132,7 @@ describe('Date formatter', () => {
                 });
 
                 it('after tomorrow (other year)', () => {
-                    const date = currentDate.plus({ hours: 49 });
+                    const date = currentDate.plus({ years: 1 });
                     expect(formatter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${DAY}${NBSP}${SHORT_MONTH} ${YEAR}`));
                 });
@@ -141,7 +140,7 @@ describe('Date formatter', () => {
 
             describe('Relative long (relativeLongDate method)', () => {
                 it('before yesterday (other year)', () => {
-                    const date = currentDate.minus({ hours: 49 });
+                    const date = currentDate.minus({ years: 1 });
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH} ${YEAR}`));
                 });
@@ -170,7 +169,7 @@ describe('Date formatter', () => {
                 });
 
                 it('today', () => {
-                    const date = adapter.today().minus({ hours: 1 });
+                    const date = adapter.today();
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(`Сегодня, ${date.toFormat(TIME)}`);
@@ -179,7 +178,7 @@ describe('Date formatter', () => {
                 it('tomorrow', () => {
                     mockAdapterAndFormatterForRelativeTests();
 
-                    const date = currentDate.plus({ days: 1, hours: 1 });
+                    const date = currentDate.plus({ days: 1 });
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(`Завтра, ${date.toFormat(TIME)}`);
@@ -200,7 +199,7 @@ describe('Date formatter', () => {
                 });
 
                 it('after tomorrow (other year)', () => {
-                    const date = currentDate.plus({ hours: 49 });
+                    const date = currentDate.plus({ years: 1 });
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH} ${YEAR}`));
                 });
@@ -358,7 +357,7 @@ describe('Date formatter', () => {
 
                     it('rangeShortDateTime (same day)', () => {
                         const startDate = adapter.today();
-                        const endDate = startDate.plus({ minutes: 10 });
+                        const endDate = startDate.plus({ minutes: 1 });
 
                         const startString = adapter.format(startDate, `${TIME}`);
                         const endString = adapter.format(endDate, `${TIME}, ${DAY_SHORT_MONTH}`);
@@ -369,7 +368,7 @@ describe('Date formatter', () => {
 
                     it('rangeShortDateTime (same day, other year)', () => {
                         const startDate = adapter.today().minus({ years: 1 });
-                        const endDate = startDate.plus({ minutes: 10 });
+                        const endDate = startDate.plus({ minutes: 1 });
 
                         const startString = adapter.format(startDate, `${TIME}`);
                         const endString = adapter.format(endDate, `${TIME}, ${DAY_SHORT_MONTH} ${YEAR}`);
@@ -482,7 +481,7 @@ describe('Date formatter', () => {
 
                     it('rangeLongDateTime (same day)', () => {
                         const startDate = adapter.today();
-                        const endDate = startDate.plus({ minutes: 10 });
+                        const endDate = startDate.plus({ minutes: 1 });
 
                         const startString = adapter.format(
                             startDate, `${DAY_MONTH}, ${FROM.toLocaleLowerCase()}${NBSP}${TIME}`
@@ -495,7 +494,7 @@ describe('Date formatter', () => {
 
                     it('rangeLongDateTime (same day, other year)', () => {
                         const startDate = adapter.today().minus({ years: 1 });
-                        const endDate = startDate.plus({ minutes: 10 });
+                        const endDate = startDate.plus({ minutes: 1 });
 
                         const startString = adapter.format(
                             startDate, `${DAY_MONTH} ${YEAR}, ${FROM.toLocaleLowerCase()}${NBSP}${TIME}`
@@ -559,7 +558,7 @@ describe('Date formatter', () => {
 
                     it('rangeMiddleDateTime (same day)', () => {
                         const startDate = adapter.today();
-                        const endDate = startDate.plus({ minutes: 10 });
+                        const endDate = startDate.plus({ minutes: 1 });
 
                         const startString = adapter.format(startDate, `${TIME}`);
                         const endString = adapter.format(endDate, `${TIME}, ${DAY_MONTH}`);
@@ -570,7 +569,7 @@ describe('Date formatter', () => {
 
                     it('rangeMiddleDateTime (same day, other year)', () => {
                         const startDate = adapter.today().minus({ years: 1 });
-                        const endDate = startDate.plus({ minutes: 10 });
+                        const endDate = startDate.plus({ minutes: 1 });
 
                         const startString = adapter.format(startDate, `${TIME}`);
                         const endString = adapter.format(endDate, `${TIME}, ${DAY_MONTH} ${YEAR}`);
@@ -812,7 +811,7 @@ describe('Date formatter', () => {
         describe('relative formats', () => {
             describe('Relative short (relativeShortDate method)', () => {
                 it('before yesterday (other year)', () => {
-                    const date = adapter.createDate(2015).minus({ hours: 49 });
+                    const date = adapter.createDate(2015).minus({ days: 3 });
                     expect(formatter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${SHORT_MONTH}${NBSP}${DAY}, ${YEAR}`));
                 });
@@ -842,7 +841,7 @@ describe('Date formatter', () => {
                 });
 
                 it('today', () => {
-                    const date = adapter.today().minus({ hours: 1 });
+                    const date = adapter.today();
 
                     expect(formatter.relativeShortDate(date))
                         .toBe(`Today, ${date.toFormat(TIME)}`);
@@ -851,7 +850,7 @@ describe('Date formatter', () => {
                 it('tomorrow', () => {
                     mockAdapterAndFormatterForRelativeTests();
 
-                    const date = currentDate.plus({ days: 1, hours: 1 });
+                    const date = currentDate.plus({ days: 1 });
 
                     expect(formatter.relativeShortDate(date))
                         .toBe(`Tomorrow, ${date.toFormat(TIME)}`);
@@ -872,7 +871,7 @@ describe('Date formatter', () => {
                 });
 
                 it('after tomorrow (other year)', () => {
-                    const date = adapter.createDate(2015).plus({ hours: 49 });
+                    const date = adapter.createDate(2015).plus({ days: 3 });
                     expect(formatter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${SHORT_MONTH}${NBSP}${DAY}, ${YEAR}`));
                 });
@@ -881,7 +880,7 @@ describe('Date formatter', () => {
 
             describe('Relative long (relativeLongDate method)', () => {
                 it('before yesterday (other year)', () => {
-                    const date = adapter.createDate(2015).minus({ hours: 49 });
+                    const date = adapter.createDate(2015).minus({ days: 3 });
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH}, ${YEAR}`));
                 });
@@ -910,7 +909,7 @@ describe('Date formatter', () => {
                 });
 
                 it('today', () => {
-                    const date = adapter.today().minus({ hours: 1 });
+                    const date = adapter.today();
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(`Today, ${date.toFormat(TIME)}`);
@@ -919,7 +918,7 @@ describe('Date formatter', () => {
                 it('tomorrow', () => {
                     mockAdapterAndFormatterForRelativeTests();
 
-                    const date = currentDate.plus({ days: 1, hours: 1 });
+                    const date = currentDate.plus({ days: 1 });
 
                     expect(formatter.relativeLongDate(date))
                         .toBe(`Tomorrow, ${date.toFormat(TIME)}`);
@@ -940,7 +939,7 @@ describe('Date formatter', () => {
                 });
 
                 it('after tomorrow (other year)', () => {
-                    const date = adapter.createDate(2015).plus({ hours: 49 });
+                    const date = adapter.createDate(2015).plus({ days: 3 });
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH}, ${YEAR}`));
                 });
@@ -1098,7 +1097,7 @@ describe('Date formatter', () => {
 
                     it('rangeShortDateTime (same day)', () => {
                         const startDate = adapter.today();
-                        const endDate = startDate.plus({ minutes: 10 });
+                        const endDate = startDate.plus({ minutes: 1 });
 
                         const startString = adapter.format(startDate, `${TIME}`);
                         const endString = adapter.format(endDate, `${TIME}, ${DAY_SHORT_MONTH}`);
@@ -1109,7 +1108,7 @@ describe('Date formatter', () => {
 
                     it('rangeShortDateTime (same day, other year)', () => {
                         const startDate = adapter.today().minus({ years: 1 });
-                        const endDate = startDate.plus({ minutes: 10 });
+                        const endDate = startDate.plus({ minutes: 1 });
 
                         const startString = adapter.format(startDate, `${TIME}`);
                         const endString = adapter.format(endDate, `${TIME}, ${DAY_SHORT_MONTH}, ${YEAR}`);
@@ -1222,7 +1221,7 @@ describe('Date formatter', () => {
 
                     it('rangeLongDateTime (same day)', () => {
                         const startDate = adapter.today();
-                        const endDate = startDate.plus({ minutes: 10 });
+                        const endDate = startDate.plus({ minutes: 1 });
 
                         const startString = adapter.format(startDate, `${DAY_MONTH}, 'from'${NBSP}${TIME}`);
                         const endString = adapter.format(endDate, `'to'${NBSP}${TIME}`);
@@ -1233,7 +1232,7 @@ describe('Date formatter', () => {
 
                     it('rangeLongDateTime (same day, other year)', () => {
                         const startDate = adapter.today().minus({ years: 1 });
-                        const endDate = startDate.plus({ minutes: 10 });
+                        const endDate = startDate.plus({ minutes: 1 });
 
                         const startString = adapter.format(startDate, `${DAY_MONTH}, ${YEAR}, 'from'${NBSP}${TIME}`);
                         const endString = adapter.format(endDate, `'to'${NBSP}${TIME}`);
@@ -1295,7 +1294,7 @@ describe('Date formatter', () => {
 
                     it('rangeMiddleDateTime (same day)', () => {
                         const startDate = adapter.today();
-                        const endDate = startDate.plus({ minutes: 10 });
+                        const endDate = startDate.plus({ minutes: 1 });
 
                         const startString = adapter.format(startDate, `${TIME}`);
                         const endString = adapter.format(endDate, `${TIME}, ${DAY_MONTH}`);
@@ -1306,7 +1305,7 @@ describe('Date formatter', () => {
 
                     it('rangeMiddleDateTime (same day, other year)', () => {
                         const startDate = adapter.today().minus({ years: 1 });
-                        const endDate = startDate.plus({ minutes: 10 });
+                        const endDate = startDate.plus({ minutes: 1 });
 
                         const startString = adapter.format(startDate, `${TIME}`);
                         const endString = adapter.format(endDate, `${TIME}, ${DAY_MONTH}, ${YEAR}`);
