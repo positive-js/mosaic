@@ -1,3 +1,7 @@
+mc-checkbox {
+    margin-top: 8px;
+}
+
 .buttons-container {
     display: flex;
     justify-content: flex-end;

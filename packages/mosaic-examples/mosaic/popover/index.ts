@@ -12,21 +12,21 @@ import { McPopoverModule } from '@ptsecurity/mosaic/popover';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
 
 import { PopoverCommonExample } from './popover-common/popover-common-example';
-import { PopoverInstanceExample } from './popover-instance/popover-instance-example';
 import { PopoverPlacementCenterExample } from './popover-placement-center/popover-placement-center-example';
 import { PopoverPlacementEdgesExample } from './popover-placement-edges/popover-placement-edges-example';
+import { PopoverScrollExample } from './popover-scroll/popover-scroll-example';
 
 
 export {
     PopoverCommonExample,
-    PopoverInstanceExample,
+    PopoverScrollExample,
     PopoverPlacementCenterExample,
     PopoverPlacementEdgesExample
 };
 
 const EXAMPLES = [
     PopoverCommonExample,
-    PopoverInstanceExample,
+    PopoverScrollExample,
     PopoverPlacementCenterExample,
     PopoverPlacementEdgesExample
 ];
