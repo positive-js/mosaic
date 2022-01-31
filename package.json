@@ -10,7 +10,7 @@
         "url": "https://github.com/positive-js/mosaic.git"
     },
     "engines": {
-        "node": ">= 16",
+        "node": ">= 14",
         "yarn": ">= 1.0.0"
     },
     "requiredAngularVersion": ">=13.0.0",

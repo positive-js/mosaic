@@ -1,3 +1,5 @@
+@use '../../../node_modules/@angular/cdk/overlay/index' as overlay;
+
 @import 'styles/common/animation';
 @import 'styles/common/button';
 @import 'styles/common/clearfix';
@@ -15,7 +17,6 @@
 @import 'forms/forms';
 
 @import '../../cdk/a11y/a11y';
-@import '../../../node_modules/@angular/cdk/overlay/index';
 
 @import './selection/pseudo-checkbox/pseudo-checkbox-theme';
 
@@ -26,7 +27,7 @@
 @mixin mc-core($typography-config: null) {
     @include mosaic-typography($typography-config);
     @include cdk-a11y();
-    @include cdk-overlay();
+    @include overlay.overlay();
 }
 
 // Mixin that renders all of the core styles that depend on the theme.

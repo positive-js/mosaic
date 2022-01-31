@@ -37,6 +37,7 @@ import { OnDestroy } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { QueryList } from '@angular/core';
 import { Renderer2 } from '@angular/core';
+import { SelectionChange } from '@angular/cdk/collections';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Subject } from 'rxjs';
 import { TemplateRef } from '@angular/core';
@@ -171,7 +172,7 @@ export class McTreeFlatDataSource<T, F> extends DataSource<F> {
     // (undocumented)
     expandedData: BehaviorSubject<F[]>;
     // (undocumented)
-    expansionHandler(): F[];
+    expansionHandler(_change: SelectionChange<F>): F[];
     // (undocumented)
     filteredData: BehaviorSubject<F[]>;
     // (undocumented)
@@ -444,7 +445,7 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
     // (undocumented)
     get viewValue(): string;
     // (undocumented)
-    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeOption, "mc-tree-option", ["mcTreeOption"], { "checkboxState": "checkboxState"; "disabled": "disabled"; "showCheckbox": "showCheckbox"; }, { "onSelectionChange": "onSelectionChange"; }, ["toggleElement", "actionButton", "tooltipTrigger", "dropdownTrigger"], ["mc-tree-node-toggle", "mc-checkbox", "[mc-icon]", "*", "mc-option-action"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeOption, "mc-tree-option", ["mcTreeOption"], { "checkboxState": "checkboxState"; "disabled": "disabled"; "showCheckbox": "showCheckbox"; }, { "onSelectionChange": "onSelectionChange"; }, ["toggleElement", "actionButton", "tooltipTrigger", "dropdownTrigger"], ["mc-tree-node-toggle", "mc-checkbox", "[mc-icon]", "mc-progress-spinner", "*", "mc-option-action"]>;
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<McTreeOption, never>;
 }

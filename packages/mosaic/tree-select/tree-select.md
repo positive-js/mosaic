@@ -10,5 +10,8 @@
 ### With search
 <!-- example(tree-select-search-overview) -->
 
+#### Lazy loading tree-select
+<!-- example(tree-select-lazyload) -->
+
 ### With custom footer
 <!-- example(tree-select-footer-overview) -->

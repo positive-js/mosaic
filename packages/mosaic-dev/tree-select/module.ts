@@ -103,7 +103,7 @@ export const DATA_OBJECT = {
 export class DemoComponent implements OnInit {
     disabledState: boolean = false;
 
-    control = new FormControl(['Downloads', 'rootNode_1']);
+    control = new FormControl(['rootNode_1', 'Downloads']);
 
     // modelValue = 'Chrome';
     modelValue: any[] | null = ['Applications', 'Documents', 'Calendar', 'Chrome'];
