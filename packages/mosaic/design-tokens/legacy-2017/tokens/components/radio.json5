@@ -2,7 +2,6 @@
     radio: {
         'light-color-scheme': {
             'outer-circle-border': { value: '{light-color-scheme.second.palette.value.300.value}' },
-            'outer-circle-background': { value: '{light-color-scheme.background.background.value}' },
             'inner-circle-border': { value: 'transparent' },
 
             states: {
@@ -20,7 +19,6 @@
         },
         'dark-color-scheme': {
             'outer-circle-border': { value: '{dark-color-scheme.second.palette.value.400.value}' },
-            'outer-circle-background': { value: 'transparent' },
             'inner-circle-border': { value: 'transparent' },
 
             states: {

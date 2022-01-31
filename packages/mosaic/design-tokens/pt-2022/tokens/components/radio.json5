@@ -2,14 +2,12 @@
     radio: {
         'light-color-scheme': {
             'outer-circle-border': { value: '{light-color-scheme.foreground.border.value}' },
-            'outer-circle-background': { value: '{light-color-scheme.background.background.value}' },
             'inner-circle-border': { value: 'transparent' },
 
             states: {
                 checked: {
                     'outer-circle-border': { value: '{light-color-scheme.primary.default.value}' },
                     'inner-circle-border': { value: '{light-color-scheme.primary.default.value}' }
-
                 },
                 focused: {
                     'outer-circle-border': { value: '{light-color-scheme.states.focused-color.value}' },
@@ -20,7 +18,6 @@
         },
         'dark-color-scheme': {
             'outer-circle-border': { value: '{dark-color-scheme.foreground.border.value}' },
-            'outer-circle-background': { value: 'transparent' },
             'inner-circle-border': { value: 'transparent' },
 
             states: {
