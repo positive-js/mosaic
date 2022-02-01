@@ -1,6 +1,7 @@
 import { Injectable, Optional, SkipSelf } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 
+import { McModalComponent } from '.';
 import { McModalRef } from './modal-ref.class';
 
 
@@ -45,6 +46,8 @@ export class McModalControlService {
             const afterCloseSubscription = modalRef.afterClose.subscribe(() => this.removeOpenModal(modalRef));
 
             this.registeredMetaMap.set(modalRef, {modalRef, afterOpenSubscription, afterCloseSubscription});
+
+            this.handleMultipleMasks(modalRef);
         }
     }
 
@@ -70,6 +73,31 @@ export class McModalControlService {
             if (!this.openModals.length) {
                 this.afterAllClose.next();
             }
+        }
+    }
+
+    private handleMultipleMasks(modalRef: McModalRef) {
+        const modals = Array.from(this.registeredMetaMap.values()).map((v) => v.modalRef) as McModalComponent[];
+
+        if (modals.filter((modal) => modal.mcVisible).length > 1) {
+            const otherModals = modals.splice(0, modals.length - 1)
+                .filter((modal) => modal.mcVisible && modal.mcMask);
+
+            // hide other masks
+            setTimeout(() => {
+                otherModals.forEach((modal) => {
+                    modal.getInstance().mcMask = false;
+                    modal.markForCheck();
+                });
+            });
+
+            // show other masks on close
+            modalRef.afterClose.subscribe(() => {
+                otherModals.forEach((modal) => {
+                    modal.getInstance().mcMask = true;
+                    modal.markForCheck();
+                });
+            });
         }
     }
 }

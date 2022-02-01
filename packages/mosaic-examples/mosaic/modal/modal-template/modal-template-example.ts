@@ -1,6 +1,7 @@
 // tslint:disable:no-console
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { McButton } from '@ptsecurity/mosaic/button';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { McModalRef, McModalService } from '@ptsecurity/mosaic/modal';
 
 
@@ -14,6 +15,7 @@ import { McModalRef, McModalService } from '@ptsecurity/mosaic/modal';
 })
 export class ModalTemplateExample {
     tplModal: McModalRef;
+    themePalette = ThemePalette;
 
     @ViewChild('modalButton') modalButton: McButton;
 

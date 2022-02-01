@@ -1,6 +1,6 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, EventEmitter, NgModule } from '@angular/core';
-import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { ENTER } from '@ptsecurity/cdk/keycodes';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { ThemePalette } from '@ptsecurity/mosaic/core';
@@ -359,6 +359,24 @@ describe('McModal', () => {
             expect(modalRef.getElement().querySelectorAll('.mc-modal-footer').length).toBe(0);
         }));
 
+        it('should show only one mask at a time', fakeAsync(() => {
+            fixture.componentInstance.nonServiceModalVisible = true; // Show non-service modal
+            const secondModal = modalService.create();
+
+            fixture.detectChanges();
+            flush();
+            fixture.detectChanges();
+
+            expect(document.querySelectorAll('.mc-modal-mask').length).toEqual(1);
+
+            secondModal.close();
+
+            fixture.detectChanges();
+            flush();
+            fixture.detectChanges();
+
+            expect(document.querySelectorAll('.mc-modal-mask').length).toEqual(1);
+        }));
     });
 });
 

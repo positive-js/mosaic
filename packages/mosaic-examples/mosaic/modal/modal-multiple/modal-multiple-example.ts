@@ -15,11 +15,13 @@ import { McModalService, ModalSize } from '@ptsecurity/mosaic/modal';
 export class ModalMultipleExample {
     @ViewChild(McButton) modalButton: McButton;
 
+    // use modalService to prevent multiple overlaid masks
     constructor(private modalService: McModalService) {}
 
     showConfirmModal() {
         const modalRef = this.modalService.confirm({
-            mcSize: ModalSize.Small,
+            mcSize: ModalSize.Normal,
+            mcBodyStyle: {height: '120px'},
             mcMaskClosable: true,
             mcContent   : 'Save changes?',
             mcOkText    : 'Save',
@@ -34,10 +36,7 @@ export class ModalMultipleExample {
     showSuccessModal() {
         this.modalService.success({
             mcSize: ModalSize.Small,
-            mcStyle: { position: 'relative', top: `200px` },
             mcMaskClosable: true,
-            //  Hide second mask
-            mcMaskStyle: {opacity: 0},
             mcContent   : 'All changes are saved!',
             mcOkText    : 'ОК',
             mcCancelText: 'Cancel',
