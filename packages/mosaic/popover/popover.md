@@ -33,7 +33,7 @@
 
 <div class="mc-alert mc-alert_info" style="margin-top: 15px;">
     <i class="mc mc-icon mc-info-o_16 mc-alert__icon"></i>
-    Поповер должен оставаться относительно небольшим. Если вам нужно показать много контента, возьмите&nbsp;<a href="/modal">модальный диалог</a>&nbsp;или&nbsp;<a href="/sidepanel">сайдпанель</a>. 
+    <span>Поповер должен оставаться относительно небольшим. Если вам нужно показать много контента, возьмите&nbsp;<a href="/modal" mc-link pseudo>модальный&nbsp;диалог</a> или <a href="/sidepanel" mc-link pseudo>сайдпанель</a>.</span> 
 </div>
 
 ### Описание работы
