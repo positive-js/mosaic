@@ -404,7 +404,6 @@ export class DemoComponent {
             now.set({ month: 1, day: 1 }).plus({ years: 1 }).set({ hour: 11, minute: 28 }),
             {milliseconds: true}
         );
-
     }
 
     private populateRangeLong(locale: string) {
@@ -500,7 +499,6 @@ export class DemoComponent {
             now.set({ month: 2, day: 1 }).minus({ years: 1 }).set({ hour: 11, minute: 28 }),
             {milliseconds: true}
         );
-
     }
 
     private populateRelativeShort(locale: string) {
