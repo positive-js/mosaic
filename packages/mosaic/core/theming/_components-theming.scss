@@ -1,4 +1,4 @@
-@import "../../design-tokens/tokens";
+@import "../../design-tokens/pt-2022/tokens";
 
 
 @function mc-light-theme-components($theme) {
@@ -222,8 +222,10 @@
     $modal: (
         background-mask: $modal-light-color-scheme-background-mask,
         shadow: $modal-light-color-scheme-shadow,
+        header-border: $modal-header-light-color-scheme-border,
         body-top-shadow: $modal-light-color-scheme-body-top-shadow,
-        body-bottom-shadow: $modal-light-color-scheme-body-bottom-shadow
+        body-bottom-shadow: $modal-light-color-scheme-body-bottom-shadow,
+        footer-border: $modal-footer-light-color-scheme-border
     );
 
     $navbar: (
@@ -237,6 +239,7 @@
         icon-color: $navbar-item-light-color-scheme-icon,
 
         state-active: $navbar-item-light-color-scheme-states-active,
+        state-selected: $navbar-item-light-color-scheme-states-selected,
         state-hover: $navbar-item-light-color-scheme-states-hover,
         state-progress: $navbar-item-light-color-scheme-states-progress,
         state-disabled-opacity: $navbar-item-light-color-scheme-states-disabled-opacity,
@@ -289,28 +292,31 @@
     $tags: (
         primary: (
             border: $tags-light-color-scheme-primary-border,
+            text: $tags-light-color-scheme-primary-text,
             background: $tags-light-color-scheme-primary-background,
             background_disabled: $tags-light-color-scheme-primary-states-disabled-background,
             icon: $tags-light-color-scheme-primary-icon,
-            icon_hover: $tags-light-color-scheme-primary-states-hover-icon,
+            icon_hovered: $tags-light-color-scheme-primary-states-hover-icon,
             focused: $tags-light-color-scheme-primary-states-focused,
             disabled: $tags-light-color-scheme-primary-states-disabled-text
         ),
         second: (
             border: $tags-light-color-scheme-second-border,
+            text: $tags-light-color-scheme-second-text,
             background: $tags-light-color-scheme-second-background,
             background_disabled: $tags-light-color-scheme-second-states-disabled-background,
             icon: $tags-light-color-scheme-second-icon,
-            icon_hover: $tags-light-color-scheme-second-states-hover-icon,
+            icon_hovered: $tags-light-color-scheme-second-states-hover-icon,
             focused: $tags-light-color-scheme-second-states-focused,
             disabled: $tags-light-color-scheme-second-states-disabled-text
         ),
         error: (
             border: $tags-light-color-scheme-error-border,
+            text: $tags-light-color-scheme-error-text,
             background: $tags-light-color-scheme-error-background,
             background_disabled: $tags-light-color-scheme-error-states-disabled-background,
             icon: $tags-light-color-scheme-error-icon,
-            icon_hover: $tags-light-color-scheme-error-states-hover-icon,
+            icon_hovered: $tags-light-color-scheme-error-states-hover-icon,
             focused: $tags-light-color-scheme-error-states-focused,
             disabled: $tags-light-color-scheme-error-states-disabled-text
         )
@@ -323,7 +329,16 @@
         circle_border: $toggle-light-color-scheme-circle-border,
         circle_background: $toggle-light-color-scheme-circle-background,
 
-        focused: $toggle-light-color-scheme-states-focused-shadow
+        focused: $toggle-light-color-scheme-states-focused-shadow,
+
+        primary: (
+            checked_border: $toggle-light-color-scheme-primary-checked-border-color,
+            checked_background: $toggle-light-color-scheme-primary-checked-background,
+        ),
+        error: (
+            checked_border: $toggle-light-color-scheme-error-checked-border-color,
+            checked_background: $toggle-light-color-scheme-error-checked-background,
+        )
     );
 
     $tooltip: (
@@ -593,8 +608,10 @@
     $modal: (
         background-mask: $modal-dark-color-scheme-background-mask,
         shadow: $modal-dark-color-scheme-shadow,
+        header-border: $modal-header-dark-color-scheme-border,
         body-top-shadow: $modal-dark-color-scheme-body-top-shadow,
-        body-bottom-shadow: $modal-dark-color-scheme-body-bottom-shadow
+        body-bottom-shadow: $modal-dark-color-scheme-body-bottom-shadow,
+        footer-border: $modal-footer-dark-color-scheme-border
     );
 
     $navbar: (
@@ -608,6 +625,7 @@
         icon-color: $navbar-item-dark-color-scheme-icon,
 
         state-active: $navbar-item-dark-color-scheme-states-active,
+        state-selected: $navbar-item-dark-color-scheme-states-selected,
         state-hover: $navbar-item-dark-color-scheme-states-hover,
         state-progress: $navbar-item-dark-color-scheme-states-progress,
         state-disabled-opacity: $navbar-item-dark-color-scheme-states-disabled-opacity,
@@ -660,6 +678,7 @@
     $tags: (
         primary: (
             border: $tags-dark-color-scheme-primary-border,
+            text: $tags-dark-color-scheme-primary-text,
             background: $tags-dark-color-scheme-primary-background,
             background_disabled: $tags-dark-color-scheme-primary-states-disabled-background,
             icon: $tags-dark-color-scheme-primary-icon,
@@ -669,6 +688,7 @@
         ),
         second: (
             border: $tags-dark-color-scheme-second-border,
+            text: $tags-dark-color-scheme-second-text,
             background: $tags-dark-color-scheme-second-background,
             background_disabled: $tags-dark-color-scheme-second-states-disabled-background,
             icon: $tags-dark-color-scheme-second-icon,
@@ -678,6 +698,7 @@
         ),
         error: (
             border: $tags-dark-color-scheme-error-border,
+            text: $tags-dark-color-scheme-error-text,
             background: $tags-dark-color-scheme-error-background,
             background_disabled: $tags-dark-color-scheme-error-states-disabled-background,
             icon: $tags-dark-color-scheme-error-icon,
@@ -694,7 +715,16 @@
         circle_border: $toggle-dark-color-scheme-circle-border,
         circle_background: $toggle-dark-color-scheme-circle-background,
 
-        focused: $toggle-dark-color-scheme-states-focused-shadow
+        focused: $toggle-dark-color-scheme-states-focused-shadow,
+
+        primary: (
+            checked_border: $toggle-dark-color-scheme-primary-checked-border-color,
+            checked_background: $toggle-dark-color-scheme-primary-checked-background,
+        ),
+        error: (
+            checked_border: $toggle-dark-color-scheme-error-checked-border-color,
+            checked_background: $toggle-dark-color-scheme-error-checked-background,
+        )
     );
 
     $tooltip: (

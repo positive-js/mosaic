@@ -1,0 +1,12 @@
+{
+    tree: {
+        size: {
+            'node-height': { value: '32px' },
+            'padding-left': { value: '8px' },
+            'padding-right': { value: '16px' },
+        },
+        font: {
+            node: { value: 'body' }
+        }
+    }
+}

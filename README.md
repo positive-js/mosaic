@@ -59,6 +59,8 @@ See our:
 and
 [contribution guidelines](https://github.com/positive-js/mosaic/blob/master/CONTRIBUTING.md)
 
+Or: go over the steps in [this](https://github.com/firstcontributions/first-contributions) guide
+
 ## Credits
 
 ### Authors

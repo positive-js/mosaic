@@ -26,7 +26,8 @@
     },
     "linterOptions": {
         "exclude": [
-            "./packages/mosaic/design-tokens/tokens.ts",
+            "./packages/mosaic/design-tokens/pt-2022/tokens.ts",
+            "./packages/mosaic/design-tokens/legacy-2017/tokens.ts",
             "./packages/docs/src/styles/**/tokens.ts"
         ]
     }

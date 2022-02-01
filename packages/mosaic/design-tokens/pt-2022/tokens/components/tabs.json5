@@ -1,0 +1,25 @@
+{
+    tabs: {
+        'light-color-scheme': {
+            border: { value: '{light-color-scheme.foreground.divider.value}' },
+            'state-active': { value: '{light-color-scheme.primary.default.value}' },
+            'state-disabled-overlay': { value: '{light-color-scheme.background.overlay-disabled.value}' }
+        },
+        'dark-color-scheme': {
+            border: { value: '{dark-color-scheme.foreground.divider.value}' },
+            'state-active': { value: '{dark-color-scheme.primary.default.value}' },
+            'state-disabled-overlay': { value: '{dark-color-scheme.background.overlay-disabled.value}' }
+        },
+        size: {
+            height: { value: '40px' },
+            'highlight-height': { value: '4px' },
+            'padding-horizontal': { value: '16px' },
+            'border-width': { value: '1px' },
+            'border-radius': { value: '3px' },
+            'label-icon-margin': { value: '{margin.iconText_M-horizontal}' }
+        },
+        font: {
+            default: { value: 'body' }
+        }
+    }
+}

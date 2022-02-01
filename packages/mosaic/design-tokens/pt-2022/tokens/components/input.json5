@@ -1,0 +1,13 @@
+{
+    input: {
+        size: {
+            padding: { value: '5px {padding.control-horizontal}' },
+            width: { value: '100%' },
+            'min-height': { value: '30px' }
+        },
+        font: {
+            default: { value: 'body' },
+            monospace: { value: 'body-mono' }
+        }
+    }
+}

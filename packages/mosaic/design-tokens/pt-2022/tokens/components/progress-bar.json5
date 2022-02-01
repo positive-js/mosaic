@@ -1,0 +1,13 @@
+{
+    'progress-bar': {
+        'light-color-scheme': {
+            background: { value: '{light-color-scheme.second.palette.value.A60.value}' }
+        },
+        'dark-color-scheme': {
+            background: { value: 'rgba(white,0.06)' }
+        },
+        size: {
+            height: { value: '4px' }
+        }
+    }
+}

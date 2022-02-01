@@ -41,15 +41,15 @@
         &.mc-active {
             &.mc-primary {
                 .mc-toggle-bar {
-                    border-color: mc-color($primary);
-                    background: mc-color($primary);
+                    border-color: map-get(map-get($toggle, primary), checked_border);
+                    background: map-get(map-get($toggle, primary), checked_background);
                 }
             }
 
             &.mc-error {
                 .mc-toggle-bar {
-                    border-color: mc-color($error);
-                    background: mc-color($error);
+                    border-color: map-get(map-get($toggle, error), checked_border);
+                    background: map-get(map-get($toggle, error), checked_background);
                 }
             }
         }
