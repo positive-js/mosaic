@@ -3,6 +3,5 @@
     "version": 2,
     "github": {
         "enabled": false
-    },
-    "builds": [{ "src": "dist/mosaic-docs/**", "use": "@vercel/static" }]
+    }
 }
