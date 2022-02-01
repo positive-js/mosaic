@@ -369,7 +369,7 @@ export class McTreeNodeToggleComponent<T> extends McTreeNodeToggleBaseDirective<
 // @public (undocumented)
 export class McTreeNodeToggleDirective<T> extends McTreeNodeToggleBaseDirective<T> {
     // (undocumented)
-    static ɵdir: i0.ɵɵDirectiveDeclaration<McTreeNodeToggleDirective<any>, "[mcTreeNodeToggle]", ["mcTreeNodeToggle"], {}, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTreeNodeToggleDirective<any>, "[mc-tree-node-toggle], [mcTreeNodeToggle]", ["mcTreeNodeToggle"], {}, {}, never>;
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<McTreeNodeToggleDirective<any>, never>;
 }
@@ -443,7 +443,7 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
     // (undocumented)
     get viewValue(): string;
     // (undocumented)
-    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeOption, "mc-tree-option", ["mcTreeOption"], { "disabled": "disabled"; "showCheckbox": "showCheckbox"; }, { "onSelectionChange": "onSelectionChange"; }, ["toggleElement", "actionButton", "tooltipTrigger", "dropdownTrigger"], ["mc-tree-node-toggle", "mc-checkbox", "[mc-icon]", "mc-progress-spinner", "*", "mc-option-action"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeOption, "mc-tree-option", ["mcTreeOption"], { "disabled": "disabled"; "showCheckbox": "showCheckbox"; }, { "onSelectionChange": "onSelectionChange"; }, ["toggleElement", "actionButton", "tooltipTrigger", "dropdownTrigger"], ["mc-tree-node-toggle, [mc-tree-node-toggle], [mcTreeNodeToggle]", "mc-checkbox", "[mc-icon]", "mc-progress-spinner", "*", "mc-option-action"]>;
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<McTreeOption, never>;
 }

@@ -74,7 +74,7 @@ export class McTreeNodeToggleComponent<T> extends McTreeNodeToggleBaseDirective<
 
 
 @Directive({
-    selector: '[mcTreeNodeToggle]',
+    selector: '[mc-tree-node-toggle], [mcTreeNodeToggle]',
     exportAs: 'mcTreeNodeToggle',
     host: {
         '[attr.disabled]': 'disabled || null',
