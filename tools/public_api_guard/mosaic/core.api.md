@@ -122,13 +122,13 @@ export class DateFormatter<D> {
     // (undocumented)
     openedRangeDate(startDate: D | null, endDate: D | null, template: FormatterRangeTemplate): string;
     // (undocumented)
-    openedRangeDateTime(startDate: D | null, endDate: D | null, template: FormatterRangeTemplate): string;
+    openedRangeDateTime(startDate: D | null, endDate: D | null, template: FormatterRangeTemplate, seconds?: boolean, milliseconds?: boolean): string;
     // (undocumented)
     rangeDate(startDate: D, endDate: D, template: FormatterRangeTemplate): string;
     // (undocumented)
     rangeDateTime(startDate: D, endDate: D, template: FormatterRangeTemplate, seconds?: boolean, milliseconds?: boolean): string;
     // (undocumented)
-    rangeLongDate(startDate: D | null, endDate?: D): string;
+    rangeLongDate(startDate: D | null, endDate?: D | null): string;
     // (undocumented)
     rangeLongDateTime(startDate: D | null, endDate?: D, options?: DateTimeOptions): string;
     // (undocumented)
@@ -136,7 +136,7 @@ export class DateFormatter<D> {
     // (undocumented)
     rangeShortDate(startDate: D | null, endDate?: D): string;
     // (undocumented)
-    rangeShortDateTime(startDate: D | null, endDate?: D, options?: DateTimeOptions): string;
+    rangeShortDateTime(startDate: D | null, endDate?: D | null, options?: DateTimeOptions): string;
     // (undocumented)
     relativeDate(date: D, template: FormatterRelativeTemplate, seconds?: boolean, milliseconds?: boolean): string;
     // (undocumented)

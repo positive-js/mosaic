@@ -136,6 +136,20 @@ describe('Date formatter', () => {
                     expect(formatter.relativeShortDate(date))
                         .toBe(adapter.format(date, `${DAY}${NBSP}${SHORT_MONTH} ${YEAR}`));
                 });
+
+                it('with milliseconds', () => {
+                    const date = adapter.today();
+
+                    expect(formatter.relativeShortDateTime(date, { milliseconds: true }))
+                        .toBe(date.toFormat(`Сегодня, ${TIME}:${SECONDS}${MILLISECONDS}`));
+                });
+
+                it('with seconds', () => {
+                    const date = adapter.today();
+
+                    expect(formatter.relativeShortDateTime(date, { seconds: true }))
+                        .toBe(adapter.format(date, `Сегодня, ${TIME}:${SECONDS}`));
+                });
             });
 
             describe('Relative long (relativeLongDate method)', () => {
@@ -203,6 +217,20 @@ describe('Date formatter', () => {
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH} ${YEAR}`));
                 });
+
+                it('with milliseconds', () => {
+                    const date = adapter.today();
+
+                    expect(formatter.relativeShortDateTime(date, { milliseconds: true }))
+                        .toBe(date.toFormat(`Сегодня, ${TIME}:${SECONDS}${MILLISECONDS}`));
+                });
+
+                it('with seconds', () => {
+                    const date = adapter.today();
+
+                    expect(formatter.relativeShortDateTime(date, { seconds: true }))
+                        .toBe(adapter.format(date, `Сегодня, ${TIME}:${SECONDS}`));
+                });
             });
         });
 
@@ -242,6 +270,13 @@ describe('Date formatter', () => {
                     expect(formatter.absoluteShortDateTime(date, { milliseconds: true }))
                         .toBe(adapter.format(date, `${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`));
                 });
+
+                it('absoluteShortDateTime with seconds', () => {
+                    const date = adapter.today();
+
+                    expect(formatter.absoluteShortDateTime(date, { seconds: true }))
+                        .toBe(adapter.format(date, `${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}`));
+                });
             });
 
             describe('Absolute long (absoluteLongDate/Time method)', () => {
@@ -278,6 +313,13 @@ describe('Date formatter', () => {
 
                     expect(formatter.absoluteLongDateTime(date, { milliseconds: true }))
                         .toBe(date.toFormat(`${DAY_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`));
+                });
+
+                it('absoluteLongDateTime with seconds', () => {
+                    const date = adapter.today();
+
+                    expect(formatter.absoluteLongDateTime(date, { seconds: true }))
+                        .toBe(adapter.format(date, `${DAY_MONTH}, ${TIME}:${SECONDS}`));
                 });
             });
         });
@@ -407,6 +449,28 @@ describe('Date formatter', () => {
                         const endString = adapter.format(endDate, `${DAY_SHORT_MONTH} ${YEAR}, ${TIME}`);
 
                         expect(formatter.rangeShortDateTime(startDate, endDate))
+                            .toBe(`${startString}${LONG_DASH}${endString}`);
+                    });
+
+                    it('rangeShortDateTime (with seconds)', () => {
+                        const startDate = adapter.today().set({ day: 1 });
+                        const endDate = startDate.plus({ days: 10 });
+
+                        const startString = adapter.format(startDate, `${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}`);
+                        const endString = adapter.format(endDate, `${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}`);
+
+                        expect(formatter.rangeShortDateTime(startDate, endDate, {seconds: true}))
+                            .toBe(`${startString}${LONG_DASH}${endString}`);
+                    });
+
+                    it('rangeShortDateTime (with milliseconds)', () => {
+                        const startDate = adapter.today().set({ day: 1 });
+                        const endDate = startDate.plus({ days: 10 });
+
+                        const startString = adapter.format(startDate, `${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`);
+                        const endString = adapter.format(endDate, `${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`);
+
+                        expect(formatter.rangeShortDateTime(startDate, endDate, {milliseconds: true}))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
                     });
                 });
@@ -700,6 +764,24 @@ describe('Date formatter', () => {
                         expect(formatter.rangeShortDateTime(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
                     });
+
+                    it('rangeShortDateTime (with seconds)', () => {
+
+                        const startDate = adapter.today();
+                        const startString = adapter.format(startDate, `${startDateFormat}:${SECONDS}`);
+
+                        expect(formatter.rangeShortDateTime(startDate, null, {seconds: true}))
+                            .toBe(`${FROM}${NBSP}${startString}`);
+                    });
+
+                    it('rangeShortDateTime (with milliseconds)', () => {
+
+                        const startDate = adapter.today();
+                        const startString = adapter.format(startDate, `${startDateFormat}:${SECONDS}${MILLISECONDS}`);
+
+                        expect(formatter.rangeShortDateTime(startDate, null, {milliseconds: true}))
+                            .toBe(`${FROM}${NBSP}${startString}`);
+                    });
                 });
 
                 describe('Range long (rangeLongDate method)', () => {
@@ -876,6 +958,19 @@ describe('Date formatter', () => {
                         .toBe(adapter.format(date, `${SHORT_MONTH}${NBSP}${DAY}, ${YEAR}`));
                 });
 
+                it('with milliseconds', () => {
+                    const date = adapter.today();
+
+                    expect(formatter.relativeShortDateTime(date, { milliseconds: true }))
+                        .toBe(`Today, ${date.toFormat(`${TIME}:${SECONDS}${MILLISECONDS}`)}`);
+                });
+
+                it('with seconds', () => {
+                    const date = adapter.today();
+
+                    expect(formatter.relativeShortDateTime(date, { seconds: true }))
+                        .toBe(`Today, ${date.toFormat(`${TIME}:${SECONDS}`)}`);
+                });
             });
 
             describe('Relative long (relativeLongDate method)', () => {
@@ -943,6 +1038,20 @@ describe('Date formatter', () => {
                     expect(formatter.relativeLongDate(date))
                         .toBe(adapter.format(date, `${DAY_MONTH}, ${YEAR}`));
                 });
+
+                it('with milliseconds', () => {
+                    const date = adapter.today();
+
+                    expect(formatter.relativeLongDateTime(date, { milliseconds: true }))
+                        .toBe(`Today, ${date.toFormat(`${TIME}:${SECONDS}${MILLISECONDS}`)}`);
+                });
+
+                it('with seconds', () => {
+                    const date = adapter.today();
+
+                    expect(formatter.relativeLongDateTime(date, { seconds: true }))
+                        .toBe(`Today, ${date.toFormat(`${TIME}:${SECONDS}`)}`);
+                });
             });
         });
 
@@ -982,6 +1091,13 @@ describe('Date formatter', () => {
                     expect(formatter.absoluteShortDateTime(date, { milliseconds: true }))
                         .toBe(adapter.format(date, `${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`));
                 });
+
+                it('absoluteShortDateTime with seconds', () => {
+                    const date = adapter.today();
+
+                    expect(formatter.absoluteShortDateTime(date, { seconds: true }))
+                        .toBe(adapter.format(date, `${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}`));
+                });
             });
 
             describe('Absolute long (absoluteLongDate/Time method)', () => {
@@ -1018,6 +1134,13 @@ describe('Date formatter', () => {
 
                     expect(formatter.absoluteLongDateTime(date, { milliseconds: true }))
                         .toBe(date.toFormat(`${DAY_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`));
+                });
+
+                it('absoluteLongDateTime with seconds', () => {
+                    const date = adapter.today();
+
+                    expect(formatter.absoluteLongDateTime(date, { seconds: true }))
+                        .toBe(adapter.format(date, `${DAY_MONTH}, ${TIME}:${SECONDS}`));
                 });
             });
         });
@@ -1147,6 +1270,28 @@ describe('Date formatter', () => {
                         const endString = adapter.format(endDate, `${DAY_SHORT_MONTH}, ${YEAR}, ${TIME}`);
 
                         expect(formatter.rangeShortDateTime(startDate, endDate))
+                            .toBe(`${startString}${LONG_DASH}${endString}`);
+                    });
+
+                    it('rangeShortDateTime (with seconds)', () => {
+                        const startDate = adapter.today().set({ day: 1 });
+                        const endDate = startDate.plus({ days: 10 });
+
+                        const startString = adapter.format(startDate, `${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}`);
+                        const endString = adapter.format(endDate, `${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}`);
+
+                        expect(formatter.rangeShortDateTime(startDate, endDate, {seconds: true}))
+                            .toBe(`${startString}${LONG_DASH}${endString}`);
+                    });
+
+                    it('rangeShortDateTime (with milliseconds)', () => {
+                        const startDate = adapter.today().set({ day: 1 });
+                        const endDate = startDate.plus({ days: 10 });
+
+                        const startString = adapter.format(startDate, `${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`);
+                        const endString = adapter.format(endDate, `${DAY_SHORT_MONTH}, ${TIME}:${SECONDS}${MILLISECONDS}`);
+
+                        expect(formatter.rangeShortDateTime(startDate, endDate, {milliseconds: true}))
                             .toBe(`${startString}${LONG_DASH}${endString}`);
                     });
                 });
@@ -1435,6 +1580,24 @@ describe('Date formatter', () => {
 
                         expect(formatter.rangeShortDateTime(null, endDate))
                             .toBe(`${UNTIL}${NBSP}${endString}`);
+                    });
+
+                    it('rangeShortDateTime (with seconds)', () => {
+
+                        const startDate = adapter.today();
+                        const startString = adapter.format(startDate, `${startDateFormat}:${SECONDS}`);
+
+                        expect(formatter.rangeShortDateTime(startDate, null, {seconds: true}))
+                            .toBe(`${FROM}${NBSP}${startString}`);
+                    });
+
+                    it('rangeShortDateTime (with milliseconds)', () => {
+
+                        const startDate = adapter.today();
+                        const startString = adapter.format(startDate, `${startDateFormat}:${SECONDS}${MILLISECONDS}`);
+
+                        expect(formatter.rangeShortDateTime(startDate, null, {milliseconds: true}))
+                            .toBe(`${FROM}${NBSP}${startString}`);
                     });
                 });
 
