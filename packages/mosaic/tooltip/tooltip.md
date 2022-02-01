@@ -130,7 +130,7 @@ https://www.figma.com/file/PQLjFxrEYbwjkrvGx5D2vO/Docs?node-id=20%3A1913
 
 #### Простой тултип
 
-<font color="red">__Тут надо просто вывести тело тултипа__</font>
+<!-- example(tooltip-overview) -->
 
 Для светлой темы используется темный тултип:
 
