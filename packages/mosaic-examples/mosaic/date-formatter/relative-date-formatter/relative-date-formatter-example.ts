@@ -82,17 +82,17 @@ export class RelativeDateFormatterExample {
         const now = this.adapter.today();
 
         relativeShort.beforeYesterdayNotCurrentYear = this.dateFormatter.relativeShortDate(
-            now.minus({ years: 1, days: 2 })
+            now.minus({ years: 1 })
         );
         relativeShort.beforeYesterdayCurrentYear = this.dateFormatter.relativeShortDate(now.minus({ days: 2 }));
         relativeShort.yesterday = this.dateFormatter.relativeShortDate(now.minus({ days: 1 }));
 
         relativeShort.today = this.dateFormatter.relativeShortDate(now.minus({ hours: 1 }));
 
-        relativeShort.tomorrow = this.dateFormatter.relativeShortDate(now.plus({ days: 1, hours: 1 }));
-        relativeShort.afterTomorrowCurrentYear = this.dateFormatter.relativeShortDate(now.plus({ days: 2, hours: 1 }));
+        relativeShort.tomorrow = this.dateFormatter.relativeShortDate(now.plus({ days: 1 }));
+        relativeShort.afterTomorrowCurrentYear = this.dateFormatter.relativeShortDate(now.plus({ days: 2 }));
         relativeShort.afterTomorrowNotCurrentYear = this.dateFormatter.relativeShortDate(
-            now.plus({ years: 1, days: 2 })
+            now.plus({ years: 1 })
         );
     }
 
@@ -104,17 +104,17 @@ export class RelativeDateFormatterExample {
         const now = this.adapter.today();
 
         relativeLong.beforeYesterdayNotCurrentYear = this.dateFormatter.relativeLongDate(
-            now.minus({ years: 1, days: 2 })
+            now.minus({ years: 1 })
         );
         relativeLong.beforeYesterdayCurrentYear = this.dateFormatter.relativeLongDate(now.minus({ days: 2 }));
         relativeLong.yesterday = this.dateFormatter.relativeLongDate(now.minus({ days: 1 }));
 
         relativeLong.today = this.dateFormatter.relativeLongDate(now.minus({ hours: 1 }));
 
-        relativeLong.tomorrow = this.dateFormatter.relativeLongDate(now.plus({ days: 1, hours: 1 }));
-        relativeLong.afterTomorrowCurrentYear = this.dateFormatter.relativeLongDate(now.plus({ days: 2, hours: 1 }));
+        relativeLong.tomorrow = this.dateFormatter.relativeLongDate(now.plus({ days: 1 }));
+        relativeLong.afterTomorrowCurrentYear = this.dateFormatter.relativeLongDate(now.plus({ days: 2 }));
         relativeLong.afterTomorrowNotCurrentYear = this.dateFormatter.relativeLongDate(
-            now.plus({ years: 1, days: 2 })
+            now.plus({ years: 1 })
         );
     }
 }

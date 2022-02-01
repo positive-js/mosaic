@@ -6,7 +6,7 @@ import {
     DateAdapter,
     MC_DATE_LOCALE
 } from '@ptsecurity/cdk/datetime';
-import { DateTime, DateTimeOptions, DurationUnit, Info, LocaleOptions } from 'luxon';
+import { DateTime, DateTimeOptions, DurationUnit, Info, Interval, LocaleOptions } from 'luxon';
 
 import { enUS } from './locales/en-US';
 import { ruRU } from './locales/ru-RU';
@@ -287,6 +287,18 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
 
     diffNow(date: DateTime, unit: DurationUnit): number {
         return date.diffNow(unit)[unit];
+    }
+
+    daysFromToday(date: DateTime): number {
+        const today = this.today();
+
+        if (this.hasSame(date, today, 'days')) {
+            return 0;
+        } else if (date < today) {
+            return Math.round(Interval.fromDateTimes(date, today).length('days')) * -1;
+        } else {
+            return Math.round(Interval.fromDateTimes(today, date).length('days'));
+        }
     }
 
     private reconfigure(date: DateTime): DateTime {
