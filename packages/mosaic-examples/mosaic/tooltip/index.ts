@@ -5,15 +5,18 @@ import { NgModule } from '@angular/core';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
+import { TooltipExtendedExample } from './tooltip-extended/tooltip-extended-example';
 import { TooltipOverviewExample } from './tooltip-overview/tooltip-overview-example';
 
 
 export {
-    TooltipOverviewExample
+    TooltipOverviewExample,
+    TooltipExtendedExample
 };
 
 const EXAMPLES = [
-    TooltipOverviewExample
+    TooltipOverviewExample,
+    TooltipExtendedExample
 ];
 
 @NgModule({
