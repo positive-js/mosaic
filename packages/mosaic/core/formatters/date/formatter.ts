@@ -347,19 +347,20 @@ export class DateFormatter<D> {
 
         const variables = {...this.adapter.config.variables, ...template.variables};
 
-        variables.SHOW_SECONDS = seconds ? 'yes' : 'no';
-        variables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
-
         const sameMonth = this.hasSame(startDate, endDate, 'month');
         const sameDay = this.hasSame(startDate, endDate, 'day');
 
         const startDateVariables = this.compileVariables(startDate, variables);
         startDateVariables.SAME_MONTH = sameMonth;
         startDateVariables.SAME_DAY = sameDay;
+        startDateVariables.SHOW_SECONDS = seconds ? 'yes' : 'no';
+        startDateVariables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
 
         const endDateVariables = this.compileVariables(endDate, variables);
         endDateVariables.SAME_MONTH = sameMonth;
         endDateVariables.SAME_DAY = sameDay;
+        endDateVariables.SHOW_SECONDS = seconds ? 'yes' : 'no';
+        endDateVariables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
 
         const bothCurrentYear = startDateVariables.CURRENT_YEAR === 'yes' && endDateVariables.CURRENT_YEAR === 'yes';
         startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
@@ -449,7 +450,8 @@ export class DateFormatter<D> {
             startDate,
             endDate,
             this.config.rangeTemplates.closedRange.middle,
-            options?.seconds, options?.milliseconds
+            options?.seconds,
+            options?.milliseconds
         );
     }
 

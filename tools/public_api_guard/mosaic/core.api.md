@@ -45,12 +45,6 @@ import { Validator } from '@angular/forms';
 import { ViewContainerRef } from '@angular/core';
 
 // @public (undocumented)
-export interface AbsoluteDateTimeOptions {
-    // (undocumented)
-    milliseconds?: boolean;
-}
-
-// @public (undocumented)
 export enum AnimationCurves {
     // (undocumented)
     AccelerationCurve = "cubic-bezier(0.4,0.0,1,1)",
@@ -114,15 +108,15 @@ export function countGroupLabelsBeforeOption(optionIndex: number, options: Query
 export class DateFormatter<D> {
     constructor(adapter: DateAdapter<D>, locale: string);
     // (undocumented)
-    absoluteDate(date: D, params: FormatterAbsoluteTemplate, datetime?: boolean, milliseconds?: boolean): string;
+    absoluteDate(date: D, params: FormatterAbsoluteTemplate, datetime?: boolean, seconds?: boolean, milliseconds?: boolean): string;
     // (undocumented)
     absoluteLongDate(date: D): string;
     // (undocumented)
-    absoluteLongDateTime(date: D, options?: AbsoluteDateTimeOptions): string;
+    absoluteLongDateTime(date: D, options?: DateTimeOptions): string;
     // (undocumented)
     absoluteShortDate(date: D): string;
     // (undocumented)
-    absoluteShortDateTime(date: D, options?: AbsoluteDateTimeOptions): string;
+    absoluteShortDateTime(date: D, options?: DateTimeOptions): string;
     // (undocumented)
     config: FormatterConfig;
     // (undocumented)
@@ -132,29 +126,41 @@ export class DateFormatter<D> {
     // (undocumented)
     rangeDate(startDate: D, endDate: D, template: FormatterRangeTemplate): string;
     // (undocumented)
-    rangeDateTime(startDate: D, endDate: D, template: FormatterRangeTemplate): string;
+    rangeDateTime(startDate: D, endDate: D, template: FormatterRangeTemplate, seconds?: boolean, milliseconds?: boolean): string;
     // (undocumented)
     rangeLongDate(startDate: D | null, endDate?: D): string;
     // (undocumented)
-    rangeLongDateTime(startDate: D | null, endDate?: D): string;
+    rangeLongDateTime(startDate: D | null, endDate?: D, options?: DateTimeOptions): string;
     // (undocumented)
-    rangeMiddleDateTime(startDate: D, endDate: D): string;
+    rangeMiddleDateTime(startDate: D, endDate: D, options?: DateTimeOptions): string;
     // (undocumented)
     rangeShortDate(startDate: D | null, endDate?: D): string;
     // (undocumented)
-    rangeShortDateTime(startDate: D | null, endDate?: D): string;
+    rangeShortDateTime(startDate: D | null, endDate?: D, options?: DateTimeOptions): string;
     // (undocumented)
-    relativeDate(date: D, template: FormatterRelativeTemplate): string;
+    relativeDate(date: D, template: FormatterRelativeTemplate, seconds?: boolean, milliseconds?: boolean): string;
     // (undocumented)
     relativeLongDate(date: D): string;
     // (undocumented)
+    relativeLongDateTime(date: D, options?: DateTimeOptions): string;
+    // (undocumented)
     relativeShortDate(date: D): string;
+    // (undocumented)
+    relativeShortDateTime(date: D, options?: DateTimeOptions): string;
     // (undocumented)
     setLocale(locale: string): void;
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<DateFormatter<any>, never>;
     // (undocumented)
     static ɵprov: i0.ɵɵInjectableDeclaration<DateFormatter<any>>;
+}
+
+// @public (undocumented)
+export interface DateTimeOptions {
+    // (undocumented)
+    milliseconds?: boolean;
+    // (undocumented)
+    seconds?: boolean;
 }
 
 // @public (undocumented)
