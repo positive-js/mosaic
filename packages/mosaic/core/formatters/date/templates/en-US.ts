@@ -1,17 +1,29 @@
+const SECONDS_TEMPLATE = `{
+    SHOW_MILLISECONDS,
+    select,
+        yes{:{SECONDS}{MILLISECONDS}}
+        other{{
+            SHOW_SECONDS,
+            select,
+                yes{:{SECONDS}}
+                other{}
+        }}
+}`;
+
 export const enUS = {
     relativeTemplates: {
         short: {
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}',
-            YESTERDAY: 'Yesterday, {TIME}',
-            TODAY: 'Today, {TIME}',
-            TOMORROW: 'Tomorrow, {TIME}',
+            BEFORE_YESTERDAY: `{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}${SECONDS_TEMPLATE}`,
+            YESTERDAY: `Yesterday, {TIME}${SECONDS_TEMPLATE}`,
+            TODAY: `Today, {TIME}${SECONDS_TEMPLATE}`,
+            TOMORROW: `Tomorrow, {TIME}${SECONDS_TEMPLATE}`,
             AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}'
         },
         long: {
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}',
-            YESTERDAY: 'Yesterday, {TIME}',
-            TODAY: 'Today, {TIME}',
-            TOMORROW: 'Tomorrow, {TIME}',
+            BEFORE_YESTERDAY: `{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}${SECONDS_TEMPLATE}`,
+            YESTERDAY: `Yesterday, {TIME}${SECONDS_TEMPLATE}`,
+            TODAY: `Today, {TIME}${SECONDS_TEMPLATE}`,
+            TOMORROW: `Tomorrow, {TIME}${SECONDS_TEMPLATE}`,
             AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}'
         }
     },
@@ -23,7 +35,7 @@ export const enUS = {
                 select,
                     yes{{SHORT_DATE}, {TIME}}
                     other{{SHORT_DATE}, {YEAR}, {TIME}}
-            }`
+            }${SECONDS_TEMPLATE}`
         },
         long: {
             DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE}, {YEAR}}}',
@@ -32,7 +44,7 @@ export const enUS = {
                 select,
                     yes{{DATE}, {TIME}}
                     other{{DATE}, {YEAR}, {TIME}}
-            }`
+            }${SECONDS_TEMPLATE}`
         }
     },
     rangeTemplates: {

@@ -115,12 +115,6 @@ export class DateFormatter<D> {
 
         const templateVariables = {...this.adapter.config.variables, ...template.variables};
 
-        if (milliseconds) {
-            templateVariables.TIME += ':ss,SSS';
-        } else if (seconds) {
-            templateVariables.TIME += ':ss';
-        }
-
         if (this.isBeforeYesterday(date)) {
             newTemplate = template.BEFORE_YESTERDAY;
         } else if (this.isYesterday(date)) {
@@ -134,6 +128,9 @@ export class DateFormatter<D> {
         }
 
         const variables = this.compileVariables(date, templateVariables);
+
+        variables.SHOW_SECONDS = seconds ? 'yes' : 'no';
+        variables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
 
         return this.messageFormat.compile(newTemplate)(variables);
     }
@@ -189,15 +186,10 @@ export class DateFormatter<D> {
     ): string {
         if (!this.adapter.isDateInstance(date)) { throw new Error(this.invalidDateErrorText); }
 
-        const templateVariables = { ...this.adapter.config.variables, ...params.variables };
+        const variables = this.compileVariables(date, { ...this.adapter.config.variables, ...params.variables });
 
-        if (milliseconds) {
-            templateVariables.TIME += ':ss,SSS';
-        } else if (seconds) {
-            templateVariables.TIME += ':ss';
-        }
-
-        const variables = this.compileVariables(date, templateVariables);
+        variables.SHOW_SECONDS = seconds ? 'yes' : 'no';
+        variables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
 
         const template = datetime ? params.DATETIME : params.DATE;
 
@@ -355,11 +347,8 @@ export class DateFormatter<D> {
 
         const variables = {...this.adapter.config.variables, ...template.variables};
 
-        if (milliseconds) {
-            variables.TIME += ':ss,SSS';
-        } else if (seconds) {
-            variables.TIME += ':ss';
-        }
+        variables.SHOW_SECONDS = seconds ? 'yes' : 'no';
+        variables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
 
         const sameMonth = this.hasSame(startDate, endDate, 'month');
         const sameDay = this.hasSame(startDate, endDate, 'day');
