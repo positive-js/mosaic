@@ -1,7 +1,6 @@
 {
     "name": "mosaic",
     "version": 2,
-    "scope": "ptsecurity",
     "github": {
         "enabled": false
     },
