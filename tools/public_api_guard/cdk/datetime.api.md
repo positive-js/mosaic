@@ -20,6 +20,8 @@ export abstract class DateAdapter<D> {
     config: DateAdapterConfig;
     abstract createDate(year: number, month?: number, date?: number): D;
     abstract createDateTime(year: number, month: number, date: number, hours: number, minutes: number, seconds: number, milliseconds: number): D;
+    // (undocumented)
+    abstract daysFromToday(date: D): number;
     deserialize(value: any): D | null;
     // (undocumented)
     abstract diffNow(date: D, unit: any): number;
