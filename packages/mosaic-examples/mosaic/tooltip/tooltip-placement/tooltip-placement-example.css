@@ -1,0 +1,67 @@
+.visual-box {
+    margin: 200px auto;
+    height: 90px;
+    width: 90px;
+    position: relative;
+
+    border: 1px solid #b3b3b2;
+    border-radius: 8px;
+}
+
+.tooltip-trigger {
+    position: absolute;
+    cursor: pointer;
+}
+
+.tooltip-trigger:after {
+    content: "";
+    display: block;
+    background: #338fcb;
+    height: 16px;
+    width: 16px;
+    position: relative;
+
+    transition: 0.2s ease;
+}
+
+.tooltip-trigger:hover:after {
+    background: #cb3c33;
+}
+
+.tooltip-trigger-top {
+    top: -8px;
+    left: calc(50% - 8px);
+}
+
+.tooltip-trigger-left {
+    top: calc(50% - 8px);
+    left: -8px;
+}
+
+.tooltip-trigger-bottom {
+    bottom: -8px;
+    right: calc(50% - 8px);
+}
+
+.tooltip-trigger-right {
+    right: -8px;
+    bottom: calc(50% - 8px);
+}
+
+.tooltip-trigger-leftTop {
+    left: -8px;
+    top: 2px;
+}
+
+.tooltip-trigger-leftTop:after {
+    top: 12px;
+}
+
+.tooltip-trigger-rightTop {
+    right: -8px;
+    top: 2px;
+}
+
+.tooltip-trigger-rightTop:after {
+    top: 12px;
+}

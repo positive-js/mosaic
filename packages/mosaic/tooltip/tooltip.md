@@ -37,6 +37,8 @@
 
 https://www.figma.com/file/xDLkQRzr7g0RVrj8A0676E/Guide-patterns?node-id=17228%3A33918
 
+<!-- example(tooltip-multiple-lines) -->
+
 Иногда удобнее, если текст в тултипе не переносится, а написан в одну строку, например, при сравнении хеш-сумм, чтении адресов электронной почты или путей к файлам и папкам.
 
 Для подобных случаев максимальную ширину тултипа можно не устанавливать:
@@ -121,6 +123,8 @@ https://www.figma.com/file/PQLjFxrEYbwjkrvGx5D2vO/Docs?node-id=20%3A1867
 https://www.figma.com/file/PQLjFxrEYbwjkrvGx5D2vO/Docs?node-id=20%3A1893
 
 * __Справа-сверху__ _опционально_<br>
+
+<!-- example(tooltip-placement) -->
 
 Если для тултипа не хватает места в границах экрана, он попытается перейти в другое положение и остаться на экране.
 

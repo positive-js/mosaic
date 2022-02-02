@@ -1,0 +1,6 @@
+<div class="visual-box">
+    <div *ngFor="let placement of placements"
+        [mcTooltip]="'mcPlacement: ' + placement"
+        [mcPlacement]="placement"
+        class="tooltip-trigger tooltip-trigger-{{placement}}"></div>
+</div>

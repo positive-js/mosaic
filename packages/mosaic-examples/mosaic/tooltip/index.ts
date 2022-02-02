@@ -6,17 +6,23 @@ import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import { TooltipExtendedExample } from './tooltip-extended/tooltip-extended-example';
+import { TooltipMultipleLinesExample } from './tooltip-multiple-lines/tooltip-multiple-lines-example';
 import { TooltipOverviewExample } from './tooltip-overview/tooltip-overview-example';
+import { TooltipPlacementExample } from './tooltip-placement/tooltip-placement-example';
 
 
 export {
     TooltipOverviewExample,
-    TooltipExtendedExample
+    TooltipExtendedExample,
+    TooltipMultipleLinesExample,
+    TooltipPlacementExample
 };
 
 const EXAMPLES = [
     TooltipOverviewExample,
-    TooltipExtendedExample
+    TooltipExtendedExample,
+    TooltipMultipleLinesExample,
+    TooltipPlacementExample
 ];
 
 @NgModule({
