@@ -4,9 +4,17 @@
     "newProjectRoot": "projects",
     "projects": {
         "mosaic-docs": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                },
+                "@schematics/angular:application": {
+                    "strict": true
+                }
+            },
             "root": "",
             "sourceRoot": "",
-            "projectType": "application",
             "prefix": "app",
             "architect": {
                 "build": {
@@ -23,33 +31,42 @@
                     },
                     "configurations": {
                         "production": {
-                            "fileReplacements": [],
-                            "optimization": true,
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.prod.ts"
+                                }
+                            ],
                             "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "extractLicenses": true,
-                            "vendorChunk": false,
-                            "buildOptimizer": true,
+
                             "budgets": [{
                                 "type": "initial",
                                 "maximumWarning": "2mb",
                                 "maximumError": "5mb"
                             }]
-                        }
+                        },
+                        "development": {
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": true
+                        },
+                        "defaultConfiguration": "production"
                     }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
-                    "options": {
-                        "browserTarget": "mosaic-docs:build"
-                    },
                     "configurations": {
                         "production": {
-                            "browserTarget": "mosaic-docs:build:production"
+                            "browserTarget": "example-app:build:production"
+                        },
+                        "development": {
+                            "browserTarget": "example-app:build:development"
                         }
-                    }
+                    },
+                    "defaultConfiguration": "development"
                 }
             }
         }

@@ -1916,6 +1916,11 @@
   resolved "https://registry.yarnpkg.com/@socket.io/base64-arraybuffer/-/base64-arraybuffer-1.0.2.tgz#568d9beae00b0d835f4f8c53fd55714986492e61"
   integrity sha512-dOlCBKnDw4iShaIsH/bxujKTM18+2TOAsYz+KSc11Am38H4q5Xw8Bbz97ZYdrVNM+um3p7w86Bvvmcn9q+5+eQ==
 
+"@stackblitz/sdk@^1.5.5":
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/@stackblitz/sdk/-/sdk-1.5.5.tgz#b7c45e534e9aa695b6cc9c518e9de6cbfcdf1dcf"
+  integrity sha512-ywcFDxrwfddW3sJpOFBlu7RtGT6X3DjGBuBUouegCovXijeBguRVSz8J4s0sRsbVYe1e1nI0b/kVWcWgzvMaAQ==
+
 "@stylelint/postcss-css-in-js@^0.37.2":
   version "0.37.2"
   resolved "https://registry.yarnpkg.com/@stylelint/postcss-css-in-js/-/postcss-css-in-js-0.37.2.tgz#7e5a84ad181f4234a2480803422a47b8749af3d2"

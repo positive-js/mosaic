@@ -46,6 +46,7 @@
         "@ptsecurity/commitlint-config": "^1.0.0",
         "@ptsecurity/tslint-config": "0.13.1",
         "@schematics/angular": "^11.2.5",
+        "@stackblitz/sdk": "^1.5.5",
         "@types/chalk": "^2.2.0",
         "@types/fs-extra": "^5.0.4",
         "@types/glob": "^7.1.3",
