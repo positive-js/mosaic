@@ -132,12 +132,16 @@ describe('McAutocomplete', () => {
             input.readOnly = true;
             fixture.detectChanges();
 
-            expect(trigger.panelOpen).toBe(false, 'Expected panel state to start out closed.');
+            expect(trigger.panelOpen)
+                .withContext('Expected panel state to start out closed.')
+                .toBe(false);
             dispatchFakeEvent(input, 'focusin');
             flush();
 
             fixture.detectChanges();
-            expect(trigger.panelOpen).toBe(false, 'Expected panel to stay closed.');
+            expect(trigger.panelOpen)
+                .withContext('Expected panel to stay closed.')
+                .toBe(false);
         }));
 
         it('should not open using the arrow keys when the input is readonly', fakeAsync(() => {
@@ -155,17 +159,21 @@ describe('McAutocomplete', () => {
 
         it('should open the panel programmatically', () => {
             expect(fixture.componentInstance.trigger.panelOpen)
-                .toBe(false, `Expected panel state to start out closed.`);
+                .withContext(`Expected panel state to start out closed.`)
+                .toBe(false);
 
             fixture.componentInstance.trigger.openPanel();
             fixture.detectChanges();
 
             expect(fixture.componentInstance.trigger.panelOpen)
-                .toBe(true, `Expected panel state to read open when opened programmatically.`);
+                .withContext(`Expected panel state to read open when opened programmatically.`)
+                .toBe(true);
             expect(overlayContainerElement.textContent)
-                .toContain('Alabama', `Expected panel to display when opened programmatically.`);
+                .withContext(`Expected panel to display when opened programmatically.`)
+                .toContain('Alabama');
             expect(overlayContainerElement.textContent)
-                .toContain('California', `Expected panel to display when opened programmatically.`);
+                .withContext(`Expected panel to display when opened programmatically.`)
+                .toContain('California');
         });
 
         it('should show the panel when the first open is after the initial zone stabilization',
@@ -178,7 +186,8 @@ describe('McAutocomplete', () => {
 
                     Promise.resolve().then(() => {
                         expect(fixture.componentInstance.panel.showPanel)
-                            .toBe(true, `Expected panel to be visible.`);
+                            .withContext(`Expected panel to be visible.`)
+                            .toBe(true);
                     });
                 });
             }));
