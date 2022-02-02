@@ -1,8 +1,8 @@
-/* tslint:disable:no-parameter-reassignment */
+/* tslint:disable:no-parameter-reassignment import-name */
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import { ExampleData, EXAMPLE_COMPONENTS } from '@ptsecurity/mosaic-examples';
-import sdk from '@stackblitz/sdk';
+import StackBlitzSDK from '@stackblitz/sdk';
 import { Observable } from 'rxjs';
 import { shareReplay, take } from 'rxjs/operators';
 
@@ -160,6 +160,7 @@ export class StackblitzWriter {
         }
 
         for (const relativeFilePath of data.exampleFiles) {
+            // tslint:disable-next-line
             tasks.push(this.loadFile(exampleBaseContentPath + relativeFilePath)
                 // Insert a copyright footer for all example files inserted into the project.
                 .then((content) => this.appendCopyright(relativeFilePath, content))
@@ -175,13 +176,13 @@ export class StackblitzWriter {
 
     private openStackBlitz({title, description, openFile, files}:
                                 {title: string; description: string; openFile: string; files: FileDictionary}): void {
-        sdk.openProject({
+        StackBlitzSDK.openProject({
             title,
             files,
             description,
             template: PROJECT_TEMPLATE,
             tags: PROJECT_TAGS
-        },              {openFile});
+        },                        {openFile});
     }
 
     private loadFile(fileUrl: string): Promise<string> {
