@@ -99,8 +99,7 @@ import {
     take,
     takeUntil,
     distinctUntilChanged,
-    startWith,
-    first
+    startWith
 } from 'rxjs/operators';
 
 
@@ -221,8 +220,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     ];
 
     options: QueryList<McTreeOption>;
-
-    optionsArray: McTreeOption[] = [];
 
     @ViewChild('trigger', { static: false }) trigger: ElementRef;
 
@@ -508,9 +505,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.initKeyManager();
 
         this.options = this.tree.renderedOptions;
-        this.options.changes.pipe(
-            first((options) => options.length))
-            .subscribe(() => this.optionsArray = this.options.toArray());
         this.tree.autoSelect = this.autoSelect;
 
         if (this.tree.multipleMode === null) {
@@ -728,7 +722,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         if (this.empty) { return []; }
 
         return this.selectedValues
-            .map((value) => this.optionsArray.find((option) => option.value === value))
+            .map((value) => this.options.find((option) => option.value === value))
             .filter((option) => option);
     }
 
