@@ -143,8 +143,6 @@ export class McTreeSelect extends McTreeSelectMixinBase implements AfterContentI
     readonly openedStream: Observable<void>;
     // (undocumented)
     options: QueryList<McTreeOption>;
-    // (undocumented)
-    optionsArray: McTreeOption[];
     readonly optionSelectionChanges: Observable<McTreeSelectChange>;
     // (undocumented)
     overlayDir: CdkConnectedOverlay;
