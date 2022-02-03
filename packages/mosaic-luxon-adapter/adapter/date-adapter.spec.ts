@@ -92,6 +92,7 @@ describe('LuxonDateAdapter', () => {
         ]);
     });
 
+    // TODO: Failing – CircleCI
     xit('should get date names in a different locale', () => {
         adapter.setLocale('ar-AE');
 
@@ -155,6 +156,7 @@ describe('LuxonDateAdapter', () => {
             .toBe('2017');
     });
 
+    // TODO: Failing – CircleCI
     xit('should get year name in a different locale', () => {
         adapter.setLocale('ar-AE');
 
