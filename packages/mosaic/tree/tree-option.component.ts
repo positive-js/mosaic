@@ -233,12 +233,12 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
         return 0;
     }
 
-    select(): void {
+    select(setFocus = true): void {
         if (this._selected) { return; }
 
         this._selected = true;
 
-        if (!this.hasFocus) {
+        if (setFocus && !this.hasFocus) {
             this.focus();
         }
 

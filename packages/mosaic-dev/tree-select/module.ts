@@ -1,16 +1,27 @@
 /* tslint:disable:no-console no-reserved-keywords */
-import { Component, NgModule, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+    Component,
+    NgModule,
+    OnInit, ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
-import { McHighlightModule } from '@ptsecurity/mosaic/core';
+import { McHighlightModule, McPseudoCheckboxModule, McPseudoCheckboxState } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
 import { McSelectModule } from '@ptsecurity/mosaic/select';
-import { McTreeFlatDataSource, McTreeFlattener, FlatTreeControl, McTreeModule, McTreeSelection } from '@ptsecurity/mosaic/tree';
-import { McTreeSelectChange, McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
+import {
+    McTreeFlatDataSource,
+    McTreeFlattener,
+    FlatTreeControl,
+    McTreeModule,
+    McTreeOption
+} from '@ptsecurity/mosaic/tree';
+import { McTreeSelect, McTreeSelectChange, McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
 
 
 export class FileNode {
@@ -114,7 +125,7 @@ export class DemoComponent implements OnInit {
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
     multiSelectSelectFormControl = new FormControl([], Validators.pattern(/^w/));
-    @ViewChild(McTreeSelection) selection: McTreeSelection;
+    @ViewChild(McTreeSelect) select: McTreeSelect;
 
     searchControl: FormControl = new FormControl();
 
@@ -140,9 +151,13 @@ export class DemoComponent implements OnInit {
     }
 
     onSelectionChange($event: McTreeSelectChange) {
+        const option: McTreeOption = $event.value;
         console.log(`onSelectionChange: ${$event.value}`);
 
-        this.toggleChildren($event);
+        if (option.isExpandable) {
+            this.toggleChildren(option);
+        }
+
         this.toggleParents($event.value.data.parent);
     }
 
@@ -150,15 +165,28 @@ export class DemoComponent implements OnInit {
     descendantsAllSelected(node: FileFlatNode): boolean {
         const descendants = this.treeControl.getDescendants(node);
 
-        return descendants.every((child: any) => this.selection?.selectionModel.isSelected(child));
+        return descendants.every((child: any) => this.select?.selectionModel.isSelected(child));
     }
 
     /** Whether part of the descendants are selected */
     descendantsPartiallySelected(node: FileFlatNode): boolean {
         const descendants = this.treeControl.getDescendants(node);
-        const result = descendants.some((child: any) => this.selection?.selectionModel.isSelected(child));
 
-        return result && !this.descendantsAllSelected(node);
+        return descendants.some((child: any) => this.select?.selectionModel.isSelected(child));
+    }
+
+    pseudoCheckboxState(option: McTreeOption): McPseudoCheckboxState {
+        if (option.isExpandable) {
+            const node: FileFlatNode = option.data as unknown as FileFlatNode;
+
+            if (this.descendantsAllSelected(node)) {
+                return 'checked';
+            } else if (this.descendantsPartiallySelected(node)) {
+                return 'indeterminate';
+            }
+        }
+
+        return option.selected ? 'checked' : 'unchecked';
     }
 
     hiddenItemsTextFormatter(hiddenItemsText: string, hiddenItems: number): string {
@@ -177,34 +205,30 @@ export class DemoComponent implements OnInit {
         console.log('closed: ', $event);
     }
 
-    private toggleChildren($event: McTreeSelectChange) {
-        const valuesToChange: any = this.treeControl.getDescendants($event.value.data);
-        if ($event.value.selected) {
-            this.selection.selectionModel.deselect(...valuesToChange);
+    private toggleChildren(option: McTreeOption) {
+        console.log('toggleChildren: ');
+        const valuesToChange: any = this.treeControl.getDescendants(option.data as unknown as FileFlatNode);
+
+        if (option.selected) {
+            this.select.selectionModel.deselect(...valuesToChange);
         } else {
-            this.selection.selectionModel.select(...valuesToChange);
+            this.select.selectionModel.select(...valuesToChange);
         }
-        this.syncModel();
     }
 
     private toggleParents(parent) {
         if (!parent) { return; }
 
         const descendants = this.treeControl.getDescendants(parent);
-        const isParentSelected = this.selection.selectionModel.selected.includes(parent);
+        const isParentSelected = this.select.selectionModel.selected.includes(parent);
 
-        if (!isParentSelected && descendants.every((d: any) => this.selection.selectionModel.selected.includes(d))) {
-            this.selection.selectionModel.select(parent);
+        if (!isParentSelected && descendants.every((d: any) => this.select.selectionModel.selected.includes(d))) {
+            this.select.selectionModel.select(parent);
             this.toggleParents(parent.parent);
         } else if (isParentSelected) {
-            this.selection.selectionModel.deselect(parent);
+            this.select.selectionModel.deselect(parent);
             this.toggleParents(parent.parent);
         }
-        this.syncModel();
-    }
-
-    private syncModel() {
-        this.control.setValue(this.selection.selectionModel.selected.map((o: any) => o.name));
     }
 
     private transformer = (node: FileNode, level: number, parent: any) => {
@@ -256,7 +280,8 @@ export class DemoComponent implements OnInit {
         McInputModule,
         McFormFieldModule,
         McIconModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        McPseudoCheckboxModule
     ],
     bootstrap: [DemoComponent]
 })

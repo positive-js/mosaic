@@ -500,6 +500,10 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
         this.tree.resetFocusedItemOnBlur = false;
 
         this.selectionModel = this.tree.selectionModel = new SelectionModel<any>(this.multiple);
+
+        this.selectionModel.changed
+            .subscribe(() => this.onChange(this.selectedValues));
+
         this.tree.ngAfterContentInit();
 
         this.initKeyManager();
