@@ -99,7 +99,7 @@ describe('LuxonDateAdapter', () => {
         ]);
     });
 
-    it('should get date names in a different locale', () => {
+    xit('should get date names in a different locale', () => {
         adapter.setLocale('ar-AE');
 
         expect(adapter.getDateNames()).toEqual([
@@ -162,7 +162,7 @@ describe('LuxonDateAdapter', () => {
             .toBe('2017');
     });
 
-    it('should get year name in a different locale', () => {
+    xit('should get year name in a different locale', () => {
         adapter.setLocale('ar-AE');
 
         expect(adapter.getYearName(adapter.createDate(2017)))
