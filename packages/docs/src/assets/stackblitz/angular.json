@@ -14,19 +14,21 @@
                 }
             },
             "root": "",
-            "sourceRoot": "",
+            "sourceRoot": "src",
             "prefix": "app",
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist",
-                        "index": "index.html",
-                        "main": "main.ts",
-                        "polyfills": "polyfills.ts",
+                        "outputPath": "dist/mosaic-docs",
+                        "index": "src/index.html",
+                        "main": "src/main.ts",
+                        "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
-                        "assets": [],
-                        "styles": ["styles.css"],
+                        "assets": [
+                            "src/assets"
+                        ],
+                        "styles": ["src/styles.scss"],
                         "scripts": []
                     },
                     "configurations": {
@@ -38,7 +40,6 @@
                                 }
                             ],
                             "outputHashing": "all",
-
                             "budgets": [{
                                 "type": "initial",
                                 "maximumWarning": "2mb",
@@ -52,18 +53,18 @@
                             "extractLicenses": false,
                             "sourceMap": true,
                             "namedChunks": true
-                        },
-                        "defaultConfiguration": "production"
-                    }
+                        }
+                    },
+                    "defaultConfiguration": "production"
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "example-app:build:production"
+                            "browserTarget": "mosaic-docs:build:production"
                         },
                         "development": {
-                            "browserTarget": "example-app:build:development"
+                            "browserTarget": "mosaic-docs:build:development"
                         }
                     },
                     "defaultConfiguration": "development"

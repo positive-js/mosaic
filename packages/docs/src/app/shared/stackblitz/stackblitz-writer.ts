@@ -27,7 +27,6 @@ export const TEMPLATE_FILES = [
     '.gitignore',
     '.stackblitzrc',
     'angular.json',
-    'karma.conf.js',
     'package.json',
     'tsconfig.app.json',
     'tsconfig.json',
@@ -85,10 +84,10 @@ export class StackblitzWriter {
                                    fileContent: string): string {
 
         if (fileName === 'src/index.html' || fileName === 'package.json') {
-            fileContent = fileContent.replace(/\${version}/g, mosaicVersion.full);
+            fileContent = fileContent.replace(/\${version}/g, mosaicVersion);
         }
 
-        if (fileName === 'index.html') {
+        if (fileName === 'src/index.html') {
             // Replace the component selector in `index,html`.
             // For example, <mosaic-docs-example></mosaic-docs-example> will be replaced as
             // <button-demo></button-demo>
@@ -99,7 +98,7 @@ export class StackblitzWriter {
         } else if (fileName === '.stackblitzrc') {
             fileContent = fileContent
                 .replace(/\${startCommand}/, 'turbo start');
-        } else if (fileName === 'main.ts') {
+        } else if (fileName === 'src/app/app.module.ts') {
             const joinedComponentNames = data.componentNames.join(', ');
             // Replace the component name in `main.ts`.
             // Replace `import {MosaicDocsExample} from 'mosaic-docs-example'`
