@@ -42,6 +42,7 @@ import { Subject } from 'rxjs';
 import { TemplateRef } from '@angular/core';
 import { Type } from '@angular/core';
 import { Validator } from '@angular/forms';
+import { Version } from '@angular/core';
 import { ViewContainerRef } from '@angular/core';
 
 // @public (undocumented)
@@ -1000,6 +1001,9 @@ export const validationTooltipHideDelay = 3000;
 
 // @public (undocumented)
 export const validationTooltipShowDelay = 10;
+
+// @public (undocumented)
+export const VERSION: Version;
 
 // (No @packageDocumentation comment for this package)
 

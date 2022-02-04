@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { McLuxonDateModule } from '@ptsecurity/mosaic-luxon-adapter/adapter';
 import { McAutocompleteModule } from '@ptsecurity/mosaic/autocomplete';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
@@ -77,15 +76,9 @@ const MC_CORE = [
     McPseudoCheckboxModule
 ];
 
-const NG_MODULES = [
-    FormsModule,
-    ReactiveFormsModule
-];
-
 
 @NgModule({
     exports: [
-        ...NG_MODULES,
         ...MC_COMPONENTS,
         ...MC_CORE
     ]

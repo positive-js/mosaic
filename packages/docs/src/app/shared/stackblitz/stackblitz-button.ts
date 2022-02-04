@@ -1,9 +1,8 @@
-import { Component, Input, NgModule } from '@angular/core';
+import { Component, Input, NgModule, NgZone } from '@angular/core';
 import { ExampleData } from '@ptsecurity/mosaic-examples';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
-
-import { McIconModule } from '../../../../../mosaic/icon';
-import { McLinkModule } from '../../../../../mosaic/link';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McLinkModule } from '@ptsecurity/mosaic/link';
 
 import { StackblitzWriter } from './stackblitz-writer';
 
@@ -11,50 +10,43 @@ import { StackblitzWriter } from './stackblitz-writer';
 @Component({
     selector: 'stackblitz-button',
     templateUrl: './stackblitz-button.html',
-    styleUrls: ['./stackblitz-button.scss'],
-    providers: [StackblitzWriter],
-    host: {
-        '(mouseover)': 'isDisabled = !stackblitzForm'
-    }
+    styleUrls: ['./stackblitz-button.scss']
 })
 export class StackblitzButton {
-    /**
-     * The button becomes disabled if the user hovers over the button before the stackblitz form
-     * is created. After the form is created, the button becomes enabled again.
-     * The form creation usually happens extremely quickly, but we handle the case of the
-     * stackblitz not yet being ready for people will poor network connections or slow devices.
-     */
-    isDisabled = false;
-    stackblitzForm: HTMLFormElement;
 
     @Input()
-    set example(example: string | undefined) {
-        if (example) {
-            const exampleData = new ExampleData(example);
-            const isTest = example.includes('harness');
-
-            this.stackblitzWriter.constructStackblitzForm(example, exampleData, isTest).then(
-                (stackblitzForm) => {
-                    this.stackblitzForm = stackblitzForm;
-                    this.isDisabled = false;
-                }
-            );
+    set example(exampleId: string | undefined) {
+        if (exampleId) {
+            this.exampleData = new ExampleData(exampleId);
+            this.prepareStackBlitzForExample(exampleId, this.exampleData);
         } else {
-            this.isDisabled = true;
+            this.exampleData = undefined;
+            this.openStackBlitzFn = null;
         }
     }
 
-    constructor(private stackblitzWriter: StackblitzWriter) {
+    exampleData: ExampleData | undefined;
+
+    private openStackBlitzFn: (() => void) | null = null;
+
+    constructor(private stackBlitzWriter: StackblitzWriter,
+                private ngZone: NgZone) {
     }
 
-    openStackblitz(): void {
-        // When the form is submitted, it must be in the document body. The standard of forms is not
-        // to submit if it is detached from the document. See the following chromium commit for
-        // more details:
-        // https://chromium.googlesource.com/chromium/src/+/962c2a22ddc474255c776aefc7abeba00edc7470%5E!
-        document.body.appendChild(this.stackblitzForm);
-        this.stackblitzForm.submit();
-        document.body.removeChild(this.stackblitzForm);
+    openStackBlitz(): void {
+        if (this.openStackBlitzFn) {
+            this.openStackBlitzFn();
+        } else {
+            // tslint:disable-next-line:no-console
+            console.log('StackBlitz is not ready yet. Please try again in a few seconds.');
+        }
+    }
+
+    private prepareStackBlitzForExample(exampleId: string, data: ExampleData): void {
+        this.ngZone.runOutsideAngular(async () => {
+            this.openStackBlitzFn = await this.stackBlitzWriter
+                .constructStackblitzForm(exampleId, data);
+        });
     }
 }
 
