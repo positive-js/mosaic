@@ -46,7 +46,8 @@ export interface FormatterRelativeTemplate {
 }
 
 // tslint:disable-next-line:naming-convention
-export interface AbsoluteDateTimeOptions {
+export interface DateTimeOptions {
+    seconds?: boolean;
     milliseconds?: boolean;
 }
 
@@ -102,10 +103,17 @@ export class DateFormatter<D> {
      * @param template - template
      * @returns relative date by template
      */
-    relativeDate(date: D, template: FormatterRelativeTemplate): string {
+    relativeDate(
+        date: D,
+        template: FormatterRelativeTemplate,
+        seconds = false,
+        milliseconds = false
+    ): string {
         if (!this.adapter.isDateInstance(date)) { throw new Error(this.invalidDateErrorText); }
 
         let newTemplate;
+
+        const templateVariables = {...this.adapter.config.variables, ...template.variables};
 
         if (this.isBeforeYesterday(date)) {
             newTemplate = template.BEFORE_YESTERDAY;
@@ -119,8 +127,10 @@ export class DateFormatter<D> {
             newTemplate = template.AFTER_TOMORROW;
         }
 
-        const templateVariables = {...this.adapter.config.variables, ...template.variables};
         const variables = this.compileVariables(date, templateVariables);
+
+        variables.SHOW_SECONDS = seconds ? 'yes' : 'no';
+        variables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
 
         return this.messageFormat.compile(newTemplate)(variables);
     }
@@ -143,8 +153,27 @@ export class DateFormatter<D> {
 
     /**
      * @param date - date
+     * @param options - DateTimeOptions
+     * @returns relative date in short format with time
+     */
+    relativeShortDateTime(date: D, options?: DateTimeOptions): string {
+        return this.relativeDate(date, this.config.relativeTemplates.short, options?.seconds, options?.milliseconds);
+    }
+
+    /**
+     * @param date - date
+     * @param options - DateTimeOptions
+     * @returns relative date in long format with time
+     */
+    relativeLongDateTime(date: D, options?: DateTimeOptions): string {
+        return this.relativeDate(date, this.config.relativeTemplates.long, options?.seconds, options?.milliseconds);
+    }
+
+    /**
+     * @param date - date
      * @param params - parameters
      * @param datetime - should time be shown as well
+     * @param seconds - should time with seconds be shown as well
      * @param milliseconds - should time with milliseconds be shown as well
      * @returns absolute date in common format
      */
@@ -152,12 +181,14 @@ export class DateFormatter<D> {
         date: D,
         params: FormatterAbsoluteTemplate,
         datetime = false,
+        seconds = false,
         milliseconds = false
     ): string {
         if (!this.adapter.isDateInstance(date)) { throw new Error(this.invalidDateErrorText); }
 
         const variables = this.compileVariables(date, { ...this.adapter.config.variables, ...params.variables });
 
+        variables.SHOW_SECONDS = seconds ? 'yes' : 'no';
         variables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
 
         const template = datetime ? params.DATETIME : params.DATE;
@@ -175,11 +206,11 @@ export class DateFormatter<D> {
 
     /**
      * @param date - date
-     * @param options - AbsoluteDateTimeOptions
+     * @param options - DateTimeOptions
      * @returns absolute date in short format with time
      */
-    absoluteShortDateTime(date: D, options?: AbsoluteDateTimeOptions): string {
-        return this.absoluteDate(date, this.config.absoluteTemplates.short, true, options?.milliseconds);
+    absoluteShortDateTime(date: D, options?: DateTimeOptions): string {
+        return this.absoluteDate(date, this.config.absoluteTemplates.short, true, options?.seconds, options?.milliseconds);
     }
 
     /**
@@ -192,11 +223,11 @@ export class DateFormatter<D> {
 
     /**
      * @param date - date
-     * @param options - AbsoluteDateTimeOptions
+     * @param options - DateTimeOptions
      * @returns absolute date in long format with time
      */
-    absoluteLongDateTime(date: D, options?: AbsoluteDateTimeOptions): string {
-        return this.absoluteDate(date, this.config.absoluteTemplates.long, true, options?.milliseconds);
+    absoluteLongDateTime(date: D, options?: DateTimeOptions): string {
+        return this.absoluteDate(date, this.config.absoluteTemplates.long, true, options?.seconds, options?.milliseconds);
     }
 
     /**
@@ -238,9 +269,17 @@ export class DateFormatter<D> {
      * @param startDate - start date
      * @param endDate - end date
      * @param template - template
+     * @param seconds - should time with seconds be shown as well
+     * @param milliseconds - should time with milliseconds be shown as well
      * @returns opened date
      */
-    openedRangeDateTime(startDate: D | null, endDate: D | null, template: FormatterRangeTemplate) {
+    openedRangeDateTime(
+        startDate: D | null,
+        endDate: D | null,
+        template: FormatterRangeTemplate,
+        seconds = false,
+        milliseconds = false
+    ) {
         if (!this.adapter.isDateInstance(startDate) && !this.adapter.isDateInstance(endDate)) {
             throw new Error(this.invalidDateErrorText);
         }
@@ -250,6 +289,8 @@ export class DateFormatter<D> {
 
         if (startDate) {
             const startDateVariables = this.compileVariables(startDate, variables);
+            startDateVariables.SHOW_SECONDS = seconds ? 'yes' : 'no';
+            startDateVariables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
 
             params = {
                 ...variables,
@@ -258,6 +299,8 @@ export class DateFormatter<D> {
             };
         } else if (endDate) {
             const endDateVariables = this.compileVariables(endDate, variables);
+            endDateVariables.SHOW_SECONDS = seconds ? 'yes' : 'no';
+            endDateVariables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
 
             params = {
                 ...variables,
@@ -309,22 +352,27 @@ export class DateFormatter<D> {
      * @param template - template
      * @returns range date in template format with time
      */
-    rangeDateTime(startDate: D, endDate: D, template: FormatterRangeTemplate): string {
+    rangeDateTime(startDate: D, endDate: D, template: FormatterRangeTemplate, seconds = false, milliseconds = false): string {
         if (!this.adapter.isDateInstance(startDate) || !this.adapter.isDateInstance(endDate)) {
             throw new Error(this.invalidDateErrorText);
         }
 
         const variables = {...this.adapter.config.variables, ...template.variables};
+
         const sameMonth = this.hasSame(startDate, endDate, 'month');
         const sameDay = this.hasSame(startDate, endDate, 'day');
 
         const startDateVariables = this.compileVariables(startDate, variables);
         startDateVariables.SAME_MONTH = sameMonth;
         startDateVariables.SAME_DAY = sameDay;
+        startDateVariables.SHOW_SECONDS = seconds ? 'yes' : 'no';
+        startDateVariables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
 
         const endDateVariables = this.compileVariables(endDate, variables);
         endDateVariables.SAME_MONTH = sameMonth;
         endDateVariables.SAME_DAY = sameDay;
+        endDateVariables.SHOW_SECONDS = seconds ? 'yes' : 'no';
+        endDateVariables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
 
         const bothCurrentYear = startDateVariables.CURRENT_YEAR === 'yes' && endDateVariables.CURRENT_YEAR === 'yes';
         startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
@@ -359,16 +407,23 @@ export class DateFormatter<D> {
     /**
      * @param startDate - start date
      * @param endDate - end date
+     * @param options - DateTimeOptions
      * @returns range date in short format with time
      */
-    rangeShortDateTime(startDate: D | null, endDate?: D): string {
+    rangeShortDateTime(startDate: D | null, endDate?: D | null, options?: DateTimeOptions): string {
         const rangeTemplates = this.config.rangeTemplates;
 
         if (startDate && endDate) {
-            return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.short);
+            return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.short, options?.seconds, options?.milliseconds);
         }
 
-        return this.openedRangeDateTime(startDate, endDate || null, rangeTemplates.openedRange.short);
+        return this.openedRangeDateTime(
+            startDate,
+            endDate || null,
+            rangeTemplates.openedRange.short,
+            options?.seconds,
+            options?.milliseconds
+        );
     }
 
     /**
@@ -376,7 +431,7 @@ export class DateFormatter<D> {
      * @param endDate - end date
      * @returns range date in long format
      */
-    rangeLongDate(startDate: D | null, endDate?: D): string {
+    rangeLongDate(startDate: D | null, endDate?: D | null): string {
         const rangeTemplates = this.config.rangeTemplates;
 
         if (startDate && endDate) {
@@ -389,13 +444,14 @@ export class DateFormatter<D> {
     /**
      * @param startDate - start date
      * @param endDate - end date
+     * @param options - DateTimeOptions
      * @returns range date in long format with time
      */
-    rangeLongDateTime(startDate: D | null, endDate?: D): string {
+    rangeLongDateTime(startDate: D | null, endDate?: D, options?: DateTimeOptions): string {
         const rangeTemplates = this.config.rangeTemplates;
 
         if (startDate && endDate) {
-            return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.long);
+            return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.long, options?.seconds, options?.milliseconds);
         }
 
         return this.openedRangeDateTime(startDate, endDate || null, rangeTemplates.openedRange.long);
@@ -404,10 +460,17 @@ export class DateFormatter<D> {
     /**
      * @param startDate - start date
      * @param endDate - end date
+     * @param options - DateTimeOptions
      * @returns range middle date with time
      */
-    rangeMiddleDateTime(startDate: D, endDate: D): string {
-        return this.rangeDateTime(startDate, endDate, this.config.rangeTemplates.closedRange.middle);
+    rangeMiddleDateTime(startDate: D, endDate: D, options?: DateTimeOptions): string {
+        return this.rangeDateTime(
+            startDate,
+            endDate,
+            this.config.rangeTemplates.closedRange.middle,
+            options?.seconds,
+            options?.milliseconds
+        );
     }
 
     private compileVariables(date: D, variables: any): any {
