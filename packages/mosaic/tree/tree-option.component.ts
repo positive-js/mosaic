@@ -18,7 +18,8 @@ import {
 import { hasModifierKey, TAB } from '@ptsecurity/cdk/keycodes';
 import {
     MC_OPTION_ACTION_PARENT,
-    McOptionActionComponent
+    McOptionActionComponent,
+    McPseudoCheckbox
 } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
@@ -80,9 +81,14 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
 
     @ContentChild('mcTreeNodeToggle') toggleElement: McTreeNodeToggleBaseDirective<McTreeOption>;
 
+    @ContentChild(McPseudoCheckbox) pseudoCheckbox: McPseudoCheckbox;
     @ContentChild(McOptionActionComponent) actionButton: McOptionActionComponent;
     @ContentChild(McTooltipTrigger) tooltipTrigger: McTooltipTrigger;
     @ContentChild(McDropdownTrigger) dropdownTrigger: McDropdownTrigger;
+
+    get externalPseudoCheckbox(): boolean {
+        return !!this.pseudoCheckbox;
+    }
 
     get value(): any {
         return this._value;
@@ -227,12 +233,12 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
         return 0;
     }
 
-    select(): void {
+    select(setFocus = true): void {
         if (this._selected) { return; }
 
         this._selected = true;
 
-        if (!this.hasFocus) {
+        if (setFocus && !this.hasFocus) {
             this.focus();
         }
 

@@ -1,27 +1,15 @@
-/* tslint:disable:no-console no-reserved-keywords */
+/* tslint:disable:no-reserved-keywords */
+import { Component, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { McPseudoCheckboxState } from '@ptsecurity/mosaic/core';
 import {
-    Component,
-    NgModule,
-    OnInit, ViewChild,
-    ViewEncapsulation
-} from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { McButtonModule } from '@ptsecurity/mosaic/button';
-import { McHighlightModule, McPseudoCheckboxModule, McPseudoCheckboxState } from '@ptsecurity/mosaic/core';
-import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
-import { McIconModule } from '@ptsecurity/mosaic/icon';
-import { McInputModule } from '@ptsecurity/mosaic/input';
-import { McSelectModule } from '@ptsecurity/mosaic/select';
-import {
+    FlatTreeControl,
     McTreeFlatDataSource,
     McTreeFlattener,
-    FlatTreeControl,
-    McTreeModule,
-    McTreeOption
+    McTreeOption,
+    McTreeSelection
 } from '@ptsecurity/mosaic/tree';
-import { McTreeSelect, McTreeSelectChange, McTreeSelectModule } from '@ptsecurity/mosaic/tree-select';
+import { McTreeSelect, McTreeSelectChange } from '@ptsecurity/mosaic/tree-select';
 
 
 export class FileNode {
@@ -67,68 +55,75 @@ export function buildFileTree(value: any, level: number): FileNode[] {
 }
 
 export const DATA_OBJECT = {
-    rootNode_1: 'app',
-    Pictures: {
-        Sun: 'png',
-        Woods: 'jpg',
-        PhotoBoothLibrary: {
-            Contents: 'dir',
-            Pictures_2: 'dir'
-        }
-    },
-    Documents: {
-        Pictures_3: 'Pictures',
-        angular: {
-            src1: {
-                core: 'ts',
-                compiler: 'ts'
+    docs: 'app',
+    src: {
+        cdk: {
+            a11ly: {
+                'aria describer': {
+                    'aria-describer': 'ts',
+                    'aria-describer.spec': 'ts',
+                    'aria-reference': 'ts',
+                    'aria-reference.spec': 'ts'
+                },
+                'focus monitor': {
+                    'focus-monitor': 'ts',
+                    'focus-monitor.spec': 'ts'
+                }
             }
         },
-        material2: {
-            src2: {
-                button: 'ts',
-                checkbox: 'ts',
-                input: 'ts'
-            }
-        }
+        documentation: {
+            source: '',
+            tools: ''
+        },
+        mosaic: {
+            autocomplete: '',
+            button: '',
+            'button-toggle': '',
+            index: 'ts',
+            package: 'json',
+            version: 'ts'
+        },
+        'mosaic-dev': {
+            alert: '',
+            badge: ''
+        },
+        'mosaic-examples': '',
+        'mosaic-moment-adapter': '',
+        README: 'md',
+        'tsconfig.build': 'json',
+        wallabyTest: 'ts'
     },
-    Downloads: {
-        Tutorial: 'html',
-        November: 'pdf',
-        October: 'pdf'
+    scripts: {
+        deploy: {
+            'cleanup-preview': 'ts',
+            'publish-artifacts': 'sh',
+            'publish-docs': 'sh',
+            'publish-docs-preview': 'ts'
+        },
+        'tsconfig.deploy': 'json'
     },
-    Applications: {
-        Chrome: 'app',
-        Calendar: 'app',
-        Webstorm: 'app'
-    }
+    tests: ''
 };
 
-
+/**
+ * @title Basic Select
+ */
 @Component({
-    selector: 'app',
-    templateUrl: 'template.html',
-    styleUrls: ['../main.scss', './styles.scss'],
-    encapsulation: ViewEncapsulation.None
+    selector: 'tree-select-child-selection-overview-example',
+    templateUrl: 'tree-select-child-selection-overview-example.html',
+    styleUrls: ['tree-select-child-selection-overview-example.css']
 })
-export class DemoComponent implements OnInit {
+export class TreeSelectChildSelectionOverviewExample {
     @ViewChild(McTreeSelect) select: McTreeSelect;
-
-    disabledState: boolean = false;
-
-    control = new FormControl(['rootNode_1', 'Downloads']);
-
-    // modelValue = 'Chrome';
-    modelValue: any[] | null = ['Applications', 'Documents', 'Calendar', 'Chrome'];
 
     treeControl: FlatTreeControl<FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
-    multiSelectSelectFormControl = new FormControl([], Validators.pattern(/^w/));
+    control = new FormControl(['Downloads', 'rootNode_1']);
 
-    searchControl: FormControl = new FormControl();
+    @ViewChild(McTreeSelection) selection: McTreeSelection;
 
     constructor() {
         this.treeFlattener = new McTreeFlattener(
@@ -139,12 +134,7 @@ export class DemoComponent implements OnInit {
             this.getLevel, this.isExpandable, this.getValue, this.getViewValue
         );
         this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
-
         this.dataSource.data = buildFileTree(DATA_OBJECT, 0);
-    }
-
-    ngOnInit(): void {
-        this.searchControl.valueChanges.subscribe((value) => this.treeControl.filterNodes(value));
     }
 
     hasChild(_: number, nodeData: FileFlatNode) {
@@ -153,7 +143,6 @@ export class DemoComponent implements OnInit {
 
     onSelectionChange($event: McTreeSelectChange) {
         const option: McTreeOption = $event.value;
-        console.log(`onSelectionChange: ${$event.value}`);
 
         if (option.isExpandable) {
             this.toggleChildren(option);
@@ -188,22 +177,6 @@ export class DemoComponent implements OnInit {
         }
 
         return option.selected ? 'checked' : 'unchecked';
-    }
-
-    hiddenItemsTextFormatter(hiddenItemsText: string, hiddenItems: number): string {
-        return `${hiddenItemsText} ${hiddenItems}`;
-    }
-
-    openedChange($event) {
-        console.log('openedChange: ', $event);
-    }
-
-    opened($event) {
-        console.log('opened: ', $event);
-    }
-
-    closed($event) {
-        console.log('closed: ', $event);
     }
 
     private toggleChildren(option: McTreeOption) {
@@ -263,26 +236,3 @@ export class DemoComponent implements OnInit {
         return `${node.name} view`;
     }
 }
-
-
-@NgModule({
-    declarations: [DemoComponent],
-    imports: [
-        BrowserAnimationsModule,
-        BrowserModule,
-        FormsModule,
-        McTreeModule,
-        McTreeSelectModule,
-        McSelectModule,
-        McHighlightModule,
-
-        McButtonModule,
-        McInputModule,
-        McFormFieldModule,
-        McIconModule,
-        ReactiveFormsModule,
-        McPseudoCheckboxModule
-    ],
-    bootstrap: [DemoComponent]
-})
-export class DemoModule {}

@@ -59,9 +59,12 @@ import {
     wrappedErrorMessage
 } from '@ptsecurity/cdk/testing';
 import {
-    ErrorStateMatcher, getMcSelectDynamicMultipleError,
+    ErrorStateMatcher,
+    getMcSelectDynamicMultipleError,
     getMcSelectNonArrayValueError,
-    getMcSelectNonFunctionValueError
+    getMcSelectNonFunctionValueError,
+    McPseudoCheckboxModule,
+    McPseudoCheckboxState
 } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McInputModule } from '@ptsecurity/mosaic/input';
@@ -79,8 +82,8 @@ import { map } from 'rxjs/operators';
 
 
 const TREE_DATA = {
-  rootNode_1: 'app',
-  Pictures: {
+    rootNode_1: 'app',
+    Pictures: {
         Sun: 'png',
         Woods: 'jpg',
         Photo_Booth_Library: {
@@ -140,6 +143,7 @@ class FileFlatNode {
     level: number;
     expandable: boolean;
     value: any;
+    parent: any;
 }
 
 /**
@@ -191,16 +195,17 @@ function buildFileTreeWithValues(value: any, level: number): FileNode[] {
     return data;
 }
 
-import { McTreeSelectModule, McTreeSelect } from './index';
+import { McTreeSelectModule, McTreeSelect, McTreeSelectChange } from './index';
 
 
 /** The debounce interval when typing letters to select an option. */
 const LETTER_KEY_DEBOUNCE_INTERVAL = 200;
 
-const transformer = (node: FileNode, level: number) => {
+const transformer = (node: FileNode, level: number, parent: any) => {
     const flatNode = new FileFlatNode();
 
     flatNode.name = node.name;
+    flatNode.parent = parent;
     flatNode.type = node.type;
     flatNode.level = level;
     flatNode.expandable = !!node.children;
@@ -1503,6 +1508,118 @@ class SelectWithFormFieldLabel {
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 }
 
+@Component({
+    template: `
+        <mc-form-field>
+            <mc-tree-select
+                [multiple]="true"
+                [formControl]="control"
+                (selectionChange)="onSelectionChange($event)"
+            >
+
+                <mc-tree-selection
+                    [dataSource]="dataSource"
+                    [treeControl]="treeControl">
+                    <mc-tree-option
+                        #option
+                        *mcTreeNodeDef="let node"
+                        mcTreeNodePadding>
+
+                        <mc-pseudo-checkbox [state]="pseudoCheckboxState(option)"></mc-pseudo-checkbox>
+                        {{ treeControl.getViewValue(node) }}
+                    </mc-tree-option>
+
+                    <mc-tree-option
+                        #option
+                        *mcTreeNodeDef="let node; when: hasChild"
+                        mcTreeNodePadding>
+
+                        <mc-pseudo-checkbox [state]="pseudoCheckboxState(option)"></mc-pseudo-checkbox>
+                        <i mc-icon="mc-angle-down-S_16" [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'" mcTreeNodeToggle></i>
+                        {{ treeControl.getViewValue(node) }}
+                    </mc-tree-option>
+                </mc-tree-selection>
+            </mc-tree-select>
+        </mc-form-field>
+    `
+})
+class ChildSelection {
+    treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
+    treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
+
+    dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
+
+    control = new FormControl(['Downloads', 'rootNode_1']);
+
+    @ViewChild(McTreeSelect) select: McTreeSelect;
+
+    constructor() {
+        this.dataSource = new McTreeFlatDataSource(this.treeControl, this.treeFlattener);
+        this.dataSource.data = buildFileTree(TREE_DATA, 0);
+    }
+
+    hasChild(_: number, nodeData: FileFlatNode) {
+        return nodeData.expandable;
+    }
+
+    onSelectionChange($event: McTreeSelectChange) {
+        this.toggleChildren($event);
+        this.toggleParents($event.value.data.parent);
+    }
+
+    /** Whether all the descendants of the node are selected. */
+    descendantsAllSelected(node: FileFlatNode): boolean {
+        const descendants = this.treeControl.getDescendants(node);
+
+        return descendants.every((child: any) => this.select?.selectionModel.isSelected(child));
+    }
+
+    /** Whether part of the descendants are selected */
+    descendantsPartiallySelected(node: FileFlatNode): boolean {
+        const descendants = this.treeControl.getDescendants(node);
+
+        return descendants.some((child: any) => this.select?.selectionModel.isSelected(child));
+    }
+
+    pseudoCheckboxState(option: McTreeOption): McPseudoCheckboxState {
+        if (option.isExpandable) {
+            const node: FileFlatNode = option.data as unknown as FileFlatNode;
+
+            if (this.descendantsAllSelected(node)) {
+                return 'checked';
+            } else if (this.descendantsPartiallySelected(node)) {
+                return 'indeterminate';
+            }
+        }
+
+        return option.selected ? 'checked' : 'unchecked';
+    }
+
+    private toggleChildren($event: McTreeSelectChange) {
+        const valuesToChange: any = this.treeControl.getDescendants($event.value.data);
+        if ($event.value.selected) {
+            this.select.selectionModel.deselect(...valuesToChange);
+        } else {
+            this.select.selectionModel.select(...valuesToChange);
+        }
+    }
+
+    private toggleParents(parent) {
+        if (!parent) { return; }
+
+        const descendants = this.treeControl.getDescendants(parent);
+        const isParentSelected = this.select.selectionModel.selected.includes(parent);
+
+        if (!isParentSelected && descendants.every((d: any) => this.select.selectionModel.selected.includes(d))) {
+            this.select.selectionModel.select(parent);
+            this.toggleParents(parent.parent);
+        } else if (isParentSelected) {
+            this.select.selectionModel.deselect(parent);
+            this.toggleParents(parent.parent);
+        }
+    }
+}
+
 describe('McTreeSelect', () => {
     let overlayContainer: OverlayContainer;
     let overlayContainerElement: HTMLElement;
@@ -1526,7 +1643,8 @@ describe('McTreeSelect', () => {
                 McInputModule,
                 ReactiveFormsModule,
                 FormsModule,
-                NoopAnimationsModule
+                NoopAnimationsModule,
+                McPseudoCheckboxModule
             ],
             declarations,
             providers: [
@@ -3832,7 +3950,7 @@ describe('McTreeSelect', () => {
                 fixture.componentInstance.control.reset();
                 tick(1);
 
-                expect(fixture.componentInstance.control.value).toBeNull();
+                expect(fixture.componentInstance.control.value).toBeUndefined();
                 expect(fixture.componentInstance.select.selected).toBeFalsy();
                 expect(trigger.textContent).not.toContain('Null');
                 expect(trigger.textContent).not.toContain('Undefined-option');
@@ -4915,6 +5033,50 @@ describe('McTreeSelect', () => {
 
             expect(options.some((option) => option.selected)).toBe(false);
             expect(testInstance.control.value).toEqual([]);
+        });
+    });
+
+    describe('with parent selection', () => {
+        beforeEach(waitForAsync(() => configureMcTreeSelectTestingModule([ChildSelection])));
+
+        let fixture: ComponentFixture<ChildSelection>;
+        let trigger: HTMLElement;
+
+        beforeEach(fakeAsync(() => {
+            fixture = TestBed.createComponent(ChildSelection);
+            fixture.detectChanges();
+
+            trigger = fixture.debugElement.query(By.css('.mc-tree-select__trigger')).nativeElement;
+
+            flush();
+        }));
+
+        it('should select children with parent', () => {
+            trigger.click();
+            fixture.detectChanges();
+
+            const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
+            options[4].click();
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.control.value).toContain('Chrome');
+        });
+
+        it('should select parent when all children are selected', () => {
+            trigger.click();
+            fixture.detectChanges();
+
+            fixture.componentInstance.treeControl.expandAll();
+
+            const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-tree-option');
+            options.forEach((o) => {
+                if (['Calendar', 'Chrome', 'Webstorm'].includes(o.innerText)) {
+                    o.click();
+                    fixture.detectChanges();
+                }
+            });
+
+            expect(fixture.componentInstance.control.value).toContain('Applications');
         });
     });
 });

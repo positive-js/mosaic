@@ -285,7 +285,7 @@ export class McTreeSelection extends McTreeBase<any>
 
                 options.forEach((option) => {
                     if (this.getSelectedValues().includes(option.value)) {
-                        option.select();
+                        option.select(false);
                     } else {
                         option.deselect();
                     }
