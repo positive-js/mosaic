@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { McHighlightModule } from '@ptsecurity/mosaic/core';
+import { McHighlightModule, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McInputModule } from '@ptsecurity/mosaic/input';
@@ -48,7 +48,8 @@ const EXAMPLES = [
         McTreeSelectModule,
         McInputModule,
         McIconModule,
-        McProgressSpinnerModule
+        McProgressSpinnerModule,
+        McPseudoCheckboxModule
     ],
     declarations: EXAMPLES,
     exports: EXAMPLES

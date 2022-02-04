@@ -1,8 +1,15 @@
 /* tslint:disable:no-reserved-keywords */
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FlatTreeControl, McTreeFlatDataSource, McTreeFlattener, McTreeSelection } from '@ptsecurity/mosaic/tree';
-import { McTreeSelectChange } from '@ptsecurity/mosaic/tree-select';
+import { McPseudoCheckboxState } from '@ptsecurity/mosaic/core';
+import {
+    FlatTreeControl,
+    McTreeFlatDataSource,
+    McTreeFlattener,
+    McTreeOption,
+    McTreeSelection
+} from '@ptsecurity/mosaic/tree';
+import { McTreeSelect, McTreeSelectChange } from '@ptsecurity/mosaic/tree-select';
 
 
 export class FileNode {
@@ -107,6 +114,8 @@ export const DATA_OBJECT = {
     styleUrls: ['tree-select-child-selection-overview-example.css']
 })
 export class TreeSelectChildSelectionOverviewExample {
+    @ViewChild(McTreeSelect) select: McTreeSelect;
+
     treeControl: FlatTreeControl<FileFlatNode>;
     treeFlattener: McTreeFlattener<FileNode, FileFlatNode>;
 
@@ -133,7 +142,12 @@ export class TreeSelectChildSelectionOverviewExample {
     }
 
     onSelectionChange($event: McTreeSelectChange) {
-        this.toggleChildren($event);
+        const option: McTreeOption = $event.value;
+
+        if (option.isExpandable) {
+            this.toggleChildren(option);
+        }
+
         this.toggleParents($event.value.data.parent);
     }
 
@@ -141,45 +155,53 @@ export class TreeSelectChildSelectionOverviewExample {
     descendantsAllSelected(node: FileFlatNode): boolean {
         const descendants = this.treeControl.getDescendants(node);
 
-        return descendants.every((child: any) => this.selection?.selectionModel.isSelected(child));
+        return descendants.every((child: any) => this.select?.selectionModel.isSelected(child));
     }
 
     /** Whether part of the descendants are selected */
     descendantsPartiallySelected(node: FileFlatNode): boolean {
         const descendants = this.treeControl.getDescendants(node);
-        const result = descendants.some((child: any) => this.selection?.selectionModel.isSelected(child));
 
-        return result && !this.descendantsAllSelected(node);
+        return descendants.some((child: any) => this.select?.selectionModel.isSelected(child));
     }
 
-    private toggleChildren($event: McTreeSelectChange) {
-        const valuesToChange: any = this.treeControl.getDescendants($event.value.data);
-        if ($event.value.selected) {
-            this.selection.selectionModel.deselect(...valuesToChange);
-        } else {
-            this.selection.selectionModel.select(...valuesToChange);
+    pseudoCheckboxState(option: McTreeOption): McPseudoCheckboxState {
+        if (option.isExpandable) {
+            const node: FileFlatNode = option.data as unknown as FileFlatNode;
+
+            if (this.descendantsAllSelected(node)) {
+                return 'checked';
+            } else if (this.descendantsPartiallySelected(node)) {
+                return 'indeterminate';
+            }
         }
-        this.syncModel();
+
+        return option.selected ? 'checked' : 'unchecked';
+    }
+
+    private toggleChildren(option: McTreeOption) {
+        const valuesToChange: any = this.treeControl.getDescendants(option.data as unknown as FileFlatNode);
+
+        if (option.selected) {
+            this.select.selectionModel.deselect(...valuesToChange);
+        } else {
+            this.select.selectionModel.select(...valuesToChange);
+        }
     }
 
     private toggleParents(parent) {
         if (!parent) { return; }
 
         const descendants = this.treeControl.getDescendants(parent);
-        const isParentSelected = this.selection.selectionModel.selected.includes(parent);
+        const isParentSelected = this.select.selectionModel.selected.includes(parent);
 
-        if (!isParentSelected && descendants.every((d: any) => this.selection.selectionModel.selected.includes(d))) {
-            this.selection.selectionModel.select(parent);
+        if (!isParentSelected && descendants.every((d: any) => this.select.selectionModel.selected.includes(d))) {
+            this.select.selectionModel.select(parent);
             this.toggleParents(parent.parent);
         } else if (isParentSelected) {
-            this.selection.selectionModel.deselect(parent);
+            this.select.selectionModel.deselect(parent);
             this.toggleParents(parent.parent);
         }
-        this.syncModel();
-    }
-
-    private syncModel() {
-        this.control.setValue(this.selection.selectionModel.selected.map((o: any) => o.name));
     }
 
     private transformer = (node: FileNode, level: number, parent: any) => {

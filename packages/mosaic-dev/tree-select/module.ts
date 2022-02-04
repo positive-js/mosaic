@@ -112,6 +112,8 @@ export const DATA_OBJECT = {
     encapsulation: ViewEncapsulation.None
 })
 export class DemoComponent implements OnInit {
+    @ViewChild(McTreeSelect) select: McTreeSelect;
+
     disabledState: boolean = false;
 
     control = new FormControl(['rootNode_1', 'Downloads']);
@@ -125,7 +127,6 @@ export class DemoComponent implements OnInit {
     dataSource: McTreeFlatDataSource<FileNode, FileFlatNode>;
 
     multiSelectSelectFormControl = new FormControl([], Validators.pattern(/^w/));
-    @ViewChild(McTreeSelect) select: McTreeSelect;
 
     searchControl: FormControl = new FormControl();
 
@@ -206,7 +207,6 @@ export class DemoComponent implements OnInit {
     }
 
     private toggleChildren(option: McTreeOption) {
-        console.log('toggleChildren: ');
         const valuesToChange: any = this.treeControl.getDescendants(option.data as unknown as FileFlatNode);
 
         if (option.selected) {
