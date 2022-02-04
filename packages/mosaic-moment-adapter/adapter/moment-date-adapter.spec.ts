@@ -91,8 +91,7 @@ describe('MomentDateAdapter', () => {
         ]);
     });
 
-    // TODO: Failing – CircleCI
-    xit('should get date names in a different locale', () => {
+    it('should get date names in a different locale', () => {
         adapter.setLocale('ar-AE');
 
         expect(adapter.getDateNames()).toEqual([
@@ -162,8 +161,7 @@ describe('MomentDateAdapter', () => {
         expect(adapter.getYearName(moment([2017,  JAN,  1]))).toBe('2017');
     });
 
-    // TODO: Failing – CircleCI
-    xit('should get year name in a different locale', () => {
+    it('should get year name in a different locale', () => {
         adapter.setLocale('ar-AE');
 
         expect(adapter.getYearName(moment([2017,  JAN,  1]))).toBe('٢٠١٧');
