@@ -1,8 +1,16 @@
-import { Component, Inject, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import {
+    Component,
+    Inject,
+    ChangeDetectionStrategy,
+    OnInit
+} from '@angular/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 
-import { ContainerRef } from './container.ref';
+import { ToastService } from './toast.service';
 import { ToastData, IToastConfig, TOAST_CONFIG_TOKEN } from './toast.type';
 
+
+let id = 0;
 
 @Component({
     selector: 'mc-toast',
@@ -11,21 +19,21 @@ import { ToastData, IToastConfig, TOAST_CONFIG_TOKEN } from './toast.type';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToastComponent implements OnInit {
-    index: number;
-    private intervalId: NodeJS.Timeout;
+    themePalette = ThemePalette;
+
+    id = id++;
+
+    private intervalId: any;
 
     constructor(
         readonly data: ToastData,
-        readonly containerRef: ContainerRef,
+        readonly service: ToastService,
         @Inject(TOAST_CONFIG_TOKEN) readonly toast: IToastConfig
-    ) {
-    }
+    ) {}
 
     ngOnInit(): void {
         this.intervalId = setTimeout(
-            () => {
-                this.close();
-            },
+            () => this.close(),
             this.toast.duration
         );
     }
@@ -35,7 +43,6 @@ export class ToastComponent implements OnInit {
     }
 
     close(): void {
-        this.containerRef.close(this.index);
+        this.service.hide(this.id);
     }
-
 }

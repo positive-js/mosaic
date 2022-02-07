@@ -1,14 +1,35 @@
 import { query, style, trigger, animate, transition, stagger } from '@angular/animations';
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    ComponentRef,
+    Directive,
+    Inject,
+    Injector,
+    ViewChild,
+    ViewContainerRef,
+    ViewRef
+} from '@angular/core';
 
+import { ToastComponent } from './toast.component';
 import { ToastService } from './toast.service';
+import { IToastConfig, TOAST_CONFIG_TOKEN, ToastData } from './toast.type';
 
 
 const ENTER_QUERY_TIMING = 50;
 
+@Directive({ selector: '[mcToastOutlet]' })
+export class McToastOutlet {
+    constructor(public viewContainer: ViewContainerRef, public changeDetectorRef: ChangeDetectorRef) {}
+}
+
+
 @Component({
     selector: 'mc-toast-container',
-    template: `<div class="toast-container" [@animate]="containerLength"><ng-container #container></ng-container></div>`,
+    template: `
+        <div class="mc-toast__container" [@animate]="containerLength">
+            <ng-container mcToastOutlet></ng-container>
+        </div>`,
     animations: [
        trigger('animate', [
            transition(':enter, * => 0, * => -1', []),
@@ -29,11 +50,39 @@ const ENTER_QUERY_TIMING = 50;
     ]
 })
 export class ToastContainerComponent {
-    @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
+    @ViewChild(McToastOutlet, { static: true, read: ViewContainerRef }) container: ViewContainerRef;
 
     constructor(
-        private toastService: ToastService
-    ) {
+        private toastService: ToastService,
+        private injector: Injector,
+        @Inject(TOAST_CONFIG_TOKEN) private toastConfig: IToastConfig
+    ) {}
+
+    createToast(data: ToastData): ComponentRef<ToastComponent> {
+        const injector = this.getInjector(data);
+        const index = this.toastConfig.newOnTop ? 0 : undefined;
+
+        return this.container.createComponent(ToastComponent, { injector, index });
+    }
+
+    deleteToast(viewRef: ViewRef) {
+        if (this.container.length === 0) { return; }
+
+        // const componentRef = this.toastService.componentsRef.filter((x) => x.instance.index === index)[0];
+        const vcrIndex: number = this.container.indexOf(viewRef);
+        this.container.remove(vcrIndex);
+        // this.toastService.componentsRef = this.toastService.componentsRef.filter((x) => x.instance.index !== index);
+    }
+
+    getInjector(data: ToastData): Injector {
+        return Injector.create({
+            providers: [
+                { provide: ToastData, useValue: data },
+                { provide: ToastService, useValue: this.toastService },
+                { provide: ToastContainerComponent, useValue: this }
+            ],
+            parent: this.injector
+        });
     }
 
     get containerLength(): number {

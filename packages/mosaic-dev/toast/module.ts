@@ -1,6 +1,7 @@
 import { NgModule, Component, ViewEncapsulation, ViewChild, ComponentRef, ViewContainerRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { ToastModule, ToastPosition, ToastService } from '@ptsecurity/mosaic/toast';
 
 import { McButtonModule } from '../../mosaic/button';
@@ -13,13 +14,15 @@ import { McButtonModule } from '../../mosaic/button';
     encapsulation: ViewEncapsulation.None
 })
 export class ToastDemoComponent {
-    @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
+    themePalette = ThemePalette;
 
     index = 0;
     componentRef: ComponentRef<any>;
     components: ComponentRef<any>[] = [];
     instance;
     overlayRef;
+
+    @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
 
     constructor(
         private toast: ToastService
@@ -56,5 +59,4 @@ export class ToastDemoComponent {
     ],
     bootstrap: [ToastDemoComponent]
 })
-export class DemoModule {
-}
+export class DemoModule {}
