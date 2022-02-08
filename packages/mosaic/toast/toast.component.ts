@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
 import { ThemePalette } from '@ptsecurity/mosaic/core';
@@ -26,12 +27,20 @@ export class McToastComponent {
 
     id = id++;
 
+    $implicit;
+
     constructor(
         readonly data: ToastData,
         readonly service: ToastService
-    ) {}
+    ) {
+        this.$implicit = this;
+    }
 
     close(): void {
         this.service.hide(this.id);
+    }
+
+    isTemplateRef(value: any): boolean {
+        return value instanceof TemplateRef;
     }
 }

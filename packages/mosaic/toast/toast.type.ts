@@ -36,6 +36,7 @@ export class ToastData {
     severity: McToastType;
     title: string;
     content: string;
+    template?: TemplateRef<any>;
 }
 
 export interface IToastConfig {

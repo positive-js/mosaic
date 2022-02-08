@@ -1,4 +1,4 @@
-<div class="mc-alert mc-alert_dismissible"
+<div class="mc-alert mc-alert_dismissible" *ngIf="!isTemplateRef(data.template)"
     [ngClass]="'mc-alert_' + data.severity || 'default'">
     <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
 
@@ -11,3 +11,8 @@
         <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="themePalette.Second"></i>
     </button>
 </div>
+
+<ng-container *ngIf="isTemplateRef(data.template)"
+              [ngTemplateOutlet]="$any(data.template)"
+              [ngTemplateOutletContext]="{ $implicit }">
+</ng-container>

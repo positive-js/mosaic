@@ -1,4 +1,4 @@
-import { NgModule, Component, ViewEncapsulation } from '@angular/core';
+import { NgModule, Component, ViewEncapsulation, TemplateRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ThemePalette } from '@ptsecurity/mosaic/core';
@@ -22,6 +22,15 @@ export class ToastDemoComponent {
 
     showToast(severity: McToastType) {
         this.toast.show({ severity, title: 'Success', content: 'Message Content' });
+    }
+
+    showToastT(severity: McToastType, template: TemplateRef<any>) {
+        this.toast.show({
+            severity,
+            title: 'Success',
+            content: 'Message Content',
+            template
+        });
     }
 }
 
