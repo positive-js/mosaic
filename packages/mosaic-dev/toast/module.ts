@@ -2,7 +2,13 @@ import { NgModule, Component, ViewEncapsulation, TemplateRef } from '@angular/co
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ThemePalette } from '@ptsecurity/mosaic/core';
-import { McToastType, ToastModule, ToastPosition, ToastService } from '@ptsecurity/mosaic/toast';
+import {
+    defaultToastConfig,
+    McToastType,
+    TOAST_CONFIG_TOKEN,
+    ToastModule,
+    ToastService
+} from '@ptsecurity/mosaic/toast';
 
 import { McButtonModule } from '../../mosaic/button';
 
@@ -20,17 +26,8 @@ export class ToastDemoComponent {
         private toast: ToastService
     ) {}
 
-    showToast(severity: McToastType) {
-        this.toast.show({ severity, title: 'Success', content: 'Message Content' });
-    }
-
-    showToastT(severity: McToastType, template: TemplateRef<any>) {
-        this.toast.show({
-            severity,
-            title: 'Success',
-            content: 'Message Content',
-            template
-        });
+    showToast(severity: McToastType, template?: TemplateRef<any>) {
+        this.toast.show({ severity, title: 'Success', content: 'Message Content', template });
     }
 }
 
@@ -40,12 +37,12 @@ export class ToastDemoComponent {
         BrowserModule,
         BrowserAnimationsModule,
         McButtonModule,
-        ToastModule.forRoot({
-            position: ToastPosition.TOP_CENTER,
-            duration: 5000,
-            newOnTop: false
-        })
+        ToastModule
     ],
-    bootstrap: [ToastDemoComponent]
+    bootstrap: [ToastDemoComponent],
+    providers: [{
+        provide: TOAST_CONFIG_TOKEN,
+        useValue: defaultToastConfig
+    }]
 })
 export class DemoModule {}

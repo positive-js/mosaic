@@ -51,4 +51,4 @@ export const defaultToastConfig: IToastConfig = {
     newOnTop: true
 };
 
-export const TOAST_CONFIG_TOKEN = new InjectionToken('toast-config');
+export const TOAST_CONFIG_TOKEN = new InjectionToken('mc-toast-config');
