@@ -1,5 +1,6 @@
 import { query, style, trigger, animate, transition, stagger } from '@angular/animations';
 import {
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ComponentRef,
@@ -8,10 +9,11 @@ import {
     Injector,
     ViewChild,
     ViewContainerRef,
+    ViewEncapsulation,
     ViewRef
 } from '@angular/core';
 
-import { ToastComponent } from './toast.component';
+import { McToastComponent } from './toast.component';
 import { ToastService } from './toast.service';
 import { IToastConfig, TOAST_CONFIG_TOKEN, ToastData } from './toast.type';
 
@@ -27,7 +29,7 @@ export class McToastOutlet {
 @Component({
     selector: 'mc-toast-container',
     template: `
-        <div class="mc-toast__container" [@animate]="containerLength">
+        <div class="mc-toast__container" [@animate]="container.length">
             <ng-container mcToastOutlet></ng-container>
         </div>`,
     animations: [
@@ -47,45 +49,44 @@ export class McToastOutlet {
                ],    { optional: true })
            ])
        ])
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
-export class ToastContainerComponent {
+export class McToastContainerComponent {
     @ViewChild(McToastOutlet, { static: true, read: ViewContainerRef }) container: ViewContainerRef;
 
     constructor(
-        private toastService: ToastService,
+        private service: ToastService,
         private injector: Injector,
-        @Inject(TOAST_CONFIG_TOKEN) private toastConfig: IToastConfig
+        @Inject(TOAST_CONFIG_TOKEN) private toastConfig: IToastConfig,
+        private changeDetectorRef: ChangeDetectorRef
     ) {}
 
-    createToast(data: ToastData): ComponentRef<ToastComponent> {
+    createToast<C>(data: ToastData): ComponentRef<C> {
         const injector = this.getInjector(data);
         const index = this.toastConfig.newOnTop ? 0 : undefined;
 
-        return this.container.createComponent(ToastComponent, { injector, index });
+        this.changeDetectorRef.markForCheck();
+
+        return this.container.createComponent(McToastComponent, { injector, index }) as unknown as ComponentRef<C>;
     }
 
     deleteToast(viewRef: ViewRef) {
-        if (this.container.length === 0) { return; }
+        const index = this.container.indexOf(viewRef);
 
-        // const componentRef = this.toastService.componentsRef.filter((x) => x.instance.index === index)[0];
-        const vcrIndex: number = this.container.indexOf(viewRef);
-        this.container.remove(vcrIndex);
-        // this.toastService.componentsRef = this.toastService.componentsRef.filter((x) => x.instance.index !== index);
+        if (index < 0) { return; }
+
+        this.container.remove(index);
     }
 
     getInjector(data: ToastData): Injector {
         return Injector.create({
             providers: [
                 { provide: ToastData, useValue: data },
-                { provide: ToastService, useValue: this.toastService },
-                { provide: ToastContainerComponent, useValue: this }
+                { provide: ToastService, useValue: this.service }
             ],
             parent: this.injector
         });
-    }
-
-    get containerLength(): number {
-        return this.toastService.componentsRef.length;
     }
 }

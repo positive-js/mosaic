@@ -4,15 +4,15 @@ import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
-import { McToastOutlet, ToastContainerComponent } from './toast-container.component';
-import { ToastComponent } from './toast.component';
+import { McToastOutlet, McToastContainerComponent } from './toast-container.component';
+import { McToastComponent } from './toast.component';
 import { defaultToastConfig, TOAST_CONFIG_TOKEN } from './toast.type';
 
 
 @NgModule({
     declarations: [
-        ToastComponent,
-        ToastContainerComponent,
+        McToastComponent,
+        McToastContainerComponent,
         McToastOutlet
     ],
     imports: [
@@ -22,8 +22,8 @@ import { defaultToastConfig, TOAST_CONFIG_TOKEN } from './toast.type';
         McIconModule
     ],
     entryComponents: [
-        ToastComponent,
-        ToastContainerComponent
+        McToastComponent,
+        McToastContainerComponent
     ]
 })
 export class ToastModule {

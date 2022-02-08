@@ -1,15 +1,13 @@
-<div class="mc-toast">
-    <div class="mc-alert mc-alert_dismissible"
-        *ngIf="data"
-        [ngClass]="'mc-alert_' + data.severity || 'default'">
-        <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+<div class="mc-alert mc-alert_dismissible"
+    [ngClass]="'mc-alert_' + data.severity || 'default'">
+    <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
 
-        <div>
-            <header>{{ data.title }}</header>
-            {{ data.content }}
-        </div>
-        <button class="mc-alert__close" (click)="close()">
-            <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="themePalette.Second"></i>
-        </button>
+    <div>
+        <header>{{ data.title }}</header>
+        {{ data.content }}
     </div>
+
+    <button class="mc-alert__close" (click)="close()">
+        <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="themePalette.Second"></i>
+    </button>
 </div>

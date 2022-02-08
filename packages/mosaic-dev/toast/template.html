@@ -1,8 +1,8 @@
 <div class="demo-block">
     <div class="example-button-group">
-        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showSuccessAlert()">Success</button>
-        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showInfoAlert()">Info</button>
-        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showWarnAlert()">Warn</button>
-        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showErrorAlert()">Error</button>
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('success')">Success</button>
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('info')">Info</button>
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('warning')">Warn</button>
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('error')">Error</button>
     </div>
 </div>

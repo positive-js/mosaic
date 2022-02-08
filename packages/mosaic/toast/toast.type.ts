@@ -2,7 +2,7 @@ import { TemplateRef, Type, EventEmitter, InjectionToken } from '@angular/core';
 
 
 export type OnClickCallback<T> = ((instance: T) => (false | void | {}) | Promise<false | void | {}>);
-export type ToastType = 'default' | 'confirm' | 'custom' | 'success' | 'error' | 'warning' | 'info';
+export type McToastType = 'default' | 'confirm' | 'custom' | 'success' | 'error' | 'warning' | 'info';
 export enum ToastPosition {
     TOP_RIGHT = 'top-right',
     TOP_LEFT = 'top-left',
@@ -14,7 +14,7 @@ export enum ToastPosition {
 }
 
 export interface IToastOptions<T> {
-    severity: ToastType;
+    severity: McToastType;
     title?: string | TemplateRef<{}>;
     content?: string | TemplateRef<{}> | Type<T>;
     component?: Type<T>;
@@ -33,7 +33,7 @@ export interface IToastOptions<T> {
 }
 
 export class ToastData {
-    severity: ToastType;
+    severity: McToastType;
     title: string;
     content: string;
 }

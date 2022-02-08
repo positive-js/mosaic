@@ -1,8 +1,8 @@
-import { NgModule, Component, ViewEncapsulation, ViewChild, ComponentRef, ViewContainerRef } from '@angular/core';
+import { NgModule, Component, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ThemePalette } from '@ptsecurity/mosaic/core';
-import { ToastModule, ToastPosition, ToastService } from '@ptsecurity/mosaic/toast';
+import { McToastType, ToastModule, ToastPosition, ToastService } from '@ptsecurity/mosaic/toast';
 
 import { McButtonModule } from '../../mosaic/button';
 
@@ -16,32 +16,12 @@ import { McButtonModule } from '../../mosaic/button';
 export class ToastDemoComponent {
     themePalette = ThemePalette;
 
-    index = 0;
-    componentRef: ComponentRef<any>;
-    components: ComponentRef<any>[] = [];
-    instance;
-    overlayRef;
-
-    @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
-
     constructor(
         private toast: ToastService
     ) {}
 
-    showSuccessAlert() {
-        this.toast.show({ severity: 'success', title: 'Success', content: 'Message Content' });
-    }
-
-    showInfoAlert() {
-        this.toast.show({ severity: 'info', title: 'Info', content: 'Message Content' });
-    }
-
-    showWarnAlert() {
-        this.toast.show({ severity: 'warning', title: 'Warn', content: 'Message Content' });
-    }
-
-    showErrorAlert() {
-        this.toast.show({ severity: 'error', title: 'Error', content: 'Message Content' });
+    showToast(severity: McToastType) {
+        this.toast.show({ severity, title: 'Success', content: 'Message Content' });
     }
 }
 

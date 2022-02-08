@@ -3,8 +3,8 @@ import { OverlayRef } from '@angular/cdk/overlay/overlay-ref';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Injectable, Injector, Inject, ComponentRef } from '@angular/core';
 
-import { ToastContainerComponent } from './toast-container.component';
-import { ToastComponent } from './toast.component';
+import { McToastContainerComponent } from './toast-container.component';
+import { McToastComponent } from './toast.component';
 import { ToastData, TOAST_CONFIG_TOKEN, IToastConfig, ToastPosition } from './toast.type';
 
 
@@ -13,15 +13,17 @@ const INDENT_SIZE = 20;
 @Injectable({
     providedIn: 'root'
 })
-export class ToastService {
-    index: number = 0;
-    componentsRef: ComponentRef<ToastComponent>[] = [];
+export class ToastService<T extends McToastComponent = McToastComponent> {
+    get toasts(): ComponentRef<T>[] {
+        return Object.values(this.toastsDict)
+            .filter((item) => !item.hostView.destroyed);
+    }
 
-    protected containerInstance: ToastContainerComponent;
+    protected containerInstance: McToastContainerComponent;
     protected overlayRef: OverlayRef;
-    protected portal: ComponentPortal<ToastContainerComponent>;
+    protected portal: ComponentPortal<McToastContainerComponent>;
 
-    private toasts: { [id: number]: ComponentRef<ToastComponent> } = {};
+    private toastsDict: { [id: number]: ComponentRef<T> } = {};
 
     constructor(
         protected overlay: Overlay,
@@ -29,37 +31,48 @@ export class ToastService {
         @Inject(TOAST_CONFIG_TOKEN) private toastConfig: IToastConfig
     ) {}
 
-    show(data: ToastData): ComponentRef<ToastComponent> {
-        this.overlayRef = this.createOverlay();
-        this.portal = this.portal || new ComponentPortal(ToastContainerComponent, null, this.injector);
-
-        if (!this.overlayRef.hasAttached()) {
-            this.containerInstance = this.overlayRef.attach(this.portal).instance;
-        }
+    show(data: ToastData): ComponentRef<T> {
+        this.prepareContainer();
 
         return this.addToast(data);
     }
 
     hide(id: number) {
-        this.containerInstance.deleteToast(this.toasts[id].hostView);
+        this.containerInstance.deleteToast(this.toastsDict[id].hostView);
+
+        this.toastsDict[id].destroy();
     }
 
-    private addToast(data: ToastData): ComponentRef<ToastComponent> {
-        const componentRef = this.containerInstance.createToast(data);
+    private addRemoveTimer(id: number, duration: number) {
+        setTimeout(() => this.hide(id), duration);
+    }
 
-        this.toasts[componentRef.instance.id] = componentRef;
+    private addToast(data: ToastData): ComponentRef<T> {
+        const componentRef = this.containerInstance.createToast<T>(data);
+
+        this.toastsDict[componentRef.instance.id] = componentRef;
+
+        this.addRemoveTimer(componentRef.instance.id, this.toastConfig.duration);
 
         return componentRef;
+    }
+
+    private prepareContainer() {
+        this.overlayRef = this.createOverlay();
+
+        this.portal = this.portal || new ComponentPortal(McToastContainerComponent, null, this.injector);
+
+        if (!this.overlayRef.hasAttached()) {
+            this.containerInstance = this.overlayRef.attach(this.portal).instance;
+        }
     }
 
     private createOverlay(): OverlayRef {
         if (this.overlayRef) { return this.overlayRef; }
 
-        const position = this.toastConfig.position;
-        const positionStrategy = this.getPositionStrategy(position);
-        this.overlayRef = this.overlay.create({ positionStrategy });
+        const positionStrategy = this.getPositionStrategy(this.toastConfig.position);
 
-        return this.overlayRef;
+        return this.overlay.create({ positionStrategy });
     }
 
     private getPositionStrategy(position?: ToastPosition): GlobalPositionStrategy {
