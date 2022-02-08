@@ -9,7 +9,8 @@ import {
     inputNames,
     methodCallChecks,
     outputNames,
-    propertyNames
+    propertyNames,
+    symbolRemoval
 } from './data';
 
 
@@ -22,5 +23,6 @@ export const mosaicUpgradeData: UpgradeData = {
     inputNames,
     methodCallChecks,
     outputNames,
-    propertyNames
+    propertyNames,
+    symbolRemoval
 };

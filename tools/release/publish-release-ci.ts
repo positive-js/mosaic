@@ -9,6 +9,7 @@ import { BaseReleaseTask } from './base-release-task';
 import { CONFIG } from './config';
 import { extractReleaseNotes } from './extract-release-notes';
 import { GitClient } from './git/git-client';
+import { notify } from './notify-release';
 import { npmPublish } from './npm/npm-client';
 import { checkReleasePackage } from './release-output/check-packages';
 import { releasePackages } from './release-output/release-packages';
@@ -99,7 +100,12 @@ class PublishReleaseCITask extends BaseReleaseTask {
 
         const { releaseNotes, releaseTitle } = extractedReleaseNotes;
 
-        this.githubApi.repos.createRelease({
+        if (!process.env.DEBUG) {
+            console.info(green(bold(`  ✓   Notification to Mattermost, version: ${newVersionName}`)));
+            notify(newVersionName);
+        }
+
+        await this.githubApi.repos.createRelease({
             owner: this.repositoryOwner,
             repo: this.repositoryName,
             tag_name: newVersionName,
@@ -108,12 +114,6 @@ class PublishReleaseCITask extends BaseReleaseTask {
         });
 
         console.info(green(`  ✓   Github release is posted.`));
-
-        if (!process.env.DEBUG) {
-            // TODO: await infro issue CM-53817
-            // console.info(green(bold(`  ✓   Notification to Mattermost, version: ${newVersionName}`)));
-            // notify(newVersionName);
-        }
     }
 
     /** Publishes the specified package within the given NPM dist tag. */

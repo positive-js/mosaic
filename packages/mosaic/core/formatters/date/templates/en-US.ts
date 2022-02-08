@@ -1,18 +1,30 @@
+const SECONDS_TEMPLATE = `{
+    SHOW_MILLISECONDS,
+    select,
+        yes{:{SECONDS}{MILLISECONDS}}
+        other{{
+            SHOW_SECONDS,
+            select,
+                yes{:{SECONDS}}
+                other{}
+        }}
+}`;
+
 export const enUS = {
     relativeTemplates: {
         short: {
-            SECONDS_AGO: 'Just now',
-            MINUTES_AGO: '{MINUTES_PASSED}{NBSP}min ago',
-            TODAY: '{TIME}',
-            YESTERDAY: 'Yesterday, {TIME}',
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}'
+            BEFORE_YESTERDAY: `{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}${SECONDS_TEMPLATE}`,
+            YESTERDAY: `Yesterday, {TIME}${SECONDS_TEMPLATE}`,
+            TODAY: `Today, {TIME}${SECONDS_TEMPLATE}`,
+            TOMORROW: `Tomorrow, {TIME}${SECONDS_TEMPLATE}`,
+            AFTER_TOMORROW: `{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}${SECONDS_TEMPLATE}`
         },
         long: {
-            SECONDS_AGO: 'Just now',
-            MINUTES_AGO: '{MINUTES_PASSED, plural, =1{#{NBSP}minute} other{#{NBSP}minutes}} ago',
-            TODAY: '{TIME}',
-            YESTERDAY: 'Yesterday, {TIME}',
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}'
+            BEFORE_YESTERDAY: `{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}${SECONDS_TEMPLATE}`,
+            YESTERDAY: `Yesterday, {TIME}${SECONDS_TEMPLATE}`,
+            TODAY: `Today, {TIME}${SECONDS_TEMPLATE}`,
+            TOMORROW: `Tomorrow, {TIME}${SECONDS_TEMPLATE}`,
+            AFTER_TOMORROW: `{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}${SECONDS_TEMPLATE}`
         }
     },
     absoluteTemplates: {
@@ -23,12 +35,7 @@ export const enUS = {
                 select,
                     yes{{SHORT_DATE}, {TIME}}
                     other{{SHORT_DATE}, {YEAR}, {TIME}}
-            }{
-                SHOW_MILLISECONDS,
-                select,
-                    yes{:{SECONDS}{MILLISECONDS}}
-                    other{}
-            }`
+            }${SECONDS_TEMPLATE}`
         },
         long: {
             DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE}, {YEAR}}}',
@@ -37,12 +44,7 @@ export const enUS = {
                 select,
                     yes{{DATE}, {TIME}}
                     other{{DATE}, {YEAR}, {TIME}}
-            }{
-                SHOW_MILLISECONDS,
-                select,
-                    yes{:{SECONDS}{MILLISECONDS}}
-                    other{}
-            }`
+            }${SECONDS_TEMPLATE}`
         }
     },
     rangeTemplates: {
@@ -77,22 +79,22 @@ export const enUS = {
                                 yes{{SHORT_DATE}, {TIME}}
                                 other{{SHORT_DATE}, {YEAR}, {TIME}}
                         }}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 END_DATETIME: `{
                     SAME_DAY,
                     select,
                         yes{{
                             CURRENT_YEAR,
                             select,
-                                yes{{TIME}, {SHORT_DATE}}
-                                other{{TIME}, {SHORT_DATE}, {YEAR}}
+                                yes{{TIME}${SECONDS_TEMPLATE}, {SHORT_DATE}}
+                                other{{TIME}${SECONDS_TEMPLATE}, {SHORT_DATE}, {YEAR}}
                         }}
                         other{{
                             CURRENT_YEAR,
                             select,
                                 yes{{SHORT_DATE}, {TIME}}
                                 other{{SHORT_DATE}, {YEAR}, {TIME}}
-                        }}
+                        }${SECONDS_TEMPLATE}}
                 }`,
                 DATETIME: `{
                     SAME_DAY,
@@ -131,22 +133,22 @@ export const enUS = {
                                 yes{{DATE}, {TIME}}
                                 other{{DATE}, {YEAR}, {TIME}}
                         }}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 END_DATETIME: `{
                     SAME_DAY,
                     select,
                         yes{{
                             CURRENT_YEAR,
                             select,
-                                yes{{TIME}, {DATE}}
-                                other{{TIME}, {DATE}, {YEAR}}
+                                yes{{TIME}${SECONDS_TEMPLATE}, {DATE}}
+                                other{{TIME}${SECONDS_TEMPLATE}, {DATE}, {YEAR}}
                         }}
                         other{{
                             CURRENT_YEAR,
                             select,
                                 yes{{DATE}, {TIME}}
                                 other{{DATE}, {YEAR}, {TIME}}
-                        }}
+                        }${SECONDS_TEMPLATE}}
                 }`,
                 DATETIME: `{
                     SAME_DAY,
@@ -190,7 +192,7 @@ export const enUS = {
                                 yes{{DATE}, {TIME}}
                                 other{{DATE}, {YEAR}, {TIME}}
                         }}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 END_DATETIME: `{
                     SAME_DAY,
                     select,
@@ -201,7 +203,7 @@ export const enUS = {
                                 yes{{DATE}, {TIME}}
                                 other{{DATE}, {YEAR}, {TIME}}
                         }}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 DATETIME: `{
                     SAME_DAY,
                     select,
@@ -231,13 +233,13 @@ export const enUS = {
                     select,
                         yes{{SHORT_DATE}, {TIME}}
                         other{{SHORT_DATE} {YEAR}, {TIME}}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 END_DATETIME: `{
                     CURRENT_YEAR,
                     select,
                         yes{{SHORT_DATE}, {TIME}}
                         other{{SHORT_DATE} {YEAR}, {TIME}}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 DATETIME: `{
                     RANGE_TYPE,
                     select,
@@ -265,13 +267,13 @@ export const enUS = {
                     select,
                         yes{{DATE}, {TIME}}
                         other{{DATE} {YEAR}, {TIME}}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 END_DATETIME: `{
                     CURRENT_YEAR,
                     select,
                         yes{{DATE}, {TIME}}
                         other{{DATE} {YEAR}, {TIME}}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 DATETIME: `{
                     RANGE_TYPE,
                     select,

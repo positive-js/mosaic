@@ -114,7 +114,7 @@ export class DemoComponent {
     get isFallbackActivated(): boolean {
         return this.selectedPlacement !== this.activatedPosition && this.activatedPosition !== '';
     }
-    
+
     onConfirm() {
         alert('confirmed');
     }

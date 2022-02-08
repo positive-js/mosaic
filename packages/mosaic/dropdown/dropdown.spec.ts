@@ -55,6 +55,8 @@ import {
 
 const PANEL_SELECTOR = '.mc-dropdown__panel';
 const ITEM_SELECTOR = '[mc-dropdown-item]';
+const ENABLED_ITEM_SELECTOR = '[mc-dropdown-item]:not([disabled])';
+const DISABLED_ITEM_SELECTOR = '[mc-dropdown-item][disabled=true]';
 
 describe('McDropdown', () => {
     let overlayContainer: OverlayContainer;
@@ -991,8 +993,8 @@ describe('McDropdown', () => {
             fixture.detectChanges();
         });
 
-        it('should emit an event when a dropdown item is clicked', () => {
-            const dropdownItem = overlayContainerElement.querySelector(ITEM_SELECTOR) as HTMLElement;
+        it('should emit an event when an enabled dropdown item is clicked', () => {
+            const dropdownItem = overlayContainerElement.querySelector(ENABLED_ITEM_SELECTOR) as HTMLElement;
 
             dropdownItem.click();
             fixture.detectChanges();
@@ -1033,6 +1035,16 @@ describe('McDropdown', () => {
             expect(emitCallback).toHaveBeenCalledTimes(1);
             expect(completeCallback).toHaveBeenCalled();
         });
+
+        it('should not emit an event when a disabled dropdown item is clicked', () => {
+            const disabledItem = overlayContainerElement.querySelector(DISABLED_ITEM_SELECTOR) as HTMLElement;
+
+            disabledItem.click();
+            fixture.detectChanges();
+
+            expect(fixture.componentInstance.closeCallback).toHaveBeenCalledTimes(0);
+        });
+
     });
 
     describe('nested dropdown', () => {

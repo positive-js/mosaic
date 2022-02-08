@@ -28,7 +28,7 @@ import { PopUpPlacements, toBoolean } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 import { MC_TOOLTIP_SCROLL_STRATEGY, McTooltipTrigger, TooltipModifier } from '@ptsecurity/mosaic/tooltip';
-import { merge, Subject } from 'rxjs';
+import { EMPTY, merge, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
 import { McVerticalNavbar } from './vertical-navbar.component';
@@ -170,8 +170,8 @@ export class McNavbarBrand implements AfterContentInit, OnDestroy {
 
     ngAfterContentInit(): void {
         merge(
-            this.logo.hovered,
-            this.title.hovered
+            this.logo ? this.logo.hovered : EMPTY,
+            this.title ? this.title.hovered : EMPTY
         )
         .pipe(takeUntil(this.destroyed))
         .subscribe((value: boolean) => this.hovered = value);

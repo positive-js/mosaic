@@ -1,0 +1,51 @@
+{
+    card: {
+        'light-color-scheme': {
+            error: {
+                'vertical-line': { value: '{light-color-scheme.error.palette.value.100.value}' },
+                background: { value: '{light-color-scheme.error.palette.value.40.value}' },
+                shadow: { value: '{light-color-scheme.error.palette.value.100.value}' }
+            },
+            warning: {
+                'vertical-line': { value: '{light-color-scheme.warning.palette.value.100.value}' },
+                background: { value: '{light-color-scheme.warning.palette.value.40.value}' },
+                shadow: { value: '{light-color-scheme.warning.palette.value.100.value}' }
+            },
+            success: {
+                'vertical-line': { value: '{light-color-scheme.success.palette.value.100.value}' },
+                background: { value: '{light-color-scheme.success.palette.value.40.value}' },
+                shadow: { value: '{light-color-scheme.success.palette.value.100.value}' }
+            },
+            info: {
+                'vertical-line': { value: '{light-color-scheme.info.palette.value.100.value}' },
+                background: { value: '{light-color-scheme.info.palette.value.40.value}' },
+                shadow: { value: '{light-color-scheme.info.palette.value.100.value}' }
+            }
+        },
+        'dark-color-scheme': {
+            error: {
+                'vertical-line': { value: '{dark-color-scheme.error.palette.value.700.value}' },
+                background: { value: '{dark-color-scheme.error.palette.value.900.value}' },
+                shadow: { value: '{dark-color-scheme.error.palette.value.700.value}' }
+            },
+            warning: {
+                'vertical-line': { value: '{dark-color-scheme.warning.palette.value.700.value}' },
+                background: { value: '{dark-color-scheme.warning.palette.value.800.value}' },
+                shadow: { value: '{dark-color-scheme.warning.palette.value.700.value}' }
+            },
+            success: {
+                'vertical-line': { value: '{dark-color-scheme.success.palette.value.700.value}' },
+                background: { value: '{dark-color-scheme.success.palette.value.800.value}' },
+                shadow: { value: '{dark-color-scheme.success.palette.value.700.value}' }
+            },
+            info: {
+                'vertical-line': { value: '{dark-color-scheme.info.palette.value.700.value}' },
+                background: { value: '{dark-color-scheme.info.palette.value.800.value}' },
+                shadow: { value: '{dark-color-scheme.info.palette.value.700.value}' }
+            }
+        },
+        size: {
+            'vertical-line': { value: '4px' }
+        }
+    }
+}

@@ -1,5 +1,5 @@
 @import '../core/styles/common/layout';
-@import '../design-tokens/tokens';
+@import '../design-tokens/pt-2022/tokens';
 @import 'button-base';
 
 
@@ -50,6 +50,7 @@
 
     .mc-button-wrapper {
         display: flex;
+        align-items: center;
 
         .mc-icon {
             margin: auto;

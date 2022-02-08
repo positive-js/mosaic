@@ -1,0 +1,11 @@
+{
+    autocomplete: {
+        size: {
+            panel: {
+                padding: { value: '4px 0' },
+                'max-height': { value: '256px' },
+                'border-radius': { value: '3px' }
+            }
+        }
+    }
+}

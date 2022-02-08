@@ -29,3 +29,8 @@ npm-debug.log
 *.log
 *.tmp
 *.tmp.*
+
+
+/.angular
+
+.ai

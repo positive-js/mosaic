@@ -1,14 +1,22 @@
-<ng-content select="mc-tree-node-toggle"></ng-content>
+<ng-content select="mc-tree-node-toggle, [mc-tree-node-toggle], [mcTreeNodeToggle]"></ng-content>
 
-<mc-pseudo-checkbox
-    *ngIf="showCheckbox"
-    [state]="selected ? 'checked' : 'unchecked'"
-    [disabled]="disabled">
-</mc-pseudo-checkbox>
+<ng-container [ngSwitch]="externalPseudoCheckbox">
+    <ng-content *ngSwitchCase="true" select="mc-pseudo-checkbox"></ng-content>
+
+    <ng-container *ngSwitchCase="false">
+        <mc-pseudo-checkbox
+            *ngIf="showCheckbox"
+            [state]="selected ? 'checked' : 'unchecked'"
+            [disabled]="disabled">
+        </mc-pseudo-checkbox>
+    </ng-container>
+</ng-container>
 
 <ng-content select="mc-checkbox"></ng-content>
 
 <ng-content select="[mc-icon]"></ng-content>
+
+<ng-content select="mc-progress-spinner"></ng-content>
 
 <span class="mc-option-text mc-no-select"><ng-content></ng-content></span>
 

@@ -1,7 +1,14 @@
-import { NgModule, Component, ViewEncapsulation, ViewChild, ComponentRef, ViewContainerRef } from '@angular/core';
+import { NgModule, Component, ViewEncapsulation, TemplateRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastModule, ToastPosition, ToastService } from '@ptsecurity/mosaic/toast';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
+import {
+    defaultToastConfig,
+    McToastType,
+    TOAST_CONFIG_TOKEN,
+    ToastModule,
+    ToastService
+} from '@ptsecurity/mosaic/toast';
 
 import { McButtonModule } from '../../mosaic/button';
 
@@ -13,32 +20,14 @@ import { McButtonModule } from '../../mosaic/button';
     encapsulation: ViewEncapsulation.None
 })
 export class ToastDemoComponent {
-    @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
-
-    index = 0;
-    componentRef: ComponentRef<any>;
-    components: ComponentRef<any>[] = [];
-    instance;
-    overlayRef;
+    themePalette = ThemePalette;
 
     constructor(
         private toast: ToastService
     ) {}
 
-    showSuccessAlert() {
-        this.toast.show({ severity: 'success', title: 'Success', content: 'Message Content' });
-    }
-
-    showInfoAlert() {
-        this.toast.show({ severity: 'info', title: 'Info', content: 'Message Content' });
-    }
-
-    showWarnAlert() {
-        this.toast.show({ severity: 'warning', title: 'Warn', content: 'Message Content' });
-    }
-
-    showErrorAlert() {
-        this.toast.show({ severity: 'error', title: 'Error', content: 'Message Content' });
+    showToast(severity: McToastType, template?: TemplateRef<any>) {
+        this.toast.show({ severity, title: 'Success', content: 'Message Content', template });
     }
 }
 
@@ -48,13 +37,12 @@ export class ToastDemoComponent {
         BrowserModule,
         BrowserAnimationsModule,
         McButtonModule,
-        ToastModule.forRoot({
-            position: ToastPosition.TOP_CENTER,
-            duration: 5000,
-            newOnTop: false
-        })
+        ToastModule
     ],
-    bootstrap: [ToastDemoComponent]
+    bootstrap: [ToastDemoComponent],
+    providers: [{
+        provide: TOAST_CONFIG_TOKEN,
+        useValue: defaultToastConfig
+    }]
 })
-export class DemoModule {
-}
+export class DemoModule {}

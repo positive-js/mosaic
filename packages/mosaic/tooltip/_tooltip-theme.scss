@@ -32,7 +32,6 @@
         $border-color: map-get($tooltip_extended, border-color);
 
         & .mc-tooltip__inner {
-            box-shadow: map-get($tooltip, shadow);
             border: 1px solid $border-color;
 
             color: map-get($tooltip_extended, color);
@@ -65,7 +64,6 @@
         $border-color: map-get($tooltip_warning, border-color);
 
         & .mc-tooltip__inner {
-            box-shadow: map-get($tooltip, shadow);
             border: 1px solid $border-color;
 
             color: $color;

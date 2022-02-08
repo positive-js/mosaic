@@ -1,4 +1,5 @@
 <div class="common-container mc-body">
+    <br>
     <header class="mc-display-3">Absolute date</header>
     <div class="common-container">
         <h3>Long format</h3>
@@ -18,20 +19,39 @@
                 <div class="flex">{{ ru.absolute.long.date.notCurrentYear }}</div>
                 <div class="flex">{{ en.absolute.long.date.notCurrentYear }}</div>
             </div>
+            <div class="row-border"></div>
+
             <div class="layout-row row-border">
                 <div class="flex">absoluteLongDateTime (current year)</div>
                 <div class="flex">{{ ru.absolute.long.dateTime.currentYear }}</div>
                 <div class="flex">{{ en.absolute.long.dateTime.currentYear }}</div>
             </div>
             <div class="layout-row row-border">
+                <div class="flex">absoluteLongDateTime (current year) (with seconds)</div>
+                <div class="flex">{{ ru.absolute.long.dateTime.currentYearSeconds }}</div>
+                <div class="flex">{{ en.absolute.long.dateTime.currentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">absoluteLongDateTime (current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.absolute.long.dateTime.currentYearMilliseconds }}</div>
+                <div class="flex">{{ en.absolute.long.dateTime.currentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
                 <div class="flex">absoluteLongDateTime (not current year)</div>
                 <div class="flex">{{ ru.absolute.long.dateTime.notCurrentYear }}</div>
                 <div class="flex">{{ en.absolute.long.dateTime.notCurrentYear }}</div>
             </div>
             <div class="layout-row row-border">
-                <div class="flex">absoluteLongDateTime (with milliseconds)</div>
-                <div class="flex">{{ ru.absolute.long.dateTime.milliseconds }}</div>
-                <div class="flex">{{ en.absolute.long.dateTime.milliseconds }}</div>
+                <div class="flex">absoluteLongDateTime (not current year) (with seconds)</div>
+                <div class="flex">{{ ru.absolute.long.dateTime.notCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.absolute.long.dateTime.notCurrentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">absoluteLongDateTime (not current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.absolute.long.dateTime.notCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.absolute.long.dateTime.notCurrentYearMilliseconds }}</div>
             </div>
         </div>
     </div>
@@ -53,24 +73,44 @@
                 <div class="flex">{{ ru.absolute.short.date.notCurrentYear }}</div>
                 <div class="flex">{{ en.absolute.short.date.notCurrentYear }}</div>
             </div>
+            <div class="row-border"></div>
+
             <div class="layout-row row-border">
                 <div class="flex">absoluteShortDateTime (current year)</div>
                 <div class="flex">{{ ru.absolute.short.dateTime.currentYear }}</div>
                 <div class="flex">{{ en.absolute.short.dateTime.currentYear }}</div>
             </div>
             <div class="layout-row row-border">
+                <div class="flex">absoluteShortDateTime (current year) (with seconds)</div>
+                <div class="flex">{{ ru.absolute.short.dateTime.currentYearSeconds }}</div>
+                <div class="flex">{{ en.absolute.short.dateTime.currentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">absoluteShortDateTime (current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.absolute.short.dateTime.currentYearMilliseconds }}</div>
+                <div class="flex">{{ en.absolute.short.dateTime.currentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
                 <div class="flex">absoluteShortDateTime (not current year)</div>
                 <div class="flex">{{ ru.absolute.short.dateTime.notCurrentYear }}</div>
                 <div class="flex">{{ en.absolute.short.dateTime.notCurrentYear }}</div>
             </div>
             <div class="layout-row row-border">
-                <div class="flex">absoluteShortDateTime (with milliseconds)</div>
-                <div class="flex">{{ ru.absolute.short.dateTime.milliseconds }}</div>
-                <div class="flex">{{ en.absolute.short.dateTime.milliseconds }}</div>
+                <div class="flex">absoluteShortDateTime (not current year) (with seconds)</div>
+                <div class="flex">{{ ru.absolute.short.dateTime.notCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.absolute.short.dateTime.notCurrentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">absoluteShortDateTime (not current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.absolute.short.dateTime.notCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.absolute.short.dateTime.notCurrentYearMilliseconds }}</div>
             </div>
         </div>
     </div>
 
+    <br>
     <header class="mc-display-3">Relative date</header>
     <div class="common-container">
         <h3>Long format</h3>
@@ -80,35 +120,113 @@
                 <div class="flex light-text-secondary">Russian</div>
                 <div class="flex light-text-secondary">English</div>
             </div>
+
             <div class="layout-row row-border">
-                <div class="flex">SecondsAgo</div>
-                <div class="flex">{{ ru.relative.long.secondsAgo }}</div>
-                <div class="flex">{{ en.relative.long.secondsAgo }}</div>
+                <div class="flex">Before yesterday (not current year)</div>
+                <div class="flex">{{ ru.relative.long.beforeYesterdayNotCurrentYear }}</div>
+                <div class="flex">{{ en.relative.long.beforeYesterdayNotCurrentYear }}</div>
             </div>
-            <div class="layout-row row-border">
-                <div class="flex">MinutesAgo</div>
-                <div class="flex">{{ ru.relative.long.minutesAgo }}</div>
-                <div class="flex">{{ en.relative.long.minutesAgo }}</div>
-            </div>
-            <div class="layout-row row-border">
-                <div class="flex">Today</div>
-                <div class="flex">{{ ru.relative.long.today }}</div>
-                <div class="flex">{{ en.relative.long.today }}</div>
-            </div>
-            <div class="layout-row row-border">
-                <div class="flex">Yesterday</div>
-                <div class="flex">{{ ru.relative.long.yesterday }}</div>
-                <div class="flex">{{ en.relative.long.yesterday }}</div>
-            </div>
+            <div class="row-border"></div>
+
             <div class="layout-row row-border">
                 <div class="flex">Before yesterday (current year)</div>
                 <div class="flex">{{ ru.relative.long.beforeYesterdayCurrentYear }}</div>
                 <div class="flex">{{ en.relative.long.beforeYesterdayCurrentYear }}</div>
             </div>
+
             <div class="layout-row row-border">
-                <div class="flex">Before yesterday (not current year)</div>
-                <div class="flex">{{ ru.relative.long.beforeYesterdayNotCurrentYear }}</div>
-                <div class="flex">{{ en.relative.long.beforeYesterdayNotCurrentYear }}</div>
+                <div class="flex">Before yesterday (current year) (with seconds)</div>
+                <div class="flex">{{ ru.relative.long.beforeYesterdayCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.relative.long.beforeYesterdayCurrentYearSeconds }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Before yesterday (current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.relative.long.beforeYesterdayCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.relative.long.beforeYesterdayCurrentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Yesterday</div>
+                <div class="flex">{{ ru.relative.long.yesterday }}</div>
+                <div class="flex">{{ en.relative.long.yesterday }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Yesterday (with seconds)</div>
+                <div class="flex">{{ ru.relative.long.yesterdaySeconds }}</div>
+                <div class="flex">{{ en.relative.long.yesterdaySeconds }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Yesterday (with milliseconds)</div>
+                <div class="flex">{{ ru.relative.long.yesterdayMilliseconds }}</div>
+                <div class="flex">{{ en.relative.long.yesterdayMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Today</div>
+                <div class="flex">{{ ru.relative.long.today }}</div>
+                <div class="flex">{{ en.relative.long.today }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Today (with seconds)</div>
+                <div class="flex">{{ ru.relative.long.todaySeconds }}</div>
+                <div class="flex">{{ en.relative.long.todaySeconds }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Today (with milliseconds)</div>
+                <div class="flex">{{ ru.relative.long.todayMilliseconds }}</div>
+                <div class="flex">{{ en.relative.long.todayMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Tomorrow</div>
+                <div class="flex">{{ ru.relative.long.tomorrow }}</div>
+                <div class="flex">{{ en.relative.long.tomorrow }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Tomorrow (with seconds)</div>
+                <div class="flex">{{ ru.relative.long.tomorrowSeconds }}</div>
+                <div class="flex">{{ en.relative.long.tomorrowSeconds }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Tomorrow (with milliseconds)</div>
+                <div class="flex">{{ ru.relative.long.tomorrowMilliseconds }}</div>
+                <div class="flex">{{ en.relative.long.tomorrowMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
+                <div class="flex">After tomorrow (current year)</div>
+                <div class="flex">{{ ru.relative.long.afterTomorrowCurrentYear }}</div>
+                <div class="flex">{{ en.relative.long.afterTomorrowCurrentYear }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">After tomorrow (current year) (with seconds)</div>
+                <div class="flex">{{ ru.relative.long.afterTomorrowCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.relative.long.afterTomorrowCurrentYearSeconds }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">After tomorrow (current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.relative.long.afterTomorrowCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.relative.long.afterTomorrowCurrentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
+                <div class="flex">After tomorrow (not current year)</div>
+                <div class="flex">{{ ru.relative.long.afterTomorrowNotCurrentYear }}</div>
+                <div class="flex">{{ en.relative.long.afterTomorrowNotCurrentYear }}</div>
             </div>
         </div>
     </div>
@@ -120,39 +238,118 @@
                 <div class="flex light-text-secondary">Russian</div>
                 <div class="flex light-text-secondary">English</div>
             </div>
-            <div class="layout-row row-border">
-                <div class="flex">SecondsAgo</div>
-                <div class="flex">{{ ru.relative.short.secondsAgo }}</div>
-                <div class="flex">{{ en.relative.short.secondsAgo }}</div>
-            </div>
-            <div class="layout-row row-border">
-                <div class="flex">MinutesAgo</div>
-                <div class="flex">{{ ru.relative.short.minutesAgo }}</div>
-                <div class="flex">{{ en.relative.short.minutesAgo }}</div>
-            </div>
-            <div class="layout-row row-border">
-                <div class="flex">Today</div>
-                <div class="flex">{{ ru.relative.short.today }}</div>
-                <div class="flex">{{ en.relative.short.today }}</div>
-            </div>
-            <div class="layout-row row-border">
-                <div class="flex">Yesterday</div>
-                <div class="flex">{{ ru.relative.short.yesterday }}</div>
-                <div class="flex">{{ en.relative.short.yesterday }}</div>
-            </div>
-            <div class="layout-row row-border">
-                <div class="flex">Before yesterday (current year)</div>
-                <div class="flex">{{ ru.relative.short.beforeYesterdayCurrentYear }}</div>
-                <div class="flex">{{ en.relative.short.beforeYesterdayCurrentYear }}</div>
-            </div>
+
             <div class="layout-row row-border">
                 <div class="flex">Before yesterday (not current year)</div>
                 <div class="flex">{{ ru.relative.short.beforeYesterdayNotCurrentYear }}</div>
                 <div class="flex">{{ en.relative.short.beforeYesterdayNotCurrentYear }}</div>
             </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Before yesterday (current year)</div>
+                <div class="flex">{{ ru.relative.short.beforeYesterdayCurrentYear }}</div>
+                <div class="flex">{{ en.relative.short.beforeYesterdayCurrentYear }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Before yesterday (current year) (with seconds)</div>
+                <div class="flex">{{ ru.relative.short.beforeYesterdayCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.relative.short.beforeYesterdayCurrentYearSeconds }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Before yesterday (current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.relative.short.beforeYesterdayCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.relative.short.beforeYesterdayCurrentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Yesterday</div>
+                <div class="flex">{{ ru.relative.short.yesterday }}</div>
+                <div class="flex">{{ en.relative.short.yesterday }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Yesterday (with seconds)</div>
+                <div class="flex">{{ ru.relative.short.yesterdaySeconds }}</div>
+                <div class="flex">{{ en.relative.short.yesterdaySeconds }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Yesterday (with milliseconds)</div>
+                <div class="flex">{{ ru.relative.short.yesterdayMilliseconds }}</div>
+                <div class="flex">{{ en.relative.short.yesterdayMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Today</div>
+                <div class="flex">{{ ru.relative.short.today }}</div>
+                <div class="flex">{{ en.relative.short.today }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Today (with seconds)</div>
+                <div class="flex">{{ ru.relative.short.todaySeconds }}</div>
+                <div class="flex">{{ en.relative.short.todaySeconds }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Today (with milliseconds)</div>
+                <div class="flex">{{ ru.relative.short.todayMilliseconds }}</div>
+                <div class="flex">{{ en.relative.short.todayMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Tomorrow</div>
+                <div class="flex">{{ ru.relative.short.tomorrow }}</div>
+                <div class="flex">{{ en.relative.short.tomorrow }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Tomorrow (with seconds)</div>
+                <div class="flex">{{ ru.relative.short.tomorrowSeconds }}</div>
+                <div class="flex">{{ en.relative.short.tomorrowSeconds }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">Tomorrow (with milliseconds)</div>
+                <div class="flex">{{ ru.relative.short.tomorrowMilliseconds }}</div>
+                <div class="flex">{{ en.relative.short.tomorrowMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
+                <div class="flex">After tomorrow (current year)</div>
+                <div class="flex">{{ ru.relative.short.afterTomorrowCurrentYear }}</div>
+                <div class="flex">{{ en.relative.short.afterTomorrowCurrentYear }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">After tomorrow (current year) (with seconds)</div>
+                <div class="flex">{{ ru.relative.short.afterTomorrowCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.relative.short.afterTomorrowCurrentYearSeconds }}</div>
+            </div>
+
+            <div class="layout-row row-border">
+                <div class="flex">After tomorrow (current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.relative.short.afterTomorrowCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.relative.short.afterTomorrowCurrentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
+                <div class="flex">After tomorrow (not current year)</div>
+                <div class="flex">{{ ru.relative.short.afterTomorrowNotCurrentYear }}</div>
+                <div class="flex">{{ en.relative.short.afterTomorrowNotCurrentYear }}</div>
+            </div>
         </div>
     </div>
 
+    <br>
     <header class="mc-display-3">Date range</header>
     <div class="common-container">
         <h3>Long format</h3>
@@ -182,30 +379,90 @@
                 <div class="flex">{{ ru.range.long.date.endsNotCurrentYear }}</div>
                 <div class="flex">{{ en.range.long.date.endsNotCurrentYear }}</div>
             </div>
+            <div class="row-border"></div>
+
             <div class="layout-row row-border">
                 <div class="flex">rangeLongDateTime (the same day, current year)</div>
                 <div class="flex">{{ ru.range.long.dateTime.sameDateCurrentYear }}</div>
                 <div class="flex">{{ en.range.long.dateTime.sameDateCurrentYear }}</div>
             </div>
             <div class="layout-row row-border">
+                <div class="flex">rangeLongDateTime (the same day, current year) (with seconds)</div>
+                <div class="flex">{{ ru.range.long.dateTime.sameDateCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.range.long.dateTime.sameDateCurrentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeLongDateTime (the same day, current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.range.long.dateTime.sameDateCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.range.long.dateTime.sameDateCurrentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
                 <div class="flex">rangeLongDateTime (the same day, not current year)</div>
                 <div class="flex">{{ ru.range.long.dateTime.sameDateNotCurrentYear }}</div>
                 <div class="flex">{{ en.range.long.dateTime.sameDateNotCurrentYear }}</div>
             </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeLongDateTime (the same day, not current year) (with seconds)</div>
+                <div class="flex">{{ ru.range.long.dateTime.sameDateNotCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.range.long.dateTime.sameDateNotCurrentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeLongDateTime (the same day, not current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.range.long.dateTime.sameDateNotCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.range.long.dateTime.sameDateNotCurrentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
             <div class="layout-row row-border">
                 <div class="flex">rangeLongDateTime (not current month)</div>
                 <div class="flex">{{ ru.range.long.dateTime.notCurrentMonth }}</div>
                 <div class="flex">{{ en.range.long.dateTime.notCurrentMonth }}</div>
             </div>
             <div class="layout-row row-border">
+                <div class="flex">rangeLongDateTime (not current month) (with seconds)</div>
+                <div class="flex">{{ ru.range.long.dateTime.notCurrentMonthSeconds }}</div>
+                <div class="flex">{{ en.range.long.dateTime.notCurrentMonthSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeLongDateTime (not current month) (with milliseconds)</div>
+                <div class="flex">{{ ru.range.long.dateTime.notCurrentMonthMilliseconds }}</div>
+                <div class="flex">{{ en.range.long.dateTime.notCurrentMonthMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
                 <div class="flex">rangeLongDateTime (start date is not in current year)</div>
                 <div class="flex">{{ ru.range.long.dateTime.startsNotCurrentYear }}</div>
                 <div class="flex">{{ en.range.long.dateTime.startsNotCurrentYear }}</div>
             </div>
             <div class="layout-row row-border">
+                <div class="flex">rangeLongDateTime (start date is not in current year) (with seconds)</div>
+                <div class="flex">{{ ru.range.long.dateTime.startsNotCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.range.long.dateTime.startsNotCurrentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeLongDateTime (start date is not in current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.range.long.dateTime.startsNotCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.range.long.dateTime.startsNotCurrentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
                 <div class="flex">rangeLongDateTime (end date is not in current year)</div>
                 <div class="flex">{{ ru.range.long.dateTime.endsNotCurrentYear }}</div>
                 <div class="flex">{{ en.range.long.dateTime.endsNotCurrentYear }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeLongDateTime (end date is not in current year) (with seconds)</div>
+                <div class="flex">{{ ru.range.long.dateTime.endsNotCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.range.long.dateTime.endsNotCurrentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeLongDateTime (end date is not in current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.range.long.dateTime.endsNotCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.range.long.dateTime.endsNotCurrentYearMilliseconds }}</div>
             </div>
         </div>
     </div>
@@ -223,29 +480,94 @@
                 <div class="flex">{{ en.range.middle.dateTime.currentYear }}</div>
             </div>
             <div class="layout-row row-border">
+                <div class="flex">rangeMiddleDateTime (with seconds)</div>
+                <div class="flex">{{ ru.range.middle.dateTime.currentYearSeconds }}</div>
+                <div class="flex">{{ en.range.middle.dateTime.currentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeMiddleDateTime (with milliseconds)</div>
+                <div class="flex">{{ ru.range.middle.dateTime.currentYearMilliseconds }}</div>
+                <div class="flex">{{ en.range.middle.dateTime.currentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+            <div class="layout-row row-border">
                 <div class="flex">rangeMiddleDateTime (the same day)</div>
                 <div class="flex">{{ ru.range.middle.dateTime.sameDateCurrentYear }}</div>
                 <div class="flex">{{ en.range.middle.dateTime.sameDateCurrentYear }}</div>
             </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeMiddleDateTime (the same day) (with seconds)</div>
+                <div class="flex">{{ ru.range.middle.dateTime.sameDateCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.range.middle.dateTime.sameDateCurrentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeMiddleDateTime (the same day) (with milliseconds)</div>
+                <div class="flex">{{ ru.range.middle.dateTime.sameDateCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.range.middle.dateTime.sameDateCurrentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
             <div class="layout-row row-border">
                 <div class="flex">rangeMiddleDateTime (the same day, not current year)</div>
                 <div class="flex">{{ ru.range.middle.dateTime.sameDateNotCurrentYear }}</div>
                 <div class="flex">{{ en.range.middle.dateTime.sameDateNotCurrentYear }}</div>
             </div>
             <div class="layout-row row-border">
+                <div class="flex">rangeMiddleDateTime (the same day, not current year) (with seconds)</div>
+                <div class="flex">{{ ru.range.middle.dateTime.sameDateNotCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.range.middle.dateTime.sameDateNotCurrentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeMiddleDateTime (the same day, not current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.range.middle.dateTime.sameDateNotCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.range.middle.dateTime.sameDateNotCurrentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+            <div class="layout-row row-border">
                 <div class="flex">rangeMiddleDateTime (not current month)</div>
                 <div class="flex">{{ ru.range.middle.dateTime.notCurrentMonth }}</div>
                 <div class="flex">{{ en.range.middle.dateTime.notCurrentMonth }}</div>
             </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeMiddleDateTime (not current month) (with seconds)</div>
+                <div class="flex">{{ ru.range.middle.dateTime.notCurrentMonthSeconds }}</div>
+                <div class="flex">{{ en.range.middle.dateTime.notCurrentMonthSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeMiddleDateTime (not current month) (with milliseconds)</div>
+                <div class="flex">{{ ru.range.middle.dateTime.notCurrentMonthMilliseconds }}</div>
+                <div class="flex">{{ en.range.middle.dateTime.notCurrentMonthMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
             <div class="layout-row row-border">
                 <div class="flex">rangeMiddleDateTime (start date is not in current year)</div>
                 <div class="flex">{{ ru.range.middle.dateTime.startsNotCurrentYear }}</div>
                 <div class="flex">{{ en.range.middle.dateTime.startsNotCurrentYear }}</div>
             </div>
             <div class="layout-row row-border">
+                <div class="flex">rangeMiddleDateTime (start date is not in current year) (with seconds)</div>
+                <div class="flex">{{ ru.range.middle.dateTime.startsNotCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.range.middle.dateTime.startsNotCurrentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeMiddleDateTime (start date is not in current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.range.middle.dateTime.startsNotCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.range.middle.dateTime.startsNotCurrentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+            <div class="layout-row row-border">
                 <div class="flex">rangeMiddleDateTime (end date is not in current year)</div>
                 <div class="flex">{{ ru.range.middle.dateTime.endsNotCurrentYear }}</div>
                 <div class="flex">{{ en.range.middle.dateTime.endsNotCurrentYear }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeMiddleDateTime (end date is not in current year) (with seconds)</div>
+                <div class="flex">{{ ru.range.middle.dateTime.endsNotCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.range.middle.dateTime.endsNotCurrentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeMiddleDateTime (end date is not in current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.range.middle.dateTime.endsNotCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.range.middle.dateTime.endsNotCurrentYearMilliseconds }}</div>
             </div>
         </div>
     </div>
@@ -264,7 +586,7 @@
             </div>
             <div class="layout-row row-border">
                 <div class="flex">rangeShortDate (not current month)</div>
-                    <div class="flex">{{ ru.range.short.date.notCurrentYear }}</div>
+                <div class="flex">{{ ru.range.short.date.notCurrentYear }}</div>
                 <div class="flex">{{ en.range.short.date.notCurrentYear }}</div>
             </div>
             <div class="layout-row row-border">
@@ -277,30 +599,90 @@
                 <div class="flex">{{ ru.range.short.date.endsNotCurrentYear }}</div>
                 <div class="flex">{{ en.range.short.date.endsNotCurrentYear }}</div>
             </div>
+            <div class="row-border"></div>
+
             <div class="layout-row row-border">
                 <div class="flex">rangeShortDateTime (the same day, current year)</div>
                 <div class="flex">{{ ru.range.short.dateTime.sameDateCurrentYear }}</div>
                 <div class="flex">{{ en.range.short.dateTime.sameDateCurrentYear }}</div>
             </div>
             <div class="layout-row row-border">
+                <div class="flex">rangeShortDateTime (the same day, current year) (with seconds)</div>
+                <div class="flex">{{ ru.range.short.dateTime.sameDateCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.range.short.dateTime.sameDateCurrentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeShortDateTime (the same day, current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.range.short.dateTime.sameDateCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.range.short.dateTime.sameDateCurrentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
                 <div class="flex">rangeShortDateTime (the same day, not current year)</div>
                 <div class="flex">{{ ru.range.short.dateTime.sameDateNotCurrentYear }}</div>
                 <div class="flex">{{ en.range.short.dateTime.sameDateNotCurrentYear }}</div>
             </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeShortDateTime (the same day, not current year) (with seconds)</div>
+                <div class="flex">{{ ru.range.short.dateTime.sameDateNotCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.range.short.dateTime.sameDateNotCurrentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeShortDateTime (the same day, not current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.range.short.dateTime.sameDateNotCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.range.short.dateTime.sameDateNotCurrentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
             <div class="layout-row row-border">
                 <div class="flex">rangeShortDateTime (not current month)</div>
                 <div class="flex">{{ ru.range.short.dateTime.notCurrentMonth }}</div>
                 <div class="flex">{{ en.range.short.dateTime.notCurrentMonth }}</div>
             </div>
             <div class="layout-row row-border">
+                <div class="flex">rangeShortDateTime (not current month) (with seconds)</div>
+                <div class="flex">{{ ru.range.short.dateTime.notCurrentMonthSeconds }}</div>
+                <div class="flex">{{ en.range.short.dateTime.notCurrentMonthSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeShortDateTime (not current month) (with milliseconds)</div>
+                <div class="flex">{{ ru.range.short.dateTime.notCurrentMonthMilliseconds }}</div>
+                <div class="flex">{{ en.range.short.dateTime.notCurrentMonthMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
                 <div class="flex">rangeShortDateTime (start date is not in current year)</div>
                 <div class="flex">{{ ru.range.short.dateTime.startsNotCurrentYear }}</div>
                 <div class="flex">{{ en.range.short.dateTime.startsNotCurrentYear }}</div>
             </div>
             <div class="layout-row row-border">
+                <div class="flex">rangeShortDateTime (start date is not in current year) (with seconds)</div>
+                <div class="flex">{{ ru.range.short.dateTime.startsNotCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.range.short.dateTime.startsNotCurrentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeShortDateTime (start date is not in current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.range.short.dateTime.startsNotCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.range.short.dateTime.startsNotCurrentYearMilliseconds }}</div>
+            </div>
+            <div class="row-border"></div>
+
+            <div class="layout-row row-border">
                 <div class="flex">rangeShortDateTime (end date is not in current year)</div>
                 <div class="flex">{{ ru.range.short.dateTime.endsNotCurrentYear }}</div>
                 <div class="flex">{{ en.range.short.dateTime.endsNotCurrentYear }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeShortDateTime (end date is not in current year) (with seconds)</div>
+                <div class="flex">{{ ru.range.short.dateTime.endsNotCurrentYearSeconds }}</div>
+                <div class="flex">{{ en.range.short.dateTime.endsNotCurrentYearSeconds }}</div>
+            </div>
+            <div class="layout-row row-border">
+                <div class="flex">rangeShortDateTime (end date is not in current year) (with milliseconds)</div>
+                <div class="flex">{{ ru.range.short.dateTime.endsNotCurrentYearMilliseconds }}</div>
+                <div class="flex">{{ en.range.short.dateTime.endsNotCurrentYearMilliseconds }}</div>
             </div>
         </div>
     </div>

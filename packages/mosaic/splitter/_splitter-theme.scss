@@ -22,4 +22,8 @@
             cursor: default;
         }
     }
+
+    .mc-gutter-ghost {
+        background: mc-color($background, overlay-disabled);
+    }
 }

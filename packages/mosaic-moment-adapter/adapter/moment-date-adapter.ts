@@ -4,7 +4,6 @@ import {
     DateAdapter,
     MC_DATE_LOCALE
 } from '@ptsecurity/cdk/datetime';
-import { DateFormatter } from '@ptsecurity/mosaic/core';
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
 // syntax. However, rollup creates a synthetic default module and we thus need to import it using
@@ -61,28 +60,9 @@ function range<T>(length: number, valueFunction: (index: number) => T): T[] {
     return valuesArray;
 }
 
-// @ts-ignore
-export function DeprecatedMethod(target: any, key: string, descriptor: PropertyDescriptor) {
-    const origin = descriptor.value;
-
-    // tslint:disable-next-line:no-function-expression only-arrow-functions
-    descriptor.value = function(...args: any[]) {
-        console.warn(
-            `Found use of deprecated method ${key}, it was moved in DateFormatter. ` +
-            `The deprecated method will be removed in 13.0.0.`
-        );
-
-        return origin.apply(this, args);
-    };
-
-    return descriptor;
-}
-
 
 @Injectable()
 export class MomentDateAdapter extends DateAdapter<Moment> {
-    private dateFormatter: DateFormatter<Moment>;
-
     private localeData: {
         firstDayOfWeek: number;
         longMonths: string[];
@@ -105,7 +85,6 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     setLocale(locale: string): void {
         super.setLocale(locale);
 
-        this.dateFormatter = new DateFormatter<Moment>(this, locale);
         this.config = locale === 'en' ? enUS : ruRU;
 
         let momentLocaleData = moment.localeData(locale);
@@ -331,89 +310,8 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         return date.diff(this.today(), unit);
     }
 
-    @DeprecatedMethod
-    absoluteDate(date: Moment, params, datetime: boolean, milliseconds: boolean): string {
-        return this.dateFormatter.absoluteDate(date, params, datetime, milliseconds);
-    }
-
-    @DeprecatedMethod
-    absoluteLongDate(date: Moment): string {
-        return this.dateFormatter.absoluteLongDate(date);
-    }
-
-    @DeprecatedMethod
-    absoluteLongDateTime(date: Moment, options?): string {
-        return this.dateFormatter.absoluteLongDateTime(date, options);
-    }
-
-    @DeprecatedMethod
-    absoluteShortDate(date: Moment): string {
-        return this.dateFormatter.absoluteShortDate(date);
-    }
-
-    @DeprecatedMethod
-    absoluteShortDateTime(date: Moment, options?): string {
-        return this.dateFormatter.absoluteShortDateTime(date, options);
-    }
-
-    @DeprecatedMethod
-    openedRangeDate(startDate: Moment, endDate: Moment, template): string {
-        return this.dateFormatter.openedRangeDate(startDate, endDate, template);
-    }
-
-    @DeprecatedMethod
-    openedRangeDateTime(startDate: Moment, endDate: Moment, template): string {
-        return this.dateFormatter.openedRangeDateTime(startDate, endDate, template);
-    }
-
-    @DeprecatedMethod
-    rangeDate(startDate: Moment, endDate: Moment, template): string {
-        return this.dateFormatter.rangeDate(startDate, endDate, template);
-    }
-
-    @DeprecatedMethod
-    rangeDateTime(startDate: Moment, endDate: Moment, template): string {
-        return this.dateFormatter.rangeDateTime(startDate, endDate, template);
-    }
-
-    @DeprecatedMethod
-    rangeLongDate(startDate: Moment | null, endDate?: Moment): string {
-        return this.dateFormatter.rangeLongDate(startDate, endDate);
-    }
-
-    @DeprecatedMethod
-    rangeLongDateTime(startDate: Moment | null, endDate?: Moment): string {
-        return this.dateFormatter.rangeLongDateTime(startDate, endDate);
-    }
-
-    @DeprecatedMethod
-    rangeMiddleDateTime(startDate: Moment, endDate: Moment): string {
-        return this.dateFormatter.rangeMiddleDateTime(startDate, endDate);
-    }
-
-    @DeprecatedMethod
-    rangeShortDate(startDate: Moment | null, endDate?: Moment): string {
-        return this.dateFormatter.rangeShortDate(startDate, endDate);
-    }
-
-    @DeprecatedMethod
-    rangeShortDateTime(startDate: Moment | null, endDate?: Moment): string {
-        return this.dateFormatter.rangeShortDateTime(startDate, endDate);
-    }
-
-    @DeprecatedMethod
-    relativeDate(date: Moment, template): string {
-        return this.dateFormatter.relativeDate(date, template);
-    }
-
-    @DeprecatedMethod
-    relativeLongDate(date: Moment): string {
-        return this.dateFormatter.relativeLongDate(date);
-    }
-
-    @DeprecatedMethod
-    relativeShortDate(date: Moment): string {
-        return this.dateFormatter.relativeShortDate(date);
+    daysFromToday(date: Moment): number {
+        return this.diffNow(date, 'days');
     }
 
     /** Creates a Moment instance while respecting the current UTC settings. */

@@ -15,3 +15,15 @@
 
     padding: 20px 69px;
 }
+
+@media (max-width: 600px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .content {
+        width: 100%;
+        margin: 0px;
+        padding: 10px;
+    }
+}

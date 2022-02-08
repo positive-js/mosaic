@@ -29,8 +29,12 @@ export class AbsoluteDateFormatterExample {
                     },
                     dateTime: {
                         currentYear: '',
+                        currentYearSeconds: '',
+                        currentYearMilliseconds: '',
+
                         notCurrentYear: '',
-                        milliseconds: ''
+                        notCurrentYearSeconds: '',
+                        notCurrentYearMilliseconds: ''
                     }
                 },
                 short: {
@@ -40,8 +44,12 @@ export class AbsoluteDateFormatterExample {
                     },
                     dateTime: {
                         currentYear: '',
+                        currentYearSeconds: '',
+                        currentYearMilliseconds: '',
+
                         notCurrentYear: '',
-                        milliseconds: ''
+                        notCurrentYearSeconds: '',
+                        notCurrentYearMilliseconds: ''
                     }
                 }
             }
@@ -55,8 +63,12 @@ export class AbsoluteDateFormatterExample {
                     },
                     dateTime: {
                         currentYear: '',
+                        currentYearSeconds: '',
+                        currentYearMilliseconds: '',
+
                         notCurrentYear: '',
-                        milliseconds: ''
+                        notCurrentYearSeconds: '',
+                        notCurrentYearMilliseconds: ''
                     }
                 },
                 short: {
@@ -66,15 +78,19 @@ export class AbsoluteDateFormatterExample {
                     },
                     dateTime: {
                         currentYear: '',
+                        currentYearSeconds: '',
+                        currentYearMilliseconds: '',
+
                         notCurrentYear: '',
-                        milliseconds: ''
+                        notCurrentYearSeconds: '',
+                        notCurrentYearMilliseconds: ''
                     }
                 }
             }
         }
     };
 
-    constructor(private adapter: DateAdapter<DateTime>, private formatter: DateFormatter<DateTime>) {
+    constructor(private adapter: DateAdapter<DateTime>, private dateFormatter: DateFormatter<DateTime>) {
         this.populateAbsoluteLong('ru');
         this.populateAbsoluteLong('en');
 
@@ -83,32 +99,46 @@ export class AbsoluteDateFormatterExample {
     }
 
     private populateAbsoluteShort(locale: string) {
-        this.formatter.setLocale(locale);
+        this.dateFormatter.setLocale(locale);
         this.adapter.setLocale(locale);
 
         const now = this.adapter.today();
 
         const absoluteShort = this.formats[locale].absolute.short;
 
-        absoluteShort.date.currentYear = this.formatter.absoluteShortDate(now);
-        absoluteShort.date.notCurrentYear = this.formatter.absoluteShortDate(now.minus({ years: 1 }));
-        absoluteShort.dateTime.currentYear = this.formatter.absoluteShortDateTime(now);
-        absoluteShort.dateTime.notCurrentYear = this.formatter.absoluteShortDateTime(now.minus({ years: 1 }));
-        absoluteShort.dateTime.milliseconds = this.formatter.absoluteShortDateTime(now, { milliseconds: true });
+        absoluteShort.date.currentYear = this.dateFormatter.absoluteShortDate(now);
+        absoluteShort.date.notCurrentYear = this.dateFormatter.absoluteShortDate(now.minus({ years: 1 }));
+
+        absoluteShort.dateTime.currentYear = this.dateFormatter.absoluteShortDateTime(now);
+        absoluteShort.dateTime.currentYearSeconds = this.dateFormatter.absoluteShortDateTime(now, {seconds: true});
+        absoluteShort.dateTime.currentYearMilliseconds = this.dateFormatter.absoluteShortDateTime(now, {milliseconds: true});
+
+        absoluteShort.dateTime.notCurrentYear = this.dateFormatter.absoluteShortDateTime(now.minus({ years: 1 }));
+        absoluteShort.dateTime.notCurrentYearSeconds = this.dateFormatter.absoluteShortDateTime(now.minus({ years: 1 }), {seconds: true});
+        absoluteShort.dateTime.notCurrentYearMilliseconds = this.dateFormatter.absoluteShortDateTime(
+            now.minus({ years: 1 }), {milliseconds: true}
+        );
     }
 
     private populateAbsoluteLong(locale: string) {
-        this.formatter.setLocale(locale);
+        this.dateFormatter.setLocale(locale);
         this.adapter.setLocale(locale);
 
         const now = this.adapter.today();
 
         const absoluteLong = this.formats[locale].absolute.long;
 
-        absoluteLong.date.currentYear = this.formatter.absoluteLongDate(now);
-        absoluteLong.date.notCurrentYear = this.formatter.absoluteLongDate(now.minus({ years: 1 }));
-        absoluteLong.dateTime.currentYear = this.formatter.absoluteLongDateTime(now);
-        absoluteLong.dateTime.notCurrentYear = this.formatter.absoluteLongDateTime(now.minus({ years: 1 }));
-        absoluteLong.dateTime.milliseconds = this.formatter.absoluteLongDateTime(now, { milliseconds: true });
+        absoluteLong.date.currentYear = this.dateFormatter.absoluteLongDate(now);
+        absoluteLong.date.notCurrentYear = this.dateFormatter.absoluteLongDate(now.minus({ years: 1 }));
+
+        absoluteLong.dateTime.currentYear = this.dateFormatter.absoluteLongDateTime(now);
+        absoluteLong.dateTime.currentYearSeconds = this.dateFormatter.absoluteLongDateTime(now, {seconds: true});
+        absoluteLong.dateTime.currentYearMilliseconds = this.dateFormatter.absoluteLongDateTime(now, {milliseconds: true});
+
+        absoluteLong.dateTime.notCurrentYear = this.dateFormatter.absoluteLongDateTime(now.minus({ years: 1 }));
+        absoluteLong.dateTime.notCurrentYearSeconds = this.dateFormatter.absoluteLongDateTime(now.minus({ years: 1 }), {seconds: true});
+        absoluteLong.dateTime.notCurrentYearMilliseconds = this.dateFormatter.absoluteLongDateTime(
+            now.minus({ years: 1 }), {milliseconds: true}
+        );
     }
 }

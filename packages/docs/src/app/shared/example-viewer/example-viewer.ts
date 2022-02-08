@@ -143,7 +143,7 @@ export class ExampleViewer {
             // @ts-ignore
             const moduleExports: any = await import(
                 /* webpackExclude: /\.map$/ */
-            `@ptsecurity/mosaic-examples/fesm2015/${module.importPath}`);
+            `@ptsecurity/mosaic-examples/fesm2020/${module.importPath}`);
             this.exampleComponentType = moduleExports[componentName];
             // The components examples package is built with Ivy. This means that no factory files are
             // generated. To retrieve the factory of the AOT compiled module, we simply pass the module

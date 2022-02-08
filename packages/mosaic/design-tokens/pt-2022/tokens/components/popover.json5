@@ -1,0 +1,68 @@
+{
+    popover: {
+        'light-color-scheme': {
+            background: { value: '{light-color-scheme.background.background.value}' },
+            text: { value: '{light-color-scheme.foreground.text.value}' },
+            shadow: { value: '{popup.light-color-scheme.shadow.value}' },
+            border: { value: '{popup.light-color-scheme.border.value}' }
+        },
+        'dark-color-scheme': {
+            background: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+            text: { value: '{dark-color-scheme.foreground.text.value}' },
+            shadow: { value: '{popup.dark-color-scheme.shadow.value}' },
+            border: { value: '{dark-color-scheme.second.palette.value.700.value}' }
+        },
+        size: {
+            'max-height': { value: '480px' },
+            padding: { value: '16px' },
+            'border-radius': { value: '3px' },
+
+        'arrow-size': { value: '12px' },
+        'trigger-margin': { value: '9px' },
+
+        'small-width': { value: '200px' },
+        'normal-width': { value: '400px' },
+        'large-width': { value: '640px' }
+    },
+    font: {
+        default: { value: 'body' }
+    }
+},
+'popover-header': {
+    'light-color-scheme': {
+        border: { value: '{popup.light-color-scheme.border.value}' },
+        text: { value: '{light-color-scheme.foreground.text.value}' },
+        background: { value: '{popup.light-color-scheme.background.value}' }
+    },
+    'dark-color-scheme': {
+        border: { value: '{dark-color-scheme.second.palette.value.600.value}' },
+        text: { value: '{dark-color-scheme.foreground.text.value}' },
+        background: { value: '{dark-color-scheme.second.palette.value.700.value}' }
+    },
+    size: {
+        height: { value: '10px 16px' },
+        padding: { value: '10px 16px' }
+    },
+    font: {
+        default: { value: 'subheading' }
+    }
+},
+'popover-footer': {
+    'light-color-scheme': {
+        border: { value: '{popup.light-color-scheme.footer-background.value}' },
+        background: { value: '{popup.light-color-scheme.footer-background.value}' }
+    },
+    'dark-color-scheme': {
+        border: { value: '{dark-color-scheme.second.palette.value.600.value}' },
+        background: { value: '{dark-color-scheme.background.background-disabled.value}' }
+    },
+    size: {
+        'margin-top': { value: '8px' },
+        padding: { value: '12px {padding.headerFooter-horizontal}' },
+        'height': { value: '56px' }
+    },
+    font: {
+        default: { value: 'body' }
+    }
+  }
+}

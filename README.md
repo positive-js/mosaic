@@ -4,7 +4,7 @@
 
 [![npm version](https://badge.fury.io/js/%40ptsecurity%2Fmosaic.svg)](https://badge.fury.io/js/%40ptsecurity%2Fmosaic)
 [![CircleCI](https://circleci.com/gh/positive-js/mosaic/tree/master.svg?style=shield)](https://circleci.com/gh/positive-js/mosaic/tree/master)
-[![Dependency Status](https://david-dm.org/positive-js/mosaic.svg)](https://david-dm.org/positive-js/mosaic)
+[![Libraries.io dependency status for latest release, scoped npm package](https://img.shields.io/librariesio/release/npm/@ptsecurity/mosaic)](https://libraries.io/npm/@ptsecurity%2Fmosaic)
 [![Known Vulnerabilities](https://snyk.io/test/github/positive-js/mosaic/badge.svg)](https://snyk.io/test/github/positive-js/mosaic)
 [![Wallaby.js](https://img.shields.io/badge/wallaby.js-configured-green.svg)](https://wallabyjs.com)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/positive-js/mosaic/blob/master/LICENSE)
@@ -34,6 +34,7 @@ Versions of this site are also available for
 - [v9](https://v9.mosaic.ptsecurity.com)
 - [v10](https://v10.mosaic.ptsecurity.com/)
 - [v11](https://v11.mosaic.ptsecurity.com/)
+- [v12](https://v12.mosaic.ptsecurity.com/)
 
 ## 🚀 Getting started
 
@@ -58,7 +59,17 @@ See our:
 and
 [contribution guidelines](https://github.com/positive-js/mosaic/blob/master/CONTRIBUTING.md)
 
+Or: go over the steps in [this](https://github.com/firstcontributions/first-contributions) guide
+
 ## Credits
+
+### Authors
+
+- Anton Galaktionov - PT
+- Leonid Kramarov – PT
+- Mike Ozornin [![alt text][1.1]][1] – PT
+- Oleg Pimenov [![alt text][1.1]][2] – PT
+
 
 ### Contributors
 
@@ -70,3 +81,27 @@ Thank you to all the people who have already contributed to Mosaic!
 [getting-started]: docs/getting-started.md
 [contributing]: docs/guides/00-contributing.md
 [design-tokens]: docs/guides/08-design-tokens.md
+
+<!-- icons with padding -->
+
+[1.1]: http://i.imgur.com/tXSoThF.png (twitter icon with padding)
+[2.1]: http://i.imgur.com/P3YfQoD.png (facebook icon with padding)
+[3.1]: http://i.imgur.com/yCsTjba.png (google plus icon with padding)
+[4.1]: http://i.imgur.com/YckIOms.png (tumblr icon with padding)
+[5.1]: http://i.imgur.com/1AGmwO3.png (dribbble icon with padding)
+[6.1]: http://i.imgur.com/0o48UoR.png (github icon with padding)
+
+<!-- icons without padding -->
+
+[1.2]: http://i.imgur.com/wWzX9uB.png (twitter icon without padding)
+[2.2]: http://i.imgur.com/fep1WsG.png (facebook icon without padding)
+[3.2]: http://i.imgur.com/VlgBKQ9.png (google plus icon without padding)
+[4.2]: http://i.imgur.com/jDRp47c.png (tumblr icon without padding)
+[5.2]: http://i.imgur.com/Vvy3Kru.png (dribbble icon without padding)
+[6.2]: http://i.imgur.com/9I6NRUm.png (github icon without padding)
+
+<!-- links to your social media accounts -->
+<!-- update these accordingly -->
+
+[1]: http://www.twitter.com/mikeozornin
+[2]: http://www.twitter.com/pimenovoleg

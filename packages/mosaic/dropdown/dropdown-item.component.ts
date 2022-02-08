@@ -151,4 +151,12 @@ export class McDropdownItem extends McDropdownItemMixinBase implements
 
         return clone.textContent?.trim() || '';
     }
+
+    haltDisabledEvents(event: Event) {
+        if (this.disabled) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            event.stopPropagation();
+        }
+    }
 }

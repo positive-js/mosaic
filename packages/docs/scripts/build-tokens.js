@@ -1,8 +1,9 @@
 const buildTokens = require('../../mosaic/design-tokens/style-dictionary/build');
 
+const themeName = 'pt-2022';
 
-const mosaicTokensProps = 'packages/mosaic/design-tokens/tokens/properties/**/*.json5';
-const mosaicTokensComponents = 'packages/mosaic/design-tokens/tokens/components/**/*.json5';
+const mosaicTokensProps = `packages/mosaic/design-tokens/${themeName}/tokens/properties/**/*.json5`;
+const mosaicTokensComponents = `packages/mosaic/design-tokens/${themeName}/tokens/components/**/*.json5`;
 
 buildTokens([
     {
@@ -18,8 +19,7 @@ buildTokens([
         buildPath: [
             mosaicTokensProps,
             `packages/docs/src/styles/green-theme/properties/**/*.json5`,
-            mosaicTokensComponents,
-            `packages/docs/src/styles/green-theme/components/**/*.json5`,
+            mosaicTokensComponents
         ],
         outputPath: 'packages/docs/src/styles/green-theme/'
     },

@@ -6,8 +6,45 @@
             "cleanUrls": true,
             "rewrites": [
                 {
-                    "source": "**/!(*.*)",
+                    "source": "/**/!(*.@(js|ts|html|css|json|svg|png|jpg|jpeg))",
                     "destination": "/index.html"
+                }
+            ],
+            "headers": [
+                {
+                    "source": "/**",
+                    "headers": [
+                        {
+                            "key": "X-XSS-Protection",
+                            "value": "1"
+                        },
+                        {
+                            "key": "X-Frame-Options",
+                            "value": "DENY"
+                        },
+                        {
+                            "key": "Content-Security-Policy",
+                            "value": "upgrade-insecure-requests; default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' *; frame-src https://www.youtube.com; media-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com; child-src 'self' blob:; connect-src 'self' https://mosaic.ptsecurity.com https://www.google-analytics.com https://api.github.com;"
+                        }
+                    ]
+                },
+                {
+                    "source": "/assets/**",
+                    "headers": [
+                        {
+                            "key": "Cache-Control",
+                            "value": "public, max-age=15811200, s-maxage=31536000"
+                        }
+                    ]
+                },
+                {
+                    "source": "/*.@(js|css)",
+                    "headers": [
+                        {
+                            "key": "Cache-Control",
+                            "value": "public, max-age=31536000"
+                        }
+                    ]
                 }
             ],
             "ignore": [
@@ -22,8 +59,45 @@
             "cleanUrls": true,
             "rewrites": [
                 {
-                    "source": "**/!(*.*)",
+                    "source": "/**/!(*.@(js|ts|html|css|json|svg|png|jpg|jpeg))",
                     "destination": "/index.html"
+                }
+            ],
+            "headers": [
+                {
+                    "source": "/**",
+                    "headers": [
+                        {
+                            "key": "X-XSS-Protection",
+                            "value": "1"
+                        },
+                        {
+                            "key": "X-Frame-Options",
+                            "value": "DENY"
+                        },
+                        {
+                            "key": "Content-Security-Policy",
+                            "value": "upgrade-insecure-requests; default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' *; frame-src https://www.youtube.com; media-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com; child-src 'self' blob:; connect-src 'self' https://mosaic.ptsecurity.com https://www.google-analytics.com https://api.github.com;"
+                        }
+                    ]
+                },
+                {
+                    "source": "/assets/**",
+                    "headers": [
+                        {
+                            "key": "Cache-Control",
+                            "value": "public, max-age=15811200, s-maxage=31536000"
+                        }
+                    ]
+                },
+                {
+                    "source": "/*.@(js|css)",
+                    "headers": [
+                        {
+                            "key": "Cache-Control",
+                            "value": "public, max-age=31536000"
+                        }
+                    ]
                 }
             ],
             "ignore": [
@@ -82,6 +156,38 @@
         },
         {
             "target": "v11",
+            "public": "dist/releases/mosaic-docs",
+            "cleanUrls": true,
+            "rewrites": [
+                {
+                    "source": "**/!(*.*)",
+                    "destination": "/index.html"
+                }
+            ],
+            "ignore": [
+                "firebase.json",
+                "**/node_modules/**",
+                "tmp"
+            ]
+        },
+        {
+            "target": "v12",
+            "public": "dist/releases/mosaic-docs",
+            "cleanUrls": true,
+            "rewrites": [
+                {
+                    "source": "**/!(*.*)",
+                    "destination": "/index.html"
+                }
+            ],
+            "ignore": [
+                "firebase.json",
+                "**/node_modules/**",
+                "tmp"
+            ]
+        },
+        {
+            "target": "v13",
             "public": "dist/releases/mosaic-docs",
             "cleanUrls": true,
             "rewrites": [

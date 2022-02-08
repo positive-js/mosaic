@@ -23,46 +23,114 @@ export class RelativeDateFormatterExample {
         ru: {
             relative: {
                 long: {
-                    secondsAgo: '',
-                    minutesAgo: '',
-                    today: '',
-                    yesterday: '',
-                    beforeYesterdayCurrentYear: '',
-                    beforeYesterdayNotCurrentYear: ''
+                        beforeYesterdayNotCurrentYear: '',
+
+                        beforeYesterdayCurrentYear: '',
+                        beforeYesterdayCurrentYearSeconds: '',
+                        beforeYesterdayCurrentYearMilliseconds: '',
+
+                        yesterday: '',
+                        yesterdaySeconds: '',
+                        yesterdayMilliseconds: '',
+
+                        today: '',
+                        todaySeconds: '',
+                        todayMilliseconds: '',
+
+                        tomorrow: '',
+                        tomorrowSeconds: '',
+                        tomorrowMilliseconds: '',
+
+                        afterTomorrowCurrentYear: '',
+                        afterTomorrowCurrentYearSeconds: '',
+                        afterTomorrowCurrentYearMilliseconds: '',
+
+                        afterTomorrowNotCurrentYear: ''
                 },
                 short: {
-                    secondsAgo: '',
-                    minutesAgo: '',
-                    today: '',
-                    yesterday: '',
-                    beforeYesterdayCurrentYear: '',
-                    beforeYesterdayNotCurrentYear: ''
+                        beforeYesterdayNotCurrentYear: '',
+
+                        beforeYesterdayCurrentYear: '',
+                        beforeYesterdayCurrentYearSeconds: '',
+                        beforeYesterdayCurrentYearMilliseconds: '',
+
+                        yesterday: '',
+                        yesterdaySeconds: '',
+                        yesterdayMilliseconds: '',
+
+                        today: '',
+                        todaySeconds: '',
+                        todayMilliseconds: '',
+
+                        tomorrow: '',
+                        tomorrowSeconds: '',
+                        tomorrowMilliseconds: '',
+
+                        afterTomorrowCurrentYear: '',
+                        afterTomorrowCurrentYearSeconds: '',
+                        afterTomorrowCurrentYearMilliseconds: '',
+
+                        afterTomorrowNotCurrentYear: ''
                 }
             }
         },
         en: {
             relative: {
                 long: {
-                    secondsAgo: '',
-                    minutesAgo: '',
-                    today: '',
-                    yesterday: '',
-                    beforeYesterdayCurrentYear: '',
-                    beforeYesterdayNotCurrentYear: ''
+                        beforeYesterdayNotCurrentYear: '',
+
+                        beforeYesterdayCurrentYear: '',
+                        beforeYesterdayCurrentYearSeconds: '',
+                        beforeYesterdayCurrentYearMilliseconds: '',
+
+                        yesterday: '',
+                        yesterdaySeconds: '',
+                        yesterdayMilliseconds: '',
+
+                        today: '',
+                        todaySeconds: '',
+                        todayMilliseconds: '',
+
+                        tomorrow: '',
+                        tomorrowSeconds: '',
+                        tomorrowMilliseconds: '',
+
+                        afterTomorrowCurrentYear: '',
+                        afterTomorrowCurrentYearSeconds: '',
+                        afterTomorrowCurrentYearMilliseconds: '',
+
+                        afterTomorrowNotCurrentYear: ''
                 },
                 short: {
-                    secondsAgo: '',
-                    minutesAgo: '',
-                    today: '',
-                    yesterday: '',
-                    beforeYesterdayCurrentYear: '',
-                    beforeYesterdayNotCurrentYear: ''
+                        beforeYesterdayNotCurrentYear: '',
+
+                        beforeYesterdayCurrentYear: '',
+                        beforeYesterdayCurrentYearSeconds: '',
+                        beforeYesterdayCurrentYearMilliseconds: '',
+
+                        yesterday: '',
+                        yesterdaySeconds: '',
+                        yesterdayMilliseconds: '',
+
+                        today: '',
+                        todaySeconds: '',
+                        todayMilliseconds: '',
+
+                        tomorrow: '',
+                        tomorrowSeconds: '',
+                        tomorrowMilliseconds: '',
+
+                        afterTomorrowCurrentYear: '',
+                        afterTomorrowCurrentYearSeconds: '',
+                        afterTomorrowCurrentYearMilliseconds: '',
+
+                        afterTomorrowNotCurrentYear: ''
                 }
             }
         }
     };
 
-    constructor(private adapter: DateAdapter<DateTime>, private formatter: DateFormatter<DateTime>) {
+    constructor(private adapter: DateAdapter<DateTime>, private dateFormatter: DateFormatter<DateTime>) {
         this.populateRelativeLong('ru');
         this.populateRelativeLong('en');
 
@@ -71,36 +139,96 @@ export class RelativeDateFormatterExample {
     }
 
     private populateRelativeShort(locale: string) {
-        this.formatter.setLocale(locale);
+        this.dateFormatter.setLocale(locale);
         this.adapter.setLocale(locale);
 
         const relativeShort = this.formats[locale].relative.short;
         const now = this.adapter.today();
 
-        relativeShort.secondsAgo = this.formatter.relativeShortDate(now.minus({ seconds: 1 }));
-        relativeShort.minutesAgo = this.formatter.relativeShortDate(now.minus({ minute: 1 }));
-        relativeShort.today = this.formatter.relativeShortDate(now.minus({ hours: 1 }));
-        relativeShort.yesterday = this.formatter.relativeShortDate(now.minus({ days: 1 }));
-        relativeShort.beforeYesterdayCurrentYear = this.formatter.relativeShortDate(now.minus({ days: 2 }));
-        relativeShort.beforeYesterdayNotCurrentYear = this.formatter.relativeShortDate(
+        relativeShort.beforeYesterdayNotCurrentYear = this.dateFormatter.relativeShortDate(
             now.minus({ years: 1, days: 2 })
+        );
+        relativeShort.beforeYesterdayCurrentYear = this.dateFormatter.relativeShortDate(now.minus({ days: 2 }));
+        relativeShort.beforeYesterdayCurrentYearSeconds = this.dateFormatter.relativeShortDateTime(
+            now.minus({ days: 2 }), {seconds: true}
+        );
+        relativeShort.beforeYesterdayCurrentYearMilliseconds = this.dateFormatter.relativeShortDateTime(
+            now.minus({ days: 2 }), {milliseconds: true}
+        );
+
+        relativeShort.yesterday = this.dateFormatter.relativeShortDate(now.minus({ days: 1 }));
+        relativeShort.yesterdaySeconds = this.dateFormatter.relativeShortDateTime(
+            now.minus({ days: 1 }), {seconds: true}
+        );
+        relativeShort.yesterdayMilliseconds = this.dateFormatter.relativeShortDateTime(
+            now.minus({ days: 1 }), {milliseconds: true}
+        );
+
+        relativeShort.today = this.dateFormatter.relativeShortDate(now.minus({ hours: 1 }));
+        relativeShort.todaySeconds = this.dateFormatter.relativeShortDateTime(
+            now.minus({ hours: 1 }), {seconds: true}
+        );
+        relativeShort.todayMilliseconds = this.dateFormatter.relativeShortDateTime(
+            now.minus({ hours: 1 }), {milliseconds: true}
+        );
+
+        relativeShort.tomorrow = this.dateFormatter.relativeShortDate(now.plus({ days: 1, hours: 1 }));
+        relativeShort.tomorrowSeconds = this.dateFormatter.relativeShortDateTime(
+            now.plus({ days: 1, hours: 1 }), {seconds: true}
+        );
+        relativeShort.tomorrowMilliseconds = this.dateFormatter.relativeShortDateTime(
+            now.plus({ days: 1, hours: 1 }), {milliseconds: true}
+        );
+
+        relativeShort.afterTomorrowCurrentYear = this.dateFormatter.relativeShortDate(now.plus({ days: 2 }));
+        relativeShort.afterTomorrowCurrentYearSeconds = this.dateFormatter.relativeShortDateTime(
+            now.plus({ days: 2 }), {seconds: true}
+        );
+        relativeShort.afterTomorrowCurrentYearMilliseconds = this.dateFormatter.relativeShortDateTime(
+            now.plus({ days: 2 }), {milliseconds: true}
+        );
+
+        relativeShort.afterTomorrowNotCurrentYear = this.dateFormatter.relativeShortDate(
+            now.plus({ years: 1, days: 2 })
         );
     }
 
     private populateRelativeLong(locale: string) {
-        this.formatter.setLocale(locale);
+        this.dateFormatter.setLocale(locale);
         this.adapter.setLocale(locale);
 
         const relativeLong = this.formats[locale].relative.long;
         const now = this.adapter.today();
 
-        relativeLong.secondsAgo = this.formatter.relativeLongDate(now.minus({ seconds: 1 }));
-        relativeLong.minutesAgo = this.formatter.relativeLongDate(now.minus({ minute: 1 }));
-        relativeLong.today = this.formatter.relativeLongDate(now.minus({ hours: 1 }));
-        relativeLong.yesterday = this.formatter.relativeLongDate(now.minus({ days: 1 }));
-        relativeLong.beforeYesterdayCurrentYear = this.formatter.relativeLongDate(now.minus({ days: 2 }));
-        relativeLong.beforeYesterdayNotCurrentYear = this.formatter.relativeLongDate(
+        relativeLong.beforeYesterdayNotCurrentYear = this.dateFormatter.relativeLongDate(
             now.minus({ years: 1, days: 2 })
+        );
+        relativeLong.beforeYesterdayCurrentYear = this.dateFormatter.relativeLongDate(now.minus({ days: 2 }));
+        relativeLong.beforeYesterdayCurrentYearSeconds = this.dateFormatter.relativeLongDateTime(now.minus({ days: 2 }), {seconds: true});
+        relativeLong.beforeYesterdayCurrentYearMilliseconds = this.dateFormatter.relativeLongDateTime(
+            now.minus({ days: 2 }), {milliseconds: true}
+        );
+
+        relativeLong.yesterday = this.dateFormatter.relativeLongDate(now.minus({ days: 1 }));
+        relativeLong.yesterdaySeconds = this.dateFormatter.relativeLongDateTime(now.minus({ days: 1 }), {seconds: true});
+        relativeLong.yesterdayMilliseconds = this.dateFormatter.relativeLongDateTime(now.minus({ days: 1 }), {milliseconds: true});
+
+        relativeLong.today = this.dateFormatter.relativeLongDate(now.minus({ hours: 1 }));
+        relativeLong.todaySeconds = this.dateFormatter.relativeLongDateTime(now.minus({ hours: 1 }), {seconds: true});
+        relativeLong.todayMilliseconds = this.dateFormatter.relativeLongDateTime(now.minus({ hours: 1 }), {milliseconds: true});
+
+        relativeLong.tomorrow = this.dateFormatter.relativeLongDate(now.plus({ days: 1, hours: 1 }));
+        relativeLong.tomorrowSeconds = this.dateFormatter.relativeLongDateTime(now.plus({ days: 1, hours: 1 }), {seconds: true});
+        relativeLong.tomorrowMilliseconds = this.dateFormatter.relativeLongDateTime(now.plus({ days: 1, hours: 1 }), {milliseconds: true});
+
+        relativeLong.afterTomorrowCurrentYear = this.dateFormatter.relativeLongDate(now.plus({ days: 2 }));
+        relativeLong.afterTomorrowCurrentYearSeconds = this.dateFormatter.relativeLongDateTime(now.plus({ days: 2 }), {seconds: true});
+        relativeLong.afterTomorrowCurrentYearMilliseconds = this.dateFormatter.relativeLongDateTime(
+            now.plus({ days: 2 }), {milliseconds: true}
+        );
+
+        relativeLong.afterTomorrowNotCurrentYear = this.dateFormatter.relativeLongDate(
+            now.plus({ years: 1, days: 2 })
         );
     }
 }

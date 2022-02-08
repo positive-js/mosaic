@@ -1,8 +1,28 @@
+<ng-template #myTemplate let-toast>
+    toast.data.title {{ toast.data.title }}
+
+    <button class="mc-alert__close" (click)="toast.close()">
+        <i class="mc-icon_light">+</i>
+    </button>
+</ng-template>
+
+<ng-template #otherTemplate let-toast>
+    otherTemplate toast.data.title {{ toast.data.title }}
+
+    <button class="mc-alert__close" (click)="toast.close()">
+        <i class="mc-icon_light">+</i>
+    </button>
+</ng-template>
+
 <div class="demo-block">
     <div class="example-button-group">
-        <button class="example-button" mc-button color="primary" (click)="showSuccessAlert()">Success</button>
-        <button class="example-button" mc-button color="primary" (click)="showInfoAlert()">Info</button>
-        <button class="example-button" mc-button color="primary" (click)="showWarnAlert()">Warn</button>
-        <button class="example-button" mc-button color="primary" (click)="showErrorAlert()">Error</button>
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('success')">Success</button>
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('info')">Info</button>
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('warning')">Warn</button>
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('error')">Error</button>
+
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('error', myTemplate)">Custom Error</button>
+
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('warning', otherTemplate)">Custom Warning</button>
     </div>
 </div>

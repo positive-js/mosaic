@@ -38,7 +38,9 @@
                                 "glob": "favicon.ico",
                                 "input": "packages/docs/src",
                                 "output": "/"
-                            }
+                            },
+                            "src/robots.txt",
+                            "src/sitemap.xml"
                         ],
                         "styles": [
                             {

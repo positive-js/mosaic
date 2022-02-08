@@ -1,0 +1,27 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
+    "mainEntryPointFilePath": "<projectFolder>dist/mosaic/button/index.d.ts",
+    "bundledPackages": [],
+    "compiler": {},
+    "apiReport": {
+        "enabled": true,
+        "reportFileName": "<unscopedPackageName>.api.md",
+        "reportFolder": "<projectFolder>/tools/public_api_guard/mosaic"
+    },
+    "docModel": { "enabled": false},
+    "dtsRollup": { "enabled": false },
+    "tsdocMetadata": { "enabled": false },
+    "messages": {
+        "compilerMessageReporting": {
+            "default": { "logLevel": "warning" }
+        },
+        "extractorMessageReporting": {
+            "default": { "logLevel": "warning" },
+            "ae-missing-release-tag": { "logLevel": "none" },
+            "ae-missing-getter": { "logLevel": "none" }
+        },
+        "tsdocMessageReporting": {
+            "default": { "logLevel": "none" }
+        }
+    }
+}

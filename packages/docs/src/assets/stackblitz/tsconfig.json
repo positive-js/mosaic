@@ -2,20 +2,20 @@
     "compileOnSave": false,
     "compilerOptions": {
         "baseUrl": "./",
-        "outDir": "../dist/out-tsc",
+        "outDir": "./dist/out-tsc",
         "sourceMap": true,
         "declaration": false,
         "downlevelIteration": true,
         "experimentalDecorators": true,
-        "module": "esnext",
         "moduleResolution": "node",
         "importHelpers": true,
-        "target": "es2015",
+        "module": "esnext",
+        "target": "es2020",
         "typeRoots": [
             "node_modules/@types"
         ],
         "lib": [
-            "es2018",
+            "es2020",
             "dom"
         ],
         "noImplicitAny": true,
@@ -24,9 +24,6 @@
         "noFallthroughCasesInSwitch": true,
         "strictNullChecks": true
     },
-    "exclude": [
-        "assets"
-    ],
     "angularCompilerOptions": {
         "fullTemplateTypeCheck": true,
         "strictTemplates": true,

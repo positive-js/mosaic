@@ -1,0 +1,24 @@
+<mc-form-field>
+    <mc-tree-select
+        [(ngModel)]="selected">
+        <mc-tree-selection
+            [dataSource]="dataSource"
+            [treeControl]="treeControl">
+            <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding>
+                {{ treeControl.getViewValue(node) }}
+            </mc-tree-option>
+
+            <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+                <i mc-icon="mc-angle-down-S_16"
+                   [style.transform]="treeControl.isExpanded(node) ? '' : 'rotate(-90deg)'"
+                   mcTreeNodeToggle>
+                </i>
+                {{ treeControl.getViewValue(node) }}
+            </mc-tree-option>
+        </mc-tree-selection>
+
+        <mc-cleaner #mcSelectCleaner></mc-cleaner>
+
+        <div mc-tree-selection-footer class="custom-footer">Custom footer</div>
+    </mc-tree-select>
+</mc-form-field>

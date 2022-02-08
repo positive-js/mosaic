@@ -9,8 +9,6 @@
     $modal: map-get(map-get($theme, components), modal);
     $popup: map-get(map-get($theme, components), popup);
 
-    $border-color: if(map-get($theme, is-dark), map-get($popup, divider), transparent);
-
     .mc-modal {
         .mc-modal-content {
             // У модалки должен быть фон background. Чтобы поповеры и дропдауны было видно поверх модалки
@@ -26,7 +24,7 @@
         .mc-modal-header {
             border-bottom-width: var(--mc-modal-size-border-width, $modal-size-border-width);
             border-bottom-style: solid;
-            border-bottom-color: map-get($popup, divider);
+            border-bottom-color: map-get($modal, header-border);
         }
 
         .mc-modal-header.mc-modal-body_top-overflow {
@@ -38,7 +36,9 @@
         }
 
         .mc-modal-footer {
-            border-top: var(--mc-modal-size-border-width, $modal-size-border-width) solid $border-color;
+            border-top-width: var(--mc-modal-size-border-width, $modal-size-border-width);
+            border-top-style: solid;
+            border-top-color: map-get($modal, footer-border);
 
             background-color: map-get($popup, footer-background);
         }
@@ -64,7 +64,9 @@
 
     .mc-confirm {
         .mc-confirm-btns {
-            border-top: var(--mc-modal-size-border-width, $modal-size-border-width) solid $border-color;
+            border-top-width: var(--mc-modal-size-border-width, $modal-size-border-width);
+            border-top-style: solid;
+            border-top-color: map-get($modal, footer-border);
 
             background-color: map-get($popup, footer-background);
         }

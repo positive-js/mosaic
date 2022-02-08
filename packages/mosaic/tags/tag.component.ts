@@ -88,6 +88,7 @@ export const McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase = 
         '[class.mc-selected]': 'selected',
         '[class.mc-focused]': 'hasFocus',
         '[class.mc-tag-with-avatar]': 'avatar',
+        '[class.mc-tag-with-icon]': 'contentChildren',
         '[class.mc-tag-with-trailing-icon]': 'trailingIcon || removeIcon',
         '[class.mc-disabled]': 'disabled',
 

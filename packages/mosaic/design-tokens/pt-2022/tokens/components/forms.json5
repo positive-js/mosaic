@@ -1,0 +1,52 @@
+{
+    forms: {
+        'light-color-scheme': {
+            label: { value: '{light-color-scheme.foreground.text-less-contrast.value}' },
+            legend: { value: '{light-color-scheme.foreground.text.value}' }
+        },
+        'dark-color-scheme': {
+            label: { value: '{dark-color-scheme.foreground.text-less-contrast.value}' },
+            legend: { value: '{dark-color-scheme.foreground.text.value}' }
+        },
+        size: {
+            horizontal: {
+                row: {
+                    'margin-bottom': { value: '20px' }
+                },
+                label: {
+                    'padding-top': { value: '6px' },
+                    'padding-bottom': { value: '0' }
+                },
+                control: {
+                    'padding-left': { value: '16px' }
+                },
+                legend: {
+                    'margin-top': { value: '32px' },
+                    'margin-bottom': { value: '16px' }
+                }
+            },
+            vertical: {
+                row: {
+                    'margin-bottom': { value: '16px' }
+                },
+                label: {
+                    'padding-top': { value: '0' },
+                    'padding-bottom': { value: '4px' }
+                },
+                control: {
+                    'padding-left': { value: '24px' }
+                },
+                legend: {
+                    'margin-top': { value: '32px' },
+                    'margin-bottom': { value: '12px' }
+                }
+            },
+        },
+        font: {
+            default: {
+                label: { value: 'body' },
+                legend: { value: 'subheading' },
+            },
+        }
+    }
+}

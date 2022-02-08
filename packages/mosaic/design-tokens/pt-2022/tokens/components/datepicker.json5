@@ -1,0 +1,64 @@
+{
+    'datepicker-toggle': {
+        size: {
+            width: { value: '30px' },
+            height: { value: '30px' }
+        }
+    },
+    'datepicker-body': {
+        'light-color-scheme': {
+            states: {
+                selected: {
+                    color: { value: '{light-color-scheme.primary.palette.value.500.value}' },
+                    background: { value: '{light-color-scheme.states.selected-color.value}' }
+                }
+            }
+        },
+        'dark-color-scheme': {
+            states: {
+                selected: {
+                    color: { value: '{dark-color-scheme.primary.palette.value.400.value}' },
+                    background: { value: '{dark-color-scheme.states.selected-color.value}' }
+                }
+            }
+        },
+        size: {
+            label: {
+                'paddings': { value: '8px 28px 12px 12px' }
+            },
+            cell: {
+                'min-size': { value: '32px' },
+                margin: { value: '5%' },
+                padding: { value: '8px' },
+                'border-width': { value: '1px' }
+            }
+        },
+        font: {
+            label: { value: 'body-strong' },
+            today: { value: 'body-strong' }
+        }
+    },
+    'datepicker-calendar': {
+        size: {
+            'padding-top': { value: '16px' },
+            'padding-horizontal': { value: '8px' },
+            'padding-bottom': { value: '8px' },
+            'padding-blocks': { value: '12px' },
+
+            'divider-width': { value: '1px' },
+
+            icon: {
+                'border-width': { value: '2px' },
+                'prev-icon-transform': { value: 'translateX(2px) rotate(-45deg)' },
+                'nex-icon-transform': { value: 'translateX(-2px) rotate(45deg)' }
+            }
+        },
+        font: {
+            default: { value: 'body' },
+            header: { value: 'caption' }
+        }
+    },
+    'datepicker-input': {
+        size: { 'width': { value: '130px' } }
+    }
+}

@@ -1,0 +1,25 @@
+{
+    select: {
+        size: {
+            height: { value: '30px' },
+            'left-padding': { value: '{padding.control-horizontal}' },
+            'right-padding': { value: '8px' },
+            'left-padding-multiple': { value: '8px' }
+        },
+        font: {
+            default: { value: 'body' }
+        }
+    },
+    'select-panel': {
+        size: {
+            'max-height': { value: '232px' },
+            'max-width': { value: '640px' },
+            'vertical-padding': { value: '4px' },
+            'border-width': { value: '1px' },
+            'border-radius': { value: '3px' }
+        },
+        font: {
+            default: { value: 'body' }
+        }
+    }
+}

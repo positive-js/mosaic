@@ -1,4 +1,6 @@
 <div class="mc-popover"
+     [cdkTrapFocus]="isTrapFocus"
+     [cdkTrapFocusAutoCapture]="isTrapFocus"
      [ngClass]="classMap"
      [@state]="visibility"
      (@state.start)="animationStart()"
@@ -12,7 +14,9 @@
             </ng-container>
         </div>
 
-        <div class="mc-popover__content" *ngIf="content">
+        <div class="mc-popover__content"
+             [ngClass]="{ 'mc-popover__content_padding_bottom': footer }"
+             *ngIf="content">
             <ng-container *ngIf="isTemplateRef(content)" [ngTemplateOutlet]="$any(content)"></ng-container>
             <ng-container *ngIf="!isTemplateRef(content)">
                 <div>{{ content }}</div>

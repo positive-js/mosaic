@@ -9,7 +9,7 @@
         "experimentalDecorators": true,
         "importHelpers": true,
         "lib": [
-            "es2015",
+            "es2020",
             "dom"
         ],
         "module": "es2015",
@@ -21,7 +21,7 @@
         "strictNullChecks": true,
         "strictFunctionTypes": true,
         "stripInternal": false,
-        "target": "es5",
+        "target": "es2020",
         "typeRoots": [
             "node_modules/@types"
         ],

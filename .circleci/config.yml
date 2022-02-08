@@ -57,17 +57,11 @@ var_10: &filter_by_release_tag
     tags:
         only: /^\d+\.\d+\.\d+$/
 
-#var_11: &docs_stable_version
-#    branches:
-#        ignore: /.*/
-#    tags:
-#        only: /11\.\d+\.\d+$/
-
 var_12: &docs_stable_version
     branches:
         ignore: /.*/
     tags:
-        only: /12\.\d+\.\d+$/
+        only: /13\.\d+\.\d+$/
 
 # Configures CircleCI orbs for this pipeline. Orbs allow consumption of publicly shared
 # CircleCI commands, jobs, configuration elements or executors.
@@ -76,14 +70,20 @@ var_12: &docs_stable_version
 orbs:
     sonarcloud: sonarsource/sonarcloud@1.0.2
     snyk: snyk/snyk@0.0.10
+    # https://circleci.com/developer/orbs/orb/circleci/browser-tools
+    browser-tools: circleci/browser-tools@1.2.4
 
 # Executor Definitions
 # https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors
 executors:
     mosaic:
         working_directory: ~/mosaic
+        parameters:
+            resource_class:
+                type: string
+                default: medium
         docker:
-            - image: circleci/node:lts-buster
+            - image: cimg/node:16.13.0
               auth:
                   username: $DOCKER_HUB_USERNAME
                   password: $DOCKER_HUB_TOKEN
@@ -91,7 +91,7 @@ executors:
     mosaic-browsers:
         working_directory: ~/mosaic
         docker:
-            -   image: circleci/node:lts-browsers
+              - image: cimg/node:16.13.0-browsers
                 auth:
                     username: $DOCKER_HUB_USERNAME
                     password: $DOCKER_HUB_TOKEN
@@ -107,6 +107,13 @@ commands:
             - attach_workspace:
                   at: ~/mosaic
 
+    yarn_install:
+        description: Install NPM dependencies
+        steps:
+            - run:
+                name: yarn install
+                command: yarn install --frozen-lockfile --non-interactive
+
 # Job definitions
 # Jobs can include parameters that are passed in the workflow job invocation.
 # https://circleci.com/docs/2.0/reusing-config/#authoring-parameterized-jobs
@@ -117,10 +124,7 @@ jobs:
         steps:
             - checkout
             - *restore_cache
-            - run:
-                  name: Install NPM dependencies 🦎
-                  command: |
-                      yarn install --frozen-lockfile --non-interactive
+            - yarn_install
             - save_cache:
                   key: *cache_key
                   paths:
@@ -154,6 +158,12 @@ jobs:
                   root: .
                   paths:
                       - ./dist/reports
+
+    check_api:
+        executor: mosaic
+        steps:
+            - prepare_job
+            - run: yarn run check-api
 
     build_packages:
         executor: mosaic
@@ -198,12 +208,26 @@ jobs:
         executor: mosaic-browsers
         steps:
             - prepare_job
+            - browser-tools/install-chrome
+            - browser-tools/install-chromedriver
+            - run:
+                 command: |
+                     google-chrome --version
+                     whereis google-chrome
+                 name: Check Chrome
             - run: yarn run unit:cdk
 
     test_unit_mosaic:
         executor: mosaic-browsers
         steps:
             - prepare_job
+            - browser-tools/install-chrome
+            - browser-tools/install-chromedriver
+            - run:
+                  command: |
+                      google-chrome --version
+                      whereis google-chrome
+                  name: Check Chrome
             - run: yarn run unit:mosaic
 
     test_unit_schematics:
@@ -217,12 +241,26 @@ jobs:
         executor: mosaic-browsers
         steps:
             - prepare_job
+            - browser-tools/install-chrome
+            - browser-tools/install-chromedriver
+            - run:
+                  command: |
+                      google-chrome --version
+                      whereis google-chrome
+                  name: Check Chrome
             - run: yarn run unit:mosaic-moment-adapter
 
     test_unit_mosaic-luxon-adapter:
         executor: mosaic-browsers
         steps:
             - prepare_job
+            - browser-tools/install-chrome
+            - browser-tools/install-chromedriver
+            - run:
+                  command: |
+                      google-chrome --version
+                      whereis google-chrome
+                  name: Check Chrome
             - run: yarn run unit:mosaic-luxon-adapter
 
     deploy-docs-next:
@@ -370,6 +408,10 @@ workflows:
                       - install
 
             # 6 Group Unit Tests
+            - check_api:
+                requires:
+                   - build_packages
+
             - test_unit_cdk:
                   requires:
                       - build_packages
@@ -385,6 +427,7 @@ workflows:
             - test_unit_mosaic:
                   requires:
                       - build_packages
+                      - check_api
 
             - test_unit_schematics:
                   requires:

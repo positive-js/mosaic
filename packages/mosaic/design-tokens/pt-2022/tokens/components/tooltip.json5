@@ -1,0 +1,83 @@
+{
+    tooltip: {
+        'light-color-scheme': {
+            background: { value: '{popup.dark-color-scheme.background.value}' },
+            text: { value: '{dark-color-scheme.foreground.text.value}' },
+            border: { value: 'transparent' },
+            shadow: { value: '0 2px 4px 0 rgba(39, 51, 62, 0.2)' },
+
+            'warning': {
+                background: { value: '{light-color-scheme.warning.palette.value.40.value}' },
+                text: { value: '{light-color-scheme.foreground.text.value}' },
+                border: { value: '{light-color-scheme.warning.palette.value.100.value}' }
+            }
+        },
+        'dark-color-scheme': {
+            background: { value: '{popup.light-color-scheme.background.value}' },
+            text: { value: '{light-color-scheme.foreground.text.value}' },
+            border: { value: 'transparent' },
+            shadow: { value: '0 2px 4px 0 rgba(39, 51, 62, 0.2)' },
+
+            'warning': {
+                background: { value: '{dark-color-scheme.warning.palette.value.560.value}' },
+                text: { value: '{dark-color-scheme.foreground.text.value}' },
+                border: { value: '{dark-color-scheme.warning.palette.value.560.value}' }
+            }
+        },
+        size: {
+            'max-width': { value: '300px' },
+            'border-width': { value: '1px' },
+            'border-radius': { value: '3px' },
+            padding: { value: '8px 16px' },
+            'arrow-size': { value: '12px' },
+            'trigger-margin': { value: '9px' }
+        },
+        font: {
+            default: { value: 'caption' }
+        }
+    },
+    'extended-tooltip': {
+        'light-color-scheme': {
+            background: { value: '{popup.light-color-scheme.background.value}' },
+            text: { value: '{light-color-scheme.foreground.text.value}' },
+            border: { value: '{popup.light-color-scheme.border.value}' },
+            shadow: { value: '0 2px 4px 0 rgba(39, 51, 62, 0.2)' },
+        },
+        'dark-color-scheme': {
+            background: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+            text: { value: '{dark-color-scheme.foreground.text.value}' },
+            border: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+            shadow: { value: '0 2px 4px 0 rgba(39, 51, 62, 0.2)' },
+        },
+        size: {
+            'border-radius': { value: '3px' },
+            'arrow-size': { value: '12px' },
+            'trigger-margin': { value: '9px' },
+            padding: { value: '8px 16px' },
+            'max-height': { value: '480px' }
+        },
+        font: {
+            default: { value: 'caption' }
+        }
+    },
+    'extended-tooltip-header': {
+        'light-color-scheme': {
+            border: { value: '{popup.light-color-scheme.border.value}' },
+            text: { value: '{light-color-scheme.foreground.text.value}' },
+            background: { value: '{popup.light-color-scheme.background.value}' }
+        },
+        'dark-color-scheme': {
+            border: { value: '{dark-color-scheme.second.palette.value.600.value}' },
+            text: { value: '{dark-color-scheme.foreground.text.value}' },
+            background: { value: '{dark-color-scheme.second.palette.value.700.value}' }
+        },
+        size: {
+            height: { value: '40px' },
+            padding: { value: '10px 16px' }
+        },
+        font: {
+            default: { value: 'subheading' }
+        }
+    }
+
+}

@@ -1,0 +1,52 @@
+{
+    'form-field': {
+        'light-color-scheme': {
+            border: { value: '{light-color-scheme.foreground.border.value}' },
+            background: { value: '{light-color-scheme.background.background.value}' },
+
+            states: {
+                hover: {
+                    border: { value: '{light-color-scheme.second.palette.value.200.value}' }
+                },
+                invalid: {
+                    border: { value: '{light-color-scheme.states.focused-color-error.value}' },
+                    background: { value: 'transparent' }
+                }
+            }
+        },
+        'dark-color-scheme': {
+            border: { value: '{dark-color-scheme.foreground.border.value}' },
+            background: { value: 'transparent' },
+
+            states: {
+                hover: {
+                    border: { value: '{dark-color-scheme.second.palette.value.560.value}' }
+                },
+                invalid: {
+                    border: { value: '{dark-color-scheme.states.focused-color-error.value}' },
+                    background: { value: 'transparent' }
+                }
+            }
+        },
+        size: {
+            border: {
+                width: { value: '1px' },
+                radius: { value: '3px' }
+            },
+            button: {
+                width: { value: '32px' }
+            }
+        },
+        font: {
+            default: { value: 'body' }
+        }
+    },
+    'form-field-hint': {
+        size: {
+            'margin-top': { value: '4px' }
+        },
+        font: {
+            default: { value: 'caption' }
+        }
+    }
+}

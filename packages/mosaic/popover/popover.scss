@@ -1,4 +1,4 @@
-@import '../design-tokens/tokens';
+@import '../design-tokens/pt-2022/tokens';
 @import '../core/styles/variables';
 @import '../core/theming/theming';
 @import '../core/styles/typography/typography-utils';
@@ -60,12 +60,17 @@
     overflow: hidden;
 
     padding: var(--mc-popover-size-padding, $popover-size-padding);
+
+    &.mc-popover__content_padding_bottom {
+        padding-bottom: calc(
+            var(--mc-popover-size-padding, $popover-size-padding) +
+            var(--mc-popover-footer-size-margin-top, $popover-footer-size-margin-top)
+        );
+    }
 }
 
 .mc-popover__footer {
     box-sizing: border-box;
-
-    margin-top: var(--mc-popover-footer-size-margin-top, $popover-footer-size-margin-top);
 
     height: var(--mc-popover-footer-size-height, $popover-footer-size-height);
 

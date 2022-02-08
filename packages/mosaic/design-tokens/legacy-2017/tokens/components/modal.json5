@@ -1,0 +1,79 @@
+{
+    modal: {
+        'light-color-scheme': {
+            shadow: {
+                value: '(0 0 0 1px {light-color-scheme.second.palette.value.300.value}, 0 6px 12px 0 rgba(0, 0, 0, 0.5))'
+            },
+            'body-top-shadow':{
+                value: '0 2px 4px 0 rgba(0, 0, 0, 0.16)'
+            },
+            'body-bottom-shadow':{
+                value: '0 -2px 4px 0 rgba(0, 0, 0, 0.16)'
+            },
+            'background-mask': { value: 'rgba(0, 0, 0, 0.5)' }
+        },
+        'dark-color-scheme': {
+            shadow: {
+                value: '(0 0 0 1px {dark-color-scheme.second.palette.value.800.value}, 0 6px 12px 0 rgba(0, 0, 0, 0.5))'
+            },
+            'body-top-shadow':{
+                value: '0 2px 4px 0 rgba(0, 0, 0, 0.16)'
+            },
+            'body-bottom-shadow':{
+                value: '0 -2px 4px 0 rgba(0, 0, 0, 0.16)'
+            },
+            'background-mask': { value: 'rgba(0, 0, 0, 0.5)' }
+        },
+        size: {
+            small: { value: '400px' },
+            normal: { value: '640px' },
+            large: { value: '960px' },
+
+            top: { value: '48px' },
+            'close-width': { value: '56px' },
+            'border-radius': { value: '4px' },
+            'border-width': { value: '1px' }
+        }
+    },
+    'modal-header': {
+        'light-color-scheme': {
+            border: { value: '{light-color-scheme.foreground.divider.value}' }
+        },
+        'dark-color-scheme': {
+            border: { value: '{dark-color-scheme.foreground.divider.value}' }
+        },
+        size: {
+            'border-radius': { value: '4px 4px 0 0' },
+            padding: { value: '14px 16px' }
+        },
+        font: {
+            default: { value: 'title' }
+        }
+    },
+    'modal-body': {
+        size: {
+            'max-height': { value: 'calc(100vh - 260px)' },
+            padding: { value: '16px 24px 24px' }
+        },
+        font: {
+            default: { value: 'body' }
+        }
+    },
+    'modal-footer': {
+        'light-color-scheme': {
+            border: { value: '{light-color-scheme.foreground.divider.value}' }
+        },
+        'dark-color-scheme': {
+            border: { value: '{dark-color-scheme.foreground.divider.value}' }
+        },
+        size: {
+            'border-radius': { value: '0 0 4px 4px' },
+            padding: { value: '16px {padding.headerFooter-horizontal}' }
+        }
+    },
+    'modal-confirm': {
+        size: {
+            padding: { value: '24px' }
+        }
+    }
+}

@@ -68,3 +68,11 @@
         }
     }
 }
+
+@media (max-width: 600px) {
+    .nav {
+        position: relative;
+        top: 0;
+        width: 100%;
+    }
+}

@@ -1,125 +1,49 @@
-/* tslint:disable:no-parameter-reassignment */
+/* tslint:disable:no-parameter-reassignment import-name */
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import { ExampleData, EXAMPLE_COMPONENTS } from '@ptsecurity/mosaic-examples';
+import StackBlitzSDK from '@stackblitz/sdk';
 import { Observable } from 'rxjs';
 import { shareReplay, take } from 'rxjs/operators';
 
 import { mosaicVersion } from '../version/version';
 
 
-const STACKBLITZ_URL = 'https://run.stackblitz.com/api/angular/v1';
-
 const COPYRIGHT =
-    `Copyright 2020 Positive Technologies. All Rights Reserved.
+    `Copyright 2022 Positive Technologies. All Rights Reserved.
     Use of this source code is governed by an MIT-style license.`;
 
 /**
  * Path that refers to the docs-content from the "@ptsecurity/mosaic-examples" package. The
  * structure is defined in the repository, but we include the docs-content as assets in
- * in the CLI configuration.
+ * the CLI configuration.
  */
 const DOCS_CONTENT_PATH = 'docs-content/examples-source';
-
 const TEMPLATE_PATH = 'assets/stackblitz/';
-const TEMPLATE_FILES = [
-    '.editorconfig',
+const PROJECT_TAGS = ['angular', 'mosaic', 'cdk', 'web', 'example'];
+const PROJECT_TEMPLATE = 'node';
+
+export const TEMPLATE_FILES = [
     '.gitignore',
-    'index.html',
-    'tsconfig.json',
-    'tsconfig.app.json',
-    'tsconfig.spec.json',
-    'styles.css',
-    'polyfills.ts',
+    '.stackblitzrc',
     'angular.json',
-    'main.ts',
-    'mosaic-module.ts'
+    'package.json',
+    'tsconfig.app.json',
+    'tsconfig.json',
+    'src/index.html',
+    'src/main.ts',
+    'src/mosaic.module.ts',
+    'src/polyfills.ts',
+    'src/styles.scss',
+    'src/app/app.module.ts',
+    'src/environments/environment.prod.ts',
+    'src/environments/environment.ts'
 ];
 
-const TEST_TEMPLATE_PATH = 'assets/stack-blitz-tests/';
-const TEST_TEMPLATE_FILES = [
-    '.editorconfig',
-    '.gitignore',
-    'index.html',
-    'tsconfig.json',
-    'tsconfig.app.json',
-    'tsconfig.spec.json',
-    'styles.css',
-    'polyfills.ts',
-    'angular.json',
-    'main.ts',
-    'mosaic-module.ts'
-];
-
-const TAGS: string[] = ['angular', 'mosaic', 'example'];
-const angularVersion = '^12.0.0';
-
-const dependencies = {
-    '@ptsecurity/cdk': mosaicVersion,
-    '@ptsecurity/mosaic': mosaicVersion,
-    '@ptsecurity/mosaic-icons': '^5.3.0',
-    '@ptsecurity/mosaic-luxon-adapter': mosaicVersion,
-    '@ptsecurity/mosaic-moment-adapter': mosaicVersion,
-    '@angular/cdk': angularVersion,
-    '@angular/animations': angularVersion,
-    '@angular/common': angularVersion,
-    '@angular/compiler': angularVersion,
-    '@angular/core': angularVersion,
-    '@angular/forms': angularVersion,
-    '@angular/platform-browser': angularVersion,
-    '@angular/platform-browser-dynamic': angularVersion,
-    '@angular/router': angularVersion,
-    'core-js': '^3.6.5',
-    rxjs: '^6.5.0',
-    '@messageformat/core': '^2.0.5',
-    tslib: '^2.0.1',
-    'zone.js': '~0.10.3',
-    moment: '^2.24.0',
-    luxon: '^1.27.0'
-};
-
-const testDependencies = {
-    '@ptsecurity/cdk': mosaicVersion,
-    '@ptsecurity/mosaic': mosaicVersion,
-    '@ptsecurity/mosaic-icons': '^5.3.0',
-    '@ptsecurity/mosaic-luxon-adapter': mosaicVersion,
-    '@ptsecurity/mosaic-moment-adapter': mosaicVersion,
-    '@angular/cdk': angularVersion,
-    '@angular/animations': angularVersion,
-    '@angular/common': angularVersion,
-    '@angular/compiler': angularVersion,
-    '@angular/core': angularVersion,
-    '@angular/forms': angularVersion,
-    '@angular/platform-browser': angularVersion,
-    '@angular/platform-browser-dynamic': angularVersion,
-    '@angular/router': angularVersion,
-    'core-js': '^3.6.5',
-    rxjs: '^6.5.0',
-    '@messageformat/core': '^2.0.5',
-    tslib: '^2.0.1',
-    'zone.js': '~0.10.3',
-    moment: '^2.24.0',
-    luxon: '^1.27.0'
-};
+type FileDictionary = {[path: string]: string};
 
 /**
  * Stackblitz writer, write example files to stackblitz
- *
- * StackBlitz API
- * URL: https://run.stackblitz.com/api/aio/v1/
- * data: {
- *   // File name, directory and content of files
- *   files[file-name1]: file-content1,
- *   files[directory-name/file-name2]: file-content2,
- *   // Can add multiple tags
- *   tags[0]: tag-0,
- *   // Description of stackblitz
- *   description: description,
- *   // Private or not
- *   private: true
- *  // Dependencies
- *  dependencies: dependencies
- * }
  */
 @Injectable({providedIn: 'root'})
 export class StackblitzWriter {
@@ -132,103 +56,21 @@ export class StackblitzWriter {
      * Returns an HTMLFormElement that will open a new stackblitz template with the example data when
      * called with submit().
      */
-    async constructStackblitzForm(exampleId: string, data: ExampleData, isTest: boolean): Promise<HTMLFormElement> {
+    constructStackblitzForm(exampleId: string, data: ExampleData): Promise<() => void> {
 
-        const liveExample = EXAMPLE_COMPONENTS[exampleId];
-        const indexFile = `src%2Fapp%2F${data.indexFilename}`;
-        const form = this.createFormElement(indexFile);
-        const baseExamplePath =
-            `${DOCS_CONTENT_PATH}/${liveExample.module.importSpecifier}/${exampleId}/`;
+        return this.ngZone.runOutsideAngular(async () => {
+            const files = await this.buildInMemoryFileDictionary(data, exampleId);
+            const exampleMainFile = `src/app/${data.indexFilename}`;
 
-        TAGS.forEach((tag, i) => this.appendFormInput(form, `tags[${i}]`, tag));
-        this.appendFormInput(form, 'private', 'true');
-        this.appendFormInput(form, 'description', data.description);
-        this.appendFormInput(form,
-                             'dependencies',
-                             JSON.stringify(isTest ? testDependencies : dependencies)
-        );
-
-        await this.ngZone.runOutsideAngular(() => {
-            const fileReadPromises: Promise<void>[] = [];
-
-            // Read all of the template files.
-            (isTest ? TEST_TEMPLATE_FILES : TEMPLATE_FILES).forEach((file) => fileReadPromises.push(
-                this.loadAndAppendFile(form, data, file, isTest ? TEST_TEMPLATE_PATH : TEMPLATE_PATH,
-                                       isTest)));
-
-            // Read the example-specific files.
-            data.exampleFiles.forEach((file) => fileReadPromises.push(
-                this.loadAndAppendFile(form, data, file, baseExamplePath, isTest)
-            ));
-
-            return Promise.all(fileReadPromises);
+            return () => {
+                this.openStackBlitz({
+                    files,
+                    title: `Angular Components - ${data.description}`,
+                    description: `${data.description}\n\nAuto-generated from: https://mosaic.ptsecurity.com`,
+                    openFile: exampleMainFile
+                });
+            };
         });
-
-        return form;
-    }
-
-    /** Constructs a new form element that will navigate to the stackblitz url. */
-    createFormElement(indexFile: string): HTMLFormElement {
-        const form = document.createElement('form');
-        form.action = `${STACKBLITZ_URL}?file=${indexFile}`;
-        form.method = 'post';
-        form.target = '_blank';
-
-        return form;
-    }
-
-    /** Appends the name and value as an input to the form. */
-    appendFormInput(form: HTMLFormElement, name: string, value: string): void {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = name;
-        input.value = value;
-        form.appendChild(input);
-    }
-
-    /**
-     * Reads the file and adds its text to the form
-     * @param form the html form you are appending to
-     * @param data example metadata about the example
-     * @param filename file name of the example
-     * @param path path to the src
-     * @param prependApp whether to prepend the 'app' prefix to the path
-     */
-    readFile(form: HTMLFormElement,
-             data: ExampleData,
-             filename: string,
-             path: string,
-             prependApp = true): void {
-        this.http.get(path + filename, {responseType: 'text'}).subscribe(
-            (response) => this.addFileToForm(form, data, response, filename, path, prependApp),
-            // tslint:disable-next-line:no-console
-            (error) => console.log(error)
-        );
-    }
-
-    /**
-     * Adds the file text to the form.
-     * @param form the html form you are appending to
-     * @param data example metadata about the example
-     * @param content file contents
-     * @param filename file name of the example
-     * @param path path to the src
-     * @param prependApp whether to prepend the 'app' prefix to the path
-     */
-    addFileToForm(form: HTMLFormElement,
-                  data: ExampleData,
-                  content: string,
-                  filename: string,
-                  path: string,
-                  isTest: boolean,
-                  prependApp = true) {
-        if (path === (isTest ? TEST_TEMPLATE_PATH : TEMPLATE_PATH)) {
-            content = this.replaceExamplePlaceholderNames(data, filename, content);
-        } else if (prependApp) {
-            // tslint:disable-next-line:prefer-template
-            filename = 'app/' + filename;
-        }
-        this.appendFormInput(form, `files[${filename}]`, this.appendCopyright(filename, content));
     }
 
     /**
@@ -240,7 +82,12 @@ export class StackblitzWriter {
     replaceExamplePlaceholderNames(data: ExampleData,
                                    fileName: string,
                                    fileContent: string): string {
-        if (fileName === 'index.html') {
+
+        if (fileName === 'src/index.html' || fileName === 'package.json') {
+            fileContent = fileContent.replace(/\${version}/g, mosaicVersion);
+        }
+
+        if (fileName === 'src/index.html') {
             // Replace the component selector in `index,html`.
             // For example, <mosaic-docs-example></mosaic-docs-example> will be replaced as
             // <button-demo></button-demo>
@@ -248,7 +95,10 @@ export class StackblitzWriter {
                 .replace(/mosaic-docs-example/g, data.selectorName)
                 .replace(/{{title}}/g, data.description)
                 .replace(/{{version}}/g, mosaicVersion);
-        } else if (fileName === 'main.ts') {
+        } else if (fileName === '.stackblitzrc') {
+            fileContent = fileContent
+                .replace(/\${startCommand}/, 'turbo start');
+        } else if (fileName === 'src/app/app.module.ts') {
             const joinedComponentNames = data.componentNames.join(', ');
             // Replace the component name in `main.ts`.
             // Replace `import {MosaicDocsExample} from 'mosaic-docs-example'`
@@ -284,7 +134,7 @@ export class StackblitzWriter {
         return fileContent;
     }
 
-    appendCopyright(filename: string, content: string) {
+    private appendCopyright(filename: string, content: string): string {
         if (filename.indexOf('.ts') > -1 || filename.indexOf('.scss') > -1) {
             content = `${content}\n\n/**  ${COPYRIGHT} */`;
         } else if (filename.indexOf('.html') > -1) {
@@ -294,21 +144,55 @@ export class StackblitzWriter {
         return content;
     }
 
-    private loadAndAppendFile(form: HTMLFormElement, data: ExampleData, filename: string,
-                              path: string, isTest: boolean, prependApp = true): Promise<void> {
-        const url = path + filename;
-        let stream = this.fileCache.get(url);
+    private async buildInMemoryFileDictionary(data: ExampleData, exampleId: string): Promise<FileDictionary> {
+        const result: FileDictionary = {};
+        const tasks: Promise<unknown>[] = [];
+        const liveExample = EXAMPLE_COMPONENTS[exampleId];
+        const exampleBaseContentPath =
+            `${DOCS_CONTENT_PATH}/${liveExample.module.importSpecifier}/${exampleId}/`;
+
+        for (const relativeFilePath of TEMPLATE_FILES) {
+            tasks.push(this.loadFile(TEMPLATE_PATH + relativeFilePath)
+                // Replace example placeholders in the template files.
+                .then((content) => this.replaceExamplePlaceholderNames(data, relativeFilePath, content))
+                .then((content) => result[relativeFilePath] = content));
+        }
+
+        for (const relativeFilePath of data.exampleFiles) {
+            // tslint:disable-next-line
+            tasks.push(this.loadFile(exampleBaseContentPath + relativeFilePath)
+                // Insert a copyright footer for all example files inserted into the project.
+                .then((content) => this.appendCopyright(relativeFilePath, content))
+                .then((content) => result[`src/app/${relativeFilePath}`] = content));
+        }
+
+        // Wait for the file dictionary to be populated. All file requests are
+        // triggered concurrently to speed up the example StackBlitz generation.
+        await Promise.all(tasks);
+
+        return result;
+    }
+
+    private openStackBlitz({title, description, openFile, files}:
+                                {title: string; description: string; openFile: string; files: FileDictionary}): void {
+        StackBlitzSDK.openProject({
+            title,
+            files,
+            description,
+            template: PROJECT_TEMPLATE,
+            tags: PROJECT_TAGS
+        },                        {openFile});
+    }
+
+    private loadFile(fileUrl: string): Promise<string> {
+        let stream = this.fileCache.get(fileUrl);
 
         if (!stream) {
-            stream = this.http.get(url, {responseType: 'text'}).pipe(shareReplay(1));
-            this.fileCache.set(url, stream);
+            stream = this.http.get(fileUrl, {responseType: 'text'}).pipe(shareReplay(1));
+            this.fileCache.set(fileUrl, stream);
         }
 
         // The `take(1)` is necessary, because the Promise from `toPromise` resolves on complete.
-        return stream.pipe(take(1)).toPromise().then(
-            (response) => this.addFileToForm(form, data, response, filename, path, isTest, prependApp),
-            // tslint:disable-next-line:no-console
-            (error) => console.log(error)
-        );
+        return stream.pipe(take(1)).toPromise();
     }
 }

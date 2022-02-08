@@ -1,0 +1,39 @@
+{
+    checkbox: {
+        'light-color-scheme': {
+            border: { value: '{light-color-scheme.second.palette.value.300.value}' },
+            states: {
+                checked: {
+                    border: { value: '{light-color-scheme.primary.palette.value.600.value}' },
+                    background: { value: '{light-color-scheme.primary.palette.value.500.value}' }
+                },
+                focused: {
+                    border: { value: '{light-color-scheme.primary.palette.value.600.value}' },
+                    shadow: { value: '0 0 0 1px {light-color-scheme.primary.palette.value.600.value}' }
+                }
+            }
+        },
+        'dark-color-scheme': {
+            border: { value: '{dark-color-scheme.second.palette.value.400.value}' },
+            states: {
+                checked: {
+                    border: { value: '{dark-color-scheme.primary.palette.value.400.value}' },
+                    background: { value: '{dark-color-scheme.primary.palette.value.600.value}' }
+                },
+                focused: {
+                    border: { value: '{dark-color-scheme.primary.palette.value.400.value}' },
+                    shadow: { value: '0 0 0 1px {dark-color-scheme.primary.palette.value.400.value}' }
+                }
+            }
+        },
+        size: {
+            width: { value: '16px' },
+            'label-margin': { value: '{margin.iconText_M-horizontal}' },
+            'border-width': { value: '1px' },
+            'toggle-box-shadow': { value: 'inset 0 0 1px 0 rgba(0, 0, 0, 0.2)' }
+        },
+        font: {
+            default: { value: 'body' }
+        }
+    }
+}

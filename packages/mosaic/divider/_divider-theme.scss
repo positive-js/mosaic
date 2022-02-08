@@ -1,11 +1,11 @@
 @mixin mc-divider-theme($theme) {
-    $foreground: map-get($theme, foreground);
+    $popup: map-get(map-get($theme, components), popup);
 
     .mc-divider_horizontal {
-        border-top-color: map-get($foreground, divider);
+        border-top-color: map-get($popup, divider);
     }
 
     .mc-divider_vertical {
-        border-right-color: map-get($foreground, divider);
+        border-right-color: map-get($popup, divider);
     }
 }

@@ -61,6 +61,7 @@ enum DateParts {
 }
 
 export const MAX_YEAR = 9999;
+const YEAR_LENGTH = 4;
 
 class DateDigit {
     maxDays = 31;
@@ -127,7 +128,7 @@ class DateDigit {
 
         if (parsedValue === 0) { return 1; }
 
-        if (parsedValue > MAX_YEAR) { return MAX_YEAR; }
+        if (parsedValue > MAX_YEAR) { return parseInt(value.substring(0, YEAR_LENGTH)); }
 
         return parsedValue;
     }
@@ -623,6 +624,14 @@ export class McDatepickerInput<D> implements McFormFieldControl<D>, ControlValue
         const newTimeObj = this.getValidDateOrNull(this.dateAdapter.createDateTime(
             date.year, date.month - 1, date.date, date.hours, date.minutes, date.seconds, date.milliseconds
         ));
+
+        if (!newTimeObj) {
+            this.lastValueValid = false;
+            this._value = null;
+            this.cvaOnChange(null);
+
+            return setTimeout(() => this.control.updateValueAndValidity());
+        }
 
         this.lastValueValid = !!newTimeObj;
 

@@ -1,0 +1,69 @@
+{
+    navbar: {
+        'light-color-scheme': {
+            background: { value: '{light-color-scheme.second.palette.value.900.value}' },
+
+            'divider-background': { value: '{light-color-scheme.second.palette.value.560.value}' }
+        },
+        'dark-color-scheme': {
+            background: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+
+            'divider-background': { value: '{dark-color-scheme.second.palette.value.560.value}' }
+        },
+        size: {
+            'icon-margin': { value: '6px' }
+        },
+        font: {
+            title: { value: 'body' }
+        }
+    },
+    'vertical-navbar': {
+        size: {
+            states: {
+                'expanded-width': { value: '240px' },
+                'collapsed-width': { value: '56px' }
+            },
+            'icon-margin': { value: '16px' }
+        }
+    },
+    'navbar-item': {
+        'light-color-scheme': {
+            text: { value: '{light-color-scheme.second.palette.value.40.value}' },
+            icon: { value: '{light-color-scheme.second.palette.value.200.value}' },
+
+            states: {
+                active: { value: 'rgba(0, 0, 0, 0.1)' },
+                selected: { value: '{light-color-scheme.second.palette.value.700.value}' },
+                hover: { value: 'rgba(255, 255, 255, 0.1)' },
+                progress: { value: '{light-color-scheme.second.palette.value.700.value}' },
+                'disabled-opacity': { value: 0.3 }
+            }
+        },
+        'dark-color-scheme': {
+            text: { value: '{dark-color-scheme.second.palette.value.40.value}' },
+            icon: { value: '{dark-color-scheme.second.palette.value.200.value}' },
+
+            states: {
+                active: { value: 'rgba(0, 0, 0, 0.1)' },
+                selected: { value: '{dark-color-scheme.second.palette.value.600.value}' },
+                hover: { value: 'rgba(255, 255, 255, 0.1)' },
+                progress: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+                'disabled-opacity': { value: 0.3 }
+            }
+        },
+        size: {
+            padding: { value: '{padding.control-horizontal}' },
+            height: { value: '48px' },
+            height_vertical: { value: '56px' }
+        }
+    },
+    'navbar-brand': {
+        size: {
+            padding: { value: '12px' },
+            'margin-right': { value: '24px' }
+        },
+        font: {
+            title: { value: 'title' }
+        }
+    }
+}

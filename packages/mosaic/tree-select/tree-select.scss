@@ -1,4 +1,4 @@
-@import '../design-tokens/tokens';
+@import '../design-tokens/pt-2022/tokens';
 @import '../core/option/option';
 @import '../core/styles/common/vendor-prefixes';
 
@@ -140,10 +140,7 @@
 }
 
 .mc-tree-select__panel {
-    max-height: var(--mc-select-panel-size-max-height, $select-panel-size-max-height);
     min-width: 100%; // prevents some animcion twitching and test inconsistencies in IE11
-
-    overflow: auto;
 
     border: {
         width: var(--mc-select-panel-size-border-width, $select-panel-size-border-width);
@@ -153,7 +150,6 @@
     border-bottom-left-radius: var(--mc-select-panel-size-border-radius, $select-panel-size-border-radius);
     border-bottom-right-radius: var(--mc-select-panel-size-border-radius, $select-panel-size-border-radius);
 
-    padding: 4px 0;
 
     // Override optgroup and option to scale based on font-size of the trigger.
     .mc-optgroup-label,
@@ -165,7 +161,9 @@
 }
 
 .mc-tree-select__content {
-    height: 100%;
+    max-height: var(--mc-select-panel-size-max-height, $select-panel-size-max-height);
+
+    overflow: auto;
 
     & .mc-tree-selection {
         height: 100%;
@@ -175,5 +173,30 @@
 .mc-form-field-type-select {
     &:not(.mc-disabled) .mc-form-field-flex {
         cursor: pointer;
+    }
+}
+
+.mc-select__no-options-message {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+
+    position: relative;
+
+    max-width: 100%;
+    height: var(--mc-option-size-height, $option-size-height);
+
+    cursor: default;
+    outline: none;
+
+    padding-left: var(--mc-option-size-horizontal-padding, $option-size-horizontal-padding);
+    padding-right: var(--mc-option-size-horizontal-padding, $option-size-horizontal-padding);
+}
+
+.mc-select__search-container {
+    border-bottom: {
+        width: 1px;
+        style: solid;
     }
 }
