@@ -13,9 +13,8 @@ import {
     ViewRef
 } from '@angular/core';
 
-import { McToastComponent } from './toast.component';
 import { ToastService } from './toast.service';
-import { IToastConfig, TOAST_CONFIG_TOKEN, ToastData } from './toast.type';
+import { ToastConfig, MC_TOAST_CONFIG, ToastData } from './toast.type';
 
 
 const ENTER_QUERY_TIMING = 50;
@@ -59,17 +58,17 @@ export class McToastContainerComponent {
     constructor(
         private service: ToastService,
         private injector: Injector,
-        @Inject(TOAST_CONFIG_TOKEN) private toastConfig: IToastConfig,
+        @Inject(MC_TOAST_CONFIG) private toastConfig: ToastConfig,
         private changeDetectorRef: ChangeDetectorRef
     ) {}
 
-    createToast<C>(data: ToastData): ComponentRef<C> {
+    createToast<C>(data: ToastData, componentType): ComponentRef<C> {
         const injector = this.getInjector(data);
         const index = this.toastConfig.newOnTop ? 0 : undefined;
 
         this.changeDetectorRef.markForCheck();
 
-        return this.container.createComponent(McToastComponent, { injector, index }) as unknown as ComponentRef<C>;
+        return this.container.createComponent(componentType, { injector, index }) as unknown as ComponentRef<C>;
     }
 
     deleteToast(viewRef: ViewRef) {

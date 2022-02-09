@@ -6,14 +6,6 @@
     </button>
 </ng-template>
 
-<ng-template #otherTemplate let-toast>
-    otherTemplate toast.data.title {{ toast.data.title }}
-
-    <button class="mc-alert__close" (click)="toast.close()">
-        <i class="mc-icon_light">+</i>
-    </button>
-</ng-template>
-
 <div class="demo-block">
     <div class="example-button-group">
         <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('success')">Success</button>
@@ -23,6 +15,6 @@
 
         <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('error', myTemplate)">Custom Error</button>
 
-        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('warning', otherTemplate)">Custom Warning</button>
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showNewToast('warning')">New Toast</button>
     </div>
 </div>

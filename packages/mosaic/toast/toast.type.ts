@@ -39,16 +39,11 @@ export class ToastData {
     template?: TemplateRef<any>;
 }
 
-export interface IToastConfig {
+// tslint:disable-next-line:naming-convention
+export interface ToastConfig {
     position: ToastPosition;
     duration: number;
     newOnTop: boolean;
 }
 
-export const defaultToastConfig: IToastConfig = {
-    position: ToastPosition.TOP_CENTER,
-    duration: 3000,
-    newOnTop: true
-};
-
-export const TOAST_CONFIG_TOKEN = new InjectionToken('mc-toast-config');
+export const MC_TOAST_CONFIG = new InjectionToken('mc-toast-config');

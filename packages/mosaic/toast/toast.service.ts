@@ -1,35 +1,43 @@
 import { GlobalPositionStrategy, Overlay } from '@angular/cdk/overlay';
 import { OverlayRef } from '@angular/cdk/overlay/overlay-ref';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Injectable, Injector, Inject, ComponentRef } from '@angular/core';
+import { Injectable, Injector, Inject, ComponentRef, Optional } from '@angular/core';
 
 import { McToastContainerComponent } from './toast-container.component';
 import { McToastComponent } from './toast.component';
-import { ToastData, TOAST_CONFIG_TOKEN, IToastConfig, ToastPosition } from './toast.type';
+import { ToastData, MC_TOAST_CONFIG, ToastConfig, ToastPosition } from './toast.type';
+
+
+export const defaultToastConfig: ToastConfig = {
+    position: ToastPosition.TOP_CENTER,
+    duration: 300000,
+    newOnTop: true
+};
 
 
 const INDENT_SIZE = 20;
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class ToastService<T extends McToastComponent = McToastComponent> {
     get toasts(): ComponentRef<T>[] {
         return Object.values(this.toastsDict)
             .filter((item) => !item.hostView.destroyed);
     }
 
-    protected containerInstance: McToastContainerComponent;
-    protected overlayRef: OverlayRef;
-    protected portal: ComponentPortal<McToastContainerComponent>;
+    private containerInstance: McToastContainerComponent;
+    private overlayRef: OverlayRef;
+    private portal: ComponentPortal<McToastContainerComponent>;
 
     private toastsDict: { [id: number]: ComponentRef<T> } = {};
 
     constructor(
-        protected overlay: Overlay,
-        protected injector: Injector,
-        @Inject(TOAST_CONFIG_TOKEN) private toastConfig: IToastConfig
-    ) {}
+        private overlay: Overlay,
+        private injector: Injector,
+        @Optional() @Inject(MC_TOAST_CONFIG) private toastConfig: ToastConfig,
+        @Optional() private toastFactory: McToastComponent
+    ) {
+        this.toastConfig = toastConfig || defaultToastConfig;
+    }
 
     show(data: ToastData): ComponentRef<T> {
         this.prepareContainer();
@@ -38,9 +46,15 @@ export class ToastService<T extends McToastComponent = McToastComponent> {
     }
 
     hide(id: number) {
-        this.containerInstance.deleteToast(this.toastsDict[id].hostView);
+        const componentRef = this.toastsDict[id];
 
-        this.toastsDict[id].destroy();
+        if (!componentRef) { return; }
+
+        this.containerInstance.deleteToast(componentRef.hostView);
+
+        componentRef.destroy();
+
+        delete this.toastsDict[id];
     }
 
     private addRemoveTimer(id: number, duration: number) {
@@ -48,7 +62,7 @@ export class ToastService<T extends McToastComponent = McToastComponent> {
     }
 
     private addToast(data: ToastData): ComponentRef<T> {
-        const componentRef = this.containerInstance.createToast<T>(data);
+        const componentRef = this.containerInstance.createToast<T>(data, this.toastFactory || McToastComponent);
 
         this.toastsDict[componentRef.instance.id] = componentRef;
 
