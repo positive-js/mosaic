@@ -1,7 +1,15 @@
 import { GlobalPositionStrategy, Overlay } from '@angular/cdk/overlay';
 import { OverlayRef } from '@angular/cdk/overlay/overlay-ref';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Injectable, Injector, Inject, ComponentRef, Optional, TemplateRef, EmbeddedViewRef } from '@angular/core';
+import {
+    Injectable,
+    Injector,
+    Inject,
+    ComponentRef,
+    Optional,
+    TemplateRef,
+    EmbeddedViewRef
+} from '@angular/core';
 
 import { McToastContainerComponent } from './toast-container.component';
 import { McToastComponent } from './toast.component';

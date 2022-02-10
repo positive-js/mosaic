@@ -1,3 +1,4 @@
+/* tslint:disable:no-console */
 import { NgModule, Component, ViewEncapsulation, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -91,7 +92,7 @@ export class ToastDemoComponent {
                 duration: 3000,
                 onTop: true
             }
-        },
+        }
         // {
         //     provide: McToastComponent,
         //     useFactory: () => MyToastComponent

@@ -4,7 +4,7 @@ import {
     transition,
     trigger,
     state,
-    AnimationTriggerMetadata,
+    AnimationTriggerMetadata
 } from '@angular/animations';
 
 
