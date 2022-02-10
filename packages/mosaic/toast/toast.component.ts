@@ -8,7 +8,7 @@ import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 import { mcToastAnimations } from './toast-animations';
 import { ToastService } from './toast.service';
-import { ToastData } from './toast.type';
+import { McToastData } from './toast.type';
 
 
 let id = 0;
@@ -36,8 +36,12 @@ export class McToastComponent {
 
     $implicit;
 
+    get hasDismiss(): boolean {
+        return this.data.hasDismiss === undefined ? true : this.data.hasDismiss;
+    }
+
     constructor(
-        readonly data: ToastData,
+        readonly data: McToastData,
         readonly service: ToastService
     ) {
         this.$implicit = this;
@@ -49,7 +53,7 @@ export class McToastComponent {
         this.service.hide(this.id);
     }
 
-    isTemplateRef(value: any): boolean {
+    isTemplateRef(value): boolean {
         return value instanceof TemplateRef;
     }
 }

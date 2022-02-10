@@ -1,21 +1,23 @@
 import { GlobalPositionStrategy, Overlay } from '@angular/cdk/overlay';
 import { OverlayRef } from '@angular/cdk/overlay/overlay-ref';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Injectable, Injector, Inject, ComponentRef, Optional } from '@angular/core';
+import { Injectable, Injector, Inject, ComponentRef, Optional, TemplateRef, EmbeddedViewRef } from '@angular/core';
 
 import { McToastContainerComponent } from './toast-container.component';
 import { McToastComponent } from './toast.component';
-import { ToastData, MC_TOAST_CONFIG, ToastConfig, ToastPosition } from './toast.type';
+import { McToastData, MC_TOAST_CONFIG, McToastConfig, ToastPosition } from './toast.type';
 
 
-export const defaultToastConfig: ToastConfig = {
+export const defaultToastConfig: McToastConfig = {
     position: ToastPosition.TOP_CENTER,
-    duration: 300000,
-    newOnTop: true
+    duration: 3000,
+    onTop: true
 };
 
 
 const INDENT_SIZE = 20;
+
+let templateId = 0;
 
 @Injectable({ providedIn: 'root' })
 export class ToastService<T extends McToastComponent = McToastComponent> {
@@ -24,25 +26,60 @@ export class ToastService<T extends McToastComponent = McToastComponent> {
             .filter((item) => !item.hostView.destroyed);
     }
 
+    get templates(): EmbeddedViewRef<T>[] {
+        return Object.values(this.templatesDict);
+    }
+
     private containerInstance: McToastContainerComponent;
     private overlayRef: OverlayRef;
     private portal: ComponentPortal<McToastContainerComponent>;
 
     private toastsDict: { [id: number]: ComponentRef<T> } = {};
+    private templatesDict: { [id: number]: EmbeddedViewRef<T> } = {};
 
     constructor(
         private overlay: Overlay,
         private injector: Injector,
-        @Optional() @Inject(MC_TOAST_CONFIG) private toastConfig: ToastConfig,
+        @Optional() @Inject(MC_TOAST_CONFIG) private toastConfig: McToastConfig,
         @Optional() private toastFactory: McToastComponent
     ) {
         this.toastConfig = toastConfig || defaultToastConfig;
     }
 
-    show(data: ToastData): ComponentRef<T> {
+    show(
+        data: McToastData,
+        onTop: boolean = this.toastConfig.onTop,
+        duration: number = this.toastConfig.duration
+    ): { ref: ComponentRef<T>; id: number} {
         this.prepareContainer();
 
-        return this.addToast(data);
+        const componentRef = this.containerInstance.createToast<T>(data, this.toastFactory || McToastComponent, onTop);
+
+        this.toastsDict[componentRef.instance.id] = componentRef;
+
+        this.addRemoveTimer(componentRef.instance.id, duration);
+
+        return { ref: componentRef, id: componentRef.instance.id };
+    }
+
+    showTemplate(
+        data: McToastData,
+        template: TemplateRef<any>,
+        onTop: boolean = this.toastConfig.onTop,
+        duration: number = this.toastConfig.duration
+    ): { ref: EmbeddedViewRef<T>; id: number } {
+
+        this.prepareContainer();
+
+        const viewRef = this.containerInstance.createTemplate<T>(data, template, onTop);
+
+        this.templatesDict[templateId] = viewRef;
+
+        this.addRemoveTimer(templateId, duration, true);
+
+        templateId++;
+
+        return { ref: viewRef, id: templateId };
     }
 
     hide(id: number) {
@@ -50,25 +87,23 @@ export class ToastService<T extends McToastComponent = McToastComponent> {
 
         if (!componentRef) { return; }
 
-        this.containerInstance.deleteToast(componentRef.hostView);
-
-        componentRef.destroy();
+        this.containerInstance.remove(componentRef.hostView);
 
         delete this.toastsDict[id];
     }
 
-    private addRemoveTimer(id: number, duration: number) {
-        setTimeout(() => this.hide(id), duration);
+    hideTemplate(id: number) {
+        const viewRef = this.templatesDict[id];
+
+        if (!viewRef) { return; }
+
+        this.containerInstance.remove(viewRef);
+
+        delete this.templatesDict[id];
     }
 
-    private addToast(data: ToastData): ComponentRef<T> {
-        const componentRef = this.containerInstance.createToast<T>(data, this.toastFactory || McToastComponent);
-
-        this.toastsDict[componentRef.instance.id] = componentRef;
-
-        this.addRemoveTimer(componentRef.instance.id, this.toastConfig.duration);
-
-        return componentRef;
+    private addRemoveTimer(id: number, duration: number, template: boolean = false) {
+        setTimeout(() => template ? this.hideTemplate(id) : this.hide(id), duration);
     }
 
     private prepareContainer() {

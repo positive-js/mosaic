@@ -3,15 +3,16 @@ import {
     ChangeDetectorRef,
     Component,
     ComponentRef,
-    Inject,
+    EmbeddedViewRef,
     Injector,
+    TemplateRef,
     ViewChild,
     ViewContainerRef,
     ViewEncapsulation,
     ViewRef
 } from '@angular/core';
 
-import { ToastConfig, MC_TOAST_CONFIG, ToastData } from './toast.type';
+import { McToastData } from './toast.type';
 
 
 @Component({
@@ -28,20 +29,25 @@ export class McToastContainerComponent {
 
     constructor(
         private injector: Injector,
-        @Inject(MC_TOAST_CONFIG) private toastConfig: ToastConfig,
         private changeDetectorRef: ChangeDetectorRef
     ) {}
 
-    createToast<C>(data: ToastData, componentType): ComponentRef<C> {
+    createToast<C>(data: McToastData, componentType, onTop: boolean): ComponentRef<C> {
         const injector = this.getInjector(data);
-        const index = this.toastConfig.newOnTop ? 0 : undefined;
+        const index = onTop ? 0 : undefined;
 
         this.changeDetectorRef.markForCheck();
 
         return this.viewContainer.createComponent(componentType, { injector, index });
     }
 
-    deleteToast(viewRef: ViewRef) {
+    createTemplate<C>(data: McToastData, template: TemplateRef<any>, onTop: boolean): EmbeddedViewRef<C> {
+        const index = onTop ? 0 : undefined;
+
+        return this.viewContainer.createEmbeddedView(template, { $implicit: data }, index);
+    }
+
+    remove(viewRef: ViewRef) {
         const index = this.viewContainer.indexOf(viewRef);
 
         if (index < 0) { return; }
@@ -49,9 +55,9 @@ export class McToastContainerComponent {
         this.viewContainer.remove(index);
     }
 
-    getInjector(data: ToastData): Injector {
+    getInjector(data: McToastData): Injector {
         return Injector.create({
-            providers: [{ provide: ToastData, useValue: data }],
+            providers: [{ provide: McToastData, useValue: data }],
             parent: this.injector
         });
     }

@@ -1,8 +1,11 @@
 .mc-toast {
     display: block;
+
     overflow: hidden;
 
     margin-bottom: 10px;
+}
 
-    width: 25rem;
+.mc-toast__container {
+    width: 300px;
 }

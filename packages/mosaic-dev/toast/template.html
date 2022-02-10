@@ -1,9 +1,13 @@
-<ng-template #myTemplate let-toast>
-    toast.data.title {{ toast.data.title }}
+<ng-template #toastTitleTemplate let-toast>
+    my title
+</ng-template>
 
-    <button class="mc-alert__close" (click)="toast.close()">
-        <i class="mc-icon_light">+</i>
-    </button>
+<ng-template #toastContentTemplate let-toast>
+    <b>my content</b>
+</ng-template>
+
+<ng-template #template let-data>
+    Template with data.title: {{ data.title }}
 </ng-template>
 
 <div class="demo-block">
@@ -13,8 +17,12 @@
         <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('warning')">Warn</button>
         <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('error')">Error</button>
 
-        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('error', myTemplate)">Custom Error</button>
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToastTitleTemplate('error', toastTitleTemplate)">Title Template</button>
 
-        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showNewToast('warning')">New Toast</button>
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToastContentTemplate('error', toastContentTemplate)">Content Template</button>
+
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showNewToast('warning')">MyToast</button>
+
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showTemplate('warning', template)">show template</button>
     </div>
 </div>

@@ -48,7 +48,7 @@ describe('ToastService', () => {
         ToastModule.forRoot({
             position: ToastPosition.TOP_CENTER,
             duration: 5000,
-            newOnTop: true
+            onTop: true
         })
     ]
 })

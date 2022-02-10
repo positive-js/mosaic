@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ThemePalette } from '@ptsecurity/mosaic/core';
 import {
-    McToastType,
+    McToastStyle,
     MC_TOAST_CONFIG,
-    ToastData,
+    McToastData,
     ToastModule,
     ToastService,
     ToastPosition
@@ -17,20 +17,21 @@ import { McToastComponent } from '../../mosaic/toast/toast.component';
 
 @Component({
     selector: 'mc-new-toast',
-    template: '<div>some new toast</div>',
+    template: '<div>MyToastComponent</div>',
     host: {
-        class: 'mc-new-toast'
+        class: 'my-toast'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class McNewToastComponent extends McToastComponent {
+export class MyToastComponent extends McToastComponent {
     constructor(
-        readonly data: ToastData,
+        readonly data: McToastData,
         readonly service: ToastService
     ) {
         super(data, service);
-        console.log('constructor: ');
+
+        console.log('MyToastComponent: ');
     }
 }
 
@@ -45,23 +46,35 @@ export class ToastDemoComponent {
     themePalette = ThemePalette;
 
     constructor(
-        private toast: ToastService,
-        private newToast: ToastService<McNewToastComponent>
+        private toastService: ToastService,
+        private newToastService: ToastService<MyToastComponent>
     ) {}
 
-    showToast(severity: McToastType, template?: TemplateRef<any>) {
-        this.toast.show({ severity, title: 'Success', content: 'Message Content', template });
+    showToast(style: McToastStyle) {
+        this.toastService.show({ style, title: 'Success', content: 'Message Content' });
     }
 
-    showNewToast(severity: McToastType) {
-        this.newToast.show({ severity, title: 'Success', content: 'Message Content' });
+    showToastTitleTemplate(style: McToastStyle, template: TemplateRef<any>) {
+        this.toastService.show({ style, title: template, content: 'Message Content' });
+    }
+
+    showToastContentTemplate(style: McToastStyle, template: TemplateRef<any>) {
+        this.toastService.show({ style, title: 'Success', content: template });
+    }
+
+    showNewToast(style: McToastStyle) {
+        this.newToastService.show({ style, title: 'Success', content: 'Message Content' });
+    }
+
+    showTemplate(style: McToastStyle, template: TemplateRef<any>) {
+        this.toastService.showTemplate({ style, title: 'Success', content: 'Message Content' }, template);
     }
 }
 
 @NgModule({
     declarations: [
         ToastDemoComponent,
-        McNewToastComponent
+        MyToastComponent
     ],
     imports: [
         BrowserModule,
@@ -75,13 +88,13 @@ export class ToastDemoComponent {
             provide: MC_TOAST_CONFIG,
             useValue: {
                 position: ToastPosition.TOP_CENTER,
-                duration: 300000,
-                newOnTop: true
+                duration: 3000,
+                onTop: true
             }
         },
         // {
         //     provide: McToastComponent,
-        //     useFactory: () => McNewToastComponent
+        //     useFactory: () => MyToastComponent
         // }
     ]
 })
