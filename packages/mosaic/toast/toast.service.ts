@@ -13,11 +13,11 @@ import {
 
 import { McToastContainerComponent } from './toast-container.component';
 import { McToastComponent } from './toast.component';
-import { McToastData, MC_TOAST_CONFIG, McToastConfig, ToastPosition } from './toast.type';
+import { McToastData, MC_TOAST_CONFIG, McToastConfig, McToastPosition } from './toast.type';
 
 
 export const defaultToastConfig: McToastConfig = {
-    position: ToastPosition.TOP_CENTER,
+    position: McToastPosition.TOP_CENTER,
     duration: 3000,
     onTop: true
 };
@@ -27,8 +27,8 @@ const INDENT_SIZE = 20;
 
 let templateId = 0;
 
-@Injectable({ providedIn: 'root' })
-export class ToastService<T extends McToastComponent = McToastComponent> {
+@Injectable()
+export class McToastService<T extends McToastComponent = McToastComponent> {
     get toasts(): ComponentRef<T>[] {
         return Object.values(this.toastsDict)
             .filter((item) => !item.hostView.destroyed);
@@ -132,21 +132,21 @@ export class ToastService<T extends McToastComponent = McToastComponent> {
         return this.overlay.create({ positionStrategy });
     }
 
-    private getPositionStrategy(position?: ToastPosition): GlobalPositionStrategy {
+    private getPositionStrategy(position?: McToastPosition): GlobalPositionStrategy {
         switch (position) {
-            case ToastPosition.CENTER:
+            case McToastPosition.CENTER:
                 return this.getCenter();
-            case ToastPosition.BOTTOM_CENTER:
+            case McToastPosition.BOTTOM_CENTER:
                 return this.getBottomCenter();
-            case ToastPosition.BOTTOM_LEFT:
+            case McToastPosition.BOTTOM_LEFT:
                 return this.getBottomLeft();
-            case ToastPosition.BOTTOM_RIGHT:
+            case McToastPosition.BOTTOM_RIGHT:
                 return this.getBottomRight();
-            case ToastPosition.TOP_CENTER:
+            case McToastPosition.TOP_CENTER:
                 return this.getTopCenter();
-            case ToastPosition.TOP_LEFT:
+            case McToastPosition.TOP_LEFT:
                 return this.getTopLeft();
-            case ToastPosition.TOP_RIGHT:
+            case McToastPosition.TOP_RIGHT:
                 return this.getTopRight();
             default:
                 return this.getTopCenter();

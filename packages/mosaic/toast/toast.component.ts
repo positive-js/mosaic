@@ -7,7 +7,7 @@ import {
 import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 import { mcToastAnimations } from './toast-animations';
-import { ToastService } from './toast.service';
+import { McToastService } from './toast.service';
 import { McToastData } from './toast.type';
 
 
@@ -42,7 +42,7 @@ export class McToastComponent {
 
     constructor(
         readonly data: McToastData,
-        readonly service: ToastService
+        readonly service: McToastService
     ) {
         this.$implicit = this;
 

@@ -1,24 +1,24 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { TestBed, inject } from '@angular/core/testing';
 
-import { ToastModule } from './toast.module';
-import { ToastService } from './toast.service';
+import { McToastModule } from './toast.module';
+import { McToastService } from './toast.service';
 
 
 describe('ToastService', () => {
-    let toastService: ToastService;
+    let toastService: McToastService;
     let overlayContainer: OverlayContainer;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [ToastModule]
+            imports: [McToastModule]
         })
         .compileComponents();
     });
 
     beforeEach(inject(
-        [ToastService, OverlayContainer],
-        (ts: ToastService, oc: OverlayContainer) => {
+        [McToastService, OverlayContainer],
+        (ts: McToastService, oc: OverlayContainer) => {
             toastService = ts;
             overlayContainer = oc;
         }

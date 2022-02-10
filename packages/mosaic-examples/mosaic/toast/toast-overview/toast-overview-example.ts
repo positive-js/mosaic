@@ -1,19 +1,7 @@
 /* tslint:disable:no-console */
-import { NgModule, Component, ViewEncapsulation, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChangeDetectionStrategy, Component, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { ThemePalette } from '@ptsecurity/mosaic/core';
-import {
-    McToastStyle,
-    MC_TOAST_CONFIG,
-    McToastData,
-    McToastModule,
-    McToastService,
-    McToastPosition,
-    McToastComponent
-} from '@ptsecurity/mosaic/toast';
-
-import { McButtonModule } from '../../mosaic/button';
+import { McToastData, McToastStyle, McToastService, McToastComponent } from '@ptsecurity/mosaic/toast';
 
 
 @Component({
@@ -35,15 +23,15 @@ export class MyToastComponent extends McToastComponent {
         console.log('MyToastComponent: ');
     }
 }
-
-
+/**
+ * @title Basic Toast
+ */
 @Component({
-    selector: 'app',
-    templateUrl: './template.html',
-    styleUrls: ['../main.scss', './styles.scss'],
-    encapsulation: ViewEncapsulation.None
+    selector: 'toast-overview-example',
+    templateUrl: 'toast-overview-example.html',
+    styleUrls: ['toast-overview-example.css']
 })
-export class ToastDemoComponent {
+export class ToastOverviewExample {
     themePalette = ThemePalette;
 
     constructor(
@@ -71,33 +59,3 @@ export class ToastDemoComponent {
         this.toastService.showTemplate({ style, title: 'Success', content: 'Message Content' }, template);
     }
 }
-
-@NgModule({
-    declarations: [
-        ToastDemoComponent,
-        MyToastComponent
-    ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        McButtonModule,
-        McToastModule
-    ],
-    bootstrap: [ToastDemoComponent],
-    providers: [
-        McToastService,
-        {
-            provide: MC_TOAST_CONFIG,
-            useValue: {
-                position: McToastPosition.TOP_RIGHT,
-                duration: 3000,
-                onTop: true
-            }
-        }
-        // {
-        //     provide: McToastComponent,
-        //     useFactory: () => MyToastComponent
-        // }
-    ]
-})
-export class DemoModule {}

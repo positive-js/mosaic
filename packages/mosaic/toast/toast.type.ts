@@ -2,7 +2,7 @@ import { TemplateRef, InjectionToken } from '@angular/core';
 
 
 export type McToastStyle = 'default' | 'confirm' | 'custom' | 'success' | 'error' | 'warning' | 'info';
-export enum ToastPosition {
+export enum McToastPosition {
     TOP_RIGHT = 'top-right',
     TOP_LEFT = 'top-left',
     TOP_CENTER = 'top-center',
@@ -22,7 +22,7 @@ export class McToastData {
 
 // tslint:disable-next-line:naming-convention
 export interface McToastConfig {
-    position: ToastPosition;
+    position: McToastPosition;
     duration: number;
     onTop: boolean;
 }

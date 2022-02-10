@@ -20,4 +20,4 @@ import { McToastComponent } from './toast.component';
         McIconModule
     ]
 })
-export class ToastModule {}
+export class McToastModule {}
