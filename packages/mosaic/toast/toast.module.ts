@@ -4,15 +4,14 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
-import { McToastOutlet, McToastContainerComponent } from './toast-container.component';
+import { McToastContainerComponent } from './toast-container.component';
 import { McToastComponent } from './toast.component';
 
 
 @NgModule({
     declarations: [
         McToastComponent,
-        McToastContainerComponent,
-        McToastOutlet
+        McToastContainerComponent
     ],
     imports: [
         CommonModule,
@@ -21,4 +20,4 @@ import { McToastComponent } from './toast.component';
         McIconModule
     ]
 })
-export class ToastModule {}
+export class McToastModule {}

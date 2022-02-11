@@ -1,28 +1,24 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { NgModule } from '@angular/core';
-import { TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 
-import { ToastModule } from './toast.module';
-import { ToastService } from './toast.service';
-import { ToastPosition } from './toast.type';
+import { McToastModule } from './toast.module';
+import { McToastService } from './toast.service';
 
-
-const TICK_TIME = 1000;
 
 describe('ToastService', () => {
-    let toastService: ToastService;
+    let toastService: McToastService;
     let overlayContainer: OverlayContainer;
 
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            imports: [ToastTestModule]
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [McToastModule]
         })
         .compileComponents();
     });
 
     beforeEach(inject(
-        [ToastService, OverlayContainer],
-        (ts: ToastService, oc: OverlayContainer) => {
+        [McToastService, OverlayContainer],
+        (ts: McToastService, oc: OverlayContainer) => {
             toastService = ts;
             overlayContainer = oc;
         }
@@ -33,23 +29,14 @@ describe('ToastService', () => {
     });
 
     describe('created by service', () => {
-        it('should create one success toast', fakeAsync(() => {
-            const toastRef = toastService.show({ severity: 'success', title: 'Success', content: 'Message Content' });
-            tick(TICK_TIME);
+        it('should create one success toast', () => {
+            const { id } = toastService.show({ style: 'success', title: 'Success', content: 'Message Content' });
 
-            expect(toastService.componentsRef.indexOf(toastRef)).toBeGreaterThan(-1);
-            expect(toastService.componentsRef.length).toBe(1);
-        }));
+            expect(toastService.toasts.length).toBe(1);
+
+            toastService.hide(id);
+
+            expect(toastService.toasts.length).toBe(0);
+        });
     });
 });
-
-@NgModule({
-    imports: [
-        ToastModule.forRoot({
-            position: ToastPosition.TOP_CENTER,
-            duration: 5000,
-            newOnTop: true
-        })
-    ]
-})
-class ToastTestModule { }
