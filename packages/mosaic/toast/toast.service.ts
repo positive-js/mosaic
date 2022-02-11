@@ -59,6 +59,7 @@ export class McToastService<T extends McToastComponent = McToastComponent> {
         onTop: boolean = this.toastConfig.onTop,
         duration: number = this.toastConfig.duration
     ): { ref: ComponentRef<T>; id: number} {
+
         this.prepareContainer();
 
         const componentRef = this.containerInstance.createToast<T>(data, this.toastFactory || McToastComponent, onTop);

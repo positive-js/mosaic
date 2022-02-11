@@ -11,7 +11,8 @@ describe('ToastService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [McToastModule]
+            imports: [McToastModule],
+            providers: [McToastService]
         })
         .compileComponents();
     });
