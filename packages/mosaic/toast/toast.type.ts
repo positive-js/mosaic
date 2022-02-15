@@ -25,6 +25,7 @@ export interface McToastConfig {
     position: McToastPosition;
     duration: number;
     onTop: boolean;
+    sticky: boolean;
 }
 
 export const MC_TOAST_CONFIG = new InjectionToken('mc-toast-config');

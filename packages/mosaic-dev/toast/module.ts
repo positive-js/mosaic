@@ -51,6 +51,10 @@ export class ToastDemoComponent {
         private newToastService: McToastService<MyToastComponent>
     ) {}
 
+    showStickyToast(style: McToastStyle) {
+        this.toastService.show({ style, title: 'Success', content: 'Message Content' }, false, 0, true);
+    }
+
     showToast(style: McToastStyle) {
         this.toastService.show({ style, title: 'Success', content: 'Message Content' });
     }

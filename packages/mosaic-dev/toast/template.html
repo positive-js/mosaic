@@ -12,6 +12,8 @@
 
 <div class="demo-block">
     <div class="example-button-group">
+        <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showStickyToast('success')">Sticky</button>
+
         <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('success')">Success</button>
         <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('info')">Info</button>
         <button class="example-button" mc-button [color]="themePalette.Primary" (click)="showToast('warning')">Warn</button>

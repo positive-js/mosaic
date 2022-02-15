@@ -19,7 +19,8 @@ import { McToastData, MC_TOAST_CONFIG, McToastConfig, McToastPosition } from './
 export const defaultToastConfig: McToastConfig = {
     position: McToastPosition.TOP_CENTER,
     duration: 3000,
-    onTop: true
+    onTop: true,
+    sticky: false
 };
 
 
@@ -57,7 +58,8 @@ export class McToastService<T extends McToastComponent = McToastComponent> {
     show(
         data: McToastData,
         onTop: boolean = this.toastConfig.onTop,
-        duration: number = this.toastConfig.duration
+        duration: number = this.toastConfig.duration,
+        sticky: boolean = this.toastConfig.sticky
     ): { ref: ComponentRef<T>; id: number} {
 
         this.prepareContainer();
@@ -66,7 +68,9 @@ export class McToastService<T extends McToastComponent = McToastComponent> {
 
         this.toastsDict[componentRef.instance.id] = componentRef;
 
-        this.addRemoveTimer(componentRef.instance.id, duration);
+        if (!sticky) {
+            this.addRemoveTimer(componentRef.instance.id, duration);
+        }
 
         return { ref: componentRef, id: componentRef.instance.id };
     }
