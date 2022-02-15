@@ -1,6 +1,7 @@
 <div class="visual-box">
-    <div *ngFor="let placement of placements"
-        [mcTooltip]="'mcPlacement: ' + placement"
+    <div *ngFor="let placement of placements; let i = index"
+        [mcTooltip]="'mcPlacement: ' + placement +
+            ((i === 4 || i === 5) ? ' (опционально)' : '') "
         [mcPlacement]="placement"
         class="tooltip-trigger tooltip-trigger-{{placement}}"></div>
 </div>
