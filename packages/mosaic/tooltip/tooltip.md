@@ -33,26 +33,20 @@
 
 <br>
 
-Тултип может занимать две и более строк:
-
-https://www.figma.com/file/xDLkQRzr7g0RVrj8A0676E/Guide-patterns?node-id=17228%3A33918
-
-<!-- example(tooltip-multiple-lines) -->
+Тултип может занимать две и более строк.
 
 Иногда удобнее, если текст в тултипе не переносится, а написан в одну строку, например, при сравнении хеш-сумм, чтении адресов электронной почты или путей к файлам и папкам.
 
 Для подобных случаев максимальную ширину тултипа можно не устанавливать:
 
-https://wiki.ptsecurity.com/pages/viewpage.action?pageId=105253786&preview=/105253786/105253792/tooltip-no-max-width.png
+<!-- example(tooltip-multiple-lines) -->
+
 
 ##### Сложный
 
-<div class="mc-alert mc-alert_warning" style="margin-top: 15px;">
-    <i class="mc mc-icon mc-error_16 mc-alert__icon"></i>
-    Не используйте интерактивные элементы (кнопки, ссылки и пр.) в сложном тултипе, пользоваться ими может быть просто невозможно. Если нужно использовать интерактивные элементы возьмите&nbsp;<a href="/popover">Поповер</a>.
-</div>
+Не используйте интерактивные элементы (кнопки, ссылки и пр.) в сложном тултипе, пользоваться ими может быть просто невозможно. Если нужно использовать интерактивные элементы возьмите&nbsp;<a href="/popover">Поповер</a>.
 
-<div style="margin-top: 15px;">
+<div style="margin-top: 5px;">
     <img src="./assets/images/tooltip/tooltip-hard__structure.jpg" alt="tooltip hard structure" style="max-width: 704px"/>
 </div>
 
@@ -98,62 +92,25 @@ https://wiki.ptsecurity.com/pages/viewpage.action?pageId=105253786&preview=/1052
 
 У тултипа четыре варианта расположения относительно тригерного элемента.
 
-По умолчанию дятел выравнивается по центру тригерного элемента
-
-* __Сверху__ (по умолчанию, если не задано другое расположение)
-
-https://www.figma.com/file/PQLjFxrEYbwjkrvGx5D2vO/Docs?node-id=20%3A1811
-
-* __Снизу__
-
-https://www.figma.com/file/PQLjFxrEYbwjkrvGx5D2vO/Docs?node-id=20%3A1831
-
-* __Слева__
-
-https://www.figma.com/file/PQLjFxrEYbwjkrvGx5D2vO/Docs?node-id=20%3A1852
-
-* __Слева-сверху__ _опционально_<br>
-
-Верхний край тултипа выравнивается по верхнему краю тригерного элемента. Дятел у верхнего края тултипа
-
-https://www.figma.com/file/PQLjFxrEYbwjkrvGx5D2vO/Docs?node-id=20%3A1867
-
-* __Справа__
-
-https://www.figma.com/file/PQLjFxrEYbwjkrvGx5D2vO/Docs?node-id=20%3A1893
-
-* __Справа-сверху__ _опционально_<br>
-
-<!-- example(tooltip-placement) -->
-
 Если для тултипа не хватает места в границах экрана, он попытается перейти в другое положение и остаться на экране.
 
-https://www.figma.com/file/PQLjFxrEYbwjkrvGx5D2vO/Docs?node-id=20%3A1913
+<!-- example(tooltip-placement) -->
 
 ### Стилизация тултипов
 
 #### Простой тултип
 
+Для светлой темы используется темный тултип
+
+Для темной темы используется светлый тултип
+
+Для предупреждений используется отдельный вид тултипов. Например, он появляется в случае попытки ввода запрещенного символа в поле (подробнее см. [Валидация](https://wiki.ptsecurity.com/pages/viewpage.action?pageId=96287564))
+
 <!-- example(tooltip-overview) -->
-
-Для светлой темы используется темный тултип:
-
-https://www.figma.com/file/xDLkQRzr7g0RVrj8A0676E/Guide-patterns?node-id=17228%3A33918
-
-Для темной темы используется светлый тултип:
-
-https://www.figma.com/file/xDLkQRzr7g0RVrj8A0676E/Guide-patterns?node-id=17228%3A33918
-
-Для предупреждений используется отдельный вид тултипов. Например, он появляется в случае попытки ввода запрещенного символа в поле (подробнее см. [Валидация](https://wiki.ptsecurity.com/pages/viewpage.action?pageId=96287564)):
-
-https://www.figma.com/file/xDLkQRzr7g0RVrj8A0676E/Guide-patterns?node-id=17228%3A33918
 
 #### Сложный тултип
 
-<div class="mc-alert mc-alert_warning" style="margin-top: 15px;">
-    <i class="mc mc-icon mc-error_16 mc-alert__icon"></i>
-    В сложном тултипе все наоборот для светлой темы используется светлый тултип, а для темной темы используется темный.
-</div>
+В сложном тултипе все наоборот для светлой темы используется светлый тултип, а для темной темы используется темный.
 
 Предупреждающий не используется.
 
