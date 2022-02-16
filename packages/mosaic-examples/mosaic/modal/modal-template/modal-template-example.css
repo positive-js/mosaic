@@ -1,1 +1,7 @@
-/** No CSS for this example */
+.buttons-container {
+    display: flex;
+}
+
+button:first-child {
+    margin-right: auto;
+}
