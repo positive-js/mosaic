@@ -1,0 +1,19 @@
+<div class="visual-box">
+    <div *ngFor="let placement of placements"
+        mcPopover
+        #popover="mcPopover"
+        [mcPopoverHeader]="'Заголовок поповера'"
+        [mcPopoverPlacement]="placement"
+        mcPopoverContent="mcPopoverPlacement: {{placement}}"
+        [mcPopoverFooter]="customFooter"
+        (mcPopoverVisibleChange)="activePlacement = ($event ? placement : null)"
+        [class.active]="activePlacement === placement"
+        class="popover-trigger popover-trigger-{{placement}}"></div>
+</div>
+
+<ng-template #customFooter>
+    <div class="buttons-container">
+        <button mc-button [color]="themePalette.Primary">Сохранить</button>
+        <button mc-button>Отмена</button>
+    </div>
+</ng-template>

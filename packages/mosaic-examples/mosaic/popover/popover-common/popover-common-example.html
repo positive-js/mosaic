@@ -1,0 +1,24 @@
+<ng-template #customContent>
+    Интересно, что это такое?
+    <mc-form-field>
+        <input mcInput placeholder="Интересная мысль">
+    </mc-form-field>
+</ng-template>
+
+<ng-template #customFooter>
+    <div class="buttons-container">
+        <button mc-button>Действие 2</button>
+        <button mc-button [color]="themePalette.Primary">Применить</button>
+        <button mc-button>Отмена</button>
+    </div>
+</ng-template>
+
+<button
+    mc-button
+    mcPopover
+    #popover="mcPopover"
+    mcPopoverHeader="Заголовок поповера"
+    [mcPopoverContent]="customContent"
+    [mcPopoverFooter]="customFooter">
+    Toggle popover
+</button>
