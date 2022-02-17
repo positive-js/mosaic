@@ -1,6 +1,9 @@
-<p align="center">
-    <img src="https://i.ibb.co/fQNPgv6/logo-png-200.png" alt="positive_js_logo" border="0">
-</p>
+<div align="center">
+	<p>
+		<img alt="Mosaic Logo" src="docs/images/mosaic-logo-200px.svg?sanitize=true" width="200" />
+	</p>
+	<h1>UI Components for Angular</h1>
+</div>
 
 [![npm version](https://badge.fury.io/js/%40ptsecurity%2Fmosaic.svg)](https://badge.fury.io/js/%40ptsecurity%2Fmosaic)
 [![CircleCI](https://circleci.com/gh/positive-js/mosaic/tree/master.svg?style=shield)](https://circleci.com/gh/positive-js/mosaic/tree/master)
@@ -10,9 +13,7 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/positive-js/mosaic/blob/master/LICENSE)
 
 
-# UI Components for Angular
-
-Mosaic components are the building blocks of Positive Technologies applications.
+Mosaic components are the building blocks of `Positive Technologies` applications.
 
 ## 🖥 Browsers support
 
