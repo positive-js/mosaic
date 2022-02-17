@@ -9,6 +9,7 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
+    Inject,
     Input,
     NgZone,
     OnDestroy,
@@ -63,6 +64,50 @@ export class McTagAvatar {}
     host: { class: 'mc-tag-trailing-icon' }
 })
 export class McTagTrailingIcon {}
+
+/**
+ *
+ * Example:
+ *
+ *     `<mc-tag>
+ *       <mc-icon mcTagRemove>cancel</mc-icon>
+ *     </mc-tag>`
+ *
+ * You *may* use a custom icon, but you may need to override the `mc-tag-remove` positioning
+ * styles to properly center the icon within the tag.
+ */
+@Directive({
+    selector: '[mcTagRemove]',
+    host: {
+        class: 'mc-tag-remove mc-tag-trailing-icon',
+        '[attr.tabindex]': '-1',
+        '(click)': 'handleClick($event)',
+        '(focus)': 'focus($event)'
+    }
+})
+export class McTagRemove {
+    constructor(@Inject(forwardRef(() => McTag)) protected parentTag: McTag) {}
+
+    focus($event): void {
+        $event.stopPropagation();
+    }
+
+    /** Calls the parent tag's public `remove()` method if applicable. */
+    handleClick(event: Event): void {
+        if (this.parentTag.removable) {
+            this.parentTag.hasFocus = true;
+
+            this.parentTag.remove();
+        }
+
+        // We need to stop event propagation because otherwise the event will bubble up to the
+        // form field and cause the `onContainerClick` method to be invoked. This method would then
+        // reset the focused tag that has been focused after tag removal. Usually the parent
+        // the parent click listener of the `McTag` would prevent propagation, but it can happen
+        // that the tag is being removed before the event bubbles up.
+        event.stopPropagation();
+    }
+}
 
 export class McTagBase {
     // tslint:disable-next-line:naming-convention
@@ -389,50 +434,5 @@ export class McTag extends McTagMixinBase implements IFocusableOption, OnDestroy
             isUserInput,
             selected: this._selected
         });
-    }
-}
-
-
-/**
- *
- * Example:
- *
- *     `<mc-tag>
- *       <mc-icon mcTagRemove>cancel</mc-icon>
- *     </mc-tag>`
- *
- * You *may* use a custom icon, but you may need to override the `mc-tag-remove` positioning
- * styles to properly center the icon within the tag.
- */
-@Directive({
-    selector: '[mcTagRemove]',
-    host: {
-        class: 'mc-tag-remove mc-tag-trailing-icon',
-        '[attr.tabindex]': '-1',
-        '(click)': 'handleClick($event)',
-        '(focus)': 'focus($event)'
-    }
-})
-export class McTagRemove {
-    constructor(protected parentTag: McTag) {}
-
-    focus($event): void {
-        $event.stopPropagation();
-    }
-
-    /** Calls the parent tag's public `remove()` method if applicable. */
-    handleClick(event: Event): void {
-        if (this.parentTag.removable) {
-            this.parentTag.hasFocus = true;
-
-            this.parentTag.remove();
-        }
-
-        // We need to stop event propagation because otherwise the event will bubble up to the
-        // form field and cause the `onContainerClick` method to be invoked. This method would then
-        // reset the focused tag that has been focused after tag removal. Usually the parent
-        // the parent click listener of the `McTag` would prevent propagation, but it can happen
-        // that the tag is being removed before the event bubbles up.
-        event.stopPropagation();
     }
 }
