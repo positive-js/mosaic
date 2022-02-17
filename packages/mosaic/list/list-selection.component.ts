@@ -165,7 +165,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
 
     @Input()
     get selected(): boolean {
-        return this.listSelection.selectionModel && this.listSelection.selectionModel.isSelected(this) || false;
+        return this.listSelection.selectionModel?.isSelected(this) || false;
     }
 
     set selected(value: boolean) {
@@ -173,8 +173,6 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
 
         if (isSelected !== this._selected) {
             this.setSelected(isSelected);
-
-            this.listSelection.reportValueChange();
         }
     }
 
@@ -251,11 +249,7 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     getHeight(): number {
         const clientRects = this.elementRef.nativeElement.getClientRects();
 
-        if (clientRects.length) {
-            return clientRects[0].height;
-        }
-
-        return 0;
+        return clientRects.length ? clientRects[0].height : 0;
     }
 
     handleClick($event) {
@@ -669,11 +663,7 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     getHeight(): number {
         const clientRects = this.elementRef.nativeElement.getClientRects();
 
-        if (clientRects.length) {
-            return clientRects[0].height;
-        }
-
-        return 0;
+        return clientRects.length ? clientRects[0].height : 0;
     }
 
     // View to model callback that should be called if the list or its options lost focus.
@@ -682,15 +672,15 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
 
     // Removes an option from the selection list and updates the active item.
     removeOptionFromList(option: McListOption) {
-        if (option.hasFocus) {
-            const optionIndex = this.getOptionIndex(option);
+        if (!option.hasFocus) { return; }
 
-            // Check whether the option is the last item
-            if (optionIndex > 0) {
-                this.keyManager.setPreviousItemActive();
-            } else if (optionIndex === 0 && this.options.length > 1) {
-                this.keyManager.setNextItemActive();
-            }
+        const optionIndex = this.getOptionIndex(option);
+
+        // Check whether the option is the last item
+        if (optionIndex > 0) {
+            this.keyManager.setPreviousItemActive();
+        } else if (optionIndex === 0 && this.options.length > 1) {
+            this.keyManager.setNextItemActive();
         }
     }
 
