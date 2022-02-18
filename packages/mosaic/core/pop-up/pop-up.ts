@@ -104,6 +104,10 @@ export abstract class McPopUp implements OnDestroy {
         this.changeDetectorRef.markForCheck();
     }
 
+    detectChanges(): void {
+        this.changeDetectorRef.detectChanges();
+    }
+
     animationStart() {
         this.closeOnInteraction = false;
     }

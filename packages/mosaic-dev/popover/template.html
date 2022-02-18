@@ -237,8 +237,8 @@
         </div>
     </div>
 
-    <div class="{{layoutClass}} result" [style]="getOrder('result')">
-        <div [ngSwitch]="showElement()">
+    <div class="{{layoutClass}} result" [style]="getOrder('result')" style="overflow: scroll" cdkScrollable>
+        <div [ngSwitch]="showElement()" style="min-width: 1500px; display: flex; justify-content: center">
             <button mc-button
                     *ngSwitchCase="ELEMENTS.BUTTON"
                     mcPopover
