@@ -637,6 +637,8 @@ export abstract class McPopUp implements OnDestroy {
     // (undocumented)
     content: string | TemplateRef<any>;
     // (undocumented)
+    detectChanges(): void;
+    // (undocumented)
     handleBodyInteraction(): void;
     // (undocumented)
     header: string | TemplateRef<any>;
