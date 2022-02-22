@@ -16,6 +16,12 @@
     }
 }
 
+.mc-form-field-type-input-password {
+    & .mc-input {
+        padding-right: var(--mc-form-field-size-button-width, $form-field-size-button-width);
+    }
+}
+
 .mc-hint {
     display: block;
 }

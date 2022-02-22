@@ -7,7 +7,7 @@ import { McCommonModule } from '@ptsecurity/mosaic/core';
 import { McInput, McInputMono } from './input';
 import { McNumberInput } from './input-number';
 import { MaxValidator, MinValidator } from './input-number-validators';
-import { McInputPassword, McInputPasswordEye } from './input-password';
+import { McInputPassword, McPasswordToggle } from './input-password';
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import { McInputPassword, McInputPasswordEye } from './input-password';
         McInput,
         McNumberInput,
         McInputPassword,
-        McInputPasswordEye,
+        McPasswordToggle,
         McInputMono,
         MinValidator,
         MaxValidator
@@ -30,7 +30,7 @@ import { McInputPassword, McInputPasswordEye } from './input-password';
         McInput,
         McNumberInput,
         McInputPassword,
-        McInputPasswordEye,
+        McPasswordToggle,
         McInputMono,
         MinValidator,
         MaxValidator

@@ -63,8 +63,10 @@ export const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixin
         '[class.mc-form-field_has-suffix]': 'hasSuffix',
         '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
         '[class.mc-form-field_has-stepper]': 'canShowStepper',
+
         '[class.mc-disabled]': 'control.disabled',
         '[class.mc-focused]': 'control.focused',
+
         '[class.ng-untouched]': 'shouldForward("untouched")',
         '[class.ng-touched]': 'shouldForward("touched")',
         '[class.ng-pristine]': 'shouldForward("pristine")',
@@ -72,6 +74,7 @@ export const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixin
         '[class.ng-valid]': 'shouldForward("valid")',
         '[class.ng-invalid]': 'shouldForward("invalid")',
         '[class.ng-pending]': 'shouldForward("pending")',
+
         '(keydown)': 'onKeyDown($event)',
         '(mouseenter)': 'onHoverChanged(true)',
         '(mouseleave)': 'onHoverChanged(false)'

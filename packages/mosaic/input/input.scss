@@ -20,3 +20,33 @@ input.mc-input[type="number"]::-webkit-outer-spin-button {
 input.mc-input:invalid {
     box-shadow: unset;
 }
+
+.mc-password-toggle {
+    display: flex;
+
+    position: absolute;
+
+    top: -1px;
+    right: -1px;
+
+    border: 1px solid transparent;
+
+    width: 32px;
+    height: 100%;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    border-top-right-radius: var(--mc-form-field-size-border-radius, $form-field-size-border-radius);
+    border-bottom-right-radius: var(--mc-form-field-size-border-radius, $form-field-size-border-radius);
+
+    &::-moz-focus-inner {
+        border: 0;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}

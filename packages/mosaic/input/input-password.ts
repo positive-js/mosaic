@@ -1,6 +1,8 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
+    ChangeDetectionStrategy,
     Component,
     Directive,
     DoCheck,
@@ -11,7 +13,8 @@ import {
     OnChanges,
     OnDestroy,
     Optional,
-    Self
+    Self,
+    ViewEncapsulation
 } from '@angular/core';
 import {
     FormControlName,
@@ -29,7 +32,7 @@ import {
     McValidationOptions,
     setMosaicValidation
 } from '@ptsecurity/mosaic/core';
-import { McFormFieldControl, McSuffix } from '@ptsecurity/mosaic/form-field';
+import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
 
 import { McInputMixinBase } from './input';
@@ -40,15 +43,43 @@ let nextUniqueId = 0;
 
 
 @Component({
-    selector: `mc-password-eye, [mcPasswordEye]`,
-    exportAs: 'mcPasswordEye',
+    selector: `mc-password-toggle`,
+    exportAs: 'mcPasswordToggle',
     template: '<i class="mc mc-calendar_16"></i>',
     host: {
-        class: 'mc-password-eye',
-        // '[attr.mcSuffix]': 'null'
-    }
+        class: 'mc-password-toggle',
+        '[attr.tabindex]': '0',
+        '(click)': 'toggle()',
+        '(keydown.ENTER)': 'toggle()',
+        '(keydown.SPACE)': 'toggle()'
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
-export class McInputPasswordEye extends McSuffix {
+export class McPasswordToggle implements OnDestroy {
+    constructor(
+        private elementRef: ElementRef,
+        private focusMonitor: FocusMonitor,
+        private formField: McFormField
+    ) {
+        this.runFocusMonitor();
+    }
+
+    ngOnDestroy() {
+        this.stopFocusMonitor();
+    }
+
+    toggle() {
+        (this.formField.control as McInputPassword).toggleType();
+    }
+
+    private runFocusMonitor() {
+        this.focusMonitor.monitor(this.elementRef.nativeElement, true);
+    }
+
+    private stopFocusMonitor() {
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+    }
 
 }
 
@@ -95,7 +126,7 @@ export class McInputPassword extends McInputMixinBase implements McFormFieldCont
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
-    controlType: string = 'input';
+    controlType: string = 'input-password';
 
     elementType: string = 'password';
 
