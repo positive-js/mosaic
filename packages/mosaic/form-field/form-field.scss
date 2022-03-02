@@ -26,7 +26,16 @@
     display: block;
 }
 
-.mc-form-field__hint > .mc-hint {
+.mc-password-hint {
+    display: block;
+
+    & .mc-icon {
+        margin-right: 4px;
+    }
+}
+
+.mc-form-field__hint > .mc-hint,
+.mc-form-field__hint > .mc-password-hint {
     margin-top: var(--mc-form-field-hint-size-margin-top, $form-field-hint-size-margin-top);
 }
 

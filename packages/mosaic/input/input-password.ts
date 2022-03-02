@@ -45,9 +45,11 @@ let nextUniqueId = 0;
 @Component({
     selector: `mc-password-toggle`,
     exportAs: 'mcPasswordToggle',
-    template: '<i class="mc mc-calendar_16"></i>',
+    template: '<ng-content></ng-content>',
     host: {
-        class: 'mc-password-toggle',
+        class: 'mc-password-toggle mc',
+        '[class.mc-eye_16]': 'hidden',
+        '[class.mc-eye-crossed_16]': '!hidden',
         '[attr.tabindex]': '0',
         '(click)': 'toggle()',
         '(keydown.ENTER)': 'toggle()',
@@ -57,6 +59,10 @@ let nextUniqueId = 0;
     encapsulation: ViewEncapsulation.None
 })
 export class McPasswordToggle implements OnDestroy {
+    get hidden(): boolean {
+        return (this.formField.control as McInputPassword).elementType === 'password';
+    }
+
     constructor(
         private elementRef: ElementRef,
         private focusMonitor: FocusMonitor,

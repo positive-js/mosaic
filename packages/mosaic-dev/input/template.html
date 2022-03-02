@@ -4,148 +4,183 @@
     <br>
     <br>
 
-    <mc-form-field mcFormFieldWithoutBorders class="mc-group-item">
-        <input mcInput [(ngModel)]="numberValue" type="number" placeholder="Number MaxMin Step"
-               [min]="min" [max]="7" [step]="0.5" [bigStep]="1.5">
-        <mc-stepper></mc-stepper>
-    </mc-form-field>
-
-    <br>
-
-    <mc-form-field class="mc-group-item">
-        <input mcInput [(ngModel)]="numberValue" type="number" placeholder="Number MaxMin Step"
-               [min]="min" [max]="7" [step]="0.5" [bigStep]="1.5">
-        <mc-stepper></mc-stepper>
-    </mc-form-field>
-
-    <mc-form-field mcFormFieldWithoutBorders class="mc-group-item">
-        <input mcInput [(ngModel)]="numberValue" type="number" placeholder="Number MaxMin Step"
-               [min]="min" [max]="7" [step]="0.5" [bigStep]="1.5">
-        <mc-stepper></mc-stepper>
-    </mc-form-field>
-
-    <br>
-    <br>
-
-    <mc-form-field class="mc-focused">
-        <input mcInput [(ngModel)]="value" placeholder="Placeholder">
-
-        <i mcSuffix mc-icon="mc-calendar_16"></i>
-    </mc-form-field>
-
-    <br>
-    <br>
-
-    <header>Without placeholder:</header>
     <mc-form-field>
-        <input mcInput [(ngModel)]="value">
+        <input mcInputPassword [formControl]="password" placeholder="Number MaxMin Step">
+        <mc-password-toggle></mc-password-toggle>
+
+        <mc-password-hint *ngIf="password.errors?.pattern">IP-адрес не соответствует</mc-password-hint>
+
+        <mc-password-hint *ngIf="password.errors">IP-адрес не соответствует</mc-password-hint>
+
+        <mc-password-hint *ngIf="password.errors">IP-адрес не соответствует</mc-password-hint>
     </mc-form-field>
 
-    <br><br>
+<!--    <br><br>-->
 
-    <header>With placeholder:</header>
+<!--    <header>With clear-button:</header>-->
 
-    <mc-form-field>
-        <input mcInput [(ngModel)]="value" placeholder="Placeholder">
-    </mc-form-field>
+<!--    <mc-form-field>-->
+<!--        <input mcInput [(ngModel)]="value" placeholder="Placeholder">-->
 
-    <br><br>
+<!--        <mc-cleaner></mc-cleaner>-->
+<!--    </mc-form-field>-->
 
-    <header>With placeholder and monospace:</header>
+<!--    <br><br>-->
 
-    <mc-form-field>
-        <input mcInput mcInputMonospace [(ngModel)]="value" placeholder="Placeholder">
-    </mc-form-field>
+<!--    <header>With prefix:</header>-->
 
-    <br><br>
+<!--    <mc-form-field>-->
+<!--        <i mcPrefix mc-icon="mc-search_16"></i>-->
 
-    <header>With placeholder and hint:</header>
+<!--        <input mcInput [(ngModel)]="value" placeholder="Placeholder">-->
+<!--    </mc-form-field>-->
 
-    <mc-form-field>
-        <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+<!--    <br><br>-->
 
-        <mc-hint>Hint under field</mc-hint>
-    </mc-form-field>
+<!--    <header>With suffix:</header>-->
 
-    <br><br>
+<!--    <mc-form-field>-->
+<!--        <input mcInput [(ngModel)]="value" placeholder="Placeholder">-->
 
-    <header>With placeholder, hint and disabled:</header>
+<!--        <i mcSuffix mc-icon="mc-calendar_16"></i>-->
+<!--    </mc-form-field>-->
 
-    <mc-form-field>
-        <input mcInput [(ngModel)]="value" placeholder="Placeholder" [disabled]="true">
+<!--    <br>-->
 
-        <mc-hint>Hint under field</mc-hint>
-    </mc-form-field>
+<!--    <mc-form-field class="mc-group-item">-->
+<!--        <input mcInput [(ngModel)]="numberValue" type="number" placeholder="Number MaxMin Step"-->
+<!--               [min]="min" [max]="7" [step]="0.5" [bigStep]="1.5">-->
+<!--        <mc-stepper></mc-stepper>-->
+<!--    </mc-form-field>-->
 
-    <br><br>
+<!--    <mc-form-field mcFormFieldWithoutBorders class="mc-group-item">-->
+<!--        <input mcInput [(ngModel)]="numberValue" type="number" placeholder="Number MaxMin Step"-->
+<!--               [min]="min" [max]="7" [step]="0.5" [bigStep]="1.5">-->
+<!--        <mc-stepper></mc-stepper>-->
+<!--    </mc-form-field>-->
 
-    <header>With clear-button:</header>
+<!--    <br>-->
+<!--    <br>-->
 
-    <mc-form-field>
-        <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+<!--    <mc-form-field class="mc-focused">-->
+<!--        <input mcInput [(ngModel)]="value" placeholder="Placeholder">-->
 
-        <mc-cleaner></mc-cleaner>
-    </mc-form-field>
+<!--        <i mcSuffix mc-icon="mc-calendar_16"></i>-->
+<!--    </mc-form-field>-->
 
-    <br><br>
+<!--    <br>-->
+<!--    <br>-->
 
-    <header>With prefix:</header>
+<!--    <header>Without placeholder:</header>-->
+<!--    <mc-form-field>-->
+<!--        <input mcInput [(ngModel)]="value">-->
+<!--    </mc-form-field>-->
 
-    <mc-form-field>
-        <i mcPrefix mc-icon="mc-search_16"></i>
+<!--    <br><br>-->
 
-        <input mcInput [(ngModel)]="value" placeholder="Placeholder">
-    </mc-form-field>
+<!--    <header>With placeholder:</header>-->
 
-    <br><br>
+<!--    <mc-form-field>-->
+<!--        <input mcInput [(ngModel)]="value" placeholder="Placeholder">-->
+<!--    </mc-form-field>-->
 
-    <header>With suffix:</header>
+<!--    <br><br>-->
 
-    <mc-form-field>
-        <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+<!--    <header>With placeholder and monospace:</header>-->
 
-        <i mcSuffix mc-icon="mc-calendar_16"></i>
-    </mc-form-field>
+<!--    <mc-form-field>-->
+<!--        <input mcInput mcInputMonospace [(ngModel)]="value" placeholder="Placeholder">-->
+<!--    </mc-form-field>-->
 
-    <br><br>
+<!--    <br><br>-->
 
-    <header>Invalid:</header>
+<!--    <header>With placeholder and hint:</header>-->
 
-    <mc-form-field>
-        <input mcInput [(ngModel)]="value" placeholder="Placeholder" [required]="true" minlength="4">
-    </mc-form-field>
+<!--    <mc-form-field>-->
+<!--        <input mcInput [(ngModel)]="value" placeholder="Placeholder">-->
 
-    <br><br>
+<!--        <mc-hint>Hint under field</mc-hint>-->
+<!--    </mc-form-field>-->
 
-    <header>Invalid with clear-button:</header>
+<!--    <br><br>-->
 
-    <mc-form-field>
-        <input mcInput [(ngModel)]="value" placeholder="Placeholder" [required]="true" minlength="4">
+<!--    <header>With placeholder, hint and disabled:</header>-->
 
-        <mc-cleaner></mc-cleaner>
-    </mc-form-field>
+<!--    <mc-form-field>-->
+<!--        <input mcInput [(ngModel)]="value" placeholder="Placeholder" [disabled]="true">-->
 
-    <br><br>
+<!--        <mc-hint>Hint under field</mc-hint>-->
+<!--    </mc-form-field>-->
 
-    <header>With placeholder, hint, prefix, cleaner and disabled:</header>
+<!--    <br><br>-->
 
-    <mc-form-field>
-        <i mcPrefix mc-icon="mc-search_16"></i>
+<!--    <header>With clear-button:</header>-->
 
-        <input mcInput [(ngModel)]="value" placeholder="Placeholder" [disabled]="true">
+<!--    <mc-form-field>-->
+<!--        <input mcInput [(ngModel)]="value" placeholder="Placeholder">-->
 
-        <mc-cleaner></mc-cleaner>
-    </mc-form-field>
+<!--        <mc-cleaner></mc-cleaner>-->
+<!--    </mc-form-field>-->
 
-    <br><br>
+<!--    <br><br>-->
 
-    <header>Without borders:</header>
+<!--    <header>With prefix:</header>-->
 
-    <mc-form-field mcFormFieldWithoutBorders>
-        <i mcPrefix mc-icon="mc-search_16"></i>
+<!--    <mc-form-field>-->
+<!--        <i mcPrefix mc-icon="mc-search_16"></i>-->
 
-        <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+<!--        <input mcInput [(ngModel)]="value" placeholder="Placeholder">-->
+<!--    </mc-form-field>-->
 
-        <mc-cleaner></mc-cleaner>
-    </mc-form-field>
+<!--    <br><br>-->
+
+<!--    <header>With suffix:</header>-->
+
+<!--    <mc-form-field>-->
+<!--        <input mcInput [(ngModel)]="value" placeholder="Placeholder">-->
+
+<!--        <i mcSuffix mc-icon="mc-calendar_16"></i>-->
+<!--    </mc-form-field>-->
+
+<!--    <br><br>-->
+
+<!--    <header>Invalid:</header>-->
+
+<!--    <mc-form-field>-->
+<!--        <input mcInput [(ngModel)]="value" placeholder="Placeholder" [required]="true" minlength="4">-->
+<!--    </mc-form-field>-->
+
+<!--    <br><br>-->
+
+<!--    <header>Invalid with clear-button:</header>-->
+
+<!--    <mc-form-field>-->
+<!--        <input mcInput [(ngModel)]="value" placeholder="Placeholder" [required]="true" minlength="4">-->
+
+<!--        <mc-cleaner></mc-cleaner>-->
+<!--    </mc-form-field>-->
+
+<!--    <br><br>-->
+
+<!--    <header>With placeholder, hint, prefix, cleaner and disabled:</header>-->
+
+<!--    <mc-form-field>-->
+<!--        <i mcPrefix mc-icon="mc-search_16"></i>-->
+
+<!--        <input mcInput [(ngModel)]="value" placeholder="Placeholder" [disabled]="true">-->
+
+<!--        <mc-cleaner></mc-cleaner>-->
+<!--    </mc-form-field>-->
+
+<!--    <br><br>-->
+
+<!--    <header>Without borders:</header>-->
+
+<!--    <mc-form-field mcFormFieldWithoutBorders>-->
+<!--        <i mcPrefix mc-icon="mc-search_16"></i>-->
+
+<!--        <input mcInput [(ngModel)]="value" placeholder="Placeholder">-->
+
+<!--        <mc-cleaner></mc-cleaner>-->
+<!--    </mc-form-field>-->
 </div>

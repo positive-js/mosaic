@@ -1,5 +1,5 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 
@@ -15,6 +15,8 @@ import { McInputModule } from '../../mosaic/input/';
     encapsulation: ViewEncapsulation.None
 })
 export class InputDemoComponent {
+    password = new FormControl([], Validators.pattern(/D/));
+
     value: string = '';
     numberValue: number | null = null;
     min = -5;
@@ -22,19 +24,15 @@ export class InputDemoComponent {
 
 
 @NgModule({
-    declarations: [
-        InputDemoComponent
-    ],
+    declarations: [InputDemoComponent],
     imports: [
         BrowserModule,
         McButtonModule,
         McInputModule,
         McFormFieldModule,
-        FormsModule,
+        ReactiveFormsModule,
         McIconModule
     ],
-    bootstrap: [
-        InputDemoComponent
-    ]
+    bootstrap: [InputDemoComponent]
 })
 export class DemoModule {}
