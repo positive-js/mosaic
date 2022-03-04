@@ -8,7 +8,8 @@
         mcTreeNodePadding
         [disabled]="node.name === 'tests'"
         (keydown.enter)="fileSelectionToggle(node)"
-        (keydown.space)="fileSelectionToggle(node)">
+        (keydown.space)="fileSelectionToggle(node)"
+        [class.mc-selected]="selectedState(node)">
 
         <mc-checkbox class= "tree-example-checkbox" [disabled]="node.name === 'tests'"
                      [checked]="checklistSelection.isSelected(node)"
@@ -20,7 +21,8 @@
         *mcTreeNodeDef="let node; when: hasChild"
         mcTreeNodePadding
         (keydown.enter)="fileSelectionToggle(node)"
-        (keydown.space)="fileSelectionToggle(node)">
+        (keydown.space)="fileSelectionToggle(node)"
+        [class.mc-selected]="selectedState(node)">
 
         <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
         <mc-checkbox class= "tree-example-checkbox"
