@@ -4,7 +4,8 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 import { McCleaner } from './cleaner';
 import { McFormField, McFormFieldWithoutBorders } from './form-field';
-import { McHint, McPasswordHint } from './hint';
+import { McHint } from './hint';
+import { McPasswordHint } from './password-hint';
 import { McPrefix } from './prefix';
 import { McStepper } from './stepper';
 import { McSuffix } from './suffix';
@@ -33,5 +34,4 @@ import { McSuffix } from './suffix';
         McStepper
     ]
 })
-export class McFormFieldModule {
-}
+export class McFormFieldModule {}

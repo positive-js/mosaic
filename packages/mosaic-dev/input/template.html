@@ -8,11 +8,15 @@
         <input mcInputPassword [formControl]="password" placeholder="Number MaxMin Step">
         <mc-password-toggle></mc-password-toggle>
 
-        <mc-password-hint *ngIf="password.errors?.pattern">IP-адрес не соответствует</mc-password-hint>
+        <mc-password-hint [rule]="passwordRules.Length" [min]="3" [max]="15">От 8 до 128 символов</mc-password-hint>
 
-        <mc-password-hint *ngIf="password.errors">IP-адрес не соответствует</mc-password-hint>
+        <mc-password-hint [rule]="passwordRules.UpperLatin">Заглавная латинская буква</mc-password-hint>
 
-        <mc-password-hint *ngIf="password.errors">IP-адрес не соответствует</mc-password-hint>
+        <mc-password-hint [rule]="passwordRules.LowerLatin">Строчная латинская буква</mc-password-hint>
+
+        <mc-password-hint [rule]="passwordRules.Digit">Цифра</mc-password-hint>
+
+        <mc-password-hint [rule]="passwordRules.SpecialSymbols">Только латинские буквы, цифры, пробелы и спец символы</mc-password-hint>
     </mc-form-field>
 
 <!--    <br><br>-->

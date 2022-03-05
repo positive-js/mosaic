@@ -1,9 +1,14 @@
+/* tslint:disable:no-magic-numbers */
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+    FormControl,
+    ReactiveFormsModule,
+    Validators
+} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 
-import { McFormFieldModule } from '../../mosaic/form-field';
+import { McFormFieldModule, PasswordRules } from '../../mosaic/form-field';
 import { McIconModule } from '../../mosaic/icon';
 import { McInputModule } from '../../mosaic/input/';
 
@@ -15,7 +20,8 @@ import { McInputModule } from '../../mosaic/input/';
     encapsulation: ViewEncapsulation.None
 })
 export class InputDemoComponent {
-    password = new FormControl([], Validators.pattern(/D/));
+    passwordRules = PasswordRules;
+    password = new FormControl('', Validators.required);
 
     value: string = '';
     numberValue: number | null = null;
