@@ -30,6 +30,8 @@ export class DemoComponent {
 
     activatedPosition: string = '';
 
+    inputText = 'Tooltip text';
+
     ELEMENTS = {
         BUTTON: 'button',
         INPUT: 'input',
