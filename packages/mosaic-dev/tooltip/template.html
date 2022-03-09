@@ -68,6 +68,15 @@
                     </mc-select>
                 </mc-form-field>
             </div>
+
+            <div class="mc-form__row">
+                <label for="layout" class="mc-form__label">
+                    Choose tooltip text
+                </label>
+                <mc-form-field>
+                    <input mcInput [(ngModel)]="inputText">
+                </mc-form-field>
+            </div>
         </div>
         <div class="flex left-padding layout-align-center-center">
             <label for="trigger" class="flex mc-form__label">
@@ -189,7 +198,7 @@
         <div [ngSwitch]="showElement()">
             <button mc-button
                     *ngSwitchCase="ELEMENTS.BUTTON"
-                    [mcTooltip]="'Tooltip text'"
+                    [mcTooltip]="inputText"
                     [mcPlacement]="selectedPlacement"
                     [mcPlacementPriority]="multipleSelected"
                     [mcTrigger]="selectedTrigger"
@@ -226,7 +235,7 @@
                 <input mcInput
                        [(ngModel)]="content"
                        placeholder="Button content"
-                       [mcTooltip]="'Tooltip text'"
+                       [mcTooltip]="inputText"
                        [mcPlacement]="selectedPlacement"
                        [mcPlacementPriority]="multipleSelected"
                        [mcTrigger]="selectedTrigger"
@@ -236,7 +245,7 @@
 
             <div *ngSwitchCase="ELEMENTS.ICON">
                 <i mc-icon="mc-calendar_16"
-                   [mcTooltip]="'Tooltip text'"
+                   [mcTooltip]="inputText"
                    [mcPlacement]="selectedPlacement"
                    [mcPlacementPriority]="multipleSelected"
                    [mcTrigger]="selectedTrigger"
