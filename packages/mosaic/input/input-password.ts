@@ -126,7 +126,7 @@ export class McInputPassword extends McInputMixinBase implements McFormFieldCont
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
-    readonly stateChanges: Subject<void> = new Subject<void>();
+    readonly stateChanges: Subject<any> = new Subject<any>();
 
     /**
      * Implemented as part of McFormFieldControl.
@@ -287,14 +287,14 @@ export class McInputPassword extends McInputMixinBase implements McFormFieldCont
     }
 
     onBlur(): void {
-        this.focusChanged(false);
-
         if (this.ngControl?.control) {
             const control = this.ngControl.control;
 
             control.updateValueAndValidity({ emitEvent: false });
             (control.statusChanges as EventEmitter<string>).emit(control.status);
         }
+
+        this.focusChanged(false);
     }
 
     /** Callback for the cases where the focused state of the input changes. */
@@ -302,7 +302,7 @@ export class McInputPassword extends McInputMixinBase implements McFormFieldCont
         if (isFocused === this.focused) { return; }
 
         this.focused = isFocused;
-        this.stateChanges.next();
+        this.stateChanges.next({ focused: this.focused });
     }
 
     onInput() {

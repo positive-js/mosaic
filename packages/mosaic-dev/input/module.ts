@@ -2,6 +2,7 @@
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import {
     FormControl,
+    FormsModule,
     ReactiveFormsModule,
     Validators
 } from '@angular/forms';
@@ -37,6 +38,7 @@ export class InputDemoComponent {
         McInputModule,
         McFormFieldModule,
         ReactiveFormsModule,
+        FormsModule,
         McIconModule
     ],
     bootstrap: [InputDemoComponent]

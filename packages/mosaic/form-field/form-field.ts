@@ -27,6 +27,7 @@ import {
     getMcFormFieldYouCanNotUseCleanerInNumberInputError
 } from './form-field-errors';
 import { McHint } from './hint';
+import { McPasswordHint } from './password-hint';
 import { McPrefix } from './prefix';
 import { McStepper } from './stepper';
 import { McSuffix } from './suffix';
@@ -91,6 +92,7 @@ export class McFormField extends McFormFieldMixinBase implements
     @ContentChild(McCleaner, { static: false }) cleaner: McCleaner | null;
 
     @ContentChildren(McHint) hint: QueryList<McHint>;
+    @ContentChildren(McPasswordHint) passwordHints: QueryList<McPasswordHint>;
     @ContentChildren(McSuffix) suffix: QueryList<McSuffix>;
     @ContentChildren(McPrefix) prefix: QueryList<McPrefix>;
 
@@ -106,15 +108,19 @@ export class McFormField extends McFormFieldMixinBase implements
     private $unsubscribe = new Subject<void>();
 
     get hasHint(): boolean {
-        return this.hint && this.hint.length > 0;
+        return this.hint?.length > 0;
+    }
+
+    get hasPasswordStrengthError(): boolean {
+        return this.passwordHints?.some((hint) => hint.hasError);
     }
 
     get hasSuffix(): boolean {
-        return this.suffix && this.suffix.length > 0;
+        return this.suffix?.length > 0;
     }
 
     get hasPrefix(): boolean {
-        return this.prefix && this.prefix.length > 0;
+        return this.prefix?.length > 0;
     }
 
     get hasCleaner(): boolean {
@@ -127,14 +133,13 @@ export class McFormField extends McFormFieldMixinBase implements
 
     get canShowCleaner(): boolean {
         return this.hasCleaner &&
-        this.control &&
-        this.control.ngControl
+        this.control?.ngControl
             ? this.control.ngControl.value && !this.control.disabled
             : false;
     }
 
     get disabled(): boolean {
-        return this.control && this.control.disabled;
+        return this.control?.disabled;
     }
 
     get canShowStepper(): boolean {
@@ -163,7 +168,11 @@ export class McFormField extends McFormFieldMixinBase implements
         // Subscribe to changes in the child control state in order to update the form field UI.
         this.control.stateChanges
             .pipe(startWith())
-            .subscribe(() => {
+            .subscribe((state: any) => {
+                if (!state?.focused && this.hasPasswordStrengthError) {
+                    this.control.ngControl?.control?.setErrors({ passwordStrength: true });
+                }
+
                 this._changeDetectorRef.markForCheck();
             });
 
@@ -172,7 +181,7 @@ export class McFormField extends McFormFieldMixinBase implements
         }
 
         // Run change detection if the value changes.
-        const valueChanges = this.control.ngControl && this.control.ngControl.valueChanges || EMPTY;
+        const valueChanges = this.control.ngControl?.valueChanges || EMPTY;
 
         merge(valueChanges)
             .pipe(takeUntil(this.$unsubscribe))
@@ -191,10 +200,8 @@ export class McFormField extends McFormFieldMixinBase implements
     clearValue($event) {
         $event.stopPropagation();
 
-        if (this.control && this.control.ngControl) {
-            this.control.ngControl.reset();
-            this.control.focus();
-        }
+        this.control?.ngControl?.reset();
+        this.control?.focus();
     }
 
     onContainerClick($event) {
@@ -206,9 +213,7 @@ export class McFormField extends McFormFieldMixinBase implements
     onKeyDown(event: KeyboardEvent): void {
         // tslint:disable-next-line:deprecation
         if (this.canCleanerClearByEsc && event.keyCode === ESCAPE && this.control.focused && this.hasCleaner) {
-            if (this.control && this.control.ngControl) {
-                this.control.ngControl.reset();
-            }
+            this.control?.ngControl?.reset();
 
             event.preventDefault();
         }
