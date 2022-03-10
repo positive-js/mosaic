@@ -100,7 +100,7 @@ export class McPasswordHint implements AfterContentInit {
             this.hasError = false;
 
             this.checked = this.checkRule(this.control.value);
-        } else {
+        } else if (!this.control.focused && !this.isValueChanged()) {
             this.hasError = !this.checkRule(this.control.value);
         }
 
