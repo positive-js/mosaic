@@ -6,16 +6,19 @@ import { McInputModule } from '@ptsecurity/mosaic/input';
 
 import { InputNumberOverviewExample } from './input-number-overview/input-number-overview-example';
 import { InputOverviewExample } from './input-overview/input-overview-example';
+import { InputPasswordOverviewExample } from './input-password-overview/input-password-overview-example';
 
 
 export {
     InputOverviewExample,
-    InputNumberOverviewExample
+    InputNumberOverviewExample,
+    InputPasswordOverviewExample
 };
 
 const EXAMPLES = [
     InputOverviewExample,
-    InputNumberOverviewExample
+    InputNumberOverviewExample,
+    InputPasswordOverviewExample
 ];
 
 @NgModule({
