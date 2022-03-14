@@ -1,20 +1,16 @@
 /* tslint:disable */
-import { Component, DebugElement, Provider, Type } from '@angular/core';
+import { Component, Provider, Type } from '@angular/core';
 import {
     ComponentFixture,
     fakeAsync,
     TestBed,
-    ComponentFixtureAutoDetect, flush
+    ComponentFixtureAutoDetect,
+    flush
 } from '@angular/core/testing';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import {
-    dispatchFakeEvent,
-} from '@ptsecurity/cdk/testing';
-import {
-    McFormField,
-    McFormFieldModule, McPasswordHint, PasswordRules
-} from '@ptsecurity/mosaic/form-field';
+import { dispatchFakeEvent } from '@ptsecurity/cdk/testing';
+import { McFormFieldModule, PasswordRules } from '@ptsecurity/mosaic/form-field';
 
 import { McInputModule, McInputPassword, McPasswordToggle } from './index';
 
@@ -55,7 +51,7 @@ function createComponent<T>(component: Type<T>, imports: any[] = [], providers: 
 
             <mc-password-hint [rule]="passwordRules.Digit">Цифра</mc-password-hint>
 
-            <mc-password-hint [rule]="passwordRules.SpecialSymbols">Только латинские буквы, цифры, пробелы и спец символы</mc-password-hint>
+            <mc-password-hint [rule]="passwordRules.SpecialSymbols">Только латинские буквы, цифры, пробелы и спецсимволы</mc-password-hint>
         </mc-form-field>
     `
 })

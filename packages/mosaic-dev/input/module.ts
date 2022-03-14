@@ -17,12 +17,12 @@ import { McInputModule } from '../../mosaic/input/';
 @Component({
     selector: 'app',
     templateUrl: './template.html',
-    styleUrls: ['./styles.scss'],
+    styleUrls: ['../main.scss', './styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class InputDemoComponent {
     passwordRules = PasswordRules;
-    password = new FormControl('', Validators.required);
+    password = new FormControl('456', Validators.required);
 
     value: string = '';
     numberValue: number | null = null;

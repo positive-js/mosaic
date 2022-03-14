@@ -76,6 +76,32 @@
             /* stylelint-enable no-descending-specificity */
         }
     }
+
+    .mc-password-hint {
+        $password-hint: map-get(map-get($theme, components), form-field-password-hint);
+
+        color: map-get($password-hint, text-color);
+
+        & .mc-password-hint__icon {
+            color: map-get($password-hint, icon-color);
+        }
+
+        &.mc-password-hint_valid {
+            color: map-get($password-hint, state-valid-text-color);
+
+            & .mc-password-hint__icon {
+                color: map-get($password-hint, state-valid-icon-color);
+            }
+        }
+
+        &.mc-password-hint_invalid {
+            color: map-get($password-hint, state-invalid-text-color);
+
+            & .mc-password-hint__icon {
+                color: map-get($password-hint, state-invalid-icon-color);
+            }
+        }
+    }
 }
 
 @mixin mc-form-field-typography($config) {

@@ -1,8 +1,8 @@
-#### With default parameters
+### With default parameters
 <!-- example(input-overview) -->
 
-#### Numeric input
+### Numeric input
 <!-- example(input-number-overview) -->
 
-#### Password input
+### Password input
 <!-- example(input-password-overview) -->

@@ -1,17 +1,6 @@
-$mc-icons-font-path: "~@ptsecurity/mosaic-icons/dist/fonts";
-@import '~@ptsecurity/mosaic-icons/dist/styles/mc-icons';
+@import '../../mosaic/core/visual/prebuilt/default-visual';
 
-//@import '../../mosaic/core/theming/prebuilt/default-theme';
-@import '../../mosaic/core/theming/prebuilt/dark-theme';
-
-@include mc-core();
 
 .container .mc-form-field {
     width: 200px;
-}
-
-header {
-    $config: mc-typography-config();
-
-    @include mc-typography-level-to-styles($config, caption);
 }

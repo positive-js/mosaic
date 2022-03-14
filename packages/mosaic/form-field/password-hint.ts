@@ -30,11 +30,7 @@ export const regExpPasswordValidator = {
 @Component({
     selector: 'mc-password-hint',
     template: `
-        <i *ngIf="!checked"
-           class="mc-password-hint__icon"
-           [class.mc-password-hint__icon_error]="hasError"
-           mc-icon="mc-close-M_16"></i>
-
+        <i *ngIf="!checked" class="mc-password-hint__icon" mc-icon="mc-close-M_16"></i>
         <i *ngIf="checked" class="mc-password-hint__icon" mc-icon="mc-check_16"></i>
 
         <span class="mc-password-hint__text">
@@ -43,7 +39,8 @@ export const regExpPasswordValidator = {
     `,
     host: {
         class: 'mc-password-hint',
-        '[class.mc-password-hint_success]': 'checked',
+        '[class.mc-password-hint_valid]': 'checked',
+        '[class.mc-password-hint_invalid]': 'hasError',
         '[attr.id]': 'id'
     },
     changeDetection: ChangeDetectionStrategy.OnPush

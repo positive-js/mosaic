@@ -36,18 +36,6 @@
 
         left: 0;
     }
-
-    &.mc-password-hint_success {
-        color: green;
-
-        & .mc-password-hint__icon {
-            color: green;
-        }
-    }
-
-    & .mc-password-hint__icon_error {
-        color: red;
-    }
 }
 
 .mc-form-field__hint > .mc-password-hint {
