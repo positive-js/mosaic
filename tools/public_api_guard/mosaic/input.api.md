@@ -11,14 +11,16 @@ import { CanUpdateErrorStateCtor } from '@ptsecurity/mosaic/core';
 import { DoCheck } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { ErrorStateMatcher } from '@ptsecurity/mosaic/core';
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { FormControlName } from '@angular/forms';
 import { FormGroupDirective } from '@angular/forms';
 import * as i0 from '@angular/core';
-import * as i4 from '@angular/common';
-import * as i5 from '@angular/cdk/a11y';
-import * as i6 from '@ptsecurity/mosaic/core';
-import * as i7 from '@angular/forms';
+import * as i5 from '@angular/common';
+import * as i6 from '@angular/cdk/a11y';
+import * as i7 from '@ptsecurity/mosaic/core';
+import * as i8 from '@angular/forms';
 import { InjectionToken } from '@angular/core';
+import { McFormField } from '@ptsecurity/mosaic/form-field';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McValidationOptions } from '@ptsecurity/mosaic/core';
 import { NgControl } from '@angular/forms';
@@ -159,9 +161,10 @@ export class McInputModule {
     // Warning: (ae-forgotten-export) The symbol "i1" needs to be exported by the entry point index.d.ts
     // Warning: (ae-forgotten-export) The symbol "i2" needs to be exported by the entry point index.d.ts
     // Warning: (ae-forgotten-export) The symbol "i3" needs to be exported by the entry point index.d.ts
+    // Warning: (ae-forgotten-export) The symbol "i4" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
-    static ɵmod: i0.ɵɵNgModuleDeclaration<McInputModule, [typeof i1.McInput, typeof i2.McNumberInput, typeof i1.McInputMono, typeof i3.MinValidator, typeof i3.MaxValidator], [typeof i4.CommonModule, typeof i5.A11yModule, typeof i6.McCommonModule, typeof i7.FormsModule], [typeof i1.McInput, typeof i2.McNumberInput, typeof i1.McInputMono, typeof i3.MinValidator, typeof i3.MaxValidator]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<McInputModule, [typeof i1.McInput, typeof i2.McNumberInput, typeof i3.McInputPassword, typeof i3.McPasswordToggle, typeof i1.McInputMono, typeof i4.MinValidator, typeof i4.MaxValidator], [typeof i5.CommonModule, typeof i6.A11yModule, typeof i7.McCommonModule, typeof i8.FormsModule], [typeof i1.McInput, typeof i2.McNumberInput, typeof i3.McInputPassword, typeof i3.McPasswordToggle, typeof i1.McInputMono, typeof i4.MinValidator, typeof i4.MaxValidator]>;
 }
 
 // @public (undocumented)
@@ -170,6 +173,62 @@ export class McInputMono {
     static ɵdir: i0.ɵɵDirectiveDeclaration<McInputMono, "input[mcInputMonospace]", ["McInputMonospace"], {}, {}, never>;
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<McInputMono, never>;
+}
+
+// @public (undocumented)
+export class McInputPassword extends McInputMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState, AfterContentInit, OnChanges {
+    constructor(elementRef: ElementRef, rawValidators: Validator[], mcValidation: McValidationOptions, ngControl: NgControl, ngModel: NgModel, formControlName: FormControlName, parentForm: NgForm, parentFormGroup: FormGroupDirective, defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any);
+    controlType: string;
+    protected dirtyCheckNativeValue(): void;
+    get disabled(): boolean;
+    set disabled(value: boolean);
+    // (undocumented)
+    protected elementRef: ElementRef;
+    // (undocumented)
+    elementType: string;
+    get empty(): boolean;
+    errorStateMatcher: ErrorStateMatcher;
+    focus(): void;
+    focusChanged(isFocused: boolean): void;
+    focused: boolean;
+    // (undocumented)
+    formControlName: FormControlName;
+    get id(): string;
+    set id(value: string);
+    protected isBadInput(): boolean;
+    // (undocumented)
+    ngAfterContentInit(): void;
+    // (undocumented)
+    ngDoCheck(): void;
+    // (undocumented)
+    ngModel: NgModel;
+    // (undocumented)
+    ngOnChanges(): void;
+    // (undocumented)
+    ngOnDestroy(): void;
+    // (undocumented)
+    onBlur(): void;
+    onContainerClick(): void;
+    // (undocumented)
+    onInput(): void;
+    placeholder: string;
+    // (undocumented)
+    protected previousNativeValue: any;
+    // (undocumented)
+    rawValidators: Validator[];
+    get required(): boolean;
+    set required(value: boolean);
+    readonly stateChanges: Subject<any>;
+    // (undocumented)
+    toggleType(): void;
+    // (undocumented)
+    protected uid: string;
+    get value(): string;
+    set value(value: string);
+    // (undocumented)
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McInputPassword, "input[mcInputPassword]", ["mcInputPassword"], { "errorStateMatcher": "errorStateMatcher"; "placeholder": "placeholder"; "disabled": "disabled"; "id": "id"; "required": "required"; "value": "value"; }, {}, never>;
+    // (undocumented)
+    static ɵfac: i0.ɵɵFactoryDeclaration<McInputPassword, [null, { optional: true; self: true; }, { optional: true; }, { optional: true; self: true; }, { optional: true; self: true; }, { optional: true; self: true; }, { optional: true; }, { optional: true; }, null, { optional: true; self: true; }]>;
 }
 
 // @public (undocumented)
@@ -205,6 +264,21 @@ export class McNumberInput {
     static ɵdir: i0.ɵɵDirectiveDeclaration<McNumberInput, "input[mcInput][type=\"number\"]", ["mcNumericalInput"], { "bigStep": "bigStep"; "step": "step"; "min": "min"; "max": "max"; }, {}, never>;
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<McNumberInput, [null, { optional: true; self: true; }, { attribute: "step"; }, { attribute: "big-step"; }, { attribute: "min"; }, { attribute: "max"; }]>;
+}
+
+// @public (undocumented)
+export class McPasswordToggle implements OnDestroy {
+    constructor(elementRef: ElementRef, focusMonitor: FocusMonitor, formField: McFormField);
+    // (undocumented)
+    get hidden(): boolean;
+    // (undocumented)
+    ngOnDestroy(): void;
+    // (undocumented)
+    toggle(): void;
+    // (undocumented)
+    static ɵcmp: i0.ɵɵComponentDeclaration<McPasswordToggle, "mc-password-toggle", ["mcPasswordToggle"], {}, {}, never, ["*"]>;
+    // (undocumented)
+    static ɵfac: i0.ɵɵFactoryDeclaration<McPasswordToggle, never>;
 }
 
 // @public (undocumented)
