@@ -60,7 +60,7 @@ export abstract class McPopUpTrigger<T> {
     // tslint:disable-next-line:naming-convention orthodox-getter-and-setter
     protected _content: string | TemplateRef<any>;
     // tslint:disable-next-line:naming-convention orthodox-getter-and-setter
-    protected _disabled: boolean = false;
+    protected _disabled: boolean;
     // tslint:disable-next-line:naming-convention orthodox-getter-and-setter
     protected _customClass: string;
 
