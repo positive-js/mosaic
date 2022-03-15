@@ -15,7 +15,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { ESCAPE } from '@ptsecurity/cdk/keycodes';
+import { ESCAPE, F8 } from '@ptsecurity/cdk/keycodes';
 import { CanColor, CanColorCtor, mixinColor } from '@ptsecurity/mosaic/core';
 import { EMPTY, merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
@@ -211,6 +211,10 @@ export class McFormField extends McFormFieldMixinBase implements
     }
 
     onKeyDown(event: KeyboardEvent): void {
+        // tslint:disable-next-line:deprecation
+        if (this.control.controlType === 'input-password' && event.altKey && event.keyCode === F8) {
+            (this.control as unknown as { toggleType(): void }).toggleType();
+        }
         // tslint:disable-next-line:deprecation
         if (this.canCleanerClearByEsc && event.keyCode === ESCAPE && this.control.focused && this.hasCleaner) {
             this.control?.ngControl?.reset();

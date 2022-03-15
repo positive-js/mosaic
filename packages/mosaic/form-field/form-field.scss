@@ -29,17 +29,21 @@
 .mc-password-hint {
     display: block;
 
-    padding-left: 20px;
+    padding-left: 16px;
 
     & .mc-icon {
         position: absolute;
 
         left: 0;
     }
+
+    & .mc-password-hint__text {
+        margin-left: var(--mc-form-field-password-hint-size-icon-margin, $form-field-password-hint-size-icon-margin);
+    }
 }
 
 .mc-form-field__hint > .mc-password-hint {
-    margin-top: 8px;
+    margin-top: var(--mc-form-field-password-hint-size-margin-top, $form-field-password-hint-size-margin-top);
 }
 
 .mc-form-field__hint > .mc-hint {
