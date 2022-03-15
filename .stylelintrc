@@ -32,6 +32,9 @@
         "packages/docs/src/styles/red-theme/*.scss",
         "packages/docs/src/styles/red-theme/*.css",
         "packages/docs/src/styles/yellow-theme/*.scss",
-        "packages/docs/src/styles/yellow-theme/*.css"
+        "packages/docs/src/styles/yellow-theme/*.css",
+        "packages/mosaic-moment-adapter/coverage/**/*.css",
+        "packages/mosaic-luxon-adapter/coverage/**/*.css",
+        "packages/mosaic/coverage/**/*.css"
     ]
 }
