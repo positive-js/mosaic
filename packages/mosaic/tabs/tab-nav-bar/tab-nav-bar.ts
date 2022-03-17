@@ -36,7 +36,7 @@ export const McTabLinkMixinBase: HasTabIndexCtor & CanDisableCtor &
 @Component({
     selector: 'a[mc-tab-link], a[mcTabLink]',
     exportAs: 'mcTabLink',
-    template: '<ng-content></ng-content><div class="mc-tab-overlay"></div>',
+    template: '<ng-content></ng-content>',
     inputs: ['disabled', 'tabIndex'],
     host: {
         class: 'mc-tab-link',

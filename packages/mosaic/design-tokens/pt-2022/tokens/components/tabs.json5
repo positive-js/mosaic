@@ -2,13 +2,55 @@
     tabs: {
         'light-color-scheme': {
             border: { value: '{light-color-scheme.foreground.divider.value}' },
-            'state-active': { value: '{light-color-scheme.primary.default.value}' },
-            'state-disabled-overlay': { value: '{light-color-scheme.background.overlay-disabled.value}' }
+
+            state: {
+                normal: {
+                    icon: { value: '{light-color-scheme.second.palette.value.400.value}' },
+                    text: { value: '{light-color-scheme.second.palette.value.700.value}' }
+                },
+                hover: {
+                    icon: { value: '{light-color-scheme.second.palette.value.700.value}' },
+                    text: { value: '{light-color-scheme.second.palette.value.700.value}' }
+                },
+                active: {
+                    'marker-color': { value: '{light-color-scheme.primary.default.value}' }
+                },
+                empty: {
+                    icon: { value: '{light-color-scheme.second.palette.value.300.value}' },
+                    text: { value: '{light-color-scheme.second.palette.value.300.value}' }
+                },
+                disabled: {
+                    icon: { value: '{light-color-scheme.second.palette.value.300.value}' },
+                    text: { value: '{light-color-scheme.second.palette.value.300.value}' },
+                    'marker-opacity': { value: '0.3' }
+                }
+            }
         },
         'dark-color-scheme': {
             border: { value: '{dark-color-scheme.foreground.divider.value}' },
-            'state-active': { value: '{dark-color-scheme.primary.default.value}' },
-            'state-disabled-overlay': { value: '{dark-color-scheme.background.overlay-disabled.value}' }
+
+            state: {
+                normal: {
+                    icon: { value: '{dark-color-scheme.second.palette.value.400.value}' },
+                    text: { value: '{dark-color-scheme.second.palette.value.700.value}' }
+                },
+                hover: {
+                    icon: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+                    text: { value: '{dark-color-scheme.second.palette.value.700.value}' }
+                },
+                active: {
+                    'marker-color': { value: '{dark-color-scheme.primary.default.value}' }
+                },
+                empty: {
+                    icon: { value: '{dark-color-scheme.second.palette.value.300.value}' },
+                    text: { value: '{dark-color-scheme.second.palette.value.300.value}' }
+                },
+                disabled: {
+                    icon: { value: '{dark-color-scheme.second.palette.value.300.value}' },
+                    text: { value: '{dark-color-scheme.second.palette.value.300.value}' },
+                    'marker-opacity': { value: '0.3' }
+                }
+            }
         },
         size: {
             height: { value: '40px' },
