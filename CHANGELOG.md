@@ -1,3 +1,18 @@
+## 13.1.1 "Zippy" (2022-03-18)
+
+### Mosaic
+
+ * bug fix  **checkbox:** use tokens in pseudo-checkbox ([#822](https://github.com/positive-js/mosaic/issues/822)) ([f15e145](https://github.com/positive-js/mosaic/commit/f15e1450dfef823e22fa090ed9de968103a16ddc))
+ * bug fix  **navbar:** error when set mcTooltipDisabled on mc-navbar-item (#UIM-882) ([#829](https://github.com/positive-js/mosaic/issues/829)) ([d11317e](https://github.com/positive-js/mosaic/commit/d11317efd0f6a3733309d45f2ca809fde23ba44a)), closes [#UIM-882](https://github.com/positive-js/mosaic/issues/UIM-882)
+ * bug fix  package.json & yarn.lock to reduce vulnerabilities ([#824](https://github.com/positive-js/mosaic/issues/824)) ([becc772](https://github.com/positive-js/mosaic/commit/becc772e66f4069b9c5f89776609d314a2aa8174))
+ * bug fix  **popover:** reposition in scrollable container (#UIM-869) ([#820](https://github.com/positive-js/mosaic/issues/820)) ([fd8fb32](https://github.com/positive-js/mosaic/commit/fd8fb32f04b80fdcb343274ee4bd2ef28f133dd7)), closes [#UIM-869](https://github.com/positive-js/mosaic/issues/UIM-869)
+ * bug fix  **splitter:** can' t detect changes with OnPush strategy (#UIM-880) ([#831](https://github.com/positive-js/mosaic/issues/831)) ([7424fc3](https://github.com/positive-js/mosaic/commit/7424fc3801ab59b3fa506d714bed67fe629be2d4)), closes [#UIM-880](https://github.com/positive-js/mosaic/issues/UIM-880)
+ * bug fix  **tooltip:** don't show tooltip when content is empty ([#823](https://github.com/positive-js/mosaic/issues/823)) ([4be0d0d](https://github.com/positive-js/mosaic/commit/4be0d0dc66ef86cec6ff13cd7d6deb0bfc951171))
+
+### Docs
+
+ * bug fix  changed example for multiple-checklist example (#UIM-885) ([#825](https://github.com/positive-js/mosaic/issues/825)) ([48f82f4](https://github.com/positive-js/mosaic/commit/48f82f4046f9a1e6d6547ac3a3a74361c2e29b99)), closes [#UIM-885](https://github.com/positive-js/mosaic/issues/UIM-885)
+
 # 13.1.0 "Knotted Regrets" (2022-02-18)
 
 ### Mosaic
