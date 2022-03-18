@@ -29,15 +29,16 @@ describe('ToastService', () => {
         overlayContainer.ngOnDestroy();
     });
 
-    describe('created by service', () => {
-        it('should create one success toast', () => {
-            const { id } = toastService.show({ style: 'success', title: 'Success', content: 'Message Content' });
-
+    describe('should bring no break change', () => {
+        it('should create one sticky toast', () => {
+            toastService.show({ style: 'success', title: 'Success', content: 'Message Content' }, true, 0);
             expect(toastService.toasts.length).toBe(1);
+        });
 
-            toastService.hide(id);
-
-            expect(toastService.toasts.length).toBe(0);
+        it('should create one sticky warning toast', () => {
+            toastService.show({ style: 'warning', title: 'Warning', content: 'Message Content' }, true, 0);
+            expect(toastService.toasts[0].instance.data.style).toBe('warning');
         });
     });
+
 });

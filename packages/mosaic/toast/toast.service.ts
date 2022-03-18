@@ -58,8 +58,7 @@ export class McToastService<T extends McToastComponent = McToastComponent> {
     show(
         data: McToastData,
         onTop: boolean = this.toastConfig.onTop,
-        duration: number = this.toastConfig.duration,
-        sticky: boolean = this.toastConfig.sticky
+        duration: number = this.toastConfig.duration
     ): { ref: ComponentRef<T>; id: number} {
 
         this.prepareContainer();
@@ -68,7 +67,7 @@ export class McToastService<T extends McToastComponent = McToastComponent> {
 
         this.toastsDict[componentRef.instance.id] = componentRef;
 
-        if (!sticky) {
+        if (duration !== 0) {
             this.addRemoveTimer(componentRef.instance.id, duration);
         }
 
