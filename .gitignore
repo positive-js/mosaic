@@ -1,8 +1,6 @@
 # firebase artifacts
 .firebase
 
-package-lock.json
-
 .env
 
 # folders
