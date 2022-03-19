@@ -3,16 +3,21 @@
     "compilerOptions": {
         "module": "commonjs",
         "outDir": "../../node_modules/@ptsecurity/builders",
+        "resolveJsonModule": true,
+        "target": "es5",
         "declaration": true,
+        "downlevelIteration": true,
         "types": [
             "node"
         ]
     },
     "exclude": [
         "**/*.spec.ts",
-        "**/*.test.ts"
+        "**/*.test.ts",
+        "tsconfig.json"
     ],
     "include": [
-        "**/*.ts"
+        "**/*.ts",
+        "**/*.json"
     ]
 }

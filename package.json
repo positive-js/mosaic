@@ -146,7 +146,7 @@
         "docs:prod-build:aot": "ng build mosaic-docs --configuration production",
         "docs:publish-preview": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/publish-docs-preview.ts",
         "docs:cleanup-preview": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/cleanup-preview.ts",
-        "postinstall": "tsc -p tools/builders/tsconfig.json",
+        "postinstall": "tsc -p tools/builders/tsconfig.lib.json",
         "publish": "ts-node --project ./scripts/tsconfig.deploy.json ./scripts/deploy/publish-artifacts.ts",
         "linter:mosaic": "gulp tslint",
         "linter:mosaic:json": "gulp tslint:json",

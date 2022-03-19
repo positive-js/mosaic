@@ -38,7 +38,7 @@ task('mosaic:bundle-theming-scss', () => {
         // The release directory is not created yet because the composing of the release happens when
         // this task finishes.
         mkdirpSync(releasePath);
-        writeFileSync(themingBundlePath, result.bundledContent);
+        writeFileSync(themingBundlePath, result.bundledContent as string);
     });
 });
 
@@ -50,7 +50,7 @@ task('mosaic:bundle-visual-scss', () => {
         // The release directory is not created yet because the composing of the release happens when
         // this task finishes.
         mkdirpSync(releasePath);
-        writeFileSync(visualBundlePath, result.bundledContent);
+        writeFileSync(visualBundlePath, result.bundledContent as string);
     });
 });
 
