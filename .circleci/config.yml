@@ -9,7 +9,7 @@ version: 2.1
 
 # This allows us to take advantage of CircleCI's fallback caching.
 # Read more here: https://circleci.com/docs/2.0/caching/#restoring-cache.
-var_3: &cache_key mosaic-cache-{{ checksum "yarn.lock" }}
+var_3: &cache_key npm-packages-{{ checksum "package-lock.json" }}
 
 # Restores the cache that could be available for the current NPM lock file.
 var_4: &restore_cache
@@ -108,10 +108,9 @@ commands:
                   at: ~/mosaic
 
     npm_install:
-        description: Install NPM dependencies
         steps:
             - run:
-                name: npm install
+                name: Install NPM dependencies
                 command: npm ci
 
 # Job definitions
@@ -128,7 +127,6 @@ jobs:
             - save_cache:
                   key: *cache_key
                   paths:
-                      - ~/.cache/yarn
                       - node_modules
             - persist_to_workspace:
                   root: ~/mosaic
