@@ -2,25 +2,22 @@
     "compilerOptions": {
         "outDir": "../../node_modules/@ptsecurity/builders",
         "declaration": true,
-        "resolveJsonModule": true,
         "rootDir": ".",
-        "module": "commonjs",
-        "target": "es5",
+        "module": "esnext",
+        "target": "es2015",
         "types": [
             "node"
         ],
         "lib": [
-            "es2017"
+            "es2018"
         ],
         "downlevelIteration": true
     },
-    "include": [
-        "**/*.ts",
-        "**/*.json"
+    "references": [
+        {
+            "path": "./tsconfig.lib.json"
+        }
     ],
-    "exclude": [
-        "node_modules",
-        "dist",
-        "tsconfig.json"
-    ]
+    "include": [],
+    "exclude": []
 }

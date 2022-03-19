@@ -7,9 +7,9 @@
 npm install --save @angular/cdk @ptsecurity/mosaic @ptsecurity/cdk @ptsecurity/mosaic-icons @ptsecurity/mosaic-luxon-adapter @ptsecurity/mosaic-moment-adapter moment @messageformat/core
 ```
 
-#### Yarn
+#### NPM
 ```bash
-yarn add @angular/cdk @ptsecurity/mosaic @ptsecurity/cdk @ptsecurity/mosaic-icons @ptsecurity/mosaic-luxon-adapter @ptsecurity/mosaic-moment-adapter moment @messageformat/core
+npm add @angular/cdk @ptsecurity/mosaic @ptsecurity/cdk @ptsecurity/mosaic-icons @ptsecurity/mosaic-luxon-adapter @ptsecurity/mosaic-moment-adapter moment @messageformat/core
 ```
 
 #### Snapshots builds
@@ -21,9 +21,9 @@ Note that this snapshot build should not be considered stable and may break betw
 npm install --save positive-js/mosaic-builds positive-js/cdk-builds
 ```
 
-#### Yarn
+#### npm
 ```bash
-yarn add positive-js/mosaic-builds positive-js/cdk-builds
+npm add positive-js/mosaic-builds positive-js/cdk-builds
 ```
 
 ### Step 2: Animations
@@ -33,9 +33,9 @@ yarn add positive-js/mosaic-builds positive-js/cdk-builds
 npm install --save @angular/animations
 ```
 
-#### Yarn
+#### npm
 ```bash
-yarn add @angular/animations
+npm add @angular/animations
 ```
 
 ```ts

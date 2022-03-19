@@ -32,4 +32,4 @@ project with all its dependencies
 
 To run the unit tests with Jasmine:
 * Build Schematics `ng build schematics`
-* Run tests `yarn run unit:schematics`
+* Run tests `npm run unit:schematics`

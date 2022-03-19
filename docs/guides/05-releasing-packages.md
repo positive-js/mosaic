@@ -9,7 +9,7 @@ Stable packages releasing only from `release branches`.
 1. Create 1.0.x branch from `master`;
 2. Run
 
-   `yarn run release:stage:commit`
+   `npm run release:stage:commit`
 
 This command create and push a release commit and tag with changelog and bumped `package.json`;
 

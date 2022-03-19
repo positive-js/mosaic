@@ -11,7 +11,7 @@ version: 2.1
 # Read more here: https://circleci.com/docs/2.0/caching/#restoring-cache.
 var_3: &cache_key mosaic-cache-{{ checksum "yarn.lock" }}
 
-# Restores the cache that could be available for the current Yarn lock file.
+# Restores the cache that could be available for the current NPM lock file.
 var_4: &restore_cache
     restore_cache:
         key: *cache_key
@@ -107,12 +107,12 @@ commands:
             - attach_workspace:
                   at: ~/mosaic
 
-    yarn_install:
+    npm_install:
         description: Install NPM dependencies
         steps:
             - run:
-                name: yarn install
-                command: yarn install --frozen-lockfile --non-interactive
+                name: npm install
+                command: npm ci
 
 # Job definitions
 # Jobs can include parameters that are passed in the workflow job invocation.
@@ -124,7 +124,7 @@ jobs:
         steps:
             - checkout
             - *restore_cache
-            - yarn_install
+            - npm_install
             - save_cache:
                   key: *cache_key
                   paths:
@@ -146,14 +146,14 @@ jobs:
         executor: mosaic
         steps:
             - prepare_job
-            - run: yarn run valid:lic
+            - run: npm run valid:lic
 
     linters:
         executor: mosaic
         steps:
             - prepare_job
-            - run: yarn run linter:mosaic:json
-            - run: yarn run linter:styles:json
+            - run: npm run linter:mosaic:json
+            - run: npm run linter:styles:json
             - persist_to_workspace:
                   root: .
                   paths:
@@ -163,7 +163,7 @@ jobs:
         executor: mosaic
         steps:
             - prepare_job
-            - run: yarn run check-api
+            - run: npm run check-api
 
     build_packages:
         executor: mosaic
@@ -173,12 +173,12 @@ jobs:
             - run:
                   name: Build packages 📦
                   command: |
-                    yarn run build:cdk
-                    yarn run build:mosaic
-                    yarn run build:mosaic-luxon-adapter
-                    yarn run build:mosaic-moment-adapter
-                    yarn run styles:built-all
-                    yarn run build:package-design-tokens
+                    npm run build:cdk
+                    npm run build:mosaic
+                    npm run build:mosaic-luxon-adapter
+                    npm run build:mosaic-moment-adapter
+                    npm run styles:built-all
+                    npm run build:package-design-tokens
             - persist_to_workspace:
                   root: ~/mosaic
                   paths:
@@ -195,10 +195,10 @@ jobs:
                       echo 'export SHORT_GIT_HASH=$(git rev-parse --short=7 $CIRCLE_SHA1)' >> $BASH_ENV
                       echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
                       source $BASH_ENV
-            - run: yarn run build:mosaic-examples-module
-            - run: yarn run build:mosaic-examples
-            - run: yarn run build:docs-content && yarn run build:highlight && yarn run build:package-docs-content
-            - run: yarn run docs:prod-build --progress false --base-href /mosaic-previews/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/ --output-path dist/releases/mosaic-docs/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/
+            - run: npm run build:mosaic-examples-module
+            - run: npm run build:mosaic-examples
+            - run: npm run build:docs-content && npm run build:highlight && npm run build:package-docs-content
+            - run: npm run docs:prod-build --progress false --base-href /mosaic-previews/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/ --output-path dist/releases/mosaic-docs/pr$CIRCLE_PULL_REQUEST_NUMBER-$SHORT_GIT_HASH/
             - persist_to_workspace:
                   root: ~/mosaic
                   paths:
@@ -215,7 +215,7 @@ jobs:
                      google-chrome --version
                      whereis google-chrome
                  name: Check Chrome
-            - run: yarn run unit:cdk
+            - run: npm run unit:cdk
 
     test_unit_mosaic:
         executor: mosaic-browsers
@@ -228,14 +228,14 @@ jobs:
                       google-chrome --version
                       whereis google-chrome
                   name: Check Chrome
-            - run: yarn run unit:mosaic
+            - run: npm run unit:mosaic
 
     test_unit_schematics:
         executor: mosaic
         steps:
             - prepare_job
-            - run: yarn run build:schematics-test
-            - run: yarn run unit:schematics
+            - run: npm run build:schematics-test
+            - run: npm run unit:schematics
 
     test_unit_mosaic-moment-adapter:
         executor: mosaic-browsers
@@ -248,7 +248,7 @@ jobs:
                       google-chrome --version
                       whereis google-chrome
                   name: Check Chrome
-            - run: yarn run unit:mosaic-moment-adapter
+            - run: npm run unit:mosaic-moment-adapter
 
     test_unit_mosaic-luxon-adapter:
         executor: mosaic-browsers
@@ -261,16 +261,16 @@ jobs:
                       google-chrome --version
                       whereis google-chrome
                   name: Check Chrome
-            - run: yarn run unit:mosaic-luxon-adapter
+            - run: npm run unit:mosaic-luxon-adapter
 
     deploy-docs-next:
         executor: mosaic
         steps:
             - prepare_job
-            - run: yarn run build:mosaic-examples-module
-            - run: yarn run build:mosaic-examples
-            - run: yarn run build:docs-content && yarn run build:highlight && yarn run build:package-docs-content
-            - run: yarn run docs:prod-build:aot
+            - run: npm run build:mosaic-examples-module
+            - run: npm run build:mosaic-examples
+            - run: npm run build:docs-content && npm run build:highlight && npm run build:package-docs-content
+            - run: npm run docs:prod-build:aot
             - run:
                 name: Deploy "Next" version of Docs
                 command: npx firebase deploy --only hosting:next --token=$FIREBASE_DEPLOY_TOKEN
@@ -279,10 +279,10 @@ jobs:
         executor: mosaic
         steps:
             - prepare_job
-            - run: yarn run build:mosaic-examples-module
-            - run: yarn run build:mosaic-examples
-            - run: yarn run build:docs-content && yarn run build:highlight && yarn run build:package-docs-content
-            - run: yarn run docs:prod-build:aot
+            - run: npm run build:mosaic-examples-module
+            - run: npm run build:mosaic-examples
+            - run: npm run build:docs-content && npm run build:highlight && npm run build:package-docs-content
+            - run: npm run docs:prod-build:aot
             - run:
                 name: Deploy "Latest Stable" version of Docs
                 command: npx firebase deploy --only hosting:stable --token=$FIREBASE_DEPLOY_TOKEN
@@ -331,7 +331,7 @@ jobs:
                       echo 'export CIRCLE_PULL_REQUEST_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | cut -d"/" -f7)' >> $BASH_ENV
                       source $BASH_ENV
             - run: printenv
-            - run: yarn run docs:publish-preview
+            - run: npm run docs:publish-preview
 
     cleanup_preview_mosaic_docs:
         executor: mosaic
@@ -341,7 +341,7 @@ jobs:
                       - "c3:de:eb:9c:82:70:a8:23:f3:4e:92:b8:07:d2:22:df"
             - *checkout_code
             - *restore_cache
-            - run: yarn run docs:cleanup-preview
+            - run: npm run docs:cleanup-preview
 
 workflows:
     version: 2

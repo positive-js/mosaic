@@ -1,0 +1,18 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "module": "commonjs",
+        "outDir": "../../node_modules/@ptsecurity/builders",
+        "declaration": true,
+        "types": [
+            "node"
+        ]
+    },
+    "exclude": [
+        "**/*.spec.ts",
+        "**/*.test.ts"
+    ],
+    "include": [
+        "**/*.ts"
+    ]
+}

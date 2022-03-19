@@ -171,11 +171,11 @@ class PublishReleaseTask extends BaseReleaseTask {
         const spawnOptions: ExecSyncOptions = {cwd: binDir, stdio: 'inherit'};
 
         execSync('rm -rf dist', spawnOptions);
-        execSync('yarn run build:cdk', spawnOptions);
-        execSync('yarn run build:mosaic', spawnOptions);
-        execSync('yarn run build:mosaic-luxon-adapter', spawnOptions);
-        execSync('yarn run build:mosaic-moment-adapter', spawnOptions);
-        execSync('yarn run styles:built-all', spawnOptions);
+        execSync('npm run build:cdk', spawnOptions);
+        execSync('npm run build:mosaic', spawnOptions);
+        execSync('npm run build:mosaic-luxon-adapter', spawnOptions);
+        execSync('npm run build:mosaic-moment-adapter', spawnOptions);
+        execSync('npm run styles:built-all', spawnOptions);
     }
 
     /** Checks the release output by running the release-output validations. */

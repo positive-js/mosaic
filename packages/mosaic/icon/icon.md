@@ -6,12 +6,12 @@
 npm install @ptsecurity/mosaic-icons --save
 ```
 
-##### Yarn
+##### NPM
 ```
-yarn add @ptsecurity/mosaic-icons
+npm install @ptsecurity/mosaic-icons
 ```
 
-Затем вы должны импортировть стили:
+Затем вы должны импортировать стили:
 ```
 @import "~@ptsecurity/mosaic-icons/dist/styles/mc-icons.css";
 ```
@@ -22,7 +22,7 @@ yarn add @ptsecurity/mosaic-icons
 import { McIconModule } from '@ptsecurity/mosaic';
 ```
 
-Если *.css не используется вашем проекте, вы также можете добавить:
+Если *.css не используется в вашем проекте, вы также можете добавить:
 
 - mc-icons.less;
 - mc-icons.scss;

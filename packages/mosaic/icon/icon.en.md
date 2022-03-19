@@ -3,8 +3,6 @@ Note that Mosaic Icons is optional package and it should be installed manually.
 
 ##### NPM
 `npm install @ptsecurity/mosaic-icons --save`
-##### Yarn
-`yarn add @ptsecurity/mosaic-icons`
 
 Then you should add icons styles:
 
