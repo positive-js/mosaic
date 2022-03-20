@@ -15,7 +15,7 @@ export enum McToastPosition {
 export class McToastData {
     style: McToastStyle;
     title: string | TemplateRef<any>;
-    content: string | TemplateRef<any>;
+    content?: string | TemplateRef<any>;
 
     hasDismiss?: boolean;
 }
