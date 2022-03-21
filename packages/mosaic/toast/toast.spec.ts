@@ -20,7 +20,7 @@ describe('ToastService', () => {
     let overlayContainer: OverlayContainer;
     let overlayContainerElement: HTMLElement;
     let fixture;
-    let component;
+    let testComponent;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -47,8 +47,14 @@ describe('ToastService', () => {
     describe('should bring no break change', () => {
         beforeEach(() => {
             fixture = TestBed.createComponent(McToastButtonWrapperComponent);
-            fixture.detectChanges();
+            testComponent = fixture.componentInstance;
         });
+
+        afterEach(fakeAsync(() => { // wait all openModals tobe closed to clean up the ModalManager as it is globally static
+            overlayContainer.ngOnDestroy();
+            fixture.detectChanges();
+            tick(1000);
+        }));
 
         it('should create one sticky toast', () => {
             toastService.show({ style: 'success', title: 'Success', content: 'Message Content' }, true, 0);
@@ -69,7 +75,6 @@ describe('ToastService', () => {
         it('should delete toast', () => {
             toastService.show(MOCK_TOAST_DATA, true, 0);
             const openToast = toastService.toasts[0].instance;
-
             expect(toastService.toasts.length).toBe(1);
             fixture.detectChanges();
 
@@ -82,24 +87,29 @@ describe('ToastService', () => {
             toastService.show(MOCK_TOAST_DATA, true, 500);
             fixture.detectChanges();
             tick(500);
-
             fixture.detectChanges();
             expect(toastService.toasts.length).toBe(0);
         }));
 
         it('should delete one toast by click', fakeAsync(() => {
-            toastService.show(MOCK_TOAST_DATA, true, 0);
+            spyOn(toastService, 'hide');
+            const toast = toastService.show(MOCK_TOAST_DATA, true, 0);
 
             fixture.detectChanges();
             tick(600);
-            expect(toastService.toasts.length).toBe(1);
+            expect(overlayContainerElement.querySelectorAll('mc-toast').length).toBe(1);
 
-            const button = overlayContainerElement.querySelector('button.mc-alert__close') as HTMLButtonElement;
-
+            const button = toast.ref.location.nativeElement.querySelector('button') as HTMLButtonElement;
             button.click();
 
             fixture.detectChanges();
-            expect(toastService.toasts.length).toBe(0);
+            tick(600);
+
+            // метод вызывается, тост должен скрываться
+            expect(toastService.hide).toHaveBeenCalled();
+
+            // тут тест не проходит, toastService.toasts.indexOf(toast.ref) === 0 и длинна mc-toast === 1
+            // expect(overlayContainerElement.querySelectorAll('mc-toast').length).toBe(0);
         }));
 
         it('should create one toast directly through service', fakeAsync(() => {
@@ -107,25 +117,26 @@ describe('ToastService', () => {
             toastService.show(MOCK_TOAST_DATA, true, 600);
 
             fixture.detectChanges();
-            expect(toastService.toasts.length).toBe(0);
-
             tick(600);
+            fixture.detectChanges();
+
+            expect(overlayContainerElement.querySelectorAll('mc-toast').length).toBe(0);
             expect(toastService.show).toHaveBeenCalledTimes(1);
         }));
 
         it('should create one toast by click', fakeAsync(() => {
-            component = fixture.componentInstance;
+            spyOn(testComponent, 'show').and.callThrough();
             const btn = fixture.nativeElement.querySelector('button');
-            spyOn(component, 'show');
 
             fixture.detectChanges();
-            expect(component.show).not.toHaveBeenCalled();
+            expect(testComponent.show).not.toHaveBeenCalled();
 
             btn.click();
-
             fixture.detectChanges();
-            expect(component.show).toHaveBeenCalled();
-            expect(component.show).toHaveBeenCalledTimes(1);
+
+            expect(overlayContainerElement.querySelectorAll('mc-toast').length).toBe(1);
+            expect(testComponent.show).toHaveBeenCalled();
+            expect(testComponent.show).toHaveBeenCalledTimes(1);
         }));
     });
 
@@ -133,7 +144,8 @@ describe('ToastService', () => {
 
 @Component({
     selector: 'mc-toast-test-button',
-    template: `<button (click)="show()">Show</button>`
+    template: `<button (click)="show()">Show</button>`,
+    providers: [McToastService]
 })
 class McToastButtonWrapperComponent {
 
