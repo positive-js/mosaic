@@ -1,3 +1,47 @@
+## 13.1.1 "Zippy" (2022-03-18)
+
+### Mosaic
+
+ * bug fix  **checkbox:** use tokens in pseudo-checkbox ([#822](https://github.com/positive-js/mosaic/issues/822)) ([f15e145](https://github.com/positive-js/mosaic/commit/f15e1450dfef823e22fa090ed9de968103a16ddc))
+ * bug fix  **navbar:** error when set mcTooltipDisabled on mc-navbar-item (#UIM-882) ([#829](https://github.com/positive-js/mosaic/issues/829)) ([d11317e](https://github.com/positive-js/mosaic/commit/d11317efd0f6a3733309d45f2ca809fde23ba44a)), closes [#UIM-882](https://github.com/positive-js/mosaic/issues/UIM-882)
+ * bug fix  package.json & yarn.lock to reduce vulnerabilities ([#824](https://github.com/positive-js/mosaic/issues/824)) ([becc772](https://github.com/positive-js/mosaic/commit/becc772e66f4069b9c5f89776609d314a2aa8174))
+ * bug fix  **popover:** reposition in scrollable container (#UIM-869) ([#820](https://github.com/positive-js/mosaic/issues/820)) ([fd8fb32](https://github.com/positive-js/mosaic/commit/fd8fb32f04b80fdcb343274ee4bd2ef28f133dd7)), closes [#UIM-869](https://github.com/positive-js/mosaic/issues/UIM-869)
+ * bug fix  **splitter:** can' t detect changes with OnPush strategy (#UIM-880) ([#831](https://github.com/positive-js/mosaic/issues/831)) ([7424fc3](https://github.com/positive-js/mosaic/commit/7424fc3801ab59b3fa506d714bed67fe629be2d4)), closes [#UIM-880](https://github.com/positive-js/mosaic/issues/UIM-880)
+ * bug fix  **tooltip:** don't show tooltip when content is empty ([#823](https://github.com/positive-js/mosaic/issues/823)) ([4be0d0d](https://github.com/positive-js/mosaic/commit/4be0d0dc66ef86cec6ff13cd7d6deb0bfc951171))
+
+### Docs
+
+ * bug fix  changed example for multiple-checklist example (#UIM-885) ([#825](https://github.com/positive-js/mosaic/issues/825)) ([48f82f4](https://github.com/positive-js/mosaic/commit/48f82f4046f9a1e6d6547ac3a3a74361c2e29b99)), closes [#UIM-885](https://github.com/positive-js/mosaic/issues/UIM-885)
+
+# 13.1.0 "Knotted Regrets" (2022-02-18)
+
+### Mosaic
+
+ * bug fix  **date-formatter:** changed logic for calculating relative formats (#UIM-853) ([#806](https://github.com/positive-js/mosaic/issues/806)) ([01af6ef](https://github.com/positive-js/mosaic/commit/01af6ef4c5361f3d74d2144bc468e4b9ebf292b5)), closes [#UIM-853](https://github.com/positive-js/mosaic/issues/UIM-853)
+ * bug fix  Error opening Stackblitz links (#UIM-846) ([#802](https://github.com/positive-js/mosaic/issues/802)) ([7f028b3](https://github.com/positive-js/mosaic/commit/7f028b39e3a8d6de3efabd1e07f546135eeaca30)), closes [#UIM-846](https://github.com/positive-js/mosaic/issues/UIM-846)
+ * bug fix  **input:** change cleaner color (#UIM-852) ([#804](https://github.com/positive-js/mosaic/issues/804)) ([399b6fb](https://github.com/positive-js/mosaic/commit/399b6fb53c0b8c282fd81293739e306e205ccf6b)), closes [#UIM-852](https://github.com/positive-js/mosaic/issues/UIM-852)
+ * bug fix  **list:** clear selected values on filtration (#UIM-868) ([#817](https://github.com/positive-js/mosaic/issues/817)) ([350c5f7](https://github.com/positive-js/mosaic/commit/350c5f73c987596aa493c3c507bda3ad0903684a)), closes [#UIM-868](https://github.com/positive-js/mosaic/issues/UIM-868)
+ * bug fix  package.json & yarn.lock to reduce vulnerabilities ([#792](https://github.com/positive-js/mosaic/issues/792)) ([a342420](https://github.com/positive-js/mosaic/commit/a342420607194e07408846c8f4d195955e30be9a))
+ * bug fix  **popover:** remove popover viewport margin (#UIM-579) ([#789](https://github.com/positive-js/mosaic/issues/789)) ([cf5a5bc](https://github.com/positive-js/mosaic/commit/cf5a5bc81a8aeb97a574e098a54c6338614f5b89)), closes [#UIM-579](https://github.com/positive-js/mosaic/issues/UIM-579)
+ * bug fix  **styles:** rename cdk-overlay -> overlay (#UIM-858) ([#800](https://github.com/positive-js/mosaic/issues/800)) ([0ccd3fe](https://github.com/positive-js/mosaic/commit/0ccd3fe25be5b8aa8501cca3e2e4ae038033f032)), closes [#UIM-858](https://github.com/positive-js/mosaic/issues/UIM-858) [#UIM-858](https://github.com/positive-js/mosaic/issues/UIM-858)
+ * bug fix  **table:** invalid paddings ([#786](https://github.com/positive-js/mosaic/issues/786)) ([7b11139](https://github.com/positive-js/mosaic/commit/7b111394d33caae30661dd43df99c078eb4d700d))
+ * bug fix  **tags:** remove circular dependencies (#UIM-872) ([#816](https://github.com/positive-js/mosaic/issues/816)) ([72a9ce4](https://github.com/positive-js/mosaic/commit/72a9ce47fc9e5cf8c0690e26920676023213b88f)), closes [#UIM-872](https://github.com/positive-js/mosaic/issues/UIM-872)
+ * bug fix  tokens for legacy-2017 and deleted design-tokens from public-api ([#805](https://github.com/positive-js/mosaic/issues/805)) ([93ceb5d](https://github.com/positive-js/mosaic/commit/93ceb5dd030b3123d7cc99b9c516cd87a8081c69))
+ * bug fix  **tree-select:** incorrect position of checkbox (#UIM-860) ([#807](https://github.com/positive-js/mosaic/issues/807)) ([2374ec5](https://github.com/positive-js/mosaic/commit/2374ec5f9b0f67a6c24c995758368cb5bbb57162)), closes [#UIM-860](https://github.com/positive-js/mosaic/issues/UIM-860) [#UIM-860](https://github.com/positive-js/mosaic/issues/UIM-860)
+ * feature  **chore:** API Guards (#UIM-822) ([#788](https://github.com/positive-js/mosaic/issues/788)) ([8d852d5](https://github.com/positive-js/mosaic/commit/8d852d523c1e30bc881c34aa83c425f6cc72a129)), closes [#UIM-822](https://github.com/positive-js/mosaic/issues/UIM-822)
+ * feature  **formatter:** add seconds and milliseconds options (#UIM-781) ([#793](https://github.com/positive-js/mosaic/issues/793)) ([690611a](https://github.com/positive-js/mosaic/commit/690611aeef22bc2829891046269d73fac744a845)), closes [#UIM-781](https://github.com/positive-js/mosaic/issues/UIM-781) [#UIM-781](https://github.com/positive-js/mosaic/issues/UIM-781) [#UIM-781](https://github.com/positive-js/mosaic/issues/UIM-781) [#UIM-781](https://github.com/positive-js/mosaic/issues/UIM-781) [#UIM-781](https://github.com/positive-js/mosaic/issues/UIM-781) [#UIM-781](https://github.com/positive-js/mosaic/issues/UIM-781)
+ * feature  **styles:** New palette, fonts and them ([#799](https://github.com/positive-js/mosaic/issues/799)) ([6609d42](https://github.com/positive-js/mosaic/commit/6609d421fe59efca02cc4ae0630dcdbdf79a2060))
+ * feature  **tree-select:** add search and custom footer (#UIM-635) ([#749](https://github.com/positive-js/mosaic/issues/749)) ([58f1f08](https://github.com/positive-js/mosaic/commit/58f1f087bcc4fe6b1d891ae46b418021a5c82843)), closes [#UIM-635](https://github.com/positive-js/mosaic/issues/UIM-635) [#UIM-635](https://github.com/positive-js/mosaic/issues/UIM-635) [#UIM-635](https://github.com/positive-js/mosaic/issues/UIM-635) [#UIM-635](https://github.com/positive-js/mosaic/issues/UIM-635) [#UIM-635](https://github.com/positive-js/mosaic/issues/UIM-635) [#UIM-635](https://github.com/positive-js/mosaic/issues/UIM-635) [#UIM-635](https://github.com/positive-js/mosaic/issues/UIM-635)
+ * feature  **tree-select:** fix highlightCorrectOption (#UIM-607) ([#790](https://github.com/positive-js/mosaic/issues/790)) ([770452c](https://github.com/positive-js/mosaic/commit/770452cfc1e7d3ca9913cb18c1008f4edff06c48)), closes [#UIM-607](https://github.com/positive-js/mosaic/issues/UIM-607) [#UIM-607](https://github.com/positive-js/mosaic/issues/UIM-607) [#UIM-607](https://github.com/positive-js/mosaic/issues/UIM-607)
+ * feature  **tree-select:** tree-select with child selection (#UIM-745) ([#810](https://github.com/positive-js/mosaic/issues/810)) ([d1b5d43](https://github.com/positive-js/mosaic/commit/d1b5d439fcb1dc2170f3551681b6cef2df635126)), closes [#UIM-745](https://github.com/positive-js/mosaic/issues/UIM-745) [#UIM-745](https://github.com/positive-js/mosaic/issues/UIM-745)
+
+### Docs
+
+ * bug fix  add example lazy loading options (#UIM-802) ([#796](https://github.com/positive-js/mosaic/issues/796)) ([fb9165e](https://github.com/positive-js/mosaic/commit/fb9165e15e7d56a083281492baf435904676230a)), closes [#UIM-802](https://github.com/positive-js/mosaic/issues/UIM-802) [#UIM-802](https://github.com/positive-js/mosaic/issues/UIM-802)
+ * bug fix  selecting with keyboard (#UIM-873) ([#818](https://github.com/positive-js/mosaic/issues/818)) ([94c38ce](https://github.com/positive-js/mosaic/commit/94c38ce5be8d5198b44c3f159258c92d19375204)), closes [#UIM-873](https://github.com/positive-js/mosaic/issues/UIM-873)
+ * feature  buttons (#UX-352) ([#811](https://github.com/positive-js/mosaic/issues/811)) ([5a5054f](https://github.com/positive-js/mosaic/commit/5a5054fccab85846ba5dd99d44e87ee960d8ad90)), closes [#UX-352](https://github.com/positive-js/mosaic/issues/UX-352)
+ * feature  new tooltip docs (#UIM-864) ([fb9e21a](https://github.com/positive-js/mosaic/commit/fb9e21a9a7bb2fb0c7a9c32a6063c7646f36576c)), closes [#UIM-864](https://github.com/positive-js/mosaic/issues/UIM-864)
+
 # 13.0.0 "KryptonLutescent" (2022-01-14)
 
 ### Mosaic

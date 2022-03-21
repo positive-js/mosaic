@@ -202,6 +202,7 @@ export class McNavbarItem extends McTooltipTrigger {
     get croppedText(): string;
     // (undocumented)
     get disabled(): boolean;
+    set disabled(value: boolean);
     // (undocumented)
     getTitleWidth(): number;
     // (undocumented)

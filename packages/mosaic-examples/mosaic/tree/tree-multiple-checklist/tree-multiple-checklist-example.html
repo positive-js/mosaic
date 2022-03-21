@@ -3,14 +3,27 @@
     [dataSource]="dataSource"
     [treeControl]="treeControl">
 
-    <mc-tree-option *mcTreeNodeDef="let node" mcTreeNodePadding [disabled]="node.name === 'tests'">
+    <mc-tree-option
+        *mcTreeNodeDef="let node"
+        mcTreeNodePadding
+        [disabled]="node.name === 'tests'"
+        (keydown.enter)="fileSelectionToggle(node)"
+        (keydown.space)="fileSelectionToggle(node)"
+        [class.mc-selected]="selectedState(node)">
+
         <mc-checkbox class= "tree-example-checkbox" [disabled]="node.name === 'tests'"
                      [checked]="checklistSelection.isSelected(node)"
                      (change)="fileSelectionToggle(node)"></mc-checkbox>
         <span [innerHTML]="treeControl.getViewValue(node)"></span>
     </mc-tree-option>
 
-    <mc-tree-option *mcTreeNodeDef="let node; when: hasChild" mcTreeNodePadding>
+    <mc-tree-option
+        *mcTreeNodeDef="let node; when: hasChild"
+        mcTreeNodePadding
+        (keydown.enter)="fileSelectionToggle(node)"
+        (keydown.space)="fileSelectionToggle(node)"
+        [class.mc-selected]="selectedState(node)">
+
         <mc-tree-node-toggle [node]="node"></mc-tree-node-toggle>
         <mc-checkbox class= "tree-example-checkbox"
                      [checked]="descendantsAllSelected(node)"

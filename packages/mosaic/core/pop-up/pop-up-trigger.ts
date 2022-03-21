@@ -60,7 +60,7 @@ export abstract class McPopUpTrigger<T> {
     // tslint:disable-next-line:naming-convention orthodox-getter-and-setter
     protected _content: string | TemplateRef<any>;
     // tslint:disable-next-line:naming-convention orthodox-getter-and-setter
-    protected _disabled: boolean = false;
+    protected _disabled: boolean;
     // tslint:disable-next-line:naming-convention orthodox-getter-and-setter
     protected _customClass: string;
 
@@ -208,7 +208,8 @@ export abstract class McPopUpTrigger<T> {
         if (this.overlayRef) { return this.overlayRef; }
 
         // Create connected position strategy that listens for scroll events to reposition.
-        const strategy = this.overlay.position()
+        const strategy = this.overlay
+            .position()
             .flexibleConnectedTo(this.elementRef)
             .withTransformOriginOn(this.originSelector)
             .withFlexibleDimensions(false)
@@ -265,11 +266,7 @@ export abstract class McPopUpTrigger<T> {
 
         this.updateClassMap(newPlacement);
 
-        if ($event.scrollableViewProperties.isOverlayClipped && this.instance.isVisible()) {
-            // After position changes occur and the overlay is clipped by
-            // a parent scrollable then close the tooltip.
-            this.ngZone.run(() => this.hide());
-        }
+        this.instance.detectChanges();
     }
 
     initListeners() {

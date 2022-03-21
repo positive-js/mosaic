@@ -1,7 +1,7 @@
 {
     checkbox: {
         'light-color-scheme': {
-            border: { value: '{light-color-scheme.second.palette.value.200.value}' },
+            border: { value: '{light-color-scheme.foreground.border.value}' },
             states: {
                 checked: {
                     border: { value: '{light-color-scheme.primary.default.value}' },
@@ -14,7 +14,7 @@
             }
         },
         'dark-color-scheme': {
-            border: { value: '{dark-color-scheme.second.palette.value.560.value}' },
+            border: { value: '{dark-color-scheme.foreground.border.value}' },
             states: {
                 checked: {
                     border: { value: '{dark-color-scheme.primary.default.value}' },

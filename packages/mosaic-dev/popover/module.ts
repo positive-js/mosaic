@@ -1,4 +1,5 @@
 import { A11yModule } from '@angular/cdk/a11y';
+import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -134,7 +135,8 @@ export class DemoComponent {
         McIconModule,
         McInputModule,
         McSplitterModule,
-        McCheckboxModule
+        McCheckboxModule,
+        CdkScrollableModule
     ],
     bootstrap: [DemoComponent]
 })

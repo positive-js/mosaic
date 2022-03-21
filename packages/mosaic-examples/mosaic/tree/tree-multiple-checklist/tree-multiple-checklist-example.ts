@@ -130,6 +130,15 @@ export class TreeMultipleChecklistExample {
 
     hasChild(_: number, nodeData: FileFlatNode) { return nodeData.expandable; }
 
+    /** Whether descendants of the node are selected or node selected. */
+    selectedState(node: FileFlatNode): boolean {
+        if (node.expandable) {
+            return this.descendantsPartiallySelected(node) || (node.expandable && this.descendantsAllSelected(node));
+        }
+
+        return this.checklistSelection.isSelected(node);
+    }
+
     /** Whether all the descendants of the node are selected. */
     descendantsAllSelected(node: FileFlatNode): boolean {
         const descendants = this.treeControl.getDescendants(node);

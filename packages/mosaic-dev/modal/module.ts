@@ -57,6 +57,7 @@ export class ModalDemoComponent {
         });
 
         modalRef.afterClose.subscribe(() => this.deleteButton.focusViaKeyboard());
+        this.showConfirm();
     }
 
     createTplModal(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>) {

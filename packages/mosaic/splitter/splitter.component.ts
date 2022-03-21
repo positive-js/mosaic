@@ -63,33 +63,36 @@ export enum Direction {
     }
 })
 export class McGutterDirective implements OnInit {
+
+    @Input()
     get direction(): Direction {
         return this._direction;
     }
 
-    @Input()
     set direction(direction: Direction) {
         this._direction = direction;
     }
 
     private _direction: Direction = Direction.Vertical;
 
+
+    @Input()
     get order(): number {
         return this._order;
     }
 
-    @Input()
     set order(order: number) {
         this._order = coerceNumberProperty(order);
     }
 
     private _order: number = 0;
 
+
+    @Input()
     get size(): number {
         return this._size;
     }
 
-    @Input()
     set size(size: number) {
         this._size = coerceNumberProperty(size);
     }
@@ -143,11 +146,11 @@ export class McGutterDirective implements OnInit {
 export class McGutterGhostDirective {
     @Input() visible: boolean;
 
+    @Input()
     get x(): number {
         return this._x;
     }
 
-    @Input()
     set x(x: number) {
         this._x = x;
         this.setStyle(StyleProperty.Left, coerceCssPixelValue(x));
@@ -155,11 +158,11 @@ export class McGutterGhostDirective {
 
     private _x: number = 0;
 
+    @Input()
     get y(): number {
         return this._y;
     }
 
-    @Input()
     set y(y: number) {
         this._y = y;
         this.setStyle(StyleProperty.Top, coerceCssPixelValue(y));
@@ -168,11 +171,11 @@ export class McGutterGhostDirective {
     private _y: number = 0;
 
 
+    @Input()
     get direction(): Direction {
         return this._direction;
     }
 
-    @Input()
     set direction(direction: Direction) {
         this._direction = direction;
         this.updateDimensions();
@@ -180,11 +183,11 @@ export class McGutterGhostDirective {
 
     private _direction: Direction = Direction.Vertical;
 
+    @Input()
     get size(): number {
         return this._size;
     }
 
-    @Input()
     set size(size: number) {
         this._size = coerceNumberProperty(size);
         this.updateDimensions();
@@ -240,55 +243,59 @@ export class McSplitterComponent implements OnInit {
     private readonly areaPositionDivider: number = 2;
     private readonly listeners: (() => void)[] = [];
 
+
+    @Input()
     get hideGutters(): boolean {
         return this._hideGutters;
     }
 
-    @Input()
     set hideGutters(value: boolean) {
         this._hideGutters = coerceBooleanProperty(value);
     }
 
     private _hideGutters: boolean = false;
 
+
+    @Input()
     get direction(): Direction {
         return this._direction;
     }
 
-    @Input()
     set direction(direction: Direction) {
         this._direction = direction;
     }
 
     private _direction: Direction;
 
+    @Input()
     get disabled(): boolean {
         return this._disabled;
     }
 
-    @Input()
     set disabled(disabled: boolean) {
         this._disabled = coerceBooleanProperty(disabled);
     }
 
     private _disabled: boolean = false;
 
+
+    @Input()
     get useGhost(): boolean {
         return this._useGhost;
     }
 
-    @Input()
     set useGhost(useGhost: boolean) {
         this._useGhost = coerceBooleanProperty(useGhost);
     }
 
     private _useGhost: boolean = false;
 
+
+    @Input()
     get gutterSize(): number {
         return this._gutterSize;
     }
 
-    @Input()
     set gutterSize(gutterSize: number) {
         const size = coerceNumberProperty(gutterSize);
         this._gutterSize = size > 0 ? size : this.gutterSize;
@@ -344,8 +351,10 @@ export class McSplitterComponent implements OnInit {
 
         const leftArea = this.areas[leftAreaIndex];
         const rightArea = this.areas[rightAreaIndex];
+
         leftArea.initialSize = leftArea.area.getSize();
         rightArea.initialSize = rightArea.area.getSize();
+
         let currentGutter: McGutterDirective | undefined;
 
         if (this.useGhost) {
@@ -367,6 +376,7 @@ export class McSplitterComponent implements OnInit {
         } else {
             this.areas.forEach((item) => {
                 const size = item.area.getSize();
+
                 item.area.disableFlex();
                 item.area.setSize(size);
             });
@@ -407,9 +417,7 @@ export class McSplitterComponent implements OnInit {
             return false;
         });
 
-        if (indexToRemove === -1) {
-            return;
-        }
+        if (indexToRemove === -1) { return; }
 
         this.areas.splice(indexToRemove, 1);
     }
@@ -428,11 +436,13 @@ export class McSplitterComponent implements OnInit {
         });
     }
 
-    private onMouseMove(event: MouseEvent,
-                        startPoint: IPoint,
-                        leftArea: IArea,
-                        rightArea: IArea,
-                        currentGutter: McGutterDirective | undefined) {
+    private onMouseMove(
+        event: MouseEvent,
+        startPoint: IPoint,
+        leftArea: IArea,
+        rightArea: IArea,
+        currentGutter: McGutterDirective | undefined
+    ) {
         if (!this.isDragging || this.disabled) { return; }
 
         const endPoint: IPoint = {
@@ -454,13 +464,10 @@ export class McSplitterComponent implements OnInit {
             const key = this.isVertical() ? 'y' : 'x';
 
             const minPos = leftPos[key] - leftMin;
-
             const maxPos = rightPos[key] + (rightArea.area.getSize() || 0) - rightMin - currentGutter.size;
-
             const newPos = gutterPosition[key] - offset;
 
             this.ghost[key] = newPos < minPos ? minPos : Math.min(newPos, maxPos);
-
         } else {
            this.resizeAreas(leftArea, rightArea, offset);
         }
@@ -487,9 +494,11 @@ export class McSplitterComponent implements OnInit {
         }
     }
 
-    private onMouseUp(leftArea: IArea,
-                      rightArea: IArea,
-                      currentGutter: McGutterDirective | undefined) {
+    private onMouseUp(
+        leftArea: IArea,
+        rightArea: IArea,
+        currentGutter: McGutterDirective | undefined
+    ) {
         while (this.listeners.length > 0) {
             const unsubscribe = this.listeners.pop();
 
@@ -497,6 +506,7 @@ export class McSplitterComponent implements OnInit {
                 unsubscribe();
             }
         }
+
         if (this.useGhost && currentGutter) {
             const gutterPosition = currentGutter.getPosition();
             const offset = this.ghost.direction === Direction.Vertical ?
@@ -511,6 +521,8 @@ export class McSplitterComponent implements OnInit {
         this.updateGutter();
 
         this.gutterPositionChange.emit();
+
+        this.changeDetectorRef.markForCheck();
     }
 
     private setStyle(property: StyleProperty, value: string | number) {
@@ -532,7 +544,7 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
         private elementRef: ElementRef,
         private renderer: Renderer2,
         private splitter: McSplitterComponent
-    ) { }
+    ) {}
 
     isResizing(): boolean {
         return this.splitter.isDragging;
@@ -555,7 +567,8 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
             this.removeStyle(StyleProperty.Width);
         }
 
-        this.splitter.gutterPositionChange.subscribe(() => this.emitSizeChange());
+        this.splitter.gutterPositionChange
+            .subscribe(this.emitSizeChange);
     }
 
     ngOnDestroy(): void {
@@ -567,10 +580,9 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
     }
 
     setSize(size: number): void {
-        if (!isNaN(size)) {
-            const sz = coerceNumberProperty(size);
-            this.setStyle(this.getSizeProperty(), coerceCssPixelValue(sz));
-        }
+        if (isNaN(size)) { return; }
+
+        this.setStyle(this.getSizeProperty(), coerceCssPixelValue(coerceNumberProperty(size)));
     }
 
     getSize(): number {
@@ -620,7 +632,7 @@ export class McSplitterAreaDirective implements OnInit, OnDestroy {
         this.renderer.removeStyle(this.elementRef.nativeElement, style);
     }
 
-    private emitSizeChange(): void {
+    private emitSizeChange = () => {
         this.sizeChange.emit(this.getSize());
     }
 }

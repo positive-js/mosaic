@@ -69,7 +69,7 @@ var_12: &docs_stable_version
 # https://circleci.com/docs/2.0/orb-intro/
 orbs:
     sonarcloud: sonarsource/sonarcloud@1.0.2
-    snyk: snyk/snyk@0.0.10
+    snyk: snyk/snyk@1.1.2
     # https://circleci.com/developer/orbs/orb/circleci/browser-tools
     browser-tools: circleci/browser-tools@1.2.4
 

@@ -35,6 +35,7 @@
         .mc-tooltip__header {
             height: var(--mc-extended-tooltip-header-size-height, $extended-tooltip-header-size-height);
             padding: var(--mc-extended-tooltip-header-size-padding, $extended-tooltip-header-size-padding);
+            box-sizing: border-box;
 
             border-top-left-radius: var(--mc-tooltip-size-border-radius, $tooltip-size-border-radius);
             border-top-right-radius: var(--mc-tooltip-size-border-radius, $tooltip-size-border-radius);
@@ -59,4 +60,3 @@ $arrow-offset: calc((var(--mc-tooltip-size-arrow-size, #{$tooltip-size-arrow-siz
 $arrow-padding: calc(18px - (var(--mc-tooltip-size-trigger-margin, #{$tooltip-size-trigger-margin}) / 2));
 
 @include popUpArrowPositions(mc-tooltip, $arrow-offset, $arrow-padding);
-

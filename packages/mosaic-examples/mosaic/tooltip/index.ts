@@ -2,29 +2,30 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
-import { McCheckboxModule } from '@ptsecurity/mosaic/checkbox';
-import { McFormsModule } from '@ptsecurity/mosaic/core';
-import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
-import { McIconModule } from '@ptsecurity/mosaic/icon';
-import { McInputModule } from '@ptsecurity/mosaic/input';
-import { McPopoverModule } from '@ptsecurity/mosaic/popover';
-import { McSelectModule } from '@ptsecurity/mosaic/select';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
+import { TooltipExtendedExample } from './tooltip-extended/tooltip-extended-example';
+import { TooltipLongExample } from './tooltip-long/tooltip-long-example';
+import { TooltipMultipleLinesExample } from './tooltip-multiple-lines/tooltip-multiple-lines-example';
 import { TooltipOverviewExample } from './tooltip-overview/tooltip-overview-example';
-import { TooltipScrollableExample } from './tooltip-scrollable/tooltip-scrollable-example';
+import { TooltipPlacementExample } from './tooltip-placement/tooltip-placement-example';
 
 
 export {
     TooltipOverviewExample,
-    TooltipScrollableExample
+    TooltipExtendedExample,
+    TooltipMultipleLinesExample,
+    TooltipPlacementExample,
+    TooltipLongExample
 };
 
 const EXAMPLES = [
     TooltipOverviewExample,
-    TooltipScrollableExample
+    TooltipExtendedExample,
+    TooltipMultipleLinesExample,
+    TooltipPlacementExample,
+    TooltipLongExample
 ];
 
 @NgModule({
@@ -33,15 +34,7 @@ const EXAMPLES = [
         A11yModule,
         McButtonModule,
         McToolTipModule,
-        CdkScrollableModule,
-        FormsModule,
-        McFormsModule,
-        McFormFieldModule,
-        McSelectModule,
-        McPopoverModule,
-        McIconModule,
-        McInputModule,
-        McCheckboxModule
+        CdkScrollableModule
     ],
     declarations: EXAMPLES,
     exports: EXAMPLES
