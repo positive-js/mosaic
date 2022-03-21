@@ -258,19 +258,19 @@ export class McFormField extends McFormFieldMixinBase implements
         this.stopFocusMonitor();
     }
 
+    /** Throws an error if the form field's control is missing. */
+    protected validateControlChild() {
+        if (!this.control) {
+            throw getMcFormFieldMissingControlError();
+        }
+    }
+
     private runFocusMonitor() {
         this.focusMonitor.monitor(this._elementRef.nativeElement, true);
     }
 
     private stopFocusMonitor() {
         this.focusMonitor.stopMonitoring(this._elementRef.nativeElement);
-    }
-
-    /** Throws an error if the form field's control is missing. */
-    protected validateControlChild() {
-        if (!this.control) {
-            throw getMcFormFieldMissingControlError();
-        }
     }
 }
 
