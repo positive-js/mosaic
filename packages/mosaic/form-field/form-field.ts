@@ -1,3 +1,4 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import {
     AfterContentChecked,
     AfterContentInit,
@@ -66,7 +67,6 @@ export const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase = mixin
         '[class.mc-form-field_has-stepper]': 'canShowStepper',
 
         '[class.mc-disabled]': 'control.disabled',
-        '[class.mc-focused]': 'control.focused',
 
         '[class.ng-untouched]': 'shouldForward("untouched")',
         '[class.ng-touched]': 'shouldForward("touched")',
@@ -148,9 +148,15 @@ export class McFormField extends McFormFieldMixinBase implements
             (this.control?.focused || this.hovered);
     }
 
-    // tslint:disable-next-line:naming-convention
-    constructor(public _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
+    constructor(
+        // tslint:disable-next-line:naming-convention
+        public _elementRef: ElementRef,
+        private _changeDetectorRef: ChangeDetectorRef,
+        private focusMonitor: FocusMonitor
+    ) {
         super(_elementRef);
+
+        this.runFocusMonitor();
     }
 
     ngAfterContentInit() {
@@ -248,6 +254,16 @@ export class McFormField extends McFormFieldMixinBase implements
     ngOnDestroy(): void {
         this.$unsubscribe.next();
         this.$unsubscribe.complete();
+
+        this.stopFocusMonitor();
+    }
+
+    private runFocusMonitor() {
+        this.focusMonitor.monitor(this._elementRef.nativeElement, true);
+    }
+
+    private stopFocusMonitor() {
+        this.focusMonitor.stopMonitoring(this._elementRef.nativeElement);
     }
 
     /** Throws an error if the form field's control is missing. */

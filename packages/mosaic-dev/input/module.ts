@@ -7,7 +7,9 @@ import {
     Validators
 } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import { McFormFieldModule, PasswordRules } from '../../mosaic/form-field';
 import { McIconModule } from '../../mosaic/icon';
@@ -33,12 +35,15 @@ export class InputDemoComponent {
 @NgModule({
     declarations: [InputDemoComponent],
     imports: [
+        BrowserAnimationsModule,
         BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+
+        McFormFieldModule,
         McButtonModule,
         McInputModule,
-        McFormFieldModule,
-        ReactiveFormsModule,
-        FormsModule,
+        McToolTipModule,
         McIconModule
     ],
     bootstrap: [InputDemoComponent]

@@ -1,5 +1,7 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Directionality } from '@angular/cdk/bidi';
+import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { Overlay, ScrollDispatcher } from '@angular/cdk/overlay';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -10,10 +12,13 @@ import {
     EventEmitter,
     Inject,
     Input,
+    NgZone,
     OnChanges,
     OnDestroy,
     Optional,
     Self,
+    TemplateRef,
+    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import {
@@ -30,9 +35,11 @@ import {
     ErrorStateMatcher,
     MC_VALIDATION,
     McValidationOptions,
+    PopUpTriggers,
     setMosaicValidation
 } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { MC_TOOLTIP_SCROLL_STRATEGY, McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 import { Subject } from 'rxjs';
 
 import { McInputMixinBase } from './input';
@@ -50,7 +57,10 @@ let nextUniqueId = 0;
         class: 'mc-password-toggle mc',
         '[class.mc-eye_16]': 'hidden',
         '[class.mc-eye-crossed_16]': '!hidden',
-        '[attr.tabindex]': '0',
+
+        '[attr.tabindex]': 'disabled ? null : tabIndex',
+        '[attr.disabled]': 'disabled || null',
+
         '(click)': 'toggle()',
         '(keydown.ENTER)': 'toggle()',
         '(keydown.SPACE)': 'toggle()'
@@ -58,16 +68,68 @@ let nextUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class McPasswordToggle implements OnDestroy {
+export class McPasswordToggle extends McTooltipTrigger implements OnDestroy {
+    @Input('mcTooltipNotHidden')
+    get content(): string | TemplateRef<any> {
+        return (this.formField.control as McInputPassword).elementType === 'password' ?
+            this.mcTooltipHidden :
+            this._content;
+    }
+
+    set content(content: string | TemplateRef<any>) {
+        this._content = content;
+
+        this.updateData();
+    }
+
+    @Input() mcTooltipHidden: string | TemplateRef<any>;
+
+    @Input()
+    get disabled() {
+        return this._disabled === undefined ? this.formField.disabled : this._disabled;
+    }
+
+    set disabled(value: any) {
+        this._disabled = coerceBooleanProperty(value);
+
+        this._disabled ? this.stopFocusMonitor() : this.runFocusMonitor();
+    }
+
+    // tslint:disable-next-line:naming-convention
+    protected _disabled: boolean;
+
+    @Input()
+    get tabIndex(): number {
+        return this.disabled ? -1 : this._tabIndex;
+    }
+
+    set tabIndex(value: number) {
+        // If the specified tabIndex value is null or undefined, fall back to the default value.
+        this._tabIndex = value != null ? coerceNumberProperty(value) : 0;
+    }
+
+    private _tabIndex: number = 0;
+
     get hidden(): boolean {
         return (this.formField.control as McInputPassword).elementType === 'password';
     }
 
     constructor(
-        private elementRef: ElementRef,
+        overlay: Overlay,
+        elementRef: ElementRef,
+        ngZone: NgZone,
+        scrollDispatcher: ScrollDispatcher,
+        hostView: ViewContainerRef,
+        @Inject(MC_TOOLTIP_SCROLL_STRATEGY) scrollStrategy,
+        @Optional() direction: Directionality,
+
         private focusMonitor: FocusMonitor,
         private formField: McFormField
     ) {
+        super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
+
+        this.trigger = `${PopUpTriggers.Hover}`;
+
         this.runFocusMonitor();
     }
 
@@ -76,17 +138,31 @@ export class McPasswordToggle implements OnDestroy {
     }
 
     toggle() {
-        (this.formField.control as McInputPassword).toggleType();
+        if (this.disabled) { return; }
+
+        this.hide();
+
+        const input = this.formField.control as McInputPassword;
+
+        input.toggleType();
+
+        this.updateData();
     }
 
     private runFocusMonitor() {
-        this.focusMonitor.monitor(this.elementRef.nativeElement, true);
+        this.focusMonitor.monitor(this.elementRef)
+            .subscribe((origin) => {
+                if (origin === 'keyboard') {
+                    this.show();
+                } else if (origin === null) {
+                    this.hide();
+                }
+            });
     }
 
     private stopFocusMonitor() {
-        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+        this.focusMonitor.stopMonitoring(this.elementRef);
     }
-
 }
 
 @Directive({

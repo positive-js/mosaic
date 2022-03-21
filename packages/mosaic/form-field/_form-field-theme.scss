@@ -46,7 +46,7 @@
                 }
             }
 
-            &.mc-focused {
+            &.cdk-focused {
                 &:not(.ng-invalid) .mc-form-field__container {
                     border-color: map-get(map-get($theme, states), focused-color);
                     box-shadow: 0 0 0 1px map-get(map-get($theme, states), focused-color);

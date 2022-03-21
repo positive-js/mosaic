@@ -23,6 +23,18 @@
     }
 
     .mc-password-toggle {
+        color: map-get($foreground, icon);
+
+        &:hover {
+            color: map-get($foreground, text);
+        }
+
+        &[disabled] {
+            cursor: default;
+
+            color: map-get($foreground, text-disabled);
+        }
+
         &.cdk-keyboard-focused {
             border-color: map-get(map-get($theme, states), focused-color);
             box-shadow: 0 0 0 1px map-get(map-get($theme, states), focused-color);
