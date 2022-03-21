@@ -195,6 +195,7 @@
         "server-dev:tabs": "ng serve dev-tabs --port 3003",
         "server-dev:tags": "ng serve dev-tags --port 3003",
         "server-dev:textarea": "ng serve dev-textarea --port 3003",
+        "server-dev:toast": "ng serve dev-toast --port 3003",
         "server-dev:toggle": "ng serve dev-toggle --port 3003",
         "server-dev:theme-picker": "ng serve dev-theme-picker --port 3003",
         "server-dev:tree": "ng serve dev-tree --port 3003",

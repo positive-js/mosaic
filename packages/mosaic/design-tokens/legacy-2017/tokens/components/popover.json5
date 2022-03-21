@@ -1,7 +1,7 @@
 {
     popover: {
         'light-color-scheme': {
-            background: { value: 'white' },
+            background: { value: '{light-color-scheme.background.background.value}' },
             text: { value: '{light-color-scheme.foreground.text.value}' },
             shadow: { value: '{popup.light-color-scheme.shadow.value}' },
             border: { value: '{light-color-scheme.foreground.border.value}' }
@@ -32,10 +32,10 @@
         'light-color-scheme': {
             border: { value: '{light-color-scheme.second.palette.value.100.value}' },
             text: { value: '{light-color-scheme.foreground.text.value}' },
-            background: { value: 'white' }
+            background: { value: '{light-color-scheme.background.background.value}' }
         },
         'dark-color-scheme': {
-            border: { value: '{popup.dark-color-scheme.footer-background.value}' },
+            border: { value: '{popup.dark-color-scheme.border.value}' },
             text: { value: '{dark-color-scheme.foreground.text.value}' },
             background: { value: '{dark-color-scheme.second.palette.value.700.value}' }
         },
@@ -53,8 +53,8 @@
             background: { value: '{popup.light-color-scheme.footer-background.value}' }
         },
         'dark-color-scheme': {
-            border: { value: '{popup.dark-color-scheme.footer-background.value}' },
-            background: { value: '{popup.dark-color-scheme.footer-background.value}' }
+            border: { value: '{popup.dark-color-scheme.border.value}' },
+            background: { value: '{dark-color-scheme.second.palette.value.700.value}' }
         },
         size: {
             'margin-top': { value: '8px' },

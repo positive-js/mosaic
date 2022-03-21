@@ -1,0 +1,26 @@
+<div class="mc-alert {{ 'mc-alert_' + data.style || 'default' }}"
+    [ngClass]="{'mc-alert_dismissible': hasDismiss}">
+    <i mc-icon="mc-info_16" class="mc-alert__icon"></i>
+
+    <div class="mc-toast__container">
+        <header *ngIf="data.title">
+            <ng-container *ngIf="isTemplateRef(data.title)"
+                          [ngTemplateOutlet]="$any(data.title)"
+                          [ngTemplateOutletContext]="{ $implicit }">
+            </ng-container>
+            <ng-container *ngIf="!isTemplateRef(data.title)">{{ data.title }}</ng-container>
+        </header>
+
+        <div *ngIf="data.content">
+            <ng-container *ngIf="isTemplateRef(data.content)"
+                          [ngTemplateOutlet]="$any(data.content)"
+                          [ngTemplateOutletContext]="{ $implicit }">
+            </ng-container>
+            <ng-container *ngIf="!isTemplateRef(data.content)">{{ data.content }}</ng-container>
+        </div>
+    </div>
+
+    <button class="mc-alert__close" *ngIf="hasDismiss" (click)="close()">
+        <i class="mc-icon_light" mc-icon="mc-close-M_16" [color]="themePalette.Second"></i>
+    </button>
+</div>

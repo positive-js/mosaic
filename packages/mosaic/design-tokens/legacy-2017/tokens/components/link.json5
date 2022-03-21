@@ -1,37 +1,37 @@
 {
     link: {
         'light-color-scheme': {
-            text: { value: '{light-color-scheme.primary.default.value}' },
-            'border-bottom': { value: 'rgba({light-color-scheme.primary.default.value}, 0.32)' },
+            text: { value: '{light-color-scheme.primary.palette.value.500.value}' },
+            'border-bottom': { value: 'rgba({link.light-color-scheme.text.value}, 0.32)' },
 
             'state-visited': {
-                'text': { value: '#6A2795' },
-                'border-bottom': { value: 'rgba(106, 39, 149, 0.32)' }
+                'text': { value: '{palette.purple.560.value}' },
+                'border-bottom': { value: 'rgba({link.light-color-scheme.state-visited.text.value}, 0.32)' }
             },
             'state-hover': {
-                'text': { value: '{light-color-scheme.primary.palette.value.600.value}' },
-                'border-bottom': { value: 'rgba({light-color-scheme.primary.palette.value.600.value}, 0.32)' }
+                'text': { value: '{light-color-scheme.primary.palette.value.560.value}' },
+                'border-bottom': { value: 'rgba({link.light-color-scheme.state-hover.text.value}, 0.32)' }
             },
 
-            'state-active': { value: '{light-color-scheme.primary.palette.value.700.value}' },
+            'state-active': { value: '{light-color-scheme.primary.palette.value.600.value}' },
 
             'state-focused': {
                 outline: { value: '{light-color-scheme.states.focused-color.value}' }
             }
         },
         'dark-color-scheme': {
-            text: { value: '{dark-color-scheme.primary.default.value}' },
-            'border-bottom': { value: 'rgba({dark-color-scheme.primary.default.value}, 0.32)' },
+            text: { value: '{dark-color-scheme.primary.palette.value.400.value}' },
+            'border-bottom': { value: 'rgba({link.dark-color-scheme.text.value}, 0.32)' },
 
             'state-visited': {
-                'text': { value: '#a23ee2' },
-                'border-bottom': { value: 'rgba(162, 62, 226, 0.32)' }
+                'text': { value: '{palette.purple.400.value}' },
+                'border-bottom': { value: 'rgba({link.dark-color-scheme.state-visited.text.value}, 0.32)' }
             },
             'state-hover': {
-                'text': { value: '{dark-color-scheme.primary.palette.value.300.value}' },
-                'border-bottom': { value: 'rgba({dark-color-scheme.primary.palette.value.300.value}, 0.32)' }
+                'text': { value: '{dark-color-scheme.primary.palette.value.500.value}' },
+                'border-bottom': { value: 'rgba({link.dark-color-scheme.state-hover.text.value}, 0.32)' }
             },
-            'state-active': { value: '{dark-color-scheme.primary.palette.value.300.value}' },
+            'state-active': { value: '{dark-color-scheme.primary.palette.value.560.value}' },
             'state-focused': {
                 outline: { value: '{dark-color-scheme.states.focused-color.value}' }
             }

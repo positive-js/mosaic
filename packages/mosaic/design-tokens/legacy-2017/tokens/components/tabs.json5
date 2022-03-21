@@ -1,14 +1,14 @@
 {
     tabs: {
         'light-color-scheme': {
-            border: { value: '{light-color-scheme.second.palette.value.300.value}' },
-            'state-active': { value: '{light-color-scheme.primary.palette.value.500.value}' },
-            'state-disabled-overlay': { value: 'rgba(white, 0.5)' }
+            border: { value: '{light-color-scheme.foreground.divider.value}' },
+            'state-active': { value: '{light-color-scheme.primary.default.value}' },
+            'state-disabled-overlay': { value: '{light-color-scheme.background.overlay-disabled.value}' }
         },
         'dark-color-scheme': {
-            border: { value: '{dark-color-scheme.second.palette.value.300.value}' },
-            'state-active': { value: '{dark-color-scheme.primary.palette.value.400.value}' },
-            'state-disabled-overlay': { value: 'rgba(white, 0.5)' }
+            border: { value: '{dark-color-scheme.foreground.divider.value}' },
+            'state-active': { value: '{dark-color-scheme.primary.default.value}' },
+            'state-disabled-overlay': { value: '{dark-color-scheme.background.overlay-disabled.value}' }
         },
         size: {
             height: { value: '40px' },

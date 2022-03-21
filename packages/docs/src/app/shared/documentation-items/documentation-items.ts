@@ -94,6 +94,12 @@ const DOCS: { [key: string]: DocCategory[] } = {
                     name: 'Tooltip',
                     summary: '',
                     examples: ['tooltip-types']
+                },
+                {
+                    id: 'toast',
+                    name: 'Toast',
+                    summary: '',
+                    examples: ['toast-types']
                 }
             ]
         },

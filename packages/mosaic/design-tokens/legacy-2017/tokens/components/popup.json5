@@ -1,17 +1,17 @@
 {
     popup: {
         'light-color-scheme': {
-            shadow: { value: '0 3px 3px 0 {light-color-scheme.second.palette.value.A200.value}' },
-            border: { value: '{light-color-scheme.second.palette.value.300.value}' },
-            divider: { value: '{light-color-scheme.second.palette.value.200.value}' },
-            background: { value: 'white' },
-            'footer-background': { value: '{light-color-scheme.second.palette.value.60.value}' }
+            shadow: { value: '0 3px 3px 0 {light-color-scheme.second.palette.value.500.value}' },
+            border: { value: '{light-color-scheme.foreground.border.value}' },
+            divider: { value: '{light-color-scheme.foreground.divider.value}' },
+            background: { value: '{light-color-scheme.background.background.value}' },
+            'footer-background': { value: '{light-color-scheme.second.palette.value.40.value}' }
         },
         'dark-color-scheme': {
-            shadow: { value: '0 3px 3px 0 {dark-color-scheme.second.palette.value.A200.value}' },
-            border: { value: '{dark-color-scheme.second.palette.value.400.value}' },
+            shadow: { value: '0 3px 3px 0 {dark-color-scheme.second.palette.value.500.value}' },
+            border: { value: '{dark-color-scheme.second.palette.value.560.value}' },
             divider: { value: '{dark-color-scheme.foreground.divider.value}' },
-            background: { value: '{dark-color-scheme.second.palette.value.700.value}' },
+            background: { value: '{dark-color-scheme.second.palette.value.600.value}' },
             'footer-background': { value: 'transparent' }
         }
     }

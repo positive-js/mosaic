@@ -3,11 +3,11 @@
         'light-color-scheme': {
             border: { value: '{light-color-scheme.foreground.border.value}' },
             background: {
-                value: 'linear-gradient(to bottom, {light-color-scheme.second.palette.value.100.value}, {light-color-scheme.background.background-disabled.value})'
+                value: '{light-color-scheme.background.background.value}'
             },
             'circle-border': { value: '{light-color-scheme.foreground.border.value}' },
-            'circle-background': { value: 'linear-gradient(to bottom, white, {light-color-scheme.second.palette.value.100.value})' },
-
+            'circle-background': { value: '{light-color-scheme.second.palette.value.100.value}'
+            },
             states: {
                 focused: {
                     shadow: {
@@ -34,7 +34,7 @@
                 value: '{dark-color-scheme.background.background.value}'
             },
             'circle-border': { value: '{dark-color-scheme.foreground.border.value}' },
-            'circle-background': { value: 'white' },
+            'circle-background': { value: '{light-color-scheme.second.palette.value.500.value}' },
 
             states: {
                 focused: {
