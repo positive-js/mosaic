@@ -8,6 +8,7 @@ import { AbstractControl } from '@angular/forms';
 import { AfterContentInit } from '@angular/core';
 import { CanUpdateErrorState } from '@ptsecurity/mosaic/core';
 import { CanUpdateErrorStateCtor } from '@ptsecurity/mosaic/core';
+import { Directionality } from '@angular/cdk/bidi';
 import { DoCheck } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { ErrorStateMatcher } from '@ptsecurity/mosaic/core';
@@ -22,17 +23,23 @@ import * as i8 from '@angular/forms';
 import { InjectionToken } from '@angular/core';
 import { McFormField } from '@ptsecurity/mosaic/form-field';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 import { McValidationOptions } from '@ptsecurity/mosaic/core';
 import { NgControl } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { NgModel } from '@angular/forms';
+import { NgZone } from '@angular/core';
 import { OnChanges } from '@angular/core';
 import { OnDestroy } from '@angular/core';
+import { Overlay } from '@angular/cdk/overlay';
 import { Provider } from '@angular/core';
+import { ScrollDispatcher } from '@angular/cdk/overlay';
 import { SimpleChanges } from '@angular/core';
 import { Subject } from 'rxjs';
+import { TemplateRef } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { Validator } from '@angular/forms';
+import { ViewContainerRef } from '@angular/core';
 
 // @public (undocumented)
 export function add(value1: number, value2: number): number;
@@ -267,18 +274,31 @@ export class McNumberInput {
 }
 
 // @public (undocumented)
-export class McPasswordToggle implements OnDestroy {
-    constructor(elementRef: ElementRef, focusMonitor: FocusMonitor, formField: McFormField);
+export class McPasswordToggle extends McTooltipTrigger implements OnDestroy {
+    constructor(overlay: Overlay, elementRef: ElementRef, ngZone: NgZone, scrollDispatcher: ScrollDispatcher, hostView: ViewContainerRef, scrollStrategy: any, direction: Directionality, focusMonitor: FocusMonitor, formField: McFormField);
+    // (undocumented)
+    get content(): string | TemplateRef<any>;
+    set content(content: string | TemplateRef<any>);
+    // (undocumented)
+    get disabled(): any;
+    set disabled(value: any);
+    // (undocumented)
+    protected _disabled: boolean;
     // (undocumented)
     get hidden(): boolean;
     // (undocumented)
+    mcTooltipHidden: string | TemplateRef<any>;
+    // (undocumented)
     ngOnDestroy(): void;
+    // (undocumented)
+    get tabIndex(): number;
+    set tabIndex(value: number);
     // (undocumented)
     toggle(): void;
     // (undocumented)
-    static ɵcmp: i0.ɵɵComponentDeclaration<McPasswordToggle, "mc-password-toggle", ["mcPasswordToggle"], {}, {}, never, ["*"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McPasswordToggle, "mc-password-toggle", ["mcPasswordToggle"], { "content": "mcTooltipNotHidden"; "mcTooltipHidden": "mcTooltipHidden"; "disabled": "disabled"; "tabIndex": "tabIndex"; }, {}, never, ["*"]>;
     // (undocumented)
-    static ɵfac: i0.ɵɵFactoryDeclaration<McPasswordToggle, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McPasswordToggle, [null, null, null, null, null, null, { optional: true; }, null, null]>;
 }
 
 // @public (undocumented)

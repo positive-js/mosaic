@@ -12,6 +12,7 @@ import { CanColorCtor } from '@ptsecurity/mosaic/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { FocusMonitor } from '@angular/cdk/a11y';
 import * as i0 from '@angular/core';
 import * as i8 from '@angular/common';
 import * as i9 from '@ptsecurity/mosaic/icon';
@@ -39,7 +40,7 @@ export class McCleaner {
 
 // @public (undocumented)
 export class McFormField extends McFormFieldMixinBase implements AfterContentInit, AfterContentChecked, AfterViewInit, CanColor, OnDestroy {
-    constructor(_elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef);
+    constructor(_elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef, focusMonitor: FocusMonitor);
     // (undocumented)
     canCleanerClearByEsc: boolean;
     // (undocumented)
