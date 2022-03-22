@@ -1,6 +1,6 @@
 const buildTokens = require('../../mosaic/design-tokens/style-dictionary/build');
 
-const themeName = 'legacy-2017';
+const themeName = 'pt-2022';
 
 const mosaicTokensProps = `packages/mosaic/design-tokens/${themeName}/tokens/properties/**/*.json5`;
 const mosaicTokensComponents = `packages/mosaic/design-tokens/${themeName}/tokens/components/**/*.json5`;
