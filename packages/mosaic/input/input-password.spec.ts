@@ -11,6 +11,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule }
 import { By } from '@angular/platform-browser';
 import { dispatchFakeEvent } from '@ptsecurity/cdk/testing';
 import { McFormFieldModule, PasswordRules } from '@ptsecurity/mosaic/form-field';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import { McInputModule, McInputPassword, McPasswordToggle } from './index';
 
@@ -24,6 +25,7 @@ function createComponent<T>(component: Type<T>, imports: any[] = [], providers: 
             ReactiveFormsModule,
             McFormFieldModule,
             McInputModule,
+            McToolTipModule,
             ...imports
         ],
         declarations: [component],

@@ -190,6 +190,7 @@ describe('McNumberInput', () => {
             dispatchFakeEvent(iconUp.nativeElement, 'mousedown');
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.formControl.value).toBe(11);
         }));
@@ -213,6 +214,7 @@ describe('McNumberInput', () => {
             dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.formControl.value).toBe(9);
         }));
@@ -238,6 +240,7 @@ describe('McNumberInput', () => {
             dispatchFakeEvent(iconUp.nativeElement, 'mousedown');
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.reactiveForm.value['reactiveInputValue']).toBe(11);
         }));
@@ -261,6 +264,7 @@ describe('McNumberInput', () => {
             dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.reactiveForm.value['reactiveInputValue']).toBe(9);
         }));
@@ -284,6 +288,7 @@ describe('McNumberInput', () => {
             dispatchFakeEvent(iconUp.nativeElement, 'mousedown');
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(1);
         }));
@@ -305,6 +310,7 @@ describe('McNumberInput', () => {
             dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(1);
         }));
@@ -330,6 +336,7 @@ describe('McNumberInput', () => {
 
             dispatchFakeEvent(iconUp.nativeElement, 'mousedown');
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(3.5);
         }));
@@ -356,6 +363,7 @@ describe('McNumberInput', () => {
 
             dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(3);
         }));
@@ -383,6 +391,7 @@ describe('McNumberInput', () => {
             dispatchFakeEvent(iconUp.nativeElement, 'mousedown');
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(min);
         }));
@@ -417,6 +426,7 @@ describe('McNumberInput', () => {
 
             dispatchFakeEvent(stepUp.nativeElement, 'mousedown');
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(max);
         }));
@@ -446,6 +456,7 @@ describe('McNumberInput', () => {
 
             dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(3);
         }));
@@ -469,6 +480,7 @@ describe('McNumberInput', () => {
             dispatchEvent(inputElementDebug.nativeElement, event);
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(8);
         }));
@@ -495,6 +507,7 @@ describe('McNumberInput', () => {
             dispatchFakeEvent(iconUp.nativeElement, 'mousedown');
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(2);
         }));
@@ -519,6 +532,7 @@ describe('McNumberInput', () => {
             dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(0);
         }));
@@ -538,6 +552,7 @@ describe('McNumberInput', () => {
             dispatchKeyboardEvent(inputElementDebug.nativeElement, 'keydown', UP_ARROW);
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(2);
         }));
@@ -555,6 +570,7 @@ describe('McNumberInput', () => {
             dispatchKeyboardEvent(inputElementDebug.nativeElement, 'keydown', DOWN_ARROW);
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(0);
         }));
@@ -574,6 +590,7 @@ describe('McNumberInput', () => {
             dispatchEvent(inputElementDebug.nativeElement, event);
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(7);
         }));
@@ -593,6 +610,7 @@ describe('McNumberInput', () => {
             dispatchEvent(inputElementDebug.nativeElement, event);
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(4);
         }));
@@ -672,6 +690,7 @@ describe('McNumberInput', () => {
             dispatchFakeEvent(iconUp.nativeElement, 'mousedown');
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(10);
         }));
@@ -696,6 +715,7 @@ describe('McNumberInput', () => {
             dispatchFakeEvent(iconDown.nativeElement, 'mousedown');
 
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.value).toBe(3);
         }));
