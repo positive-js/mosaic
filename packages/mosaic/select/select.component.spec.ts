@@ -1005,6 +1005,7 @@ describe('McSelect', () => {
                         'Expected value from fourth option to have been set on the model.');
 
                     dispatchKeyboardEvent(select, 'keydown', UP_ARROW);
+                    flush();
 
                     expect(options[1].selected).toBe(true, 'Expected second option to be selected.');
                     expect(formControl.value).toBe(options[1].value,
@@ -1029,6 +1030,7 @@ describe('McSelect', () => {
 
                     dispatchKeyboardEvent(select, 'keydown', DOWN_ARROW);
                     fixture.detectChanges();
+                    flush();
 
                     expect(formControl.value).toBe(options[4].value);
                 }));
@@ -1054,6 +1056,7 @@ describe('McSelect', () => {
                         'Expected value from fourth option to have been set on the model.');
 
                     dispatchKeyboardEvent(select, 'keydown', LEFT_ARROW);
+                    flush();
 
                     expect(options[1].selected).toBe(true, 'Expected second option to be selected.');
                     expect(formControl.value).toBe(options[1].value,
@@ -1070,6 +1073,7 @@ describe('McSelect', () => {
                     Object.defineProperty(event, 'altKey', { get: () => true });
 
                     dispatchEvent(select, event);
+                    flush();
 
                     expect(selectInstance.panelOpen).toBe(true, 'Expected select to be open.');
                     expect(formControl.value).toBeFalsy('Expected value not to have changed.');
@@ -1085,6 +1089,7 @@ describe('McSelect', () => {
                     Object.defineProperty(event, 'altKey', { get: () => true });
 
                     dispatchEvent(select, event);
+                    flush();
 
                     expect(selectInstance.panelOpen).toBe(true, 'Expected select to be open.');
                     expect(formControl.value).toBeFalsy('Expected value not to have changed.');
@@ -1101,6 +1106,7 @@ describe('McSelect', () => {
                     Object.defineProperty(event, 'altKey', { get: () => true });
 
                     dispatchEvent(select, event);
+                    flush();
 
                     expect(selectInstance.panelOpen).toBe(false, 'Expected select to be closed.');
                     expect(event.defaultPrevented).toBe(true, 'Expected default action to be prevented.');
@@ -1117,6 +1123,7 @@ describe('McSelect', () => {
                     Object.defineProperty(event, 'altKey', { get: () => true });
 
                     dispatchEvent(select, event);
+                    flush();
 
                     expect(selectInstance.panelOpen).toBe(false, 'Expected select to be closed.');
                     expect(event.defaultPrevented).toBe(true, 'Expected default action to be prevented.');
@@ -1158,6 +1165,7 @@ describe('McSelect', () => {
                         expect(instance.select.panelOpen).toBe(false, 'Expected panel to be closed.');
 
                         const event = dispatchKeyboardEvent(select, 'keydown', DOWN_ARROW);
+                        flush();
 
                         expect(instance.select.panelOpen).toBe(true, 'Expected panel to be open.');
                         expect(instance.control.value).toBe(initialValue, 'Expected value to stay the same.');
@@ -1179,6 +1187,7 @@ describe('McSelect', () => {
                         expect(instance.select.panelOpen).toBe(false, 'Expected panel to be closed.');
 
                         const event = dispatchKeyboardEvent(select, 'keydown', RIGHT_ARROW);
+                        flush();
 
                         expect(instance.select.panelOpen).toBe(true, 'Expected panel to be open.');
                         expect(instance.control.value).toBe(initialValue, 'Expected value to stay the same.');
@@ -1199,6 +1208,7 @@ describe('McSelect', () => {
                     expect(instance.select.panelOpen).toBe(false, 'Expected panel to be closed.');
 
                     dispatchEvent(select, createKeyboardEvent('keydown', 80, undefined, 'p'));
+                    flush();
 
                     expect(instance.select.panelOpen).toBe(false, 'Expected panel to stay closed.');
                     expect(instance.control.value).toBe(initialValue, 'Expected value to stay the same.');
@@ -1223,6 +1233,7 @@ describe('McSelect', () => {
                         formControl.setValue('eggs-5');
 
                         dispatchKeyboardEvent(select, 'keydown', DOWN_ARROW);
+                        flush();
 
                         expect(formControl.value).toBe('pasta-6');
                         expect(fixture.componentInstance.options.toArray()[6].selected).toBe(true);
@@ -1256,6 +1267,7 @@ describe('McSelect', () => {
                     formControl.disable();
 
                     dispatchKeyboardEvent(select, 'keydown', DOWN_ARROW);
+                    flush();
 
                     expect(formControl.value).toBe('eggs-5', 'Expected value to remain unchaged.');
                 }));
@@ -1270,6 +1282,7 @@ describe('McSelect', () => {
                     expect(lastOption.selected).toBe(true, 'Expected last option to be selected.');
 
                     dispatchKeyboardEvent(select, 'keydown', DOWN_ARROW);
+                    flush();
 
                     expect(lastOption.selected).toBe(true, 'Expected last option to stay selected.');
                 }));
@@ -1286,6 +1299,7 @@ describe('McSelect', () => {
                         .toBe(false, 'Expected panel to be closed initially.');
 
                     dispatchKeyboardEvent(select, 'keydown', TAB);
+                    flush();
 
                     expect(multiFixture.componentInstance.select.panelOpen)
                         .toBe(false, 'Expected panel to stay closed.');
@@ -1312,6 +1326,8 @@ describe('McSelect', () => {
                         expect(multiFixture.componentInstance.select.value).toEqual(['pizza-1']);
 
                         dispatchEvent(select, event);
+                        flush();
+
                         expect(multiFixture.componentInstance.select.value).toEqual(['pizza-1', 'tacos-2']);
                     }));
 
@@ -1347,6 +1363,8 @@ describe('McSelect', () => {
 
                 it('should prevent the default action when pressing space', fakeAsync(() => {
                     const event = dispatchKeyboardEvent(select, 'keydown', SPACE);
+                    flush();
+
                     expect(event.defaultPrevented).toBe(true);
                 }));
 
@@ -1358,6 +1376,7 @@ describe('McSelect', () => {
 
                     dispatchKeyboardEvent(select, 'keydown', DOWN_ARROW);
                     expect(spy).toHaveBeenCalledWith(true);
+                    flush();
 
                     subscription.unsubscribe();
                 }));
@@ -1548,6 +1567,7 @@ describe('McSelect', () => {
 
                 const event = dispatchKeyboardEvent(trigger, 'keydown', HOME);
                 fixture.detectChanges();
+                flush();
 
                 expect(fixture.componentInstance.select.keyManager.activeItemIndex).toBe(0);
                 expect(event.defaultPrevented).toBe(true);
@@ -1563,6 +1583,7 @@ describe('McSelect', () => {
 
                 const event = dispatchKeyboardEvent(trigger, 'keydown', END);
                 fixture.detectChanges();
+                flush();
 
                 expect(fixture.componentInstance.select.keyManager.activeItemIndex).toBe(7);
                 expect(event.defaultPrevented).toBe(true);
@@ -1586,6 +1607,7 @@ describe('McSelect', () => {
 
                 const option = overlayContainerElement.querySelector('mc-option') as Node;
                 const event = dispatchKeyboardEvent(option, 'keydown', SPACE);
+                flush();
 
                 expect(event.defaultPrevented).toBe(true);
             }));
@@ -1597,6 +1619,7 @@ describe('McSelect', () => {
 
                 const option = overlayContainerElement.querySelector('mc-option') as Node;
                 const event = dispatchKeyboardEvent(option, 'keydown', ENTER);
+                flush();
 
                 expect(event.defaultPrevented).toBe(true);
             }));
@@ -2179,6 +2202,7 @@ describe('McSelect', () => {
                 [1, 2, 3].forEach(() => {
                     dispatchKeyboardEvent(host, 'keydown', DOWN_ARROW);
                 });
+                flush();
 
                 expect(panel.scrollTop)
                     .toBe(initialScrollPosition, 'Expected scroll position not to change');
@@ -2188,6 +2212,7 @@ describe('McSelect', () => {
                 for (let i = 0; i < 15; i++) {
                     dispatchKeyboardEvent(host, 'keydown', DOWN_ARROW);
                 }
+                flush();
 
                 expect(panel.scrollTop).toBe(316, 'Expected scroll to be at the 16th option.');
             }));
@@ -2201,6 +2226,7 @@ describe('McSelect', () => {
                 for (let i = 0; i < 20; i++) {
                     dispatchKeyboardEvent(host, 'keydown', UP_ARROW);
                 }
+                flush();
 
                 expect(panel.scrollTop).toBe(252, 'Expected scroll to be at the 9th option.');
             }));
@@ -2221,6 +2247,7 @@ describe('McSelect', () => {
                 for (let i = 0; i < 5; i++) {
                     dispatchKeyboardEvent(host, 'keydown', DOWN_ARROW);
                 }
+                flush();
 
                 // Note that we press down 5 times, but it will skip
                 // 3 options because the second group is disabled.
@@ -2237,6 +2264,7 @@ describe('McSelect', () => {
 
                 dispatchKeyboardEvent(host, 'keydown', HOME);
                 fixture.detectChanges();
+                flush();
 
                 expect(panel.scrollTop).toBe(0, 'Expected panel to be scrolled to the top');
             }));
@@ -2244,6 +2272,7 @@ describe('McSelect', () => {
             it('should scroll to the bottom of the panel when pressing END', fakeAsync(() => {
                 dispatchKeyboardEvent(host, 'keydown', END);
                 fixture.detectChanges();
+                flush();
 
                 expect(panel.scrollTop).toBe(728, 'Expected panel to be scrolled to the bottom');
             }));
@@ -2451,6 +2480,7 @@ describe('McSelect', () => {
         it('should only emit one event when pressing arrow keys on closed select', fakeAsync(() => {
             const select = fixture.debugElement.query(By.css('mc-select')).nativeElement;
             dispatchKeyboardEvent(select, 'keydown', DOWN_ARROW);
+            flush();
 
             expect(fixture.componentInstance.changeListener).toHaveBeenCalledTimes(1);
         }));

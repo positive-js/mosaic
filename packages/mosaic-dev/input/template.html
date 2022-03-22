@@ -4,10 +4,49 @@
     <br>
     <br>
 
-    <mc-form-field mcFormFieldWithoutBorders class="mc-group-item">
-        <input mcInput [(ngModel)]="numberValue" type="number" placeholder="Number MaxMin Step"
-               [min]="min" [max]="7" [step]="0.5" [bigStep]="1.5">
-        <mc-stepper></mc-stepper>
+    <mc-form-field>
+        <input mcInputPassword [formControl]="password" placeholder="Number MaxMin Step">
+        <mc-password-toggle [mcTooltipNotHidden]="'Скрыть пароль'" [mcTooltipHidden]="'Показать пароль'"></mc-password-toggle>
+
+        <mc-password-hint [rule]="passwordRules.Length" [min]="8" [max]="15">От 8 до 15 символов</mc-password-hint>
+
+        <mc-password-hint [rule]="passwordRules.UpperLatin">Заглавная латинская буква</mc-password-hint>
+
+        <mc-password-hint [rule]="passwordRules.LowerLatin">Строчная латинская буква</mc-password-hint>
+
+        <mc-password-hint [rule]="passwordRules.Digit">Цифра</mc-password-hint>
+
+        <mc-password-hint [rule]="passwordRules.SpecialSymbols">Только латинские буквы, цифры, пробелы и спецсимволы</mc-password-hint>
+    </mc-form-field>
+
+    <br><br>
+
+    <header>With clear-button:</header>
+
+    <mc-form-field>
+        <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+
+        <mc-cleaner></mc-cleaner>
+    </mc-form-field>
+
+    <br><br>
+
+    <header>With prefix:</header>
+
+    <mc-form-field>
+        <i mcPrefix mc-icon="mc-search_16"></i>
+
+        <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+    </mc-form-field>
+
+    <br><br>
+
+    <header>With suffix:</header>
+
+    <mc-form-field>
+        <input mcInput [(ngModel)]="value" placeholder="Placeholder">
+
+        <i mcSuffix mc-icon="mc-calendar_16"></i>
     </mc-form-field>
 
     <br>

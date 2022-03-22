@@ -1,7 +1,7 @@
 import { Directive, Input } from '@angular/core';
 
 
-let nextUniqueId = 0;
+let nextHintUniqueId = 0;
 
 @Directive({
     selector: 'mc-hint',
@@ -11,5 +11,5 @@ let nextUniqueId = 0;
     }
 })
 export class McHint {
-    @Input() id: string = `mc-hint-${nextUniqueId++}`;
+    @Input() id: string = `mc-hint-${nextHintUniqueId++}`;
 }

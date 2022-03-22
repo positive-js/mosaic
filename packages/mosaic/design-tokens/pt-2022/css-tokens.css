@@ -76,6 +76,8 @@
   --mc-form-field-size-border-radius: 3px;
   --mc-form-field-size-button-width: 32px;
   --mc-form-field-hint-size-margin-top: 4px;
+  --mc-form-field-password-hint-size-margin-top: 8px;
+  --mc-form-field-password-hint-size-icon-margin: 4px;
   --mc-forms-size-horizontal-row-margin-bottom: 20px;
   --mc-forms-size-horizontal-label-padding-top: 6px;
   --mc-forms-size-horizontal-label-padding-bottom: 0;

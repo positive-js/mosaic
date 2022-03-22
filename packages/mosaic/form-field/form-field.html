@@ -18,9 +18,11 @@
         <ng-content select="mc-cleaner"></ng-content>
     </div>
 
+    <ng-content select="mc-password-toggle"></ng-content>
+
     <ng-content *ngIf="canShowStepper" select="mc-stepper"></ng-content>
 </div>
 
 <div class="mc-form-field__hint">
-    <ng-content select="mc-hint"></ng-content>
+    <ng-content select="mc-hint, mc-password-hint"></ng-content>
 </div>

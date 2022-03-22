@@ -12,9 +12,10 @@ import { CanColorCtor } from '@ptsecurity/mosaic/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { FocusMonitor } from '@angular/cdk/a11y';
 import * as i0 from '@angular/core';
-import * as i7 from '@angular/common';
-import * as i8 from '@ptsecurity/mosaic/icon';
+import * as i8 from '@angular/common';
+import * as i9 from '@ptsecurity/mosaic/icon';
 import { NgControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { OnDestroy } from '@angular/core';
@@ -39,7 +40,7 @@ export class McCleaner {
 
 // @public (undocumented)
 export class McFormField extends McFormFieldMixinBase implements AfterContentInit, AfterContentChecked, AfterViewInit, CanColor, OnDestroy {
-    constructor(_elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef);
+    constructor(_elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef, focusMonitor: FocusMonitor);
     // (undocumented)
     canCleanerClearByEsc: boolean;
     // (undocumented)
@@ -63,6 +64,8 @@ export class McFormField extends McFormFieldMixinBase implements AfterContentIni
     get hasCleaner(): boolean;
     // (undocumented)
     get hasHint(): boolean;
+    // (undocumented)
+    get hasPasswordStrengthError(): boolean;
     // (undocumented)
     get hasPrefix(): boolean;
     // (undocumented)
@@ -90,6 +93,8 @@ export class McFormField extends McFormFieldMixinBase implements AfterContentIni
     // (undocumented)
     onKeyDown(event: KeyboardEvent): void;
     // (undocumented)
+    passwordHints: QueryList<McPasswordHint>;
+    // (undocumented)
     prefix: QueryList<McPrefix>;
     shouldForward(prop: keyof NgControl): boolean;
     // (undocumented)
@@ -98,7 +103,7 @@ export class McFormField extends McFormFieldMixinBase implements AfterContentIni
     suffix: QueryList<McSuffix>;
     protected validateControlChild(): void;
     // (undocumented)
-    static ɵcmp: i0.ɵɵComponentDeclaration<McFormField, "mc-form-field", ["mcFormField"], { "color": "color"; }, {}, ["control", "stepper", "cleaner", "hint", "suffix", "prefix"], ["[mcPrefix]", "*", "[mcSuffix]", "mc-cleaner", "mc-stepper", "mc-hint"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McFormField, "mc-form-field", ["mcFormField"], { "color": "color"; }, {}, ["control", "stepper", "cleaner", "hint", "passwordHints", "suffix", "prefix"], ["[mcPrefix]", "*", "[mcSuffix]", "mc-cleaner", "mc-password-toggle", "mc-stepper", "mc-hint, mc-password-hint"]>;
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<McFormField, never>;
 }
@@ -143,9 +148,10 @@ export class McFormFieldModule {
     // Warning: (ae-forgotten-export) The symbol "i4" needs to be exported by the entry point index.d.ts
     // Warning: (ae-forgotten-export) The symbol "i5" needs to be exported by the entry point index.d.ts
     // Warning: (ae-forgotten-export) The symbol "i6" needs to be exported by the entry point index.d.ts
+    // Warning: (ae-forgotten-export) The symbol "i7" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
-    static ɵmod: i0.ɵɵNgModuleDeclaration<McFormFieldModule, [typeof i1.McFormField, typeof i1.McFormFieldWithoutBorders, typeof i2.McHint, typeof i3.McPrefix, typeof i4.McSuffix, typeof i5.McCleaner, typeof i6.McStepper], [typeof i7.CommonModule, typeof i8.McIconModule], [typeof i1.McFormField, typeof i1.McFormFieldWithoutBorders, typeof i2.McHint, typeof i3.McPrefix, typeof i4.McSuffix, typeof i5.McCleaner, typeof i6.McStepper]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<McFormFieldModule, [typeof i1.McFormField, typeof i1.McFormFieldWithoutBorders, typeof i2.McHint, typeof i3.McPasswordHint, typeof i4.McPrefix, typeof i5.McSuffix, typeof i6.McCleaner, typeof i7.McStepper], [typeof i8.CommonModule, typeof i9.McIconModule], [typeof i1.McFormField, typeof i1.McFormFieldWithoutBorders, typeof i2.McHint, typeof i3.McPasswordHint, typeof i4.McPrefix, typeof i5.McSuffix, typeof i6.McCleaner, typeof i7.McStepper]>;
 }
 
 // @public (undocumented)
@@ -164,6 +170,31 @@ export class McHint {
     static ɵdir: i0.ɵɵDirectiveDeclaration<McHint, "mc-hint", never, { "id": "id"; }, {}, never>;
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<McHint, never>;
+}
+
+// @public (undocumented)
+export class McPasswordHint implements AfterContentInit {
+    constructor(changeDetectorRef: ChangeDetectorRef, formField: McFormField);
+    // (undocumented)
+    checked: boolean;
+    // (undocumented)
+    hasError: boolean;
+    // (undocumented)
+    id: string;
+    // (undocumented)
+    max: number;
+    // (undocumented)
+    min: number;
+    // (undocumented)
+    ngAfterContentInit(): void;
+    // (undocumented)
+    regex: RegExp | null;
+    // (undocumented)
+    rule: PasswordRules | any;
+    // (undocumented)
+    static ɵcmp: i0.ɵɵComponentDeclaration<McPasswordHint, "mc-password-hint", never, { "id": "id"; "rule": "rule"; "min": "min"; "max": "max"; "regex": "regex"; }, {}, never, ["*"]>;
+    // (undocumented)
+    static ɵfac: i0.ɵɵFactoryDeclaration<McPasswordHint, never>;
 }
 
 // @public (undocumented)
@@ -199,6 +230,28 @@ export class McSuffix {
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<McSuffix, never>;
 }
+
+// @public (undocumented)
+export enum PasswordRules {
+    // (undocumented)
+    Digit = 3,
+    // (undocumented)
+    Length = 0,
+    // (undocumented)
+    LowerLatin = 2,
+    // (undocumented)
+    SpecialSymbols = 4,
+    // (undocumented)
+    UpperLatin = 1
+}
+
+// @public (undocumented)
+export const regExpPasswordValidator: {
+    2: RegExp;
+    1: RegExp;
+    3: RegExp;
+    4: RegExp;
+};
 
 // (No @packageDocumentation comment for this package)
 

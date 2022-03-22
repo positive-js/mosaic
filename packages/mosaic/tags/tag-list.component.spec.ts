@@ -846,14 +846,14 @@ describe('McTagList', () => {
                 flush();
                 fixture.detectChanges();
 
-                expect(formField.classList).toContain('mc-focused');
+                expect(formField.classList).toContain('cdk-focused');
 
                 nativeTags[0].blur();
                 fixture.detectChanges();
                 zone.simulateZoneExit();
                 fixture.detectChanges();
 
-                expect(formField.classList).not.toContain('mc-focused');
+                expect(formField.classList).not.toContain('cdk-focused');
             }));
         });
 
@@ -1099,7 +1099,7 @@ describe('McTagList', () => {
             fixture.detectChanges();
             dispatchKeyboardEvent(nativeInput, 'keydown', ENTER);
             fixture.detectChanges();
-            tick();
+            flush();
 
             expect(document.activeElement).toBe(nativeInput, 'Expected input to remain focused.');
         }));

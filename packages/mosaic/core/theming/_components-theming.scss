@@ -199,6 +199,17 @@
         state-invalid-background: $form-field-light-color-scheme-states-invalid-background
     );
 
+    $form-field-password-hint: (
+        text-color: $form-field-password-hint-light-color-scheme-text-color,
+        icon-color: $form-field-password-hint-light-color-scheme-text-color,
+
+        state-invalid-text-color: $form-field-password-hint-light-color-scheme-states-invalid-text-color,
+        state-invalid-icon-color: $form-field-password-hint-light-color-scheme-states-invalid-icon-color,
+
+        state-valid-text-color: $form-field-password-hint-light-color-scheme-states-valid-text-color,
+        state-valid-icon-color: $form-field-password-hint-light-color-scheme-states-valid-icon-color
+    );
+
     $forms: (
         label: $forms-light-color-scheme-label,
         legend: $forms-light-color-scheme-legend,
@@ -371,6 +382,7 @@
         checkbox: $checkbox,
         datepicker: $datepicker,
         form-field: $form-field,
+        form-field-password-hint: $form-field-password-hint,
         forms: $forms,
         link: $link,
         modal: $modal,
@@ -585,6 +597,17 @@
         state-invalid-background: $form-field-dark-color-scheme-states-invalid-background
     );
 
+    $form-field-password-hint: (
+        text-color: $form-field-password-hint-dark-color-scheme-text-color,
+        icon-color: $form-field-password-hint-dark-color-scheme-text-color,
+
+        state-invalid-text-color: $form-field-password-hint-dark-color-scheme-states-invalid-text-color,
+        state-invalid-icon-color: $form-field-password-hint-dark-color-scheme-states-invalid-icon-color,
+
+        state-valid-text-color: $form-field-password-hint-dark-color-scheme-states-valid-text-color,
+        state-valid-icon-color: $form-field-password-hint-dark-color-scheme-states-valid-icon-color
+    );
+
     $forms: (
         label: $forms-dark-color-scheme-label,
         legend: $forms-dark-color-scheme-legend,
@@ -757,6 +780,7 @@
         checkbox: $checkbox,
         datepicker: $datepicker,
         form-field: $form-field,
+        form-field-password-hint: $form-field-password-hint,
         forms: $forms,
         link: $link,
         modal: $modal,

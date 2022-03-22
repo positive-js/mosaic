@@ -16,8 +16,32 @@
     }
 }
 
+.mc-form-field-type-input-password {
+    & .mc-input {
+        padding-right: var(--mc-form-field-size-button-width, $form-field-size-button-width);
+    }
+}
+
 .mc-hint {
     display: block;
+}
+
+.mc-password-hint {
+    display: block;
+
+    padding-left: calc(
+        16px + var(--mc-form-field-password-hint-size-icon-margin, $form-field-password-hint-size-icon-margin)
+    );
+
+    & .mc-icon {
+        position: absolute;
+
+        left: 0;
+    }
+}
+
+.mc-form-field__hint > .mc-password-hint {
+    margin-top: var(--mc-form-field-password-hint-size-margin-top, $form-field-password-hint-size-margin-top);
 }
 
 .mc-form-field__hint > .mc-hint {

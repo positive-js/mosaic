@@ -7,11 +7,33 @@ import { McCommonModule } from '@ptsecurity/mosaic/core';
 import { McInput, McInputMono } from './input';
 import { McNumberInput } from './input-number';
 import { MaxValidator, MinValidator } from './input-number-validators';
+import { McInputPassword, McPasswordToggle } from './input-password';
 
 
 @NgModule({
-    imports: [CommonModule, A11yModule, McCommonModule, FormsModule],
-    exports: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator],
-    declarations: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator ]
+    imports: [
+        CommonModule,
+        A11yModule,
+        McCommonModule,
+        FormsModule
+    ],
+    declarations: [
+        McInput,
+        McNumberInput,
+        McInputPassword,
+        McPasswordToggle,
+        McInputMono,
+        MinValidator,
+        MaxValidator
+    ],
+    exports: [
+        McInput,
+        McNumberInput,
+        McInputPassword,
+        McPasswordToggle,
+        McInputMono,
+        MinValidator,
+        MaxValidator
+    ]
 })
 export class McInputModule {}

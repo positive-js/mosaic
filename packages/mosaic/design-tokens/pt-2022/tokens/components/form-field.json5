@@ -48,5 +48,44 @@
         font: {
             default: { value: 'caption' }
         }
+    },
+    'form-field-password-hint': {
+        'light-color-scheme': {
+            'text-color': { value: '{light-color-scheme.foreground.text.value}' },
+            'icon-color': { value: '{light-color-scheme.foreground.text.value}' },
+
+            states: {
+                invalid: {
+                    'icon-color': { value: '{light-color-scheme.foreground.text-error.value}' },
+                    'text-color': { value: '{light-color-scheme.foreground.text.value}' }
+                },
+                valid: {
+                    'text-color': { value: '{light-color-scheme.foreground.text-success.value}' },
+                    'icon-color': { value: '{light-color-scheme.foreground.text-success.value}' }
+                }
+            }
+        },
+        'dark-color-scheme': {
+            'text-color': { value: '{dark-color-scheme.foreground.text.value}' },
+            'icon-color': { value: '{dark-color-scheme.foreground.text.value}' },
+
+            states: {
+                invalid: {
+                    'icon-color': { value: '{dark-color-scheme.foreground.text-error.value}' },
+                    'text-color': { value: '{dark-color-scheme.foreground.text.value}' }
+                },
+                valid: {
+                    'text-color': { value: '{dark-color-scheme.foreground.text-success.value}' },
+                    'icon-color': { value: '{dark-color-scheme.foreground.text-success.value}' }
+                }
+            }
+        },
+        size: {
+            'margin-top': { value: '8px' },
+            'icon-margin': { value: '4px' }
+        },
+        font: {
+            default: { value: 'caption' }
+        }
     }
 }

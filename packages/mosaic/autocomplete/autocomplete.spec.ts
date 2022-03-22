@@ -210,11 +210,13 @@ describe('McAutocomplete', () => {
         it('should close the panel when an option is clicked', fakeAsync(() => {
             dispatchFakeEvent(input, 'focusin');
             fixture.detectChanges();
+            flush();
             zone.simulateZoneExit();
 
             const option = overlayContainerElement.querySelector('mc-option') as HTMLElement;
             option.click();
             fixture.detectChanges();
+            flush();
 
             expect(fixture.componentInstance.trigger.panelOpen)
                 .toBe(false, `Expected clicking an option to set the panel state to closed.`);
@@ -1028,6 +1030,7 @@ describe('McAutocomplete', () => {
 
             dispatchKeyboardEvent(document.body, 'keydown', ESCAPE);
             fixture.detectChanges();
+            flush();
 
             expect(document.activeElement).toBe(input, 'Expected input to continue to be focused.');
             expect(trigger.panelOpen).toBe(false, 'Expected panel to be closed.');
@@ -1036,6 +1039,7 @@ describe('McAutocomplete', () => {
         it('should prevent the default action when pressing escape', fakeAsync(() => {
             const escapeEvent = dispatchKeyboardEvent(input, 'keydown', ESCAPE);
             fixture.detectChanges();
+            flush();
 
             expect(escapeEvent.defaultPrevented).toBe(true);
         }));
@@ -1054,6 +1058,7 @@ describe('McAutocomplete', () => {
 
             dispatchEvent(document.body, upArrowEvent);
             fixture.detectChanges();
+            flush();
 
             expect(document.activeElement).toBe(input, 'Expected input to continue to be focused.');
             expect(trigger.panelOpen).toBe(false, 'Expected panel to be closed.');
@@ -1071,6 +1076,7 @@ describe('McAutocomplete', () => {
 
             dispatchKeyboardEvent(input, 'keydown', TAB);
             fixture.detectChanges();
+            flush();
 
             expect(overlayContainerElement.querySelector('.mc-autocomplete-panel'))
                 .toBeFalsy('Expected panel to be removed.');
@@ -1081,7 +1087,7 @@ describe('McAutocomplete', () => {
 
             trigger.openPanel();
             fixture.detectChanges();
-            tick();
+            flush();
 
             expect(trigger.panelOpen).toBe(true, 'Expected panel to be open.');
             expect(!!trigger.activeOption).toBe(false, 'Expected no active option.');
@@ -1098,7 +1104,7 @@ describe('McAutocomplete', () => {
             expect(!!trigger.activeOption).toBe(true, 'Expected to find an active option.');
 
             dispatchKeyboardEvent(document.body, 'keydown', ESCAPE);
-            tick();
+            flush();
 
             expect(!!trigger.activeOption).toBe(false, 'Expected no active options.');
         }));

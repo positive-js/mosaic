@@ -34,6 +34,8 @@
             text: { value: '{palette.grey.700.value}' },
             'text-less-contrast': { value: '{palette.grey.400.value}'},
             'text-disabled': { value: '{palette.grey.300.value}' },
+            'text-error': { value: '{light-color-scheme.error.palette.value.500.value}' },
+            'text-success': { value: '{light-color-scheme.success.palette.value.560.value}' },
             divider: { value: '{palette.grey.100.value}' },
             border: { value: '{palette.grey.300.value}' },
             icon: { value: '{palette.grey.400.value}' }
@@ -88,6 +90,8 @@
             text: { value: '{palette.grey.60.value}' },
             'text-less-contrast': { value: '{palette.grey.400.value}'},
             'text-disabled': { value: '{palette.grey.400.value}' },
+            'text-error': { value: '{dark-color-scheme.error.palette.value.400.value}' },
+            'text-success': { value: '{dark-color-scheme.success.palette.value.400.value}' },
             divider: { value: '{palette.grey.600.value}' },
             border: { value: '{palette.grey.500.value}' },
             icon: { value: '{palette.grey.400.value}' }

@@ -3201,7 +3201,7 @@ describe('McTreeSelect', () => {
             const select = fixture.debugElement.query(By.css('mc-tree-select')).nativeElement;
             dispatchKeyboardEvent(select, 'keydown', DOWN_ARROW);
 
-            tick();
+            flush();
 
             expect(fixture.componentInstance.changeListener).toHaveBeenCalledTimes(1);
         }));
