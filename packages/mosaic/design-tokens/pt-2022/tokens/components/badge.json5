@@ -1,43 +1,5 @@
 {
     badge: {
-        size: {
-            default: {
-                'min-width': { value: '10px' },
-                padding: { value: '0 8px' },
-                'border-width': { value: '1px' },
-                'border-radius': { value: '4px' },
-                height: { value: '24px' },
-                font: {
-                    default: { value: 'caption' },
-                    caps: { value: 'caption-caps' },
-                    mono: { value: 'caption-mono'}
-                }
-            },
-            mini: {
-                height: { value: '16px' },
-                'min-width': { value: '10px' },
-                'border-width': { value: '1px' },
-                'border-radius': { value: '2px' },
-                padding: { value: '0 4px' },
-                font: {
-                    default: { value: 'extra-small-text' },
-                    caps: { value: 'extra-small-text-caps' },
-                    mono: { value: 'extra-small-text-mono'}
-                }
-            }
-        },
-        font: {
-            default: {
-                default: { value: 'caption' },
-                caps: { value: 'caption-caps' },
-                mono: { value: 'caption-mono'}
-            },
-            mini: {
-                default: { value: 'extra-small-text' },
-                caps: { value: 'extra-small-text-caps' },
-                mono: { value: 'extra-small-text-mono'}
-            }
-        },
         'light-color-scheme': {
             solid: {
                 primary: {
@@ -166,7 +128,7 @@
                 transparent: {
                     background: { value: 'transparent' },
                     border: { value: '{light-color-scheme.second.palette.value.560.value}' },
-                    color: { value: 'white' },                    
+                    color: { value: 'white' },
                 },
                 light: {
                     background: { value: '{light-color-scheme.second.palette.value.400.value}' },
@@ -180,5 +142,33 @@
                 }
             }
         },
+        size: {
+            default: {
+                height: { value: '{size.XXL}' },
+                'min-width': { value: '10px' },
+                padding: { value: '0 8px' },
+                'border-width': { value: '1px' },
+                'border-radius': { value: '4px' }
+            },
+            mini: {
+                height: { value: '{size.L}' },
+                'min-width': { value: '10px' },
+                'border-width': { value: '1px' },
+                'border-radius': { value: '2px' },
+                padding: { value: '0 4px' }
+            }
+        },
+        font: {
+            default: {
+                default: { value: 'caption' },
+                caps: { value: 'caption-caps' },
+                mono: { value: 'caption-mono'}
+            },
+            mini: {
+                default: { value: 'extra-small-text' },
+                caps: { value: 'extra-small-text-caps' },
+                mono: { value: 'extra-small-text-mono'}
+            }
+        }
     }
 }
