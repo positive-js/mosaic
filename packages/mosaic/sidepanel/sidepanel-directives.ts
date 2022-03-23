@@ -69,7 +69,7 @@ export class McSidepanelClose implements OnInit, OnChanges {
         </div>
         <button *ngIf="closeable" mc-sidepanel-close>
             <span class="mc-sidepanel-close-x">
-                <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" [color]="themePalette.Primary"></i>
+                <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" [color]="themePalette.Second"></i>
             </span>
         </button>
     `,
