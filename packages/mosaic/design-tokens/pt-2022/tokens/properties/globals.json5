@@ -1,19 +1,5 @@
 {
     size: {
-        'option-height': '32px',
-        'panel-height': '48px',
-        // у radio и checkbox в макетах 20px, у тоггла есть две модификации на 16px и 14px
-        'control_S-height': '16px',
-        // в form-field это реализовано через отступы
-        'control_M-height': '32px',
-        // этого нет сейчас
-        'button-minWidth': '64px',
-        // badge на padding
-        'badge_tag-height': '24px',
-        // modal; sidepanel - сейчас в этих компонентах paddings
-        'header-height': '56px',
-        'footer-height': '64px',
-
         '3XS': '2px',
         'XXS': '4px',
         'XS': '6px',
@@ -27,6 +13,25 @@
         '5XL': '48px',
         '6XL': '56px',
         '7XL': '64px',
+
+        'border-width': '1px',
+        'border-radius': '3px',
+
+        // this will be deleted
+        'option-height': '32px',
+        'panel-height': '48px',
+        // у radio и checkbox в макетах 20px, у тоггла есть две модификации на 16px и 14px
+        'control_S-height': '16px',
+        // в form-field это реализовано через отступы
+        'control_M-height': '32px',
+        // этого нет сейчас
+        'button-minWidth': '64px',
+        // badge на padding
+        'badge_tag-height': '24px',
+        // modal; sidepanel - сейчас в этих компонентах paddings
+        'header-height': '56px',
+        'footer-height': '64px',
+        // this will be deleted
     },
     padding: {
         'control-horizontal': '16px',
