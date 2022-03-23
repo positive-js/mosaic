@@ -1,5 +1,23 @@
 {
     size: {
+        '3XS': '2px',
+        'XXS': '4px',
+        'XS': '6px',
+        'S': '8px',
+        'M': '12px',
+        'L': '16px',
+        'XL': '20px',
+        'XXL': '24px',
+        '3XL': '32px',
+        '4XL': '40px',
+        '5XL': '48px',
+        '6XL': '56px',
+        '7XL': '64px',
+
+        'border-width': '1px',
+        'border-radius': '3px',
+
+        // this will be deleted
         'option-height': '32px',
         'panel-height': '48px',
         // у radio и checkbox в макетах 20px, у тоггла есть две модификации на 16px и 14px
@@ -12,7 +30,8 @@
         'badge_tag-height': '24px',
         // modal; sidepanel - сейчас в этих компонентах paddings
         'header-height': '56px',
-        'footer-height': '64px'
+        'footer-height': '64px',
+        // this will be deleted
     },
     padding: {
         'control-horizontal': '16px',
