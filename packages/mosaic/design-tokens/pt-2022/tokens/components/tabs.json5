@@ -1,7 +1,7 @@
 {
     tabs: {
         'light-color-scheme': {
-            border: { value: '{light-color-scheme.second.palette.value.300.value}' },
+            border: { value: '{light-color-scheme.second.palette.value.100.value}' },
 
             state: {
                 normal: {
@@ -27,7 +27,7 @@
             }
         },
         'dark-color-scheme': {
-            border: { value: '{dark-color-scheme.second.palette.value.300.value}' },
+            border: { value: '{dark-color-scheme.second.palette.value.700.value}' },
 
             state: {
                 normal: {
