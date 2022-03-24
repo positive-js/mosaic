@@ -1,0 +1,59 @@
+@import '../core/styles/common/layout';
+@import '../design-tokens/pt-2022/tokens';
+
+
+// Description Lists
+.mc-dl {
+    margin-bottom: 8px;
+
+    .mc-dt {
+    }
+
+    .mc-dd {
+        margin-bottom: 16px;
+        line-height: 20px;
+    }
+
+    & .mc-dl_horizontal {
+        display: flex;
+        flex-wrap: wrap;
+
+        .mc-dt {
+            width: 25%;
+            margin-bottom: 12px;
+        }
+
+        .mc-dd {
+            width: 75%;
+            padding-left: 16px;
+            margin-bottom: 12px;
+            line-height: 20px;
+        }
+
+        & .mc-dl-conditional {
+        }
+    }
+
+    & .mc-dl_small {
+        .mc-dt,
+        .mc-dd {
+            line-height: 16px;
+        }
+
+        .mc-dd {
+            margin-bottom: 12px;
+        }
+    }
+}
+
+.mc-dl_small.mc-dl_horizontal {
+    .mc-dt,
+    .mc-dd {
+        margin-bottom: 8px;
+    }
+}
+
+.mc-dl-conditional {
+    //.flex-100;
+    //.layout-column;
+}

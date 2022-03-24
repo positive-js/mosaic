@@ -1,0 +1,10 @@
+@import '../../mosaic/core/visual/all-visual';
+
+
+@include mosaic-visual();
+
+.mc-column-container {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
