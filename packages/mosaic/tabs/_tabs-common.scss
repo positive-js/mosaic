@@ -53,13 +53,6 @@
 
     outline: none;
 
-    & .mc-tab-overlay {
-        position: absolute;
-
-        top: 0; left: 0; right: 0; bottom: 0;
-        pointer-events: none;
-    }
-
     &.mc-active {
         cursor: default;
 
@@ -68,10 +61,6 @@
             content: "";
 
             position: absolute;
-        }
-
-        &[disabled] .mc-tab-overlay {
-            bottom: -1px;
         }
     }
 
@@ -159,14 +148,5 @@
         @extend %horizontal-focus;
 
         top: -1px
-    }
-
-    & .mc-tab-overlay {
-        top: -1px;
-
-        border-top: {
-            left-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
-            right-radius: var(--mc-tabs-size-border-radius, #{$tabs-size-border-radius});
-        }
     }
 }

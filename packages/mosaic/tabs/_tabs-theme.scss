@@ -9,6 +9,7 @@
     $states: map-get($theme, states);
 
     $tabs: map-get(map-get($theme, components), tabs);
+    $vertical-tabs: map-get(map-get($theme, components), vertical-tabs);
 
     .mc-tab-group_vertical .mc-tab-header__content {
         border-right-color: map-get($foreground, divider);
@@ -58,13 +59,21 @@
             border-bottom-color: transparent;
         }
 
-        &.mc-tab-label_empty .mc-tab-overlay{
-            background: map-get($tabs, state-disabled-overlay);
+        &.mc-tab-label_empty {
+            color: map-get($tabs, state-empty-text);
+
+            & .mc-icon {
+                color: map-get($tabs, state-empty-icon);
+            }
         }
 
         &:hover {
-            & .mc-tab-overlay {
-                background: map-get($background, overlay-hover);
+            background: map-get($background, overlay-hover);
+
+            color: map-get($tabs, state-hover-text);
+
+            & .mc-icon {
+                color: map-get($tabs, state-hover-icon);
             }
         }
 
@@ -73,166 +82,140 @@
                 color: map-get($tabs, border);
                 bottom-color: transparent;
             }
-
-            & .mc-tab-overlay {
-                background: transparent;
-            }
         }
 
         &[disabled] {
             cursor: default;
 
-            & .mc-tab-overlay {
-                background: map-get($tabs, state-disabled-overlay);
+            color: map-get($tabs, state-disabled-text);
+
+            & .mc-icon {
+                color: map-get($tabs, state-disabled-icon);
             }
         }
     }
 
+    .mc-tab-link,
     .mc-tab-label_horizontal {
-        color: map-get($foreground, text);
+        color: map-get($tabs, state-normal-text);
+
+        & .mc-icon {
+            color: map-get($tabs, state-normal-icon);
+        }
 
         border-bottom-color: map-get($tabs, border);
-
-        & .mc-tab-overlay {
-            background: transparent;
-        }
 
         &.cdk-keyboard-focused:after {
             border-color: map-get(map-get($theme, states), focused-color);
             border-bottom-color: transparent;
         }
 
-        &.mc-tab-label_empty .mc-tab-overlay{
-            background: map-get($tabs, state-disabled-overlay);
-        }
-
-        &:hover {
-            &:before {
-                background-color: map-get($tabs, border);
-            }
-
-            & .mc-tab-overlay {
-                background: map-get($background, overlay-hover);
-            }
+        &.mc-tab-label_empty {
+            color: map-get($tabs, state-empty-text);
 
             & .mc-icon {
-                color: map-get($foreground, text);
+                color: map-get($tabs, state-empty-icon);
             }
         }
 
         &.mc-active {
             border-bottom-color: transparent;
 
-            &:before {
-                background-color: map-get($tabs, state-active);
+            color: map-get($tabs, state-normal-text);
+
+            & .mc-icon {
+                color: map-get($tabs, state-normal-icon);
             }
 
-            & .mc-tab-overlay {
-                background: transparent;
+            &:before {
+                background-color: map-get($tabs, state-active-marker);
+            }
+        }
+
+        &:hover {
+            background: map-get($background, overlay-hover);
+
+            color: map-get($tabs, state-hover-text);
+
+            & .mc-icon {
+                color: map-get($tabs, state-hover-icon);
             }
         }
 
         &[disabled] {
             cursor: default;
 
-            & .mc-tab-overlay {
-                background: map-get($tabs, state-disabled-overlay);
+            color: map-get($tabs, state-disabled-text);
+
+            &:before {
+                opacity: map-get($tabs, state-disabled-marker-opacity);
+            }
+
+            & .mc-icon {
+                color: map-get($tabs, state-disabled-icon);
             }
         }
     }
 
     .mc-tab-label_vertical {
-        color: map-get($foreground, text);
+        background: map-get($vertical-tabs, state-normal-background);
+        color: map-get($tabs, state-normal-text);
 
-        & .mc-tab-overlay {
-            background: transparent;
+        & .mc-icon {
+            color: map-get($tabs, state-normal-icon);
         }
 
         &.cdk-keyboard-focused:after {
             border-color: map-get(map-get($theme, states), focused-color);
         }
 
-        &.mc-tab-label_empty .mc-tab-overlay{
-            background: map-get($tabs, state-disabled-overlay);
+        &.mc-tab-label_empty {
+            color: map-get($tabs, state-empty-text);
+
+            & .mc-icon {
+                color: map-get($tabs, state-empty-icon);
+            }
         }
 
         &:hover {
-            &:before {
-                background-color: map-get($tabs, border);
-            }
+            background: map-get($vertical-tabs, state-hover-background);
 
-            & .mc-tab-overlay {
-                background: map-get($background, overlay-hover);
-            }
+            color: map-get($tabs, state-hover-text);
 
             & .mc-icon {
-                color: map-get($foreground, text);
+                color: map-get($tabs, state-hover-icon);
             }
         }
 
         &.mc-active {
-            border-bottom-color: transparent;
+            color: map-get($tabs, state-normal-text);
             background: map-get($states, selected-color);
 
-            &:before {
-                background-color: map-get($tabs, state-active);
+            & .mc-icon {
+                color: map-get($tabs, state-normal-icon);
             }
 
-            & .mc-tab-overlay {
-                background: transparent;
+            &:before {
+                background-color: map-get($tabs, state-active-marker);
             }
 
             &:hover {
-                & .mc-tab-overlay {
-                    background: map-get($background, overlay-hover);
-                }
+                background: map-get($vertical-tabs, state-hover-selected-background);
 
                 & .mc-icon {
-                    color: map-get($foreground, text);
+                    color: map-get($tabs, state-hover-icon);
                 }
             }
         }
 
         &[disabled] {
             cursor: default;
-            background: transparent;
+            background: map-get($vertical-tabs, state-normal-background);
 
-            & .mc-tab-overlay {
-                background: map-get($tabs, state-disabled-overlay);
-            }
-        }
-    }
-
-    .mc-tab-link {
-        &.mc-tab-label_empty .mc-tab-overlay{
-            background: map-get($tabs, state-disabled-overlay);
-        }
-
-        &:hover {
-            &:before {
-                background-color: map-get($tabs, border);
-            }
+            color: map-get($tabs, state-disabled-text);
 
             & .mc-icon {
-                color: map-get($foreground, text);
-            }
-        }
-
-        &.mc-active {
-            border-bottom-color: transparent;
-
-            &:before {
-                background-color: map-get($tabs, state-active);
-            }
-
-            & .mc-tab-overlay {
-                background: transparent;
-            }
-        }
-
-        &[disabled] {
-            & .mc-tab-overlay {
-                background: map-get($tabs, state-disabled-overlay);
+                color: map-get($tabs, state-disabled-icon);
             }
         }
     }

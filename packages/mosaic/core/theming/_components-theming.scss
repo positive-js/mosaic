@@ -296,8 +296,27 @@
 
     $tabs: (
         border: $tabs-light-color-scheme-border,
-        state-active: $tabs-light-color-scheme-state-active,
-        state-disabled-overlay: $tabs-light-color-scheme-state-disabled-overlay
+        state-normal-icon: $tabs-light-color-scheme-state-normal-icon,
+        state-normal-text: $tabs-light-color-scheme-state-normal-text,
+
+        state-hover-icon: $tabs-light-color-scheme-state-hover-icon,
+        state-hover-text: $tabs-light-color-scheme-state-hover-text,
+
+        state-active-marker: $tabs-light-color-scheme-state-active-marker-color,
+
+        state-empty-icon: $tabs-light-color-scheme-state-empty-icon,
+        state-empty-text: $tabs-light-color-scheme-state-empty-text,
+
+        state-disabled-icon: $tabs-light-color-scheme-state-disabled-icon,
+        state-disabled-text: $tabs-light-color-scheme-state-disabled-text,
+        state-disabled-marker-opacity: $tabs-light-color-scheme-state-disabled-marker-opacity
+    );
+
+    $vertical-tabs: (
+        state-normal-background: $vertical-tabs-light-color-scheme-state-normal-background,
+        state-selected-background: $vertical-tabs-light-color-scheme-state-selected-background,
+        state-hover-background: $vertical-tabs-light-color-scheme-state-hover-background,
+        state-hover-selected-background: $vertical-tabs-light-color-scheme-state-hover-selected-background
     );
 
     $tags: (
@@ -393,6 +412,7 @@
         radio: $radio,
         sidepanel: $sidepanel,
         tabs: $tabs,
+        vertical-tabs: $vertical-tabs,
         tags: $tags,
         toggle: $toggle,
         tooltip: $tooltip
@@ -694,8 +714,27 @@
 
     $tabs: (
         border: $tabs-dark-color-scheme-border,
-        state-active: $tabs-dark-color-scheme-state-active,
-        state-disabled-overlay: $tabs-dark-color-scheme-state-disabled-overlay
+        state-normal-icon: $tabs-dark-color-scheme-state-normal-icon,
+        state-normal-text: $tabs-dark-color-scheme-state-normal-text,
+
+        state-hover-icon: $tabs-dark-color-scheme-state-hover-icon,
+        state-hover-text: $tabs-dark-color-scheme-state-hover-text,
+
+        state-active-marker: $tabs-dark-color-scheme-state-active-marker-color,
+
+        state-empty-icon: $tabs-dark-color-scheme-state-empty-icon,
+        state-empty-text: $tabs-dark-color-scheme-state-empty-text,
+
+        state-disabled-icon: $tabs-dark-color-scheme-state-disabled-icon,
+        state-disabled-text: $tabs-dark-color-scheme-state-disabled-text,
+        state-disabled-marker-opacity: $tabs-dark-color-scheme-state-disabled-marker-opacity
+    );
+
+    $vertical-tabs: (
+        state-normal-background: $vertical-tabs-dark-color-scheme-state-normal-background,
+        state-selected-background: $vertical-tabs-dark-color-scheme-state-selected-background,
+        state-hover-background: $vertical-tabs-dark-color-scheme-state-hover-background,
+        state-hover-selected-background: $vertical-tabs-dark-color-scheme-state-hover-selected-background
     );
 
     $tags: (
@@ -791,6 +830,7 @@
         radio: $radio,
         sidepanel: $sidepanel,
         tabs: $tabs,
+        vertical-tabs: $vertical-tabs,
         tags: $tags,
         toggle: $toggle,
         tooltip: $tooltip
