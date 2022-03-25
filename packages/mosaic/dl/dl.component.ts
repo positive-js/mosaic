@@ -6,7 +6,8 @@ import { Component, ElementRef, ViewEncapsulation } from '@angular/core';
     template: '<ng-content></ng-content>',
     styleUrls: ['dl.scss'],
     host: {
-        '[class.mc-dl]': 'true'
+        class: 'mc-dl',
+        '[class.mc-dl_vertical]': 'false'
     },
     encapsulation: ViewEncapsulation.None
 })
@@ -17,8 +18,8 @@ export class McDlComponent {
 @Component({
     selector: 'mc-dt',
     template: '<ng-content></ng-content>',
-    styleUrls: ['dl.scss'],
     host: {
+        class: 'mc-dt',
         '[class.mc-dt]': 'true'
     },
     encapsulation: ViewEncapsulation.None
@@ -30,8 +31,8 @@ export class McDtComponent {
 @Component({
     selector: 'mc-dd',
     template: '<ng-content></ng-content>',
-    styleUrls: ['dl.scss'],
     host: {
+        class: 'mc-dd',
         '[class.mc-dd]': 'true'
     },
     encapsulation: ViewEncapsulation.None

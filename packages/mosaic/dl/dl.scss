@@ -4,56 +4,30 @@
 
 // Description Lists
 .mc-dl {
-    margin-bottom: 8px;
+    display: flex;
+    flex-direction: row;
+
+    margin-bottom: var(--mc-description-list-size-margin-bottom, $description-list-size-margin-bottom);
 
     .mc-dt {
+        width: var(--mc-description-list-size-term-width, $description-list-size-term-width);
+        max-width: var(--mc-description-list-size-term-width, $description-list-size-term-width);
+
+        padding-right: 16px;
     }
 
     .mc-dd {
-        margin-bottom: 16px;
-        line-height: 20px;
+        width: var(--mc-description-list-size-description-width, $description-list-size-description-width);
+        max-width: var(--mc-description-list-size-description-width, $description-list-size-description-width);
     }
 
-    & .mc-dl_horizontal {
-        display: flex;
-        flex-wrap: wrap;
+    &.mc-dl_vertical {
+        flex-direction: column;
 
-        .mc-dt {
-            width: 25%;
-            margin-bottom: 12px;
-        }
-
-        .mc-dd {
-            width: 75%;
-            padding-left: 16px;
-            margin-bottom: 12px;
-            line-height: 20px;
-        }
-
-        & .mc-dl-conditional {
-        }
-    }
-
-    & .mc-dl_small {
         .mc-dt,
         .mc-dd {
-            line-height: 16px;
-        }
-
-        .mc-dd {
-            margin-bottom: 12px;
+            width: 100%;
+            max-width: 100%;
         }
     }
-}
-
-.mc-dl_small.mc-dl_horizontal {
-    .mc-dt,
-    .mc-dd {
-        margin-bottom: 8px;
-    }
-}
-
-.mc-dl-conditional {
-    //.flex-100;
-    //.layout-column;
 }

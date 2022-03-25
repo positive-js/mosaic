@@ -8,6 +8,7 @@
 @import '../../../button/button-theme';
 @import '../../../checkbox/checkbox-theme';
 @import '../../../datepicker/datepicker-theme';
+@import '../../../dl/dl-theme';
 @import '../../../dropdown/dropdown-theme';
 @import '../../../form-field/form-field-theme';
 @import '../../../input/input-theme';
@@ -42,6 +43,7 @@
     @include mc-checkbox-typography($config);
     @include mc-datepicker-typography($config);
     @include mc-dropdown-typography($config);
+    @include mc-dl-typography($config);
     @include mc-form-field-typography($config);
     @include mc-forms-typography($config);
     @include mc-input-typography($config);

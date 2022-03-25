@@ -55,6 +55,9 @@
   --mc-datepicker-input-size-width: 130px;
   --mc-divider-size-width: 1px;
   --mc-divider-size-inset-margin: 80px;
+  --mc-description-list-size-term-width: 25%;
+  --mc-description-list-size-description-width: 75%;
+  --mc-description-list-size-margin-bottom: 12px;
   --mc-dropdown-item-size-padding: 5px 15px;
   --mc-dropdown-item-size-icon-padding: 0 8px 2px 0;
   --mc-dropdown-group-header-size-default-padding: 6px 15px;

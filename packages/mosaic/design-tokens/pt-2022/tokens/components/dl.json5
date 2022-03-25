@@ -1,0 +1,12 @@
+{
+    'description-list': {
+        size: {
+            'term-width': { value: '25%' },
+            'description-width': { value: '75%' },
+            'margin-bottom': { value: '12px' }
+        },
+        font: {
+            default: { value: 'body' },
+        }
+    }
+}

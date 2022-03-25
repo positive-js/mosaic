@@ -1,85 +1,16 @@
-<div class="mc-column-container">
-    <h1>DL</h1>
-</div>
-
-<h4>Standard list</h4>
-
 <mc-dl>
     <mc-dt>File</mc-dt>
     <mc-dd>125 КБ</mc-dd>
+</mc-dl>
 
+<mc-dl>
     <mc-dt>Never show GUIDs</mc-dt>
     <mc-dd>f3a9583e-346c-4a52-9ddb-252fd34ea9f0</mc-dd>
 
+</mc-dl>
+
+<mc-dl>
     <mc-dt>Description</mc-dt>
     <mc-dd>In order for your npm command line client to work with Artifactory you will firstly need to set the relevant authentication.
         For getting authentication details run the following command</mc-dd>
-</mc-dl>
-
-<h4>Small list</h4>
-
-<mc-dl class="mc-dl_small">
-    <mc-dt>File</mc-dt>
-    <mc-dd>125 КБ</mc-dd>
-
-    <mc-dt>Never show GUIDs</mc-dt>
-    <mc-dd>f3a9583e-346c-4a52-9ddb-252fd34ea9f0</mc-dd>
-
-    <mc-dt>Description</mc-dt>
-    <mc-dd>In order for your npm command line client to work with Artifactory you will firstly need to set the relevant authentication.
-        For getting authentication details run the following command</mc-dd>
-</mc-dl>
-
-<h4>Float list</h4>
-
-<mc-dl class="mc-dl-float">
-    <mc-dt>File</mc-dt>
-    <mc-dd>125 КБ</mc-dd>
-
-    <mc-dt>Never show GUIDs</mc-dt>
-    <mc-dd>f3a9583e-346c-4a52-9ddb-252fd34ea9f0</mc-dd>
-
-    <mc-dt>Description</mc-dt>
-    <mc-dd>In order for your npm command line client to work with Artifactory you will firstly need to set the relevant authentication.
-        For getting authentication details run the following command</mc-dd>
-</mc-dl>
-
-<h4>Collapsible float list</h4>
-
-<div id="container">
-
-    <i class="mc mc-angle-down-M_16" style="line-height: 0.8; margin-left: -21px; margin-top: -4px;" ng-if="collapse"></i>
-    <i class="mc mc-angle-down-M_16" style="line-height: 0.8; margin-left: -21px; margin-top: -4px; transform: rotate(-90deg)" ng-if="!collapse"></i>
-
-    <span style="font-size: 15px; font-weight: bold; font-color:#4d4d4d; cursor: pointer;"
-          ng-click="collapse = !collapse">
-               Collapsible float list
-        </span>
-
-    <mc-dl class="mc-dl-float" ng-show="collapse" style="margin-top: 12px">
-        <mc-dt>File</mc-dt>
-        <mc-dd>125 КБ</mc-dd>
-
-        <mc-dt>Never show GUIDs</mc-dt>
-        <mc-dd>f3a9583e-346c-4a52-9ddb-252fd34ea9f0</mc-dd>
-
-        <mc-dt>Description</mc-dt>
-        <mc-dd>In order for your npm command line client to work with Artifactory you will firstly need to set the relevant authentication.
-            For getting authentication details run the following command</mc-dd>
-    </mc-dl>
-</div>
-
-<h4>List with conditional rows</h4>
-
-<mc-dl class="mc-dl-float">
-    <mc-dt>File</mc-dt>
-    <mc-dd>125 КБ</mc-dd>
-
-    <mc-dt>Never show GUIDs</mc-dt>
-    <mc-dd>f3a9583e-346c-4a52-9ddb-252fd34ea9f0</mc-dd>
-
-    <div ng-if="condition" class="mc-dl-conditional">
-        <dt>Description</dt>
-        <dd>In order for your npm command line client to work with Artifactory you will firstly need to set the relevant authentication.</dd>
-    </div>
 </mc-dl>
