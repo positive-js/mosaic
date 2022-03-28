@@ -51,6 +51,7 @@
     @include mc-card-theme($theme);
     @include mc-checkbox-theme($theme);
     @include mc-datepicker-theme($theme);
+    @include mc-dl-theme($theme);
     @include mc-divider-theme($theme);
     @include mc-dropdown-theme($theme);
     @include mc-form-field-theme($theme);

@@ -3,10 +3,15 @@
 
 
 @mixin mc-dl-theme($theme) {
-    $background: map-get($theme, background);
-    $foreground: map-get($theme, foreground);
+    $dl: map-get(map-get($theme, components), dl);
 
-    $button: map-get(map-get($theme, components), button);
+    .mc-dt {
+        color: map-get($dl, dt);
+    }
+
+    .mc-dd {
+        color: map-get($dl, dd);
+    }
 }
 
 @mixin mc-dl-typography($config) {

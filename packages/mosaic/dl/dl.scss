@@ -2,32 +2,46 @@
 @import '../design-tokens/pt-2022/tokens';
 
 
-// Description Lists
 .mc-dl {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    column-gap: var(--mc-description-list-size-column-gap, $description-list-size-column-gap);
+    row-gap: var(--mc-description-list-size-row-gap, $description-list-size-row-gap);
 
-    margin-bottom: var(--mc-description-list-size-margin-bottom, $description-list-size-margin-bottom);
+    grid-template-columns: repeat(4, 1fr);
 
     .mc-dt {
-        width: var(--mc-description-list-size-term-width, $description-list-size-term-width);
-        max-width: var(--mc-description-list-size-term-width, $description-list-size-term-width);
-
-        padding-right: 16px;
+        grid-column: var(--mc-description-list-size-dt-grid-column, $description-list-size-dt-grid-column);
     }
 
     .mc-dd {
-        width: var(--mc-description-list-size-description-width, $description-list-size-description-width);
-        max-width: var(--mc-description-list-size-description-width, $description-list-size-description-width);
+        grid-column: var(--mc-description-list-size-dd-grid-column, $description-list-size-dd-grid-column);
+    }
+
+    &.mc-dl_wide {
+        grid-template-columns: repeat(2, 1fr);
+
+        .mc-dt {
+            grid-column: 1;
+        }
+
+        .mc-dd {
+            grid-column: 2;
+        }
     }
 
     &.mc-dl_vertical {
-        flex-direction: column;
+        grid-template-columns: repeat(1, 1fr);
+
+        column-gap: 0;
+        row-gap: 2px;
 
         .mc-dt,
         .mc-dd {
-            width: 100%;
-            max-width: 100%;
+            grid-column: 1;
+        }
+
+        .mc-dd {
+            margin-bottom: var(--mc-description-list-size-row-gap, $description-list-size-row-gap);
         }
     }
 }
