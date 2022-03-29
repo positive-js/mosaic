@@ -46,6 +46,10 @@
     @return _mc-get-type-value($config, $level, text-transform);
 }
 
+@function mc-font-feature-settings($config, $level) {
+    @return _mc-get-type-value($config, $level, font-feature-settings);
+}
+
 // Gets the font-family from a typography config and removes the quotes around it.
 @function mc-font-family($config, $level: null) {
     $font-family: map-get($config, font-family);
@@ -64,10 +68,12 @@
     $line-height: mc-line-height($config, $level);
     $font-family: mc-font-family($config, $level);
     $text-transform: mc-text-transform($config, $level);
+    $font-feature-settings: mc-font-feature-settings($config, $level);
 
     font: $font-weight #{$font-size}/#{$line-height} $font-family;
     letter-spacing: mc-letter-spacing($config, $level);
     text-transform: mc-text-transform($config, $level);
+    font-feature-settings: mc-font-feature-settings($config, $level);
 }
 
 @mixin mc-base-typography($config) {

@@ -4,30 +4,35 @@ $typography-display-1-letter-spacing: normal;
 $typography-display-1-font-weight: normal;
 $typography-display-1-font-family: 'TT Positive', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 $typography-display-1-text-transform: null;
+$typography-display-1-font-feature-settings: null;
 $typography-display-2-font-size: 45px;
 $typography-display-2-line-height: 56px;
 $typography-display-2-letter-spacing: normal;
 $typography-display-2-font-weight: normal;
 $typography-display-2-font-family: 'TT Positive', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 $typography-display-2-text-transform: null;
+$typography-display-2-font-feature-settings: null;
 $typography-display-3-font-size: 34px;
 $typography-display-3-line-height: 44px;
 $typography-display-3-letter-spacing: normal;
 $typography-display-3-font-weight: normal;
 $typography-display-3-font-family: 'TT Positive', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 $typography-display-3-text-transform: null;
+$typography-display-3-font-feature-settings: null;
 $typography-headline-font-size: 24px;
 $typography-headline-line-height: 32px;
 $typography-headline-letter-spacing: normal;
 $typography-headline-font-weight: normal;
 $typography-headline-font-family: 'TT Positive', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 $typography-headline-text-transform: null;
+$typography-headline-font-feature-settings: null;
 $typography-title-font-size: 20px;
 $typography-title-line-height: 28px;
 $typography-title-letter-spacing: normal;
 $typography-title-font-weight: 600;
 $typography-title-font-family: 'TT Positive', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 $typography-title-text-transform: null;
+$typography-title-font-feature-settings: null;
 $typography-subheading-font-size: 15px;
 $typography-subheading-line-height: 20px;
 $typography-subheading-letter-spacing: -0.009em;
@@ -69,6 +74,7 @@ $typography-body-mono-letter-spacing: normal;
 $typography-body-mono-font-weight: normal;
 $typography-body-mono-font-family: 'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
 $typography-body-mono-text-transform: null;
+$typography-body-mono-font-feature-settings: null;
 $typography-caption-font-size: 13px;
 $typography-caption-line-height: 16px;
 $typography-caption-letter-spacing: -0.0025em;
@@ -76,6 +82,13 @@ $typography-caption-font-weight: normal;
 $typography-caption-font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 $typography-caption-text-transform: null;
 $typography-caption-font-feature-settings: "ss01" on, "ss04" on;
+$typography-caption-tabular-font-size: 13px;
+$typography-caption-tabular-line-height: 16px;
+$typography-caption-tabular-letter-spacing: -0.0025em;
+$typography-caption-tabular-font-weight: normal;
+$typography-caption-tabular-font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+$typography-caption-tabular-text-transform: null;
+$typography-caption-tabular-font-feature-settings: "tnum" on, "ss01" on, "ss04" on;
 $typography-caption-caps-font-size: 13px;
 $typography-caption-caps-line-height: 16px;
 $typography-caption-caps-letter-spacing: 1.5px;
@@ -89,6 +102,7 @@ $typography-caption-mono-letter-spacing: normal;
 $typography-caption-mono-font-weight: normal;
 $typography-caption-mono-font-family: 'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
 $typography-caption-mono-text-transform: null;
+$typography-caption-mono-font-feature-settings: null;
 $typography-small-text-font-size: 13px;
 $typography-small-text-line-height: 16px;
 $typography-small-text-letter-spacing: -0.0025em;
@@ -116,6 +130,7 @@ $typography-extra-small-text-mono-letter-spacing: 0px;
 $typography-extra-small-text-mono-font-weight: normal;
 $typography-extra-small-text-mono-font-family: 'Roboto Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
 $typography-extra-small-text-mono-text-transform: null;
+$typography-extra-small-text-mono-font-feature-settings: null;
 
 $mosaic: (
   'typography': (
@@ -125,7 +140,8 @@ $mosaic: (
       'letter-spacing': $typography-display-1-letter-spacing,
       'font-weight': $typography-display-1-font-weight,
       'font-family': $typography-display-1-font-family,
-      'text-transform': $typography-display-1-text-transform
+      'text-transform': $typography-display-1-text-transform,
+      'font-feature-settings': $typography-display-1-font-feature-settings
     ),
     'display-2': (
       'font-size': $typography-display-2-font-size,
@@ -133,7 +149,8 @@ $mosaic: (
       'letter-spacing': $typography-display-2-letter-spacing,
       'font-weight': $typography-display-2-font-weight,
       'font-family': $typography-display-2-font-family,
-      'text-transform': $typography-display-2-text-transform
+      'text-transform': $typography-display-2-text-transform,
+      'font-feature-settings': $typography-display-2-font-feature-settings
     ),
     'display-3': (
       'font-size': $typography-display-3-font-size,
@@ -141,7 +158,8 @@ $mosaic: (
       'letter-spacing': $typography-display-3-letter-spacing,
       'font-weight': $typography-display-3-font-weight,
       'font-family': $typography-display-3-font-family,
-      'text-transform': $typography-display-3-text-transform
+      'text-transform': $typography-display-3-text-transform,
+      'font-feature-settings': $typography-display-3-font-feature-settings
     ),
     'headline': (
       'font-size': $typography-headline-font-size,
@@ -149,7 +167,8 @@ $mosaic: (
       'letter-spacing': $typography-headline-letter-spacing,
       'font-weight': $typography-headline-font-weight,
       'font-family': $typography-headline-font-family,
-      'text-transform': $typography-headline-text-transform
+      'text-transform': $typography-headline-text-transform,
+      'font-feature-settings': $typography-headline-font-feature-settings
     ),
     'title': (
       'font-size': $typography-title-font-size,
@@ -157,7 +176,8 @@ $mosaic: (
       'letter-spacing': $typography-title-letter-spacing,
       'font-weight': $typography-title-font-weight,
       'font-family': $typography-title-font-family,
-      'text-transform': $typography-title-text-transform
+      'text-transform': $typography-title-text-transform,
+      'font-feature-settings': $typography-title-font-feature-settings
     ),
     'subheading': (
       'font-size': $typography-subheading-font-size,
@@ -210,7 +230,8 @@ $mosaic: (
       'letter-spacing': $typography-body-mono-letter-spacing,
       'font-weight': $typography-body-mono-font-weight,
       'font-family': $typography-body-mono-font-family,
-      'text-transform': $typography-body-mono-text-transform
+      'text-transform': $typography-body-mono-text-transform,
+      'font-feature-settings': $typography-body-mono-font-feature-settings
     ),
     'caption': (
       'font-size': $typography-caption-font-size,
@@ -220,6 +241,15 @@ $mosaic: (
       'font-family': $typography-caption-font-family,
       'text-transform': $typography-caption-text-transform,
       'font-feature-settings': $typography-caption-font-feature-settings
+    ),
+    'caption-tabular': (
+      'font-size': $typography-caption-tabular-font-size,
+      'line-height': $typography-caption-tabular-line-height,
+      'letter-spacing': $typography-caption-tabular-letter-spacing,
+      'font-weight': $typography-caption-tabular-font-weight,
+      'font-family': $typography-caption-tabular-font-family,
+      'text-transform': $typography-caption-tabular-text-transform,
+      'font-feature-settings': $typography-caption-tabular-font-feature-settings
     ),
     'caption-caps': (
       'font-size': $typography-caption-caps-font-size,
@@ -236,7 +266,8 @@ $mosaic: (
       'letter-spacing': $typography-caption-mono-letter-spacing,
       'font-weight': $typography-caption-mono-font-weight,
       'font-family': $typography-caption-mono-font-family,
-      'text-transform': $typography-caption-mono-text-transform
+      'text-transform': $typography-caption-mono-text-transform,
+      'font-feature-settings': $typography-caption-mono-font-feature-settings
     ),
     'small-text': (
       'font-size': $typography-small-text-font-size,
@@ -271,7 +302,8 @@ $mosaic: (
       'letter-spacing': $typography-extra-small-text-mono-letter-spacing,
       'font-weight': $typography-extra-small-text-mono-font-weight,
       'font-family': $typography-extra-small-text-mono-font-family,
-      'text-transform': $typography-extra-small-text-mono-text-transform
+      'text-transform': $typography-extra-small-text-mono-text-transform,
+      'font-feature-settings': $typography-extra-small-text-mono-font-feature-settings
     )
   )
 );
