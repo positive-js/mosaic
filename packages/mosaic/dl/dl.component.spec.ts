@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { fakeAsync, TestBed } from '@angular/core/testing';
 
-import { McButtonModule } from './index';
+import { McDlModule } from './index';
 
 
 describe('McDl', () => {
     beforeEach(fakeAsync(() => {
         TestBed.configureTestingModule({
-            imports: [McButtonModule],
+            imports: [McDlModule],
             declarations: [TestApp]
         });
 
