@@ -1,4 +1,11 @@
-import { Component, ElementRef, Input, OnDestroy, ViewEncapsulation } from '@angular/core';
+import {
+    AfterContentInit,
+    Component,
+    ElementRef,
+    Input,
+    OnDestroy,
+    ViewEncapsulation
+} from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -15,19 +22,22 @@ import { debounceTime } from 'rxjs/operators';
     },
     encapsulation: ViewEncapsulation.None
 })
-export class McDlComponent implements OnDestroy {
+export class McDlComponent implements AfterContentInit, OnDestroy {
     @Input() minWidth: number = 400;
     @Input() wide = false;
-
-    vertical = false;
+    @Input() vertical: boolean | null = null;
 
     readonly resizeStream = new Subject<Event>();
     private readonly resizeDebounceInterval: number = 100;
 
-    private resizeSubscription: Subscription;
+    private resizeSubscription = Subscription.EMPTY;
 
 
-    constructor(public elementRef: ElementRef) {
+    constructor(protected elementRef: ElementRef) {}
+
+    ngAfterContentInit(): void {
+        if (this.vertical !== null) { return; }
+
         this.resizeSubscription = this.resizeStream
             .pipe(debounceTime(this.resizeDebounceInterval))
             .subscribe(this.updateState);
@@ -48,8 +58,7 @@ export class McDlComponent implements OnDestroy {
     selector: 'mc-dt',
     template: '<ng-content></ng-content>',
     host: {
-        class: 'mc-dt',
-        '[class.mc-dt]': 'true'
+        class: 'mc-dt'
     },
     encapsulation: ViewEncapsulation.None
 })

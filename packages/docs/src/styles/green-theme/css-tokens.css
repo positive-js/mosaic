@@ -56,10 +56,13 @@
   --mc-divider-size-width: 1px;
   --mc-divider-size-inset-margin: 80px;
   --mc-description-list-size-grid-template-columns: repeat(4, 1fr);
-  --mc-description-list-size-column-gap: 16px;
-  --mc-description-list-size-row-gap: 12px;
   --mc-description-list-size-dt-grid-column: 1;
   --mc-description-list-size-dd-grid-column: 2 / span 3;
+  --mc-description-list-size-horizontal-column-gap: 16px;
+  --mc-description-list-size-horizontal-row-gap: 12px;
+  --mc-description-list-size-vertical-column-gap: 0;
+  --mc-description-list-size-vertical-row-gap: 2px;
+  --mc-description-list-size-vertical-dd-margin-bottom: 16px;
   --mc-dropdown-item-size-padding: 5px 15px;
   --mc-dropdown-item-size-icon-padding: 0 8px 2px 0;
   --mc-dropdown-group-header-size-default-padding: 6px 15px;

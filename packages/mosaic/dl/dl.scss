@@ -4,8 +4,8 @@
 
 .mc-dl {
     display: grid;
-    column-gap: var(--mc-description-list-size-column-gap, $description-list-size-column-gap);
-    row-gap: var(--mc-description-list-size-row-gap, $description-list-size-row-gap);
+    column-gap: var(--mc-description-list-size-horizontal-column-gap, $description-list-size-horizontal-column-gap);
+    row-gap: var(--mc-description-list-size-horizontal-row-gap, $description-list-size-horizontal-row-gap);
 
     grid-template-columns: repeat(4, 1fr);
 
@@ -32,8 +32,8 @@
     &.mc-dl_vertical {
         grid-template-columns: repeat(1, 1fr);
 
-        column-gap: 0;
-        row-gap: 2px;
+        column-gap: var(--mc-description-list-size-vertical-column-gap, $description-list-size-vertical-column-gap);
+        row-gap: var(--mc-description-list-size-vertical-row-gap, $description-list-size-vertical-row-gap);
 
         .mc-dt,
         .mc-dd {
@@ -41,7 +41,7 @@
         }
 
         .mc-dd {
-            margin-bottom: var(--mc-description-list-size-row-gap, $description-list-size-row-gap);
+            margin-bottom: var(--mc-description-list-size-vertical-dd-margin-bottom, $description-list-size-vertical-dd-margin-bottom);
         }
     }
 }
