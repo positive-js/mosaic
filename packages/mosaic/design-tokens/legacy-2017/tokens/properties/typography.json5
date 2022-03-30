@@ -70,7 +70,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": { value: 'null' }
+            "font-feature-settings": { value: '"tnum" on }
         },
         "body-strong": {
             "font-size": { value: '15px' },
@@ -115,7 +115,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": { value: 'null' }
+            "font-feature-settings": { value: '"tnum" on }
         },
         "caption-caps": {
             "font-size": { value: '13px' },
