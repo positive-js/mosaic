@@ -7,7 +7,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.accent.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: 'null'}
+            "font-feature-settings": { value: 'null' }
         },
         "display-2": {
             "font-size": { value: '45px' },
@@ -16,7 +16,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.accent.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: 'null'}
+            "font-feature-settings": { value: 'null' }
         },
         "display-3": {
             "font-size": { value: '34px' },
@@ -25,7 +25,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.accent.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: 'null'}
+            "font-feature-settings": { value: 'null' }
         },
         "headline": {
             "font-size": { value: '24px' },
@@ -34,7 +34,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.accent.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: 'null'}
+            "font-feature-settings": { value: 'null' }
         },
         "title": {
             "font-size": { value: '20px' },
@@ -43,7 +43,7 @@
             "font-weight": { value: '600' },
             "font-family": { value: '{font.family.accent.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: 'null'}
+            "font-feature-settings": { value: 'null' }
         },
         "subheading": {
             "font-size": { value: '15px' },
@@ -52,7 +52,7 @@
             "font-weight": { value: '600' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: '"ss01" on, "ss04" on'}
+            "font-feature-settings": { value: "'ss01' on, 'ss04' on" }
         },
         "body": {
             "font-size": { value: '15px' },
@@ -61,7 +61,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: '"ss01" on, "ss04" on'}
+            "font-feature-settings": { value: '"ss01" on, "ss04" on' }
         },
         "body-tabular": {
             "font-size": { value: '15px' },
@@ -70,7 +70,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: '"tnum" on, "ss01" on, "ss04" on'}
+            "font-feature-settings": { value: '"tnum" on, "ss01" on, "ss04" on' }
         },
         "body-strong": {
             "font-size": { value: '15px' },
@@ -79,7 +79,7 @@
             "font-weight": { value: '500' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: '"ss01" on, "ss04" on'}
+            "font-feature-settings": { value: '"ss01" on, "ss04" on' }
         },
         "body-caps": {
             "font-size": { value: '15px' },
@@ -88,7 +88,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'uppercase' },
-            "font-feature-settings": {value: '"ss01" on, "ss04" on'}
+            "font-feature-settings": { value: '"ss01" on, "ss04" on' }
         },
         "body-mono": {
             "font-size": { value: '15px' },
@@ -97,7 +97,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.monospace.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: 'null'}
+            "font-feature-settings": { value: 'null' }
         },
         "caption": {
             "font-size": { value: '13px' },
@@ -106,7 +106,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: '"ss01" on, "ss04" on'}
+            "font-feature-settings": { value: '"ss01" on, "ss04" on' }
         },
         "caption-tabular": {
             "font-size": { value: '13px' },
@@ -115,7 +115,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: '"tnum" on, "ss01" on, "ss04" on'}
+            "font-feature-settings": { value: '"tnum" on, "ss01" on, "ss04" on' }
         },
         "caption-caps": {
             "font-size": { value: '13px' },
@@ -124,7 +124,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'uppercase' },
-            "font-feature-settings": {value: '"ss01" on, "ss04" on'}
+            "font-feature-settings": { value: '"ss01" on, "ss04" on' }
         },
         "caption-mono": {
             "font-size": { value: '13px' },
@@ -133,7 +133,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.monospace.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: 'null'}
+            "font-feature-settings": { value: 'null' }
         },
         "small-text": {
             "font-size": { value: '13px' },
@@ -142,7 +142,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: '"ss01" on, "ss04" on'}
+            "font-feature-settings": { value: '"ss01" on, "ss04" on' }
         },
         "extra-small-text": {
             "font-size": { value: '11px' },
@@ -151,7 +151,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: '"ss01" on, "ss04" on'}
+            "font-feature-settings": { value: '"ss01" on, "ss04" on' }
         },
         "extra-small-text-caps": {
             "font-size": { value: '11px' },
@@ -160,7 +160,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'uppercase' },
-            "font-feature-settings": {value: '"ss01" on, "ss04" on'}
+            "font-feature-settings": { value: '"ss01" on, "ss04" on' }
         },
         "extra-small-text-mono": {
             "font-size": { value: '11px' },
@@ -169,7 +169,7 @@
             "font-weight": { value: 'normal' },
             "font-family": { value: '{font.family.monospace.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": {value: 'null'}
+            "font-feature-settings": { value: 'null' }
         }
     }
 }

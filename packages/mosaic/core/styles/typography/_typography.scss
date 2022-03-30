@@ -21,10 +21,12 @@
         body-strong:        map-get($typography, body-strong),
         body-caps:          map-get($typography, body-caps),
         body-mono:          map-get($typography, body-mono),
+        body-tabular:       map-get($typography, body-tabular),
 
         caption:            map-get($typography, caption),
         caption-caps:       map-get($typography, caption-caps),
         caption-mono:       map-get($typography, caption-mono),
+        caption-tabular:    map-get($typography, caption-tabular),
 
         small-text:         map-get($typography, small-text),
         extra-small-text:   map-get($typography, extra-small-text),
