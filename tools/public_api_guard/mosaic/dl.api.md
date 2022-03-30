@@ -4,6 +4,7 @@
 
 ```ts
 
+import { AfterContentInit } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import * as i0 from '@angular/core';
 import * as i2 from '@angular/common';
@@ -21,12 +22,14 @@ export class McDdComponent {
 }
 
 // @public (undocumented)
-export class McDlComponent implements OnDestroy {
+export class McDlComponent implements AfterContentInit, OnDestroy {
     constructor(elementRef: ElementRef);
     // (undocumented)
-    elementRef: ElementRef;
+    protected elementRef: ElementRef;
     // (undocumented)
     minWidth: number;
+    // (undocumented)
+    ngAfterContentInit(): void;
     // (undocumented)
     ngOnDestroy(): void;
     // (undocumented)
@@ -34,11 +37,11 @@ export class McDlComponent implements OnDestroy {
     // (undocumented)
     updateState: () => void;
     // (undocumented)
-    vertical: boolean;
+    vertical: boolean | null;
     // (undocumented)
     wide: boolean;
     // (undocumented)
-    static ɵcmp: i0.ɵɵComponentDeclaration<McDlComponent, "mc-dl", never, { "minWidth": "minWidth"; "wide": "wide"; }, {}, never, ["*"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McDlComponent, "mc-dl", never, { "minWidth": "minWidth"; "wide": "wide"; "vertical": "vertical"; }, {}, never, ["*"]>;
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<McDlComponent, never>;
 }

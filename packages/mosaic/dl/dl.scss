@@ -41,7 +41,9 @@
         }
 
         .mc-dd {
-            margin-bottom: var(--mc-description-list-size-vertical-dd-margin-bottom, $description-list-size-vertical-dd-margin-bottom);
+            margin-bottom: var(
+                --mc-description-list-size-vertical-dd-margin-bottom, $description-list-size-vertical-dd-margin-bottom
+            );
         }
     }
 }
