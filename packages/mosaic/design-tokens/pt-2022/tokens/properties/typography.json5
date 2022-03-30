@@ -52,7 +52,7 @@
             "font-weight": { value: '600' },
             "font-family": { value: '{font.family.base.value}' },
             "text-transform": { value: 'null' },
-            "font-feature-settings": { value: "'ss01' on, 'ss04' on" }
+            "font-feature-settings": { value: '"ss01" on, "ss04" on' }
         },
         "body": {
             "font-size": { value: '15px' },
