@@ -322,6 +322,67 @@ export class McNavbarFocusableItem implements IFocusableOption, AfterContentInit
 }
 
 
+@Directive({
+    selector: 'mc-navbar-item, [mc-navbar-item], mc-navbar-divider, mc-navbar-brand, [mc-navbar-brand]',
+    host: {
+        '[class.mc-vertical]': 'vertical',
+        '[class.mc-horizontal]': 'horizontal',
+
+        '[class.mc-expanded]': 'vertical && !collapsed',
+        '[class.mc-collapsed]': 'vertical && collapsed'
+    }
+})
+export class McNavbarRectangleElement {
+    readonly state = new Subject<void>();
+
+    get horizontal(): boolean {
+        return this._horizontal;
+    }
+
+    set horizontal(value: boolean) {
+        this._horizontal = value;
+
+        this.state.next();
+    }
+
+    private _horizontal: boolean;
+
+    get vertical(): boolean {
+        return this._vertical;
+    }
+
+    set vertical(value: boolean) {
+        this._vertical = value;
+
+        this.state.next();
+    }
+
+    private _vertical: boolean;
+
+    get collapsed(): boolean {
+        return this._collapsed;
+    }
+
+    set collapsed(value: boolean) {
+        this._collapsed = value;
+
+        this.state.next();
+    }
+
+    private _collapsed: boolean;
+
+    @ContentChild(McButtonCssStyler) button: McButtonCssStyler;
+
+    constructor(public elementRef: ElementRef) {}
+
+    getOuterElementWidth(): number {
+        const { width, marginLeft, marginRight } = window.getComputedStyle(this.elementRef.nativeElement);
+
+        return [width, marginLeft, marginRight].reduce((acc, item) => acc + parseInt(item), 0);
+    }
+}
+
+
 @Component({
     selector: 'mc-navbar-item, [mc-navbar-item]',
     exportAs: 'mcNavbarItem',
@@ -473,67 +534,6 @@ export class McNavbarItem extends McTooltipTrigger {
 
             $event.preventDefault();
         }
-    }
-}
-
-
-@Directive({
-    selector: 'mc-navbar-item, [mc-navbar-item], mc-navbar-divider, mc-navbar-brand, [mc-navbar-brand]',
-    host: {
-        '[class.mc-vertical]': 'vertical',
-        '[class.mc-horizontal]': 'horizontal',
-
-        '[class.mc-expanded]': 'vertical && !collapsed',
-        '[class.mc-collapsed]': 'vertical && collapsed'
-    }
-})
-export class McNavbarRectangleElement {
-    readonly state = new Subject<void>();
-
-    get horizontal(): boolean {
-        return this._horizontal;
-    }
-
-    set horizontal(value: boolean) {
-        this._horizontal = value;
-
-        this.state.next();
-    }
-
-    private _horizontal: boolean;
-
-    get vertical(): boolean {
-        return this._vertical;
-    }
-
-    set vertical(value: boolean) {
-        this._vertical = value;
-
-        this.state.next();
-    }
-
-    private _vertical: boolean;
-
-    get collapsed(): boolean {
-        return this._collapsed;
-    }
-
-    set collapsed(value: boolean) {
-        this._collapsed = value;
-
-        this.state.next();
-    }
-
-    private _collapsed: boolean;
-
-    @ContentChild(McButtonCssStyler) button: McButtonCssStyler;
-
-    constructor(public elementRef: ElementRef) {}
-
-    getOuterElementWidth(): number {
-        const { width, marginLeft, marginRight } = window.getComputedStyle(this.elementRef.nativeElement);
-
-        return [width, marginLeft, marginRight].reduce((acc, item) => acc + parseInt(item), 0);
     }
 }
 

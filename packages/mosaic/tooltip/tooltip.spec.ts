@@ -124,7 +124,7 @@ describe('McTooltip', () => {
             expect(overlayContainerElement.textContent).not.toContain(featureKey);
         }));
     });
-    describe('should support directive usage', () => {
+    xdescribe('should support directive usage', () => {
         beforeEach(() => {
             fixture = TestBed.createComponent(McTooltipTestNewComponent);
             component = fixture.componentInstance;

@@ -180,6 +180,4 @@ describe('McPasswordInput', () => {
             fixture.detectChanges();
         }));
     });
-
-    describe('empty value', () => {});
 });
