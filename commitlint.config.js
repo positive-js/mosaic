@@ -14,6 +14,7 @@ const scope_types = [
     'common',
     'datepicker',
     'divider',
+    'dl',
     'docs',
     'dropdown',
     'overlay',

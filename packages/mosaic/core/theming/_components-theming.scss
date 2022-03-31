@@ -190,6 +190,11 @@
         state-selected-background: $datepicker-body-light-color-scheme-states-selected-background
     );
 
+    $dl: (
+        dt: $description-list-light-color-scheme-dt,
+        dd: $description-list-light-color-scheme-dd
+    );
+
     $form-field: (
         border: $form-field-light-color-scheme-border,
         background: $form-field-light-color-scheme-background,
@@ -400,6 +405,7 @@
         card: $card,
         checkbox: $checkbox,
         datepicker: $datepicker,
+        dl: $dl,
         form-field: $form-field,
         form-field-password-hint: $form-field-password-hint,
         forms: $forms,
@@ -606,6 +612,11 @@
     $datepicker: (
         state-selected-color: $datepicker-body-dark-color-scheme-states-selected-color,
         state-selected-background: $datepicker-body-dark-color-scheme-states-selected-background
+    );
+
+    $dl: (
+        dt: $description-list-dark-color-scheme-dt,
+        dd: $description-list-dark-color-scheme-dd
     );
 
     $form-field: (
@@ -818,6 +829,7 @@
         card: $card,
         checkbox: $checkbox,
         datepicker: $datepicker,
+        dl: $dl,
         form-field: $form-field,
         form-field-password-hint: $form-field-password-hint,
         forms: $forms,
