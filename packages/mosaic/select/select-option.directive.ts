@@ -30,6 +30,7 @@ export class McSelectOption extends McTooltipTrigger implements AfterViewInit, O
         this.optionContentElement = this.elementRef.nativeElement.querySelector('.mc-option-text');
 
         this.content = this.option.viewValue;
+        this.disabled = !this.isEllipsisActive();
 
         this.resizeObserver = new ResizeObserver(() => {
             this.disabled = !this.isEllipsisActive();

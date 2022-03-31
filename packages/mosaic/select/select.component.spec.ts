@@ -57,7 +57,7 @@ import {
     dispatchEvent,
     dispatchFakeEvent,
     dispatchKeyboardEvent,
-    wrappedErrorMessage
+    wrappedErrorMessage, dispatchMouseEvent
 } from '@ptsecurity/cdk/testing';
 import {
     ErrorStateMatcher,
@@ -898,15 +898,15 @@ class SelectWithFormFieldLabel {
     template: `
         <mc-form-field>
             <mc-select>
-                <mc-option [value]="'value1'">Long long long long Long long long long Long long long long Long long long long Long long long long Long long long long text</mc-option>
-                <mc-option [value]="'value2'">Not long text</mc-option>
-                <mc-option [value]="'value3'">{{ changingLabel }}</mc-option>
+                <mc-option [value]="'value1'">Not long text</mc-option>
+                <mc-option style="max-width: 200px;" [value]="'value2'">Long long long long Long long long long Long long long long Long long long long Long long long long Long long long long text</mc-option>
+                <mc-option style="max-width: 200px;" [value]="'value3'">{{ changingLabel }}</mc-option>
             </mc-select>
         </mc-form-field>
     `
 })
 class SelectWithLongOptionText {
-    changingLabel: string = 'Long long long long Long long long long Long long long long Long long long long Long long long long Long long long long text';
+    changingLabel: string = 'Changed Long long long long Long long long long Long long long long Long long long long Long long long long Long long long long text';
     counter: number = 0;
 
     changeLabel(): void {
@@ -4467,34 +4467,132 @@ describe('McSelect', () => {
     });
 
     describe('option tooltip', () => {
-        beforeEach(waitForAsync(() => configureMcSelectTestingModule([SelectWithLongOptionText])));
+        beforeEach(waitForAsync(() => {
+            configureMcSelectTestingModule([SelectWithLongOptionText]);
+        }));
 
         let fixture: ComponentFixture<SelectWithLongOptionText>;
-        //let testInstance: SelectWithLongOptionText;
+        let testInstance: SelectWithLongOptionText;
         let trigger: HTMLElement;
+
+        class MockedResizeObserver implements ResizeObserver {
+            elements: any[] = [];
+
+            observe(target: Element) { this.elements.push(target); }
+            unobserve(target: Element) {
+                const idx = this.elements.indexOf(target);
+                if (idx > -1) {
+                    this.elements.splice(idx, 1)
+                }
+            }
+
+            disconnect() {
+                window.removeEventListener('resize', this.onWindowResize);
+            }
+
+            private onWindowResize() {
+                this.callback(this.elements, this);
+            }
+
+            constructor(private callback: ResizeObserverCallback) {
+                window.addEventListener('resize', this.onWindowResize.bind(this));
+            }
+        }
+
+        window.ResizeObserver = MockedResizeObserver;
+
+        class MockedMutationObserver implements MutationObserver {
+            disconnect() { }
+            observe() {  }
+            takeRecords() { return []; }
+
+            private onNodesChanged() {
+                this.callback([], this);
+            }
+
+            constructor(private callback: MutationCallback) {
+                document.addEventListener('DOMNodeInserted', this.onNodesChanged.bind(this));
+                document.addEventListener('DOMNodeRemoved', this.onNodesChanged.bind(this));
+            }
+        }
+
+        window.MutationObserver = MockedMutationObserver;
 
         beforeEach(fakeAsync(() => {
             fixture = TestBed.createComponent(SelectWithLongOptionText);
-            //testInstance = fixture.componentInstance;
+            testInstance = fixture.componentInstance;
             fixture.detectChanges();
 
             trigger = fixture.debugElement.query(By.css('.mc-select__trigger')).nativeElement;
         }));
 
-        it('should display tooltip only if ellipsed', fakeAsync(() => {
+        it('should not display tooltip if ellipse not applied', fakeAsync(() => {
             trigger.click();
             fixture.detectChanges();
-
             const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-option');
 
-            options[0].click();
-            options[1].click();
-            options[2].click();
+            options[0].style.width = '200px';
+
+            dispatchMouseEvent(options[0], 'mouseenter');
+            tick();
             fixture.detectChanges();
             flush();
 
-            //expect(testInstance.control.value).toEqual(['steak-0', 'tacos-2', 'eggs-5']);
+            const tooltips = document.querySelectorAll('.mc-tooltip__content')
+            expect(tooltips.length).toEqual(0);
         }));
 
+        it('should display tooltip if ellipse applied', fakeAsync(() => {
+            trigger.click();
+            tick();
+            fixture.detectChanges();
+
+            window.dispatchEvent(new Event('resize'));
+            tick();
+            fixture.detectChanges();
+
+            const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-option');
+            dispatchMouseEvent(options[1], 'mouseenter');
+            tick();
+            fixture.detectChanges();
+
+            flush();
+
+            const tooltips = document.querySelectorAll('.mc-tooltip__content')
+            expect(tooltips.length).toEqual(1);
+            expect(tooltips[0].textContent).toEqual(options[1].textContent);
+        }));
+
+        it('should change tooltip if option content changed', fakeAsync(() => {
+            trigger.click();
+            tick();
+            fixture.detectChanges();
+
+            window.dispatchEvent(new Event('resize'));
+            tick();
+            fixture.detectChanges();
+
+            const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-option');
+            dispatchMouseEvent(options[2], 'mouseenter');
+            tick();
+            fixture.detectChanges();
+
+
+            let tooltips = document.querySelectorAll('.mc-tooltip__content')
+            expect(tooltips.length).toEqual(1);
+            expect(tooltips[0].textContent).toEqual(options[2].textContent);
+
+            testInstance.changeLabel();
+            tick();
+            fixture.detectChanges();
+            tick(500);
+            fixture.detectChanges();
+
+            flush();
+
+            tooltips = document.querySelectorAll('.mc-tooltip__content')
+            expect(tooltips.length).toEqual(1);
+            expect(tooltips[0].textContent).toEqual(options[2].textContent);
+        }));
     });
 });
