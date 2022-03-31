@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ThemePalette } from '@ptsecurity/mosaic/core';
 
 
 /**
@@ -10,6 +9,4 @@ import { ThemePalette } from '@ptsecurity/mosaic/core';
     templateUrl: 'dl-overview-example.html',
     styleUrls: ['dl-overview-example.css']
 })
-export class DlOverviewExample {
-    themePalette = ThemePalette;
-}
+export class DlOverviewExample {}
