@@ -4506,13 +4506,13 @@ describe('McSelect', () => {
             observe() {  }
             takeRecords() { return []; }
 
-            private onNodesChanged() {
+            private onDOMChanged() {
                 this.callback([], this);
             }
 
             constructor(private callback: MutationCallback) {
-                document.addEventListener('DOMNodeInserted', this.onNodesChanged.bind(this));
-                document.addEventListener('DOMNodeRemoved', this.onNodesChanged.bind(this));
+                document.addEventListener('DOMNodeInserted', this.onDOMChanged.bind(this));
+                document.addEventListener('DOMNodeRemoved', this.onDOMChanged.bind(this));
             }
         }
 
@@ -4584,8 +4584,6 @@ describe('McSelect', () => {
 
             testInstance.changeLabel();
             tick();
-            fixture.detectChanges();
-            tick(500);
             fixture.detectChanges();
 
             flush();
