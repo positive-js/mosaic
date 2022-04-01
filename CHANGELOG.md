@@ -1,3 +1,14 @@
+# 13.2.0 "Disciplined Artichoke" (2022-04-01)
+
+### Mosaic
+
+ * bug fix  **sidepanel:** use second color for close icon (#UIM-892) ([#833](https://github.com/positive-js/mosaic/issues/833)) ([52c90f4](https://github.com/positive-js/mosaic/commit/52c90f48db4fea378efde424cf2bf27d8a62a3ea)), closes [#UIM-892](https://github.com/positive-js/mosaic/issues/UIM-892)
+ * feature  **dl:** added description-list (#UIM-668) ([#835](https://github.com/positive-js/mosaic/issues/835)) ([716a87a](https://github.com/positive-js/mosaic/commit/716a87ac2371d4a10fe65935937d474873c1ffe1)), closes [#UIM-668](https://github.com/positive-js/mosaic/issues/UIM-668) [#UIM-668](https://github.com/positive-js/mosaic/issues/UIM-668)
+ * feature  **doc:** validation update doc ([#837](https://github.com/positive-js/mosaic/issues/837)) ([1e758d7](https://github.com/positive-js/mosaic/commit/1e758d77fabc50708a21115cc23c698ab4197ac0))
+ * feature  **input:** input password (#UIM-716) ([#821](https://github.com/positive-js/mosaic/issues/821)) ([694fb6f](https://github.com/positive-js/mosaic/commit/694fb6f75751f00b81939534dea623de8681ac25)), closes [#UIM-716](https://github.com/positive-js/mosaic/issues/UIM-716) [#UIM-716](https://github.com/positive-js/mosaic/issues/UIM-716)
+ * feature  **styles:** added new size tokens (#UIM-893) ([#834](https://github.com/positive-js/mosaic/issues/834)) ([2156faa](https://github.com/positive-js/mosaic/commit/2156faa9a8a7b0d9760319bdbbd79d4fa78b03e4)), closes [#UIM-893](https://github.com/positive-js/mosaic/issues/UIM-893) [#UIM-893](https://github.com/positive-js/mosaic/issues/UIM-893)
+ * feature  **tabs:** added new states without overlay (#UIM-830) ([#832](https://github.com/positive-js/mosaic/issues/832)) ([59729fe](https://github.com/positive-js/mosaic/commit/59729fe5f5e1d32d4616abb7925ae487d31462f4)), closes [#UIM-830](https://github.com/positive-js/mosaic/issues/UIM-830) [#UIM-830](https://github.com/positive-js/mosaic/issues/UIM-830)
+
 ## 13.1.1 "Zippy" (2022-03-18)
 
 ### Mosaic
