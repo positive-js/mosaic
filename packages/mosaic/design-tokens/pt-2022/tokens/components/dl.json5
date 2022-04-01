@@ -1,0 +1,38 @@
+{
+    'description-list': {
+        'light-color-scheme': {
+            dt: { value: '{light-color-scheme.foreground.text-less-contrast.value}' },
+            dd: { value: '{light-color-scheme.foreground.text.value}' }
+        },
+        'dark-color-scheme': {
+            dt: { value: '{dark-color-scheme.foreground.text-less-contrast.value}' },
+            dd: { value: '{dark-color-scheme.foreground.text.value}' }
+        },
+        size: {
+            'grid-template-columns': { value: 'repeat(4, 1fr)' },
+
+            'dt-grid-column': { value: '1' },
+            'dd-grid-column': { value: '2 / span 3' },
+
+            horizontal: {
+                'column-gap': { value: '{size.l}' },
+                'row-gap': { value: '{size.m}' }
+            },
+            vertical: {
+                'column-gap': { value: '0' },
+                'row-gap': { value: '{size.3xs}' },
+                'dd-margin-bottom': { value: '{size.l}' }
+            },
+        },
+        font: {
+            horizontal: {
+                dt: { value: 'body' },
+                dd: { value: 'body' },
+            },
+            vertical: {
+                dt: { value: 'caption' },
+                dd: { value: 'body' }
+            },
+        }
+    }
+}

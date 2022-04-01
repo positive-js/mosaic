@@ -39,6 +39,7 @@
             "@ptsecurity/mosaic/datepicker": ["packages/mosaic/datepicker/index.ts"],
             "@ptsecurity/mosaic/design-tokens": ["packages/mosaic/design-tokens/index.ts"],
             "@ptsecurity/mosaic/divider": ["packages/mosaic/divider/index.ts"],
+            "@ptsecurity/mosaic/dl": ["packages/mosaic/dl/index.ts"],
             "@ptsecurity/mosaic/dropdown": ["packages/mosaic/dropdown/index.ts"],
             "@ptsecurity/mosaic/form-field": ["packages/mosaic/form-field/index.ts"],
             "@ptsecurity/mosaic/icon": ["packages/mosaic/icon/index.ts"],

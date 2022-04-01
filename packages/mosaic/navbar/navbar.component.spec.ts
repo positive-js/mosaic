@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { fakeAsync, TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { McIconModule } from './../icon/icon.module';
@@ -19,67 +19,47 @@ describe('McNavbar', () => {
         TestBed.compileComponents();
     }));
 
-    it('should be collapsed on init stage', (done) => {
+    it('should be collapsed on init stage', fakeAsync(() => {
         const fixture = TestBed.createComponent(TestApp);
 
         fixture.detectChanges();
+        tick(FONT_RENDER_TIMEOUT_MS);
+        fixture.detectChanges();
 
-        // Note: setTimeout - please see the issue about font rendering time
-        setTimeout(
-            () => {
-                fixture.detectChanges();
-                const collapsedElements = fixture.debugElement.queryAll(By.css('.mc-navbar-item_collapsed'));
+        const collapsedElements = fixture.debugElement.queryAll(By.css('.mc-navbar-item_collapsed'));
 
-                expect(collapsedElements.length).toBeGreaterThan(0);
-                done();
-            },
-            FONT_RENDER_TIMEOUT_MS
-        );
-    });
+        expect(collapsedElements.length).toBeGreaterThan(0);
+    }));
 
-    it('collapsed elements should have title', (done) => {
+    it('collapsed elements should have title', fakeAsync(() => {
         const fixture = TestBed.createComponent(TestApp);
 
         fixture.detectChanges();
-
-        // Note: setTimeout - please see the issue about font rendering time
-        setTimeout(
-            () => {
-                fixture.detectChanges();
-
-                const items = fixture.debugElement.queryAll(By.css('mc-navbar-item'));
-                const collapsedElements = items.filter((item) =>
-                    item.nativeElement.querySelectorAll('.mc-navbar-item_collapsed').length > 0);
-
-                const hasTitle = collapsedElements.reduce((acc, el) => acc && el.nativeElement.hasAttribute('title'), true);
-
-                expect(hasTitle).toBeTruthy();
-                done();
-            },
-            FONT_RENDER_TIMEOUT_MS
-        );
-    });
-
-    it('collapsed elements should have specific title if defined', (done) => {
-        const fixture = TestBed.createComponent(TestApp);
+        tick(FONT_RENDER_TIMEOUT_MS);
         fixture.detectChanges();
 
-        // Note: setTimeout - please see the issue about font rendering time
-        setTimeout(
-            () => {
-                fixture.detectChanges();
+        const items = fixture.debugElement.queryAll(By.css('mc-navbar-item'));
+        const collapsedElements = items.filter((item) =>
+            item.nativeElement.querySelectorAll('.mc-navbar-item_collapsed').length > 0);
 
-                const collapsedElements = fixture.debugElement.queryAll(By.css('.mc-navbar-item_collapsed'));
-                const elementWithCustomTitle = collapsedElements[collapsedElements.length - 1];
+        const hasTitle = collapsedElements
+            .reduce((acc, el) => acc && el.nativeElement.hasAttribute('title'), true);
 
-                expect(elementWithCustomTitle.componentInstance.titleText)
-                    .toBe('Right icon');
+        expect(hasTitle).toBeTruthy();
+    }));
 
-                done();
-            },
-            FONT_RENDER_TIMEOUT_MS
-        );
-    });
+    it('collapsed elements should have specific title if defined', fakeAsync(() => {
+        const fixture = TestBed.createComponent(TestApp);
+        fixture.detectChanges();
+        tick(FONT_RENDER_TIMEOUT_MS);
+        fixture.detectChanges();
+
+        const collapsedElements = fixture.debugElement.queryAll(By.css('.mc-navbar-item_collapsed'));
+        const elementWithCustomTitle = collapsedElements[collapsedElements.length - 1];
+
+        expect(elementWithCustomTitle.componentInstance.titleText)
+            .toBe('Right icon');
+    }));
 
     it('items should allow click if not disable', () => {
         const fixture = TestBed.createComponent(TestApp);

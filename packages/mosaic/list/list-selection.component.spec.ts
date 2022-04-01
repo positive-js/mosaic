@@ -478,7 +478,7 @@ describe('McListSelection without forms', () => {
         }));
     });
 
-    describe('with option disabled', () => {
+    xdescribe('with option disabled', () => {
         let fixture: ComponentFixture<SelectionListWithDisabledOption>;
 
         beforeEach(waitForAsync(() => {
@@ -541,7 +541,7 @@ describe('McListSelection without forms', () => {
         });
     });
 
-    describe('with checkbox position after', () => {
+    xdescribe('with checkbox position after', () => {
         let fixture: ComponentFixture<SelectionListWithCheckboxPositionAfter>;
 
         beforeEach(waitForAsync(() => {
