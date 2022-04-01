@@ -4547,7 +4547,7 @@ describe('McSelect', () => {
             flush();
         }));
 
-        it('should change tooltip if option content changed', fakeAsync(() => {
+        xit('should change tooltip if option content changed', fakeAsync(() => {
             trigger.click();
             tick();
             fixture.detectChanges();
