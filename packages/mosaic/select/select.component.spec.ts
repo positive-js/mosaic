@@ -4501,23 +4501,6 @@ describe('McSelect', () => {
 
         window.ResizeObserver = MockedResizeObserver;
 
-        class MockedMutationObserver implements MutationObserver {
-            disconnect() { }
-            observe() {  }
-            takeRecords() { return []; }
-
-            private onDOMChanged() {
-                this.callback([], this);
-            }
-
-            constructor(private callback: MutationCallback) {
-                document.addEventListener('DOMNodeInserted', this.onDOMChanged.bind(this));
-                document.addEventListener('DOMNodeRemoved', this.onDOMChanged.bind(this));
-            }
-        }
-
-        window.MutationObserver = MockedMutationObserver;
-
         beforeEach(fakeAsync(() => {
             fixture = TestBed.createComponent(SelectWithLongOptionText);
             testInstance = fixture.componentInstance;
@@ -4536,10 +4519,11 @@ describe('McSelect', () => {
             dispatchMouseEvent(options[0], 'mouseenter');
             tick();
             fixture.detectChanges();
-            flush();
 
             const tooltips = document.querySelectorAll('.mc-tooltip__content')
             expect(tooltips.length).toEqual(0);
+
+            flush();
         }));
 
         it('should display tooltip if ellipse applied', fakeAsync(() => {
@@ -4556,11 +4540,11 @@ describe('McSelect', () => {
             tick();
             fixture.detectChanges();
 
-            flush();
-
             const tooltips = document.querySelectorAll('.mc-tooltip__content')
             expect(tooltips.length).toEqual(1);
             expect(tooltips[0].textContent).toEqual(options[1].textContent);
+
+            flush();
         }));
 
         it('should change tooltip if option content changed', fakeAsync(() => {
@@ -4583,14 +4567,15 @@ describe('McSelect', () => {
             expect(tooltips[0].textContent).toEqual(options[2].textContent);
 
             testInstance.changeLabel();
-            tick();
             fixture.detectChanges();
 
-            flush();
+            tick(500);
 
             tooltips = document.querySelectorAll('.mc-tooltip__content')
             expect(tooltips.length).toEqual(1);
             expect(tooltips[0].textContent).toEqual(options[2].textContent);
+
+            flush();
         }));
     });
 });
