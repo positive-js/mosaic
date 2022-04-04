@@ -1838,6 +1838,7 @@ describe('McSelect', () => {
                 const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-option');
                 options[8].click();
                 fixture.detectChanges();
+                tick();
                 flush();
 
                 expect(trigger.textContent).toContain('Potatoes');
@@ -1940,6 +1941,7 @@ describe('McSelect', () => {
                     const option = overlayContainerElement.querySelector('mc-option') as HTMLElement;
                     option.click();
                     fixture.detectChanges();
+                    tick();
                     flush();
 
                     expect(spy).toHaveBeenCalledWith(jasmine.any(McOptionSelectionChange));
@@ -2232,8 +2234,8 @@ describe('McSelect', () => {
             it('should scroll down to the active option', fakeAsync(() => {
                 for (let i = 0; i < 15; i++) {
                     dispatchKeyboardEvent(host, 'keydown', DOWN_ARROW);
+                    flush();
                 }
-                flush();
 
                 expect(panel.scrollTop).toBe(316, 'Expected scroll to be at the 16th option.');
             }));
@@ -2242,12 +2244,13 @@ describe('McSelect', () => {
                 // Scroll to the bottom.
                 for (let i = 0; i < fixture.componentInstance.foods.length; i++) {
                     dispatchKeyboardEvent(host, 'keydown', DOWN_ARROW);
+                    flush();
                 }
 
                 for (let i = 0; i < 20; i++) {
                     dispatchKeyboardEvent(host, 'keydown', UP_ARROW);
+                    flush();
                 }
-                flush();
 
                 expect(panel.scrollTop).toBe(252, 'Expected scroll to be at the 9th option.');
             }));
@@ -2279,6 +2282,7 @@ describe('McSelect', () => {
                 for (let i = 0; i < 20; i++) {
                     dispatchKeyboardEvent(host, 'keydown', DOWN_ARROW);
                     fixture.detectChanges();
+                    flush();
                 }
 
                 expect(panel.scrollTop).toBeGreaterThan(0, 'Expected panel to be scrolled down.');
@@ -2614,6 +2618,7 @@ describe('McSelect', () => {
 
             triggers[1].nativeElement.click();
             fixture.detectChanges();
+            tick();
             flush();
 
             options =
@@ -3049,6 +3054,7 @@ describe('McSelect', () => {
             options = overlayContainerElement.querySelectorAll('mc-option');
             options[0].click();
             fixture.detectChanges();
+            tick();
             flush();
         }));
 
@@ -3152,6 +3158,7 @@ describe('McSelect', () => {
 
             (overlayContainerElement.querySelectorAll('mc-option')[2] as HTMLElement).click();
             fixture.detectChanges();
+            tick();
             flush();
 
             expect(fixture.componentInstance.selectedFood).toBe('sandwich-2');
@@ -3269,6 +3276,7 @@ describe('McSelect', () => {
 
             (overlayContainerElement.querySelector('mc-option') as HTMLElement).click();
             fixture.detectChanges();
+            tick();
             flush();
 
             const select = fixture.debugElement.nativeElement.querySelector('mc-select');
@@ -3290,6 +3298,7 @@ describe('McSelect', () => {
             select.blur(); // Blur manually since the programmatic click might not do it.
             document.body.click();
             fixture.detectChanges();
+            tick();
             flush();
 
             expect(document.activeElement).not.toBe(select, 'Expected trigger not to be focused.');
@@ -3311,6 +3320,7 @@ describe('McSelect', () => {
 
             (overlayContainerElement.querySelector('mc-option') as HTMLElement).click();
             fixture.detectChanges();
+            tick();
             flush();
 
             expect(instance.selectedFood).toBe('steak-0');
@@ -4104,6 +4114,7 @@ describe('McSelect', () => {
             options[2].click();
             options[5].click();
             fixture.detectChanges();
+            tick();
             flush();
 
             expect(testInstance.control.value).toEqual(['steak-0', 'tacos-2', 'eggs-5']);
@@ -4197,6 +4208,7 @@ describe('McSelect', () => {
             options[0].click();
             options[1].click();
             fixture.detectChanges();
+            tick();
             flush();
 
             expect(testInstance.select.panelOpen).toBe(true);
@@ -4321,6 +4333,7 @@ describe('McSelect', () => {
 
             options[2].click();
             fixture.detectChanges();
+            tick();
             flush();
 
             expect(fixture.componentInstance.select.keyManager.activeItemIndex).toBe(2);
@@ -4343,6 +4356,7 @@ describe('McSelect', () => {
             options[1].click();
             options[2].click();
             fixture.detectChanges();
+            tick();
             flush();
 
             expect(testInstance.control.value).toEqual([null, 'pizza-1', null]);
