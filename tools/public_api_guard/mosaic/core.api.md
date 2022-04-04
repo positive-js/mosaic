@@ -529,6 +529,8 @@ export class McOption implements AfterViewChecked, OnDestroy {
     get showCheckbox(): boolean | undefined;
     set showCheckbox(value: boolean | undefined);
     readonly stateChanges: Subject<void>;
+    // (undocumented)
+    textElement: ElementRef;
     value: any;
     get viewValue(): string;
     // (undocumented)

@@ -243,11 +243,17 @@ export class McSelectModule {
 export class McSelectOption extends McTooltipTrigger implements AfterViewInit, OnDestroy {
     constructor(option: McOption, overlay: Overlay, elementRef: ElementRef, ngZone: NgZone, scrollDispatcher: ScrollDispatcher, hostView: ViewContainerRef, scrollStrategy: any, direction: Directionality);
     // (undocumented)
-    isEllipsisActive(): boolean;
+    get isOverflown(): boolean;
     // (undocumented)
     ngAfterViewInit(): void;
     // (undocumented)
     ngOnDestroy(): void;
+    // (undocumented)
+    onMouseEnter(): void;
+    // (undocumented)
+    onMouseLeave(): void;
+    // (undocumented)
+    get textElement(): HTMLElement;
     // (undocumented)
     static ɵdir: i0.ɵɵDirectiveDeclaration<McSelectOption, "mc-option", never, {}, {}, never>;
     // (undocumented)

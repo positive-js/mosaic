@@ -1,6 +1,15 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { Overlay, ScrollDispatcher } from '@angular/cdk/overlay';
-import { AfterViewInit, Directive, ElementRef, Inject, NgZone, OnDestroy, Optional, ViewContainerRef } from '@angular/core';
+import {
+    AfterViewInit,
+    Directive,
+    ElementRef,
+    Inject,
+    NgZone,
+    OnDestroy,
+    Optional,
+    ViewContainerRef
+} from '@angular/core';
 import { McOption } from '@ptsecurity/mosaic/core';
 import { McTooltipTrigger, MC_TOOLTIP_SCROLL_STRATEGY } from '@ptsecurity/mosaic/tooltip';
 
@@ -15,7 +24,14 @@ import { McTooltipTrigger, MC_TOOLTIP_SCROLL_STRATEGY } from '@ptsecurity/mosaic
 export class McSelectOption extends McTooltipTrigger implements AfterViewInit, OnDestroy {
     private resizeObserver: ResizeObserver;
     private mutationObserver: MutationObserver;
-    private optionContentElement: HTMLElement;
+
+    get textElement(): HTMLElement {
+        return this.option.textElement.nativeElement;
+    }
+
+    get isOverflown(): boolean {
+        return this.textElement.clientWidth < this.textElement.scrollWidth;
+    }
 
     constructor(
         private option: McOption,
@@ -31,20 +47,13 @@ export class McSelectOption extends McTooltipTrigger implements AfterViewInit, O
     }
 
     ngAfterViewInit() {
-        this.optionContentElement = this.elementRef.nativeElement.querySelector('.mc-option-text');
-
         this.content = this.option.viewValue;
-        this.disabled = !this.isEllipsisActive();
 
-        this.resizeObserver = new ResizeObserver(() => {
-            this.disabled = !this.isEllipsisActive();
-        });
+        this.resizeObserver = new ResizeObserver(() => this.disabled = !this.isOverflown);
 
-        this.mutationObserver = new MutationObserver(() => {
-            this.content = this.option.viewValue;
-        });
+        this.mutationObserver = new MutationObserver(() => this.content = this.option.viewValue);
 
-        this.mutationObserver.observe(this.optionContentElement, {
+        this.mutationObserver.observe(this.textElement, {
             characterData: true, attributes: false, childList: true, subtree: true
         });
     }
@@ -53,7 +62,7 @@ export class McSelectOption extends McTooltipTrigger implements AfterViewInit, O
         super.ngOnDestroy();
 
         if (this.resizeObserver) {
-            this.resizeObserver.unobserve(this.elementRef.nativeElement);
+            this.resizeObserver.unobserve(this.textElement);
             this.resizeObserver.disconnect();
         }
 
@@ -63,16 +72,14 @@ export class McSelectOption extends McTooltipTrigger implements AfterViewInit, O
     }
 
     onMouseEnter() {
-        this.resizeObserver.observe(this.elementRef.nativeElement);
-        this.disabled = !this.isEllipsisActive();
+        this.resizeObserver.observe(this.textElement);
+
+        this.disabled = !this.isOverflown;
     }
 
     onMouseLeave() {
-        this.resizeObserver.unobserve(this.elementRef.nativeElement);
-        this.disabled = true;
-    }
+        this.resizeObserver.unobserve(this.textElement);
 
-    isEllipsisActive(): boolean {
-        return this.optionContentElement.clientWidth < this.optionContentElement.scrollWidth;
+        this.disabled = true;
     }
 }
