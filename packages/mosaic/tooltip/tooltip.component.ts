@@ -222,6 +222,7 @@ export class McTooltipTrigger extends McPopUpTrigger<McTooltipComponent> {
         if (!this.instance) { return; }
 
         this.instance.content = this.content;
+        this.instance.detectChanges();
     }
 
     closingActions() {

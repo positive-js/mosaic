@@ -8,9 +8,8 @@
 // TODO: fix linter
 // tslint:disable
 import { Directionality } from '@angular/cdk/bidi';
-import { OverlayContainer } from '@angular/cdk/overlay';
+import { OverlayContainer, ScrollDispatcher } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
-import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -58,7 +57,7 @@ import {
     dispatchEvent,
     dispatchFakeEvent,
     dispatchKeyboardEvent,
-    wrappedErrorMessage
+    wrappedErrorMessage, dispatchMouseEvent
 } from '@ptsecurity/cdk/testing';
 import {
     ErrorStateMatcher,
@@ -894,6 +893,27 @@ class SelectWithFormFieldLabel {
     placeholder: string;
 }
 
+@Component({
+    selector: 'select-with-long-label-option',
+    template: `
+        <mc-form-field>
+            <mc-select>
+                <mc-option [value]="'value1'">Not long text</mc-option>
+                <mc-option style="max-width: 200px;" [value]="'value2'">Long long long long Long long long long Long long long long Long long long long Long long long long Long long long long text</mc-option>
+                <mc-option style="max-width: 200px;" [value]="'value3'">{{ changingLabel }}</mc-option>
+            </mc-select>
+        </mc-form-field>
+    `
+})
+class SelectWithLongOptionText {
+    changingLabel: string = 'Changed Long long long long Long long long long Long long long long Long long long long Long long long long Long long long long text';
+    counter: number = 0;
+
+    changeLabel(): void {
+        this.changingLabel = this.changingLabel.concat((this.counter++).toString());
+    }
+}
+
 describe('McSelect', () => {
     let overlayContainer: OverlayContainer;
     let overlayContainerElement: HTMLElement;
@@ -915,14 +935,15 @@ describe('McSelect', () => {
                 McInputModule,
                 ReactiveFormsModule,
                 FormsModule,
-                NoopAnimationsModule
+                NoopAnimationsModule,
             ],
             declarations,
             providers: [
                 { provide: Directionality, useFactory: () => dir = { value: 'ltr' } },
                 {
                     provide: ScrollDispatcher, useFactory: () => ({
-                        scrolled: () => scrolledSubject.asObservable()
+                        scrolled: () => scrolledSubject.asObservable(),
+                        getAncestorScrollContainers: () => [],
                     })
                 }
             ]
@@ -4443,5 +4464,118 @@ describe('McSelect', () => {
             expect(options.some((option) => option.selected)).toBe(false);
             expect(testInstance.control.value).toEqual([]);
         });
+    });
+
+    describe('option tooltip', () => {
+        beforeEach(waitForAsync(() => {
+            configureMcSelectTestingModule([SelectWithLongOptionText]);
+        }));
+
+        let fixture: ComponentFixture<SelectWithLongOptionText>;
+        let testInstance: SelectWithLongOptionText;
+        let trigger: HTMLElement;
+
+        class MockedResizeObserver implements ResizeObserver {
+            elements: any[] = [];
+
+            observe(target: Element) { this.elements.push(target); }
+            unobserve(target: Element) {
+                const idx = this.elements.indexOf(target);
+                if (idx > -1) {
+                    this.elements.splice(idx, 1)
+                }
+            }
+
+            disconnect() {
+                window.removeEventListener('resize', this.onWindowResize);
+            }
+
+            private onWindowResize() {
+                this.callback(this.elements, this);
+            }
+
+            constructor(private callback: ResizeObserverCallback) {
+                window.addEventListener('resize', this.onWindowResize.bind(this));
+            }
+        }
+
+        window.ResizeObserver = MockedResizeObserver;
+
+        beforeEach(fakeAsync(() => {
+            fixture = TestBed.createComponent(SelectWithLongOptionText);
+            testInstance = fixture.componentInstance;
+            fixture.detectChanges();
+
+            trigger = fixture.debugElement.query(By.css('.mc-select__trigger')).nativeElement;
+        }));
+
+        it('should not display tooltip if ellipse not applied', fakeAsync(() => {
+            trigger.click();
+            fixture.detectChanges();
+            const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-option');
+
+            options[0].style.width = '200px';
+
+            dispatchMouseEvent(options[0], 'mouseenter');
+            tick();
+            fixture.detectChanges();
+
+            const tooltips = document.querySelectorAll('.mc-tooltip__content')
+            expect(tooltips.length).toEqual(0);
+
+            flush();
+        }));
+
+        it('should display tooltip if ellipse applied', fakeAsync(() => {
+            trigger.click();
+            tick();
+            fixture.detectChanges();
+
+            window.dispatchEvent(new Event('resize'));
+            tick();
+            fixture.detectChanges();
+
+            const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-option');
+            dispatchMouseEvent(options[1], 'mouseenter');
+            tick();
+            fixture.detectChanges();
+
+            const tooltips = document.querySelectorAll('.mc-tooltip__content')
+            expect(tooltips.length).toEqual(1);
+            expect(tooltips[0].textContent).toEqual(options[1].textContent);
+
+            flush();
+        }));
+
+        xit('should change tooltip if option content changed', fakeAsync(() => {
+            trigger.click();
+            tick();
+            fixture.detectChanges();
+
+            window.dispatchEvent(new Event('resize'));
+            tick();
+            fixture.detectChanges();
+
+            const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-option');
+            dispatchMouseEvent(options[2], 'mouseenter');
+            tick();
+            fixture.detectChanges();
+
+
+            let tooltips = document.querySelectorAll('.mc-tooltip__content')
+            expect(tooltips.length).toEqual(1);
+            expect(tooltips[0].textContent).toEqual(options[2].textContent);
+
+            testInstance.changeLabel();
+            fixture.detectChanges();
+
+            tick(500);
+
+            tooltips = document.querySelectorAll('.mc-tooltip__content')
+            expect(tooltips.length).toEqual(1);
+            expect(tooltips[0].textContent).toEqual(options[2].textContent);
+
+            flush();
+        }));
     });
 });
