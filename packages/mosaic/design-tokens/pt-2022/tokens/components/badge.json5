@@ -144,14 +144,14 @@
         },
         size: {
             default: {
-                height: { value: '{size.xxl}' },
+                height: { value: '{size.xxl.value}' },
                 'min-width': { value: '10px' },
                 padding: { value: '0 8px' },
                 'border-width': { value: '1px' },
                 'border-radius': { value: '4px' }
             },
             mini: {
-                height: { value: '{size.l}' },
+                height: { value: '{size.l.value}' },
                 'min-width': { value: '10px' },
                 'border-width': { value: '1px' },
                 'border-radius': { value: '2px' },

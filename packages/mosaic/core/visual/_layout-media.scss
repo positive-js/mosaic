@@ -1,9 +1,7 @@
 
 
 @mixin media-print {
-
     @media print {
-
         .hide-print:not(.show-print):not(.show) {
             display: none !important;
         }
