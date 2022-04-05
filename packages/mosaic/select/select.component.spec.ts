@@ -26,7 +26,8 @@ import {
     flush,
     inject,
     TestBed,
-    tick
+    tick,
+    discardPeriodicTasks
 } from '@angular/core/testing';
 import {
     ControlValueAccessor,
@@ -4492,9 +4493,13 @@ describe('McSelect', () => {
         class MockedResizeObserver implements ResizeObserver {
             elements: any[] = [];
 
-            observe(target: Element) { this.elements.push(target); }
+            observe(target: Element) {
+                this.elements.push(target);
+            }
+
             unobserve(target: Element) {
                 const idx = this.elements.indexOf(target);
+
                 if (idx > -1) {
                     this.elements.splice(idx, 1)
                 }
@@ -4509,7 +4514,7 @@ describe('McSelect', () => {
             }
 
             constructor(private callback: ResizeObserverCallback) {
-                window.addEventListener('resize', this.onWindowResize.bind(this));
+                window.addEventListener('resize', () => this.onWindowResize());
             }
         }
 
@@ -4536,29 +4541,25 @@ describe('McSelect', () => {
 
             const tooltips = document.querySelectorAll('.mc-tooltip__content')
             expect(tooltips.length).toEqual(0);
-
-            flush();
         }));
 
         it('should display tooltip if ellipse applied', fakeAsync(() => {
             trigger.click();
-            tick();
-            fixture.detectChanges();
-
-            window.dispatchEvent(new Event('resize'));
-            tick();
-            fixture.detectChanges();
+            fixture.autoDetectChanges();
 
             const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-option');
             dispatchMouseEvent(options[1], 'mouseenter');
-            tick();
-            fixture.detectChanges();
+            fixture.autoDetectChanges();
+
+            window.dispatchEvent(new Event('resize'));
+            fixture.autoDetectChanges();
+            flush();
+
+            discardPeriodicTasks();
 
             const tooltips = document.querySelectorAll('.mc-tooltip__content')
             expect(tooltips.length).toEqual(1);
             expect(tooltips[0].textContent).toEqual(options[1].textContent);
-
-            flush();
         }));
 
         xit('should change tooltip if option content changed', fakeAsync(() => {

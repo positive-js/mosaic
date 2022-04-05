@@ -21,7 +21,7 @@ import { McTooltipTrigger, MC_TOOLTIP_SCROLL_STRATEGY } from '@ptsecurity/mosaic
         '(mouseleave)': 'onMouseLeave()'
     }
 })
-export class McSelectOption extends McTooltipTrigger implements AfterViewInit, OnDestroy {
+export class McOptionTooltip extends McTooltipTrigger implements AfterViewInit, OnDestroy {
     private resizeObserver: ResizeObserver;
     private mutationObserver: MutationObserver;
 

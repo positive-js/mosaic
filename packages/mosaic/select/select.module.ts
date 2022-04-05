@@ -7,7 +7,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McTagsModule } from '@ptsecurity/mosaic/tags';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
-import { McSelectOption } from './select-option.directive';
+import { McOptionTooltip } from './select-option.directive';
 import { McSelect, McSelectSearch, McSelectSearchEmptyResult, McSelectTrigger } from './select.component';
 
 
@@ -26,7 +26,7 @@ import { McSelect, McSelectSearch, McSelectSearchEmptyResult, McSelectTrigger } 
         McSelectSearch,
         McSelectSearchEmptyResult,
         McSelectTrigger,
-        McSelectOption,
+        McOptionTooltip,
         McOptionModule,
         CommonModule
     ],
@@ -35,7 +35,7 @@ import { McSelect, McSelectSearch, McSelectSearchEmptyResult, McSelectTrigger } 
         McSelectSearch,
         McSelectSearchEmptyResult,
         McSelectTrigger,
-        McSelectOption
+        McOptionTooltip
     ],
     providers: [MC_SELECT_SCROLL_STRATEGY_PROVIDER]
 })
