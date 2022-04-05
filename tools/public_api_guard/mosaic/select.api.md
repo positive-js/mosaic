@@ -25,12 +25,13 @@ import { FormGroupDirective } from '@angular/forms';
 import { HasTabIndex } from '@ptsecurity/mosaic/core';
 import { HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 import * as i0 from '@angular/core';
-import * as i2 from '@angular/common';
-import * as i3 from '@angular/cdk/overlay';
-import * as i4 from '@ptsecurity/mosaic/core';
-import * as i5 from '@ptsecurity/mosaic/icon';
-import * as i6 from '@ptsecurity/mosaic/tags';
-import * as i7 from '@ptsecurity/mosaic/form-field';
+import * as i3 from '@angular/common';
+import * as i4 from '@angular/cdk/overlay';
+import * as i5 from '@ptsecurity/mosaic/core';
+import * as i6 from '@ptsecurity/mosaic/icon';
+import * as i7 from '@ptsecurity/mosaic/tags';
+import * as i8 from '@ptsecurity/mosaic/tooltip';
+import * as i9 from '@ptsecurity/mosaic/form-field';
 import { McCleaner } from '@ptsecurity/mosaic/form-field';
 import { McFormField } from '@ptsecurity/mosaic/form-field';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
@@ -39,6 +40,7 @@ import { McOptgroup } from '@ptsecurity/mosaic/core';
 import { McOption } from '@ptsecurity/mosaic/core';
 import { McOptionSelectionChange } from '@ptsecurity/mosaic/core';
 import { McTag } from '@ptsecurity/mosaic/tags';
+import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 import { McValidationOptions } from '@ptsecurity/mosaic/core';
 import { NgControl } from '@angular/forms';
 import { NgForm } from '@angular/forms';
@@ -48,13 +50,37 @@ import { Observable } from 'rxjs';
 import { OnChanges } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { OnInit } from '@angular/core';
+import { Overlay } from '@angular/cdk/overlay';
 import { QueryList } from '@angular/core';
 import { Renderer2 } from '@angular/core';
+import { ScrollDispatcher } from '@angular/cdk/overlay';
 import { SelectionModel } from '@angular/cdk/collections';
 import { SimpleChanges } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { Validator } from '@angular/forms';
+import { ViewContainerRef } from '@angular/core';
+
+// @public (undocumented)
+export class McOptionTooltip extends McTooltipTrigger implements AfterViewInit, OnDestroy {
+    constructor(option: McOption, overlay: Overlay, elementRef: ElementRef, ngZone: NgZone, scrollDispatcher: ScrollDispatcher, hostView: ViewContainerRef, scrollStrategy: any, direction: Directionality);
+    // (undocumented)
+    get isOverflown(): boolean;
+    // (undocumented)
+    ngAfterViewInit(): void;
+    // (undocumented)
+    ngOnDestroy(): void;
+    // (undocumented)
+    onMouseEnter(): void;
+    // (undocumented)
+    onMouseLeave(): void;
+    // (undocumented)
+    get textElement(): HTMLElement;
+    // (undocumented)
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McOptionTooltip, "mc-option", never, {}, {}, never>;
+    // (undocumented)
+    static ɵfac: i0.ɵɵFactoryDeclaration<McOptionTooltip, [null, null, null, null, null, null, null, { optional: true; }]>;
+}
 
 // Warning: (ae-forgotten-export) The symbol "McSelectMixinBase" needs to be exported by the entry point index.d.ts
 //
@@ -228,9 +254,10 @@ export class McSelectModule {
     // (undocumented)
     static ɵinj: i0.ɵɵInjectorDeclaration<McSelectModule>;
     // Warning: (ae-forgotten-export) The symbol "i1" needs to be exported by the entry point index.d.ts
+    // Warning: (ae-forgotten-export) The symbol "i2" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
-    static ɵmod: i0.ɵɵNgModuleDeclaration<McSelectModule, [typeof i1.McSelect, typeof i1.McSelectSearch, typeof i1.McSelectSearchEmptyResult, typeof i1.McSelectTrigger], [typeof i2.CommonModule, typeof i3.OverlayModule, typeof i4.McOptionModule, typeof i5.McIconModule, typeof i6.McTagsModule], [typeof i7.McFormFieldModule, typeof i1.McSelect, typeof i1.McSelectSearch, typeof i1.McSelectSearchEmptyResult, typeof i1.McSelectTrigger, typeof i4.McOptionModule, typeof i2.CommonModule]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<McSelectModule, [typeof i1.McSelect, typeof i1.McSelectSearch, typeof i1.McSelectSearchEmptyResult, typeof i1.McSelectTrigger, typeof i2.McOptionTooltip], [typeof i3.CommonModule, typeof i4.OverlayModule, typeof i5.McOptionModule, typeof i6.McIconModule, typeof i7.McTagsModule, typeof i8.McToolTipModule], [typeof i9.McFormFieldModule, typeof i1.McSelect, typeof i1.McSelectSearch, typeof i1.McSelectSearchEmptyResult, typeof i1.McSelectTrigger, typeof i2.McOptionTooltip, typeof i5.McOptionModule, typeof i3.CommonModule]>;
 }
 
 // @public (undocumented)

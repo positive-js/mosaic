@@ -8,9 +8,8 @@
 // TODO: fix linter
 // tslint:disable
 import { Directionality } from '@angular/cdk/bidi';
-import { OverlayContainer } from '@angular/cdk/overlay';
+import { OverlayContainer, ScrollDispatcher } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
-import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -27,7 +26,8 @@ import {
     flush,
     inject,
     TestBed,
-    tick
+    tick,
+    discardPeriodicTasks
 } from '@angular/core/testing';
 import {
     ControlValueAccessor,
@@ -58,7 +58,7 @@ import {
     dispatchEvent,
     dispatchFakeEvent,
     dispatchKeyboardEvent,
-    wrappedErrorMessage
+    wrappedErrorMessage, dispatchMouseEvent
 } from '@ptsecurity/cdk/testing';
 import {
     ErrorStateMatcher,
@@ -894,6 +894,27 @@ class SelectWithFormFieldLabel {
     placeholder: string;
 }
 
+@Component({
+    selector: 'select-with-long-label-option',
+    template: `
+        <mc-form-field>
+            <mc-select>
+                <mc-option [value]="'value1'">Not long text</mc-option>
+                <mc-option style="max-width: 200px;" [value]="'value2'">Long long long long Long long long long Long long long long Long long long long Long long long long Long long long long text</mc-option>
+                <mc-option style="max-width: 200px;" [value]="'value3'">{{ changingLabel }}</mc-option>
+            </mc-select>
+        </mc-form-field>
+    `
+})
+class SelectWithLongOptionText {
+    changingLabel: string = 'Changed Long long long long Long long long long Long long long long Long long long long Long long long long Long long long long text';
+    counter: number = 0;
+
+    changeLabel(): void {
+        this.changingLabel = this.changingLabel.concat((this.counter++).toString());
+    }
+}
+
 describe('McSelect', () => {
     let overlayContainer: OverlayContainer;
     let overlayContainerElement: HTMLElement;
@@ -915,14 +936,15 @@ describe('McSelect', () => {
                 McInputModule,
                 ReactiveFormsModule,
                 FormsModule,
-                NoopAnimationsModule
+                NoopAnimationsModule,
             ],
             declarations,
             providers: [
                 { provide: Directionality, useFactory: () => dir = { value: 'ltr' } },
                 {
                     provide: ScrollDispatcher, useFactory: () => ({
-                        scrolled: () => scrolledSubject.asObservable()
+                        scrolled: () => scrolledSubject.asObservable(),
+                        getAncestorScrollContainers: () => [],
                     })
                 }
             ]
@@ -1817,6 +1839,7 @@ describe('McSelect', () => {
                 const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-option');
                 options[8].click();
                 fixture.detectChanges();
+                tick();
                 flush();
 
                 expect(trigger.textContent).toContain('Potatoes');
@@ -1919,6 +1942,7 @@ describe('McSelect', () => {
                     const option = overlayContainerElement.querySelector('mc-option') as HTMLElement;
                     option.click();
                     fixture.detectChanges();
+                    tick();
                     flush();
 
                     expect(spy).toHaveBeenCalledWith(jasmine.any(McOptionSelectionChange));
@@ -2211,8 +2235,8 @@ describe('McSelect', () => {
             it('should scroll down to the active option', fakeAsync(() => {
                 for (let i = 0; i < 15; i++) {
                     dispatchKeyboardEvent(host, 'keydown', DOWN_ARROW);
+                    flush();
                 }
-                flush();
 
                 expect(panel.scrollTop).toBe(316, 'Expected scroll to be at the 16th option.');
             }));
@@ -2221,12 +2245,13 @@ describe('McSelect', () => {
                 // Scroll to the bottom.
                 for (let i = 0; i < fixture.componentInstance.foods.length; i++) {
                     dispatchKeyboardEvent(host, 'keydown', DOWN_ARROW);
+                    flush();
                 }
 
                 for (let i = 0; i < 20; i++) {
                     dispatchKeyboardEvent(host, 'keydown', UP_ARROW);
+                    flush();
                 }
-                flush();
 
                 expect(panel.scrollTop).toBe(252, 'Expected scroll to be at the 9th option.');
             }));
@@ -2258,6 +2283,7 @@ describe('McSelect', () => {
                 for (let i = 0; i < 20; i++) {
                     dispatchKeyboardEvent(host, 'keydown', DOWN_ARROW);
                     fixture.detectChanges();
+                    flush();
                 }
 
                 expect(panel.scrollTop).toBeGreaterThan(0, 'Expected panel to be scrolled down.');
@@ -2593,6 +2619,7 @@ describe('McSelect', () => {
 
             triggers[1].nativeElement.click();
             fixture.detectChanges();
+            tick();
             flush();
 
             options =
@@ -3028,6 +3055,7 @@ describe('McSelect', () => {
             options = overlayContainerElement.querySelectorAll('mc-option');
             options[0].click();
             fixture.detectChanges();
+            tick();
             flush();
         }));
 
@@ -3131,6 +3159,7 @@ describe('McSelect', () => {
 
             (overlayContainerElement.querySelectorAll('mc-option')[2] as HTMLElement).click();
             fixture.detectChanges();
+            tick();
             flush();
 
             expect(fixture.componentInstance.selectedFood).toBe('sandwich-2');
@@ -3248,6 +3277,7 @@ describe('McSelect', () => {
 
             (overlayContainerElement.querySelector('mc-option') as HTMLElement).click();
             fixture.detectChanges();
+            tick();
             flush();
 
             const select = fixture.debugElement.nativeElement.querySelector('mc-select');
@@ -3269,6 +3299,7 @@ describe('McSelect', () => {
             select.blur(); // Blur manually since the programmatic click might not do it.
             document.body.click();
             fixture.detectChanges();
+            tick();
             flush();
 
             expect(document.activeElement).not.toBe(select, 'Expected trigger not to be focused.');
@@ -3290,6 +3321,7 @@ describe('McSelect', () => {
 
             (overlayContainerElement.querySelector('mc-option') as HTMLElement).click();
             fixture.detectChanges();
+            tick();
             flush();
 
             expect(instance.selectedFood).toBe('steak-0');
@@ -4083,6 +4115,7 @@ describe('McSelect', () => {
             options[2].click();
             options[5].click();
             fixture.detectChanges();
+            tick();
             flush();
 
             expect(testInstance.control.value).toEqual(['steak-0', 'tacos-2', 'eggs-5']);
@@ -4176,6 +4209,7 @@ describe('McSelect', () => {
             options[0].click();
             options[1].click();
             fixture.detectChanges();
+            tick();
             flush();
 
             expect(testInstance.select.panelOpen).toBe(true);
@@ -4300,6 +4334,7 @@ describe('McSelect', () => {
 
             options[2].click();
             fixture.detectChanges();
+            tick();
             flush();
 
             expect(fixture.componentInstance.select.keyManager.activeItemIndex).toBe(2);
@@ -4322,6 +4357,7 @@ describe('McSelect', () => {
             options[1].click();
             options[2].click();
             fixture.detectChanges();
+            tick();
             flush();
 
             expect(testInstance.control.value).toEqual([null, 'pizza-1', null]);
@@ -4443,5 +4479,118 @@ describe('McSelect', () => {
             expect(options.some((option) => option.selected)).toBe(false);
             expect(testInstance.control.value).toEqual([]);
         });
+    });
+
+    describe('option tooltip', () => {
+        beforeEach(waitForAsync(() => {
+            configureMcSelectTestingModule([SelectWithLongOptionText]);
+        }));
+
+        let fixture: ComponentFixture<SelectWithLongOptionText>;
+        let testInstance: SelectWithLongOptionText;
+        let trigger: HTMLElement;
+
+        class MockedResizeObserver implements ResizeObserver {
+            elements: any[] = [];
+
+            observe(target: Element) {
+                this.elements.push(target);
+            }
+
+            unobserve(target: Element) {
+                const idx = this.elements.indexOf(target);
+
+                if (idx > -1) {
+                    this.elements.splice(idx, 1)
+                }
+            }
+
+            disconnect() {
+                window.removeEventListener('resize', this.onWindowResize);
+            }
+
+            private onWindowResize() {
+                this.callback(this.elements, this);
+            }
+
+            constructor(private callback: ResizeObserverCallback) {
+                window.addEventListener('resize', () => this.onWindowResize());
+            }
+        }
+
+        window.ResizeObserver = MockedResizeObserver;
+
+        beforeEach(fakeAsync(() => {
+            fixture = TestBed.createComponent(SelectWithLongOptionText);
+            testInstance = fixture.componentInstance;
+            fixture.detectChanges();
+
+            trigger = fixture.debugElement.query(By.css('.mc-select__trigger')).nativeElement;
+        }));
+
+        it('should not display tooltip if ellipse not applied', fakeAsync(() => {
+            trigger.click();
+            fixture.detectChanges();
+            const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-option');
+
+            options[0].style.width = '200px';
+
+            dispatchMouseEvent(options[0], 'mouseenter');
+            tick();
+            fixture.detectChanges();
+
+            const tooltips = document.querySelectorAll('.mc-tooltip__content')
+            expect(tooltips.length).toEqual(0);
+        }));
+
+        it('should display tooltip if ellipse applied', fakeAsync(() => {
+            trigger.click();
+            fixture.autoDetectChanges();
+
+            const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-option');
+            dispatchMouseEvent(options[1], 'mouseenter');
+            fixture.autoDetectChanges();
+
+            window.dispatchEvent(new Event('resize'));
+            fixture.autoDetectChanges();
+            flush();
+
+            discardPeriodicTasks();
+
+            const tooltips = document.querySelectorAll('.mc-tooltip__content')
+            expect(tooltips.length).toEqual(1);
+            expect(tooltips[0].textContent).toEqual(options[1].textContent);
+        }));
+
+        xit('should change tooltip if option content changed', fakeAsync(() => {
+            trigger.click();
+            tick();
+            fixture.detectChanges();
+
+            window.dispatchEvent(new Event('resize'));
+            tick();
+            fixture.detectChanges();
+
+            const options: NodeListOf<HTMLElement> = overlayContainerElement.querySelectorAll('mc-option');
+            dispatchMouseEvent(options[2], 'mouseenter');
+            tick();
+            fixture.detectChanges();
+
+
+            let tooltips = document.querySelectorAll('.mc-tooltip__content')
+            expect(tooltips.length).toEqual(1);
+            expect(tooltips[0].textContent).toEqual(options[2].textContent);
+
+            testInstance.changeLabel();
+            fixture.detectChanges();
+
+            tick(500);
+
+            tooltips = document.querySelectorAll('.mc-tooltip__content')
+            expect(tooltips.length).toEqual(1);
+            expect(tooltips[0].textContent).toEqual(options[2].textContent);
+
+            flush();
+        }));
     });
 });

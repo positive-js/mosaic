@@ -13,6 +13,7 @@ import {
     Optional,
     Output,
     QueryList,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ENTER, SPACE } from '@ptsecurity/cdk/keycodes';
@@ -72,6 +73,8 @@ export const MC_OPTION_PARENT_COMPONENT =
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class McOption implements AfterViewChecked, OnDestroy {
+    @ViewChild('mcTextElement', { static: false }) textElement: ElementRef;
+
     /** The form value of the option. */
     @Input() value: any;
 

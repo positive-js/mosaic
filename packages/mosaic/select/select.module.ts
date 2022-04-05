@@ -5,7 +5,9 @@ import { MC_SELECT_SCROLL_STRATEGY_PROVIDER, McOptionModule } from '@ptsecurity/
 import { McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McTagsModule } from '@ptsecurity/mosaic/tags';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
+import { McOptionTooltip } from './select-option.directive';
 import { McSelect, McSelectSearch, McSelectSearchEmptyResult, McSelectTrigger } from './select.component';
 
 
@@ -15,7 +17,8 @@ import { McSelect, McSelectSearch, McSelectSearchEmptyResult, McSelectTrigger } 
         OverlayModule,
         McOptionModule,
         McIconModule,
-        McTagsModule
+        McTagsModule,
+        McToolTipModule
     ],
     exports: [
         McFormFieldModule,
@@ -23,6 +26,7 @@ import { McSelect, McSelectSearch, McSelectSearchEmptyResult, McSelectTrigger } 
         McSelectSearch,
         McSelectSearchEmptyResult,
         McSelectTrigger,
+        McOptionTooltip,
         McOptionModule,
         CommonModule
     ],
@@ -30,7 +34,9 @@ import { McSelect, McSelectSearch, McSelectSearchEmptyResult, McSelectTrigger } 
         McSelect,
         McSelectSearch,
         McSelectSearchEmptyResult,
-        McSelectTrigger],
+        McSelectTrigger,
+        McOptionTooltip
+    ],
     providers: [MC_SELECT_SCROLL_STRATEGY_PROVIDER]
 })
 export class McSelectModule {}
