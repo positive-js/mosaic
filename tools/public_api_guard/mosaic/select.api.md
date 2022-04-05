@@ -61,6 +61,27 @@ import { Subscription } from 'rxjs';
 import { Validator } from '@angular/forms';
 import { ViewContainerRef } from '@angular/core';
 
+// @public (undocumented)
+export class McOptionTooltip extends McTooltipTrigger implements AfterViewInit, OnDestroy {
+    constructor(option: McOption, overlay: Overlay, elementRef: ElementRef, ngZone: NgZone, scrollDispatcher: ScrollDispatcher, hostView: ViewContainerRef, scrollStrategy: any, direction: Directionality);
+    // (undocumented)
+    get isOverflown(): boolean;
+    // (undocumented)
+    ngAfterViewInit(): void;
+    // (undocumented)
+    ngOnDestroy(): void;
+    // (undocumented)
+    onMouseEnter(): void;
+    // (undocumented)
+    onMouseLeave(): void;
+    // (undocumented)
+    get textElement(): HTMLElement;
+    // (undocumented)
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McOptionTooltip, "mc-option", never, {}, {}, never>;
+    // (undocumented)
+    static ɵfac: i0.ɵɵFactoryDeclaration<McOptionTooltip, [null, null, null, null, null, null, null, { optional: true; }]>;
+}
+
 // Warning: (ae-forgotten-export) The symbol "McSelectMixinBase" needs to be exported by the entry point index.d.ts
 //
 // @public (undocumented)
@@ -236,28 +257,7 @@ export class McSelectModule {
     // Warning: (ae-forgotten-export) The symbol "i2" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
-    static ɵmod: i0.ɵɵNgModuleDeclaration<McSelectModule, [typeof i1.McSelect, typeof i1.McSelectSearch, typeof i1.McSelectSearchEmptyResult, typeof i1.McSelectTrigger, typeof i2.McSelectOption], [typeof i3.CommonModule, typeof i4.OverlayModule, typeof i5.McOptionModule, typeof i6.McIconModule, typeof i7.McTagsModule, typeof i8.McToolTipModule], [typeof i9.McFormFieldModule, typeof i1.McSelect, typeof i1.McSelectSearch, typeof i1.McSelectSearchEmptyResult, typeof i1.McSelectTrigger, typeof i2.McSelectOption, typeof i5.McOptionModule, typeof i3.CommonModule]>;
-}
-
-// @public (undocumented)
-export class McSelectOption extends McTooltipTrigger implements AfterViewInit, OnDestroy {
-    constructor(option: McOption, overlay: Overlay, elementRef: ElementRef, ngZone: NgZone, scrollDispatcher: ScrollDispatcher, hostView: ViewContainerRef, scrollStrategy: any, direction: Directionality);
-    // (undocumented)
-    get isOverflown(): boolean;
-    // (undocumented)
-    ngAfterViewInit(): void;
-    // (undocumented)
-    ngOnDestroy(): void;
-    // (undocumented)
-    onMouseEnter(): void;
-    // (undocumented)
-    onMouseLeave(): void;
-    // (undocumented)
-    get textElement(): HTMLElement;
-    // (undocumented)
-    static ɵdir: i0.ɵɵDirectiveDeclaration<McSelectOption, "mc-option", never, {}, {}, never>;
-    // (undocumented)
-    static ɵfac: i0.ɵɵFactoryDeclaration<McSelectOption, [null, null, null, null, null, null, null, { optional: true; }]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<McSelectModule, [typeof i1.McSelect, typeof i1.McSelectSearch, typeof i1.McSelectSearchEmptyResult, typeof i1.McSelectTrigger, typeof i2.McOptionTooltip], [typeof i3.CommonModule, typeof i4.OverlayModule, typeof i5.McOptionModule, typeof i6.McIconModule, typeof i7.McTagsModule, typeof i8.McToolTipModule], [typeof i9.McFormFieldModule, typeof i1.McSelect, typeof i1.McSelectSearch, typeof i1.McSelectSearchEmptyResult, typeof i1.McSelectTrigger, typeof i2.McOptionTooltip, typeof i5.McOptionModule, typeof i3.CommonModule]>;
 }
 
 // @public (undocumented)
