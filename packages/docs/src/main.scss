@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+@import url('https://rsms.me/inter/inter.css');
+
 @import '../../mosaic/core/theming/all-theme';
 @import '../../mosaic/core/visual/all-visual';
 
@@ -22,8 +26,6 @@
 @import './styles/red-theme/theme';
 @import './styles/green-theme/theme';
 @import './styles/yellow-theme/theme';
-
-@import './fonts';
 
 
 $typography: mc-typography-config();
