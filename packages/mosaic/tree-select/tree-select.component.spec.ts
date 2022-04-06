@@ -1165,7 +1165,7 @@ class SelectInsideFormGroup {
 class BasicSelectWithoutForms {
     selectedFood: string | null;
 
-    @ViewChild(McTreeSelect, {static: false}) select: McTreeSelect;
+    @ViewChild(McTreeSelect, { static: false }) select: McTreeSelect;
 
     treeControl = new FlatTreeControl<FileFlatNode>(getLevel, isExpandable, getValue, getValue);
     treeFlattener = new McTreeFlattener(transformer, getLevel, isExpandable, getChildren);
@@ -4004,7 +4004,6 @@ describe('McTreeSelect', () => {
             expect(fixture.componentInstance.select.value).toBe('Documents');
             expect(trigger.textContent).toContain('Documents');
         }));
-
 
         it('should mark options as selected when the value is set', fakeAsync(() => {
             fixture = TestBed.createComponent(BasicSelectWithoutForms);

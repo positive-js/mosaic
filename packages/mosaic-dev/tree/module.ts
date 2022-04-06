@@ -112,7 +112,7 @@ export class DemoComponent {
 
     filterValue: string = '';
 
-    modelValue: any = [];
+    modelValue: any = 'rootNode_1';
     // modelValue: any[] = ['rootNode_1', 'Documents', 'Calendar', 'Chrome'];
 
     disableState: boolean = false;
