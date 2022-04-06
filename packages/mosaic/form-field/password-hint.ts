@@ -3,6 +3,8 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    forwardRef,
+    Inject,
     Input
 } from '@angular/core';
 
@@ -65,7 +67,10 @@ export class McPasswordHint implements AfterContentInit {
 
     private lastControlValue: string;
 
-    constructor(private changeDetectorRef: ChangeDetectorRef, private formField: McFormField) {}
+    constructor(
+        private changeDetectorRef: ChangeDetectorRef,
+        @Inject(forwardRef(() => McFormField)) private formField: McFormField
+    ) {}
 
     ngAfterContentInit(): void {
         if (this.rule === null) {
