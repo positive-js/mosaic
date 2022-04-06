@@ -370,7 +370,7 @@ export class McTreeSelect extends McTreeSelectMixinBase implements
     }
 
     get value(): any {
-        return this.multiple ? this.tree.getSelectedValues() : this.tree.getSelectedValues()[0];
+        return this.tree.getSelectedValues();
     }
 
     private _value: any = null;
