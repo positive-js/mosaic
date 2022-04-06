@@ -15,13 +15,13 @@
             'dd-grid-column': { value: '2 / span 3' },
 
             horizontal: {
-                'column-gap': { value: '16px' },
-                'row-gap': { value: '12px' }
+                'column-gap': { value: '{size.l.value}' },
+                'row-gap': { value: '{size.m.value}' }
             },
             vertical: {
                 'column-gap': { value: '0' },
-                'row-gap': { value: '2px' },
-                'dd-margin-bottom': { value: '16px' }
+                'row-gap': { value: '{size.3xs.value}' },
+                'dd-margin-bottom': { value: '{size.l.value}' }
             },
         },
         font: {
