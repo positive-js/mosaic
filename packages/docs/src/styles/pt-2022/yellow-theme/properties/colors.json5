@@ -1,0 +1,16 @@
+{
+    'light-color-scheme': {
+        primary: {
+            default: { value: '{palette.yellow.500.value}' },
+
+            palette: { value: '{palette.yellow}' }
+        }
+    },
+    'dark-color-scheme': {
+        primary: {
+            default: { value: '{palette.yellow.400.value}' },
+
+            palette: { value: '{palette.yellow}' }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-@import '../../../../mosaic/core/theming/theming';
+@import '../../../../../mosaic/core/theming/theming';
 @import './tokens';
 
 
@@ -10,7 +10,7 @@ $light-info: mc-palette($light-color-scheme-info-palette, $light-color-scheme-in
 $light-success: mc-palette($light-color-scheme-success-palette, $light-color-scheme-success-default);
 $light-warning: mc-palette($light-color-scheme-warning-palette, $light-color-scheme-warning-default);
 
-$theme-green: mc-light-theme($light-primary, $light-second, $light-error, $light-info, $light-success, $light-warning);
+$legacy-2017-light-red-theme: mc-light-theme($light-primary, $light-second, $light-error, $light-info, $light-success, $light-warning);
 
 
 $dark-primary: mc-palette($dark-color-scheme-primary-palette, $dark-color-scheme-primary-default);
@@ -21,4 +21,4 @@ $dark-info: mc-palette($dark-color-scheme-info-palette, $dark-color-scheme-info-
 $dark-success: mc-palette($dark-color-scheme-success-palette, $dark-color-scheme-success-default);
 $dark-warning: mc-palette($dark-color-scheme-warning-palette, $dark-color-scheme-warning-default);
 
-$dark-theme-green: mc-dark-theme($dark-primary, $dark-second, $dark-error, $dark-info, $dark-success, $dark-warning);
+$legacy-2017-dark-red-theme: mc-dark-theme($dark-primary, $dark-second, $dark-error, $dark-info, $dark-success, $dark-warning);

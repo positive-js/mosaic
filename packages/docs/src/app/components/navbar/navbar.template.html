@@ -1,71 +1,104 @@
-<header class="docs-navbar-header docs-navbar-header_fixed">
-    <div class="docs-navbar-logo">
-        <svg height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" transform="translate(.96)"><path d="m15.056 0-14.896 5.312 2.272 19.696 12.624 6.992 12.624-6.992 2.272-19.696z" fill="#ca0813"/><path d="m15.04 0v32l12.624-6.992 2.272-19.696z" fill="#a00810"/><path d="m15.04 0 14.88 5.312-2.2695596 19.696-12.6104404 6.992-12.61044039-6.992-2.26955961-19.696zm0 1.5927156-13.2534557 4.73134117 2.04487091 17.74607603 11.20858479 6.2147254 11.2085848-6.2147254 2.0448709-17.74607603z" fill="#ca0813" fill-rule="nonzero"/><g fill="#fff"><path d="m15.04 1.5927156 13.2534557 4.73134117-2.0448709 17.74607603-11.2085848 6.2147254-11.20858479-6.2147254-2.04487091-17.74607603zm0 1.5927156-11.6269114 4.15068235 1.8201822 15.79615205 9.8067292 5.4374509 9.8067292-5.4374509 1.8201822-15.79615205z" fill-rule="nonzero"/><path d="m23.541 19.341.939 2.899h-2.88l-.302-1.017zm-8.584-2.554 1.352 3.035-1.111068 2.418h-.33792l-1.199012-2.541zm-8.498 2.324 2.39 1.38-.529 1.749h-2.88zm16.622-1.191.301.929-2.232 1.872-.829-2.801zm-13.209-.8-.879 2.899-2.382-1.375.496-1.524zm5.589-.383 1.942.706-.827 1.798zm-.964-.097-1.107 2.485-1.172-2.485zm7.407-2.357 1.022 3.157h-2.747l-.405-1.369zm-5.742-.198 2.201 1.271-.759 1.65-2.3397814-.8497417c.0404824-.0979144.0815829-.1969339.1233014-.2970583zm-8.103.115 2.296 1.327-.337 1.113h-2.754zm5.705-.172.79984 1.8312.12316.2928-.0093071.0054281.0003071.0015719h-2.687l-.411-.871zm7.473-1.805.508 1.568-2.12 1.778-.11908-.40676-.07292-.23424.0037867-.0009743-.2972154-1.0355299c-.019996-.0770346-.0386797-.1511599-.0560513-.2223758l-.00452.01088-.294-1.024zm-9.846-.286-.4988449 1.741526c-.0010771-.0031573-.0021421-.0062926-.0031951-.009406l-.39196 1.38488-2.286-1.32.427-1.311zm6.3-1.356 1.0944579 3.811965c-.0667348.1566826-.1417777.330814-.2251286.5223944l-2.2053293-1.2733594zm-5.42.028 1.299 2.976-2.1915156 1.2645235c-.0725851-.1611133-.1380954-.3093488-.1965308-.4447066zm5.777-.523 2.648.467.391 1.209-2.435.43zm-8.55-.304 2.39.422-.35 1.22-2.732.482zm10.11352-2.582.91748 2.837-2.414-.426 1.053-2.411zm-8.82816 0 1.09764 2.515-.766-.135-1.467-.258.69184-2.122z"/></g></g></svg>
-        <span class="docs-navbar-logo__title">Mosaic</span>
-    </div>
+<mc-navbar>
+    <mc-navbar-container>
+        <div class="layout-padding-left-l" mc-navbar-brand>
+            <mc-navbar-logo>
+                <svg height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" transform="translate(.96)"><path d="m15.056 0-14.896 5.312 2.272 19.696 12.624 6.992 12.624-6.992 2.272-19.696z" fill="#ca0813"/><path d="m15.04 0v32l12.624-6.992 2.272-19.696z" fill="#a00810"/><path d="m15.04 0 14.88 5.312-2.2695596 19.696-12.6104404 6.992-12.61044039-6.992-2.26955961-19.696zm0 1.5927156-13.2534557 4.73134117 2.04487091 17.74607603 11.20858479 6.2147254 11.2085848-6.2147254 2.0448709-17.74607603z" fill="#ca0813" fill-rule="nonzero"/><g fill="#fff"><path d="m15.04 1.5927156 13.2534557 4.73134117-2.0448709 17.74607603-11.2085848 6.2147254-11.20858479-6.2147254-2.04487091-17.74607603zm0 1.5927156-11.6269114 4.15068235 1.8201822 15.79615205 9.8067292 5.4374509 9.8067292-5.4374509 1.8201822-15.79615205z" fill-rule="nonzero"/><path d="m23.541 19.341.939 2.899h-2.88l-.302-1.017zm-8.584-2.554 1.352 3.035-1.111068 2.418h-.33792l-1.199012-2.541zm-8.498 2.324 2.39 1.38-.529 1.749h-2.88zm16.622-1.191.301.929-2.232 1.872-.829-2.801zm-13.209-.8-.879 2.899-2.382-1.375.496-1.524zm5.589-.383 1.942.706-.827 1.798zm-.964-.097-1.107 2.485-1.172-2.485zm7.407-2.357 1.022 3.157h-2.747l-.405-1.369zm-5.742-.198 2.201 1.271-.759 1.65-2.3397814-.8497417c.0404824-.0979144.0815829-.1969339.1233014-.2970583zm-8.103.115 2.296 1.327-.337 1.113h-2.754zm5.705-.172.79984 1.8312.12316.2928-.0093071.0054281.0003071.0015719h-2.687l-.411-.871zm7.473-1.805.508 1.568-2.12 1.778-.11908-.40676-.07292-.23424.0037867-.0009743-.2972154-1.0355299c-.019996-.0770346-.0386797-.1511599-.0560513-.2223758l-.00452.01088-.294-1.024zm-9.846-.286-.4988449 1.741526c-.0010771-.0031573-.0021421-.0062926-.0031951-.009406l-.39196 1.38488-2.286-1.32.427-1.311zm6.3-1.356 1.0944579 3.811965c-.0667348.1566826-.1417777.330814-.2251286.5223944l-2.2053293-1.2733594zm-5.42.028 1.299 2.976-2.1915156 1.2645235c-.0725851-.1611133-.1380954-.3093488-.1965308-.4447066zm5.777-.523 2.648.467.391 1.209-2.435.43zm-8.55-.304 2.39.422-.35 1.22-2.732.482zm10.11352-2.582.91748 2.837-2.414-.426 1.053-2.411zm-8.82816 0 1.09764 2.515-.766-.135-1.467-.258.69184-2.122z"/></g></g></svg>
+            </mc-navbar-logo>
+            <mc-navbar-title>Mosaic</mc-navbar-title>
+        </div>
 
-    <div class="docs-navbar-version">
-        <button mc-button class="mc-button mc-button_transparent" [mcDropdownTriggerFor]="versionDropdown">
-            Версия {{mosaicVersion}}
-            <i mc-icon="mc-angle-down-L_16" class="docs-navbar-version__icon"></i>
-        </button>
+        <mc-navbar-item
+            #versionDropdownDropdownTrigger="mcDropdownTrigger"
+            [mcDropdownTriggerFor]="versionDropdown"
+            [class.mc-active]="versionDropdownDropdownTrigger.opened"
+            [collapsable]="false">
 
-        <mc-dropdown #versionDropdown="mcDropdown" class="docs-navbar-version__dropdown">
-            <button mc-dropdown-item *ngFor="let version of versionData; let i = index"
-                    (click)="goToVersion(i)" [class.mc-selected]="version.selected"
-                    [class.docs-navbar-version_bold]="version.number.length < 4">
-                <span class="docs-navbar-version__item">
-                    <span class="docs-navbar-version__num flex-50">{{version.number}}</span>
-                    <span class="docs-navbar-version__date flex-50">{{version.date}}</span>
-                </span>
-            </button>
-        </mc-dropdown>
-    </div>
+            <mc-navbar-title>Версия {{mosaicVersion}}</mc-navbar-title>
+        </mc-navbar-item>
 
-    <div class="flex-spacer"></div>
+        <mc-dropdown
+            #versionDropdown="mcDropdown"
+            [class]="'docs-navbar__version-dropdown'">
+            <div mc-dropdown-item *ngFor="let version of versionData; let i = index"
+                 [class.mc-selected]="version.selected"
+                 (click)="goToVersion(i)"
+                 [class.docs-navbar-version_bold]="version.number.length < 4">
 
-    <div class="docs-navbar-dropdown docs-navbar-dropdown_hidden">
-        <button mc-button class="mc-button mc-button_transparent" [mcDropdownTriggerFor]="languageDropdown">
-           {{languageSwitch.currentValue}}
-            <i mc-icon="mc-angle-down-M_16" class="docs-navbar-dropdown__icon"></i>
-        </button>
-
-        <mc-dropdown #languageDropdown="mcDropdown">
-            <button mc-dropdown-item *ngFor="let language of languageSwitch.data; let i = index"
-                    (click)="languageSwitch.setValue(i)">
-                {{language}}
-            </button>
-        </mc-dropdown>
-    </div>
-
-    <div class="docs-navbar-dropdown">
-        <button mc-button class="mc-button mc-button_transparent" [mcDropdownTriggerFor]="themeDropdown">
-            {{themeSwitch.currentValue.name}}
-            <i mc-icon="mc-angle-down-M_16" class="docs-navbar-dropdown__icon"></i>
-        </button>
-
-        <mc-dropdown #themeDropdown="mcDropdown">
-            <button mc-dropdown-item *ngFor="let theme of themeSwitch.data; let i = index"
-                    [class.mc-selected]="theme.selected" (click)="themeSwitch.setValue(i)">
-                {{theme.name}}
-            </button>
-        </mc-dropdown>
-    </div>
-
-    <div class="color-picker">
-        <button mc-button class="mc-button mc-button_transparent" [mcDropdownTriggerFor]="colorDropdown">
-            <i mc-icon="mc-circle-8_16" [style.color]='colorSwitch.currentValue.code' class="color-picker__icon"></i>
-            <i mc-icon="mc-angle-down-M_16" class="docs-navbar-dropdown__icon"></i>
-        </button>
-
-        <mc-dropdown #colorDropdown="mcDropdown" class="color-picker__dropdown" [style.margin-top]="0">
-            <div class="color-picker__dropdown-content">
-                <span *ngFor="let color of colorSwitch.data; let i = index"
-                      [class.color-picker__dropdown-item]="true" [class.mc-selected]="color.selected"
-                      (click)="colorSwitch.setValue(i)">
-                    <i mc-icon="mc-circle-8_16" [style.color]='color.code' class="color-picker__icon"></i>
-                </span>
+                <div class="layout-row layout-fill layout-align-space-between">
+                    <span>{{version.number}}</span><span>{{version.date}}</span>
+                </div>
             </div>
         </mc-dropdown>
-    </div>
-</header>
+    </mc-navbar-container>
+
+    <mc-navbar-container>
+<!--        <mc-navbar-item [mcDropdownTriggerFor]="languageDropdown">-->
+<!--            <mc-navbar-title>{{ languageSwitch.currentValue }}</mc-navbar-title>-->
+<!--            <i mc-icon="mc-gear_16"></i>-->
+<!--        </mc-navbar-item>-->
+
+<!--        <mc-dropdown #languageDropdown="mcDropdown">-->
+<!--            <button mc-dropdown-item *ngFor="let language of languageSwitch.data; let i = index"-->
+<!--                    (click)="languageSwitch.setValue(i)">-->
+<!--                {{language}}-->
+<!--            </button>-->
+<!--        </mc-dropdown>-->
+
+<!--        <mc-navbar-divider></mc-navbar-divider>-->
+
+        <mc-navbar-item
+            [mcDropdownTriggerFor]="skinDropdown"
+            #skinDropdownTrigger="mcDropdownTrigger"
+            [class.mc-active]="skinDropdownTrigger.opened">
+
+            <mc-navbar-title></mc-navbar-title>
+            <i mc-icon="mc-gear_16"></i>
+        </mc-navbar-item>
+
+        <mc-dropdown #skinDropdown="mcDropdown">
+            <div class="mc-dropdown__group-header">СКИН</div>
+
+            <button mc-dropdown-item *ngFor="let skin of skinSwitch.data; let i = index"
+                    [class.mc-selected]="skin.selected"
+                    (click)="skinSwitch.setValue(i)">
+                {{skin.name}}
+            </button>
+        </mc-dropdown>
+
+        <mc-navbar-item
+            [mcDropdownTriggerFor]="themeDropdown"
+            #themeDropdownTrigger="mcDropdownTrigger"
+            [class.mc-active]="themeDropdownTrigger.opened">
+            <mc-navbar-title></mc-navbar-title>
+            <i mc-icon="mc-gear_16"></i>
+        </mc-navbar-item>
+
+        <mc-dropdown #themeDropdown="mcDropdown">
+            <div class="mc-dropdown__group-header">ТЕМА</div>
+
+            <button mc-dropdown-item *ngFor="let theme of themeSwitch.data; let i = index"
+                    [class.mc-selected]="theme.selected"
+                    (click)="themeSwitch.setValue(i)">
+                {{ theme.name }}
+            </button>
+        </mc-dropdown>
+
+        <mc-navbar-item
+            [mcDropdownTriggerFor]="colorDropdown"
+            #colorDropdownTrigger="mcDropdownTrigger"
+            [class.mc-active]="colorDropdownTrigger.opened">
+            <i mc-icon="mc-circle-8_16" [style.color]='colorSwitch.currentValue.code' class="color-picker__icon"></i>
+            <i mc-icon="mc-angle-down-M_16"></i>
+        </mc-navbar-item>
+
+        <mc-dropdown #colorDropdown="mcDropdown" class="color-picker__dropdown" [style.margin-top]="0">
+            <button
+                mc-dropdown-item
+                *ngFor="let color of colorSwitch.data; let i = index"
+                [class.color-picker__dropdown-item]="true" [class.mc-selected]="color.selected"
+                (click)="colorSwitch.setValue(i)">
+                <i mc-icon="mc-circle-8_16" [style.color]='color.code' class="color-picker__icon"></i>
+            </button>
+        </mc-dropdown>
+    </mc-navbar-container>
+</mc-navbar>

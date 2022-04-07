@@ -33,17 +33,14 @@
             margin-left: 24px;
         }
     }
-
-    // wtf ?
-    .docs-navbar-version__num {
-        margin-right: 4px;
-    }
 }
 
 .mc-dropdown-item-wrapper {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    width: 100%;
 
     padding: var(--mc-dropdown-item-size-padding, $dropdown-item-size-padding);
 

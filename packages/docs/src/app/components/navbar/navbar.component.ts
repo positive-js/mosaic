@@ -1,16 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { mosaicVersion } from '../../shared/version/version';
 
 import { INavbarProperty, NavbarProperty } from './navbar-property';
-import { ThemeService } from './theme.service';
+import { Themes, ThemeService } from './theme.service';
 
 
 @Component({
     selector: 'navbar',
     templateUrl: './navbar.template.html',
-    styleUrls: ['./navbar.scss']
+    styleUrls: ['./navbar.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class NavbarComponent implements OnInit, OnDestroy {
     mosaicVersion = mosaicVersion;
@@ -20,6 +21,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     versionSwitch: NavbarProperty;
     colorSwitch: NavbarProperty;
     themeSwitch: NavbarProperty;
+    skinSwitch: NavbarProperty;
     languageSwitch: NavbarProperty;
 
     // To add new version to dropdown add new object to the end of data array,
@@ -27,7 +29,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     // run npm show @ptsecurity/mosaic versions --json to see all mosaic versions
     versionData = [
         {
-            number: 'Версия 11',
+            number: 'Версия 13',
             date: '30 марта',
             selected: false,
             link: '//mosaic.ptsecurity.com'
@@ -62,23 +64,23 @@ export class NavbarComponent implements OnInit, OnDestroy {
         property: 'PT_color',
         data: [
             {
-                code: '#2f80ed',
-                className: 'active-blue',
+                code: '#2F80ED',
+                className: 'color-blue',
                 selected: true
             },
             {
                 code: '#832112',
-                className: 'active-red',
+                className: 'color-red',
                 selected: false
             },
             {
-                code: '#07804e',
-                className: 'active-green',
+                code: '#07804E',
+                className: 'color-green',
                 selected: false
             },
             {
-                code: '#eaaf00',
-                className: 'active-yellow',
+                code: '#EAAF00',
+                className: 'color-yellow',
                 selected: false
             }
         ],
@@ -89,8 +91,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private languageProperty: INavbarProperty = {
         property: 'PT_language',
         data: [
-            'Русский язык',
-            'Английский язык'
+            'Русский',
+            'English'
         ],
         updateTemplate: false,
         updateSelected: false
@@ -101,21 +103,41 @@ export class NavbarComponent implements OnInit, OnDestroy {
         data: [
             {
                 theme: 'auto',
-                name: 'Автоматическое переключение',
-                className: this.colorAutomaticTheme.matches ? 'theme-default' : 'theme-dark',
+                name: 'Авто',
+                className: this.colorAutomaticTheme.matches ? Themes.Default : Themes.Dark,
                 selected: true
             },
             {
                 theme: 'default',
-                name: 'Светлая тема',
-                className: 'theme-default',
+                name: 'Светлая',
+                className: Themes.Default,
                 selected: false
             },
             {
                 theme: 'dark',
-                name: 'Темная тема',
-                className: 'theme-dark',
+                name: 'Тёмная',
+                className: Themes.Dark,
                 selected: false
+            }
+        ],
+        updateTemplate: true,
+        updateSelected: true
+    };
+
+    private skinProperty: INavbarProperty = {
+        property: 'PT_skin',
+        data: [
+            {
+                theme: 'pt-2022',
+                name: 'Mosaic 2022',
+                className: 'pt-2022',
+                selected: false
+            },
+            {
+                theme: 'legacy-2017',
+                name: 'Mosaic 2017',
+                className: 'legacy-2017',
+                selected: true
             }
         ],
         updateTemplate: true,
@@ -127,15 +149,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
         this.colorSwitch = new NavbarProperty(this.activeColorProperty);
         this.themeSwitch = new NavbarProperty(this.themeProperty);
+        this.skinSwitch = new NavbarProperty(this.skinProperty);
         this.languageSwitch = new NavbarProperty(this.languageProperty);
 
         try {
             // Chrome & Firefox
             this.colorAutomaticTheme.addEventListener('change', (e) => {
                 if (e.matches) {
-                    this.themeProperty.data[0].className = 'theme-default';
+                    this.themeProperty.data[0].className = Themes.Default;
                 } else {
-                    this.themeProperty.data[0].className = 'theme-dark';
+                    this.themeProperty.data[0].className = Themes.Dark;
                 }
             });
         } catch (err) {
@@ -143,9 +166,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
                 // Safari
                 this.colorAutomaticTheme.addListener((e) => {
                     if (e.matches) {
-                        this.themeProperty.data[0].className = 'theme-default';
+                        this.themeProperty.data[0].className = Themes.Default;
                     } else {
-                        this.themeProperty.data[0].className = 'theme-dark';
+                        this.themeProperty.data[0].className = Themes.Dark;
                     }
                 });
             } catch (errSafari) {
@@ -156,12 +179,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.themingSubscription = this.themeService.currentTheme.subscribe((theme: string) => {
-            if (this.themeSwitch.data[0].selected) {
-            this.themeSwitch.data[0].className = theme;
-            this.themeSwitch.setValue(0);
-          }
-        });
+        this.themingSubscription = this.themeService.currentTheme
+            .subscribe((theme: string) => {
+                if (this.themeSwitch.data[0].selected) {
+                    this.themeSwitch.data[0].className = theme;
+                    this.themeSwitch.setValue(0);
+              }
+            });
     }
 
     ngOnDestroy() {
@@ -170,9 +194,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     goToVersion(i: number) {
         const link = this.versionData[i].link;
+
         if (!location.origin.match(link)) {
             location.href = `${link}${location.pathname}${location.search}${location.hash}`;
         }
+
         this.versionSwitch.setValue(i);
     }
 

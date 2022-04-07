@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 
 export enum Themes {
-    Default = 'theme-default',
+    Default = 'theme-light',
     Dark = 'theme-dark'
 }
 

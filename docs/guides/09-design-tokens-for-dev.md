@@ -102,7 +102,7 @@ $typography: mc-typography-config();
 }
 
 .theme-default {
-    &.active-blue {
+    &.color-blue {
 
         // Include all theme styles for the mosaic components.
         @include app-theme($default-light-theme);

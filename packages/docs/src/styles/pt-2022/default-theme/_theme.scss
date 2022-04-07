@@ -1,0 +1,6 @@
+@import '../../../../../mosaic/core/theming/theming';
+@import './tokens';
+
+
+$pt-2022-light-blue-theme: mc-light-theme();
+$pt-2022-dark-blue-theme: mc-dark-theme();

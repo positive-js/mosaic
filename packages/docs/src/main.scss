@@ -18,10 +18,15 @@
 
 @import './styles/hot-keys';
 
-@import './styles/default-theme/theme';
-@import './styles/red-theme/theme';
-@import './styles/green-theme/theme';
-@import './styles/yellow-theme/theme';
+@import './styles/legacy-2017/default-theme/theme';
+@import './styles/legacy-2017/red-theme/theme';
+@import './styles/legacy-2017/green-theme/theme';
+@import './styles/legacy-2017/yellow-theme/theme';
+
+@import './styles/pt-2022/default-theme/theme';
+@import './styles/pt-2022/red-theme/theme';
+@import './styles/pt-2022/green-theme/theme';
+@import './styles/pt-2022/yellow-theme/theme';
 
 
 $typography: mc-typography-config();
@@ -64,42 +69,83 @@ $typography: mc-typography-config();
     @include docs-component-theme($theme);
 }
 
+.legacy-2017 {
+    &.theme-light {
+        &.color-blue {
+            @include docs-theme($legacy-2017-light-blue-theme);
+        }
 
-.theme-default {
-    &.active-blue {
-        @include docs-theme($default-theme);
+        &.color-red {
+            @include docs-theme($legacy-2017-light-red-theme);
+        }
+
+        &.color-green {
+            @include docs-theme($legacy-2017-light-green-theme);
+        }
+
+        &.color-yellow {
+            @include docs-theme($legacy-2017-light-yellow-theme);
+        }
     }
 
-    &.active-red {
-        @include docs-theme($theme-red);
-    }
+    &.theme-dark {
+        @include material-dark();
 
-    &.active-green {
-        @include docs-theme($theme-green);
-    }
+        &.color-blue {
+            @include docs-theme($legacy-2017-dark-blue-theme);
+        }
 
-    &.active-yellow {
-        @include docs-theme($theme-yellow);
+        &.color-red {
+            @include docs-theme($legacy-2017-dark-red-theme);
+        }
+
+        &.color-green {
+            @include docs-theme($legacy-2017-dark-green-theme);
+        }
+
+        &.color-yellow {
+            @include docs-theme($legacy-2017-dark-yellow-theme);
+        }
     }
 }
 
-.theme-dark {
-    @include material-dark();
+.pt-2022 {
+    &.theme-light {
+        &.color-blue {
+            @include docs-theme($pt-2022-light-blue-theme);
+        }
 
-    &.active-blue {
-        @include docs-theme($default-dark-theme);
+        &.color-red {
+            @include docs-theme($pt-2022-light-red-theme);
+        }
+
+        &.color-green {
+            @include docs-theme($pt-2022-light-green-theme);
+        }
+
+        &.color-yellow {
+            @include docs-theme($pt-2022-light-yellow-theme);
+        }
     }
 
-    &.active-red {
-        @include docs-theme($dark-theme-red);
-    }
+    &.theme-dark {
+        @include material-dark();
 
-    &.active-green {
-        @include docs-theme($dark-theme-green);
-    }
+        &.color-blue {
+            @include docs-theme($pt-2022-dark-blue-theme);
+        }
 
-    &.active-yellow {
-        @include docs-theme($dark-theme-yellow);
+        &.color-red {
+            @include docs-theme($pt-2022-dark-red-theme);
+        }
+
+        &.color-green {
+            @include docs-theme($pt-2022-dark-green-theme);
+        }
+
+        &.color-yellow {
+            @include docs-theme($pt-2022-dark-yellow-theme);
+        }
     }
 }
 
