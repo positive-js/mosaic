@@ -233,13 +233,16 @@ export class McListOption implements OnDestroy, OnInit, IFocusableOption {
     }
 
     setSelected(selected: boolean) {
-        if (this._selected === selected || !this.listSelection.selectionModel) { return; }
+        console.log('setSelected', this.value, this.selected, selected, !this.listSelection.selectionModel )
+        if (this._selected === selected || !this.listSelection.selectionModel) { console.log('frist'); return; }
 
         this._selected = selected;
 
         if (selected) {
+            console.log('select')
             this.listSelection.selectionModel.select(this);
         } else {
+            console.log('deselect')
             this.listSelection.selectionModel.deselect(this);
         }
 
@@ -572,11 +575,15 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     }
 
     setSelectedOptionsByKey(option: McListOption, shiftKey: boolean, ctrlKey: boolean): void {
+        console.log('setSelectedOptionsByKey')
         if (shiftKey && this.multiple) {
+            console.log('shift multiple')
             this.setSelectedOptions(option);
         } else if (ctrlKey) {
-            if (!this.canDeselectLast(option)) { return; }
+            console.log('ctrlKey')
+            if (!this.canDeselectLast(option)) { console.log('canDeselectLast'); return; }
         } else if (this.autoSelect) {
+            console.log('autoSelect');
             this.options.forEach((item) => item.setSelected(false));
             option.setSelected(true);
 
@@ -586,10 +593,14 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     }
 
     setSelectedOptions(option: McListOption): void {
-        const selectedOptionState = option.selected;
-
+        console.log('----------------------setSelectedOptions')
+        const options = this.options.toArray();
         let fromIndex = this.keyManager.previousActiveItemIndex;
         let toIndex = this.keyManager.previousActiveItemIndex = this.keyManager.activeItemIndex;
+        const selectedOptionState = options[fromIndex].selected;
+      
+        console.log('value state', options[fromIndex].value, selectedOptionState)
+        console.log('indexes:', fromIndex, toIndex)
 
         if (toIndex === fromIndex) { return; }
 
@@ -597,17 +608,22 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
             [fromIndex, toIndex] = [toIndex, fromIndex];
         }
 
-        this.options
-            .toArray()
+        console.log('activeItem',  this.keyManager.activeItem?.value)
+
+        options
             .slice(fromIndex, toIndex + 1)
             .filter((item) => !item.disabled)
             .forEach((renderedOption) => {
-                const isLastRenderedOption = renderedOption === this.keyManager.activeItem;
+                // const isLastRenderedOption = renderedOption === this.keyManager.activeItem;
+                // if (isLastRenderedOption && renderedOption.selected && this.noUnselectLast) { console.log('isLastRenderedOption'); return; }
+                if (!selectedOptionState && this.noUnselectLast && this.selectionModel.selected.length === 1) {
+                    return;
+                }
 
-                if (isLastRenderedOption && renderedOption.selected && this.noUnselectLast) { return; }
-
-                renderedOption.setSelected(!selectedOptionState);
+                console.log('renderedOption.setSelected', selectedOptionState)
+                renderedOption.setSelected(selectedOptionState);
             });
+        if (option) {}
     }
 
     // Implemented as part of ControlValueAccessor.
@@ -687,44 +703,56 @@ export class McListSelection extends McListSelectionMixinBase implements CanDisa
     onKeyDown(event: KeyboardEvent) {
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
-
+        console.log(event.key)
         if ([SPACE, ENTER, LEFT_ARROW, RIGHT_ARROW].includes(keyCode) || isVerticalMovement(event)) {
+            console.log('prevent default')
             event.preventDefault();
         }
 
         if (this.multiple && isSelectAll(event)) {
+            console.log('this.multiple && isSelectAll');
             this.selectAllOptions();
             event.preventDefault();
 
             return;
         } else if (isCopy(event)) {
+            console.log('isCopy');
             this.copyActiveOption();
             event.preventDefault();
 
             return;
         } else if ([SPACE, ENTER].includes(keyCode)) {
+            console.log('[SPACE, ENTER]')
             this.toggleFocusedOption();
 
             return;
         } else if (keyCode === TAB) {
+            console.log('TAB')
             this.keyManager.tabOut.next();
 
             return;
         } else if (keyCode === DOWN_ARROW) {
+            console.log('DOWN_ARROW')
             this.keyManager.setNextItemActive();
         } else if (keyCode === UP_ARROW) {
+            console.log('UP_ARROW')
             this.keyManager.setPreviousItemActive();
         } else if (keyCode === HOME) {
+            console.log('HOME')
             this.keyManager.setFirstItemActive();
         } else if (keyCode === END) {
+            console.log('END')
             this.keyManager.setLastItemActive();
         } else if (keyCode === PAGE_UP) {
+            console.log('PAGE_UP')
             this.keyManager.setPreviousPageItemActive();
         } else if (keyCode === PAGE_DOWN) {
+            console.log('PAGE_DOWN')
             this.keyManager.setNextPageItemActive();
         }
 
         if (this.keyManager.activeItem && isVerticalMovement(event)) {
+            console.log('this.keyManager.activeItem && isVerticalMovement(event)')
             this.setSelectedOptionsByKey(
                 this.keyManager.activeItem as McListOption,
                 hasModifierKey(event, 'shiftKey'),
