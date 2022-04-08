@@ -29,28 +29,28 @@ export class NavbarComponent implements OnInit, OnDestroy {
     // run npm show @ptsecurity/mosaic versions --json to see all mosaic versions
     versionData = [
         {
-            number: 'Версия 13',
-            date: '30 марта',
+            number: 'Версия 13.2',
+            date: '1 апреля',
             selected: false,
             link: '//mosaic.ptsecurity.com'
         },
         {
-            number: 'Версия 10',
-            date: '23 окт 2020',
+            number: 'Версия 12.2',
+            date: '12 янв 2022',
+            selected: false,
+            link: '//v12.mosaic.ptsecurity.com'
+        },
+        {
+            number: 'Версия 11.6',
+            date: '13 янв 2022',
+            selected: false,
+            link: '//v11.mosaic.ptsecurity.com'
+        },
+        {
+            number: 'Версия 10.2',
+            date: '17 февр 2021',
             selected: false,
             link: '//v10.mosaic.ptsecurity.com'
-        },
-        {
-            number: 'Версия 9',
-            date: '18 мая 2020',
-            selected: false,
-            link: '//v9.mosaic.ptsecurity.com'
-        },
-        {
-            number: 'Версия 8',
-            date: '5 сент 2019',
-            selected: false,
-            link: '//v8.mosaic.ptsecurity.com'
         }
     ];
 

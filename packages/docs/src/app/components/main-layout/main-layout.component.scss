@@ -1,3 +1,5 @@
+@import '../../../styles/legacy-2017/default-theme/variables';
+
 .main {
     display: flex;
     height: 100%;
@@ -7,7 +9,7 @@
 .content {
     width: calc(100% - 600px); // for Edge
     margin: {
-        top: 64px;
+        top: $navbar-item-size-height;
         left: 300px;
         right: 300px;
         bottom: 62px;
@@ -23,7 +25,7 @@
 
     .content {
         width: 100%;
-        margin: 0px;
+        margin: 0;
         padding: 10px;
     }
 }

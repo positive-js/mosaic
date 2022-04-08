@@ -1,6 +1,9 @@
+@import '../../../styles/legacy-2017/default-theme/variables';
+
+
 .anchors-menu {
     position: fixed;
-    top: 64px;
+    top: $navbar-item-size-height;
     width: 300px;
     right: 0;
     bottom: 0;

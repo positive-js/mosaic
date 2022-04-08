@@ -20,19 +20,19 @@
         }]
     },
     "ignoreFiles": [
-        "packages/mosaic/design-tokens/pt-2022/*.scss",
-        "packages/mosaic/design-tokens/pt-2022/*.css",
-        "packages/mosaic/design-tokens/legacy-2017/*.scss",
-        "packages/mosaic/design-tokens/legacy-2017/*.css",
+        "packages/mosaic/design-tokens/pt-2022/*.*",
+        "packages/mosaic/design-tokens/legacy-2017/*.*",
 
-        "packages/docs/src/styles/default-theme/*.scss",
-        "packages/docs/src/styles/default-theme/*.css",
-        "packages/docs/src/styles/green-theme/*.scss",
-        "packages/docs/src/styles/green-theme/*.css",
-        "packages/docs/src/styles/red-theme/*.scss",
-        "packages/docs/src/styles/red-theme/*.css",
-        "packages/docs/src/styles/yellow-theme/*.scss",
-        "packages/docs/src/styles/yellow-theme/*.css",
+        "packages/docs/src/styles/pt-2022/default-theme/*.*",
+        "packages/docs/src/styles/pt-2022/green-theme/*.*",
+        "packages/docs/src/styles/pt-2022/red-theme/*.*",
+        "packages/docs/src/styles/pt-2022/yellow-theme/*.*",
+
+        "packages/docs/src/styles/legacy-2017/default-theme/*.*",
+        "packages/docs/src/styles/legacy-2017/green-theme/*.*",
+        "packages/docs/src/styles/legacy-2017/red-theme/*.*",
+        "packages/docs/src/styles/legacy-2017/yellow-theme/*.*",
+
         "packages/mosaic-moment-adapter/coverage/**/*.css",
         "packages/mosaic-luxon-adapter/coverage/**/*.css",
         "packages/mosaic/coverage/**/*.css"
