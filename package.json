@@ -92,7 +92,7 @@
         "lodash": "^4.17.21",
         "luxon": "^1.26.0",
         "merge2": "^1.2.3",
-        "moment": "~2.23.0",
+        "moment": "~2.29.2",
         "ng-packagr": "^13.1.1",
         "request": "^2.88.0",
         "resolve-bin": "^0.4.0",
