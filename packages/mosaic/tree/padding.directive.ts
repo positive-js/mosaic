@@ -72,7 +72,7 @@ export class McTreeNodePadding<T> implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.withIcon = this.tree.treeControl.isExpandable(this.treeNode.data);
+        this.withIcon = this.element.nativeElement.querySelector('i[mctreenodetoggle]:first-child') !== null;
 
         this.setPadding();
     }
