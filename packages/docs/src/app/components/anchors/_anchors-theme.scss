@@ -1,51 +1,33 @@
 @mixin mc-anchors-theme($theme) {
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
-    $background-color: mc-color($background, background);
-    $text: mc-color($foreground, text);
-    $primary: map_get($theme, primary);
-    $primary_500: mc-color($primary, 500);
+
     $shadow: mc-color($foreground, text-less-contrast);
 
     .anchors-menu {
-        background-color: $background-color;
+        background-color: mc-color($background, background);
     }
 
     .anchors-menu__list-element {
-        color: $text;
+        color: mc-color($foreground, text);
 
         &:first-child {
-            padding:  {
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 16px;
-            }
-            margin: {
-                top: 0;
-                right: 0;
-                bottom: 6px;
-                left: 0;
-            }
+            padding: 0 0 0 16px;
+            margin: 0 0 6px 0;
 
             & .anchors-menu__link {
                 border-bottom: 1px solid rgba($shadow, 0.2);
-                padding: {
-                    top: 6px;
-                    right: 16px;
-                    bottom: 6px;
-                    left: 0;
-                }
+                padding: 6px 16px 6px 0;
             }
         }
 
         &:hover {
-            @include box-shadow( inset 3px 0 0 rgba($shadow, 0.2) );
+            @include box-shadow(inset 3px 0 0 rgba($shadow, 0.2));
         }
 
-        &_active,
-        &_active:hover {
-            @include box-shadow( inset 3px 0 0 $primary_500 );
+        &.anchors-menu__list-element_active,
+        &.anchors-menu__list-element_active:hover {
+            @include box-shadow(inset 3px 0 0 mc-color(map_get($theme, primary)));
         }
     }
 }

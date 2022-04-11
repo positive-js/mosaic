@@ -10,7 +10,9 @@ $light-info: mc-palette($light-color-scheme-info-palette, $light-color-scheme-in
 $light-success: mc-palette($light-color-scheme-success-palette, $light-color-scheme-success-default);
 $light-warning: mc-palette($light-color-scheme-warning-palette, $light-color-scheme-warning-default);
 
-$pt-2022-light-red-theme: mc-light-theme($light-primary, $light-second, $light-error, $light-info, $light-success, $light-warning);
+$pt-2022-light-red-theme: mc-light-theme(
+    $light-primary, $light-second, $light-error, $light-info, $light-success, $light-warning
+);
 
 
 $dark-primary: mc-palette($dark-color-scheme-primary-palette, $dark-color-scheme-primary-default);
@@ -21,4 +23,6 @@ $dark-info: mc-palette($dark-color-scheme-info-palette, $dark-color-scheme-info-
 $dark-success: mc-palette($dark-color-scheme-success-palette, $dark-color-scheme-success-default);
 $dark-warning: mc-palette($dark-color-scheme-warning-palette, $dark-color-scheme-warning-default);
 
-$pt-2022-dark-red-theme: mc-dark-theme($dark-primary, $dark-second, $dark-error, $dark-info, $dark-success, $dark-warning);
+$pt-2022-dark-red-theme: mc-dark-theme(
+    $dark-primary, $dark-second, $dark-error, $dark-info, $dark-success, $dark-warning
+);
