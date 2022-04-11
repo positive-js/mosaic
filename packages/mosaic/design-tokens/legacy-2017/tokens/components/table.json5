@@ -9,7 +9,7 @@
         },
         font: {
             header: { value: 'caption' },
-            body: { value: 'body' }
+            body: { value: 'body-tabular' }
         }
     }
 }
