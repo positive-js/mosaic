@@ -9,7 +9,6 @@ import {
     ElementRef,
     Inject,
     InjectionToken,
-    
     ViewEncapsulation,
     AfterContentInit,
     NgZone,

@@ -6,6 +6,7 @@
 
 import { AfterContentChecked } from '@angular/core';
 import { AfterContentInit } from '@angular/core';
+import { AfterViewInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CanDisable } from '@ptsecurity/mosaic/core';
 import { CanDisableCtor } from '@ptsecurity/mosaic/core';
@@ -304,8 +305,8 @@ export class McTreeNodeOutletContext<T> {
 }
 
 // @public (undocumented)
-export class McTreeNodePadding<T> implements OnInit, OnDestroy {
-    constructor(treeNode: McTreeNode<T>, tree: McTreeBase<T>, renderer: Renderer2, element: ElementRef<HTMLElement>, dir: Directionality);
+export class McTreeNodePadding<T> implements OnDestroy, AfterViewInit {
+    constructor(treeNode: McTreeNode<T>, tree: McTreeBase<T>, renderer: Renderer2, element: ElementRef<HTMLElement>, option: McTreeOption, dir: Directionality);
     // (undocumented)
     baseLeftPadding: number;
     // (undocumented)
@@ -320,9 +321,9 @@ export class McTreeNodePadding<T> implements OnInit, OnDestroy {
     get level(): number;
     set level(value: number);
     // (undocumented)
-    ngOnDestroy(): void;
+    ngAfterViewInit(): void;
     // (undocumented)
-    ngOnInit(): void;
+    ngOnDestroy(): void;
     // (undocumented)
     paddingIndent(): string | null;
     // (undocumented)
@@ -334,7 +335,7 @@ export class McTreeNodePadding<T> implements OnInit, OnDestroy {
     // (undocumented)
     static ɵdir: i0.ɵɵDirectiveDeclaration<McTreeNodePadding<any>, "[mcTreeNodePadding]", ["mcTreeNodePadding"], { "indent": "mcTreeNodePaddingIndent"; }, {}, never>;
     // (undocumented)
-    static ɵfac: i0.ɵɵFactoryDeclaration<McTreeNodePadding<any>, [null, null, null, null, { optional: true; }]>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTreeNodePadding<any>, [null, null, null, null, null, { optional: true; }]>;
 }
 
 // @public (undocumented)
@@ -437,7 +438,7 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
     // (undocumented)
     toggle(): void;
     // (undocumented)
-    toggleElement: McTreeNodeToggleBaseDirective<McTreeOption>;
+    toggleElement: McTreeNodeToggleDirective<McTreeOption>;
     // (undocumented)
     tooltipTrigger: McTooltipTrigger;
     // (undocumented)
