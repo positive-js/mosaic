@@ -43,7 +43,8 @@ function createComponent<T>(component: Type<T>, imports: any[] = [], providers: 
     template: `
         <mc-form-field>
             <input mcInputPassword [(ngModel)]="value">
-            <mc-password-toggle [mcTooltipNotHidden]="'Скрыть пароль'" [mcTooltipHidden]="'Показать пароль'"></mc-password-toggle>
+            <mc-password-toggle [mcTooltipNotHidden]="'Скрыть пароль'"
+                                [mcTooltipHidden]="'Показать пароль'"></mc-password-toggle>
 
             <mc-password-hint [rule]="passwordRules.Length" [min]="8" [max]="64">От 8 до 64 символов</mc-password-hint>
 
@@ -53,7 +54,9 @@ function createComponent<T>(component: Type<T>, imports: any[] = [], providers: 
 
             <mc-password-hint [rule]="passwordRules.Digit">Цифра</mc-password-hint>
 
-            <mc-password-hint [rule]="passwordRules.SpecialSymbols">Только латинские буквы, цифры, пробелы и спецсимволы</mc-password-hint>
+            <mc-password-hint [rule]="passwordRules.LatinAndSpecialSymbols">Только латинские буквы, цифры, пробелы и
+                спецсимволы
+            </mc-password-hint>
         </mc-form-field>
     `
 })

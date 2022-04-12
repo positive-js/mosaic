@@ -5,7 +5,7 @@
     <br>
 
     <mc-form-field>
-        <input mcInputPassword [formControl]="password" placeholder="Number MaxMin Step">
+        <input mcInputPassword [ngModel]="password" [required]="true" placeholder="Number MaxMin Step">
         <mc-password-toggle [mcTooltipNotHidden]="'Скрыть пароль'" [mcTooltipHidden]="'Показать пароль'"></mc-password-toggle>
 
         <mc-password-hint [rule]="passwordRules.Length" [min]="8" [max]="15">От 8 до 15 символов</mc-password-hint>
@@ -16,7 +16,9 @@
 
         <mc-password-hint [rule]="passwordRules.Digit">Цифра</mc-password-hint>
 
-        <mc-password-hint [rule]="passwordRules.SpecialSymbols">Только латинские буквы, цифры, пробелы и спецсимволы</mc-password-hint>
+        <mc-password-hint [rule]="passwordRules.LatinAndSpecialSymbols">Только латинские буквы, цифры, пробелы и спецсимволы</mc-password-hint>
+
+        <mc-password-hint [rule]="passwordRules.Custom" [regex]="customRegex">User Rule</mc-password-hint>
     </mc-form-field>
 
     <br><br>

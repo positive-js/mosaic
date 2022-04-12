@@ -18,14 +18,15 @@ export enum PasswordRules {
     UpperLatin,
     LowerLatin,
     Digit,
-    SpecialSymbols
+    LatinAndSpecialSymbols,
+    Custom
 }
 
 export const regExpPasswordValidator = {
     [PasswordRules.LowerLatin]: RegExp(/^(?=.*?[a-z])/),
     [PasswordRules.UpperLatin]: RegExp(/^(?=.*?[A-Z])/),
     [PasswordRules.Digit]: RegExp(/^(?=.*?[0-9])/),
-    [PasswordRules.SpecialSymbols]: RegExp(/^(?=.*?[" !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"])/)
+    [PasswordRules.LatinAndSpecialSymbols]: RegExp(/[^ !`"'#№$%&()*+,-./:;<=>?@[\]^_{|}~A-Za-z0-9]/)
 };
 
 
@@ -77,17 +78,23 @@ export class McPasswordHint implements AfterContentInit {
             throw Error('You should set [rule] name');
         }
 
+        if (this.rule === PasswordRules.Custom && this.regex === undefined) {
+            throw Error('You should set [regex] for PasswordRules.Custom');
+        }
+
         if (this.rule === PasswordRules.Length && (this.min || this.max) === null) {
             throw Error('For [rule] "Length" need set [min] and [max]');
         }
 
         if (this.rule === PasswordRules.Length) {
             this.checkRule = this.checkLengthRule;
-        } else if (
-            [PasswordRules.UpperLatin, PasswordRules.LowerLatin, PasswordRules.Digit, PasswordRules.SpecialSymbols]
-                .includes(this.rule)
-        ) {
-            this.regex = this.regex || regExpPasswordValidator[this.rule];
+        } else if ([PasswordRules.UpperLatin, PasswordRules.LowerLatin, PasswordRules.Digit].includes(this.rule)) {
+            this.regex = regExpPasswordValidator[this.rule];
+            this.checkRule = this.checkRegexRule;
+        } else if (this.rule === PasswordRules.LatinAndSpecialSymbols) {
+            this.regex = regExpPasswordValidator[this.rule];
+            this.checkRule = this.checkSpecialSymbolsRegexRule;
+        } else if (this.rule === PasswordRules.Custom) {
             this.checkRule = this.checkRegexRule;
         } else {
             throw Error(`Unknown [rule]=${this.rule}`);
@@ -106,6 +113,10 @@ export class McPasswordHint implements AfterContentInit {
             this.hasError = !this.checkRule(this.control.value);
         }
 
+        if (!this.control.required && !this.control.value) {
+            this.checked = this.hasError = false;
+        }
+
         this.lastControlValue = this.control.value;
         this.changeDetectorRef.markForCheck();
     }
@@ -116,6 +127,10 @@ export class McPasswordHint implements AfterContentInit {
 
     private checkRegexRule(value: string): boolean {
         return !!this.regex?.test(value);
+    }
+
+    private checkSpecialSymbolsRegexRule(value: string): boolean {
+        return !!value && !this.regex?.test(value);
     }
 
     private isValueChanged(): boolean {
