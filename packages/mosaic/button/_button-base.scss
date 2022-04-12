@@ -13,6 +13,8 @@
 
     margin: 0; /* Safari */
 
+    height: var(--mc-button-size-height, $button-size-height);
+
     white-space: nowrap;
 
     text-decoration: none;

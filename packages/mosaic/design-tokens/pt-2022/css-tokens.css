@@ -25,13 +25,12 @@
   --mc-badge-size-mini-padding: 0 4px;
   --mc-button-toggle-size-border-size: 1px;
   --mc-button-toggle-size-border-radius: 3px;
+  --mc-button-size-height: 32px;
   --mc-button-size-border-width: 1px;
   --mc-button-size-border-radius: 3px;
-  --mc-button-size-vertical-padding: 6px;
-  --mc-button-size-horizontal-padding: 16px;
-  --mc-icon-button-size-vertical-padding: 6px;
+  --mc-button-size-horizontal-padding: 12px;
   --mc-icon-button-size-horizontal-padding: 8px;
-  --mc-icon-button-size-icon-horizontal-padding: 16px;
+  --mc-icon-button-size-icon-horizontal-padding: 6px;
   --mc-card-size-vertical-line: 4px;
   --mc-checkbox-size-width: 16px;
   --mc-checkbox-size-label-margin: 8px;
@@ -74,6 +73,7 @@
   --mc-dropdown-panel-size-padding: 4px 0;
   --mc-dropdown-panel-size-border-width: 1px;
   --mc-dropdown-panel-size-border-radius: 3px;
+  --mc-form-field-size-height: 32px;
   --mc-form-field-size-border-width: 1px;
   --mc-form-field-size-border-radius: 3px;
   --mc-form-field-size-button-width: 32px;

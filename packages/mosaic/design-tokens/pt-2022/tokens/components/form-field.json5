@@ -29,6 +29,7 @@
             }
         },
         size: {
+            height: { value: '{size.3xl.value}' },
             border: {
                 width: { value: '1px' },
                 radius: { value: '3px' }
