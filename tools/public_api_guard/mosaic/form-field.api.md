@@ -234,13 +234,15 @@ export class McSuffix {
 // @public (undocumented)
 export enum PasswordRules {
     // (undocumented)
+    Custom = 5,
+    // (undocumented)
     Digit = 3,
+    // (undocumented)
+    LatinAndSpecialSymbols = 4,
     // (undocumented)
     Length = 0,
     // (undocumented)
     LowerLatin = 2,
-    // (undocumented)
-    SpecialSymbols = 4,
     // (undocumented)
     UpperLatin = 1
 }
