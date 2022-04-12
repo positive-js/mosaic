@@ -1,10 +1,8 @@
 /* tslint:disable:no-magic-numbers */
 import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import {
-    FormControl,
     FormsModule,
-    ReactiveFormsModule,
-    Validators
+    ReactiveFormsModule
 } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,11 +22,12 @@ import { McInputModule } from '../../mosaic/input/';
 })
 export class InputDemoComponent {
     passwordRules = PasswordRules;
-    password = new FormControl('456', Validators.required);
+    password = '456';
 
     value: string = '';
     numberValue: number | null = null;
     min = -5;
+    customRegex = /\D/;
 }
 
 
