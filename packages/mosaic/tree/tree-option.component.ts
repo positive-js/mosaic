@@ -9,11 +9,12 @@ import {
     ElementRef,
     Inject,
     InjectionToken,
-    ChangeDetectionStrategy,
+    
     ViewEncapsulation,
     AfterContentInit,
     NgZone,
-    ContentChild
+    ContentChild,
+    ChangeDetectionStrategy
 } from '@angular/core';
 import { hasModifierKey, TAB } from '@ptsecurity/cdk/keycodes';
 import {
@@ -26,7 +27,7 @@ import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { McTreeNodeToggleBaseDirective } from './toggle';
+import { McTreeNodeToggleDirective } from './toggle';
 import { McTreeNode } from './tree-base';
 
 
@@ -79,8 +80,7 @@ export class McTreeOption extends McTreeNode<McTreeOption> implements AfterConte
 
     readonly onBlur = new Subject<McTreeOptionEvent>();
 
-    @ContentChild('mcTreeNodeToggle') toggleElement: McTreeNodeToggleBaseDirective<McTreeOption>;
-
+    @ContentChild(McTreeNodeToggleDirective) toggleElement: McTreeNodeToggleDirective<McTreeOption>;
     @ContentChild(McPseudoCheckbox) pseudoCheckbox: McPseudoCheckbox;
     @ContentChild(McOptionActionComponent) actionButton: McOptionActionComponent;
     @ContentChild(McTooltipTrigger) tooltipTrigger: McTooltipTrigger;
