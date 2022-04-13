@@ -1,0 +1,28 @@
+@import '../../../../../mosaic/core/theming/theming';
+@import './tokens';
+
+
+$light-primary: mc-palette($light-color-scheme-primary-palette, $light-color-scheme-primary-default);
+$light-second: mc-palette($light-color-scheme-second-palette, $light-color-scheme-second-default);
+$light-error: mc-palette($light-color-scheme-error-palette, $light-color-scheme-error-default);
+
+$light-info: mc-palette($light-color-scheme-info-palette, $light-color-scheme-info-default);
+$light-success: mc-palette($light-color-scheme-success-palette, $light-color-scheme-success-default);
+$light-warning: mc-palette($light-color-scheme-warning-palette, $light-color-scheme-warning-default);
+
+$legacy-2017-light-blue-theme: mc-light-theme(
+    $light-primary, $light-second, $light-error, $light-info, $light-success, $light-warning
+);
+
+
+$dark-primary: mc-palette($dark-color-scheme-primary-palette, $dark-color-scheme-primary-default);
+$dark-second: mc-palette($dark-color-scheme-second-palette, $dark-color-scheme-second-default);
+$dark-error: mc-palette($dark-color-scheme-error-palette, $dark-color-scheme-error-default);
+
+$dark-info: mc-palette($dark-color-scheme-info-palette, $dark-color-scheme-info-default);
+$dark-success: mc-palette($dark-color-scheme-success-palette, $dark-color-scheme-success-default);
+$dark-warning: mc-palette($dark-color-scheme-warning-palette, $dark-color-scheme-warning-default);
+
+$legacy-2017-dark-blue-theme: mc-dark-theme(
+    $dark-primary, $dark-second, $dark-error, $dark-info, $dark-success, $dark-warning
+);

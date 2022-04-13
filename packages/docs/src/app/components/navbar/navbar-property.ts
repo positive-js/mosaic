@@ -28,8 +28,14 @@ export class NavbarProperty {
     setValue(i: number) {
         this.currentValue = this.data[i];
         localStorage.setItem(this.property, `${i}`);
-        if (this.updateTemplate) { this.updateTemplate(); }
-        if (this.updateSelected) { this.updateSelected(i); }
+
+        if (this.updateTemplate) {
+            this.updateTemplate();
+        }
+
+        if (this.updateSelected) {
+            this.updateSelected(i);
+        }
     }
 
     init() {
@@ -43,20 +49,18 @@ export class NavbarProperty {
     }
 
     private updateTemplate() {
-        if (this.currentValue) {
-            for (const color of this.data) {
-                document.body.classList.remove(color.className);
-            }
+        if (!this.currentValue) { return; }
 
-            document.body.classList.add(this.currentValue.className);
+        for (const color of this.data) {
+            document.body.classList.remove(color.className);
         }
+
+        document.body.classList.add(this.currentValue.className);
     }
 
     private updateSelected(i: number) {
         if (this.data[i]) {
-            this.data.forEach((color) => {
-                color.selected = false;
-            });
+            this.data.forEach((color) => color.selected = false);
             this.data[i].selected = true;
         }
     }

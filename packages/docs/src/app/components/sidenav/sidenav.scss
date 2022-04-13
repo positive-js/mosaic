@@ -1,3 +1,6 @@
+@import '../../../styles/legacy-2017/default-theme/variables';
+
+
 @mixin transition ($transition) {
     -webkit-transition: $transition;
     -moz-transition: $transition;
@@ -7,7 +10,7 @@
 
 .nav {
     position: fixed;
-    top: 64px;
+    top: $navbar-item-size-height;
     bottom: 0;
     z-index: 101;
 
