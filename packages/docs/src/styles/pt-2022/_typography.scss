@@ -1,0 +1,5 @@
+@import '../../../../mosaic/core/theming/all-theme';
+
+@import './default-theme/typography';
+
+$pt-2022-typography: mc-typography-config();

@@ -19,27 +19,29 @@
 @import './styles/hot-keys';
 
 @import './styles/legacy-2017/default-theme/theme';
+@import './styles/legacy-2017/typography';
 @import './styles/legacy-2017/red-theme/theme';
 @import './styles/legacy-2017/green-theme/theme';
 @import './styles/legacy-2017/yellow-theme/theme';
 
 @import './styles/pt-2022/default-theme/theme';
+@import './styles/pt-2022/typography';
 @import './styles/pt-2022/red-theme/theme';
 @import './styles/pt-2022/green-theme/theme';
 @import './styles/pt-2022/yellow-theme/theme';
 
 
-$typography: mc-typography-config();
+@mixin docs-typography($typography) {
+    // Include all typography for the components.
+    @include mc-core($typography);
 
-// Include all typography for the components.
-@include mc-core($typography);
-
-@include mc-footer-typography($typography);
-@include mc-sidenav-typography($typography);
-@include mc-anchors-typography($typography);
-@include mc-docs-navbar-typography($typography);
-@include docs-markdown-typography($typography);
-@include example-viewer-typography($typography);
+    @include mc-footer-typography($typography);
+    @include mc-sidenav-typography($typography);
+    @include mc-anchors-typography($typography);
+    @include mc-docs-navbar-typography($typography);
+    @include docs-markdown-typography($typography);
+    @include example-viewer-typography($typography);
+}
 
 @mixin docs-component-theme($theme) {
     @include layouts_for_breakpoint();
@@ -70,6 +72,8 @@ $typography: mc-typography-config();
 }
 
 .legacy-2017 {
+    @include docs-typography($legacy-2017-typography);
+
     &.theme-light {
         &.color-blue {
             @include docs-theme($legacy-2017-light-blue-theme);
@@ -110,6 +114,8 @@ $typography: mc-typography-config();
 }
 
 .pt-2022 {
+    @include docs-typography($pt-2022-typography);
+
     &.theme-light {
         &.color-blue {
             @include docs-theme($pt-2022-light-blue-theme);

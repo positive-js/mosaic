@@ -1,0 +1,5 @@
+@import '../../../../mosaic/core/theming/all-theme';
+
+@import './default-theme/typography';
+
+$legacy-2017-typography: mc-typography-config();
