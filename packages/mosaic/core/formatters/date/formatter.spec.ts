@@ -7,7 +7,7 @@ import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 import { LuxonDateAdapter, LuxonDateModule } from '@ptsecurity/mosaic-luxon-adapter/adapter';
 import { DateFormatter, McFormattersModule } from '@ptsecurity/mosaic/core';
-import { DateTime, DurationUnit } from 'luxon';
+import { DateTime, DateTimeUnit } from 'luxon';
 
 
 describe('Date formatter', () => {
@@ -20,7 +20,7 @@ describe('Date formatter', () => {
         adapter.today = (): DateTime => currentDate;
 
         // @ts-ignore
-        formatter.hasSame = (startDate: DateTime, endDate: DateTime, unit: DurationUnit): string => {
+        formatter.hasSame = (startDate: DateTime, endDate: DateTime, unit: DateTimeUnit): string => {
             return adapter.hasSame(startDate, currentDate, unit) ? 'yes' : 'no';
         };
     };

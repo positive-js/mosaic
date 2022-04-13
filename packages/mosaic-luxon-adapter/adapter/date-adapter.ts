@@ -6,7 +6,7 @@ import {
     DateAdapter,
     MC_DATE_LOCALE
 } from '@ptsecurity/cdk/datetime';
-import { DateTime, DateTimeOptions, DurationUnit, Info, Interval, LocaleOptions } from 'luxon';
+import { DateTime, DateTimeOptions, DateTimeUnit, DurationUnit, Info, Interval, LocaleOptions } from 'luxon';
 
 import { enUS } from './locales/en-US';
 import { ruRU } from './locales/ru-RU';
@@ -281,7 +281,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
         return DateTime.fromObject({ month: 0 });
     }
 
-    hasSame(startDate: DateTime, endDate: DateTime, unit: DurationUnit): boolean {
+    hasSame(startDate: DateTime, endDate: DateTime, unit: DateTimeUnit): boolean {
         return startDate.hasSame(endDate, unit);
     }
 
@@ -292,7 +292,7 @@ export class LuxonDateAdapter extends DateAdapter<DateTime> {
     daysFromToday(date: DateTime): number {
         const today = this.today();
 
-        if (this.hasSame(date, today, 'days')) {
+        if (this.hasSame(date, today, 'day')) {
             return 0;
         } else if (date < today) {
             return Math.round(Interval.fromDateTimes(date, today).length('days')) * -1;

@@ -206,7 +206,7 @@ describe('LuxonDateAdapter', () => {
     });
 
     it('should not create DateTime date in utc format', () => {
-        expect(adapter.createDate(2017).zone.universal)
+        expect(adapter.createDate(2017).zone.isUniversal)
             .toBe(false);
     });
 
@@ -482,22 +482,22 @@ describe('LuxonDateAdapter with MC_MOMENT_DATE_ADAPTER_OPTIONS override', () => 
 
     describe('use UTC', () => {
         it('should create date in UTC', () => {
-            expect(adapter.createDate(2017).zone.universal)
+            expect(adapter.createDate(2017).zone.isUniversal)
                 .toBe(true);
         });
 
         it('should create today in UTC', () => {
-            expect(adapter.today().zone.universal)
+            expect(adapter.today().zone.isUniversal)
                 .toBe(true);
         });
 
         it('should parse dates to UTC', () => {
-            expect(adapter.parse('1/2/2017', 'L/d/yyyy')!.zone.universal)
+            expect(adapter.parse('1/2/2017', 'L/d/yyyy')!.zone.isUniversal)
                 .toBe(true);
         });
 
         it('should return UTC date when deserializing', () => {
-            expect(adapter.deserialize('1985-04-12T23:20:50.52Z')!.zone.universal)
+            expect(adapter.deserialize('1985-04-12T23:20:50.52Z')!.zone.isUniversal)
                 .toBe(true);
         });
     });
