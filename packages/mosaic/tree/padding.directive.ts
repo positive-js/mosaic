@@ -1,11 +1,11 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import {
+    AfterViewInit,
     Directive,
     ElementRef,
     Input,
     OnDestroy,
-    OnInit,
     Optional,
     Renderer2
 } from '@angular/core';
@@ -14,6 +14,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { McTreeBase, McTreeNode } from './tree-base';
+import { McTreeOption } from './tree-option.component';
 
 
 /** Regex used to split a string on its CSS units. */
@@ -24,7 +25,7 @@ const cssUnitPattern = /([A-Za-z%]+)$/;
     selector: '[mcTreeNodePadding]',
     exportAs: 'mcTreeNodePadding'
 })
-export class McTreeNodePadding<T> implements OnInit, OnDestroy {
+export class McTreeNodePadding<T> implements OnDestroy, AfterViewInit {
     get level(): number {
         return this._level;
     }
@@ -65,15 +66,15 @@ export class McTreeNodePadding<T> implements OnInit, OnDestroy {
         protected tree: McTreeBase<T>,
         private renderer: Renderer2,
         private element: ElementRef<HTMLElement>,
+        private option: McTreeOption,
         @Optional() private dir: Directionality
     ) {
         this.dir?.change?.pipe(takeUntil(this.destroyed))
             .subscribe(() => this.setPadding());
     }
 
-    ngOnInit(): void {
-        this.withIcon = this.tree.treeControl.isExpandable(this.treeNode.data);
-
+    ngAfterViewInit(): void {
+        this.withIcon = !!this.option.toggleElement;
         this.setPadding();
     }
 
