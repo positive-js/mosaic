@@ -101,7 +101,7 @@ export class McDecimalPipe implements PipeTransform {
      * @param locale A locale code for the locale format rules to use.
      * When not supplied, uses the value of `MC_LOCALE_ID`, which is `ru` by default.
      */
-    transform(value: any, digitsInfo?: string, locale?: string): string | null {
+    transform(value: any, digitsInfo?: string, locale?: string, tableGrouping: boolean = true): string | null {
         if (isEmpty(value)) { return null; }
 
         const currentLocale = locale || this._locale || DEFAULT_MC_LOCALE_ID;
@@ -112,8 +112,9 @@ export class McDecimalPipe implements PipeTransform {
             parsedDigitsInfo = parseDigitsInfo(digitsInfo);
         }
 
+        const useGrouping = tableGrouping ? true : value.toString().length > 4;
         const options: NumberFormatOptions = {
-            useGrouping: true,
+            useGrouping,
             minimumIntegerDigits: 1,
             minimumFractionDigits: 0,
             maximumFractionDigits: 3,
