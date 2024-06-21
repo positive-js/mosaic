@@ -63,6 +63,8 @@ export class McDropdownItem extends McDropdownItemMixinBase implements
     /** Whether the dropdown item acts as a trigger for a nested dropdown. */
     isNested: boolean = false;
 
+    tooltipText: string;
+
     constructor(
         private elementRef: ElementRef<HTMLElement>,
         private focusMonitor: FocusMonitor,
@@ -158,5 +160,10 @@ export class McDropdownItem extends McDropdownItemMixinBase implements
             event.stopImmediatePropagation();
             event.stopPropagation();
         }
+    }
+
+    isEllipsisActive(): boolean {
+        const contentElement = this.getHostElement().children[0];
+        return contentElement.clientWidth < contentElement.scrollWidth;
     }
 }

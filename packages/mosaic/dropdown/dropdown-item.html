@@ -2,4 +2,5 @@
     <ng-content></ng-content>
 </div>
 <i *ngIf="isNested" mc-icon="mc-angle-right-M_16" class="mc-dropdown-trigger__icon"></i>
-<div class="mc-dropdown-item-overlay" (click)="haltDisabledEvents($event)"></div>
+<div class="mc-dropdown-item-overlay" (click)="haltDisabledEvents($event)"
+    [mcTooltipDisabled]="!isEllipsisActive()" [mcTooltip]="getHostElement().innerText"></div>

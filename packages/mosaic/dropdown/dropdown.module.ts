@@ -2,6 +2,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 
 import { McDropdownContent } from './dropdown-content.directive';
 import { McDropdownItem } from './dropdown-item.component';
@@ -13,7 +14,8 @@ import { McDropdown } from './dropdown.component';
     imports: [
         CommonModule,
         OverlayModule,
-        McIconModule
+        McIconModule,
+        McToolTipModule
     ],
     exports: [
         McDropdown,
