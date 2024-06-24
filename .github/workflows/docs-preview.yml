@@ -1,0 +1,52 @@
+name: Docs Preview
+
+on:
+    pull_request:
+        branches:
+            - master
+
+jobs:
+    deploy:
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Restore Cache
+              uses: actions/cache@v2
+              with:
+                path: |
+                    node_modules
+                    */*/node_modules
+                key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+                restore-keys: |
+                    ${{ runner.os }}-yarn-
+
+            - name: Install
+              run: yarn install --frozen-lockfile
+
+            - name: Build Mosaic Docs
+              run: |
+                yarn run build:cdk
+                yarn run build:mosaic
+                yarn run build:mosaic-luxon-adapter
+                yarn run build:mosaic-moment-adapter
+                yarn run styles:built-all
+                yarn run build:package-design-tokens
+                yarn run build:mosaic-examples-module
+                yarn run build:mosaic-examples
+                yarn run build:docs-content && yarn run build:highlight && yarn run build:package-docs-content
+                yarn run docs:prod-build --output-path dist/mosaic-docs
+
+            - name: Vercel Deployment
+              id: vercel-action
+              uses: amondnet/vercel-action@v20.0.0
+              with:
+                vercel-token: ${{ secrets.VERCEL_TOKEN }}
+                github-token: ${{ secrets.GH_TOKEN }}
+                vercel-org-id: ${{ secrets.VERCEL_TEAM_ID}}
+                vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+                vercel-args: '--scope=ptsecurity --confirm ./dist/mosaic-docs'
+
